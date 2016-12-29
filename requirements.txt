@@ -1,2 +1,3 @@
 Sphinx
 jsonschema
+travis-sphinx
