@@ -1,3 +1,5 @@
+"""Exemple de validation d'un fichier JSON avec JSON Schema."""
+
 import json
 
 from jsonschema import validate
