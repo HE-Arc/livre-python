@@ -3,7 +3,7 @@
 JSON
 ====
 
-.. image:: image/json.gif
+.. image:: _static/json.gif
    :align: right
    :alt: JSON logo
 

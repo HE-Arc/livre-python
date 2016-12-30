@@ -20,7 +20,7 @@ vous appliquez les termes de cette licence.
 Selon les conditions suivantes :
 --------------------------------
 
-.. image:: image/by.png
+.. image:: _static/by.png
    :align: left
 
 **Attribution** — Vous devez créditer l'Œuvre, intégrer un lien vers la licence
@@ -29,7 +29,7 @@ indiquer ces informations par tous les moyens raisonnables, sans toutefois
 suggérer que l'Offrant vous soutient ou soutient la façon dont vous avez
 utilisé son Oeuvre.
 
-.. image:: image/sa.png
+.. image:: _static/sa.png
    :align: left
 
 **Partage dans les Mêmes Conditions** — Dans le cas où vous effectuez un remix,
