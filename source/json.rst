@@ -1,3 +1,5 @@
+.. _json-tutorial:
+
 JSON
 ====
 
@@ -5,17 +7,17 @@ JSON
    :align: right
    :alt: JSON logo
 
-Par Yoan Blanc (<yoan.blanc@he-arc.ch>)
+Par Yoan Blanc [#yb]_
 
 Introduction
 ------------
 
-JSON_ ou *JavaScript Object Notation* est un format simple, compact qui a, au
+JSON_ (*JavaScript Object Notation*) est un format simple, compact qui a, au
 fil des ans, remplacé XML comme format d'échange préféré. Standardisé au sein
 de l'`ECMA-404`_ il est supporté par l'énorme majorité des langages de
-programmations.
+programmation.
 
-JSON comporte six types : chaines de caractères, nombre, objet, tableau,
+JSON_ comporte six types : chaine de caractères, nombre, objet, tableau,
 booléen (``true``, ``false``) et ``null``.
 
 .. code-block:: json
@@ -37,8 +39,8 @@ Il serait possible de lire directement cette structure de donnée en Python si
 les booléens et la valeur vide n'étaient pas écrites différemment : ``True``,
 ``False`` et ``None``.
 
-Le module :py:mod:`json` est des plus simples à utilisé. Il est présenté par
-Kenneith Reitz dans `Hitchiker's Guide To Python
+Le module :py:mod:`json` est des plus simples à utiliser. Il est présenté par
+le fameux Kenneith Reitz dans `Hitchhiker's Guide To Python
 <http://docs.python-guide.org/en/latest/scenarios/json/>`_.
 
 Exemple
@@ -101,7 +103,9 @@ d'erreur adéquate en cas d'erreur avant que votre application ne casse.
 
     -- Anonymous
 
-.. Bibliographie
+.. [#yb] <yoan.blanc@he-arc.ch>
+
+.. Bibliographie (ceci est un commentaire)
 
 .. _JSON: http://json.org/
 .. _JSON Schema: http://json-schema.org/

@@ -12,10 +12,12 @@
 :Licence: `Creative Commons Attribution-ShareAlike 4.0 International
           <https://creativecommons.org/licenses/by-sa/4.0/legalcode>`_
 
+Table des matières
+==================
 
 .. toctree::
    :maxdepth: 1
-   :caption: Table des matières:
 
-   introduction
-   json
+   introduction.rst
+   json.rst
+   licence.rst

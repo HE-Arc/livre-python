@@ -7,7 +7,7 @@ install:
   - pip install -r requirements.txt
 
 script:
-  - travis-sphinx --nowarn --source=source build
+  - travis-sphinx --source=source build
 
 after_success:
   - travis-sphinx deploy
