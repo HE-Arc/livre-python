@@ -1,3 +1,6 @@
 Sphinx
+
+# JSON
 jsonschema
-travis-sphinx
+msgpack-python
+ijson

@@ -21,7 +21,6 @@ JSON_ comporte six types : chaine de caractères, nombre, objet, tableau,
 booléen (``true``, ``false``) et ``null``.
 
 .. code-block:: json
-    :linenos:
 
     {
         "clé": "valeur",
@@ -56,7 +55,6 @@ Python.
 - :py:meth:`json.dumps` écrit en JSON dans une chaine de caractères.
 
 .. code-block:: python3
-   :linenos:
 
     import json
 
@@ -73,10 +71,8 @@ Un exemple travaillant avec un fichier externe. Un point très important est
 que JSON est toujours encodé en UTF-8.
 
 .. literalinclude:: example/json/test.json
-   :linenos:
 
 .. literalinclude:: example/json/example.py
-   :linenos:
 
 Validation
 ----------
@@ -85,23 +81,46 @@ Validation
 consultez la documentation de `JSON Schema`_ pour en savoir plus.
 
 .. literalinclude:: example/json/schema.json
-   :linenos:
 
 .. literalinclude:: example/json/validation.py
+
+Format binaire
+--------------
+
+Un document JSON est un fichier texte, qui consomme plus de place qu'une
+représentation binaire. `MessagePack`_ permet de réduire efficacement l'espace
+nécessaire au stockage et à l'échange de tels documents. En Python, c'est le
+module :py:mod:`msgpack`.
+
+.. literalinclude:: example/json/msg.py
+
+Streaming
+---------
+
+Autre inconvénient majeur vis-à-vis du format XML est qu'il n'est pas aisé de
+lire un document au fur et à mesure qu'il est reçu, en *streaming*. En XML,
+cette API se nomme SAX (Simple API for XML). ``json`` propose un modèle à la
+DOM demandant de charger l'entier d'un document en mémoire. La solution à se
+problème est résolue à l'aide de `YAJL`_ et du module `ijson`_.
+
+.. literalinclude:: example/json/stream.py
    :linenos:
 
 Conclusion
 ----------
 
-JSON est un format de fichier à connaitre, comprendre et savoir utiliser. Dans
+JSON est un format de fichier à connaître, comprendre et savoir utiliser. Dans
 sa version basique, voire même dans sa version riche nommée `JSON-LD`_ utilisée
 par de nombreuses API. Si vous devez consommer des données JSON externe, il
 n'est que vivement recommandé d'ajouter un schéma afin d'offrir un message
-d'erreur adéquate en cas d'erreur avant que votre application ne casse.
+d'erreur adéquat en cas de non respect du document espéré. Et des solutions
+existent afin de contourner des problèmes de fichiers inutilement volumineux ou
+devant être chargés complétement en mémoire avoir de pouvoir être lus.
 
     *JSON c'est bon, mangez-en!*
 
     -- Anonymous
+
 
 .. [#yb] <yoan.blanc@he-arc.ch>
 
@@ -111,3 +130,6 @@ d'erreur adéquate en cas d'erreur avant que votre application ne casse.
 .. _JSON Schema: http://json-schema.org/
 .. _JSON-LD: http://json-ld.org/
 .. _ECMA-404: http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf
+.. _MessagePack: http://msgpack.org/
+.. _YAJL: http://lloyd.github.io/yajl/
+.. _ijson: https://pypi.python.org/pypi/ijson/
