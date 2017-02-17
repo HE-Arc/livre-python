@@ -169,5 +169,5 @@ epub_exclude_files = ['search.html']
 intersphinx_mapping = {
     'python': ('https://docs.python.org/3.6', None),
     'jsonschema': ('http://python-jsonschema.readthedocs.io/en/latest/', None),
-    'msgpack-python': ('http://pythonhosted.org/msgpack-python/', None)
+    'msgpack-python': ('http://msgpack-python.readthedocs.io/en/latest/', None)
 }
