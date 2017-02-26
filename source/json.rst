@@ -3,7 +3,7 @@
 JSON
 ====
 
-.. image:: _static/json.gif
+.. image:: _static/json.png
    :align: right
    :alt: JSON logo
 
@@ -70,9 +70,9 @@ Python.
 Un exemple travaillant avec un fichier externe. Un point très important est
 que JSON est toujours encodé en UTF-8.
 
-.. literalinclude:: example/json/test.json
+.. literalinclude:: examples/json/test.json
 
-.. literalinclude:: example/json/example.py
+.. literalinclude:: examples/json/examples.py
 
 Validation
 ----------
@@ -80,9 +80,9 @@ Validation
 :py:mod:`jsonschema` permet de valider un document JSON selon un modèle.
 consultez la documentation de `JSON Schema`_ pour en savoir plus.
 
-.. literalinclude:: example/json/schema.json
+.. literalinclude:: examples/json/schema.json
 
-.. literalinclude:: example/json/validation.py
+.. literalinclude:: examples/json/validation.py
 
 Format binaire
 --------------
@@ -92,7 +92,7 @@ représentation binaire. `MessagePack`_ permet de réduire efficacement l'espace
 nécessaire au stockage et à l'échange de tels documents. En Python, c'est le
 module :py:mod:`msgpack`.
 
-.. literalinclude:: example/json/msg.py
+.. literalinclude:: examples/json/msg.py
 
 Streaming
 ---------
@@ -103,7 +103,7 @@ cette API se nomme SAX (Simple API for XML). ``json`` propose un modèle à la
 DOM demandant de charger l'entier d'un document en mémoire. La solution à se
 problème est résolue à l'aide de `YAJL`_ et du module `ijson`_.
 
-.. literalinclude:: example/json/stream.py
+.. literalinclude:: examples/json/stream.py
    :linenos:
 
 Conclusion
