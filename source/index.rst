@@ -19,5 +19,5 @@ Table des matières
    :maxdepth: 1
 
    introduction.rst
-   json.rst
+   json/index.rst
    licence.rst

@@ -3,7 +3,7 @@
 JSON
 ====
 
-.. image:: _static/json.png
+.. image:: ../_static/json.png
    :align: right
    :alt: JSON logo
 
@@ -17,7 +17,7 @@ fil des ans, remplacé XML comme format d'échange préféré. Standardisé au s
 de l'`ECMA-404`_ il est supporté par l'énorme majorité des langages de
 programmation.
 
-JSON_ comporte six types : chaine de caractères, nombre, objet, tableau,
+JSON_ comporte six types : chaîne de caractères, nombre, objet, tableau,
 booléen (``true``, ``false``) et ``null``.
 
 .. code-block:: json
@@ -50,9 +50,9 @@ L'API du module :py:mod:`json` est similaire à celle utilisée par
 Python.
 
 - :py:meth:`json.load` charge un fichier JSON;
-- :py:meth:`json.loads` charge une chaine de caractères;
+- :py:meth:`json.loads` charge une chaîne de caractères;
 - :py:meth:`json.dump` écrit en JSON dans fichier;
-- :py:meth:`json.dumps` écrit en JSON dans une chaine de caractères.
+- :py:meth:`json.dumps` écrit en JSON dans une chaîne de caractères.
 
 .. code-block:: python3
 
@@ -70,9 +70,9 @@ Python.
 Un exemple travaillant avec un fichier externe. Un point très important est
 que JSON est toujours encodé en UTF-8.
 
-.. literalinclude:: examples/json/test.json
+.. literalinclude:: ./examples/test.json
 
-.. literalinclude:: examples/json/examples.py
+.. literalinclude:: ./examples/example.py
 
 Validation
 ----------
@@ -80,9 +80,9 @@ Validation
 :py:mod:`jsonschema` permet de valider un document JSON selon un modèle.
 consultez la documentation de `JSON Schema`_ pour en savoir plus.
 
-.. literalinclude:: examples/json/schema.json
+.. literalinclude:: ./examples/schema.json
 
-.. literalinclude:: examples/json/validation.py
+.. literalinclude:: ./examples/validation.py
 
 Format binaire
 --------------
@@ -92,18 +92,18 @@ représentation binaire. `MessagePack`_ permet de réduire efficacement l'espace
 nécessaire au stockage et à l'échange de tels documents. En Python, c'est le
 module :py:mod:`msgpack`.
 
-.. literalinclude:: examples/json/msg.py
+.. literalinclude:: ./examples/msg.py
 
 Streaming
 ---------
 
 Autre inconvénient majeur vis-à-vis du format XML est qu'il n'est pas aisé de
-lire un document au fur et à mesure qu'il est reçu, en *streaming*. En XML,
-cette API se nomme SAX (Simple API for XML). ``json`` propose un modèle à la
-DOM demandant de charger l'entier d'un document en mémoire. La solution à se
-problème est résolue à l'aide de `YAJL`_ et du module `ijson`_.
+lire un document au fur et à mesure qu'il est reçu, en *streaming*. En XML, on
+utilise une API nommée SAX (Simple API for XML). ``json`` propose un modèle
+demandant de charger l'entier d'un document en mémoire. Comme avec DOM en XML.
+Ce problème se résoud à l'aide de `YAJL`_ et du module `ijson`_.
 
-.. literalinclude:: examples/json/stream.py
+.. literalinclude:: ./examples/stream.py
    :linenos:
 
 Conclusion
