@@ -34,6 +34,7 @@ Table des matières
 
    colorama/index.rst
    hug/index.rst
+   invoke/index.rst
    matplotlib/index.rst
    pillow/index.rst
    pycrypto/index.rst
@@ -60,6 +61,7 @@ Table des matières
  - Dylan Santos de Pinho <dylan.santosdeppinho@he-arc.ch>
  - Florian Fasmeyer <florian.fasmeyer@he-arc.ch>
  - Guillaume Noguera <guillaume.noguera@he-arc.ch>
+ - Johnathan Guerne <johnathan.guerne@he-arc.ch>
  - Johnny Da Costa <johnny.dacosta@he-arc.ch>
  - Julien Feuillade <julien.feuillade@he-arc.ch>
  - Jérémy Dubois <jeremy.dubois@he-arc.ch>
