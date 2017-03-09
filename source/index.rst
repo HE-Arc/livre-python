@@ -8,6 +8,7 @@
 
 :Auteurs:
           Anthony Fleury <anth.fleury@gmail.com>,
+          Axel Rieben <axel.rieben@he-arc.ch>
           Cédric Pahud <cedric.pahud@he-arc.ch>,
           Dany Chea <dany.chea@he-arc.ch>,
           Dylan Santos de Pinho <dylan.santosdeppinho@he-arc.ch>,
@@ -26,13 +27,16 @@ Table des matières
 
    introduction.rst
 
+   super/index.rst
+
    collections/index.rst
+   csv/index.rst
    io/index.rst
    json/index.rst
    multiprocessing/index.rst
+   unittest/index.rst
+
    pillow/index.rst
    pygame/index.rst
-   super/index.rst
-   unittest/index.rst
 
    licence.rst
