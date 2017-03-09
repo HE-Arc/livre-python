@@ -10,6 +10,7 @@ Table des matières
 .. toctree::
    :maxdepth: 1
 
+   introduction.rst
    builtins/index.rst
    dunders/index.rst
    super/index.rst
@@ -21,6 +22,7 @@ Table des matières
    hashlib/index.rst
    io/index.rst
    itertools/index.rst
+   invoke/index.rst
    json/index.rst
    math/index.rst
    multiprocessing/index.rst
