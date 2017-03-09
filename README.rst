@@ -4,7 +4,12 @@ Livre Python
 .. image:: https://travis-ci.org/HE-Arc/livre-python.svg?branch=master
     :target: https://travis-ci.org/HE-Arc/livre-python
 
+<<<<<<< 4230dc8c669951aeb4e113e1851fe484f5d68877
 
+=======
+ceci est un test	
+	
+>>>>>>> commit test
 Compilation
 -----------
 
