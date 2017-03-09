@@ -8,6 +8,7 @@
 
 :Auteurs:
           Cédric Pahud <cedric.pahud@he-arc.ch>,
+          Dylan Santos de Pinho <dylan.santosdeppinho@he-arc.ch>,
           Yoan Blanc <yoan.blanc@he-arc.ch>
 :Date: 2017-03-09
 :Licence: `Creative Commons Attribution-ShareAlike 4.0 International
