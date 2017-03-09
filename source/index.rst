@@ -11,6 +11,7 @@
           Cédric Pahud <cedric.pahud@he-arc.ch>,
           Dany Chea <dany.chea@he-arc.ch>,
           Dylan Santos de Pinho <dylan.santosdeppinho@he-arc.ch>,
+          Neto Da Silva André <andre.netodas@he-arc.ch>,
           Quentin Vaucher <quentin.vaucher@protonmail.com>,
           Yoan Blanc <yoan.blanc@he-arc.ch>
 :Date: 2017-03-09
@@ -24,12 +25,14 @@ Table des matières
    :maxdepth: 1
 
    introduction.rst
-   pygame/index.rst
+
    collections/index.rst
-   multiprocessing/index.rst
-   json/index.rst
    io/index.rst
-   super/index.rst
+   json/index.rst
+   multiprocessing/index.rst
    pillow/index.rst
+   pygame/index.rst
+   super/index.rst
+   unittest/index.rst
 
    licence.rst
