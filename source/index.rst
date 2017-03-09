@@ -37,6 +37,7 @@ Table des matières
 
    collections/index.rst
    csv/index.rst
+   hashlib/index.rst
    io/index.rst
    itertools/index.rst
    json/index.rst
@@ -47,5 +48,7 @@ Table des matières
    colorama/index.rst
    pillow/index.rst
    pygame/index.rst
+   secrets/index.rst
+   itertools/index.rst
 
    licence.rst
