@@ -1,4 +1,4 @@
-======================
+﻿======================
  Bibliothèques Python
 ======================
 
@@ -20,6 +20,9 @@ Table des matières
    :maxdepth: 1
 
    introduction.rst
-   json/index.rst
+
    collections/index.rst
+   json/index.rst
+   io/index.rst
+
    licence.rst
