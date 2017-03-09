@@ -58,4 +58,5 @@ Table des matières
    secrets/index.rst
    itertools/index.rst
    pytest/index.rst
+   math/index.rst
    licence.rst
