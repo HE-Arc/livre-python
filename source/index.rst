@@ -12,6 +12,7 @@
           Cédric Pahud <cedric.pahud@he-arc.ch>,
           Dany Chea <dany.chea@he-arc.ch>,
           Dylan Santos de Pinho <dylan.santosdeppinho@he-arc.ch>,
+          Killian Castella <killian.castella@he-arc.ch>,
           Neto Da Silva André <andre.netodas@he-arc.ch>,
           Quentin Vaucher <quentin.vaucher@protonmail.com>,
           Yoan Blanc <yoan.blanc@he-arc.ch>
@@ -36,6 +37,7 @@ Table des matières
    multiprocessing/index.rst
    unittest/index.rst
 
+   colorama/index.rst
    pillow/index.rst
    pygame/index.rst
 
