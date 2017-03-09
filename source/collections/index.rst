@@ -9,7 +9,9 @@ Par Cédric Pahud <cedric.pahud@he-arc.ch>
 --------------
  Introduction
 --------------
-Collections contient des conteneurs de donées spécialisés qui offrent une alternative aux conteneurs généraux de python.
+
+:py:mod:`collections` contient des conteneurs de donées spécialisés qui offrent une alternative aux conteneurs généraux de python.
+>>>>>>> création index
 Ces conteneurs vont souvent plus loin que les conteneurs de données *built-in* et ont des fonctionnalités plus avancées que nous allons voir ici.
 
 Voici donc les conteneurs dont nous allons parler:
@@ -27,14 +29,15 @@ Voici donc les conteneurs dont nous allons parler:
 +----------------+------------------------------------------------------------------------------------------------------+
 | OrderedDict    | une sous classe de dictionnaire permettant de savoir l’ordre des entrées                             |
 +----------------+------------------------------------------------------------------------------------------------------+
-| defaultDict    | une sous classe de dictionnaire permettant de spécifier une valeur par défaut dans le constructeur   |
+| defaultdict    | une sous classe de dictionnaire permettant de spécifier une valeur par défaut dans le constructeur   |
 +----------------+------------------------------------------------------------------------------------------------------+
 
 
 ------------
 namedtuple()
 ------------
-tout d'abord avant d'utiliser les namedtuple() il faut comprendre ce qu'est un tuple.
+
+tout d'abord avant d'utiliser les :py:class:`collections.namedtuple()` il faut comprendre ce qu'est un tuple.
 un tuple est une liste que l'on ne peut pas modifier après sa création.
 
 .. code-block:: pycon
@@ -121,7 +124,7 @@ elle est utile si on veut créer un nouveau tuple avec les champs d'un tuple exi
 -----
 deque
 -----
-le deque est une généralisation des liste et des piles. les deque sont thread-safe et supporte l'ajout d'une
+la classe :py:class:`collections.deque` est une généralisation des liste et des piles. les deque sont thread-safe et supporte l'ajout d'une
 valeur de chaque côté *(pile, liste)*. La preformance lors de l'ajout d'une valeur peut importe le côté
 est de O(1). Même si les objets de type *list* supportent des opérations similaires elles sont plus optimisées
 pour des opérations qui ne change pas leur taille alors qu' un ``pop()`` ou un ``insert()`` ont une complexité O(n).
@@ -182,7 +185,7 @@ pop(), popleft(), remove(val) et clear()
 ChainMap
 --------
 
-ChainMap permet de linker plusieurs mappings pour qu'ils soient géré comme un seul. C'est
+:py:class:`collections.ChainMap` permet de linker plusieurs mappings pour qu'ils soient géré comme un seul. C'est
 souvent plus rapide que de créer un nouveau dictionnaire et faire plusieurs ``update()``.
 
 ``class collections.ChainMap(*maps)`` cette fonction nous retourne une nouvelle ChainMap.
@@ -207,7 +210,7 @@ Dans cet exemple on remarque que la clé b a pris la valeur 10 et pas 2 car
 Counter
 -------
 
-Counter est une sous calsse de dict
+:py:class:`collections.Counter` est une sous classe de `dict`_
 qui permet de compter des objets *hachable*. Enfaite c'est un dictionnaire avec comme clé les
 éléments et comme valeurs leur nombre.
 
@@ -272,7 +275,7 @@ permet de soustraire des éléments d'un compteur (mais pas de les supprimer) :
 OrderedDict
 -----------
 
-les OrderedDict sont comme les dict
+les :py:class:`collections.OrderedDict` sont comme les `dict`_
 mais ils se rappelent l'ordre d'entrée des valeurs. Si on itère dessus les données seront
 retournées dans l'ordre d'ajout dans notre dict.
 
@@ -306,20 +309,20 @@ last est à ``True`` sinon au début de notre dict.
   'bacde'
 
 -----------
-defaultDict
+defaultdict
 -----------
 
-Cette classe est une sous classe de dict.
-Elle rajoute une variable et une fonction à la classe dict.
+La classe :py:class:`collections.defaultdict` est une sous classe de `dict`_.
+Elle rajoute une variable et une fonction à la classe `dict`_.
 ``class collections.defaultdict([default_factory[, ...]])`` cette commande nous retourne un objet
-de type defaultDict.L'argument ``default_factory`` est par défaut à ``None`` et les reste des arguments
+de type defaultdict.L'argument ``default_factory`` est par défaut à ``None`` et les reste des arguments
 sont traité comme si on utilisait le constructeur de dict.
 
-La fonction ajoutée par defaultDict est ``__missing(key)__`` elle est appelée par ``__getitem()__`` de la
-classe dict.
+La fonction ajoutée par defaultdict est ``__missing(key)__`` elle est appelée par ``__getitem()__`` de la
+classe `dict`_.
 
 l'argument ``default_factory`` permet de spécifier quelle structure de données va correspondre
-à une clé dans notre defaultDict. Voici 2 exemples pour mieu comprendre:
+à une clé dans notre defaultdict. Voici 2 exemples pour mieu comprendre:
 
 .. code-block:: pycon
 
@@ -344,7 +347,7 @@ Dans cette exemple on initialise ``default_factory`` comme une list ce qui nous 
   >>> sorted(d.items())
   [('i', 4), ('m', 1), ('p', 2), ('s', 4)]
 
-Dans cet exemple on va utiliser un int au lieu d'une liste et notre defaultDict
+Dans cet exemple on va utiliser un int au lieu d'une liste et notre defaultdict
 va s'utiliser comme un compteur.
 
 ----------
@@ -358,5 +361,4 @@ sagement votre conteneur en fonction de votre problème pour vous simplifier la 
 
     -- Maître Yoda
 
-:py:mod:`collections` https://docs.python.org/3/library/collections.html
-:py:mod:`dict` https://docs.python.org/3/library/stdtypes.html#dict
+.. _dict: https://docs.python.org/3.6/tutorial/datastructures.html#dictionaries
