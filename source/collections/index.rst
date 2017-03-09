@@ -1,6 +1,5 @@
 .. _collections-tutorial:
 
-
 =============
  Collections
 =============
