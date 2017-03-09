@@ -41,5 +41,6 @@ Table des matières
    pillow/index.rst
    pygame/index.rst
    secrets/index.rst
+   itertools/index.rst
 
    licence.rst
