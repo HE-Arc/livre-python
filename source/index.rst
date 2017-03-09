@@ -9,6 +9,7 @@
 :Auteurs:
           Anthony Fleury <anth.fleury@gmail.com>,
           Cédric Pahud <cedric.pahud@he-arc.ch>,
+          Dany Chea <dany.chea@he-arc.ch>,
           Dylan Santos de Pinho <dylan.santosdeppinho@he-arc.ch>,
           Quentin Vaucher <quentin.vaucher@protonmail.com>,
           Yoan Blanc <yoan.blanc@he-arc.ch>
@@ -23,7 +24,7 @@ Table des matières
    :maxdepth: 1
 
    introduction.rst
-
+   pygame/index.rst
    collections/index.rst
    multiprocessing/index.rst
    json/index.rst
