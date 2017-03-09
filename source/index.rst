@@ -35,6 +35,7 @@ Table des matières
    pygame/index.rst
    pytest/index.rst
    sphinx/index.rst
+   watchdog/index.rst
 
 À propos de ce livre
 ====================
