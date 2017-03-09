@@ -40,5 +40,6 @@ Table des matières
    colorama/index.rst
    pillow/index.rst
    pygame/index.rst
+   secrets/index.rst
 
    licence.rst
