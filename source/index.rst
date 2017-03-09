@@ -31,7 +31,6 @@ Table des matières
    time/index.rst
    unittest/index.rst
    weakref/index.rst
-
    colorama/index.rst
    hug/index.rst
    invoke/index.rst
@@ -49,8 +48,9 @@ Table des matières
 ====================
 
 :Auteurs:
+
  - Adrien Mendes <adrien.mendes@he-arc.ch>
- - André Neto Da Silva <andre.netodas@he-arc.ch>
+ - André Neto Da Silva <andre.netodasilva@he-arc.ch>
  - Anthony Fleury <anth.fleury@gmail.com>
  - Anthony Gillioz <anthony.gillioz@he-arc.ch>
  - Axel Rieben <axel.rieben@he-arc.ch>
@@ -75,6 +75,7 @@ Table des matières
  - Sylvain Renaud <sylvain.renaud@he-arc.ch>
  - Thibaut Piquerez <thibaut.piquerez@he-arc.ch>
  - Yoan Blanc <yoan.blanc@he-arc.ch>
+ 
 :Date:  2017-03-16
 :Licence:
         :ref:`licence`
