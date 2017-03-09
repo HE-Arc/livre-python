@@ -27,3 +27,4 @@ Table des matières
    io/index.rst
 
    licence.rst
+   super/index.rst
