@@ -11,6 +11,7 @@ Table des matières
    :maxdepth: 1
 
    builtins/index.rst
+   dunders/index.rst
    super/index.rst
    fstrings/index.rst
 
@@ -54,6 +55,6 @@ Table des matières
          - Sylvain Renaud <sylvain.renaud@he-arc.ch>,
          - Guillaume Noguera <guillaume.noguera@he-arc.ch>,
          - Yoan Blanc <yoan.blanc@he-arc.ch>
-:Date:  2017-03-15
+:Date:  2017-03-16
 :Licence:
         :ref:`licence`
