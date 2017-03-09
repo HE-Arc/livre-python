@@ -1,0 +1,515 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Python Imaging Library &#8212; Bibliothèques Python 0.1.1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Recherche" href="../search.html" />
+    <link rel="next" title="pycrypto" href="../pycrypto/index.html" />
+    <link rel="prev" title="matplotlib" href="../matplotlib/index.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="python-imaging-library">
+<span id="pillow-tutorial"></span><h1>Python Imaging Library<a class="headerlink" href="#python-imaging-library" title="Permalink to this headline">¶</a></h1>
+<img alt="Pillow logo" class="align-right" src="../_images/pillow.png" />
+<p>Par Quentin Vaucher. <a class="footnote-reference" href="#qv" id="id1">[1]</a></p>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://python-pillow.org/">Pillow</a> est une bibliothèque de traitement d&#8217;image, qui est un fork et
+successeur du projet <a class="reference external" href="http://www.pythonware.com/products/pil/">PIL</a> (<em>Python Imaging Library</em>). Elle est conçue
+de manière à offrir un accès rapide aux données contenues dans une image, et offre
+un support pour différents formats de fichiers tels que PPM, PNG, JPEG, GIF,
+TIFF et BMP.</p>
+<p><a class="reference external" href="https://python-pillow.org/">Pillow</a> dispose de capacités de traitement d&#8217;images relativement puissantes, et
+a pour but d&#8217;offrir une solide base à toute application générale de traitement d&#8217;images.</p>
+</div>
+<div class="section" id="domaines-d-utilisations">
+<h2>Domaines d&#8217;utilisations<a class="headerlink" href="#domaines-d-utilisations" title="Permalink to this headline">¶</a></h2>
+<p>La bibliothèque de fonctions peut être utilisée pour différents types d&#8217;activités, telles que:</p>
+<dl class="docutils">
+<dt><strong>Archivage d&#8217;images</strong>:</dt>
+<dd>Création de miniatures, conversion d&#8217;images d&#8217;un format de fichier à un autre, ...</dd>
+<dt><strong>Affichage d&#8217;images</strong>:</dt>
+<dd>Création et affichage d&#8217;images via le module <a class="reference external" href="https://pillow.readthedocs.io/en/latest/reference/ImageTk.html#module-PIL.ImageTk" title="(in Pillow (PIL Fork) v4.1.0.dev0)"><code class="xref py py-mod docutils literal"><span class="pre">PIL.ImageTk</span></code></a>, ou <a class="reference external" href="https://pillow.readthedocs.io/en/latest/reference/ImageWin.html#module-PIL.ImageWin" title="(in Pillow (PIL Fork) v4.1.0.dev0)"><code class="xref py py-mod docutils literal"><span class="pre">PIL.ImageWin</span></code></a> sous Windows. Ouverture d&#8217;une image dans un utilitaire externe via la méthode <a class="reference external" href="https://pillow.readthedocs.io/en/latest/reference/Image.html#PIL.Image.Image.show" title="(in Pillow (PIL Fork) v4.1.0.dev0)"><code class="xref py py-meth docutils literal"><span class="pre">PIL.Image.Image.show()</span></code></a>.</dd>
+<dt><strong>Traitement d&#8217;images</strong>:</dt>
+<dd>Offre un support pour quelques fonctions de bases telles que le filtrage, la convolution ou encore la conversion d&#8217;espaces couleurs. Il est également possible de redimensionner et d&#8217;appliquer des transformations géométriques à l&#8217;image (rotation, ...).</dd>
+</dl>
+</div>
+<div class="section" id="concepts">
+<h2>Concepts<a class="headerlink" href="#concepts" title="Permalink to this headline">¶</a></h2>
+<p>La bibliothèque utilise le principe d&#8217;images matricielles (par opposition aux images vectorielles), c&#8217;est-à-dire que chaque élément de la matrice représente un point avec une couleur associée (= un pixel). <a class="reference external" href="https://python-pillow.org/">Pillow</a> utilise également les <a class="reference external" href="https://pillow.readthedocs.io/en/latest/handbook/concepts.html#concept-bands" title="(in Pillow (PIL Fork) v4.1.0.dev0)"><span class="xref std std-ref">concepts des bandes</span></a> et de <a class="reference external" href="https://pillow.readthedocs.io/en/latest/handbook/concepts.html#concept-modes" title="(in Pillow (PIL Fork) v4.1.0.dev0)"><span class="xref std std-ref">modes</span></a> décrits ci-dessous:</p>
+<dl class="docutils">
+<dt><strong>Bandes</strong>:</dt>
+<dd>Les images sont constituées de bandes de données (une ou plusieurs, pour autant que celles-ci aient toute les mêmes dimensions et profondeurs). Un exemple commun de bandes est celles sous la forme RGBA, qui sépare les informations sur le rouge, le vert, le bleu et la transparence. Il est ainsi possible de réaliser différentes actions qui agissent que sur une seule bande. Finalement, du point de vue des pixels, on peut dire qu&#8217;ils disposent tous d&#8217;une valeur par bande.</dd>
+<dt><strong>Modes</strong>:</dt>
+<dd>Ils définissent le type et la profondeur des pixels d&#8217;une image. Parmi les modes les plus connus, on peut notamment citer RGB et RGBA, qui représentent les pixels sur respectivement 3x8 bits et 4x8 bits.</dd>
+</dl>
+</div>
+<div class="section" id="exemples">
+<h2>Exemples<a class="headerlink" href="#exemples" title="Permalink to this headline">¶</a></h2>
+<p>Le premier exemple ci-dessous permet dans un premier temps de se familiariser avec le fonctionnement de base de <a class="reference external" href="https://python-pillow.org/">Pillow</a>, puis une fois les bases acquises, un deuxième exemple plus technique met en évidence la puissance de la bibliothèque.</p>
+<div class="section" id="exemple-basique">
+<h3>Exemple basique<a class="headerlink" href="#exemple-basique" title="Permalink to this headline">¶</a></h3>
+<p>L&#8217;exemple suivant aborde de manière simple quelques notions de bases de <a class="reference external" href="https://python-pillow.org/">Pillow</a>. Une image en couleur au format <em>.png</em> est récupérée et convertie en nuances de gris. Le résultat s&#8217;affiche puis est sauvegardé au format <em>.jpeg</em>.</p>
+<ul class="simple">
+<li><a class="reference external" href="https://pillow.readthedocs.io/en/latest/reference/Image.html#PIL.Image.open" title="(in Pillow (PIL Fork) v4.1.0.dev0)"><code class="xref py py-func docutils literal"><span class="pre">open()</span></code></a> charge une image en mémoire;</li>
+<li><a class="reference external" href="https://pillow.readthedocs.io/en/latest/reference/Image.html#PIL.Image.Image.convert" title="(in Pillow (PIL Fork) v4.1.0.dev0)"><code class="xref py py-meth docutils literal"><span class="pre">Image.convert()</span></code></a> change le mode de l&#8217;image. <code class="docutils literal"><span class="pre">L</span></code> représente <span class="math">\(256\)</span> nuances de gris (voir <a class="reference external" href="https://pillow.readthedocs.io/en/latest/handbook/concepts.html#concept-modes" title="(in Pillow (PIL Fork) v4.1.0.dev0)"><span class="xref std std-ref">modes</span></a>).</li>
+<li><a class="reference external" href="https://pillow.readthedocs.io/en/latest/reference/Image.html#PIL.Image.Image.show" title="(in Pillow (PIL Fork) v4.1.0.dev0)"><code class="xref py py-meth docutils literal"><span class="pre">Image.show()</span></code></a> ouvre l&#8217;image dans un outil externe;</li>
+<li><a class="reference external" href="https://pillow.readthedocs.io/en/latest/reference/Image.html#PIL.Image.Image.save" title="(in Pillow (PIL Fork) v4.1.0.dev0)"><code class="xref py py-meth docutils literal"><span class="pre">Image.save()</span></code></a> sauvegarde l&#8217;image dans le format spécifié.</li>
+</ul>
+<div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;Exemple simple de manipulation d&#39;images.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="k">import</span> <span class="n">Image</span>
+
+<span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;../../_static/pillow.png&quot;</span><span class="p">)</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s1">&#39;L&#39;</span><span class="p">)</span>
+
+<span class="n">image</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">image</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;gray-pillow.jpeg&#39;</span><span class="p">,</span> <span class="s1">&#39;jpeg&#39;</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<p>Le résultat obtenu est le suivant:</p>
+<img alt="Logo de Pillow en nuances de gris" class="align-center" src="../_images/gray-pillow.jpeg" />
+</div>
+<div class="section" id="exemple-technique">
+<h3>Exemple technique<a class="headerlink" href="#exemple-technique" title="Permalink to this headline">¶</a></h3>
+<p>Dans cet exemple, le logo de la bibliothèque <a class="reference external" href="https://python-pillow.org/">Pillow</a> subit diverses modifications afin de mettre en pratique quelques fonctions de la bibliothèque. Le logo est d&#8217;abord flouté à l&#8217;aide d&#8217;un filtre, puis transposé afin d&#8217;inverser la position de chaque python. On parcourt ensuite tous les pixels, puis on colorie l&#8217;arrière-plan en étudiant les attributs de chacun d&#8217;eux (couleurs et position).</p>
+<ul class="simple">
+<li><a class="reference external" href="https://pillow.readthedocs.io/en/latest/reference/Image.html#PIL.Image.Image.filter" title="(in Pillow (PIL Fork) v4.1.0.dev0)"><code class="xref py py-meth docutils literal"><span class="pre">PIL.Image.Image.filter()</span></code></a> filtre l&#8217;image;</li>
+<li><a class="reference external" href="https://pillow.readthedocs.io/en/latest/reference/Image.html#PIL.Image.Image.transpose" title="(in Pillow (PIL Fork) v4.1.0.dev0)"><code class="xref py py-meth docutils literal"><span class="pre">PIL.Image.Image.transpose()</span></code></a> retourne l&#8217;image;</li>
+<li><a class="reference external" href="https://pillow.readthedocs.io/en/latest/reference/Image.html#PIL.Image.Image.getpixel" title="(in Pillow (PIL Fork) v4.1.0.dev0)"><code class="xref py py-meth docutils literal"><span class="pre">PIL.Image.Image.getpixel()</span></code></a> récupère les attributs du pixel à la position donnée;</li>
+<li><a class="reference external" href="https://pillow.readthedocs.io/en/latest/reference/Image.html#PIL.Image.Image.putpixel" title="(in Pillow (PIL Fork) v4.1.0.dev0)"><code class="xref py py-meth docutils literal"><span class="pre">PIL.Image.Image.putpixel()</span></code></a> modifie  les attributs du pixel à la position donnée.</li>
+</ul>
+<div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;Filtrage, transformation, puis coloration.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="k">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">ImageFilter</span>
+
+<span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;../../_static/pillow.png&quot;</span><span class="p">)</span>
+
+<span class="n">img</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">ImageFilter</span><span class="o">.</span><span class="n">BLUR</span><span class="p">)</span> \
+         <span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">Image</span><span class="o">.</span><span class="n">FLIP_TOP_BOTTOM</span><span class="p">)</span> \
+         <span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">Image</span><span class="o">.</span><span class="n">FLIP_LEFT_RIGHT</span><span class="p">)</span>
+
+<span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">size</span>
+
+<span class="n">WHITE_THRESHOLD</span> <span class="o">=</span> <span class="mi">250</span>
+<span class="n">PURPLE</span> <span class="o">=</span> <span class="p">(</span><span class="mi">155</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span> <span class="mi">182</span><span class="p">)</span>
+<span class="n">BLUE</span> <span class="o">=</span> <span class="p">(</span><span class="mi">52</span><span class="p">,</span> <span class="mi">152</span><span class="p">,</span> <span class="mi">219</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">width</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">height</span><span class="p">):</span>
+        <span class="n">pixel</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">getpixel</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
+        <span class="c1"># On vérifie que le pixel est blanc</span>
+        <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="n">channel</span> <span class="o">&gt;</span> <span class="n">WHITE_THRESHOLD</span> <span class="k">for</span> <span class="n">channel</span> <span class="ow">in</span> <span class="n">pixel</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="o">&lt;=</span> <span class="n">width</span><span class="p">:</span>
+                <span class="n">img</span><span class="o">.</span><span class="n">putpixel</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="n">PURPLE</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">img</span><span class="o">.</span><span class="n">putpixel</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="n">BLUE</span><span class="p">)</span>
+
+<span class="n">img</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></div>
+<p>Le résultat obtenu est le suivant:</p>
+<img alt="Cercle Trigonométrique" class="align-center" src="../_images/logoFiltre.png" />
+</div>
+</div>
+<div class="section" id="manipulation-des-bandes">
+<h2>Manipulation des bandes<a class="headerlink" href="#manipulation-des-bandes" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://python-pillow.org/">Pillow</a> utilise le <a class="reference external" href="https://pillow.readthedocs.io/en/latest/handbook/concepts.html#concept-bands" title="(in Pillow (PIL Fork) v4.1.0.dev0)"><span class="xref std std-ref">concept des bandes de données</span></a>, qu&#8217;il est possible de traiter séparément. L&#8217;exemple suivant illustre cette notion, en inversant l&#8217;ordre des bandes R, G et B.</p>
+<ul class="simple">
+<li><a class="reference external" href="https://pillow.readthedocs.io/en/latest/reference/Image.html#PIL.Image.Image.split" title="(in Pillow (PIL Fork) v4.1.0.dev0)"><code class="xref py py-meth docutils literal"><span class="pre">PIL.Image.Image.split()</span></code></a> retourne un tuple contenant toutes les bandes de l&#8217;image;</li>
+<li><a class="reference external" href="https://pillow.readthedocs.io/en/latest/reference/Image.html#PIL.Image.merge" title="(in Pillow (PIL Fork) v4.1.0.dev0)"><code class="xref py py-func docutils literal"><span class="pre">PIL.Image.merge()</span></code></a> fusionne un ensemble d&#8217;images monobande en une image multibandes.</li>
+</ul>
+<div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;Inversion des bandes (r, b, g) d&#39;une image.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="k">import</span> <span class="n">Image</span>
+
+<span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;../../_static/pillow.png&quot;</span><span class="p">)</span>
+
+<span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+
+<span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="s2">&quot;RGBA&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">a</span><span class="p">))</span>
+
+<span class="n">image</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></div>
+<p>Le résultat obtenu est le suivant:</p>
+<img alt="Suppression du rouge dans le logo de Pillow" class="align-center" src="../_images/logoBandes.png" />
+</div>
+<div class="section" id="methodes-de-dessin">
+<h2>Méthodes de dessin<a class="headerlink" href="#methodes-de-dessin" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://python-pillow.org/">Pillow</a> fournit également des outils de base pour le graphisme 2D. Toutes ces fonctions sont regroupées dans le module <a class="reference external" href="https://pillow.readthedocs.io/en/latest/reference/ImageDraw.html#module-PIL.ImageDraw" title="(in Pillow (PIL Fork) v4.1.0.dev0)"><code class="xref py py-mod docutils literal"><span class="pre">PIL.ImageDraw</span></code></a>. Il est possible de dessiner diverses formes géométriques, ainsi que du texte, dans le but de créer ou retoucher des images. L&#8217;exemple suivant met en évidence quelques-unes des fonctionnalités disponibles.</p>
+<ul class="simple">
+<li><a class="reference external" href="https://pillow.readthedocs.io/en/latest/reference/Image.html#PIL.Image.new" title="(in Pillow (PIL Fork) v4.1.0.dev0)"><code class="xref py py-func docutils literal"><span class="pre">PIL.Image.new()</span></code></a> crée une image avec la taille et la couleur spécifiée;</li>
+<li><code class="docutils literal"><span class="pre">PIL.ImageDraw.Draw</span></code> crée un objet qui peut être utilisé pour dessiner sur l&#8217;image;</li>
+<li><code class="docutils literal"><span class="pre">PIL.ImageDraw.Draw.line</span></code> dessine une ligne entre les points donnés, avec la couleur choisie;</li>
+<li><code class="docutils literal"><span class="pre">PIL.ImageDraw.Draw.ellipse</span></code> dessine une ellipse à l&#8217;intérieur du rectangle donné;</li>
+<li><code class="docutils literal"><span class="pre">PIL.ImageDraw.Draw.text</span></code> dessine du texte à l&#8217;endroit choisi.</li>
+</ul>
+<div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;Graphisme 2D avec Pillow.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="k">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">ImageDraw</span>
+
+<span class="n">width</span> <span class="o">=</span> <span class="mi">160</span>
+<span class="n">height</span> <span class="o">=</span> <span class="mi">160</span>
+
+<span class="n">WHITE</span> <span class="o">=</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s1">&#39;RGBA&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">),</span> <span class="n">WHITE</span><span class="p">)</span>
+
+<span class="c1"># Obtention du contexte graphique</span>
+<span class="n">draw</span> <span class="o">=</span> <span class="n">ImageDraw</span><span class="o">.</span><span class="n">Draw</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+
+<span class="n">GREEN</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">draw</span><span class="o">.</span><span class="n">line</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="n">height</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span>
+          <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="o">//</span><span class="mi">2</span><span class="p">),</span>
+          <span class="n">fill</span><span class="o">=</span><span class="n">GREEN</span><span class="p">)</span>
+<span class="n">draw</span><span class="o">.</span><span class="n">line</span><span class="p">((</span><span class="n">width</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
+          <span class="n">width</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span> <span class="n">height</span><span class="p">),</span>
+          <span class="n">fill</span><span class="o">=</span><span class="n">GREEN</span><span class="p">)</span>
+
+<span class="n">BLUE</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">draw</span><span class="o">.</span><span class="n">ellipse</span><span class="p">((</span><span class="n">width</span><span class="o">//</span><span class="mi">4</span><span class="p">,</span> <span class="n">height</span><span class="o">//</span><span class="mi">4</span><span class="p">,</span>
+             <span class="mi">3</span><span class="o">*</span><span class="n">width</span><span class="o">//</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="o">*</span><span class="n">height</span><span class="o">//</span><span class="mi">4</span><span class="p">),</span>
+             <span class="n">outline</span><span class="o">=</span><span class="n">BLUE</span><span class="p">)</span>
+
+<span class="n">BLACK</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">draw</span><span class="o">.</span><span class="n">text</span><span class="p">((</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span> <span class="s2">&quot;Cercle trigonométrique&quot;</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="n">BLACK</span><span class="p">)</span>
+
+<span class="n">image</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">image</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;cercleTrigo.png&quot;</span><span class="p">,</span> <span class="s2">&quot;png&quot;</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<p>Le résultat obtenu est le suivant:</p>
+<img alt="Cercle Trigonométrique" class="align-center" src="../_images/cercleTrigo.png" />
+</div>
+<div class="section" id="utilisation-au-sein-du-binding-pyqt">
+<h2>Utilisation au sein du binding PyQt<a class="headerlink" href="#utilisation-au-sein-du-binding-pyqt" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://python-pillow.org/">Pillow</a> fournit le module <a class="reference external" href="https://pillow.readthedocs.io/en/latest/reference/ImageQt.html#module-PIL.ImageQt" title="(in Pillow (PIL Fork) v4.1.0.dev0)"><code class="xref py py-mod docutils literal"><span class="pre">PIL.ImageQt</span></code></a> afin de créer des Qimage directement utilisables par le binding PyQt. En effet, le module dispose d&#8217;une classe du même nom qui est une sous-classe de QtGui.QImage. Il est donc possible de passer l&#8217;objet directement à l&#8217;API PyQt. On peut donc utiliser la puissance de <a class="reference external" href="https://python-pillow.org/">Pillow</a> pour réaliser du traitement d&#8217;images au sein d&#8217;un logiciel graphique utilisant le Framework Qt.</p>
+<p>Le code suivant illustre un telle utilisation, permettant à l&#8217;utilisateur de visualiser une image, de la tourner et de la flouter. Le traitement de l&#8217;image est réalisé à l&#8217;aide de <a class="reference external" href="https://python-pillow.org/">Pillow</a>, tandis que l&#8217;interface utilisateur utilise l&#8217;api PyQt. La fonction <code class="docutils literal"><span class="pre">initUI()</span></code> n&#8217;est pas présentée car elle ne sert qu&#8217;à mettre en place les différents composants visuels.</p>
+<div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;Manipulation d&#39;une image graphiquement à l&#39;aide de PyQt.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="k">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">ImageFilter</span><span class="p">,</span> <span class="n">ImageQt</span>
+<span class="kn">from</span> <span class="nn">PyQt5.QtGui</span> <span class="k">import</span> <span class="n">QImage</span><span class="p">,</span> <span class="n">QPixmap</span>
+<span class="kn">from</span> <span class="nn">PyQt5.QtWidgets</span> <span class="k">import</span> <span class="p">(</span><span class="n">QApplication</span><span class="p">,</span> <span class="n">QHBoxLayout</span><span class="p">,</span> <span class="n">QLabel</span><span class="p">,</span> <span class="n">QPushButton</span><span class="p">,</span>
+                             <span class="n">QVBoxLayout</span><span class="p">,</span> <span class="n">QWidget</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">Viewer</span><span class="p">(</span><span class="n">QWidget</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Affiche une image avec trois boutons pour la pivoter/flouter.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialisation des composants, connexion signaux/slots.&quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">blurButton</span> <span class="o">=</span> <span class="n">QPushButton</span><span class="p">(</span><span class="s2">&quot;Blur&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rotateLeftButton</span> <span class="o">=</span> <span class="n">QPushButton</span><span class="p">(</span><span class="s2">&quot;Rotate Left&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rotateRightButton</span> <span class="o">=</span> <span class="n">QPushButton</span><span class="p">(</span><span class="s2">&quot;Rotate Right&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">label</span> <span class="o">=</span> <span class="n">QLabel</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;../../_static/pillow.png&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">initUI</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">displayImage</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">blurButton</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">blurImage</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rotateLeftButton</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">turnLeft</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rotateRightButton</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">turnRight</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">displayImage</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;PIL Image -&gt; QImage -&gt; QPixmap.</span>
+
+<span class="sd">        Convertit une image de la bibliothèque PIL en QImage. Convertit</span>
+<span class="sd">        l&#39;objet QImage en QPixmap puis affiche le résultat dans un label.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="n">setPixmap</span><span class="p">(</span><span class="n">QPixmap</span><span class="o">.</span><span class="n">fromImage</span><span class="p">(</span><span class="n">ImageQt</span><span class="o">.</span><span class="n">ImageQt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">image</span><span class="p">)))</span>
+
+    <span class="k">def</span> <span class="nf">turnLeft</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Tourne l&#39;image à gauche à l&#39;aide de PIL puis affiche le résultat.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">image</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">displayImage</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">turnRight</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Tourne l&#39;image à droite à l&#39;aide de PIL puis affiche le résultat.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">image</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="o">-</span><span class="mi">90</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">displayImage</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">blurImage</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Floute l&#39;image à l&#39;aide de PIL puis affiche le résultat.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">image</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">ImageFilter</span><span class="o">.</span><span class="n">BLUR</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">displayImage</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">app</span> <span class="o">=</span> <span class="n">QApplication</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span>
+
+    <span class="n">viewer</span> <span class="o">=</span> <span class="n">Viewer</span><span class="p">()</span>
+    <span class="n">viewer</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="mi">450</span><span class="p">,</span> <span class="mi">400</span><span class="p">)</span>
+    <span class="n">viewer</span><span class="o">.</span><span class="n">setWindowTitle</span><span class="p">(</span><span class="s1">&#39;Image Viewer&#39;</span><span class="p">)</span>
+    <span class="n">viewer</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">exec_</span><span class="p">())</span>
+</pre></div>
+</td></tr></table></div>
+<p>Le résultat obtenu est le suivant:</p>
+<img alt="Application PyQt avec traitement d'images réalisé par Pillow" class="align-center" src="../_images/pyqt.png" />
+</div>
+<div class="section" id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://python-pillow.org/">Pillow</a> est une bibliothèque relativement complète qui offre la possibilité de manipuler des images avec une grande simplicité. Elle dispose d&#8217;une large palette de fonctions qui touche à différents domaines allant du filtrage au graphisme, en passant par la manipulation de pixels.</p>
+<p>La bibliothèque se positionne donc plutôt comme une bibliothèque à vocation généraliste dans le domaine du traitement d&#8217;images, et ne se démarque donc dans aucun domaine spécifique.</p>
+<p>Pour conclure, les quelques exemples abordés dans cet article offrent un bon aperçu du fonctionnement de <a class="reference external" href="https://python-pillow.org/">Pillow</a>, mais ne couvrent en aucun cas toutes ses possibilités. Pour une liste plus exhaustive et plus détaillée, la <a class="reference external" href="https://pillow.readthedocs.io/en/latest/">documentation officielle</a> semble être la candidate idéale.</p>
+<table class="docutils footnote" frame="void" id="qv" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>&lt;<a class="reference external" href="mailto:quentin&#46;vaucher&#37;&#52;&#48;he-arc&#46;ch">quentin<span>&#46;</span>vaucher<span>&#64;</span>he-arc<span>&#46;</span>ch</a>&gt;</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table des Matières</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Python Imaging Library</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#domaines-d-utilisations">Domaines d&#8217;utilisations</a></li>
+<li><a class="reference internal" href="#concepts">Concepts</a></li>
+<li><a class="reference internal" href="#exemples">Exemples</a><ul>
+<li><a class="reference internal" href="#exemple-basique">Exemple basique</a></li>
+<li><a class="reference internal" href="#exemple-technique">Exemple technique</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#manipulation-des-bandes">Manipulation des bandes</a></li>
+<li><a class="reference internal" href="#methodes-de-dessin">Méthodes de dessin</a></li>
+<li><a class="reference internal" href="#utilisation-au-sein-du-binding-pyqt">Utilisation au sein du binding PyQt</a></li>
+<li><a class="reference internal" href="#conclusion">Conclusion</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="../matplotlib/index.html" title="Chapitre précédent"><code class="docutils literal"><span class="pre">matplotlib</span></code></a></li>
+      <li>Next: <a href="../pycrypto/index.html" title="Chapitre suivant"><code class="docutils literal"><span class="pre">pycrypto</span></code></a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>Cette page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/pillow/index.rst.txt"
+            rel="nofollow">Montrer le code source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Recherche rapide</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016-2017, HE-Arc.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="../_sources/pillow/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

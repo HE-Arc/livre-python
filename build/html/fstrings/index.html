@@ -1,0 +1,176 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>f-strings &#8212; Bibliothèques Python 0.1.1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Recherche" href="../search.html" />
+    <link rel="next" title="email" href="../email/index.html" />
+    <link rel="prev" title="super()" href="../super/index.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="f-strings">
+<span id="fstrings-tutorial"></span><h1>f-strings<a class="headerlink" href="#f-strings" title="Permalink to this headline">¶</a></h1>
+<p>Écrit par : Thibaut Piquerez</p>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>f-strings permet d&#8217;insérer des expressions dans des chaines de caractères en utilisant une syntaxe minimale.</p>
+</div>
+<div class="section" id="fonctionnement">
+<h2>Fonctionnement<a class="headerlink" href="#fonctionnement" title="Permalink to this headline">¶</a></h2>
+<p>Pour utiliser f-strings il suffit de mettre un f devant la chaine de caractères et pour insérer la valeur d&#8217;une variable dans la chaine il suffit de mettre la variable entre accolade. Si il n&#8217;y a pas de variable a substituer il n&#8217;est pas nécessaire de mettre le <code class="docutils literal"><span class="pre">f</span></code> devant.</p>
+<div class="highlight-pycon"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Paul&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">age</span> <span class="o">=</span> <span class="mi">23</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Votre nom est un {name} et vous avez {age} ans&#39;</span><span class="p">)</span>
+
+<span class="go">Votre nom est un Paul et vous avez 23 ans</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="echappement">
+<h2>Echappement<a class="headerlink" href="#echappement" title="Permalink to this headline">¶</a></h2>
+<p>Certains cractères ne peuvent pas être afficher tel quel il est nécessaire de les échapper.</p>
+<p>Pour les accolade <code class="docutils literal"><span class="pre">{}</span></code> il faut en mettre deux à la suite :</p>
+<div class="highlight-pycon"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nombre</span> <span class="o">=</span> <span class="mi">34</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Le nombre est {{{nombre}}}&#39;</span><span class="p">)</span>
+
+<span class="go">Le nombre est {34}</span>
+</pre></div>
+</div>
+<p>Pour afficher des apostrophes, il y a trois solutions:</p>
+<blockquote>
+<div><p>Mettre la chaine entre guillemets :</p>
+<div class="highlight-pycon"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;ma chaine de caractères avec des &#39;apostrophes&#39; &quot;</span><span class="p">)</span>
+
+<span class="go">ma chaine de caractères avec des &#39;apostrophes&#39;</span>
+</pre></div>
+</div>
+<p>Mettre la chaine entre 3 apostrophes :</p>
+<div class="highlight-pycon"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;ma chaine de caractères avec des &#39;apostrophes&#39; &#39;&#39;&#39;</span><span class="p">)</span>
+
+<span class="go">ma chaine de caractères avec des &#39;apostrophes&#39;</span>
+</pre></div>
+</div>
+<p>Mettre des backslash avant les apostrophes :</p>
+<div class="highlight-pycon"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;ma chaine de caractères avec une </span><span class="se">\&#39;</span><span class="s1">apostrophe &#39;</span><span class="p">)</span>
+
+<span class="go">ma chaine de caractères avec des &#39;apostrophes</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="raw-f-strings">
+<h2>raw f-strings<a class="headerlink" href="#raw-f-strings" title="Permalink to this headline">¶</a></h2>
+<p>Un string convertit automatiquement les échappements avec des backslashs comme par exemple : <code class="docutils literal"><span class="pre">\n</span></code> , <code class="docutils literal"><span class="pre">\&quot;</span></code>, <code class="docutils literal"><span class="pre">\t</span></code>, etc. Donc si on ne veut pas que python interprète ces échappements il faut utiliser les raw string en ecrivant <code class="docutils literal"><span class="pre">r</span></code> avant la chaine de caractères et si on veut utiliser des raw f-strings il faut mettre <code class="docutils literal"><span class="pre">fr</span></code>.</p>
+<div class="highlight-pycon"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;ma </span><span class="se">\n</span><span class="s1"> phrase&#39;</span><span class="p">)</span>
+
+<span class="go">ma</span>
+<span class="go"> phrase</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s1">r&#39;ma \n phrase&#39;</span><span class="p">)</span>
+
+<span class="go">ma \n phrase</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table des Matières</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">f-strings</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#fonctionnement">Fonctionnement</a></li>
+<li><a class="reference internal" href="#echappement">Echappement</a></li>
+<li><a class="reference internal" href="#raw-f-strings">raw f-strings</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="../super/index.html" title="Chapitre précédent"><code class="docutils literal"><span class="pre">super()</span></code></a></li>
+      <li>Next: <a href="../email/index.html" title="Chapitre suivant"><code class="docutils literal"><span class="pre">email</span></code></a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>Cette page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/fstrings/index.rst.txt"
+            rel="nofollow">Montrer le code source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Recherche rapide</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016-2017, HE-Arc.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="../_sources/fstrings/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

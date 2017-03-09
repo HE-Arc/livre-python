@@ -1,0 +1,434 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>unittest, doctest, mock &#8212; Bibliothèques Python 0.1.1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Recherche" href="../search.html" />
+    <link rel="next" title="Weakref" href="../weakref/index.html" />
+    <link rel="prev" title="time" href="../time/index.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="unittest-doctest-mock">
+<span id="unittest-tutorial"></span><h1><code class="docutils literal"><span class="pre">unittest</span></code>, <code class="docutils literal"><span class="pre">doctest</span></code>, <code class="docutils literal"><span class="pre">mock</span></code><a class="headerlink" href="#unittest-doctest-mock" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>Les tests unitaires permettent d&#8217;assurer le fonctionnement correct d&#8217;une unité de programme (fonctions, méthodes, classes, etc...). Un test unitaire vérifie, en fonction des entrées fournies à l&#8217;unité du module, que la sortie corresponde aux spécifications de l&#8217;unité.</p>
+<p>Python possède plusieurs modules de test unitaire dont <a class="reference external" href="https://docs.python.org/3.6/library/unittest.html#module-unittest" title="(in Python v3.6)"><code class="xref py py-mod docutils literal"><span class="pre">unittest</span></code></a> et <a class="reference external" href="https://docs.python.org/3.6/library/doctest.html#module-doctest" title="(in Python v3.6)"><code class="xref py py-mod docutils literal"><span class="pre">doctest</span></code></a> que nous allons décrire par la suite.</p>
+</div>
+<div class="section" id="unittest">
+<h2>Unittest<a class="headerlink" href="#unittest" title="Permalink to this headline">¶</a></h2>
+<p>Le framework <a class="reference external" href="https://docs.python.org/3.6/library/unittest.html#module-unittest" title="(in Python v3.6)"><code class="xref py py-mod docutils literal"><span class="pre">unittest</span></code></a> a été à l&#8217;origine inspiré par <a class="reference external" href="http://junit.org/junit4/">JUnit</a> et le fonctionnement est similaire aux frameworks de tests unitaires dans d&#8217;autres langages de programmation.</p>
+<p>Pour réaliser des tests unitaires, unittest s&#8217;appuie sur 4 concepts importants:</p>
+<ul class="simple">
+<li><em>test fixture</em> : un &#8216;test fixture&#8217; représente la préparation nécessaire pour réaliser un test. Tout comme par exemple la création temporaire de base de données, dossiers ou même le démarrage de services.</li>
+<li><em>test case</em> : consiste à tester une fonctionnalité précise, et ainsi tester que la sortie corresponde bien à un résultat attendu.</li>
+<li><em>test suite</em> : un est regroupement de &#8216;test case&#8217;, de &#8216;test suite, voir les deux. Utilisé lorsque plusieurs tests doivent être éxécutés ensemble.</li>
+<li><em>test runner</em> : un &#8216;test runner&#8217; gère l&#8217;exécution des tests et fournit la sortie à l&#8217;utilisateur sous forme graphique ou textuelle.</li>
+</ul>
+<p>Ce chapitre présentera ainsi l&#8217;utilisation de ce module et se basant sur ces concepts.</p>
+<div class="section" id="creation-d-un-test-unitaire">
+<h3>Création d&#8217;un test unitaire<a class="headerlink" href="#creation-d-un-test-unitaire" title="Permalink to this headline">¶</a></h3>
+<p>Voici les étapes nécessaires pour créer un test unitaire:</p>
+<ol class="arabic">
+<li><p class="first">Importer le module &#8216;unittest&#8217;</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">unittest</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Définir la fonction à tester ou l&#8217;importer depuis un module. Ici on prend l&#8217;exemple avec la fonction carre(x):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">carré</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Élève au carré.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">**</span> <span class="mi">2</span>
+
+
+</pre></div>
+</div>
+</li>
+<li><p class="first">Créer une classe en héritant de <a class="reference external" href="https://docs.python.org/3.6/library/unittest.html#unittest.TestCase" title="(in Python v3.6)"><code class="xref py py-class docutils literal"><span class="pre">unittest.TestCase</span></code></a>, puis écrire les tests sous forme de méthodes. Les noms des méthodes doivent impérativement commencer par &#8216;test&#8217; afin d&#8217;indiquer au &#8216;test runner&#8217; quelles sont les méthodes de tests.</p>
+<p>De plus, chaque test doit appeller une fonction assertion de la classe TestCase. La classe TestCase possède plusieurs types de &#8216;assert&#8217;. Ici nous utiliseront &#8216;assertEquals()&#8217; qui permet de comparer deux valeurs (valeur retournée par la fonction et la valeur attendue).</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">CarreTestCase</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Classe testeur pour la fonction carrée.&quot;&quot;&quot;</span>
+
+    <span class="n">test_values</span> <span class="o">=</span> <span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">test_carré</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Teste les valeurs références.&quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">value</span><span class="p">,</span> <span class="n">expected</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">test_values</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">expected</span><span class="p">,</span> <span class="n">carré</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+
+
+</pre></div>
+</div>
+</li>
+<li><p class="first">Exécuter les tests :</p>
+<ul class="simple">
+<li>en appelant la fonction <a class="reference external" href="https://docs.python.org/3.6/library/unittest.html#unittest.main" title="(in Python v3.6)"><code class="xref py py-func docutils literal"><span class="pre">unittest.main()</span></code></a></li>
+</ul>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">unittest</span><span class="o">.</span><span class="n">main</span><span class="p">()</span>
+
+</pre></div>
+</div>
+<ul class="simple">
+<li>via la ligne de commande. La ligne de commande permet aussi de spécifier les modules, classes ou même des méthodes individuelles à tester.</li>
+</ul>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> python -m unittest test_module
+<span class="gp">$</span> python -m unittest test_module.TestClass
+<span class="gp">$</span> python -m unittest test_module.TestClass.test_methode
+</pre></div>
+</div>
+<p>Il est aussi possible de laisser &#8216;Unittest&#8217; rechercher tous les tests grâce à l&#8217;option &#8216;discover&#8217;. Ainsi tout les modules qui contiennent des tests depuis le répertoire courant seront exécutés, de même que pour tous les sous-répertoires.</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> python -m unittest discover
+</pre></div>
+</div>
+</li>
+<li><p class="first">Analyser la sortie du test:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">------------------------------------------------------------</span>
+<span class="go">Ran 1 test in 0.001s</span>
+
+<span class="go">OK</span>
+</pre></div>
+</div>
+<p>Il y a trois possibilités de sortie:</p>
+</li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li>OK : Le test est passé sans erreurs</li>
+<li>FAIL : Le test n&#8217;est pas passé et a levé une exception (AssertionError).</li>
+<li>ERROR : Le test n&#8217;est pas passé et a levé une exception autre que &#8220;AssertionError&#8221;</li>
+</ul>
+</div></blockquote>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Les tests sont exécutés par ordre alphabétique et non par ordre dans lequel ils sont écrits dans le fichier.</p>
+</div>
+</div>
+<div class="section" id="classes-et-methodes">
+<h3>Classes et méthodes<a class="headerlink" href="#classes-et-methodes" title="Permalink to this headline">¶</a></h3>
+<p>Ce chapitre présentera les classes et méthodes définies dans le module unittest. Ici seront présentées les deux classes les plus utilisées.</p>
+<div class="section" id="testcase-classe">
+<h4>TestCase Classe<a class="headerlink" href="#testcase-classe" title="Permalink to this headline">¶</a></h4>
+<p>Une classe qui hérite de TestCase doit contenir toutes les méthodes nécessaires permettant de tester une seule et unique fonctionnalité.</p>
+<p>Voici quelques méthodes utiles définies dans TestCase:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">setUp()</span></code> : Méthode appelée avant d&#8217;effectuer chaque méthode de test. Si cette méthode lève une exception, la méthode de test n&#8217;est pas éxécutée.</li>
+<li><code class="docutils literal"><span class="pre">tearDown()</span></code> : Méthode appelée après chaque méthode de test. Cette méthode est appellée même si la méthode de test lève une exception.</li>
+<li><code class="docutils literal"><span class="pre">setUpClass()</span></code> : Méthode appelée en premier lieu une fois avant l&#8217;exécution des tests de la classe.</li>
+<li><code class="docutils literal"><span class="pre">tearDownClass()</span></code> : Méthode appelée une fois l&#8217;exécution des tests de la classe terminée.</li>
+<li><code class="docutils literal"><span class="pre">run(result</span> <span class="pre">=</span> <span class="pre">None)</span></code>: Méthode qui récolte le résultat dans l&#8217;object result passé en paramètre.</li>
+<li><code class="docutils literal"><span class="pre">debug()</span></code> : Exécute le test sans récolter le résultat.</li>
+</ul>
+<p>Cette classe possède aussi beaucoup de méthodes &#8220;assert&#8221; qui testent une condition particulière. Voici quelques &#8216;Asserts&#8217; souvent utiles:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="46%" />
+<col width="54%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Type</th>
+<th class="head">vérifie que</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>assertEqual(a, b)</td>
+<td>a == b</td>
+</tr>
+<tr class="row-odd"><td>assertNotequal(a, b)</td>
+<td>a != b</td>
+</tr>
+<tr class="row-even"><td>assertTrue(x)</td>
+<td>bool(x) vaut &#8216;True&#8217;</td>
+</tr>
+<tr class="row-odd"><td>assertFalse(x)</td>
+<td>bool(x) vaut &#8216;False&#8217;</td>
+</tr>
+<tr class="row-even"><td>assertIs(a, b)</td>
+<td>a est b</td>
+</tr>
+<tr class="row-odd"><td>assertIsNot(a, b)</td>
+<td>a n&#8217;est pas b</td>
+</tr>
+<tr class="row-even"><td>assertIsNone(x)</td>
+<td>x est &#8216;None&#8217;</td>
+</tr>
+<tr class="row-odd"><td>assertIsNotNone(x)</td>
+<td>x n&#8217;est pas &#8216;None&#8217;</td>
+</tr>
+<tr class="row-even"><td>assertIn(a, b)</td>
+<td>a est dans b</td>
+</tr>
+<tr class="row-odd"><td>assertNotIn(a, b)</td>
+<td>a n&#8217;est pas dans b</td>
+</tr>
+<tr class="row-even"><td>assertIsInstance(a,b)</td>
+<td>a est une instance de b</td>
+</tr>
+<tr class="row-odd"><td>assertNotIsInstance(a,b)</td>
+<td>a n&#8217;est pas une instance de b</td>
+</tr>
+</tbody>
+</table>
+<p>De plus, chaque méthode &#8216;assert&#8217; peut accepter un message comme dernier argument. Si ce message est spécifié, alors il viendra affiché lors d&#8217;un échec de test.</p>
+<p>Voici un exemple de test qui échoue:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">CarreTestCaseFail</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Mauvaise classe testeur pour la fonction carrée.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">test_assert_fail</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Affichage d&#39;un message d&#39;erreur personnalisé.&quot;&quot;&quot;</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="mi">2</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">carré</span><span class="p">(</span><span class="n">value</span><span class="p">),</span> <span class="s2">&quot;Message d&#39;erreur personnalisé&quot;</span><span class="p">)</span>
+
+
+</pre></div>
+</div>
+<p>ainsi que la sortie lorsque le test est exécuté :</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">.F</span>
+<span class="go">======================================================================</span>
+<span class="go">FAIL: test_assert_fail (carre.CarreTestCaseFail)</span>
+<span class="go">Affichage d&#39;un message d&#39;erreur spécifique.</span>
+<span class="go">----------------------------------------------------------------------</span>
+<span class="go">Traceback (most recent call last):</span>
+<span class="go">  File &quot;FilePath\carre.py&quot;, line 36, in test_assert_fail</span>
+<span class="go">    self.assertEqual(2, carré(value), &quot;Message d&#39;erreur personnalisé&quot;)</span>
+<span class="go">AssertionError: 2 != 4 : Message d&#39;erreur personnalisé</span>
+
+<span class="go">----------------------------------------------------------------------</span>
+<span class="go">Ran 1 tests in 0.010s</span>
+
+<span class="go">FAILED (failures=1)</span>
+</pre></div>
+</div>
+<p>On constate bien que le message d&#8217;erreur spécifié au moment de l&#8217;assert, est affiché lors de l&#8217;échec du test.</p>
+</div>
+<div class="section" id="testsuite-class">
+<h4>TestSuite Class<a class="headerlink" href="#testsuite-class" title="Permalink to this headline">¶</a></h4>
+<p>Chaque instance de &#8216;testCase&#8217; peut être regroupée selon la fonctionnalité du programme qu&#8217;elle teste. Ce mécanisme est mis à disposition grâce à la classe &#8216;TestSuite&#8217;.</p>
+<p>voici les étapes pour regrouper un &#8216;TestSuite&#8217;:</p>
+<ol class="arabic simple">
+<li>Créer une instance de &#8216;TestSuite&#8217;</li>
+</ol>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">suite</span> <span class="o">=</span> <span class="n">unittest</span><span class="o">.</span><span class="n">TestSuite</span><span class="p">()</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li>Ajouter le &#8216;testCase&#8217; avec la méthode addTest() ou  makeSuite():</li>
+</ol>
+<div class="admonition-todo admonition" id="index-0">
+<p class="first admonition-title">Todo</p>
+<p>Le code suivant n&#8217;est pas du Python.</p>
+<div class="last highlight-text"><div class="highlight"><pre><span></span>suite.addTest(testcase class)
+suite = unittest.makeSuite(testcase class)
+</pre></div>
+</div>
+</div>
+<ol class="arabic simple" start="3">
+<li>Créer une instance de la class TestTestRunner:</li>
+</ol>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">runner</span> <span class="o">=</span> <span class="n">unittest</span><span class="o">.</span><span class="n">TextTestRunner</span><span class="p">()</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li>Appeller la méthode run() pour exécuter tous les tests</li>
+</ol>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">runner</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">suite</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="mock">
+<h2>Mock<a class="headerlink" href="#mock" title="Permalink to this headline">¶</a></h2>
+<p><strong>TODO</strong></p>
+<div class="admonition-todo admonition" id="index-1">
+<p class="first admonition-title">Todo</p>
+<p class="last">Vous avez pas mal de contenu déjà, renforcez-le si nécessaire mais il ça me parait difficile d&#8217;explorer <a class="reference external" href="https://docs.python.org/3.6/library/unittest.mock.html#module-unittest.mock" title="(in Python v3.6)"><code class="xref py py-mod docutils literal"><span class="pre">unittest.mock</span></code></a>.</p>
+</div>
+</div>
+<div class="section" id="doctest">
+<h2>Doctest<a class="headerlink" href="#doctest" title="Permalink to this headline">¶</a></h2>
+<p>Un autre standard pour les tests unitaires en Python est: <a class="reference external" href="https://docs.python.org/3.6/library/doctest.html#module-doctest" title="(in Python v3.6)"><code class="xref py py-mod docutils literal"><span class="pre">doctest</span></code></a>. Ce concepte de test passe par l&#8217;utilisation des docstrings tout comme l&#8217;écriture de documentation.</p>
+<dl class="glossary docutils">
+<dt id="term-docstring">Docstring</dt>
+<dd>Une docstring est essentiellement une chaîne de caractères. Elle commence et termine par trois guillemets. De plus l&#8217;indentation d&#8217;une docstring est importante car elle dépend directement de l&#8217;indentation de la classe ou de la méthode qu&#8217;elle documente.</dd>
+</dl>
+<div class="admonition-todo admonition" id="index-2">
+<p class="first admonition-title">Todo</p>
+<p>une docstring c&#8217;est juste une chaine de caractère pour documenter une fonction, variable, classe, etc. Le triple guillemets est un choix esthétique.</p>
+<p class="last">L&#8217;idée des doctest est de mettre ses tests dans sa documentation afin de s&#8217;assurer que les exemples dans la documentation fonctionnent.</p>
+</div>
+<div class="section" id="id1">
+<h3>Création d&#8217;un test unitaire<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>Pour pouvoir créer des tests à l&#8217;intérieur d&#8217;une docstring il est nécessaire de respecter une syntaxe précise. On utilise un triple chevron &gt;&gt;&gt; pour indiquer que l&#8217;on écrit un test, puis à la ligne suivante on écrit le résultat attendu.</p>
+<p>Voici un exemple avec la fonction carré:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">carré</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Élève au carré.</span>
+
+<span class="sd">    &gt;&gt;&gt; carré(-2)</span>
+<span class="sd">    4</span>
+<span class="sd">    &gt;&gt;&gt; carré(0)</span>
+<span class="sd">    0</span>
+<span class="sd">    &gt;&gt;&gt; carré(2)</span>
+<span class="sd">    4</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">**</span> <span class="mi">2</span>
+
+
+</pre></div>
+</div>
+<p>Ensuite pour éxécuter le(s) test(s), il faut importer le module doctest (ici fait dans le &#8216;main&#8217;). Ensuite il faut appeller la méthode testmod() du module doctest qui va parser le fichier entier à la recherche de docstrings. Une fois la recherche effectué, il éxécute tout les tests qu&#8217;il a trouvé.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">doctest</span>
+
+    <span class="n">doctest</span><span class="o">.</span><span class="n">testmod</span><span class="p">()</span>
+
+</pre></div>
+</div>
+<p>Cependant si on éxécute le fichier en ligne de commande:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> python doctest_example.py
+</pre></div>
+</div>
+<p>On constate qu&#8217;aucune sortie est affichée si aucun test échoue. Cependant si on voulait avoir un retour des tests, il faudrait utiliser l&#8217;option -v (verbose):</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> python doctest_example.py -v
+</pre></div>
+</div>
+<p>Ce qui produirait le résultat suivant:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">Trying:</span>
+<span class="go">    carré(-2)</span>
+<span class="go">Expecting:</span>
+<span class="go">    4</span>
+<span class="go">ok</span>
+<span class="go">Trying:</span>
+<span class="go">    carré(0)</span>
+<span class="go">Expecting:</span>
+<span class="go">    0</span>
+<span class="go">ok</span>
+<span class="go">Trying:</span>
+<span class="go">    carré(2)</span>
+<span class="go">Expecting:</span>
+<span class="go">    4</span>
+<span class="go">ok</span>
+<span class="go">1 items had no tests:</span>
+<span class="go">    __main__</span>
+<span class="go">1 items passed all tests:</span>
+<span class="go">   3 tests in __main__.carré</span>
+<span class="go">3 tests in 2 items.</span>
+<span class="go">3 passed and 0 failed.</span>
+<span class="go">Test passed.</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table des Matières</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><code class="docutils literal"><span class="pre">unittest</span></code>, <code class="docutils literal"><span class="pre">doctest</span></code>, <code class="docutils literal"><span class="pre">mock</span></code></a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#unittest">Unittest</a><ul>
+<li><a class="reference internal" href="#creation-d-un-test-unitaire">Création d&#8217;un test unitaire</a></li>
+<li><a class="reference internal" href="#classes-et-methodes">Classes et méthodes</a><ul>
+<li><a class="reference internal" href="#testcase-classe">TestCase Classe</a></li>
+<li><a class="reference internal" href="#testsuite-class">TestSuite Class</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#mock">Mock</a></li>
+<li><a class="reference internal" href="#doctest">Doctest</a><ul>
+<li><a class="reference internal" href="#id1">Création d&#8217;un test unitaire</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="../time/index.html" title="Chapitre précédent"><code class="docutils literal"><span class="pre">time</span></code></a></li>
+      <li>Next: <a href="../weakref/index.html" title="Chapitre suivant">Weakref</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>Cette page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/unittest/index.rst.txt"
+            rel="nofollow">Montrer le code source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Recherche rapide</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016-2017, HE-Arc.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="../_sources/unittest/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

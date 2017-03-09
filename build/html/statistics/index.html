@@ -1,0 +1,404 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>statistics &#8212; Bibliothèques Python 0.1.1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Recherche" href="../search.html" />
+    <link rel="next" title="random" href="../random/index.html" />
+    <link rel="prev" title="secrets" href="../secrets/index.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="statistics">
+<span id="statistics-tutorial"></span><h1>statistics<a class="headerlink" href="#statistics" title="Permalink to this headline">¶</a></h1>
+<p>Par Jérémy dubois <a class="reference internal" href="#jd" id="id1">[jd]</a></p>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>le module <a class="reference external" href="https://docs.python.org/3.6/library/statistics.html#module-statistics" title="(in Python v3.6)"><code class="xref py py-mod docutils literal"><span class="pre">statistics</span></code></a> est un ensemble de fonctions offrant la possibilité de résoudre des problèmes
+mathématiques de statistiques avec des valeures &#8220;real&#8221;.</p>
+<p>Il faut noté que ces méthodes ne supportent pas tous les types de variable. Sans précision explicite,
+seul les <em>int, float, decimal.Decimal</em> et <em>fraction.Fraction</em> sont supportés.</p>
+</div>
+<div class="section" id="fonctions">
+<h2>Fonctions<a class="headerlink" href="#fonctions" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="moyenne-et-calcul-de-valeur-central">
+<h3>Moyenne et calcul de valeur central<a class="headerlink" href="#moyenne-et-calcul-de-valeur-central" title="Permalink to this headline">¶</a></h3>
+<p>Les fonctions suivantes permettent de calculer la moyenne ou d&#8217;autres valeurs typiques d&#8217;une population ou d&#8217;un échantillon.</p>
+<p><a class="reference internal" href="#mean"><span class="std std-ref">mean()</span></a> : Évaluation de la moyenne arithmétique.</p>
+<p><a class="reference internal" href="#harmonic"><span class="std std-ref">harmonic_mean()</span></a> : Évaluation de la moyenne harmonique.</p>
+<p><a class="reference internal" href="#median"><span class="std std-ref">median()</span></a> : Évaluation de la médiane. On prend la valeur centrale, même si elle n&#8217;est pas dans les données.</p>
+<p><a class="reference internal" href="#mlow"><span class="std std-ref">median_low()</span></a> : Évaluation de la médiane basse.</p>
+<p><a class="reference internal" href="#mhigh"><span class="std std-ref">median_high()</span></a> : Évaluation de la médiane haute.</p>
+<p><a class="reference internal" href="#mgr"><span class="std std-ref">median_grouped()</span></a> : Évaluation de la médiane pour des données groupées.</p>
+<p><a class="reference internal" href="#mode"><span class="std std-ref">mode()</span></a> : Évalutaion de valeurs la plus commune dans un ensemble de valeurs discrètes.</p>
+</div>
+<div class="section" id="mesure-de-dispersion">
+<h3>Mesure de dispersion<a class="headerlink" href="#mesure-de-dispersion" title="Permalink to this headline">¶</a></h3>
+<p>Tandis que les fonctions ci-dessous calculent les valeurs de variations avec des valeurs standards ou moyennes.</p>
+<p><a class="reference internal" href="#pstdev"><span class="std std-ref">pstdev()</span></a> : Retourne l&#8217;écart type de la population des données.</p>
+<p><a class="reference internal" href="#pvar"><span class="std std-ref">pvariance()</span></a> : Retourne la variance de la population des données.</p>
+<p><a class="reference internal" href="#stdev"><span class="std std-ref">stdev()</span></a> : Retourne l&#8217;écart type de l&#8217;échantillon de données.</p>
+<p><a class="reference internal" href="#var"><span class="std std-ref">variance()</span></a> : Retourne la variance de l&#8217;échantillon de données.</p>
+</div>
+</div>
+<div class="section" id="exception">
+<span id="error"></span><h2>Exception<a class="headerlink" href="#exception" title="Permalink to this headline">¶</a></h2>
+<p>Dans cette bibliothèque, il n&#8217;y a qu&#8217;une seule exception de définie; <em>statistics.StatisticError</em>.
+Cette erreur apparait lorsque les données fournies aux méthodes sont insuffisantes ou inexistantes.</p>
+</div>
+<div class="section" id="descriptions-et-exemples">
+<h2>Descriptions et exemples<a class="headerlink" href="#descriptions-et-exemples" title="Permalink to this headline">¶</a></h2>
+<p>L&#8217;ensemble de ces fonctions ne nécessite pas que les données qui sont fournies soient triées.</p>
+<div class="section" id="statistics-mean-data">
+<span id="mean"></span><h3>statistics.mean(<em>data</em>)<a class="headerlink" href="#statistics-mean-data" title="Permalink to this headline">¶</a></h3>
+<p>Cette méthode retourne la valeur moyenne de données fournies qu&#8217;elles soit sous forme de série ou
+d&#8217;itérateur.</p>
+<p>La logique de la fonction est de sommer toutes les valeurs fournies et et de diviser cette somme par
+le nombre de ces valeurs.</p>
+<p>Exemples d&#8217;utilisation:</p>
+<div class="highlight-pycon"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mean</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">11</span><span class="p">])</span>
+<span class="go">6.25</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mean</span><span class="p">([</span><span class="o">-</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">4.35</span><span class="p">,</span> <span class="mf">7.4</span><span class="p">])</span>
+<span class="go">2.8125</span>
+</pre></div>
+</div>
+<p>Si les données sont vides, l&#8217;erreur <a class="reference internal" href="#error"><span class="std std-ref">statisticsError</span></a> est signalée.</p>
+</div>
+<div class="section" id="statistics-harmonic-mean-data">
+<span id="harmonic"></span><h3>statistics.harmonic_mean(<em>data</em>)<a class="headerlink" href="#statistics-harmonic-mean-data" title="Permalink to this headline">¶</a></h3>
+<p>Cette méthode a été introduite dans la version 3.6. Elle permet de calculer la moyenne harmonique
+d&#8217;une série, d&#8217;un échantillon ou d&#8217;un itérateur de données.</p>
+<p>La moyenne harmonique est un type de moyenne utile pour trouver la mesure central de données, qui
+montre tout son intérêt lorsqu&#8217;il faut étudier des taux, par exemple les vitesses.</p>
+<dl class="docutils">
+<dt>On calcul la moyenne harmonique en utilisant l&#8217;inverse de la moyenne arithmétique avec des données inversées.</dt>
+<dd>Imaginons qu&#8217;il y aie trois valeur a, b et c; le calcul serait donc (3/(1/a + 1/b + 1/c))</dd>
+</dl>
+<p>Exemple d&#8217;utilisation:</p>
+<div class="highlight-pycon"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">harmonic_mean</span><span class="p">([</span><span class="mf">2.5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
+<span class="go">3.6</span>
+</pre></div>
+</div>
+<p>Si les données sont vides, l&#8217;erreur <a class="reference internal" href="#error"><span class="std std-ref">statisticsError</span></a> est signalée.</p>
+</div>
+<div class="section" id="statistics-median-data">
+<span id="median"></span><h3>statistics.median(<em>data</em>)<a class="headerlink" href="#statistics-median-data" title="Permalink to this headline">¶</a></h3>
+<p>Cette méthode calcul la valeur médiane de données numériques. Ces dernières peuvent
+venir sous plusieurs forme; séries ou itérateurs.</p>
+<p><em>median()</em> emploie la règle mathématique de la moyenne des éléments centraux. C&#8217;est à dire que
+suivant le nombre de valeurs, le comportement le résultat peux être hors des des données.</p>
+<p>Exemples:</p>
+<p>Nombre de valeurs, impaire.</p>
+<div class="highlight-pycon"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">median</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">9</span><span class="p">])</span>
+<span class="go">4</span>
+</pre></div>
+</div>
+<p>Nombre de valeurs, paire.</p>
+<div class="highlight-pycon"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">median</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">9</span><span class="p">])</span>
+<span class="go">5.0</span>
+</pre></div>
+</div>
+<p>On remarque que dans la série paire, la valeurs médiane a été interpolée.</p>
+<p>Si les données sont vides, l&#8217;erreur <a class="reference internal" href="#error"><span class="std std-ref">statisticsError</span></a> est signalée.</p>
+</div>
+<div class="section" id="statistics-median-low-data">
+<span id="mlow"></span><h3>statistics.median_low(<em>data</em>)<a class="headerlink" href="#statistics-median-low-data" title="Permalink to this headline">¶</a></h3>
+<p>Cette méthode calcul le même élément que <em>median()</em> mais avec cette fonction la valeurs médiane
+est toujours une valeurs parmis les données choisies. Les données peuvent prendre les même forme
+que pour la fonction précédente; série ou itérateur.</p>
+<p>La valeur médiane rendue par cette méthode est toujours la plus petite des deux valeurs centrales.</p>
+<p>Exemples:</p>
+<p>Nombre de valeurs, impaire.</p>
+<div class="highlight-pycon"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">median_low</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">9</span><span class="p">])</span>
+<span class="go">4</span>
+</pre></div>
+</div>
+<p>Nombre de valeurs, paire.</p>
+<div class="highlight-pycon"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">median_low</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">9</span><span class="p">])</span>
+<span class="go">4</span>
+</pre></div>
+</div>
+<p>On utilise la médiane basse sur des données discrètes et dont la valeurs médiane doit appartenir
+à l&#8217;ensemble choisi.</p>
+<p>Si les données sont vides, l&#8217;erreur <a class="reference internal" href="#error"><span class="std std-ref">statisticsError</span></a> est signalée.</p>
+</div>
+<div class="section" id="statistics-median-high-data">
+<span id="mhigh"></span><h3>statistics.median_high(<em>data</em>)<a class="headerlink" href="#statistics-median-high-data" title="Permalink to this headline">¶</a></h3>
+<p>Cette méthode calcul le même élément que <em>median()</em> mais avec cette fonction la valeurs médiane
+est toujours une valeurs parmis les données choisies. Les données peuvent prendre les même forme
+que pour la fonction précédente; série ou itérateur.</p>
+<p>La valeur médiane rendue par cette méthode est toujours la plus grande des deux valeurs centrales.</p>
+<p>Exemples:</p>
+<p>Nombre de valeurs, impaire.</p>
+<div class="highlight-pycon"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">median_high</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">9</span><span class="p">])</span>
+<span class="go">4</span>
+</pre></div>
+</div>
+<p>Nombre de valeurs, paire.</p>
+<div class="highlight-pycon"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">median_high</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">9</span><span class="p">])</span>
+<span class="go">6</span>
+</pre></div>
+</div>
+<p>On utilise la médiane haute sur des données discrètes et dont la valeurs médiane doit appartenir
+à l&#8217;ensemble choisi.</p>
+<p>Si les données sont vides, l&#8217;erreur <a class="reference internal" href="#error"><span class="std std-ref">statisticsError</span></a> est signalée.</p>
+</div>
+<div class="section" id="statistics-median-grouped-data-interval-1">
+<span id="mgr"></span><h3>statistics.median_grouped(<em>data, interval=1</em>)<a class="headerlink" href="#statistics-median-grouped-data-interval-1" title="Permalink to this headline">¶</a></h3>
+<p>Cette méthode retourne la médiane de données groupées continues. Elle résout en cherchant le
+50e centile avec la méthode de l&#8217;interpolation. Les données que la fonction peut traiter ont la
+frome de séries ou d&#8217;itérateurs.</p>
+<p>L&#8217;argument <em>interval</em> est optionnel. Si il n&#8217;est pas fourni, la fonction prend la valeur par défault
+1. Dans l&#8217;exemple ci-dessous, onconstat aussi que cette argument influe sur l&#8217;interpolation du résultat.</p>
+<p>Exemples d&#8217;utilisation:</p>
+<div class="highlight-pycon"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">median_grouped</span><span class="p">([</span><span class="mi">42</span><span class="p">,</span> <span class="mi">43</span> <span class="p">,</span> <span class="mi">44</span><span class="p">,</span> <span class="mi">45</span><span class="p">])</span>
+<span class="go">43.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">median_grouped</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>
+<span class="go">2.375</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">median_grouped</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="n">interval</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">2.375</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">median_grouped</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="n">interval</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">2.75</span>
+</pre></div>
+</div>
+<p>Cette fonciton ne vérifie pas si les valeurs sont séparées par au moins <em>interval</em>.</p>
+<p>Si les données sont vides, l&#8217;erreur <a class="reference internal" href="#error"><span class="std std-ref">statisticsError</span></a> est signalée.</p>
+</div>
+<div class="section" id="statistics-mode-data">
+<span id="mode"></span><h3>statistics.mode(<em>data</em>)<a class="headerlink" href="#statistics-mode-data" title="Permalink to this headline">¶</a></h3>
+<p>Cette méthode retourne l&#8217;élément le plus commun d&#8217;un ensembe de données, soit numérique, soit nominale.</p>
+<p>Exemples d&#8217;utilisation:</p>
+<div class="highlight-pycon"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mode</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
+<span class="go">4</span>
+</pre></div>
+</div>
+<p>C&#8217;est la seule méthode de statistique qui s&#8217;applique aussi à des données nominales.</p>
+<div class="highlight-pycon"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mode</span><span class="p">([</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="s2">&quot;yellow&quot;</span><span class="p">,</span> <span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="s2">&quot;yellow&quot;</span><span class="p">,</span> <span class="s2">&quot;yellow&quot;</span><span class="p">,</span> <span class="s2">&quot;yellow&quot;</span><span class="p">,])</span>
+<span class="go">&#39;yellow&#39;</span>
+</pre></div>
+</div>
+<p>Si les données sont vides ou si il n&#8217;y a pas qu&#8217;une seule valeur la plus représentée, l&#8217;erreur <a class="reference internal" href="#error"><span class="std std-ref">statisticsError</span></a> est signalée.</p>
+</div>
+<div class="section" id="statistics-pstdev-data-mu-none">
+<span id="pstdev"></span><h3>statistics.pstdev(<em>data, mu=None</em>)<a class="headerlink" href="#statistics-pstdev-data-mu-none" title="Permalink to this headline">¶</a></h3>
+<p>Cette méthode retourne l&#8217;écart type standard d&#8217;une population ( c&#8217;est aussi la racine carrée de la
+variance de la population). Voir <a class="reference internal" href="#pvar"><span class="std std-ref">pvariance()</span></a> pour l&#8217;explication des arguments.</p>
+<p>Exemple d&#8217;utilisation:</p>
+<div class="highlight-pycon"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pstdev</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">,</span> <span class="mf">5.5</span><span class="p">,</span> <span class="mf">6.25</span><span class="p">,</span> <span class="mf">9.5</span><span class="p">])</span>
+<span class="go">3.1128764832546763</span>
+</pre></div>
+</div>
+<p>Si les données sont vides, l&#8217;erreur <a class="reference internal" href="#error"><span class="std std-ref">statisticsError</span></a> est signalée.</p>
+</div>
+<div class="section" id="statistics-pvariance-data-mu-none">
+<span id="pvar"></span><h3>statistics.pvariance(<em>data, mu=None</em>)<a class="headerlink" href="#statistics-pvariance-data-mu-none" title="Permalink to this headline">¶</a></h3>
+<p>Cette méthode retourne la variance de population des données. La variance est une mesure de la
+dispersion des données. Plus la variance est grande, plus les valeurs sont étalées. Tandis qu&#8217;une
+petite variance indique que les valeurs sont regroupées autour de la moyenne.</p>
+<p>L&#8217;argument <em>mu</em> est optionnel, mais il peut être utilisé si la moyenne des données a déjà étée
+calculée. Si ce n&#8217;est pas le cas ou que l&#8217;argument est <em>None</em>, la méthode calcul automatiquement <em>mean()</em>.</p>
+<p>Cette méthode est utile lorsqu&#8217;il est souhaité de calculé la variance d&#8217;une entière population.
+Par contre, il mieux d&#8217;utiliser <a class="reference internal" href="#var"><span class="std std-ref">variance()</span></a> si on estime des échantillons.</p>
+<p>Exemples d&#8217;utilisation:</p>
+<div class="highlight-pycon"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">2.25</span><span class="p">,</span> <span class="mf">2.75</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pvariance</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="go">1.6128472222222223</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">mean</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">variance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
+<span class="go">1.6128472222222223</span>
+</pre></div>
+</div>
+<p>La fonction n&#8217;essaie pas de vérifier la valeur de <em>mu</em> donc l&#8217;utilisation d&#8217;une valeur arbitraire
+pour <em>mu</em> peut mener à un résultat invalide ou impossible.</p>
+<p>Si les données sont vides, l&#8217;erreur <a class="reference internal" href="#error"><span class="std std-ref">statisticsError</span></a> est signalée.</p>
+<p>Cette méthode supporte aussi les types <em>Decimal</em> et <em>Fraction</em>.</p>
+<p>Exemple:</p>
+<p>..code-block:: pycon</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">decimal</span> <span class="k">import</span> <span class="n">Decimal</span> <span class="k">as</span> <span class="n">D</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">statistics</span><span class="o">.</span><span class="n">pvariance</span><span class="p">([</span><span class="n">D</span><span class="p">(</span><span class="s2">&quot;42.00&quot;</span><span class="p">),</span> <span class="n">D</span><span class="p">(</span><span class="s2">&quot;48.25&quot;</span><span class="p">),</span> <span class="n">D</span><span class="p">(</span><span class="s2">&quot;48.25&quot;</span><span class="p">),</span> <span class="n">D</span><span class="p">(</span><span class="s2">&quot;49.5&quot;</span><span class="p">),</span> <span class="n">D</span><span class="p">(</span><span class="s2">&quot;51.25&quot;</span><span class="p">)])</span>
+<span class="go">9.765</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fractions</span> <span class="k">import</span> <span class="n">Fraction</span> <span class="k">as</span> <span class="n">F</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">statistics</span><span class="o">.</span><span class="n">pvariance</span><span class="p">([</span><span class="n">F</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">F</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">F</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)])</span>
+<span class="go">13/72</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="statistics-stdev-data-xbar-none">
+<span id="stdev"></span><h3>statistics.stdev(<em>data, xbar=None</em>)<a class="headerlink" href="#statistics-stdev-data-xbar-none" title="Permalink to this headline">¶</a></h3>
+<p>Cette méthode retourne l&#8217;écart type standard ( c&#8217;est aussi la racine carrée de la
+variance de la population). Voir <a class="reference internal" href="#var"><span class="std std-ref">variance()</span></a> pour l&#8217;explication des arguments.</p>
+<p>Exemple d&#8217;utilisation:</p>
+<div class="highlight-pycon"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">stdev</span><span class="p">([</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">,</span> <span class="mf">2.75</span><span class="p">,</span> <span class="mf">3.25</span><span class="p">,</span> <span class="mf">4.75</span><span class="p">])</span>
+<span class="go">1.0810874155219827</span>
+</pre></div>
+</div>
+<p>Si il y a moins de deux valeurs, l&#8217;erreur <a class="reference internal" href="#error"><span class="std std-ref">statisticsError</span></a> est signalée.</p>
+</div>
+<div class="section" id="statistics-variance-data-xbar-none">
+<span id="var"></span><h3>statistics.variance(<em>data, xbar=None</em>)<a class="headerlink" href="#statistics-variance-data-xbar-none" title="Permalink to this headline">¶</a></h3>
+<p>Cette méthode retournela variance d&#8217;un échantillon de données, un itérative d&#8217;au moins deux
+nombres réels. La variance mesure la dispersion des données. Une Grande variance indique que les
+valeurs sont éparses. Tandis qu&#8217;une petite indique que les données sont regroupées vers la valeurs
+de la moyenne.</p>
+<p><em>xbar</em> est un argument optionnel qui représente la moyenne des données de l&#8217;argument <em>data</em>.
+Si, <em>xbar</em> est <em>None</em> ou n&#8217;est pas rempli, alors la moyenne est calculée automatiquement.</p>
+<p>On utilise cette fonction lorsqu&#8217;il est souhaité de calculer la variance d&#8217;échantillons d&#8217;une population.
+Si on veut calculer la variance sur toute la population, voir <a class="reference internal" href="#pvar"><span class="std std-ref">pvariance()</span></a>.</p>
+<p>Exemples d&#8217;utilisation:</p>
+<div class="highlight-pycon"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="o">=</span> <span class="p">[</span><span class="mf">2.75</span><span class="p">,</span> <span class="mf">1.25</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.75</span><span class="p">,</span> <span class="mf">3.25</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">variance</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="go">1.2104166666666667</span>
+</pre></div>
+</div>
+<p>Si la moyenne a déjà été calculée on peut l&#8217;entrer dans l&#8217;argument <em>xbar</em>.</p>
+<div class="highlight-pycon"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">mean</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">variance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
+<span class="go">1.2104166666666667</span>
+</pre></div>
+</div>
+<p>La fonction n&#8217;essaie pas de vérifier la valeur de <em>xbar</em> donc l&#8217;utilisation d&#8217;une valeur arbitraire
+pour <em>xbar</em> peut mener à un résultat invalide ou impossible.</p>
+<p>Si il y a moins de deux valeurs, l&#8217;erreur <a class="reference internal" href="#error"><span class="std std-ref">statisticsError</span></a> est signalée.</p>
+<p>Cette méthode supporte aussi les types <em>Decimal</em> et <em>Fraction</em>.</p>
+<p>Exemple:</p>
+<p>..code-block:: pycon</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">decimal</span> <span class="k">import</span> <span class="n">Decimal</span> <span class="k">as</span> <span class="n">D</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">statistics</span><span class="o">.</span><span class="n">variance</span><span class="p">([</span><span class="n">D</span><span class="p">(</span><span class="s2">&quot;42.00&quot;</span><span class="p">),</span> <span class="n">D</span><span class="p">(</span><span class="s2">&quot;48.25&quot;</span><span class="p">),</span> <span class="n">D</span><span class="p">(</span><span class="s2">&quot;48.25&quot;</span><span class="p">),</span> <span class="n">D</span><span class="p">(</span><span class="s2">&quot;49.5&quot;</span><span class="p">),</span> <span class="n">D</span><span class="p">(</span><span class="s2">&quot;51.25&quot;</span><span class="p">)])</span>
+<span class="go">12.20625</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fractions</span> <span class="k">import</span> <span class="n">Fraction</span> <span class="k">as</span> <span class="n">F</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">statistics</span><span class="o">.</span><span class="n">variance</span><span class="p">([</span><span class="n">F</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">F</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">F</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)])</span>
+<span class="go">13/48</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">¶</a></h2>
+<p>Cette bibliothèque permet de ne pas devoir recoder les outils mathématique
+de statistique.</p>
+<table class="docutils citation" frame="void" id="jd" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[jd]</a></td><td>&lt;<a class="reference external" href="mailto:jeremy&#46;dubois&#37;&#52;&#48;he-arc&#46;ch">jeremy<span>&#46;</span>dubois<span>&#64;</span>he-arc<span>&#46;</span>ch</a>&gt;</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table des Matières</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">statistics</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#fonctions">Fonctions</a><ul>
+<li><a class="reference internal" href="#moyenne-et-calcul-de-valeur-central">Moyenne et calcul de valeur central</a></li>
+<li><a class="reference internal" href="#mesure-de-dispersion">Mesure de dispersion</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#exception">Exception</a></li>
+<li><a class="reference internal" href="#descriptions-et-exemples">Descriptions et exemples</a><ul>
+<li><a class="reference internal" href="#statistics-mean-data">statistics.mean(<em>data</em>)</a></li>
+<li><a class="reference internal" href="#statistics-harmonic-mean-data">statistics.harmonic_mean(<em>data</em>)</a></li>
+<li><a class="reference internal" href="#statistics-median-data">statistics.median(<em>data</em>)</a></li>
+<li><a class="reference internal" href="#statistics-median-low-data">statistics.median_low(<em>data</em>)</a></li>
+<li><a class="reference internal" href="#statistics-median-high-data">statistics.median_high(<em>data</em>)</a></li>
+<li><a class="reference internal" href="#statistics-median-grouped-data-interval-1">statistics.median_grouped(<em>data, interval=1</em>)</a></li>
+<li><a class="reference internal" href="#statistics-mode-data">statistics.mode(<em>data</em>)</a></li>
+<li><a class="reference internal" href="#statistics-pstdev-data-mu-none">statistics.pstdev(<em>data, mu=None</em>)</a></li>
+<li><a class="reference internal" href="#statistics-pvariance-data-mu-none">statistics.pvariance(<em>data, mu=None</em>)</a></li>
+<li><a class="reference internal" href="#statistics-stdev-data-xbar-none">statistics.stdev(<em>data, xbar=None</em>)</a></li>
+<li><a class="reference internal" href="#statistics-variance-data-xbar-none">statistics.variance(<em>data, xbar=None</em>)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#conclusion">Conclusion</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="../secrets/index.html" title="Chapitre précédent"><code class="docutils literal"><span class="pre">secrets</span></code></a></li>
+      <li>Next: <a href="../random/index.html" title="Chapitre suivant"><code class="docutils literal"><span class="pre">random</span></code></a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>Cette page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/statistics/index.rst.txt"
+            rel="nofollow">Montrer le code source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Recherche rapide</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016-2017, HE-Arc.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="../_sources/statistics/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,457 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Collections &#8212; Bibliothèques Python 0.1.1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Recherche" href="../search.html" />
+    <link rel="next" title="csv" href="../csv/index.html" />
+    <link rel="prev" title="Abstract Base Class" href="../abc/index.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="collections">
+<span id="collections-tutorial"></span><h1>Collections<a class="headerlink" href="#collections" title="Permalink to this headline">¶</a></h1>
+<p>Par Cédric Pahud &lt;<a class="reference external" href="mailto:cedric&#46;pahud&#37;&#52;&#48;he-arc&#46;ch">cedric<span>&#46;</span>pahud<span>&#64;</span>he-arc<span>&#46;</span>ch</a>&gt;</p>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://docs.python.org/3.6/library/collections.html#module-collections" title="(in Python v3.6)"><code class="xref py py-mod docutils literal"><span class="pre">collections</span></code></a> contient des conteneurs de donées spécialisés qui offrent une alternative aux conteneurs généraux de python.
+Ces conteneurs vont souvent plus loin que les conteneurs de données <em>built-in</em> et ont des fonctionnalités plus avancées que nous allons voir ici.</p>
+<p>Voici donc les conteneurs dont nous allons parler:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="86%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Conteneur</th>
+<th class="head">Utilité</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>namedtuple()</td>
+<td>une fonction permettant de créer une sous-classe de tuple avec des champs nommés</td>
+</tr>
+<tr class="row-odd"><td>deque</td>
+<td>un conteneur ressemblant a une liste mais avec ajout et suppression rapide a chacun des bouts</td>
+</tr>
+<tr class="row-even"><td>ChainMap</td>
+<td>permet de linker entre eux plusieurs mappings ensemble pour les gérer comme un tout</td>
+</tr>
+<tr class="row-odd"><td>Counter</td>
+<td>Permet de compter les occurences d&#8217;objets hachable</td>
+</tr>
+<tr class="row-even"><td>OrderedDict</td>
+<td>une sous classe de dictionnaire permettant de savoir l’ordre des entrées</td>
+</tr>
+<tr class="row-odd"><td>defaultdict</td>
+<td>une sous classe de dictionnaire permettant de spécifier une valeur par défaut dans le constructeur</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="namedtuple">
+<h2>namedtuple()<a class="headerlink" href="#namedtuple" title="Permalink to this headline">¶</a></h2>
+<p>tout d&#8217;abord avant d&#8217;utiliser la fonction <code class="docutils literal"><span class="pre">namedtuple()</span></code> il faut comprendre ce qu&#8217;est un tuple.
+un tuple est une collection immuable de données souvent hétérogène.</p>
+<div class="highlight-pycon"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;cheval&quot;</span><span class="p">,</span> <span class="s2">&quot;voiture&quot;</span><span class="p">,</span> <span class="s2">&quot;bateau&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span>
+<span class="go">(&#39;cheval&#39;, &#39;voiture&#39;,&#39;bateau&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="go">&#39;cheval&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="go">&#39;voiture&#39;</span>
+</pre></div>
+</div>
+<p>ci-dessus on remarque qu&#8217;on peut atteindre les champs de notre tuple seulement en spécifiant son index.
+En utilisant la fonction <code class="docutils literal"><span class="pre">namedtuple()</span></code> pour créer notre tuple, on peut nommer ses champs.</p>
+<div class="highlight-pycon"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># exemple namedtuple</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Point</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s1">&#39;Point&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">22</span><span class="p">)</span>     <span class="c1"># instanciation par position ou en utilisant le nom du champs</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>             <span class="c1"># indexable comme les tuples de base (11, 22)</span>
+<span class="go">33</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">p</span>                <span class="c1"># on peut le diviser en plusieurs variables (comme un tuple normal)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">,</span> <span class="n">y</span>
+<span class="go">(11, 22)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">p</span><span class="o">.</span><span class="n">y</span>               <span class="c1"># les champs sont accessible par nom</span>
+<span class="go">33</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span>                       <span class="c1"># lisible dans un style nom=valeur</span>
+<span class="go">Point(x=11, y=22)</span>
+</pre></div>
+</div>
+<div class="section" id="quelques-fonctions">
+<h3>quelques fonctions<a class="headerlink" href="#quelques-fonctions" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="mytuple-make-iterable">
+<h4>mytuple._make(iterable)<a class="headerlink" href="#mytuple-make-iterable" title="Permalink to this headline">¶</a></h4>
+<p>cette fonction permet de créer un tuple a partir d&#8217;un objet <em>iterable</em>.</p>
+<div class="highlight-pycon"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="p">[</span><span class="mi">11</span><span class="p">,</span> <span class="mi">22</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Point</span><span class="o">.</span><span class="n">_make</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<span class="go">Point(x=11, y=22)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="mytuple-asdict">
+<h4>mytuple._asdict()<a class="headerlink" href="#mytuple-asdict" title="Permalink to this headline">¶</a></h4>
+<p>cette fonction retourne un nouveau OrderedDict qui <em>map</em> les noms de champs avec leurs valeurs.</p>
+<div class="highlight-pycon"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">22</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">_asdict</span><span class="p">()</span>
+<span class="go">OrderedDict([(&#39;x&#39;, 11), (&#39;y&#39;, 22)])</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="mytuple-replace-key-args">
+<h4>mytuple._replace(key=args)<a class="headerlink" href="#mytuple-replace-key-args" title="Permalink to this headline">¶</a></h4>
+<p>cette fonction permet de retourner une nouvelle insatnce de notre tuple avec une valeures modifiée.</p>
+<div class="highlight-pycon"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">22</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">_replace</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">33</span><span class="p">)</span>
+<span class="go">Point(x=33, y=22</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="mytuple-fields">
+<h4>mytuple._fields<a class="headerlink" href="#mytuple-fields" title="Permalink to this headline">¶</a></h4>
+<p>cette fonction permet de récupérer les noms des champs de notre tuple.
+elle est utile si on veut créer un nouveau tuple avec les champs d&#8217;un tuple existant.</p>
+<div class="highlight-pycon"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">_fields</span>            <span class="c1"># retourne les noms de champs</span>
+<span class="go">(&#39;x&#39;, &#39;y&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Color</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s1">&#39;Color&#39;</span><span class="p">,</span> <span class="s1">&#39;red green blue&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Pixel</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s1">&#39;Pixel&#39;</span><span class="p">,</span> <span class="n">Point</span><span class="o">.</span><span class="n">_fields</span> <span class="o">+</span> <span class="n">Color</span><span class="o">.</span><span class="n">_fields</span><span class="p">)</span> <span class="c1">#on créé un nouveau tuple avec les champs de point et de color</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Pixel</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="go">Pixel(x=11, y=22, red=128, green=255, blue=0)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="deque">
+<h2>deque<a class="headerlink" href="#deque" title="Permalink to this headline">¶</a></h2>
+<p>la classe <a class="reference external" href="https://docs.python.org/3.6/library/collections.html#collections.deque" title="(in Python v3.6)"><code class="xref py py-class docutils literal"><span class="pre">collections.deque</span></code></a> est une généralisation des liste et des piles. les deque sont thread-safe et supporte l&#8217;ajout d&#8217;une
+valeur de chaque côté <em>(pile, liste)</em>. La preformance lors de l&#8217;ajout d&#8217;une valeur peut importe le côté
+est de O(1). Même si les objets de type <em>list</em> supportent des opérations similaires elles sont plus optimisées
+pour des opérations qui ne change pas leur taille alors qu&#8217; un <code class="docutils literal"><span class="pre">pop()</span></code> ou un <code class="docutils literal"><span class="pre">insert()</span></code> ont une complexité O(n).</p>
+<p><code class="docutils literal"><span class="pre">class</span> <span class="pre">collections.deque([iterable[,</span> <span class="pre">maxlen]])</span></code> cette instruction retourne un deque contenant les valeurs de
+<code class="docutils literal"><span class="pre">iterable</span></code> (s&#8217;il n&#8217;est pas spécifié le deque est vide) et l&#8217;argument <code class="docutils literal"><span class="pre">maxlen</span></code> permet de spécifier une taille
+maximum (la taille n&#8217;a pas de limite s&#8217;il nes pas spécifié).</p>
+<div class="highlight-pycon"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="n">deque</span><span class="p">(</span><span class="s1">&#39;abc&#39;</span><span class="p">)</span>                 <span class="c1"># créé un nouveau deque avec 3 valeurs</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="n">d</span><span class="p">:</span>                   <span class="c1"># itères sur les éléments de notre deque</span>
+<span class="gp">... </span>    <span class="k">print</span><span class="p">(</span><span class="n">elem</span><span class="p">)</span>
+<span class="go">a</span>
+<span class="go">b</span>
+<span class="go">c</span>
+</pre></div>
+</div>
+<div class="section" id="id1">
+<h3>quelques fonctions<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="append-x-appendleft-x-extend-iterable-et-extendleft-iterable">
+<h4>append(x), appendleft(x), extend(iterable) et extendleft(iterable)<a class="headerlink" href="#append-x-appendleft-x-extend-iterable-et-extendleft-iterable" title="Permalink to this headline">¶</a></h4>
+<p><code class="docutils literal"><span class="pre">append</span></code> ajoute une seule valeure du côté droit du deque et <code class="docutils literal"><span class="pre">appendleft</span></code> du côté gauche
+alors que <code class="docutils literal"><span class="pre">extend</span></code> et <code class="docutils literal"><span class="pre">extendleft</span></code> permettent d&#8217;ajouer plusieurs éléments d&#8217;un coup.</p>
+<div class="highlight-pycon"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">d</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;z&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span><span class="o">.</span><span class="n">appendleft</span><span class="p">(</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span>
+<span class="go">deque([&#39;r&#39;, &#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;z&#39;])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="s1">&#39;jkl&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span>
+<span class="go">deque([&#39;r&#39;, &#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;z&#39;,&#39;j&#39;,&#39;k&#39;,&#39;l&#39;])</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="pop-popleft-remove-val-et-clear">
+<h4>pop(), popleft(), remove(val) et clear()<a class="headerlink" href="#pop-popleft-remove-val-et-clear" title="Permalink to this headline">¶</a></h4>
+<p><code class="docutils literal"><span class="pre">pop</span></code> et <code class="docutils literal"><span class="pre">popleft</span></code> permettent de faire sortire un objet de notre deque alors que
+<code class="docutils literal"><span class="pre">remove</span></code> supprime la première occurence de la val passée en paramètre et finalement
+<code class="docutils literal"><span class="pre">clear</span></code> vide le deque.</p>
+<div class="highlight-pycon"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">d</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span><span class="o">.</span><span class="n">extends</span><span class="p">(</span><span class="s1">&#39;abc&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span>
+<span class="go">deque([&#39;a&#39;, &#39;c&#39;])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+<span class="go">&#39;c&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span><span class="o">.</span><span class="n">popleft</span><span class="p">()</span>
+<span class="go">&#39;a&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="chainmap">
+<h2>ChainMap<a class="headerlink" href="#chainmap" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://docs.python.org/3.6/library/collections.html#collections.ChainMap" title="(in Python v3.6)"><code class="xref py py-class docutils literal"><span class="pre">collections.ChainMap</span></code></a> permet de linker plusieurs mappings pour qu&#8217;ils soient géré comme un seul. C&#8217;est
+souvent plus rapide que de créer un nouveau dictionnaire et faire plusieurs <code class="docutils literal"><span class="pre">update()</span></code>.</p>
+<p><code class="docutils literal"><span class="pre">class</span> <span class="pre">collections.ChainMap(*maps)</span></code> cette fonction nous retourne une nouvelle ChainMap.
+Si il n&#8217;y a pas de maps spécifiés en paramètres la ChainMap sera vide.</p>
+<div class="highlight-pycon"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">ChainMap</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="mi">11</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">z</span> <span class="o">=</span> <span class="n">ChainMap</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">z</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+<span class="go">      print(k, v)</span>
+<span class="go">a 1</span>
+<span class="go">c 11</span>
+<span class="go">b 10</span>
+</pre></div>
+</div>
+<p>Dans cet exemple on remarque que la clé b a pris la valeur 10 et pas 2 car
+<code class="docutils literal"><span class="pre">y</span></code> est passé avant <code class="docutils literal"><span class="pre">x</span></code> dans le constructeur de ChainMap.</p>
+</div>
+<div class="section" id="counter">
+<h2>Counter<a class="headerlink" href="#counter" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://docs.python.org/3.6/library/collections.html#collections.Counter" title="(in Python v3.6)"><code class="xref py py-class docutils literal"><span class="pre">collections.Counter</span></code></a> est une sous classe de <a class="reference external" href="https://docs.python.org/3.6/tutorial/datastructures.html#dictionaries">dict</a>
+qui permet de compter des objets <em>hachable</em>. Enfaite c&#8217;est un dictionnaire avec comme clé les
+éléments et comme valeurs leur nombre.</p>
+<p><code class="docutils literal"><span class="pre">class</span> <span class="pre">collections.Counter([iterable-or-mapping])</span></code> ceci nous retourne un Counter. L&#8217;argument
+permet de spécifier ce que l&#8217;on veut mettre dedans et qui doit être compté. Voici un exemple :</p>
+<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">()</span>                           <span class="c1"># compteur vide</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="s1">&#39;gallahad&#39;</span><span class="p">)</span>                 <span class="c1">#compteur avec un iterable</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">({</span><span class="s1">&#39;red&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;blue&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">})</span>      <span class="c1"># un compteur avec un mapping</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">cats</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">dogs</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>             <span class="c1">#un compteur avec key=valeur</span>
+</pre></div>
+</div>
+<p>Contrairement à un dictionnaire si on demande une valeur n&#8217;étant pas dans notre liste
+il retourne 0 et non pas <code class="docutils literal"><span class="pre">KeyError</span></code></p>
+<div class="highlight-pycon"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">([</span><span class="s1">&#39;eggs&#39;</span><span class="p">,</span> <span class="s1">&#39;ham&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="p">[</span><span class="s1">&#39;bacon&#39;</span><span class="p">]</span>                              <span class="c1"># clé inconnue</span>
+<span class="go">0</span>
+</pre></div>
+</div>
+<div class="section" id="id2">
+<h3>quelques fonctions<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="elements">
+<h4>elements()<a class="headerlink" href="#elements" title="Permalink to this headline">¶</a></h4>
+<p>retourne une liste de tous les éléments du compteur :</p>
+<div class="highlight-pycon"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">d</span><span class="o">=-</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">sorted</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">elements</span><span class="p">())</span>
+<span class="go">[&#39;a&#39;, &#39;a&#39;, &#39;a&#39;, &#39;a&#39;, &#39;b&#39;, &#39;b&#39;]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="most-common-n">
+<h4>most_common([n])<a class="headerlink" href="#most-common-n" title="Permalink to this headline">¶</a></h4>
+<p>retourne les n éléments les plus présents dans notre compteur :</p>
+<div class="highlight-pycon"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Counter</span><span class="p">(</span><span class="s1">&#39;abracadabra&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">most_common</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">[(&#39;a&#39;, 5), (&#39;r&#39;, 2), (&#39;b&#39;, 2)]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="substract-iterable-or-mapping">
+<h4>substract([iterable or mapping])<a class="headerlink" href="#substract-iterable-or-mapping" title="Permalink to this headline">¶</a></h4>
+<p>permet de soustraire des éléments d&#8217;un compteur (mais pas de les supprimer) :</p>
+<div class="highlight-pycon"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">d</span><span class="o">=-</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="o">.</span><span class="n">subtract</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span>
+<span class="go">Counter({&#39;a&#39;: 3, &#39;b&#39;: 0, &#39;c&#39;: -3, &#39;d&#39;: -6})</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="ordereddict">
+<h2>OrderedDict<a class="headerlink" href="#ordereddict" title="Permalink to this headline">¶</a></h2>
+<p>les <a class="reference external" href="https://docs.python.org/3.6/library/collections.html#collections.OrderedDict" title="(in Python v3.6)"><code class="xref py py-class docutils literal"><span class="pre">collections.OrderedDict</span></code></a> sont comme les <a class="reference external" href="https://docs.python.org/3.6/tutorial/datastructures.html#dictionaries">dict</a>
+mais ils se rappelent l&#8217;ordre d&#8217;entrée des valeurs. Si on itère dessus les données seront
+retournées dans l&#8217;ordre d&#8217;ajout dans notre dict.</p>
+<p><code class="docutils literal"><span class="pre">class</span> <span class="pre">collections.OrderedDict([items])</span></code> cette fonction nous retourn un OrderedDict.</p>
+<div class="section" id="id3">
+<h3>quelques fonctions<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="popitem-last-true">
+<h4>popitem(last=True)<a class="headerlink" href="#popitem-last-true" title="Permalink to this headline">¶</a></h4>
+<p>Cette fonction fait sortir une paire clé valeur de notre dictionnaire et si
+l&#8217;argument last est a <code class="docutils literal"><span class="pre">`True</span></code> alors les pairs seront retournée en LIFO sinon
+ce serra en FIFO.</p>
+</div>
+<div class="section" id="move-to-end-key-last-true">
+<h4>move_to_end(key, last=True)<a class="headerlink" href="#move-to-end-key-last-true" title="Permalink to this headline">¶</a></h4>
+<p>Cette fonction permet de déplacer une clé à la fin de notre dictionnaire si
+last est à <code class="docutils literal"><span class="pre">True</span></code> sinon au début de notre dict.</p>
+<div class="highlight-pycon"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="o">.</span><span class="n">fromkeys</span><span class="p">(</span><span class="s1">&#39;abcde&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span><span class="o">.</span><span class="n">move_to_end</span><span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+<span class="go">&#39;acdeb&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span><span class="o">.</span><span class="n">move_to_end</span><span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">last</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+<span class="go">&#39;bacde&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="defaultdict">
+<h2>defaultdict<a class="headerlink" href="#defaultdict" title="Permalink to this headline">¶</a></h2>
+<p>La classe <a class="reference external" href="https://docs.python.org/3.6/library/collections.html#collections.defaultdict" title="(in Python v3.6)"><code class="xref py py-class docutils literal"><span class="pre">collections.defaultdict</span></code></a> est une sous classe de <a class="reference external" href="https://docs.python.org/3.6/tutorial/datastructures.html#dictionaries">dict</a>.
+Elle rajoute une variable et une fonction à la classe <a class="reference external" href="https://docs.python.org/3.6/tutorial/datastructures.html#dictionaries">dict</a>.
+<code class="docutils literal"><span class="pre">class</span> <span class="pre">collections.defaultdict([default_factory[,</span> <span class="pre">...]])</span></code> cette commande nous retourne un objet
+de type defaultdict.L&#8217;argument <code class="docutils literal"><span class="pre">default_factory</span></code> est par défaut à <code class="docutils literal"><span class="pre">None</span></code> et les reste des arguments
+sont traité comme si on utilisait le constructeur de dict.</p>
+<p>La fonction ajoutée par defaultdict est <code class="docutils literal"><span class="pre">__missing(key)__</span></code> elle est appelée par <code class="docutils literal"><span class="pre">__getitem()__</span></code> de la
+classe <a class="reference external" href="https://docs.python.org/3.6/tutorial/datastructures.html#dictionaries">dict</a>.</p>
+<p>l&#8217;argument <code class="docutils literal"><span class="pre">default_factory</span></code> permet de spécifier quelle structure de données va correspondre
+à une clé dans notre defaultdict. Voici 2 exemples pour mieu comprendre:</p>
+<div class="highlight-pycon"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39;yellow&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;yellow&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">d</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">sorted</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+<span class="go">[(&#39;blue&#39;, [2, 4]), (&#39;red&#39;, [1]), (&#39;yellow&#39;, [1, 3])]</span>
+</pre></div>
+</div>
+<p>Dans cette exemple on initialise <code class="docutils literal"><span class="pre">default_factory</span></code> comme une list ce qui nous permet d&#8217;utiliser
+<code class="docutils literal"><span class="pre">append()</span></code> pour ajouter des éléments à la liste correspondant à une clé donnée.</p>
+<div class="highlight-pycon"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;mississippi&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">d</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">sorted</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+<span class="go">[(&#39;i&#39;, 4), (&#39;m&#39;, 1), (&#39;p&#39;, 2), (&#39;s&#39;, 4)]</span>
+</pre></div>
+</div>
+<p>Dans cet exemple on va utiliser un int au lieu d&#8217;une liste et notre defaultdict
+va s&#8217;utiliser comme un compteur.</p>
+</div>
+<div class="section" id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">¶</a></h2>
+<p>Chacun des conteneurs vu dans ce tutoriel a une utilité bien définie alors choisissez
+sagement votre conteneur en fonction de votre problème pour vous simplifier la vie.</p>
+<blockquote>
+<div><p><em>Choisir Sagement ton conteneur tu dois !</em></p>
+<p class="attribution">&mdash;Maître Yoda</p>
+</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table des Matières</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Collections</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#namedtuple">namedtuple()</a><ul>
+<li><a class="reference internal" href="#quelques-fonctions">quelques fonctions</a><ul>
+<li><a class="reference internal" href="#mytuple-make-iterable">mytuple._make(iterable)</a></li>
+<li><a class="reference internal" href="#mytuple-asdict">mytuple._asdict()</a></li>
+<li><a class="reference internal" href="#mytuple-replace-key-args">mytuple._replace(key=args)</a></li>
+<li><a class="reference internal" href="#mytuple-fields">mytuple._fields</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#deque">deque</a><ul>
+<li><a class="reference internal" href="#id1">quelques fonctions</a><ul>
+<li><a class="reference internal" href="#append-x-appendleft-x-extend-iterable-et-extendleft-iterable">append(x), appendleft(x), extend(iterable) et extendleft(iterable)</a></li>
+<li><a class="reference internal" href="#pop-popleft-remove-val-et-clear">pop(), popleft(), remove(val) et clear()</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#chainmap">ChainMap</a></li>
+<li><a class="reference internal" href="#counter">Counter</a><ul>
+<li><a class="reference internal" href="#id2">quelques fonctions</a><ul>
+<li><a class="reference internal" href="#elements">elements()</a></li>
+<li><a class="reference internal" href="#most-common-n">most_common([n])</a></li>
+<li><a class="reference internal" href="#substract-iterable-or-mapping">substract([iterable or mapping])</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ordereddict">OrderedDict</a><ul>
+<li><a class="reference internal" href="#id3">quelques fonctions</a><ul>
+<li><a class="reference internal" href="#popitem-last-true">popitem(last=True)</a></li>
+<li><a class="reference internal" href="#move-to-end-key-last-true">move_to_end(key, last=True)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#defaultdict">defaultdict</a></li>
+<li><a class="reference internal" href="#conclusion">Conclusion</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="../abc/index.html" title="Chapitre précédent">Abstract Base Class</a></li>
+      <li>Next: <a href="../csv/index.html" title="Chapitre suivant"><code class="docutils literal"><span class="pre">csv</span></code></a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>Cette page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/collections/index.rst.txt"
+            rel="nofollow">Montrer le code source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Recherche rapide</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016-2017, HE-Arc.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="../_sources/collections/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

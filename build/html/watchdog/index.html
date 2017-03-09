@@ -1,0 +1,208 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>WatchDog &#8212; Bibliothèques Python 0.1.1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Recherche" href="../search.html" />
+    <link rel="next" title="datetime" href="../datetime/index.html" />
+    <link rel="prev" title="Sphinx" href="../sphinx/index.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="watchdog">
+<span id="watchdog-tutorial"></span><h1>WatchDog<a class="headerlink" href="#watchdog" title="Permalink to this headline">¶</a></h1>
+<p>Par Paul Jeanbourquin <a class="footnote-reference" href="#pj" id="id1">[1]</a></p>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>Watchdog est une librairie permettant l&#8217;utilisation d&#8217;événemement du système de f
+ichier (création de fichier, modification, ...).</p>
+<p>Cette librairie peut-être utilisée pour la mise en place d&#8217;un scanner de fichier dynamique
+(exemple Scanner multimédia)
+ou pour la mise en place d&#8217;un système d&#8217;audit des événements sur les fichiers.</p>
+</div>
+<div class="section" id="fonctionnement">
+<h2>Fonctionnement<a class="headerlink" href="#fonctionnement" title="Permalink to this headline">¶</a></h2>
+<p>Pour intercepter les événements il faut créer un class qui va contenir les fonctions par événements.</p>
+<p>Un exemple d&#8217;une classe pour un système d&#8217;audit :</p>
+<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">watchdog.events</span> <span class="k">import</span> <span class="n">FileSystemEventHandler</span>
+
+<span class="k">class</span> <span class="nc">AuditHandler</span><span class="p">(</span><span class="n">FileSystemEventHandler</span><span class="p">):</span>
+  <span class="k">def</span> <span class="nf">on_modified</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Le fichier </span><span class="si">%s</span><span class="s2"> a été modifié&quot;</span> <span class="o">%</span> <span class="n">event</span><span class="o">.</span><span class="n">src_path</span><span class="p">)</span>
+  <span class="k">def</span> <span class="nf">on_created</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">event</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Le fichier </span><span class="si">%s</span><span class="s2"> a été créé&quot;</span> <span class="o">%</span> <span class="n">event</span><span class="o">.</span><span class="n">src_path</span><span class="p">)</span>
+  <span class="k">def</span> <span class="nf">on_deleted</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">event</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Le fichier </span><span class="si">%s</span><span class="s2"> a été supprimé&quot;</span> <span class="o">%</span> <span class="n">event</span><span class="o">.</span><span class="n">src_path</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Liste d&#8217;événements interceptable :</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="21%" />
+<col width="79%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Nom</th>
+<th class="head">Déclanchement</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>on_modified</td>
+<td>Modification d&#8217;un fichier / dossier</td>
+</tr>
+<tr class="row-odd"><td>on_created</td>
+<td>Création d&#8217;un fichier / dossier</td>
+</tr>
+<tr class="row-even"><td>on_deleted</td>
+<td>Suppression d&#8217;un fichier / dossier</td>
+</tr>
+<tr class="row-odd"><td>on_moved</td>
+<td>Déplacement / renomage d&#8217;un fichier / dossier</td>
+</tr>
+<tr class="row-even"><td>on_any_event</td>
+<td>Dans tous le cas au-dessus</td>
+</tr>
+</tbody>
+</table>
+<p>La classs doit, ensuite, être liée à un observateur.
+C&#8217;est ici que nous spécifierons le dossier qui devra être observer.</p>
+<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="n">observer</span> <span class="o">=</span> <span class="n">Observer</span><span class="p">()</span> <span class="c1"># Création de l&#39;observeur</span>
+<span class="n">observer</span><span class="o">.</span><span class="n">schedule</span><span class="p">(</span><span class="n">eventHandler</span><span class="o">.</span><span class="n">AuditHandler</span><span class="p">(),</span> <span class="n">path</span><span class="o">=</span><span class="s1">&#39;U:&#39;</span><span class="p">,</span> <span class="n">recursive</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># Création du lien</span>
+<span class="n">observer</span><span class="o">.</span><span class="n">start</span><span class="p">()</span> <span class="c1"># Démarrage de l&#39;observateur</span>
+</pre></div>
+</div>
+<p>Dans ce cas l&#8217;observateur surveille le dossier &#8220;U:&#8221; de manière recursive.</p>
+<p>Un observateur étant lancer dans un thread sépraré, il faut bloquer l&#8217;éxecution du script.
+Mais, nous aimerions aussi pouvoir fermer le script par interuption du clavier.
+La fermeture de l&#8217;observateur doit aussi être douce. Pour ce faire nous utiliserons le code ci-dessous.</p>
+<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+
+<span class="k">try</span><span class="p">:</span>
+  <span class="k">while</span> <span class="kc">True</span><span class="p">:</span> <span class="c1"># Boucle infinie bloquant l&#39;execution du script</span>
+      <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># petite attente d&#39;une millisecondes</span>
+<span class="k">except</span> <span class="ne">KeyboardInterrupt</span><span class="p">:</span> <span class="c1"># Prise en charge de l&#39;interuption par le clavier</span>
+      <span class="n">observer</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span> <span class="c1"># Arret de l&#39;observateur</span>
+      <span class="n">observer</span><span class="o">.</span><span class="n">join</span><span class="p">()</span> <span class="c1"># Attend que l&#39;observateur se soit bien fermer</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="exemple">
+<h2>Exemple<a class="headerlink" href="#exemple" title="Permalink to this headline">¶</a></h2>
+<p>Todo</p>
+</div>
+<div class="section" id="contenu">
+<h2>Contenu<a class="headerlink" href="#contenu" title="Permalink to this headline">¶</a></h2>
+<p>ToDo</p>
+</div>
+<div class="section" id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">¶</a></h2>
+<p>ToDo</p>
+<table class="docutils footnote" frame="void" id="pj" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>&lt;<a class="reference external" href="mailto:paul&#46;jeanbourquin&#37;&#52;&#48;he-arc&#46;ch">paul<span>&#46;</span>jeanbourquin<span>&#64;</span>he-arc<span>&#46;</span>ch</a>&gt;</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table des Matières</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">WatchDog</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#fonctionnement">Fonctionnement</a></li>
+<li><a class="reference internal" href="#exemple">Exemple</a></li>
+<li><a class="reference internal" href="#contenu">Contenu</a></li>
+<li><a class="reference internal" href="#conclusion">Conclusion</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="../sphinx/index.html" title="Chapitre précédent">Sphinx</a></li>
+      <li>Next: <a href="../datetime/index.html" title="Chapitre suivant"><code class="docutils literal"><span class="pre">datetime</span></code></a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>Cette page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/watchdog/index.rst.txt"
+            rel="nofollow">Montrer le code source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Recherche rapide</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016-2017, HE-Arc.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="../_sources/watchdog/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
