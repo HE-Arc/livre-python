@@ -25,6 +25,7 @@ Table des matières
    introduction.rst
 
    collections/index.rst
+   mutiprocessing/index.rst
    json/index.rst
    io/index.rst
    super/index.rst
