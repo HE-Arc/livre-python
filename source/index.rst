@@ -8,6 +8,7 @@
 
 :Auteurs:
           Adrien Mendes <adrien.mendes@he-arc.ch>,
+          André Neto Da Silva <andre.netodas@he-arc.ch>,
           Anthony Fleury <anth.fleury@gmail.com>,
           Axel Rieben <axel.rieben@he-arc.ch>
           Cédric Pahud <cedric.pahud@he-arc.ch>,
@@ -15,7 +16,7 @@
           Dylan Santos de Pinho <dylan.santosdeppinho@he-arc.ch>,
           Killian Castella <killian.castella@he-arc.ch>,
           Maël Pedretti <mael.pedretti@hotmail.fr>,
-          Neto Da Silva André <andre.netodas@he-arc.ch>,
+          Pedro Costa <pedro.costa@he-arc.ch>,
           Quentin Vaucher <quentin.vaucher@protonmail.com>,
           Sylvain Renaud <sylvain.renaud@he-arc.ch>,
           Yoan Blanc <yoan.blanc@he-arc.ch>
