@@ -40,11 +40,17 @@ Table des matières
    csv/index.rst
    hashlib/index.rst
    io/index.rst
+
    itertools/index.rst
    json/index.rst
    multiprocessing/index.rst
    secrets/index.rst
    unittest/index.rst
+
+   super/index.rst
+   pillow/index.rst
+   matplotlib/index.rst
+   statistics/index.rst
 
    colorama/index.rst
    pillow/index.rst
