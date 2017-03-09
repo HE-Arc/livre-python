@@ -1,6 +1,12 @@
+
 .. _collections-tutorial:
 
-``collections``
-===============
+=============
+collections
+=============
 
 Par Cédric Pahud <cedric.pahud@he-arc.ch>
+=======
+COLLECTIONS
+===========
+>>>>>>> création index
