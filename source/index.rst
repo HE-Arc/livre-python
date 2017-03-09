@@ -6,9 +6,10 @@
  Le petit guide des batteries à découvrir
 ------------------------------------------
 
-:Auteurs: Yoan Blanc <yoan.blanc@he-arc.ch>,
-          A B <a.b@he-arc.ch>
-:Date: 2017-02-17
+:Auteurs:
+          Cédric Pahud <cedric.pahud@he-arc.ch>,
+          Yoan Blanc <yoan.blanc@he-arc.ch>
+:Date: 2017-03-09
 :Licence: `Creative Commons Attribution-ShareAlike 4.0 International
           <https://creativecommons.org/licenses/by-sa/4.0/legalcode>`_
 
