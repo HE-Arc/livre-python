@@ -1,4 +1,3 @@
-
 .. _collections-tutorial:
 
 =============
