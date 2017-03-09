@@ -49,6 +49,7 @@ Table des matières
 
    super/index.rst
    pillow/index.rst
+
    matplotlib/index.rst
    statistics/index.rst
 
