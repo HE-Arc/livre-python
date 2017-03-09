@@ -7,6 +7,7 @@
 ------------------------------------------
 
 :Auteurs:
+          Anthony Fleury <anth.fleury@gmail.com>,
           Cédric Pahud <cedric.pahud@he-arc.ch>,
           Dylan Santos de Pinho <dylan.santosdeppinho@he-arc.ch>,
           Yoan Blanc <yoan.blanc@he-arc.ch>
@@ -25,6 +26,6 @@ Table des matières
    collections/index.rst
    json/index.rst
    io/index.rst
+   super/index.rst
 
    licence.rst
-   super/index.rst
