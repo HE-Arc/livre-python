@@ -40,8 +40,8 @@ Table des matières
    pytest/index.rst
    sphinx/index.rst
    watchdog/index.rst
+   datetime/index.rst
 
-   licence.rst
 
 À propos de ce livre
 ====================
