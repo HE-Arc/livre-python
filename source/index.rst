@@ -10,6 +10,7 @@
           Anthony Fleury <anth.fleury@gmail.com>,
           Cédric Pahud <cedric.pahud@he-arc.ch>,
           Dylan Santos de Pinho <dylan.santosdeppinho@he-arc.ch>,
+          Quentin Vaucher <quentin.vaucher@protonmail.com>,
           Yoan Blanc <yoan.blanc@he-arc.ch>
 :Date: 2017-03-09
 :Licence: `Creative Commons Attribution-ShareAlike 4.0 International
@@ -27,5 +28,6 @@ Table des matières
    json/index.rst
    io/index.rst
    super/index.rst
+   pillow/index.rst
 
    licence.rst
