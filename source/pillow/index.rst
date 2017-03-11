@@ -93,6 +93,12 @@ Le résultat obtenu est le suivant:
    :align: center
    :alt: Cercle Trigonométrique
 
+Utilisation au sein du binding PyQt
+-----------------------------------
+
+Pillow_ fournit le module :py:mod:`ImageQt` afin de créer des Qimage directement utilisables par le binding PyQt. En effet, le module dispose d'une classe du même nom qui est une sous-calsse de QtGui.QImage. Il est donc possible de passer l'objet directement à l'API PyQt.
+
+
 .. [#qv] <quentin.vaucher@he-arc.ch>
 
 .. _Pillow: https://python-pillow.org/
