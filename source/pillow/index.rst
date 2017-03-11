@@ -61,7 +61,17 @@ L'example suivant aborde de manière simple quelques notions de bases de Pillow_
 
 Example technique
 '''''''''''''''''
-#TODO
+
+Dans cet example, le logo de la librairie Pillow_ subit divers modification afin de mettre en partique quelques fonctions de la bibliothèque. Le logo est d'abord flouté, puis retourner afin d'inverser la position de chaque python. On parcourt ensuite chaque pixel, puis on colorie l'arrière-plan en étudiant les attributs de chaque pixels (couleurs et position).
+
+.. literalinclude:: ./examples/example2.py
+  :linenos:
+
+Le résultat obtenu est le suivant:
+
+.. image:: ../_static/logoFiltre.png
+   :align: center
+   :alt: Cercle Trigonométrique
 
 Méthodes de dessin
 ------------------
@@ -86,5 +96,5 @@ Le résultat obtenu est le suivant:
 .. [#qv] <quentin.vaucher@he-arc.ch>
 
 .. _Pillow: https://python-pillow.org/
-.. _PIL: https://en.wikipedia.org/wiki/Python_Imaging_Library
+.. _PIL: http://www.pythonware.com/products/pil/
 .. _mode: https://pillow.readthedocs.io/en/4.0.x/handbook/concepts.html#modes
