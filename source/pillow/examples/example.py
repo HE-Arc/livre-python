@@ -1,6 +1,6 @@
-from PIL import Image
-
 """Exemple simple de manipulation d'images."""
+
+from PIL import Image
 
 image = Image.open("../../_static/pillow.png")
 image = image.convert('L')

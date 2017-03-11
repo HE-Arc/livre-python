@@ -57,10 +57,31 @@ L'example suivant aborde de manière simple quelques notions de bases de Pillow_
 - :py:meth:`Image.save` sauvegarde l'image dans le format spécifié.
 
 .. literalinclude:: ./examples/example.py
+  :linenos:
 
 Example technique
 '''''''''''''''''
+#TODO
 
+Méthodes de dessin
+------------------
+
+Pillow_ fournit également des outils de base pour le graphisme 2D. Toutes ces fonctions sont regroupées dans le module :py:mod:`ImageDraw`. Il est possible de dessiner divers formes géométriques, ainsi que du texte, dans le but de créer ou retoucher des images. l'exemple suivant met en évidence quelques unes des fonctionnalités disponibles.
+
+- :py:meth:`Image.new` crée une image avec la taille et la couleur spécifiée;
+- :py:meth:`ImageDraw.Draw` crée un objet qui peut être utilisé pour dessinier sur l'image;
+- :py:meth:`Draw.line` dessine une ligne entre les points donnés, avec la couleur choisie;
+- :py:meth:`Draw.ellipse` dessine une ellipse à l'intérieur du rectangle donné;
+- :py:meth:`Draw.text` dessine du texte à l'endroit choisi.
+
+.. literalinclude:: ./examples/drawing.py
+  :linenos:
+
+Le résultat obtenu est le suivant:
+
+.. image:: ../_static/cercleTrigo.png
+   :align: center
+   :alt: Cercle Trigonométrique
 
 .. [#qv] <quentin.vaucher@he-arc.ch>
 
