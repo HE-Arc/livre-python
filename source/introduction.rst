@@ -19,6 +19,7 @@ Bases
 * :ref:`builtins-tutorial`
 * :ref:`collections-tutorial`
 * :ref:`hashlib-tutorial`
+* :ref:`fstrings-tutorial`
 * :ref:`io-tutorial`
 * :ref:`itertools-tutorial`
 * :ref:`math-tutorial`

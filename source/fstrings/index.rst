@@ -1,3 +1,5 @@
+.. _fstrings-tutorial:
+
 =========
 f-strings
 =========
