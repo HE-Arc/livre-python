@@ -1,4 +1,6 @@
-Pygame
-======
+.. _pygame-tutorial:
+
+``pygame``
+==========
 
 tout doux

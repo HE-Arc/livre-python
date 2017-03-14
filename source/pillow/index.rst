@@ -1,5 +1,7 @@
-======
-pillow
-======
+.. _pillow-tutorial:
 
-Quentin Vaucher
+======================
+Python Imaging Library
+======================
+
+par Quentin Vaucher.

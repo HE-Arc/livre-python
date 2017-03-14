@@ -1,3 +1,5 @@
-==========
-statistics
-==========
+.. _statistics-tutorial:
+
+==============
+``statistics``
+==============

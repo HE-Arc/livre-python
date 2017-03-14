@@ -1,7 +1,7 @@
 .. _json-tutorial:
 
-JSON
-====
+``json``
+========
 
 .. image:: ../_static/json.png
    :align: right

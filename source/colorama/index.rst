@@ -1,4 +1,6 @@
-============================================
-Cross-platform colored terminal text.
-============================================
-Killian Castella
+.. _colorama-tutorial:
+
+``colorama``
+============
+
+Par Killian Castella

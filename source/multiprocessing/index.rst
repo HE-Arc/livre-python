@@ -1,5 +1,7 @@
-===============
-Multiprocessing
-===============
+.. _multiprocessing-tutorial:
+
+===================
+``multiprocessing``
+===================
 
 Par Gander Laurent

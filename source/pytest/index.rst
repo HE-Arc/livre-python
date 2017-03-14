@@ -1,3 +1,6 @@
-pytest
-===================
+.. _pytest-tutorial:
+
+``pytest``
+==========
+
 Nicolas Beyeler

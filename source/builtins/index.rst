@@ -1,3 +1,5 @@
+.. _builtins-tutorial:
+
 =========
 builtins
 =========

@@ -1,5 +1,7 @@
-SUPER
-=====
+.. _super-tutorial:
+
+``super()``
+===========
 
 Introduction
 ------------

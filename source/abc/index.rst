@@ -1,3 +1,6 @@
-abstract base class
+.. _abc-tutorial:
+
+Abstract Base Class
 ===================
+
 Par Sylvain Renaud <sylvain.renaud@he-arc.ch>

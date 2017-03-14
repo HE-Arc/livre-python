@@ -1,6 +1,6 @@
 .. _collections-tutorial:
 
-Collections
-===========
+``collections``
+===============
 
 Par Cédric Pahud <cedric.pahud@he-arc.ch>
