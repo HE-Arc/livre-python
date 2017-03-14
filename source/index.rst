@@ -12,6 +12,7 @@ Table des matières
 
    builtins/index.rst
    super/index.rst
+   fstrings/index.rst
 
    abc/index.rst
    collections/index.rst
