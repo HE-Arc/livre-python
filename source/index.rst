@@ -34,6 +34,7 @@ Table des matières
    itertools/index.rst
    pytest/index.rst
    math/index.rst
+   re/index.rst
 
 À propos de ce livre
 ====================
@@ -51,6 +52,7 @@ Table des matières
         Pedro Costa <pedro.costa@he-arc.ch>,
         Quentin Vaucher <quentin.vaucher@protonmail.com>,
         Sylvain Renaud <sylvain.renaud@he-arc.ch>,
+        Feuillade Julien <julien.feuillade@he-arc.ch>,
         Yoan Blanc <yoan.blanc@he-arc.ch>
 :Date:  2017-03-14
 :Licence:
