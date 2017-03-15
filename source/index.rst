@@ -54,7 +54,7 @@ Table des matières
         Quentin Vaucher <quentin.vaucher@protonmail.com>,
         Sylvain Renaud <sylvain.renaud@he-arc.ch>,
         Feuillade Julien <julien.feuillade@he-arc.ch>,
-		Guillaume Noguera <guillaume.noguera@he-arc.ch>,
+        Guillaume Noguera <guillaume.noguera@he-arc.ch>,
         Yoan Blanc <yoan.blanc@he-arc.ch>
 :Date:  2017-03-14
 :Licence:
