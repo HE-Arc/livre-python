@@ -84,7 +84,6 @@ Autres
    sphinx/index
    watchdog/index
 
-
 À propos de ce livre
 ====================
 
@@ -125,5 +124,6 @@ Autres
  - Yoan Blanc <yoan.blanc@he-arc.ch>
 
 :Date:  2017-03-28
+
 :Licence:
         :ref:`licence`
