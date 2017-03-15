@@ -1,9 +1,10 @@
-Expression régulière RE
-=======================
+.. _re-tutorial:
+
+======
+``re``
+======
 
 Par Julien Feuillade
 
 Introduction
 ------------
-
-

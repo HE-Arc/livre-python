@@ -1,3 +1,5 @@
+.. _sphinx-tutorial:
+
 Sphinx
 ======
 

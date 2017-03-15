@@ -21,7 +21,9 @@ Table des matières
    io/index.rst
    itertools/index.rst
    json/index.rst
+   math/index.rst
    multiprocessing/index.rst
+   re/index.rst
    secrets/index.rst
    statistics/index.rst
    random/index.rst
@@ -30,11 +32,7 @@ Table des matières
    colorama/index.rst
    pillow/index.rst
    pygame/index.rst
-   secrets/index.rst
-   itertools/index.rst
    pytest/index.rst
-   math/index.rst
-   re/index.rst
    sphinx/index.rst
 
 À propos de ce livre
@@ -48,14 +46,14 @@ Table des matières
         Cédric Pahud <cedric.pahud@he-arc.ch>,
         Dany Chea <dany.chea@he-arc.ch>,
         Dylan Santos de Pinho <dylan.santosdeppinho@he-arc.ch>,
+        Julien Feuillade <julien.feuillade@he-arc.ch>,
         Killian Castella <killian.castella@he-arc.ch>,
         Maël Pedretti <mael.pedretti@hotmail.fr>,
         Pedro Costa <pedro.costa@he-arc.ch>,
         Quentin Vaucher <quentin.vaucher@protonmail.com>,
         Sylvain Renaud <sylvain.renaud@he-arc.ch>,
-        Feuillade Julien <julien.feuillade@he-arc.ch>,
         Guillaume Noguera <guillaume.noguera@he-arc.ch>,
         Yoan Blanc <yoan.blanc@he-arc.ch>
-:Date:  2017-03-14
+:Date:  2017-03-15
 :Licence:
         :ref:`licence`

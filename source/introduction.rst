@@ -32,6 +32,7 @@ Avancé
 ------
 
 * :ref:`abc-tutorial`
+* :ref:`re-tutorial`
 * :ref:`multiprocessing-tutorial`
 
 Ligne de commande
@@ -56,3 +57,4 @@ Autres
 ------
 
 * :ref:`pygame-tutorial`
+* :ref:`sphinx-tutorial`
