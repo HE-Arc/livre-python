@@ -1,6 +1,8 @@
-========
- RANDOM
-========
+.. _random-tutorial:
+
+==========
+``random``
+==========
 
 Par Christophe Hirschi [#email]_
 
@@ -18,10 +20,8 @@ monde informatique.
     de sécurité ou de cryptographie et d'utiliser le module :py:mod:`secrets` à
     la place.
 
-Classe Random
-=============
-
-
+Module ``random``
+=================
 
 Exemples
 ========
@@ -124,7 +124,7 @@ Conclusion
 valeur dans un intervalle donné. Toutes ses fonctionnalités n'ont pu être
 traitées ici (car certaines sont exotiques et/ou très spécifiques) et si vous
 êtes désireux d'en connaitre encore un peu plus sur son sujet, visitez la
-documentation officielle python3 de random_.
+documentation officielle python3 de :py:mod:`random`.
 
 .. [#email] <christophe.hirschi@he-arc.ch>
 
@@ -132,4 +132,3 @@ documentation officielle python3 de random_.
 
 .. _module python: https://github.com/python/cpython/blob/3.6/Lib/random.py
 .. _Mersenne Twister: https://fr.wikipedia.org/wiki/Mersenne_Twister
-.. _random: https://docs.python.org/3/library/random.html

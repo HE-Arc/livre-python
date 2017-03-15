@@ -22,6 +22,7 @@ Bases
 * :ref:`fstrings-tutorial`
 * :ref:`io-tutorial`
 * :ref:`itertools-tutorial`
+* :ref:`random-tutorial`
 * :ref:`math-tutorial`
 * :ref:`secrets-tutorial`
 * :ref:`statistics-tutorial`
