@@ -7,6 +7,9 @@ from itertools import *
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> ajout de nouvelles fonctions
 #COUNT_BEGIN
 #Attention boucle infini
 '''for i in count(0, 0.4):
@@ -17,6 +20,10 @@ from itertools import *
 for i in islice(count(), 0, 11, 1):
     print(i)
 #COUNT_END
+<<<<<<< HEAD
+=======
+
+>>>>>>> ajout de nouvelles fonctions
 
 
 #CHAIN_BEGIN
@@ -113,6 +120,7 @@ print(list(chain(a[0:2], b[0:2], c[0:2])))
 #CHAIN_END
 
 
+<<<<<<< HEAD
 #COUNT_BEGIN
 #Attention boucle infini
 '''for i in count(0, 0.4):
@@ -125,6 +133,9 @@ for i in islice(count(), 0, 11, 1):
 <<<<<<< HEAD
 >>>>>>> refactor name
 =======
+=======
+
+>>>>>>> ajout de nouvelles fonctions
 
 
 #COMPRESS_BEGIN
@@ -142,7 +153,14 @@ print(b)
 >>>>>>> ajout de la config + fonction compress
 =======
 
+#FILTER_BEGIN
+listeNumber = [1,2,3,5,6];
+listeNumberOdds = list(filter(lambda x:x%2, listeNumber)) #[0, 2, 4]
+listeNumberEvens = list(filterfalse(lambda x:x%2, listeNumber)) #[1, 3, 5]
 
+print(listeNumberOdds);
+print(listeNumberEvens)
+#FILTER_END
 
 #MAP_BEGIN
 listeNumber = [1, 2, 3, 4]
@@ -152,8 +170,26 @@ def cube(x):
     return x**3
 
 listeNumberCube = list(map(cube, listeNumber))
-print(listeNumber)
-print(listeNumberCube)
-    
+print(listeNumber)     #[1, 2, 3, 4]
+print(listeNumberCube) #[1, 8, 27, 64]
+
+#autre syntaxe pour le même résultat
+listeNumberCubeV2 = list(map(lambda x : x**3, listeNumber))
+print(listeNumberCubeV2) #[1, 8, 27, 64]
 #MAP_END
+<<<<<<< HEAD
 >>>>>>> Ajout de la fonction map et compress
+=======
+
+#DROPWHILE_BEGIN
+
+dropwhile = list(dropwhile(lambda x:x<5, [1, 4, 23, 2,42,23,2]))
+print(dropwhile) #[23, 2, 42, 23, 2]
+
+#DROPWHILE_END
+
+#TAKEWHILE_BEGIN
+takewhile = list(takewhile(lambda x:x<5, [1, 4, 54, 23,2,42,23,2]))
+print(takewhile) #[1, 4]
+#TAKEWHILE_END
+>>>>>>> ajout de nouvelles fonctions
