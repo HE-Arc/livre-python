@@ -79,6 +79,5 @@ Table des matières
  - Yoan Blanc <yoan.blanc@he-arc.ch>
 
 :Date:  2017-03-16
-
 :Licence:
         :ref:`licence`
