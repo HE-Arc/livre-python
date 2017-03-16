@@ -33,12 +33,18 @@ for i in chain(a, b, c):
 #list(chain(...)) qui va nous retourner en une seul fois la liste
 print(list(chain(a, b, c)));
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> Ajout du fichier de base UseItertools
 =======
+=======
+>>>>>>> itertools
 #on peut aussi selectionner des ranges
 #par exemple le premier élément de chaque liste
 print(list(chain(a[:1], b[:1], c[:1])));
 #ou les deux premier element
 print(list(chain(a[0:2], b[0:2], c[0:2])));
 # CHAIN() END
+<<<<<<< HEAD
 >>>>>>> chain, compress, count, map
+=======
+>>>>>>> itertools
