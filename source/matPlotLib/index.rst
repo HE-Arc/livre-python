@@ -3,7 +3,7 @@
 ``matPlotLib``
 ==============
 
-Par Florian [#ff]_
+Par Florian Fasmeyer
 
 Introduction
 ------------
