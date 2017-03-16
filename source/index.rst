@@ -9,8 +9,7 @@ Table des matières
 
 .. toctree::
    :maxdepth: 1
-   
-   matplotlib/index.rst
+
    builtins/index.rst
    dunders/index.rst
    super/index.rst
