@@ -81,7 +81,7 @@ Table des matières
  - Sylvain Renaud <sylvain.renaud@he-arc.ch>
  - Thibaut Piquerez <thibaut.piquerez@he-arc.ch>
  - Yoan Blanc <yoan.blanc@he-arc.ch>
- 
+
 :Date:  2017-03-16
 :Licence:
         :ref:`licence`
