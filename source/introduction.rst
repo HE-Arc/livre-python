@@ -59,3 +59,4 @@ Autres
 
 * :ref:`pygame-tutorial`
 * :ref:`sphinx-tutorial`
+* :ref:`watchdog-tutorial`
