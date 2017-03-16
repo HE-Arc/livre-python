@@ -1,7 +1,7 @@
 .. _matPlotLib Tutorial:
 
 ``matPlotLib``
-========
+==============
 
 Par Florian [#ff]_
 
