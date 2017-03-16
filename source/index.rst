@@ -9,7 +9,6 @@ Table des matières
 
 .. toctree::
    :maxdepth: 1
-
    builtins/index.rst
    dunders/index.rst
    super/index.rst
