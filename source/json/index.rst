@@ -49,10 +49,10 @@ L'API du module :py:mod:`json` est similaire à celle utilisée par
 :py:mod:`marshal` et :py:mod:`pickle` qui permettent de sérialiser des objets
 Python.
 
-- :py:meth:`json.load` charge un fichier JSON;
-- :py:meth:`json.loads` charge une chaîne de caractères;
-- :py:meth:`json.dump` écrit en JSON dans fichier;
-- :py:meth:`json.dumps` écrit en JSON dans une chaîne de caractères.
+- :py:func:`json.load` charge un fichier JSON;
+- :py:func:`json.loads` charge une chaîne de caractères;
+- :py:func:`json.dump` écrit en JSON dans fichier;
+- :py:func:`json.dumps` écrit en JSON dans une chaîne de caractères.
 
 .. code-block:: python3
 

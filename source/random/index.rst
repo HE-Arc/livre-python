@@ -9,7 +9,7 @@ Par Christophe Hirschi [#email]_
 Introduction
 ============
 
-:py:mod:`random` est un `module python`_ qui regroupe plusieurs fonctions
+:py:mod:`random` est un module Python regroupant plusieurs fonctions
 permettant de travailler avec des valeurs aléatoires. La distribution des
 nombres aléatoires est réalisée par le générateur de nombres pseudo-aléatoires
 `Mersenne Twister`_, l'un des générateurs les plus testés et utilisés dans le
@@ -35,8 +35,8 @@ Avant toutes choses, il convient d'importer le module au projet :
 Nombres à virgules
 ------------------
 
-La fonction basique :py:meth:`random()` retourne un chiffre à virgule dans
-l'intervalle compris entre 0 et 1 non-compris [0.0; 1.0[ :
+La fonction basique :py:func:`random.random` retourne un chiffre à virgule dans
+l'intervalle compris entre 0 et 1 non-compris :math:`[0.0; 1.0[` :
 
 .. code-block:: python3
 
@@ -44,8 +44,8 @@ l'intervalle compris entre 0 et 1 non-compris [0.0; 1.0[ :
     0.6982933392406706
 
 Il est possible de spécifier un intervalle avec la fonction
-:py:meth:`uniforme(a, b)` qui retourne un chiffre à virgule dans l'intervalle
-compris entre *a* et *b* non-compris [a; b[ :
+:py:func:`uniform(a,b) <random.uniform()>` qui retourne un chiffre à virgule dans l'intervalle
+compris entre *a* et *b* non-compris :math:`[a; b[` :
 
 .. code-block:: python3
 
@@ -56,7 +56,7 @@ Nombres entiers
 ---------------
 
 Si l'on souhaite travailler avec des nombres entiers, il faut utiliser la
-fonction :py:meth:`randrange(a)`. Cette fonction retourne un nombre entier entre
+fonction :py:func:`random.randrange()`. Cette fonction retourne un nombre entier entre
 0 et *a* non-compris [0; a[ :
 
 .. code-block:: python3
@@ -65,8 +65,8 @@ fonction :py:meth:`randrange(a)`. Cette fonction retourne un nombre entier entre
     8
 
 Il est également possible de spécifier le commencement de l'intervalle avec
-:py:meth:`randrange(a, b)` ce qui correspond à l'intervalle [a; b[ et d'ajouter
-un pas d'une certaine valeur avec :py:meth:`randrange(a, b, s)` où *s* est le pas
+:py:func:`random.randrange()` ce qui correspond à l'intervalle [a; b[ et d'ajouter
+un pas d'une certaine valeur avec :py:func:`random.randrange()` où *s* est le pas
 dans l'intervalle :
 
 .. code-block:: python3
@@ -80,7 +80,7 @@ dans l'intervalle :
 Séquences
 ---------
 
-La fonction :py:meth:`choice(seq)` retourne un élément de la séquence *seq* à
+La fonction :py:func:`random.choice()` retourne un élément de la séquence *seq* à
 condition que celle-ci ne soit pas vide :
 
 .. code-block:: python3
@@ -91,7 +91,7 @@ condition que celle-ci ne soit pas vide :
     >>> random.choice([4, 7, 11, 18])
     18
 
-Il existe aussi la fonction :py:meth:`suffle(seq)` qui mélange les éléments
+Il existe aussi la fonction :py:func:`random.shuffle()` qui mélange les éléments
 de la séquence *seq* :
 
 .. code-block:: python3
@@ -106,7 +106,7 @@ de la séquence *seq* :
     >>> numbers
     [4, 11, 18, 7]
 
-La fonction :py:meth:`sample(seq, k)` permet de retourner une liste de *k*
+La fonction :py:func:`random.sample()` permet de retourner une liste de *k*
 éléments de la séquence *seq* aléatoirement :
 
 .. code-block:: python3
@@ -130,5 +130,4 @@ documentation officielle python3 de :py:mod:`random`.
 
 .. Bibliographie
 
-.. _module python: https://github.com/python/cpython/blob/3.6/Lib/random.py
 .. _Mersenne Twister: https://fr.wikipedia.org/wiki/Mersenne_Twister

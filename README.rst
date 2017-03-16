@@ -10,6 +10,6 @@ Compilation
 .. code-block:: bash
 
     $ pip install -r requirements.txt
-    $ sphinx-build -b html source build/html
-    $ sphinx-build -b latex source build/latex
-    $ sphinx-build -b epub source build/epub
+    $ sphinx-build -Wn -b html source build/html
+    $ sphinx-build -Wn -b latex source build/latex
+    $ sphinx-build -Wn -b epub source build/epub
