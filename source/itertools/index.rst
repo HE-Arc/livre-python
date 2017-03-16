@@ -1,8 +1,11 @@
-.. _itertools-tutorial:
-
-=============
-``itertools``
-=============
+======================
+     ITERTOOLS
+======================
 
 Par Johnny Da Costa <johnny.dacosta@he-arc.ch>
-Test
+
+
+
+.. literalinclude:: UseIterTools.py
+   start-after: #CHAIN()
+   end-before: #CHAIN() END
