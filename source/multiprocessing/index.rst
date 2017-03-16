@@ -22,6 +22,7 @@ Les classes
 
 Process
 ^^^^^^^
+
 :py:mod:`Multiprocessing` contient plusieurs classes très utiles, je vais vous introduire à quelques unes. 
 
 Prenons tout d'abord la classe `Process <https://docs.python.org/3.6/library/multiprocessing.html#multiprocessing.Process>`_, la classe `Process <https://docs.python.org/3.6/library/multiprocessing.html#multiprocessing.Process>`_ nous permet de créer des processus en créant un objets `Process <https://docs.python.org/3.6/library/multiprocessing.html#multiprocessing.Process>`_, en appelant sa méthode start().
@@ -65,4 +66,3 @@ Conclusion
 
 
 .. [Ref] http://bioinfo.iric.ca/fr/faites-travailler-vos-cpus/
-
