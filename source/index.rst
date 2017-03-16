@@ -32,12 +32,12 @@ Table des matières
 
    colorama/index.rst
    pillow/index.rst
+   pycrypto/index.rst
    pygame/index.rst
    pytest/index.rst
    sphinx/index.rst
    watchdog/index.rst
 
-   pycrypto/index.rst
    licence.rst
 
 À propos de ce livre

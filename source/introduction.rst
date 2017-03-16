@@ -57,6 +57,7 @@ Traitement des données
 Autres
 ------
 
+* :ref:`pycrypto-tutorial`
 * :ref:`pygame-tutorial`
 * :ref:`sphinx-tutorial`
 * :ref:`watchdog-tutorial`
