@@ -92,9 +92,12 @@ Introduction
 ------------
 
 
-Exemples
+Config de base
 --------
-
+.. literalinclude:: use_itertools.py
+   :start-after: #CONFIG_BEGIN
+   :end-before: #CONFIG_END
+   
 function chain()
 ----------------
 
@@ -110,4 +113,14 @@ function Count()
 .. literalinclude:: use_itertools.py
    :start-after: #COUNT_BEGIN
    :end-before: #COUNT_END
+<<<<<<< HEAD
 >>>>>>> refactor name
+=======
+   
+function Compress
+----------------
+   
+.. literalinclude:: use_itertools.py
+   :start-after: #COMPRESS_BEGIN
+   :end-before: #COMPRESS_END
+>>>>>>> ajout de la config + fonction compress
