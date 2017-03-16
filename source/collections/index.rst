@@ -1,5 +1,3 @@
-.. _collections-tutorial:
-
 =============
  Collections
 =============
