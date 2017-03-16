@@ -1,3 +1,0 @@
-Friedli Marc
-
-dunder
