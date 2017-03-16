@@ -54,17 +54,17 @@ Python.
 - :py:func:`json.dump` écrit en JSON dans fichier;
 - :py:func:`json.dumps` écrit en JSON dans une chaîne de caractères.
 
-.. code-block:: python3
+.. code-block:: pycon
 
-    import json
+    >>> import json
 
-    print(json.dumps(['foo', {'bar': ('baz', None, 1.0, 2)}]))
+    >>> json.dumps(['foo', {'bar': ('baz', None, 1.0, 2)}])
     ["foo", {"bar": ["baz", null, 1.0, 2]}]
 
-    print(json.dumps("🐍"))
+    >>> json.dumps("🐍")
     "\\ud83d\\udc0d"
 
-    print(json.loads('[1, 2, "Hello"]'))
+    >>> json.loads('[1, 2, "Hello"]')
     [1, 2, 'Hello']
 
 Un exemple travaillant avec un fichier externe. Un point très important est
