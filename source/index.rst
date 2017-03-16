@@ -28,6 +28,7 @@ Table des matières
    secrets/index.rst
    statistics/index.rst
    random/index.rst
+   time/index.rst
    unittest/index.rst
 
    colorama/index.rst
