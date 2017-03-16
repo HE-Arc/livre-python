@@ -6,7 +6,7 @@ Livre Python
     
 Compilation
 -----------
-ceci est un test
+
 .. code-block:: bash
 
     $ pip install -r requirements.txt
