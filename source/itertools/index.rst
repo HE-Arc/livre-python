@@ -92,7 +92,7 @@ Introduction
 ------------
 
 
-Config de base
+Config de base pour les exemples
 --------
 .. literalinclude:: use_itertools.py
    :start-after: #CONFIG_BEGIN
@@ -117,10 +117,21 @@ function Count()
 >>>>>>> refactor name
 =======
    
-function Compress
+function Compress()
 ----------------
    
 .. literalinclude:: use_itertools.py
    :start-after: #COMPRESS_BEGIN
    :end-before: #COMPRESS_END
+<<<<<<< HEAD
 >>>>>>> ajout de la config + fonction compress
+=======
+   
+   
+function Map()
+----------------
+      
+.. literalinclude:: use_itertools.py
+   :start-after: #MAP_BEGIN
+   :end-before: #MAP_END
+>>>>>>> Ajout de la fonction map et compress
