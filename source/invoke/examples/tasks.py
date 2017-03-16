@@ -1,5 +1,3 @@
-"""Hello world avec invoke."""
-
 from invoke import task
 
 
