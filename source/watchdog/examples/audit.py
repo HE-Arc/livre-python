@@ -1,5 +1,8 @@
-import eventHandler
+"""Exemple d'audit."""
+
 import time
+
+import eventHandler
 from watchdog.observers import Observer
 
 observer = Observer()

@@ -8,7 +8,6 @@ install:
   - pip install travis-sphinx
 
 script:
-  - sphinx-build -Wn -b html source target/doc/build
-
+  - ./build.sh
 after_success:
   - travis-sphinx deploy
