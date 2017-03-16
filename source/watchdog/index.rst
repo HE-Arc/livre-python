@@ -21,6 +21,8 @@ Fonctionnement
 
 Pour intercepter les événements il faut créer un class qui va contenir les fonctions par événements.
 
+Un exemple d'une classe pour un système d'audit :
+
 .. code-block:: python3
 
   from watchdog.events import FileSystemEventHandler
@@ -33,7 +35,17 @@ Pour intercepter les événements il faut créer un class qui va contenir les fo
     def on_deleted(self,event):
       print("Le fichier %s a été supprimé" % event.src_path)
 
-Un exemple d'une classe pour un système d'audit.
+Liste d'événements interceptable :
+
+============  =============================================
+      Nom                      Déclanchement
+============  =============================================
+on_modified   Modification d'un fichier / dossier
+on_created    Création d'un fichier / dossier
+on_deleted    Suppression d'un fichier / dossier
+on_moved      Déplacement / renomage d'un fichier / dossier
+on_any_event  Dans tous le cas au-dessus
+============  =============================================
 
 La classs doit, ensuite, être liée à un observateur.
 C'est ici que nous spécifierons le dossier qui devra être observer.
@@ -43,6 +55,8 @@ C'est ici que nous spécifierons le dossier qui devra être observer.
   observer = Observer() # Création de l'observeur
   observer.schedule(eventHandler.AuditHandler(), path='U:', recursive=True) # Création du lien
   observer.start() # Démarrage de l'observateur
+
+Dans ce cas l'observateur surveille le dossier "U:" de manière recursive.
 
 Un observateur étant lancer dans un thread sépraré, il faut bloquer l'éxecution du script.
 Mais, nous aimerions aussi pouvoir fermer le script par interuption du clavier.
