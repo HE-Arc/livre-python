@@ -77,6 +77,13 @@ Génération d'un jeton d'une longueur de 16 bytes pouvant être utilisé dans u
 	>>> secrets.token_urlsafe(16)
 	k84RkJMyMpX6e3qzVXRqcw
 
+
+Conclusion
+----------
+
+Le module :py:mod:`secrets` est un module destiné aux utilisateurs avancés ayant des besoins de sécurité supérieurs à la normale.
+Il offre différents outils permettant la création de différents mots de passe et jetons sécurisés.
+
 .. [#mp] <mael.pedretti@he-arc.ch>
 .. _URL: https://fr.wikipedia.org/wiki/Uniform_Resource_Locator
 .. _base64: https://fr.wikipedia.org/wiki/Base64
