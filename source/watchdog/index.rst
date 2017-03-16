@@ -9,7 +9,12 @@ Par Paul Jeanbourquin [#pj]_
 Introduction
 ------------
 
-ToDo
+Watchdog est une librairie permettant l'utilisation d'événemement du système de f
+ichier (création de fichier, modification, ...).
+
+Cette librairie peut-être utilisée pour la mise en place d'un scanner de fichier dynamique
+(exemple Scanner multimédia) 
+ou pour la mise en place d'un système d'audit des événements sur les fichiers.
 
 Exemple
 -------
