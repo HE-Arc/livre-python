@@ -5,6 +5,7 @@
 Par Johnny Da Costa <johnny.dacosta@he-arc.ch>
 
 
+<<<<<<< HEAD
 Introduction
 ------------
 ------------
@@ -79,3 +80,9 @@ function Takewhile()
 .. literalinclude:: use_itertools.py
    :start-after: #TAKEWHILE_BEGIN
    :end-before: #TAKEWHILE_END
+=======
+
+.. literalinclude:: UseIterTools.py
+   start-after: #CHAIN()
+   end-before: #CHAIN() END
+>>>>>>> chain, compress, count, map
