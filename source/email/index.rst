@@ -1,7 +1,7 @@
-.. _Email tutoriel:
+.. _email-tutorial:
 
-Email
-============
+``email``
+=========
 
 Introduction
 ------------
