@@ -5,7 +5,25 @@
 Par Johnny Da Costa <johnny.dacosta@he-arc.ch>
 
 
+Introduction
+------------
 
-.. literalinclude:: UseIterTools.py
-   start-after: #CHAIN()
-   end-before: #CHAIN() END
+
+Exemples
+--------
+
+function chain()
+----------------
+
+.. literalinclude:: use_itertools.py
+   :start-after: #CHAIN_BEGIN
+   :end-before: #CHAIN_END
+   
+   
+   
+function Count()
+----------------
+
+.. literalinclude:: use_itertools.py
+   :start-after: #COUNT_BEGIN
+   :end-before: #COUNT_END
