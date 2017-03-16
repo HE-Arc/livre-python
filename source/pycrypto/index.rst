@@ -1,9 +1,9 @@
 .. _pycrypto-tutorial:
 
-Pycrypto
-========
+``pycrypto``
+============
 
-Luca Srdjenovic [#yb]_
+Luca Srdjenovic [#ls]_
 
 Introduction
 ------------
@@ -12,6 +12,6 @@ Introduction
 
 
 
-.. [#yb] <luca.srdjenovic@he-arc.ch>
+.. [#ls] <luca.srdjenovic@he-arc.ch>
 
 .. Bibliographie (ceci est un commentaire)

@@ -17,6 +17,7 @@ Bases
 -----
 
 * :ref:`builtins-tutorial`
+* :ref:`dunder-tutorial`
 * :ref:`collections-tutorial`
 * :ref:`hashlib-tutorial`
 * :ref:`fstrings-tutorial`
@@ -27,6 +28,7 @@ Bases
 * :ref:`secrets-tutorial`
 * :ref:`statistics-tutorial`
 * :ref:`super-tutorial`
+* :ref:`time-tutorial`
 
 Avancé
 ------
@@ -57,6 +59,7 @@ Traitement des données
 Autres
 ------
 
+* :ref:`hug-tutorial`
 * :ref:`pycrypto-tutorial`
 * :ref:`pygame-tutorial`
 * :ref:`sphinx-tutorial`

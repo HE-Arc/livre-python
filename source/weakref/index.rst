@@ -1,12 +1,12 @@
 .. _weakref-tutorial:
 
-Weakref
-=======
+``weakref``
+===========
 
-Par Anthony gillioz [#yb]_
+Par Anthony Gillioz [#ag]_
 
 Introduction
 ------------
 
 
-.. [#yb] <anthony.gillioz@he-arc.ch>
+.. [#ag] <anthony.gillioz@he-arc.ch>

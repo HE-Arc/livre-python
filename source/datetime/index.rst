@@ -1,7 +1,8 @@
-=============
-mohamed jmaa
-=============
+.. _datetime-tutorial:
+
+============
+``datetime``
+============
 
 
-datetime
---------
+Par Mohamed Jmaa

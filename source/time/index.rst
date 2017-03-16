@@ -1,4 +1,7 @@
-===============
-Time /timestamp
-===============
-Kaser Nicolas
+.. _time-tutorial:
+
+========
+``time``
+========
+
+Par Kaser Nicolas

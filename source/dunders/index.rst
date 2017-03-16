@@ -1,4 +1,6 @@
-Dunders
-========
+.. _dunder-tutorial:
 
-Marc Friedli
+dunders
+=======
+
+Par Marc Friedli
