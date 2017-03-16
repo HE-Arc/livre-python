@@ -31,7 +31,7 @@ La bibliothèque de fonctions peut être utilisée pour différents types d'acti
 **Archivage d'images**:
   Création de miniatures, conversion d'images d'un format de fichier à un autre, ...
 **Affichage d'images**:
-  Création et affichage d'images via le module :py:mod:`PIL.ImageTK`, ou :py:mod:`ImageWin` sous Windows. Ouverture d'une image dans un utilitaire externe via la méthode :py:meth:`show`.
+  Création et affichage d'images via le module :py:mod:`PIL.ImageTk`, ou :py:mod:`PIL.ImageWin` sous Windows. Ouverture d'une image dans un utilitaire externe via la méthode :py:meth:`PIL.Image.Image.show`.
 **Traitement d'images**:
   Offre un support pour quelques fonctions de bases tel que le filtrage, la convolution ou encore la conversion d'espaces couleurs. Il est également possible de redimensionner et d'appliquer des tranformations géométriques à l'image (rotation, ...).
 
@@ -46,10 +46,10 @@ Example basique
 
 L'example suivant aborde de manière simple quelques notions de bases de Pillow_. Une image en couleur au format *.png* est récupérée et convertie en nuances de gris. Le résultat s'affiche puis est sauvegardé au format *.jpeg*.
 
-- :py:meth:`Image.open` charge une image en mémoire;
-- :py:meth:`Image.convert` change le mode_ de l'image;
-- :py:meth:`Image.show` ouvre l'image dans un outil externe;
-- :py:meth:`Image.save` sauvegarde l'image dans le format spécifié.
+- :py:func:`PIL.Image.open` charge une image en mémoire;
+- :py:meth:`PIL.Image.Image.convert` change le mode_ de l'image;
+- :py:meth:`PIL.Image.Image.show` ouvre l'image dans un outil externe;
+- :py:meth:`PIL.Image.Image.save` sauvegarde l'image dans le format spécifié.
 
 .. literalinclude:: ./examples/example.py
   :linenos:
@@ -71,13 +71,13 @@ Le résultat obtenu est le suivant:
 Méthodes de dessin
 ------------------
 
-Pillow_ fournit également des outils de base pour le graphisme 2D. Toutes ces fonctions sont regroupées dans le module :py:mod:`ImageDraw`. Il est possible de dessiner divers formes géométriques, ainsi que du texte, dans le but de créer ou retoucher des images. l'exemple suivant met en évidence quelques unes des fonctionnalités disponibles.
+Pillow_ fournit également des outils de base pour le graphisme 2D. Toutes ces fonctions sont regroupées dans le module :py:mod:`PIL.ImageDraw`. Il est possible de dessiner divers formes géométriques, ainsi que du texte, dans le but de créer ou retoucher des images. l'exemple suivant met en évidence quelques unes des fonctionnalités disponibles.
 
-- :py:meth:`Image.new` crée une image avec la taille et la couleur spécifiée;
-- :py:meth:`ImageDraw.Draw` crée un objet qui peut être utilisé pour dessinier sur l'image;
-- :py:meth:`Draw.line` dessine une ligne entre les points donnés, avec la couleur choisie;
-- :py:meth:`Draw.ellipse` dessine une ellipse à l'intérieur du rectangle donné;
-- :py:meth:`Draw.text` dessine du texte à l'endroit choisi.
+- :py:func:`PIL.Image.new` crée une image avec la taille et la couleur spécifiée;
+- :py:class::`PIL.ImageDraw.Draw` crée un objet qui peut être utilisé pour dessinier sur l'image;
+- :py:meth::`PIL.ImageDraw.Draw.line` dessine une ligne entre les points donnés, avec la couleur choisie;
+- :py:meth::`PIL.ImageDraw.Draw.ellipse` dessine une ellipse à l'intérieur du rectangle donné;
+- :py:meth::`PIL.ImageDraw.Draw.text` dessine du texte à l'endroit choisi.
 
 .. literalinclude:: ./examples/drawing.py
   :linenos:
@@ -91,7 +91,7 @@ Le résultat obtenu est le suivant:
 Utilisation au sein du binding PyQt
 -----------------------------------
 
-Pillow_ fournit le module :py:mod:`ImageQt` afin de créer des Qimage directement utilisables par le binding PyQt. En effet, le module dispose d'une classe du même nom qui est une sous-calsse de QtGui.QImage. Il est donc possible de passer l'objet directement à l'API PyQt.
+Pillow_ fournit le module :py:mod:`PIL.ImageQt` afin de créer des Qimage directement utilisables par le binding PyQt. En effet, le module dispose d'une classe du même nom qui est une sous-calsse de QtGui.QImage. Il est donc possible de passer l'objet directement à l'API PyQt.
 
 
 .. [#qv] <quentin.vaucher@he-arc.ch>
