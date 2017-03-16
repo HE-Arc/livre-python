@@ -8,8 +8,8 @@ Weakref
 
 Par Anthony Gillioz [#ag]_
 
-Introduction
-------------
+Introductions
+-------------
 totot
 les joies du code
 
