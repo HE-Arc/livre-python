@@ -9,7 +9,7 @@ Introduction
 ------------
 
 
-Config de base
+Config de base pour les exemples
 --------
 .. literalinclude:: use_itertools.py
    :start-after: #CONFIG_BEGIN
@@ -31,9 +31,17 @@ function Count()
    :start-after: #COUNT_BEGIN
    :end-before: #COUNT_END
    
-function Compress
+function Compress()
 ----------------
    
 .. literalinclude:: use_itertools.py
    :start-after: #COMPRESS_BEGIN
    :end-before: #COMPRESS_END
+   
+   
+function Map()
+----------------
+      
+.. literalinclude:: use_itertools.py
+   :start-after: #MAP_BEGIN
+   :end-before: #MAP_END
