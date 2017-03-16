@@ -37,6 +37,9 @@ Table des matières
    sphinx/index.rst
    watchdog/index.rst
 
+   pycrypto/index.rst
+   licence.rst
+
 À propos de ce livre
 ====================
 
