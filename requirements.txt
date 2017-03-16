@@ -12,3 +12,6 @@ isort
 jsonschema
 msgpack-python
 ijson
+
+# PIL
+Pillow

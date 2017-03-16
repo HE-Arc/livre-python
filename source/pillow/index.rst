@@ -4,17 +4,12 @@
 Python Imaging Library
 ======================
 
-par Quentin Vaucher.
-=======
-
-Pillow
-======
-
 .. image:: ../_static/pillow.png
    :align: right
    :alt: Pillow logo
 
-Par Quentin Vaucher [#qv]_
+par Quentin Vaucher. [#qv]_
+===========================
 
 Introduction
 ------------
@@ -36,7 +31,7 @@ La bibliothèque de fonctions peut être utilisée pour différents types d'acti
 **Archivage d'images**:
   Création de miniatures, conversion d'images d'un format de fichier à un autre, ...
 **Affichage d'images**:
-  Création et affichage d'images via le module :py:mod:`ImageTK`, ou :py:mod:`ImageWin` sous Windows. Ouverture d'une image dans un utilitaire externe via la méthode :py:meth:`show`.
+  Création et affichage d'images via le module :py:mod:`PIL.ImageTK`, ou :py:mod:`ImageWin` sous Windows. Ouverture d'une image dans un utilitaire externe via la méthode :py:meth:`show`.
 **Traitement d'images**:
   Offre un support pour quelques fonctions de bases tel que le filtrage, la convolution ou encore la conversion d'espaces couleurs. Il est également possible de redimensionner et d'appliquer des tranformations géométriques à l'image (rotation, ...).
 

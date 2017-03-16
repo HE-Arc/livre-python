@@ -170,7 +170,9 @@ intersphinx_mapping = {
     'python': ('https://docs.python.org/3.6', None),
     'invoke': ('http://docs.pyinvoke.org/en/latest/', None),
     'jsonschema': ('http://python-jsonschema.readthedocs.io/en/latest/', None),
+
     'matplotlib': ('http://matplotlib.org/2.0.0', None),
     'pillow': ('https://pillow.readthedocs.io/en/latest/', None),
-    'msgpack-python': ('http://msgpack-python.readthedocs.io/en/latest/', None)
+    'msgpack-python': ('http://msgpack-python.readthedocs.io/en/latest/', None),
+    'Pillow': ('https://pillow.readthedocs.io/en/latest/', None)
 }
