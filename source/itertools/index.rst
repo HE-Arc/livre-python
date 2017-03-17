@@ -22,10 +22,15 @@ créer un filtre sur nos tableau avec :py:func:`compress<itertools.compress>`.
 Itérateur infini
 ----------------
 
+<<<<<<< HEAD
 fonction :py:func:`count(start=0, step=1) <itertools.count>`
 
 Fonction :py:func:`itertools.count` est un itérateur infini. Il prend comme
 paramètres un début et le *step* (par défault c'est 1).
+=======
+function :py:func:`count(start=0, step=1) <itertools.count>`
+*************************************************************
+>>>>>>> Revert "Revert "syntaxe pycon pour les exemples chain()""
 
 .. literalinclude:: use_itertools.py
    :start-after: # COUNT_BEGIN
@@ -35,6 +40,7 @@ paramètres un début et le *step* (par défault c'est 1).
 Itérateur avec fin
 -------------------
 
+<<<<<<< HEAD
 fonction :py:func:`chain() <itertools.chain>`
 *********************************************
 
@@ -106,6 +112,67 @@ et 0(=false) ne renvoi pas le valeur.
 
 Fonction :py:func:`filterfalse() <itertools.filterfalse>`
 *********************************************************
+=======
+function :py:func:`Chain() <itertools.chain>`
+**********************************************
+Chain permet de concaténer des listes ensembles en lui passant en paramètre
+les listes que vous voulez concatener.
+
+Par exemple : 
+
+.. code-block:: pycon
+
+>>> a = [1, 2, 3, 4, 5, 6, 7]
+>>> b = ["Johnny", "David", "Mike", "Bali", "Noami"]
+>>> c = ["c", "h", "b", "s", "z"]
+>>> for i in chain(a, b, c):
+      print(i)
+1
+2
+3
+4
+5
+6
+7
+Johnny
+David
+Mike
+Bali
+Noami
+c
+h
+b
+s
+z
+
+Une façon plus élégante d'afficher une liste est d'utiliser 
+la fonction list qui va nous retourner une liste(captain obvious) qui vous
+suffira de print.
+
+>>> print(list(chain(a, b, c)))
+[1, 2, 3, 4, 5, 6, 7, 'Johnny', 'David', 'Mike', 'Bali', 'Noami', 'c', 'h', 'b', 's', 'z']
+>>> print(list(chain(a[:1], b[:1], c[:1])))
+[1, 'Johnny', 'c']
+>>> print(list(chain(a[0:2], b[0:2], c[0:2]))
+[1, 2, 'Johnny', 'David', 'c', 'h']
+ 
+function Compress()
+*********************
+
+
+.. literalinclude:: use_itertools.py
+   :start-after: # COMPRESS_BEGIN
+   :end-before: # COMPRESS_END
+   
+   
+   
+function filter()  /filterfalse()
+***********************************
+        
+.. literalinclude:: use_itertools.py
+   :start-after: # FILTER_BEGIN
+   :end-before: # FILTER_END
+>>>>>>> Revert "Revert "syntaxe pycon pour les exemples chain()""
 
 Dans la même idée que la fonction compress filter/filterfalse sont des
 fonctions qui vont vous permettre de filtre vos tableaux. La puissance des
