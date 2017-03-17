@@ -24,6 +24,7 @@ Le module itertools de Python nous propose un bon nombre de générateurs prêts
 
 Derrière cette boucle **for** se cache enfet un itérateur. C'est un objet qui va être chargé de parcourir un objet conteneur, dans  notre cas notre liste. Quand Python va tomber sur la ligne **for i in liste:**, il va appeler l'itérateur de notre liste pour pouvoir la parcourir. L'itérateur se crée dans la méthode **__iter__** de notre objet liste dans notre cas. Et lui va nous retourner notre itérateur pour pouvoir parcourir notre petit liste.
 
+<<<<<<< HEAD
 A chaque itération python va appeler la méthode **__next__** de notre liste pour itérer à l'élément suivant ou s'arrêter avec l'execption **StopIteration** si le parcours à fini de parcour la liste.
 
 Voici un autre exemple mais avec une chaine string.
@@ -43,10 +44,6 @@ Voici un autre exemple mais avec une chaine string.
     n
 
 On voit que le **P** à déjà été consommé lors de l'appel à la fonction **next(iterateur)**
-
-Itérateurs offert par Python
-----------------------------
-Python nous offres des :py:mod:`itertools` qui sont des itérateurs qui nous permette d'itérer sur nous objets. Voici une petit liste non-exaustif de ce que nous propose se module : 
 
 - :py:func:`itertools.count` : crée un itérateur qui va nous retourner des valeurs espacé de par 1 défault. Attention boucle inifni.
 - :py:func:`itertools.repeat` : va nous répeter les éléments n fois.
