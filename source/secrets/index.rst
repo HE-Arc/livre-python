@@ -3,6 +3,11 @@
 ``secrets``
 ===========
 
+.. image:: ./lock.png
+	:scale: 30%
+   	:align: right
+   	:alt: lock logo
+
 Par Maël Pedretti [#mp]_
 
 Introduction
@@ -28,12 +33,12 @@ Jetons
 Ce module fournit également des fonctions pour générer des jetons sécurisés, adaptés à des applications telles que des réinitialisations de mots de passe via des URL_ difficiles à deviner, des authentifications via API_ tierces, et d'autres utilisations similaires.
 
 - :py:func:`secrets.token_bytes(k) <secrets.token_bytes()>` retourne une chaine binaire composé de *k* bytes. 
-- :py:func:`secrets.token_hex(l) <secrets.token_hex()>` retourne une chaine de texte héxadécimale composée de *l* bytes convertis chacun en deux digits hexadécimaux.
+- :py:func:`secrets.token_hex(l) <secrets.token_hex()>` retourne une chaine de texte hexadécimale composée de *l* bytes convertis chacun en deux digits hexadécimaux.
 - :py:func:`secrets.token_urlsafe(m) <secrets.token_urlsafe()>` retourne une chaine de texte de *m* bytes utilisable dans une URL_. Le texte est encodé en base64_ donc chaque byte est représenté par environ 1.3 charactère.
 
 Si *k*, *l* ou *m* ne sont pas renseignés, un nombre raisonnable sera utilisé par défaut.
 
-Pour résister à une attaque de `force brute`_, les jetons doivent être suffisament longs pour êtres suffisament aléatoires. Cependant, cette notion de suffisance reste assez vague. Plus les ordinateurs deviennent puissants, plus les jetons devront être longs afin de ralonger le temps nécessaire à une machine pour le découvrir.
+Pour résister à une attaque de `force brute`_, les jetons doivent être suffisament longs pour être suffisament aléatoires. Cependant, cette notion de suffisance reste assez vague. Plus les ordinateurs deviennent puissants, plus les jetons devront être longs afin de ralonger le temps nécessaire à une machine pour le découvrir.
 D'après la documentation python, des jetons de 32 bytes sont suffisament sécurisés.
 
 Autre
@@ -56,9 +61,9 @@ Génération d'un mot de passe aléatoire de 10 charactères contenant au minimu
 	>>> while True:
     		password = ''.join(choice(alphabet) for i in range(10))
     		if (any(c.islower() for c in password)
-            		and any(c.isupper() for c in password)
-            		and sum(c.isdigit() for c in password) >= 3):
-        		break
+            	and any(c.isupper() for c in password)
+            	and sum(c.isdigit() for c in password) >= 3):
+        	break
 
 	>>> print(password)
 	cQjUuu02e5
@@ -83,6 +88,9 @@ Conclusion
 
 Le module :py:mod:`secrets` est un module destiné aux utilisateurs avancés ayant des besoins de sécurité supérieurs à la normale.
 Il offre différents outils permettant la création de différents mots de passe et jetons sécurisés.
+
+
+Source de l'image : https://pixabay.com/p-1968247/?no_redirect
 
 .. [#mp] <mael.pedretti@he-arc.ch>
 .. _URL: https://fr.wikipedia.org/wiki/Uniform_Resource_Locator
