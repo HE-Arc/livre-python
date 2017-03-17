@@ -1,0 +1,9 @@
+>>> document = {"title": "HE-Arc!", "values": [1000, 2000, 3000]}
+
+>>> import msgpack
+>>> len(msgpack.packb(document))
+32
+
+>>> import json
+>>> len(json.dumps(document).encode("utf-8"))
+50

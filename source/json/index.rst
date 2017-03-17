@@ -59,10 +59,10 @@ Python.
     >>> import json
 
     >>> json.dumps(['foo', {'bar': ('baz', None, 1.0, 2)}])
-    ["foo", {"bar": ["baz", null, 1.0, 2]}]
+    '["foo", {"bar": ["baz", null, 1.0, 2]}]'
 
     >>> json.dumps("🐍")
-    "\\ud83d\\udc0d"
+    '"\\ud83d\\udc0d"'
 
     >>> json.loads('[1, 2, "Hello"]')
     [1, 2, 'Hello']
@@ -73,6 +73,11 @@ que JSON est toujours encodé en UTF-8.
 .. literalinclude:: ./examples/test.json
 
 .. literalinclude:: ./examples/example.py
+
+Résultat :
+
+.. literalinclude:: ./examples/test.out.json
+
 
 Validation
 ----------
@@ -92,7 +97,8 @@ représentation binaire. `MessagePack`_ permet de réduire efficacement l'espace
 nécessaire au stockage et à l'échange de tels documents. En Python, c'est le
 module :py:mod:`msgpack`.
 
-.. literalinclude:: ./examples/msg.py
+.. literalinclude:: ./examples/msg.pycon
+   :language: pycon
 
 Streaming
 ---------
