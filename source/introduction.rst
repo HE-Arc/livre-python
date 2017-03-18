@@ -60,6 +60,7 @@ Autres
 ------
 
 * :ref:`hug-tutorial`
+* :ref:`invoke-tutorial`
 * :ref:`matplotlib-tutorial`
 * :ref:`pycrypto-tutorial`
 * :ref:`pygame-tutorial`
