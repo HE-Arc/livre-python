@@ -7,6 +7,11 @@ cd source/invoke/examples
 invoke ouverture
 cd ../../..
 
+# Itertools
+cd source/itertools
+python use_itertools.py
+cd ../..
+
 # JSON
 cd source/json/examples
 python example.py

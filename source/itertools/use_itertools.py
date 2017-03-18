@@ -1,8 +1,10 @@
 """Module itertools."""
+
 #  Chain, slice, ...
 #  Source : https://www.youtube.com/watch?v=xK7E2YmjyAc
 
-from itertools import *
+from itertools import (chain, compress, count, dropwhile, filterfalse, islice,
+                       takewhile)
 
 a = [1, 2, 3, 4, 5, 6, 7]
 b = ["Johnny", "David", "Mike", "Bali", "Noami"]
@@ -18,9 +20,9 @@ print(list(chain(a[0:2], b[0:2], c[0:2])))
 
 # COUNT_BEGIN
 # Attention boucle infini
-'''for i in count(0, 0.4):
-    print(i)
-'''
+# for i in count(0, 0.4):
+#     print(i)
+
 # génére une liste de 0..100 par step 1
 for i in islice(count(), 0, 11, 1):
     print(i)
