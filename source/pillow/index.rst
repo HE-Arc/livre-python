@@ -17,11 +17,11 @@ Introduction
 Pillow_ est une bibliothèque de traitement d'image, qui est un fork et
 successeur du projet PIL_ (*Python Imaging Library*). Elle est conçue
 de manière à offrir un accès rapide aux données contenues dans une image, et offre
-un support pour différents formats de fichiers tel que PPM, PNG, JPEG, GIF,
+un support pour différents formats de fichiers tels que PPM, PNG, JPEG, GIF,
 TIFF et BMP.
 
 Pillow_ dispose de capacités de traitement d'images relativement puissantes, et
-a pour but d'offrir une solide base à toute application générale de traitement d'image.
+a pour but d'offrir une solide base à toute application générale de traitement d'images.
 
 Domaines d'utilisations
 -----------------------
@@ -33,23 +33,23 @@ La bibliothèque de fonctions peut être utilisée pour différents types d'acti
 **Affichage d'images**:
   Création et affichage d'images via le module :py:mod:`PIL.ImageTk`, ou :py:mod:`PIL.ImageWin` sous Windows. Ouverture d'une image dans un utilitaire externe via la méthode :py:meth:`PIL.Image.Image.show`.
 **Traitement d'images**:
-  Offre un support pour quelques fonctions de bases tel que le filtrage, la convolution ou encore la conversion d'espaces couleurs. Il est également possible de redimensionner et d'appliquer des transformations géométriques à l'image (rotation, ...).
+  Offre un support pour quelques fonctions de bases telles que le filtrage, la convolution ou encore la conversion d'espaces couleurs. Il est également possible de redimensionner et d'appliquer des transformations géométriques à l'image (rotation, ...).
 
 
 Concepts
 ---------
 
-La libraire utilise le principe d'images matricielles (par opposition aux images vectorielles), c'est à dire que chaque élément de la matrice représente un point avec une couleur associée (= un pixel). Pillow_ utilise également les concepts de bandes_ et de mode_ décrit ci-dessous:
+La libraire utilise le principe d'images matricielles (par opposition aux images vectorielles), c'est-à-dire que chaque élément de la matrice représente un point avec une couleur associée (= un pixel). Pillow_ utilise également les concepts de bandes_ et de modes_ décrits ci-dessous:
 
 **Bandes**:
   Les images sont constituées de bandes de données (une ou plusieurs, pour autant que celles-ci aient toute les mêmes dimensions et profondeurs). Un exemple commun de bandes est celles sous la forme RGBA, qui sépare les informations sur le rouge, le vert, le bleu et la transparence. Il est ainsi possible de réaliser différentes actions qui agissent que sur une seule bande. Finalement, du point de vue des pixels, on peut dire qu'ils disposent tous d'une valeur par bande.
 **Modes**:
-  Ils définissent le type et la profondeur des pixels d'une images. Parmi les modes_ les plus connus, on peut notamment citer RGB et RGBA, qui représentent les pixels sur respectivement 3x8 bits et 4x8 bits.
+  Ils définissent le type et la profondeur des pixels d'une image. Parmi les modes_ les plus connus, on peut notamment citer RGB et RGBA, qui représentent les pixels sur respectivement 3x8 bits et 4x8 bits.
 
 Exemples
 --------
 
-Le premier exemple ci-dessous permet dans un premier temps de se familiariser avec le fonctionnement de base de Pillow_, puis, une fois les bases acquises, un deuxième exemple plus technique met en évidence la puissance de la bibliothèque.
+Le premier exemple ci-dessous permet dans un premier temps de se familiariser avec le fonctionnement de base de Pillow_, puis une fois les bases acquises, un deuxième exemple plus technique met en évidence la puissance de la bibliothèque.
 
 Exemple basique
 '''''''''''''''
@@ -67,7 +67,7 @@ L'exemple suivant aborde de manière simple quelques notions de bases de Pillow_
 Exemple technique
 '''''''''''''''''
 
-Dans cet exemple, le logo de la librairie Pillow_ subit divers modification afin de mettre en pratique quelques fonctions de la bibliothèque. Le logo est d'abord flouté à l'aide d'un filtre_, puis transposé_ afin d'inverser la position de chaque python. On parcourt ensuite tous les pixels, puis on colorie l'arrière-plan en étudiant les attributs de chacun d'eux (couleurs et position).
+Dans cet exemple, le logo de la librairie Pillow_ subit diverses modifications afin de mettre en pratique quelques fonctions de la bibliothèque. Le logo est d'abord flouté à l'aide d'un filtre_, puis transposé_ afin d'inverser la position de chaque python. On parcourt ensuite tous les pixels, puis on colorie l'arrière-plan en étudiant les attributs de chacun d'eux (couleurs et position).
 
 - :py:meth:`PIL.Image.Image.filter` filtre l'image;
 - :py:meth:`PIL.Image.Image.transpose` retourne l'image;
@@ -104,7 +104,7 @@ Le résultat obtenu est le suivant:
 Méthodes de dessin
 ------------------
 
-Pillow_ fournit également des outils de base pour le graphisme 2D. Toutes ces fonctions sont regroupées dans le module :py:mod:`PIL.ImageDraw`. Il est possible de dessiner diverses formes géométriques, ainsi que du texte, dans le but de créer ou retoucher des images. l'exemple suivant met en évidence quelques-unes des fonctionnalités disponibles.
+Pillow_ fournit également des outils de base pour le graphisme 2D. Toutes ces fonctions sont regroupées dans le module :py:mod:`PIL.ImageDraw`. Il est possible de dessiner diverses formes géométriques, ainsi que du texte, dans le but de créer ou retoucher des images. L'exemple suivant met en évidence quelques-unes des fonctionnalités disponibles.
 
 - :py:func:`PIL.Image.new` crée une image avec la taille et la couleur spécifiée;
 - ``PIL.ImageDraw.Draw()`` crée un objet qui peut être utilisé pour dessiner sur l'image;
@@ -126,16 +126,16 @@ Utilisation au sein du binding PyQt
 
 Pillow_ fournit le module :py:mod:`PIL.ImageQt` afin de créer des Qimage directement utilisables par le binding PyQt. En effet, le module dispose d'une classe du même nom qui est une sous-classe de QtGui.QImage. Il est donc possible de passer l'objet directement à l'API PyQt.
 
-On pourrait donc imaginer utiliser la puissance de Pillow_ pour réaliser un rapide traitement d'image au sein d'un logiciel utilisant le Framework Qt.
+On pourrait donc imaginer utiliser la puissance de Pillow_ pour réaliser un rapide traitement d'images au sein d'un logiciel utilisant le Framework Qt.
 
 Conclusion
 ----------
 
 Pillow_ est une libraire relativement complète qui offre la possibilité de manipuler des images avec une grande simplicité. Elle dispose d'une large palette de fonctions qui touche à différents domaines allant du filtrage au graphisme, en passant par la manipulation de pixels.
 
-La bibliothèque se positionne donc plutôt comme une librairie à vocation généraliste dans le domaine du traitement d'image, et ne se démarque donc dans aucun domaine spécifique.
+La bibliothèque se positionne donc plutôt comme une librairie à vocation généraliste dans le domaine du traitement d'images, et ne se démarque donc dans aucun domaine spécifique.
 
-Pour conclure, les quelques exemples abordés dans cet article offre un bon aperçu du fonctionnement de Pillow_, mais ne couvre en aucun cas toutes ses possibilités. Pour une liste plus exhaustive et plus détaillée, la `documentation officielle`_ semble être la candidate idéale.
+Pour conclure, les quelques exemples abordés dans cet article offrent un bon aperçu du fonctionnement de Pillow_, mais ne couvrent en aucun cas toutes ses possibilités. Pour une liste plus exhaustive et plus détaillée, la `documentation officielle`_ semble être la candidate idéale.
 
 .. [#qv] <quentin.vaucher@he-arc.ch>
 
