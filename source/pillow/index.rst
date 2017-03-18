@@ -26,7 +26,7 @@ a pour but d'offrir une solide base à toute application générale de traitemen
 Domaines d'utilisations
 -----------------------
 
-La bibliothèque de fonctions peut être utilisée pour différents types d'activités, tel que:
+La bibliothèque de fonctions peut être utilisée pour différents types d'activités, telles que:
 
 **Archivage d'images**:
   Création de miniatures, conversion d'images d'un format de fichier à un autre, ...
