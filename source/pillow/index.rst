@@ -36,6 +36,16 @@ La bibliothèque de fonctions peut être utilisée pour différents types d'acti
   Offre un support pour quelques fonctions de bases tel que le filtrage, la convolution ou encore la conversion d'espaces couleurs. Il est également possible de redimensionner et d'appliquer des tranformations géométriques à l'image (rotation, ...).
 
 
+Conceptes
+---------
+
+La libraire utilise le principe d'images matricielles (par opposition aux images vectirielles), c'est à dire que chaque élément de la matrice représente un point avec une couleur associée (= un pixel). Pillow_ utilise également les conceptes de bandes_ et de mode_ décrit ci-dessous:
+
+**Bandes**:
+  Les images sont constituées de bandes de données (une ou plusieurs, pour autant que celles-ci aient toute les mêmes dimensions et profondeurs). Un exemple commun de bandes est celles sous la forme RGBA, qui sépare les informations sur le rouge, le vert, le bleu et la transparence. Il est ainsi possible de réaliser différentes actions qui agissent que sur une seule bande. Finallement, du point de vue des pixels, on peut dire qu'ils disposent tous d'une valeur par bande.
+**Modes**:
+  Ils définissent le type et la profondeur des pixels d'une images. Parmis les modes_ les plus connus, on peut notamment citer RGB et RGBA, qui représentent les pixels sur respectivement 3x8 bits et 4x8 bits.
+
 Examples
 --------
 
@@ -57,7 +67,12 @@ L'example suivant aborde de manière simple quelques notions de bases de Pillow_
 Example technique
 '''''''''''''''''
 
-Dans cet example, le logo de la librairie Pillow_ subit divers modification afin de mettre en partique quelques fonctions de la bibliothèque. Le logo est d'abord flouté, puis retourner afin d'inverser la position de chaque python. On parcourt ensuite chaque pixel, puis on colorie l'arrière-plan en étudiant les attributs de chaque pixels (couleurs et position).
+Dans cet example, le logo de la librairie Pillow_ subit divers modification afin de mettre en partique quelques fonctions de la bibliothèque. Le logo est d'abord flouté à l'aide d'un filtre_, puis transposé_ afin d'inverser la position de chaque python. On parcourt ensuite tous les pixels, puis on colorie l'arrière-plan en étudiant les attributs de chacun d'eux (couleurs et position).
+
+- :py:meth:`PIL.Image.Image.filter` filtre l'image;
+- :py:meth:`PIL.Image.Image.transpose` retourne l'image;
+- :py:meth:`PIL.Image.Image.getpixel` récupère les attributs du pixel à la position donnée.
+- :py:meth:`PIL.Image.Image.putpixel` modifie  les attributs du pixel à la position donnée.
 
 .. literalinclude:: ./examples/example2.py
   :linenos:
@@ -74,10 +89,10 @@ Méthodes de dessin
 Pillow_ fournit également des outils de base pour le graphisme 2D. Toutes ces fonctions sont regroupées dans le module :py:mod:`PIL.ImageDraw`. Il est possible de dessiner divers formes géométriques, ainsi que du texte, dans le but de créer ou retoucher des images. l'exemple suivant met en évidence quelques unes des fonctionnalités disponibles.
 
 - :py:func:`PIL.Image.new` crée une image avec la taille et la couleur spécifiée;
-- :py:class::`PIL.ImageDraw.Draw` crée un objet qui peut être utilisé pour dessinier sur l'image;
-- :py:meth::`PIL.ImageDraw.Draw.line` dessine une ligne entre les points donnés, avec la couleur choisie;
-- :py:meth::`PIL.ImageDraw.Draw.ellipse` dessine une ellipse à l'intérieur du rectangle donné;
-- :py:meth::`PIL.ImageDraw.Draw.text` dessine du texte à l'endroit choisi.
+- ``PIL.ImageDraw.Draw()`` crée un objet qui peut être utilisé pour dessinier sur l'image (obtention du contexte graphique);
+- ``PIL.ImageDraw.Draw.line()`` dessine une ligne entre les points donnés, avec la couleur choisie;
+- ``PIL.ImageDraw.Draw.ellipse()`` dessine une ellipse à l'intérieur du rectangle donné;
+- ``PIL.ImageDraw.Draw.text()`` dessine du texte à l'endroit choisi.
 
 .. literalinclude:: ./examples/drawing.py
   :linenos:
@@ -93,9 +108,15 @@ Utilisation au sein du binding PyQt
 
 Pillow_ fournit le module :py:mod:`PIL.ImageQt` afin de créer des Qimage directement utilisables par le binding PyQt. En effet, le module dispose d'une classe du même nom qui est une sous-calsse de QtGui.QImage. Il est donc possible de passer l'objet directement à l'API PyQt.
 
+On pourrait donc imaginer utiliser la puissance de Pillow_ pour réaliser un rapide traitement d'image au sein d'un logiciel utilisant le Framework Qt.
+
 
 .. [#qv] <quentin.vaucher@he-arc.ch>
 
 .. _Pillow: https://python-pillow.org/
 .. _PIL: http://www.pythonware.com/products/pil/
+.. _bandes: https://pillow.readthedocs.io/en/4.0.x/handbook/concepts.html#bands
 .. _mode: https://pillow.readthedocs.io/en/4.0.x/handbook/concepts.html#modes
+.. _modes: https://pillow.readthedocs.io/en/4.0.x/handbook/concepts.html#modes
+.. _filtre: https://pillow.readthedocs.io/en/4.0.x/reference/ImageFilter.html#filters
+.. _transposé: https://pillow.readthedocs.io/en/4.0.x/reference/Image.html?highlight=transpose#PIL.Image.Image.transpose
