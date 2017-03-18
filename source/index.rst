@@ -34,6 +34,7 @@ Table des matières
 
    colorama/index.rst
    hug/index.rst
+   matplotlib/index.rst
    pillow/index.rst
    pycrypto/index.rst
    pygame/index.rst
@@ -57,6 +58,7 @@ Table des matières
  - Cédric Pahud <cedric.pahud@he-arc.ch>
  - Dany Chea <dany.chea@he-arc.ch>
  - Dylan Santos de Pinho <dylan.santosdeppinho@he-arc.ch>
+ - Florian Fasmeyer <florian.fasmeyer@he-arc.ch>
  - Guillaume Noguera <guillaume.noguera@he-arc.ch>
  - Johnny Da Costa <johnny.dacosta@he-arc.ch>
  - Julien Feuillade <julien.feuillade@he-arc.ch>
