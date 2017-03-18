@@ -61,8 +61,8 @@ Table des matières
  - Dylan Santos de Pinho <dylan.santosdeppinho@he-arc.ch>
  - Florian Fasmeyer <florian.fasmeyer@he-arc.ch>
  - Guillaume Noguera <guillaume.noguera@he-arc.ch>
- - Johnathan Guerne <johnathan.guerne@he-arc.ch>
  - Johnny Da Costa <johnny.dacosta@he-arc.ch>
+ - Jonathan Guerne <jonathan.guerne@he-arc.ch>
  - Julien Feuillade <julien.feuillade@he-arc.ch>
  - Jérémy Dubois <jeremy.dubois@he-arc.ch>
  - Karim Gehrig <karim.gehrig@he-arc.ch>
