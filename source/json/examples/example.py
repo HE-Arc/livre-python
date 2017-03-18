@@ -3,7 +3,7 @@
 import json
 
 entrée = "test.json"
-sortie = "test2.json"
+sortie = "test.out.json"
 
 with open(entrée, "r", encoding="utf-8") as fp:
     données = json.load(fp)

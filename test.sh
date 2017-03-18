@@ -10,6 +10,6 @@ cd ../../..
 # JSON
 cd source/json/examples
 python example.py
-python stream.py
+python stream.py || echo ':-)'
 python validation.py
 cd ../../..
