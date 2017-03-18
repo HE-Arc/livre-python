@@ -34,6 +34,7 @@ for i in compress(a, filter_binaire):
     print(i)
 
 # on récupere sous forme de liste
+print("compress exemple\n")
 b = list(compress(a, filter_binaire))
 print(b)
 # COMPRESS_END
