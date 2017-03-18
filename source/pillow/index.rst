@@ -64,6 +64,12 @@ L'exemple suivant aborde de manière simple quelques notions de bases de Pillow_
 .. literalinclude:: ./examples/example.py
   :linenos:
 
+Le résultat obtenu est le suivant:
+
+.. image:: ../_static/gray-pillow.jpeg
+  :align: center
+  :alt: Logo de Pillow en nuances de gris
+
 Exemple technique
 '''''''''''''''''
 
