@@ -2,12 +2,13 @@
 
 import json
 
-filename = "test.json"
+entrée = "test.json"
+sortie = "test2.json"
 
-with open(filename, "r", encoding="utf-8") as fp:
-    data = json.load(fp)
+with open(entrée, "r", encoding="utf-8") as fp:
+    données = json.load(fp)
 
-data["counter"] += 1
+données["counter"] += 1
 
-with open(filename, "w", encoding="utf-8") as fp:
-    json.dump(data, fp, sort_keys=True, indent=4)
+with open(sortie, "w", encoding="utf-8") as fp:
+    json.dump(données, fp, sort_keys=True, indent=4)

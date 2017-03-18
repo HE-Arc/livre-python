@@ -9,5 +9,6 @@ install:
 
 script:
   - ./build.sh
+  - ./test.sh
 after_success:
   - travis-sphinx deploy
