@@ -3,6 +3,8 @@
 from PIL import Image, ImageDraw
 
 image = Image.new('RGBA', (160, 160), (255, 255, 255, 0))
+
+# Obtention du contexte graphique
 draw = ImageDraw.Draw(image)
 
 draw.line((0, image.size[1]/2,
@@ -18,6 +20,7 @@ draw.ellipse((image.size[0]/4, image.size[1]/4,
 
 draw.text((20, 20), "Cercle trigonométrique", fill=(0, 0, 0))
 
+# Suppression du contexte graphique
 del draw
 
 image.show()

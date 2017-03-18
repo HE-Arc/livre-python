@@ -71,7 +71,7 @@ Dans cet example, le logo de la librairie Pillow_ subit divers modification afin
 
 - :py:meth:`PIL.Image.Image.filter` filtre l'image;
 - :py:meth:`PIL.Image.Image.transpose` retourne l'image;
-- :py:meth:`PIL.Image.Image.getpixel` récupère les attributs du pixel à la position donnée.
+- :py:meth:`PIL.Image.Image.getpixel` récupère les attributs du pixel à la position donnée;
 - :py:meth:`PIL.Image.Image.putpixel` modifie  les attributs du pixel à la position donnée.
 
 .. literalinclude:: ./examples/example2.py
@@ -83,13 +83,31 @@ Le résultat obtenu est le suivant:
    :align: center
    :alt: Cercle Trigonométrique
 
+Manipulation des bandes
+-----------------------
+
+Comme expliqué plus haut, Pillow_ utilise le concepte de bandes de données, qu'il est possible de traiter séparément. L'exemple suivant illuste cette notion, en inverssant l'ordre des bandes R, G et B.
+
+- :py:meth:`PIL.Image.Image.split` retourne un tuple contenant toutes les bandes de l'image;
+- :py:func:`PIL.Image.merge` fusionne un ensemble d'images monobande en une image multibandes.
+
+.. literalinclude:: ./examples/bandes.py
+  :linenos:
+
+Le résultat obtenu est le suivant:
+
+.. image:: ../_static/logoBandes.png
+  :align: center
+  :alt: Suppression du rouge dans le logo de Pillow
+
+
 Méthodes de dessin
 ------------------
 
 Pillow_ fournit également des outils de base pour le graphisme 2D. Toutes ces fonctions sont regroupées dans le module :py:mod:`PIL.ImageDraw`. Il est possible de dessiner divers formes géométriques, ainsi que du texte, dans le but de créer ou retoucher des images. l'exemple suivant met en évidence quelques unes des fonctionnalités disponibles.
 
 - :py:func:`PIL.Image.new` crée une image avec la taille et la couleur spécifiée;
-- ``PIL.ImageDraw.Draw()`` crée un objet qui peut être utilisé pour dessinier sur l'image (obtention du contexte graphique);
+- ``PIL.ImageDraw.Draw()`` crée un objet qui peut être utilisé pour dessinier sur l'image;
 - ``PIL.ImageDraw.Draw.line()`` dessine une ligne entre les points donnés, avec la couleur choisie;
 - ``PIL.ImageDraw.Draw.ellipse()`` dessine une ellipse à l'intérieur du rectangle donné;
 - ``PIL.ImageDraw.Draw.text()`` dessine du texte à l'endroit choisi.
@@ -110,6 +128,14 @@ Pillow_ fournit le module :py:mod:`PIL.ImageQt` afin de créer des Qimage direct
 
 On pourrait donc imaginer utiliser la puissance de Pillow_ pour réaliser un rapide traitement d'image au sein d'un logiciel utilisant le Framework Qt.
 
+Conclusion
+----------
+
+Pillow_ est une libraire relativement complète qui offre la possibilité de manipuler des images avec une grande simplicité. Elle dispose d'une large palette de fonctions qui touche à différents domaines allant du filtrage au graphisme, en passant par la manipulation de pixels.
+
+La bibliothèque se positionne donc plutôt comme une librairie à vocation généraliste dans le domaine du traitement d'image, et ne se démarque donc dans aucun domaine spécifique.
+
+Pour conclure, les quelques exemples abordés dans cet article offre un bon aperçu du fonctionnement de Pillow_, mais ne couvre en aucun cas toutes ses possibilités. Pour une liste plus exhaustive et plus détaillée, la `documentation officielle`_ semble être la candidate idéale.
 
 .. [#qv] <quentin.vaucher@he-arc.ch>
 
@@ -120,3 +146,4 @@ On pourrait donc imaginer utiliser la puissance de Pillow_ pour réaliser un rap
 .. _modes: https://pillow.readthedocs.io/en/4.0.x/handbook/concepts.html#modes
 .. _filtre: https://pillow.readthedocs.io/en/4.0.x/reference/ImageFilter.html#filters
 .. _transposé: https://pillow.readthedocs.io/en/4.0.x/reference/Image.html?highlight=transpose#PIL.Image.Image.transpose
+.. _documentation officielle: https://pillow.readthedocs.io/en/latest/
