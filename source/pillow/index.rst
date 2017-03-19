@@ -36,13 +36,13 @@ La bibliothèque de fonctions peut être utilisée pour différents types d'acti
   Offre un support pour quelques fonctions de bases telles que le filtrage, la convolution ou encore la conversion d'espaces couleurs. Il est également possible de redimensionner et d'appliquer des transformations géométriques à l'image (rotation, ...).
 
 
-Concepts
----------
+[Concepts]_
+-----------
 
 La libraire utilise le principe d'images matricielles (par opposition aux images vectorielles), c'est-à-dire que chaque élément de la matrice représente un point avec une couleur associée (= un pixel). Pillow_ utilise également les concepts de bandes_ et de modes_ décrits ci-dessous:
 
 **Bandes**:
-  Les images sont constituées de bandes de données (une ou plusieurs, pour autant que celles-ci aient toute les mêmes dimensions et profondeurs). Un exemple commun de bandes est celles sous la forme RGBA, qui sépare les informations sur le rouge, le vert, le bleu et la transparence. Il est ainsi possible de réaliser différentes actions qui agissent que sur une seule bande. Finalement, du point de vue des pixels, on peut dire qu'ils disposent tous d'une valeur par bande.
+  Les images sont constituées de bandes_ de données (une ou plusieurs, pour autant que celles-ci aient toute les mêmes dimensions et profondeurs). Un exemple commun de bandes est celles sous la forme RGBA, qui sépare les informations sur le rouge, le vert, le bleu et la transparence. Il est ainsi possible de réaliser différentes actions qui agissent que sur une seule bande. Finalement, du point de vue des pixels, on peut dire qu'ils disposent tous d'une valeur par bande.
 **Modes**:
   Ils définissent le type et la profondeur des pixels d'une image. Parmi les modes_ les plus connus, on peut notamment citer RGB et RGBA, qui représentent les pixels sur respectivement 3x8 bits et 4x8 bits.
 
@@ -153,3 +153,4 @@ Pour conclure, les quelques exemples abordés dans cet article offrent un bon ap
 .. _filtre: https://pillow.readthedocs.io/en/4.0.x/reference/ImageFilter.html#filters
 .. _transposé: https://pillow.readthedocs.io/en/4.0.x/reference/Image.html?highlight=transpose#PIL.Image.Image.transpose
 .. _documentation officielle: https://pillow.readthedocs.io/en/latest/
+.. [Concepts] https://pillow.readthedocs.io/en/4.0.x/handbook/concepts.html#concepts

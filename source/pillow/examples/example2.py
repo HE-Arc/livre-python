@@ -8,17 +8,20 @@ img = img.filter(ImageFilter.BLUR)
 img = img.transpose(Image.FLIP_TOP_BOTTOM)
 img = img.transpose(Image.FLIP_LEFT_RIGHT)
 
-for x in range(img.size[0]):
-    for y in range(img.size[1]):
+width = img.size[0]
+height = img.size[1]
+
+for x in range(width):
+    for y in range(height):
         # On vérifie que le pixel est blanc
-        if img.getpixel((x, y))[0] > 250 and
-        img.getpixel((x, y))[1] > 250 and
-        img.getpixel((x, y))[2] > 250:
-            if x + y <= img.size[0]:
-                # Violet
-                img.putpixel((x, y), (155, 89, 182))
+        pixel = img.getpixel((x, y))
+        white = 250
+        if all(chanel > white for chanel in pixel):
+            if x + y <= width:
+                purple = (155, 89, 182)
+                img.putpixel((x, y), purple)
             else:
-                # Bleu
-                img.putpixel((x, y), (52, 152, 219))
+                blue = (52, 152, 219)
+                img.putpixel((x, y), blue)
 
 img.show()
