@@ -50,37 +50,37 @@ Exemples
 --------
 Génération d'un mot de passe aléatoire de 10 charactères contenant au minimum une lettre majuscule, une lettre minuscule et un chiffre
 
-.. code-block:: pycon
+.. code-block:: python
 
->>> from secrets import choice
+    from secrets import choice
 
->>> import string
+    import string
 
->>> alphabet = string.ascii_letters + string.digits
+    alphabet = string.ascii_letters + string.digits
 
->>> while True:
-...     password = ''.join(choice(alphabet) for i in range(10))
-...     if(any(c.islower() for c in password)
-...             and any(c.isupper() for c in password)
-...             and sum(c.isdigit() for c in password) >=3):
-...             break
+    while True:
+        password = ''.join(choice(alphabet) for i in range(10))
+        if(any(c.islower() for c in password)
+            and any(c.isupper() for c in password)
+            and sum(c.isdigit() for c in password) >=3):
+            break
 
->>> print(password)
-68sZmkdve4
+    print(password)
+    68sZmkdve4
 
 Génération d'un jeton hexadécimal d'une longueur de 16 bytes.
 
 .. code-block:: pycon
-
->>> secrets.token_hex(16)
-7e5e31e55f5a878980bb230b7e5c7fbe
+    
+    >>> secrets.token_hex(16)
+    7e5e31e55f5a878980bb230b7e5c7fbe
 
 Génération d'un jeton d'une longueur de 16 bytes pouvant être utilisé dans une URL
 
 .. code-block:: pycon
 
->>> secrets.token_urlsafe(16)
-k84RkJMyMpX6e3qzVXRqcw
+    >>> secrets.token_urlsafe(16)
+    k84RkJMyMpX6e3qzVXRqcw
 
 
 Conclusion
