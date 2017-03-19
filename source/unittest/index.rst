@@ -30,31 +30,40 @@ Création d'un test unitaire
 
 Voici les étapes nécessaires pour créer un test unitaire:
 
-1) Importer le module 'unittest'
+1)  Importer le module 'unittest'
 
-   .. literalinclude:: ./exemples/test-fonction.py
-      :end-before: definition
+	.. code-block:: python
+
+		import unittest
    
-2) Définir la fonction à tester ou l'importer depuis un module. Ici on prend l'exemple avec la fonction carre(x): 
+2)  Définir la fonction à tester ou l'importer depuis un module. Ici on prend l'exemple avec la fonction carre(x): 
 
-   .. literalinclude:: ./exemples/test-fonction.py
-      :start-after: definition 
-      :end-before: classTest
+	.. code-block:: python
+
+		def carre(x):
+			return x ** 2
 
 3) Créer une classe en héritant de 'TestCase', puis écrire les tests sous forme de méthodes. Les noms des méthodes doivent impérativement commencer par 'test' afin d'indiquer au 'test runner' quelles sont les méthodes de tests. 
 
    De plus, chaque test doit appeller une fonction 'assert' de la classe TestCase. La classe TestCase possède plusieurs types de 'assert'. Ici nous utiliseront 'assertEquals()' qui permet de comparer deux valeurs (valeur retournée par la fonction et la valeur attendue).
 
-   .. literalinclude:: ./exemples/test-fonction.py
-      :start-after: classTest 
-      :end-before: execution
+   .. code-block:: python
+   
+	class Testeur(unittest.TestCase):
+		testValues = {2: 4, 0: 0, -2: 4}
+
+		def testCarre(self):
+			for i, a in self.testValues.items():
+				self.assertEqual(carre(i), a)
    
 4) Éxécuter les tests soit:
 
    - en appelant la méthode main() du module unittest
 	
-   .. literalinclude:: ./exemples/test-fonction.py
-      :start-after: execution
+   .. code-block:: python
+   
+		if __name__ == '__main__':
+			unittest.main()
 	
    - via la ligne de commande. La ligne de commande permet aussi de spécifier les modules, classes ou même des méthodes individuelles à tester.
 
