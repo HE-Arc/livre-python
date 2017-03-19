@@ -4,9 +4,10 @@
 ===========
 
 .. image:: ./lock.png
-	:scale: 30%
-   	:align: right
-   	:alt: lock logo
+    :scale: 30%
+    :align: right
+    :alt: lock logo
+    :target: https://cdn.pixabay.com/photo/2017/01/10/03/54/icon-1968247_960_720.png
 
 Par Maël Pedretti [#mp]_
 
@@ -18,7 +19,6 @@ Introduction
 
 Utilisations
 ------------
-
 Nombres aléatoires
 ******************
 Ce module donne accès à la source d'aléatoire la plus sécurisée que votre système d'exploitation fournit.
@@ -44,56 +44,59 @@ D'après la documentation python, des jetons de 32 bytes sont suffisament sécur
 Autre
 *****
 
-- :py:func:`secrets.compare_digest(a,b) <secrets.compare_digest()>` permet de comparer deux chaînes de texte.
+- :py:func:`secrets.compare_digest(a,b) <secrets.compare_digest()>` permet de comparer deux chaînes de texte de manière à réduire le risque d'`attaques temporelles`_.
 
 Exemples
 --------
 Génération d'un mot de passe aléatoire de 10 charactères contenant au minimum une lettre majuscule, une lettre minuscule et un chiffre
 
 .. code-block:: pycon
-	
-	>>> from secrets import choice
 
-	>>> import string
+>>> from secrets import choice
 
-	>>> alphabet = string.ascii_letters + string.digits
+>>> import string
 
-	>>> while True:
-    		password = ''.join(choice(alphabet) for i in range(10))
-    		if (any(c.islower() for c in password)
-            	and any(c.isupper() for c in password)
-            	and sum(c.isdigit() for c in password) >= 3):
-        	break
+>>> alphabet = string.ascii_letters + string.digits
 
-	>>> print(password)
-	cQjUuu02e5
+>>> while True:
+...     password = ''.join(choice(alphabet) for i in range(10))
+...     if(any(c.islower() for c in password)
+...             and any(c.isupper() for c in password)
+...             and sum(c.isdigit() for c in password) >=3):
+...             break
+
+>>> print(password)
+68sZmkdve4
 
 Génération d'un jeton hexadécimal d'une longueur de 16 bytes.
 
 .. code-block:: pycon
 
-	>>> secrets.token_hex(16)
-	7e5e31e55f5a878980bb230b7e5c7fbe
+>>> secrets.token_hex(16)
+7e5e31e55f5a878980bb230b7e5c7fbe
 
 Génération d'un jeton d'une longueur de 16 bytes pouvant être utilisé dans une URL
 
 .. code-block:: pycon
 
-	>>> secrets.token_urlsafe(16)
-	k84RkJMyMpX6e3qzVXRqcw
+>>> secrets.token_urlsafe(16)
+k84RkJMyMpX6e3qzVXRqcw
 
 
 Conclusion
 ----------
 
 Le module :py:mod:`secrets` est un module destiné aux utilisateurs avancés ayant des besoins de sécurité supérieurs à la normale.
-Il offre différents outils permettant la création de différents mots de passe et jetons sécurisés.
+Il offre différents outils permettant la création de mots de passe et jetons sécurisés.
 
 
-Source de l'image : https://pixabay.com/p-1968247/?no_redirect
 
 .. [#mp] <mael.pedretti@he-arc.ch>
+
+.. Bibliographie
+
 .. _URL: https://fr.wikipedia.org/wiki/Uniform_Resource_Locator
 .. _base64: https://fr.wikipedia.org/wiki/Base64
 .. _force brute: https://fr.wikipedia.org/wiki/Attaque_par_force_brute
 .. _API: https://fr.wikipedia.org/wiki/Interface_de_programmation
+.. _attaques temporelles: https://fr.wikipedia.org/wiki/Attaque_temporelle
