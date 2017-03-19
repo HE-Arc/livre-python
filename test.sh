@@ -2,19 +2,24 @@
 
 set -x
 
-# Invoke
+# invoke
 cd source/invoke/examples
 invoke ouverture
 cd ../../..
 
-# Itertools
+# itertools
 cd source/itertools
 python use_itertools.py
 cd ../..
 
-# JSON
+# json
 cd source/json/examples
 python example.py
 python stream.py || echo ':-)'
 python validation.py
+cd ../../..
+
+# secrets
+cd source/secrets/examples
+python password.py
 cd ../../..

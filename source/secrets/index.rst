@@ -24,7 +24,7 @@ Nombres aléatoires
 Ce module donne accès à la source d'aléatoire la plus sécurisée que votre système d'exploitation fournit.
 
 - Classe :py:class:`secrets.SystemRandom` permet de générer des nombres aléatoires, voir :py:class:`random.SystemRandom` pour plus de détails
-- :py:func:`secrets.choice(sequence) <secrets.choice()>` retourne un élément aléatoire à partir de *sequence*
+- :py:func:`secrets.choice(sequence) <secrets.choice()>` retourne un élément aléatoire à partir de *séquence*
 - :py:func:`secrets.randbelow(i) <secrets.randbelow()>` retourne un nombre entier aléatoire entre zéro et *i*
 - :py:func:`secrets.randbits(j) <secrets.randbits()>` retourne un nombre entier aléatoire composé de *j* bits
 
@@ -48,30 +48,18 @@ Autre
 
 Exemples
 --------
-Génération d'un mot de passe aléatoire de 10 charactères contenant au minimum une lettre majuscule, une lettre minuscule et un chiffre
 
-.. code-block:: python
+.. literalinclude:: ./examples/password.py
 
-    from secrets import choice
+.. code-block:: console
 
-    import string
-
-    alphabet = string.ascii_letters + string.digits
-
-    while True:
-        password = ''.join(choice(alphabet) for i in range(10))
-        if(any(c.islower() for c in password)
-            and any(c.isupper() for c in password)
-            and sum(c.isdigit() for c in password) >=3):
-            break
-
-    print(password)
+    $ python password.py
     68sZmkdve4
 
 Génération d'un jeton hexadécimal d'une longueur de 16 bytes.
 
 .. code-block:: pycon
-    
+
     >>> secrets.token_hex(16)
     7e5e31e55f5a878980bb230b7e5c7fbe
 
