@@ -51,7 +51,8 @@ Python nous offres des :py:mod:`itertools` qui sont des itérateurs qui nous per
 - :py:func:`itertools.count` : crée un itérateur qui va nous retourner des valeurs espacé de par 1 défault. Attention boucle inifni.
 - :py:func:`itertools.repeat` : va nous répeter les éléments n fois.
 - :py:func:`itertools.chain` : permet de concaténer des listes, chaine de caractère, etc...
-- itertools.filter : créer un itérateur qui va filtrer les éléments qui sont itérable et nous retourner seulement ceux qui réponde vrai à notre prédicat. :py:func:`itertools.filterfalse` fait l'opération inverse.
+- :py:func:`itertools.filterfalse` : créer un itérateur qui va filtrer les éléments qui sont itérable et nous retourner seulement ceux qui réponde faux à notre prédicat
+- todo : mettre encore deux trois itertools...
 
 La liste est encore longue et le but ici n'est pas de voir chaque :py:mod:`itertools` mais de comprendre le concept d'iterateur. Rien de mieux que pour comprendre ce que sont les itérateur que de créer le notre.
 
@@ -75,15 +76,6 @@ Exemple inspiré de la documentation Python : `Python3Doc`_
 
 - troisième étape utiliser notre itertools perso!
 
-.. code-block:: pycon
-
-    >>> liste = revList(list(islice(count(), 0, 10)))
-    >>> for i in liste:
-        print(i)
-    9
-    8
-    7
-    ...
 
 Les générateurs
 ---------------
@@ -129,17 +121,16 @@ Exemple d'utilisations d':py:mod:`itertools`
 Essayons maintenant de résoudre un problème avec les itertools que Pythons nous offre. Imaginons que nous avons une liste de point qui formerai un chemin dont on aimerai connaitre la distance.
 
 Objectif :
-
 .. code-block:: pycon
 
-    >>> chemin = [A, B, C]
-    >>> ...
-    >>> pairs = [(A, B), (B, C), (C, A)]
-    >>> ...
-    >>> distances = [len(B - A), len(C - B), len(A - C)]
-    >>> distance = sum(distances)
+>>> chemin = [A, B, C]
+>>> ...
+>>> pairs = [(A, B), (B, C), (C, A)]
+>>> ...
+>>> distances = [len(B - A), len(C - B), len(A - C)]
+>>> distance = sum(distances)
 
-Voici nos fonctions :
+Voici nos fonctions : 
 
 .. literalinclude:: ./exemples/main.py
    :start-after: # function_pairs_begin
@@ -159,9 +150,6 @@ Sortie :
     >>> distance = sum(distances)
     >>> print(distance)
     0
-
-:py:func:`itertools.cycle` va nous créer un itérateur qui va retourner les élélments en faisant à chaque fois une copie. Quand la boucle est terminé il va retourner les éléments qui la sauvé.
-Dans notre cas il va décaler notre liste et rajouter le première élément qu'il a enregistré à la fin. Ensuite il nous suffit de lui appliquer la fonction :py:func:`zip` qui va nous "zipper" tous ça en pair.
 
 Conclusion
 ----------
