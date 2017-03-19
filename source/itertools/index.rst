@@ -6,11 +6,9 @@
 
 Par Johnny Da Costa [#jd]_
 
-
-
 Introduction
 ------------
-Le module itertools de Python nous propose un bon nombre de générateurs prêts à l'emploi. Qu'est-ce qu'un générateur ou un itérateur ? Pour comprendre ça, nous allons utiliser un exemple très simple. Imaginer que vous avez une liste et que vous voulez l'afficher. La première chose qui nous vient en tête est d'utiliser une boucle.
+Le module itertools de Python nous propose un bon nombre de générateurs prêts à l'emploi. Qu'est-ce qu'un générateur ou un itérateur ? Pour comprendre ça, nous allons utiliser un exemple très simple. Imaginez que vous avez une liste et que vous voulez l'afficher. La première chose qui nous vient en tête est d'utiliser une boucle.
 
 .. code-block:: pycon
 
@@ -55,7 +53,8 @@ Python nous offres des :py:mod:`itertools` qui sont des itérateurs qui nous per
 - :py:func:`itertools.count` : crée un itérateur qui va nous retourner des valeurs espacé de par 1 défault. Attention boucle inifni.
 - :py:func:`itertools.repeat` : va nous répeter les éléments n fois.
 - :py:func:`itertools.chain` : permet de concaténer des listes, chaine de caractère, etc...
-- itertools.filter : créer un itérateur qui va filtrer les éléments qui sont itérable et nous retourner seulement ceux qui réponde vrai à notre prédicat. :py:func:`itertools.filterfalse` fait l'opération inverse.
+- :py:func:`itertools.filterfalse` : créer un itérateur qui va filtrer les éléments qui sont itérable et nous retourner seulement ceux qui réponde faux à notre prédicat
+- todo : mettre encore deux trois itertools...
 
 La liste est encore longue et le but ici n'est pas de voir chaque :py:mod:`itertools` mais de comprendre le concept d'iterateur. Rien de mieux que pour comprendre ce que sont les itérateur que de créer le notre.
 
@@ -91,4 +90,49 @@ Exemple inspiré de la documentation de pyhton : https://docs.python.org/3/tutor
 
 Exemple
 -------
-Essayons maintenant de résoudre un problème avec les itertools que Pythons nous offre. Imaginons que nous avons une liste de point qui formerai un chemin dont on aimerai connaitre la distance. 
+Essayons maintenant de résoudre un problème avec les itertools que Pythons nous offre. Imaginons que nous avons une liste de point qui formerai un chemin dont on aimerai connaitre la distance.
+
+Objectif :
+.. code-block:: pycon
+
+>>> chemin = [A, B, C]
+>>> ...
+>>> pairs = [(A, B), (B, C), (C, A)]
+>>> ...
+>>> distances = [len(B - A), len(C - B), len(A - C)]
+>>> distance = sum(distances)
+
+Voici nos fonctions : 
+
+.. literalinclude:: ./exemples/main.py
+   :start-after: # function_pairs_begin
+   :end-before: # function_pairs_end
+
+Sortie : 
+.. code-block:: pycon
+
+>>> chemin = [5, 3, 23, 223]
+>>> steps = pairs(chemin)
+>>> print(steps)
+[(5, 3), (3, 23), (23, 223), (223, 5)]
+>>> distances = getDistance(steps)
+>>> print(distances)
+[-2, 20, 200, -218]
+>>> distance = sum(distances)
+>>> print(distance)
+0
+
+:py:func:`itertools.cycle` va nous créer un itérateur qui va retourner les élélments en faisant à chaque fois une copie. Quand la boucle est terminé il va retourner les éléments qui la sauvé.
+Dans notre cas il va décaler notre liste et rajouter le première élément qu'il a enregistré à la fin. Ensuite il nous suffit de lui appliquer la fonction :py:func:`zip` qui va nous "zipper" tous ça en pair.
+
+
+
+Conclusion
+----------
+
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+
+.. [#jd] <johnny.dacosta@he-arc.ch>
+
+todo : déclarer les sources...
