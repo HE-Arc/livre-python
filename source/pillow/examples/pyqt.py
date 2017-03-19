@@ -1,14 +1,14 @@
-from PIL import Image, ImageQt
-import sys
+from PIL import Image, ImageQt, ImageFilter
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
-
+import sys
 
 class Viewer(QWidget):
     
     def __init__(self):
         super().__init__()
         
+        self.blurButton = QPushButton("Blur")
         self.rotateLeftButton = QPushButton("Rotate Left")
         self.rotateRightButton = QPushButton("Rotate Right")
 
@@ -18,10 +18,30 @@ class Viewer(QWidget):
         self.initUI()
         self.displayImage()
 
+        self.blurButton.clicked.connect(self.blurImage)
         self.rotateLeftButton.clicked.connect(self.turnLeft)
         self.rotateRightButton.clicked.connect(self.turnRight)
+          
+        
+    def displayImage(self):
+        self.label.setPixmap(QPixmap.fromImage(ImageQt.ImageQt(self.image)))
+    
+
+    def turnLeft(self):
+        self.image = self.image.rotate(90)
+        self.displayImage()
         
         
+    def turnRight(self):
+       self.image = self.image.rotate(-90)
+       self.displayImage()
+
+
+    def blurImage(self):
+        self.image = self.image.filter(ImageFilter.BLUR)
+        self.displayImage()
+
+
     def initUI(self):
             
         hboxLabel = QHBoxLayout()
@@ -31,8 +51,12 @@ class Viewer(QWidget):
 
         hboxButtons = QHBoxLayout()
         hboxButtons.addStretch(1)
+        hboxButtons.addWidget(self.blurButton)
+        hboxButtons.addStretch(1)
         hboxButtons.addWidget(self.rotateLeftButton)
+        hboxButtons.addStretch(1)
         hboxButtons.addWidget(self.rotateRightButton)
+        hboxButtons.addStretch(1)
 
         vbox = QVBoxLayout()
         vbox.addStretch(1)
@@ -40,24 +64,7 @@ class Viewer(QWidget):
         vbox.addStretch(1)
         vbox.addLayout(hboxButtons)
         
-        self.setLayout(vbox)   
- 
-        
-    def displayImage(self):
-
-        self.label.setPixmap(QPixmap.fromImage(ImageQt.ImageQt(self.image)))
-
-    
-    def turnLeft(self):
-        
-        self.image = self.image.rotate(90)
-        self.label.setPixmap(QPixmap.fromImage(ImageQt.ImageQt(self.image)))
-        
-        
-    def turnRight(self):
-
-       self.image = self.image.rotate(-90)
-       self.label.setPixmap(QPixmap.fromImage(ImageQt.ImageQt(self.image)))
+        self.setLayout(vbox)
         
 if __name__ == '__main__':
     
