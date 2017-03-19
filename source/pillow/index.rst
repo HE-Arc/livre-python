@@ -130,9 +130,19 @@ Le résultat obtenu est le suivant:
 Utilisation au sein du binding PyQt
 -----------------------------------
 
-Pillow_ fournit le module :py:mod:`PIL.ImageQt` afin de créer des Qimage directement utilisables par le binding PyQt. En effet, le module dispose d'une classe du même nom qui est une sous-classe de QtGui.QImage. Il est donc possible de passer l'objet directement à l'API PyQt.
+Pillow_ fournit le module :py:mod:`PIL.ImageQt` afin de créer des Qimage directement utilisables par le binding PyQt. En effet, le module dispose d'une classe du même nom qui est une sous-classe de QtGui.QImage. Il est donc possible de passer l'objet directement à l'API PyQt. On peut donc utiliser la puissance de Pillow_ pour réaliser du traitement d'images au sein d'un logiciel graphique utilisant le Framework Qt.
 
-On pourrait donc imaginer utiliser la puissance de Pillow_ pour réaliser un rapide traitement d'images au sein d'un logiciel utilisant le Framework Qt.
+Le code suivant illustre un telle utilisation, permettant à l'utilisateur de visualiser une image, de la tourner et de la flouter. Le traitement de l'image est réalisé à l'aide de Pillow_, tandis que l'interface utilisateur utilise l'api PyQt. La fonction ``initUI()`` n'est pas présentée car elle ne sert qu'à mettre en place les différents composants visuels.
+
+.. literalinclude:: ./examples/pyqt.py
+  :lines: 1-54, 80-
+  :linenos:
+
+Le résultat obtenu est le suivant:
+
+.. image:: ../_static/pyqt.png
+  :align: center
+  :alt: Application PyQt avec traitement d'images réalisé par Pillow
 
 Conclusion
 ----------

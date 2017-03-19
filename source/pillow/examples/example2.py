@@ -13,9 +13,9 @@ height = img.size[1]
 
 for x in range(width):
     for y in range(height):
-        # On vérifie que le pixel est blanc
         pixel = img.getpixel((x, y))
         white = 250
+        # On vérifie que le pixel est blanc
         if all(chanel > white for chanel in pixel):
             if x + y <= width:
                 purple = (155, 89, 182)

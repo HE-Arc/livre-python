@@ -2,23 +2,30 @@
 
 from PIL import Image, ImageDraw
 
-image = Image.new('RGBA', (160, 160), (255, 255, 255, 0))
+width = 160
+height = 160
+white = (255, 255, 255, 0)
+
+image = Image.new('RGBA', (width, height), white)
 
 # Obtention du contexte graphique
 draw = ImageDraw.Draw(image)
 
-draw.line((0, image.size[1]/2,
-          image.size[0], image.size[1]/2),
-          fill=(0, 255, 0))
-draw.line((image.size[0]/2, 0,
-          image.size[0]/2, image.size[1]),
-          fill=(0, 255, 0))
+green = (0, 255, 0, 0)
+draw.line((0, height/2,
+          width, height/2),
+          fill=(green))
+draw.line((width/2, 0,
+          width/2, height),
+          fill=green)
 
-draw.ellipse((image.size[0]/4, image.size[1]/4,
-             3*image.size[0]/4, 3*image.size[1]/4),
-             outline=(0, 0, 255))
+blue = (0, 0, 255, 0)
+draw.ellipse((width/4, height/4,
+             3*width/4, 3*height/4),
+             outline=blue)
 
-draw.text((20, 20), "Cercle trigonométrique", fill=(0, 0, 0))
+black = (0, 0, 0, 0)
+draw.text((20, 20), "Cercle trigonométrique", fill=black)
 
 # Suppression du contexte graphique
 del draw

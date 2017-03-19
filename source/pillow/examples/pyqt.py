@@ -1,11 +1,18 @@
-from PIL import Image, ImageQt, ImageFilter
-from PyQt5.QtWidgets import *
-from PyQt5.QtGui import *
+"""Manipulation d'une image graphiquement à l'aide de PyQt."""
+
 import sys
 
+from PIL import Image, ImageFilter, ImageQt
+from PyQt5.QtGui import QImage, QPixmap
+from PyQt5.QtWidgets import (QApplication, QHBoxLayout, QLabel, QPushButton,
+                             QVBoxLayout, QWidget)
+
+
 class Viewer(QWidget):
+    """Affiche une image avec trois boutons pour la pivoter/flouter."""
 
     def __init__(self):
+        """Initialisation des composants, connexion signaux/slots."""
         super().__init__()
 
         self.blurButton = QPushButton("Blur")
@@ -22,28 +29,31 @@ class Viewer(QWidget):
         self.rotateLeftButton.clicked.connect(self.turnLeft)
         self.rotateRightButton.clicked.connect(self.turnRight)
 
-
     def displayImage(self):
+        """PIL Image -> QImage -> QPixmap.
+
+        Convertit une image de la libraire PIL en QImage. Convertit
+        l'objet QImage en QPixmap puis affiche le résultat dans un label.
+        """
         self.label.setPixmap(QPixmap.fromImage(ImageQt.ImageQt(self.image)))
 
-
     def turnLeft(self):
+        """Tourne l'image à gauche à l'aide de PIL puis affiche le résultat."""
         self.image = self.image.rotate(90)
         self.displayImage()
 
-
     def turnRight(self):
-       self.image = self.image.rotate(-90)
-       self.displayImage()
-
+        """Tourne l'image à droite à l'aide de PIL puis affiche le résultat."""
+        self.image = self.image.rotate(-90)
+        self.displayImage()
 
     def blurImage(self):
+        """Floute l'image à l'aide de PIL puis affiche le résultat."""
         self.image = self.image.filter(ImageFilter.BLUR)
         self.displayImage()
 
-
     def initUI(self):
-
+        """Dispose les composants dans des layouts."""
         hboxLabel = QHBoxLayout()
         hboxLabel.addStretch(1)
         hboxLabel.addWidget(self.label)
@@ -66,9 +76,10 @@ class Viewer(QWidget):
 
         self.setLayout(vbox)
 
-if __name__ == '__main__':
 
+if __name__ == '__main__':
     app = QApplication(sys.argv)
+
     viewer = Viewer()
     viewer.resize(450, 400)
     viewer.setWindowTitle('Image Viewer')
