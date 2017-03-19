@@ -24,7 +24,6 @@ Le module itertools de Python nous propose un bon nombre de générateurs prêts
 
 Derrière cette boucle **for** se cache enfet un itérateur. C'est un objet qui va être chargé de parcourir un objet conteneur, dans  notre cas notre liste. Quand Python va tomber sur la ligne **for i in liste:**, il va appeler l'itérateur de notre liste pour pouvoir la parcourir. L'itérateur se crée dans la méthode **__iter__** de notre objet liste dans notre cas. Et lui va nous retourner notre itérateur pour pouvoir parcourir notre petit liste.
 
-<<<<<<< HEAD
 A chaque itération python va appeler la méthode **__next__** de notre liste pour itérer à l'élément suivant ou s'arrêter avec l'execption **StopIteration** si le parcours à fini de parcour la liste.
 
 Voici un autre exemple mais avec une chaine string.
@@ -45,11 +44,14 @@ Voici un autre exemple mais avec une chaine string.
 
 On voit que le **P** à déjà été consommé lors de l'appel à la fonction **next(iterateur)**
 
+Itérateurs offert par Python
+----------------------------
+Python nous offres des :py:mod:`itertools` qui sont des itérateurs qui nous permette d'itérer sur nous objets. Voici une petit liste non-exaustif de ce que nous propose se module : 
+
 - :py:func:`itertools.count` : crée un itérateur qui va nous retourner des valeurs espacé de par 1 défault. Attention boucle inifni.
 - :py:func:`itertools.repeat` : va nous répeter les éléments n fois.
 - :py:func:`itertools.chain` : permet de concaténer des listes, chaine de caractère, etc...
-- :py:func:`itertools.filterfalse` : créer un itérateur qui va filtrer les éléments qui sont itérable et nous retourner seulement ceux qui réponde faux à notre prédicat
-- todo : mettre encore deux trois itertools...
+- itertools.filter : créer un itérateur qui va filtrer les éléments qui sont itérable et nous retourner seulement ceux qui réponde vrai à notre prédicat. :py:func:`itertools.filterfalse` fait l'opération inverse.
 
 La liste est encore longue et le but ici n'est pas de voir chaque :py:mod:`itertools` mais de comprendre le concept d'iterateur. Rien de mieux que pour comprendre ce que sont les itérateur que de créer le notre.
 
@@ -82,7 +84,6 @@ Exemple inspiré de la documentation Python : `Python3Doc`_
     8
     7
     ...
-
 
 Les générateurs
 ---------------
@@ -162,14 +163,10 @@ Sortie :
 :py:func:`itertools.cycle` va nous créer un itérateur qui va retourner les élélments en faisant à chaque fois une copie. Quand la boucle est terminé il va retourner les éléments qui la sauvé.
 Dans notre cas il va décaler notre liste et rajouter le première élément qu'il a enregistré à la fin. Ensuite il nous suffit de lui appliquer la fonction :py:func:`zip` qui va nous "zipper" tous ça en pair.
 
-
-
 Conclusion
 ----------
 
 Itertools est un module permettant de faire des choses simpas avec cet objet qu'est l'itérateur. Ces itérateurs sont vraiment utile et important que Python a dédié un module pour les opérations d'itération qui sont les itertools.
-
-
 
 .. [#jd] <johnny.dacosta@he-arc.ch>
 
