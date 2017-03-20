@@ -8,8 +8,7 @@ img = img.filter(ImageFilter.BLUR)
 img = img.transpose(Image.FLIP_TOP_BOTTOM)
 img = img.transpose(Image.FLIP_LEFT_RIGHT)
 
-width = img.size[0]
-height = img.size[1]
+width, height = img.size
 
 white = 250
 purple = (155, 89, 182)

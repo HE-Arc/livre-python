@@ -39,7 +39,7 @@ La bibliothèque de fonctions peut être utilisée pour différents types d'acti
 [Concepts]_
 -----------
 
-La libraire utilise le principe d'images matricielles (par opposition aux images vectorielles), c'est-à-dire que chaque élément de la matrice représente un point avec une couleur associée (= un pixel). Pillow_ utilise également les concepts de bandes_ et de modes_ décrits ci-dessous:
+La libraire utilise le principe d'images matricielles (par opposition aux images vectorielles), c'est-à-dire que chaque élément de la matrice représente un point avec une couleur associée (= un pixel). Pillow_ utilise également les :ref:`concepts des bandes <concept-bands>` et de :ref:`modes <concept-modes>` décrits ci-dessous:
 
 **Bandes**:
   Les images sont constituées de bandes_ de données (une ou plusieurs, pour autant que celles-ci aient toute les mêmes dimensions et profondeurs). Un exemple commun de bandes est celles sous la forme RGBA, qui sépare les informations sur le rouge, le vert, le bleu et la transparence. Il est ainsi possible de réaliser différentes actions qui agissent que sur une seule bande. Finalement, du point de vue des pixels, on peut dire qu'ils disposent tous d'une valeur par bande.
@@ -73,7 +73,7 @@ Le résultat obtenu est le suivant:
 Exemple technique
 '''''''''''''''''
 
-Dans cet exemple, le logo de la librairie Pillow_ subit diverses modifications afin de mettre en pratique quelques fonctions de la bibliothèque. Le logo est d'abord flouté à l'aide d'un filtre_, puis transposé_ afin d'inverser la position de chaque python. On parcourt ensuite tous les pixels, puis on colorie l'arrière-plan en étudiant les attributs de chacun d'eux (couleurs et position).
+Dans cet exemple, le logo de la bibliothèque Pillow_ subit diverses modifications afin de mettre en pratique quelques fonctions de la bibliothèque. Le logo est d'abord flouté à l'aide d'un filtre_, puis transposé_ afin d'inverser la position de chaque python. On parcourt ensuite tous les pixels, puis on colorie l'arrière-plan en étudiant les attributs de chacun d'eux (couleurs et position).
 
 - :py:meth:`PIL.Image.Image.filter` filtre l'image;
 - :py:meth:`PIL.Image.Image.transpose` retourne l'image;
@@ -149,7 +149,7 @@ Conclusion
 
 Pillow_ est une libraire relativement complète qui offre la possibilité de manipuler des images avec une grande simplicité. Elle dispose d'une large palette de fonctions qui touche à différents domaines allant du filtrage au graphisme, en passant par la manipulation de pixels.
 
-La bibliothèque se positionne donc plutôt comme une librairie à vocation généraliste dans le domaine du traitement d'images, et ne se démarque donc dans aucun domaine spécifique.
+La bibliothèque se positionne donc plutôt comme une bibliothèque à vocation généraliste dans le domaine du traitement d'images, et ne se démarque donc dans aucun domaine spécifique.
 
 Pour conclure, les quelques exemples abordés dans cet article offrent un bon aperçu du fonctionnement de Pillow_, mais ne couvrent en aucun cas toutes ses possibilités. Pour une liste plus exhaustive et plus détaillée, la `documentation officielle`_ semble être la candidate idéale.
 
