@@ -114,21 +114,20 @@ D'après l'exemple de `zeste de savoir`_
     >>> list(fibonacci(5, 6, 7))
     [6, 7, 13, 20, 33]
 
-
 Exemple d'utilisations d':py:mod:`itertools`
 --------------------------------------------
-
 Essayons maintenant de résoudre un problème avec les itertools que Pythons nous offre. Imaginons que nous avons une liste de point qui formerai un chemin dont on aimerai connaitre la distance.
 
 Objectif :
+
 .. code-block:: pycon
 
->>> chemin = [A, B, C]
->>> ...
->>> pairs = [(A, B), (B, C), (C, A)]
->>> ...
->>> distances = [len(B - A), len(C - B), len(A - C)]
->>> distance = sum(distances)
+    >>> chemin = [A, B, C]
+    >>> ...
+    >>> pairs = [(A, B), (B, C), (C, A)]
+    >>> ...
+    >>> distances = [len(B - A), len(C - B), len(A - C)]
+    >>> distance = sum(distances)
 
 Voici nos fonctions : 
 
