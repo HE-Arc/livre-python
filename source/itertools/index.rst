@@ -12,15 +12,15 @@ Le module itertools de Python nous propose un bon nombre de générateurs prêts
 
 .. code-block:: pycon
 
->>> liste = ["I", "do" "love", "programming", "in", "python"]
->>> for i in liste:
-    print(i)
-I
-do
-love
-programming
-in
-python
+    >>> liste = ["I", "do" "love", "programming", "in", "python"]
+    >>> for i in liste:
+        print(i)
+    I
+    do
+    love
+    programming
+    in
+    python
 
 Derrière cette boucle **for** se cache enfet un itérateur. C'est un objet qui va être chargé de parcourir un objet conteneur, dans  notre cas notre liste. Quand Python va tomber sur la ligne **for i in liste:**, il va appeler l'itérateur de notre liste pour pouvoir la parcourir. L'itérateur se crée dans la méthode **__iter__** de notre objet liste dans notre cas. Et lui va nous retourner notre itérateur pour pouvoir parcourir notre petit liste.
 
@@ -30,19 +30,19 @@ Voici un autre exemple mais avec une chaine string.
 
 .. code-block:: pycon
 
->>> chaine = "Python"
->>> iterateur = iter(chaine) # va nous retourner un itérateur sur notre chaine
->>> print(next(iterateur)) # va nous afficher la première lettre de notre string
-P
->>> for i in iterateur: # va parcourir tous les caractères un à un
-    print(i)
-y
-t
-h
-o
-n
+    >>> chaine = "Python"
+    >>> iterateur = iter(chaine) # va nous retourner un itérateur sur notre chaine
+    >>> print(next(iterateur)) # va nous afficher la première lettre de notre string
+    P
+    >>> for i in iterateur: # va parcourir tous les caractères un à un
+        print(i)
+    y
+    t
+    h
+    o
+    n
 
-On voit que le **P** à déjà été consommé lors de l'appelle à la fonction **next(iterateur)**
+On voit que le **P** à déjà été consommé lors de l'appel à la fonction **next(iterateur)**
 
 Itérateurs offert par Python
 ----------------------------
@@ -60,7 +60,7 @@ Nos :py:mod:`itertools` perso
 -----------------------------
 Nous allons ici créer une classe qui va nous retourner un itérateur qui va parcouir un liste de la fin jusqu'au début.
 
-Exemple inspiré de la documentation de pyhton : `Python3Doc`_
+Exemple inspiré de la documentation Python : `Python3Doc`_
 
 - Première étape nous allons créer notre class qui va nous retourner un itérateur
 
@@ -73,87 +73,94 @@ Exemple inspiré de la documentation de pyhton : `Python3Doc`_
 .. literalinclude:: ./exemples/tools.py
    :start-after: # revlist_begin
    :end-before: # revlist_end
-   
+
 - troisième étape utiliser notre itertools perso!
 
 .. code-block:: pycon
 
->>> liste = revList(list(islice(count(), 0, 10)))
->>> for i in liste:
-    print(i)
-9
-8
-7
-...
+    >>> liste = revList(list(islice(count(), 0, 10)))
+    >>> for i in liste:
+        print(i)
+    9
+    8
+    7
+    ...
 
 
-Les générateurs 
+Les générateurs
 ---------------
 Les générateurs et les itérateurs sont intimement liés. Pour faire simple, un générateur est une fonction construite à l'aide
 du mot clef **yield**. Mais contrairement aux fonctions habituelles, elle n'a pas de **return**, mais ou plusieurs **yield**.
 
-Un petit exemple simple : 
+Un petit exemple simple :
+
 .. code-block:: pycon
 
->>> def sayHello(name):
-        yield "Bienvenu, "
-        yield # return none
-        yield name
->>> for in sayHello("Johnny"):
-    print(i)
-"Bienvenu,"
-None
-"Johnny"
+    >>> def say_hello(name):
+            yield "Bienvenue, "
+            yield                # return none
+            yield name
+    >>> for in say_hello("Johnny"):
+        print(i)
+    "Bienvenue,"
+    None
+    "Johnny"
 
 Exemple de générateur **fibonacci**
 -----------------------------------
 
 D'après l'exemple de `zeste de savoir`_
+
 .. code-block:: pycon
 
->>> def fibonacci(n, a=0, b=1):
-     for _ in range(n):
-         yield a
-         a, b = b, a + b
->>> list(fibonacci(10))
-[0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
->>> list(fibonacci(5, 6, 7))
-[6, 7, 13, 20, 33]
+    >>> def fibonacci(n, a=0, b=1):
+         for _ in range(n):
+             yield a
+             a, b = b, a + b
+
+    >>> list(fibonacci(10))
+    [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
+
+    >>> list(fibonacci(5, 6, 7))
+    [6, 7, 13, 20, 33]
 
 
 Exemple d'utilisations d':py:mod:`itertools`
 --------------------------------------------
+
 Essayons maintenant de résoudre un problème avec les itertools que Pythons nous offre. Imaginons que nous avons une liste de point qui formerai un chemin dont on aimerai connaitre la distance.
 
 Objectif :
+
 .. code-block:: pycon
 
->>> chemin = [A, B, C]
->>> ...
->>> pairs = [(A, B), (B, C), (C, A)]
->>> ...
->>> distances = [len(B - A), len(C - B), len(A - C)]
->>> distance = sum(distances)
+    >>> chemin = [A, B, C]
+    >>> ...
+    >>> pairs = [(A, B), (B, C), (C, A)]
+    >>> ...
+    >>> distances = [len(B - A), len(C - B), len(A - C)]
+    >>> distance = sum(distances)
 
-Voici nos fonctions : 
+Voici nos fonctions :
 
 .. literalinclude:: ./exemples/main.py
    :start-after: # function_pairs_begin
    :end-before: # function_pairs_end
 
-Sortie : 
+Sortie :
+
 .. code-block:: pycon
 
->>> chemin = [5, 3, 23, 223]
->>> steps = pairs(chemin)
->>> print(steps)
-[(5, 3), (3, 23), (23, 223), (223, 5)]
->>> distances = getDistance(steps)
->>> print(distances)
-[-2, 20, 200, -218]
->>> distance = sum(distances)
->>> print(distance)
-0
+    >>> chemin = [5, 3, 23, 223]
+    >>> steps = pairs(chemin)
+    >>> print(steps)
+    [(5, 3), (3, 23), (23, 223), (223, 5)]
+    >>> distances = getDistance(steps)
+    >>> print(distances)
+    [-2, 20, 200, -218]
+    >>> distance = sum(distances)
+    >>> print(distance)
+    0
 
 :py:func:`itertools.cycle` va nous créer un itérateur qui va retourner les élélments en faisant à chaque fois une copie. Quand la boucle est terminé il va retourner les éléments qui la sauvé.
 Dans notre cas il va décaler notre liste et rajouter le première élément qu'il a enregistré à la fin. Ensuite il nous suffit de lui appliquer la fonction :py:func:`zip` qui va nous "zipper" tous ça en pair.

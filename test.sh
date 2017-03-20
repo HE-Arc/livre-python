@@ -10,6 +10,8 @@ cd ../../..
 # itertools
 cd source/itertools
 python use_itertools.py
+python main.py
+python tools.py
 cd ../..
 
 # json
