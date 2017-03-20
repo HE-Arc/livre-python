@@ -58,14 +58,12 @@ Exemple basique
 L'exemple suivant aborde de manière simple quelques notions de bases de Pillow_. Une image en couleur au format *.png* est récupérée et convertie en nuances de gris. Le résultat s'affiche puis est sauvegardé au format *.jpeg*.
 
 - :py:func:`open() <PIL.Image.open>` charge une image en mémoire;
-- :py:meth:`Image.convert() <PIL.Image.Image.convert>` change le mode de l'image;
+- :py:meth:`Image.convert() <PIL.Image.Image.convert>` change le mode de l'image. Ici, ``L`` représente les piexels sur 8 bits, en noir et blanc;
 - :py:meth:`Image.show() <PIL.Image.Image.show>` ouvre l'image dans un outil externe;
 - :py:meth:`Image.save() <PIL.Image.Image.save>` sauvegarde l'image dans le format spécifié.
 
 .. literalinclude:: ./examples/example.py
   :linenos:
-
-.. todo:: c'est quoi ``L`` du coup ?
 
 Le résultat obtenu est le suivant:
 
