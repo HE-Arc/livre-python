@@ -1,3 +1,5 @@
+.. py:currentmodule:: PIL
+
 .. _pillow-tutorial:
 
 ======================
@@ -8,8 +10,7 @@ Python Imaging Library
    :align: right
    :alt: Pillow logo
 
-par Quentin Vaucher. [#qv]_
-===========================
+Par Quentin Vaucher. [#qv]_
 
 Introduction
 ------------
@@ -36,15 +37,15 @@ La bibliothèque de fonctions peut être utilisée pour différents types d'acti
   Offre un support pour quelques fonctions de bases telles que le filtrage, la convolution ou encore la conversion d'espaces couleurs. Il est également possible de redimensionner et d'appliquer des transformations géométriques à l'image (rotation, ...).
 
 
-[Concepts]_
------------
+Concepts
+--------
 
 La bibliothèque utilise le principe d'images matricielles (par opposition aux images vectorielles), c'est-à-dire que chaque élément de la matrice représente un point avec une couleur associée (= un pixel). Pillow_ utilise également les :ref:`concepts des bandes <concept-bands>` et de :ref:`modes <concept-modes>` décrits ci-dessous:
 
 **Bandes**:
-  Les images sont constituées de bandes_ de données (une ou plusieurs, pour autant que celles-ci aient toute les mêmes dimensions et profondeurs). Un exemple commun de bandes est celles sous la forme RGBA, qui sépare les informations sur le rouge, le vert, le bleu et la transparence. Il est ainsi possible de réaliser différentes actions qui agissent que sur une seule bande. Finalement, du point de vue des pixels, on peut dire qu'ils disposent tous d'une valeur par bande.
+  Les images sont constituées de bandes de données (une ou plusieurs, pour autant que celles-ci aient toute les mêmes dimensions et profondeurs). Un exemple commun de bandes est celles sous la forme RGBA, qui sépare les informations sur le rouge, le vert, le bleu et la transparence. Il est ainsi possible de réaliser différentes actions qui agissent que sur une seule bande. Finalement, du point de vue des pixels, on peut dire qu'ils disposent tous d'une valeur par bande.
 **Modes**:
-  Ils définissent le type et la profondeur des pixels d'une image. Parmi les modes_ les plus connus, on peut notamment citer RGB et RGBA, qui représentent les pixels sur respectivement 3x8 bits et 4x8 bits.
+  Ils définissent le type et la profondeur des pixels d'une image. Parmi les modes les plus connus, on peut notamment citer RGB et RGBA, qui représentent les pixels sur respectivement 3x8 bits et 4x8 bits.
 
 Exemples
 --------
@@ -56,13 +57,15 @@ Exemple basique
 
 L'exemple suivant aborde de manière simple quelques notions de bases de Pillow_. Une image en couleur au format *.png* est récupérée et convertie en nuances de gris. Le résultat s'affiche puis est sauvegardé au format *.jpeg*.
 
-- :py:func:`PIL.Image.open` charge une image en mémoire;
-- :py:meth:`PIL.Image.Image.convert` change le mode_ de l'image;
-- :py:meth:`PIL.Image.Image.show` ouvre l'image dans un outil externe;
-- :py:meth:`PIL.Image.Image.save` sauvegarde l'image dans le format spécifié.
+- :py:func:`open() <PIL.Image.open>` charge une image en mémoire;
+- :py:meth:`Image.convert() <PIL.Image.Image.convert>` change le mode de l'image;
+- :py:meth:`Image.show() <PIL.Image.Image.show>` ouvre l'image dans un outil externe;
+- :py:meth:`Image.save() <PIL.Image.Image.save>` sauvegarde l'image dans le format spécifié.
 
 .. literalinclude:: ./examples/example.py
   :linenos:
+
+.. todo:: c'est quoi ``L`` du coup ?
 
 Le résultat obtenu est le suivant:
 
@@ -73,7 +76,7 @@ Le résultat obtenu est le suivant:
 Exemple technique
 '''''''''''''''''
 
-Dans cet exemple, le logo de la bibliothèque Pillow_ subit diverses modifications afin de mettre en pratique quelques fonctions de la bibliothèque. Le logo est d'abord flouté à l'aide d'un filtre_, puis transposé_ afin d'inverser la position de chaque python. On parcourt ensuite tous les pixels, puis on colorie l'arrière-plan en étudiant les attributs de chacun d'eux (couleurs et position).
+Dans cet exemple, le logo de la bibliothèque Pillow_ subit diverses modifications afin de mettre en pratique quelques fonctions de la bibliothèque. Le logo est d'abord flouté à l'aide d'un filtre, puis transposé afin d'inverser la position de chaque python. On parcourt ensuite tous les pixels, puis on colorie l'arrière-plan en étudiant les attributs de chacun d'eux (couleurs et position).
 
 - :py:meth:`PIL.Image.Image.filter` filtre l'image;
 - :py:meth:`PIL.Image.Image.transpose` retourne l'image;
@@ -113,10 +116,10 @@ Méthodes de dessin
 Pillow_ fournit également des outils de base pour le graphisme 2D. Toutes ces fonctions sont regroupées dans le module :py:mod:`PIL.ImageDraw`. Il est possible de dessiner diverses formes géométriques, ainsi que du texte, dans le but de créer ou retoucher des images. L'exemple suivant met en évidence quelques-unes des fonctionnalités disponibles.
 
 - :py:func:`PIL.Image.new` crée une image avec la taille et la couleur spécifiée;
-- ``PIL.ImageDraw.Draw()`` crée un objet qui peut être utilisé pour dessiner sur l'image;
-- ``PIL.ImageDraw.Draw.line()`` dessine une ligne entre les points donnés, avec la couleur choisie;
-- ``PIL.ImageDraw.Draw.ellipse()`` dessine une ellipse à l'intérieur du rectangle donné;
-- ``PIL.ImageDraw.Draw.text()`` dessine du texte à l'endroit choisi.
+- ``PIL.ImageDraw.Draw`` crée un objet qui peut être utilisé pour dessiner sur l'image;
+- ``PIL.ImageDraw.Draw.line`` dessine une ligne entre les points donnés, avec la couleur choisie;
+- ``PIL.ImageDraw.Draw.ellipse`` dessine une ellipse à l'intérieur du rectangle donné;
+- ``PIL.ImageDraw.Draw.text`` dessine du texte à l'endroit choisi.
 
 .. literalinclude:: ./examples/drawing.py
   :linenos:
@@ -155,12 +158,8 @@ Pour conclure, les quelques exemples abordés dans cet article offrent un bon ap
 
 .. [#qv] <quentin.vaucher@he-arc.ch>
 
+.. Bibliographie
+
 .. _Pillow: https://python-pillow.org/
 .. _PIL: http://www.pythonware.com/products/pil/
-.. _bandes: https://pillow.readthedocs.io/en/4.0.x/handbook/concepts.html#bands
-.. _mode: https://pillow.readthedocs.io/en/4.0.x/handbook/concepts.html#modes
-.. _modes: https://pillow.readthedocs.io/en/4.0.x/handbook/concepts.html#modes
-.. _filtre: https://pillow.readthedocs.io/en/4.0.x/reference/ImageFilter.html#filters
-.. _transposé: https://pillow.readthedocs.io/en/4.0.x/reference/Image.html?highlight=transpose#PIL.Image.Image.transpose
 .. _documentation officielle: https://pillow.readthedocs.io/en/latest/
-.. [Concepts] https://pillow.readthedocs.io/en/4.0.x/handbook/concepts.html#concepts

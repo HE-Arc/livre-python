@@ -19,6 +19,15 @@ python stream.py || echo ':-)'
 python validation.py
 cd ../../..
 
+# pil
+cd source/pillow/examples
+python bandes.py
+python drawing.py
+python example2.py
+python example.py
+#python pyqt.py
+cd ../../..
+
 # secrets
 cd source/secrets/examples
 python password.py

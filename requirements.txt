@@ -15,3 +15,4 @@ ijson
 
 # PIL
 Pillow
+#PyQt5
