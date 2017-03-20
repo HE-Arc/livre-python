@@ -39,7 +39,7 @@ La bibliothèque de fonctions peut être utilisée pour différents types d'acti
 [Concepts]_
 -----------
 
-La libraire utilise le principe d'images matricielles (par opposition aux images vectorielles), c'est-à-dire que chaque élément de la matrice représente un point avec une couleur associée (= un pixel). Pillow_ utilise également les :ref:`concepts des bandes <concept-bands>` et de :ref:`modes <concept-modes>` décrits ci-dessous:
+La bibliothèque utilise le principe d'images matricielles (par opposition aux images vectorielles), c'est-à-dire que chaque élément de la matrice représente un point avec une couleur associée (= un pixel). Pillow_ utilise également les :ref:`concepts des bandes <concept-bands>` et de :ref:`modes <concept-modes>` décrits ci-dessous:
 
 **Bandes**:
   Les images sont constituées de bandes_ de données (une ou plusieurs, pour autant que celles-ci aient toute les mêmes dimensions et profondeurs). Un exemple commun de bandes est celles sous la forme RGBA, qui sépare les informations sur le rouge, le vert, le bleu et la transparence. Il est ainsi possible de réaliser différentes actions qui agissent que sur une seule bande. Finalement, du point de vue des pixels, on peut dire qu'ils disposent tous d'une valeur par bande.
@@ -147,7 +147,7 @@ Le résultat obtenu est le suivant:
 Conclusion
 ----------
 
-Pillow_ est une libraire relativement complète qui offre la possibilité de manipuler des images avec une grande simplicité. Elle dispose d'une large palette de fonctions qui touche à différents domaines allant du filtrage au graphisme, en passant par la manipulation de pixels.
+Pillow_ est une bibliothèque relativement complète qui offre la possibilité de manipuler des images avec une grande simplicité. Elle dispose d'une large palette de fonctions qui touche à différents domaines allant du filtrage au graphisme, en passant par la manipulation de pixels.
 
 La bibliothèque se positionne donc plutôt comme une bibliothèque à vocation généraliste dans le domaine du traitement d'images, et ne se démarque donc dans aucun domaine spécifique.
 

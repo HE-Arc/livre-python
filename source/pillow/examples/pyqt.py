@@ -32,7 +32,7 @@ class Viewer(QWidget):
     def displayImage(self):
         """PIL Image -> QImage -> QPixmap.
 
-        Convertit une image de la libraire PIL en QImage. Convertit
+        Convertit une image de la bibliothèque PIL en QImage. Convertit
         l'objet QImage en QPixmap puis affiche le résultat dans un label.
         """
         self.label.setPixmap(QPixmap.fromImage(ImageQt.ImageQt(self.image)))
