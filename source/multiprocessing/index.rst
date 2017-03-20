@@ -15,7 +15,7 @@ Le `Multiprocessing <https://docs.python.org/3.6/library/multiprocessing.html>`_
 
 Multiprocessing de python permet d'utiliser un ensemble de processus qui consumeront une liste de tâche contenue dans une queue.
 
-:py:mod:`Multiprocessing` met en place le verrouillage global de l'interpréteur en utilisant des sous-processus au lieu des threads. De ce fait, le module multiprocessing permet au programmeur d'exploiter pleinement plusieurs processeurs sur une machine donnée. Il fonctionne sur Unix et Windows.
+:py:mod:`multiprocessing` met en place le verrouillage global de l'interpréteur en utilisant des sous-processus au lieu des threads. De ce fait, le module multiprocessing permet au programmeur d'exploiter pleinement plusieurs processeurs sur une machine donnée. Il fonctionne sur Unix et Windows.
 
 Les classes
 -----------
@@ -23,7 +23,7 @@ Les classes
 Process
 ^^^^^^^
 
-:py:mod:`Multiprocessing` contient plusieurs classes très utiles, je vais vous introduire à quelques unes. 
+:py:mod:`multiprocessing` contient plusieurs classes très utiles, je vais vous introduire à quelques unes. 
 
 Prenons tout d'abord la classe `Process <https://docs.python.org/3.6/library/multiprocessing.html#multiprocessing.Process>`_, la classe `Process <https://docs.python.org/3.6/library/multiprocessing.html#multiprocessing.Process>`_ nous permet de créer des processus en créant un objets `Process <https://docs.python.org/3.6/library/multiprocessing.html#multiprocessing.Process>`_, en appelant sa méthode start().
 
@@ -35,12 +35,8 @@ Dans le main, nous appelonr la fonction info puis nous créons un objet Process 
 Queue
 ^^^^^
 
-
-
 Pool
 ^^^^
-
-
 
 Contexte et méthode de démarrage
 --------------------------------
@@ -59,7 +55,6 @@ Il y a plusieurs façon de demarrer un processus, le multiprocessing en contient
 Echange de données
 ------------------
 
-			
 
 Conclusion
 ----------
