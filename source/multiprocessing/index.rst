@@ -1,5 +1,8 @@
+<<<<<<< HEAD
 .. _multiprocessing-tutorial:
 
+=======
+>>>>>>> debut multiprocessing
 ===============
 Multiprocessing
 ===============
