@@ -1,8 +1,16 @@
 """Module d'exemple struct."""
 
+<<<<<<< 8c201756bfefb3a8877d52786a0d8290c49e8c31
 from collections import namedtuple
 from struct import pack, unpack
 
+=======
+
+from collections import namedtuple
+from struct import pack, unpack
+
+
+>>>>>>> new branch
 # packing et unpacking de trois entiers.
 pack('hhl', 1, 2, 3)
 # sortie : '\x00\x01\x00\x02\x00\x00\x00\x03'
@@ -15,4 +23,8 @@ name, serialnum, school, gradelevel = unpack('<10sHHb', record)
 
 Student = namedtuple('Student', 'name serialnum school gradelevel')
 Student._make(unpack('<10sHHb', record))
+<<<<<<< 8c201756bfefb3a8877d52786a0d8290c49e8c31
 Student(name='raymond   ', serialnum=4658, school=264, gradelevel=8)
+=======
+Student(name='raymond   ', serialnum=4658, school=264, gradelevel=8)
+>>>>>>> new branch

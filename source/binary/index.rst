@@ -24,12 +24,12 @@ exemple
 Affichage
 ~~~~~~~~~
 
+<<<<<<< 8c201756bfefb3a8877d52786a0d8290c49e8c31
 Le ``b`` est affiché pour bien préciser que c'est une chaine de type bytes.
 
 .. code-block:: python
 
     b'exemple'
-
 
 Accès
 ~~~~~
@@ -40,10 +40,10 @@ Accède à la première valeur à la clé 0 donc b'e' dans l'exemple ci-dessus.
 
     msg[0]
 
-
 opérations
 ~~~~~~~~~~
 
+<<<<<<< 8c201756bfefb3a8877d52786a0d8290c49e8c31
 Cast bytes <--> str
 
 .. literalinclude:: ./examples/cast_bytes_string.py
@@ -65,8 +65,6 @@ Lecture d'un fichier
 
 Le type :py:class:`bytearray` est un tableau de ``bytes`` et contient donc un objet bytes dans chaque clé.
 Il n'y a donc pas de différence un ``bytarray`` est une collection de ``bytes``.
-
-.. Montrez la différence entre les deux, c'est important.
 
 Instanciation
 ~~~~~~~~~~~~~
@@ -93,7 +91,6 @@ En plus des opérations, ci-dessous voir les opérations de bytes ci-dessus.
 
 .. literalinclude:: ./examples/bytearray_cast.py
 
-
 ``memoryview``
 --------------
 
@@ -111,6 +108,8 @@ Opérations
 
 .. literalinclude:: ./examples/memoryview_op.py
 
+`Plus d'opérations ici <https://docs.python.org/3.1/library/stdtypes.html>`_.
+
 Exemple d'utilisation
 ~~~~~~~~~~~~~~~~~~~~~
 
@@ -119,7 +118,6 @@ Exemple d'utilisation
 Avec bytearray:
 
 .. literalinclude:: ./examples/memoryview_ex_bytearray.py
-
 
 ``struct``
 ----------
@@ -135,11 +133,13 @@ Opérations
 ~~~~~~~~~~
 
 Un tableau résumant les opérations standards sur les structures se trouve sur la documentation officielle. :py:mod:`struct`.
-
+	
 Sources
 -------
 
-bytes / bytearray
+:py:class:`bytes` / :py:class:`bytearray`
+
+`<https://docs.python.org/3.1/library/stdtypes.html>`_
 
 `<http://docs.python-guide.org/en/latest/scenarios/json/>`_
 
@@ -151,8 +151,7 @@ bytes / bytearray
 
 `<http://stackoverflow.com/questions/7585435/best-way-to-convert-string-to-bytes-in-python-3>`_
 
-
-memoryview
+:py:class:`memoryview`
 
 `<https://docs.python.org/3/library/stdtypes.html?highlight=memoryview#memoryview>`_
 
