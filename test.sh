@@ -23,3 +23,8 @@ cd ../../..
 cd source/secrets/examples
 python password.py
 cd ../../..
+
+# unittest
+cd source/unittest/examples
+python carre.py
+cd ../../..
