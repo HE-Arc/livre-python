@@ -34,17 +34,15 @@ Voici un autre exemple mais avec une chaine string.
 >>> iterateur = iter(chaine) # va nous retourner un itérateur sur notre chaine
 >>> print(next(iterateur)) # va nous afficher la première lettre de notre string
 P
->>> for i in chaine: # va parcourir tous les caractère un à un
+>>> for i in iterateur: # va parcourir tous les caractères un à un
     print(i)
-P
 y
 t
 h
 o
 n
 
-Quand au générateurs, ce sont des outils puissants pour créer et manipuler des itérateurs ce qui permet de créer des choses complexe avec très peu de code.
-
+On voit que le **P** à déjà été consommé lors de l'appelle à la fonction **next(iterateur)**
 
 Itérateurs offert par Python
 ----------------------------
@@ -58,11 +56,11 @@ Python nous offres des :py:mod:`itertools` qui sont des itérateurs qui nous per
 
 La liste est encore longue et le but ici n'est pas de voir chaque :py:mod:`itertools` mais de comprendre le concept d'iterateur. Rien de mieux que pour comprendre ce que sont les itérateur que de créer le notre.
 
-Nos itertools perso
--------------------
+Nos :py:mod:`itertools` perso
+-----------------------------
 Nous allons ici créer une classe qui va nous retourner un itérateur qui va parcouir un liste de la fin jusqu'au début.
 
-Exemple inspiré de la documentation de pyhton : https://docs.python.org/3/tutorial/classes.html#iterators.
+Exemple inspiré de la documentation de pyhton : `Python3Doc`_
 
 - Première étape nous allons créer notre class qui va nous retourner un itérateur
 
@@ -88,8 +86,43 @@ Exemple inspiré de la documentation de pyhton : https://docs.python.org/3/tutor
 7
 ...
 
-Exemple
--------
+
+Les générateurs 
+---------------
+Les générateurs et les itérateurs sont intimement liés. Pour faire simple, un générateur est une fonction construite à l'aide
+du mot clef **yield**. Mais contrairement aux fonctions habituelles, elle n'a pas de **return**, mais ou plusieurs **yield**.
+
+Un petit exemple simple : 
+.. code-block:: pycon
+
+>>> def sayHello(name):
+        yield "Bienvenu, "
+        yield # return none
+        yield name
+>>> for in sayHello("Johnny"):
+    print(i)
+"Bienvenu,"
+None
+"Johnny"
+
+Exemple de générateur **fibonacci**
+-----------------------------------
+
+D'après l'exemple de `zeste de savoir`_
+.. code-block:: pycon
+
+>>> def fibonacci(n, a=0, b=1):
+     for _ in range(n):
+         yield a
+         a, b = b, a + b
+>>> list(fibonacci(10))
+[0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
+>>> list(fibonacci(5, 6, 7))
+[6, 7, 13, 20, 33]
+
+
+Exemple d'utilisations d':py:mod:`itertools`
+--------------------------------------------
 Essayons maintenant de résoudre un problème avec les itertools que Pythons nous offre. Imaginons que nous avons une liste de point qui formerai un chemin dont on aimerai connaitre la distance.
 
 Objectif :
@@ -130,9 +163,11 @@ Dans notre cas il va décaler notre liste et rajouter le première élément qu'
 Conclusion
 ----------
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Itertools est un module permettant de faire des choses simpas avec cet objet qu'est l'itérateur. Ces itérateurs sont vraiment utile et important que Python a dédié un module pour les opérations d'itération qui sont les itertools.
+
 
 
 .. [#jd] <johnny.dacosta@he-arc.ch>
 
-todo : déclarer les sources...
+.. _zeste de savoir: https://zestedesavoir.com/tutoriels/954/notions-de-python-avancees/5-generators/
+.. _Python3Doc : https://docs.python.org/3/tutorial/classes.html#iterators

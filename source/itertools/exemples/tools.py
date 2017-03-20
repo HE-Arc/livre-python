@@ -9,7 +9,7 @@ for i in liste:
 chaine = "Python"
 iterateur = iter(chaine)  # va nous retourner un itérateur sur notre chaine
 print(next(iterateur))  # va nous afficher la première lettre de notre string
-for i in chaine:  # va parcourir tous les caractère un à un
+for i in iterateur:  # va parcourir tous les caractère un à un
     print(i)
 
 # iterateur_perso_begin
@@ -52,4 +52,15 @@ class revList(list):
 
 liste = revList(list(islice(count(), 0, 10)))
 for i in liste:
+    print(i)
+
+
+def sayHello(name):
+    """SayHello(name)."""
+    yield "Bienvenu, "
+    yield  # return none
+    yield name
+
+
+for i in sayHello("Johnny"):
     print(i)
