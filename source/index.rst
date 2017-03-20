@@ -42,6 +42,7 @@ Table des matières
    sphinx/index.rst
    watchdog/index.rst
    datetime/index.rst
+   binary/index.rst
 
 
 À propos de ce livre
