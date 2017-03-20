@@ -22,10 +22,10 @@ Bases
 * :ref:`hashlib-tutorial`
 * :ref:`fstrings-tutorial`
 * :ref:`io-tutorial`
-* :ref:`itertools-tutorial`
-* :ref:`random-tutorial`
+* :ref:`itertools-tutorial` ★
+* :ref:`random-tutorial` ★
 * :ref:`math-tutorial`
-* :ref:`secrets-tutorial`
+* :ref:`secrets-tutorial` ★
 * :ref:`statistics-tutorial`
 * :ref:`super-tutorial`
 * :ref:`time-tutorial`
@@ -53,7 +53,7 @@ Traitement des données
 ----------------------
 
 * :ref:`csv-tutorial`
-* :ref:`json-tutorial`
+* :ref:`json-tutorial` ★
 * :ref:`pillow-tutorial`
 
 Autres
