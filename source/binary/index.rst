@@ -100,17 +100,8 @@ Lecture d'un fichier
     couple_bytes = binary_file.read(2)
     print(couple_bytes)
 
-Opérations standard
-	
-.. image:: ./img/bytes_operation.jpg
-   :align: right
-   :alt: operations bytes
-     
-.. image:: ./img/bytes_notes.jpg
-   :align: right
-   :alt: notes bytes
-   
-   
+`Un tableau résumant les opérations standards sur les bytes se trouve sur la documentation officiel <https://docs.python.org/3.1/library/stdtypes.html>`_.
+
 BytesArray
 ----------
 
@@ -147,6 +138,7 @@ Opérations
 En plus des opérations ci-dessous voir les opérations de bytes ci-dessus.
 
 .. code-block:: python
+
 	# Cast bytes à bytearray
 	mutable_bytes = bytearray(b'\x00\x0F')
 
@@ -234,9 +226,8 @@ Instanciation
 Opérations
 ~~~~~~~~~~
 
-.. image:: ./img/struct_operation.jpg
-   :align: right
-   :alt: operations struct
+`Un tableau résumant les opérations standards sur les structures se trouve sur la documentation officiel <https://docs.python.org/2/library/struct.html>`_.
+ 
 	
 Exemple d'utilisation
 ~~~~~~~~~~~~~~~~~~~~~
@@ -264,24 +255,24 @@ Sources
 
 Bytes / Bytearray:
 
-`<https://docs.python.org/3.1/library/stdtypes.html>`_.
-`<http://docs.python-guide.org/en/latest/scenarios/json/>`_.
-`<http://stackoverflow.com/questions/16678363/python-3-how-do-i-declare-an-empty-bytes-variable>`_.
-`<http://stackoverflow.com/questions/19511440/add-b-prefix-to-python-variable>`_.
-`<http://www.devdungeon.com/content/working-binary-data-python>`_.
-`<http://stackoverflow.com/questions/7585435/best-way-to-convert-string-to-bytes-in-python-3>`_.
+`<https://docs.python.org/3.1/library/stdtypes.html>`_
+`<http://docs.python-guide.org/en/latest/scenarios/json/>`_
+`<http://stackoverflow.com/questions/16678363/python-3-how-do-i-declare-an-empty-bytes-variable>`_
+`<http://stackoverflow.com/questions/19511440/add-b-prefix-to-python-variable>`_
+`<http://www.devdungeon.com/content/working-binary-data-python>`_
+`<http://stackoverflow.com/questions/7585435/best-way-to-convert-string-to-bytes-in-python-3>`_
 
 
 Memoryview:
 
-`<https://docs.python.org/3/c-api/memoryview.html>`_.
-`<https://docs.python.org/2/c-api/buffer.html>`_.
-`<http://stackoverflow.com/questions/6736771/buffers-and-memoryview-objects-explained-for-the-non-c-programmer>`_.
+`<https://docs.python.org/3/c-api/memoryview.html>`_
+`<https://docs.python.org/2/c-api/buffer.html>`_
+`<http://stackoverflow.com/questions/6736771/buffers-and-memoryview-objects-explained-for-the-non-c-programmer>`_
 
 Struct:
 
-`<https://docs.python.org/2/library/struct.html>`_.
-`<http://stackoverflow.com/questions/35988/c-like-structures-in-python>`_.
+`<https://docs.python.org/2/library/struct.html>`_
+`<http://stackoverflow.com/questions/35988/c-like-structures-in-python>`_
 
 
 Schnaebele Marc 2017
