@@ -10,44 +10,69 @@ Introduction
 ============
 
 :py:mod:`random` est un module Python regroupant plusieurs fonctions
-permettant de travailler avec des valeurs aléatoires. La distribution des
-nombres aléatoires est réalisée par le générateur de nombres pseudo-aléatoires
-`Mersenne Twister`_, l'un des générateurs les plus testés et utilisés dans le
-monde informatique.
+permettant de travailler avec des valeurs aléatoires.
 
-.. warning::
-    Il est préférable d'éviter l'utilisation de :py:mod:`random` lors d'applications
-    de sécurité ou de cryptographie et d'utiliser le module :py:mod:`secrets` à
-    la place.
+La distribution des nombres aléatoires est réalisée par le générateur de nombres
+pseudo-aléatoires `Mersenne Twister`_, l'un des générateurs les plus testés et
+utilisés dans le monde informatique.
 
 Module ``random``
 =================
+
+Le module comprend plusieurs fonctions travaillant chacune avec un type défini
+de variables. Ces fonctions peuvent être séparées en trois groupes :
+
+- Celles qui travaillent avec des nombres entiers
+- Celles qui travaillent avec des nombres réels
+- Celles qui travaillent avec des séquences (par exemple des listes).
+
+Les fonctions de nombres entiers telles que :py:func:`random.randint` et
+:py:func:`random.randrange` permettent de sélectionner arbitrairement une valeur
+entière dans un intervalle donné.
+
+Les fonctions de nombres réels, en plus de sélectionner des valeurs dans un
+intervalle (avec les fonctions :py:func:`random.random` et
+:py:func:`random.unifrom` par exemple), permettent aussi de réaliser des
+distributions gaussienne, exponentielles et logarithmiques.
+
+Les fonctions de séquences permettent de manipuler des éléments dans une liste
+donnée. Elles peuvent sélectionner un élément de la liste aléatoirement
+(:py:func:`random.choice`), altérer l'ordre des éléments dans la liste elle-même
+(:py:func:`random.shuffle`) ou encore retourner un nombre d'éléments aléatoires
+d'une liste (:py:func:`random.sample`).
+
+.. warning::
+    Il est préférable d'éviter l'utilisation de :py:mod:`random` pour des
+    applications liées à la cryptographie ou la sécurité en général (génération
+    de mots de passe, authentification de compte, etc.) et de préférer le
+    module :py:mod:`secrets` à la place.
 
 Exemples
 ========
 
 Avant toutes choses, il convient d'importer le module au projet :
 
-.. code-block:: python3
+.. code-block:: pycon
 
     >>> import random
 
-Nombres à virgules
-------------------
+Nombres réels
+-------------
 
-La fonction basique :py:func:`random.random` retourne un chiffre à virgule dans
-l'intervalle compris entre 0 et 1 non-compris :math:`[0.0; 1.0[` :
+:py:func:`random.random` est la fonction la plus basique du module. Elle
+retourne un nombre à virgule dans l'intervalle compris entre 0 et 1 non-compris
+:math:`[0; 1[` :
 
-.. code-block:: python3
+.. code-block:: pycon
 
     >>> random.random()
     0.6982933392406706
 
-Il est possible de spécifier un intervalle avec la fonction
-:py:func:`uniform(a,b) <random.uniform()>` qui retourne un chiffre à virgule dans l'intervalle
-compris entre *a* et *b* non-compris :math:`[a; b[` :
+:py:func:`random.uniform` permet de spécifier un intervalle. La fonction accepte
+deux nombres comme arguments, *a* et *b*. Elle retourne un nombre à virgule
+dans l'intervalle compris entre *a* et *b* non-compris :math:`[a; b[` :
 
-.. code-block:: python3
+.. code-block:: pycon
 
     >>> random.uniform(4.5, 7.5)
     5.292029100094782
@@ -55,35 +80,58 @@ compris entre *a* et *b* non-compris :math:`[a; b[` :
 Nombres entiers
 ---------------
 
-Si l'on souhaite travailler avec des nombres entiers, il faut utiliser la
-fonction :py:func:`random.randrange()`. Cette fonction retourne un nombre entier entre
-0 et *a* non-compris [0; a[ :
+Si l'on souhaite travailler avec des nombres entiers, il faut utiliser les
+fonctions suivantes :
 
-.. code-block:: python3
+:py:func:`random.randint` accepte deux nombre comme arguments, *a* et *b*, et
+retourne un nombre entier de l'intervalle compris entre *a* et *b*
+:math:`[a;b]` :
+
+.. code-block:: pycon
+
+    >>> random.randint(2, 9)
+    8
+
+**Notez que c'est la seule fonction qui prend en compte la valeur limite
+supérieur de l'intervalle dans son exécution**.
+
+:py:func:`random.randrange` accepte un nombre comme argument, *a*. Cette
+fonction retourne un nombre entier compris entre 0 et *a* non-compris
+:math:`[0; a[` :
+
+.. code-block:: pycon
 
     >>> random.randrange(15)
     8
 
-Il est également possible de spécifier le commencement de l'intervalle avec
-:py:func:`random.randrange()` ce qui correspond à l'intervalle [a; b[ et d'ajouter
-un pas d'une certaine valeur avec :py:func:`random.randrange()` où *s* est le pas
-dans l'intervalle :
+Elle accepte aussi deux nombres comme arguments, *a* et *b*.
+Il est ainsi possible de spécifier le commencement de l'intervalle, ce qui
+correspond à l'intervalle :math:`[a; b[` :
 
-.. code-block:: python3
+.. code-block:: pycon
 
     >>> random.randrange(10, 12)
     10
 
-    >>> random.randrange(4, 8, 2) #Retourne un nombre paire
+Il est possible d'ajouter un nombre en troisième argument pour indiquer
+un pas dans l'intervalle :
+
+.. code-block:: pycon
+
+    >>> random.randrange(4, 8, 2) # Retourne un nombre paire.
     6
 
 Séquences
 ---------
 
-La fonction :py:func:`random.choice()` retourne un élément de la séquence *seq* à
-condition que celle-ci ne soit pas vide :
+Il est possible d'utiliser certaines fonctions du module sur des listes
+d'éléments :
 
-.. code-block:: python3
+:py:func:`random.choice` accepte une séquence comme argument, *seq*. Elle
+retourne un élément de la séquence *seq* à condition que celle-ci ne soit pas
+vide :
+
+.. code-block:: pycon
 
     >>> random.choice(['dede', 'toto', 'lulu'])
     'lulu'
@@ -91,10 +139,10 @@ condition que celle-ci ne soit pas vide :
     >>> random.choice([4, 7, 11, 18])
     18
 
-Il existe aussi la fonction :py:func:`random.shuffle()` qui mélange les éléments
-de la séquence *seq* :
+:py:func:`random.shuffle` accepte une séquence en argument, *seq*, et permet de
+mélanger les éléments de la séquence *seq* :
 
-.. code-block:: python3
+.. code-block:: pycon
 
     >>> names = ['dede', 'toto', 'lulu']
     >>> random.shuffle(names)
@@ -106,16 +154,50 @@ de la séquence *seq* :
     >>> numbers
     [4, 11, 18, 7]
 
-La fonction :py:func:`random.sample()` permet de retourner une liste de *k*
-éléments de la séquence *seq* aléatoirement :
+:py:func:`random.sample` prend en compte une séquence *seq* comme premier
+argument et un nombre *k* en second argument. Elle permet de retourner une liste
+de *k* éléments de la séquence *seq* aléatoirement :
 
-.. code-block:: python3
+.. code-block:: pycon
 
-    >>> random.sample(['dede', 'toto', 'lulu', 'momo', 'baba'], 3)
-    ['momo', 'dede', 'baba']
+    >>> random.sample(['dede', 'toto', 'lulu', 'momo', 'bibi'], 3)
+    ['momo', 'dede', 'bibi']
 
     >>> random.sample([10, 20, 30, 40, 50, 60], 4)
     [10, 30, 60, 50]
+
+Exemple concret
+---------------
+
+L'exemple ci-dessous utilise la fonction :py:func:`random.shuffle` pour mélanger
+un jeu de 52 cartes.
+
+Dans un premier temps, les cartes sont créées et ajoutées une à une dans une
+liste de cartes appelée *jeu*. Cette liste est ensuite mélangée, puis les 5
+premières cartes du jeu mélangé sont attribuées au joueur.
+
+.. literalinclude:: ./examples/cards_shuffling.py
+   :linenos:
+
+Résultats :
+
+.. code-block:: console
+
+    $ python cards_shuffling.py
+    Main du joueur :
+    - Valet de Pique
+    - Dix de Trèfle
+    - Dix de Carreau
+    - Roi de Carreau
+    - Trois de Coeur
+
+    $ python cards_shuffling.py
+    Main du joueur :
+    - Dame de Coeur
+    - Six de Coeur
+    - As de Carreau
+    - Deux de Trèfle
+    - Sept de Carreau
 
 Conclusion
 ==========
@@ -124,7 +206,7 @@ Conclusion
 valeur dans un intervalle donné. Toutes ses fonctionnalités n'ont pu être
 traitées ici (car certaines sont exotiques et/ou très spécifiques) et si vous
 êtes désireux d'en connaitre encore un peu plus sur son sujet, visitez la
-documentation officielle python3 de :py:mod:`random`.
+documentation officielle Python3 de :py:mod:`random`.
 
 .. [#email] <christophe.hirschi@he-arc.ch>
 
