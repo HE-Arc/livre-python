@@ -55,6 +55,7 @@ with open("test_file.dat", "rb") as binary_file:
     data = binary_file.read()
 print(data)
 
+
 # Lit N bytes depuis une certaine position.
 binary_file.seek(0)
 couple_bytes = binary_file.read(2)
@@ -111,7 +112,7 @@ func(mv_mybuf[:len(mv_mybuf)//2])
 
 buf = bytearray(b'abcdefgh')
 mv = memoryview(buf)
-mv[4:6]=b'ZA'
+mv[4:6] = b'ZA'
 buf
 bytearray(b'abcdZAgh')
 
