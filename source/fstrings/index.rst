@@ -38,9 +38,12 @@ Pour les accolade {} il faut en mettre 2 a la suite:
 	
 Pour afficher des apostrophes il y a deux solutions:
 	Mettre la chaine entre guillemets :
+	
 	.. code-block:: pycon
 		print(f"ma chaine de caractères avec des 'apostrophes' ")
+		
 	Mettre la chaine entre 3 apostrophes :
+	
 	.. code-block:: pycon
 		print(f'''ma chaine de caractères avec des 'apostrophes' ''')
 	
