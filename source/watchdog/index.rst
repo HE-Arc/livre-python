@@ -19,6 +19,9 @@ ou pour la mise en place d'un système d'audit des événements sur les fichiers
 Fonctionnement
 --------------
 
+Traitement de l'événement
+=========================
+
 Pour intercepter les événements il faut créer un class qui va contenir les fonctions par événements.
 
 Un exemple d'une classe pour un système d'audit :
@@ -37,15 +40,30 @@ Un exemple d'une classe pour un système d'audit :
 
 Liste d'événements interceptable :
 
-============  =============================================
+================  =============================================
       Nom                      Déclanchement
-============  =============================================
-on_modified   Modification d'un fichier / dossier
-on_created    Création d'un fichier / dossier
-on_deleted    Suppression d'un fichier / dossier
-on_moved      Déplacement / renomage d'un fichier / dossier
-on_any_event  Dans tous le cas au-dessus
-============  =============================================
+================  =============================================
+``on_modified``   Modification d'un fichier / dossier
+``on_created``    Création d'un fichier / dossier
+``on_deleted``    Suppression d'un fichier / dossier
+``on_moved``      Déplacement / renomage d'un fichier / dossier
+``on_any_event``  Dans tous le cas au-dessus
+================  =============================================
+
+L'objet ``event`` est une instance de la classe ``FileSystemEvent``.
+Cette classe est dérivée pour chaque type d'événement. Elle contient les attributs suivant :
+
+=================   ===========================================================
+Attribut            Description
+=================   ===========================================================
+``event_type``      Le type d'événement en string
+``is_directory``    Boolean signalant si l'événement s'applique à un dossier
+``src_path``        Chemin du fichier ayant lancé l'événement
+``dest_path``       Fichier vers de destination (Uniquement lors ``on_moved``)
+=================   ===========================================================
+
+Interception de l'événement
+===========================
 
 La classs doit, ensuite, être liée à un observateur.
 C'est ici que nous spécifierons le dossier qui devra être observer.
@@ -56,7 +74,10 @@ C'est ici que nous spécifierons le dossier qui devra être observer.
   observer.schedule(eventHandler.AuditHandler(), path='U:', recursive=True) # Création du lien
   observer.start() # Démarrage de l'observateur
 
-Dans ce cas l'observateur surveille le dossier "U:" de manière recursive.
+Dans ce cas l'observateur surveille le dossier ``"U:"`` de manière recursive.
+
+Bloquer le script
+=================
 
 Un observateur étant lancer dans un thread sépraré, il faut bloquer l'éxecution du script.
 Mais, nous aimerions aussi pouvoir fermer le script par interuption du clavier.
@@ -73,15 +94,66 @@ La fermeture de l'observateur doit aussi être douce. Pour ce faire nous utilise
         observer.stop() # Arret de l'observateur
         observer.join() # Attend que l'observateur se soit bien fermer
 
-Exemple
--------
+Filtrage
+============
 
-Todo
+Il est possible de filtrer les fichiers sur lesquelles les events sont interceptés,
+ce qui est utile si l'on souhaite (par exemple) traiter que certain type de fichiers (par ex. les .mp3).
 
-Contenu
-----------
+Pour ce faire, il faut utiliser une autre classe de base pour la classe de traitement.
+Il existe 2 autre classes qui dérive ``FileSystemEventHandler`` voici la liste complète :
 
-ToDo
+===============================   ===========================================
+Nom                               Utilisation
+===============================   ===========================================
+``FileSystemEventHandler``        Handler de base (sans filtre)
+``PatternMatchingEventHandler``   Handler utilisant un pattern pour filtrer
+``RegexMatchingEventHandler``     Handler utilisant un regex pour filtrer
+===============================   ===========================================
+
+L'utilisation de la version avec les patterns étant la même que celle avec les regex,
+nous utiliserons la version patterns dans la suite.
+Par exemple si l'on souhaite reprendre le code du programme d'audit fait plus haut mais,
+qui s'occupe que des fichiers de musique (.mp3, .flac, .wav).
+
+.. code-block:: python3
+
+  from watchdog.events import PatternMatchingEventHandler
+
+  class AuditHandlerMusic(PatternMatchingEventHandler):
+      def on_modified(self, event):
+          print("Le fichier %s a été modifié" % event.src_path)
+      def on_created(self,event):
+          print("Le fichier %s a été créé" % event.src_path)
+      def on_deleted(self,event):
+          print("Le fichier %s a été supprimé" % event.src_path)
+
+La classe de traitement ne change quasiment pas la seule différence est le changement de la classe de base.
+La principale différence ce trouvera au moment de l'instantation de l'objet.
+
+.. code-block:: python3
+
+  observer = Observer()
+  handler = eventHandler.AuditHandlerMusic(patterns=["*.mp3","*.wav","*.flac"])
+  observer.schedule(handler, path='U:', recursive=True)
+  observer.start()
+
+Ici nous avons instancier l'objet avant de le passer en arguments à la fonction.
+Nous spécifions aussi un 1er arguement du constructeur
+qui se trouve dans ce cas être les patterns à traités.
+
+Les autres arguments possible sont dans l'ordre :
+
+========================================  ====================  ================================================================================
+Noms                                      Default               Utilisation
+========================================  ====================  ================================================================================
+``patterns``/``regexes``                  ``None``/``[".*"]``   Spécifie les patterns (respectivement regex) à traiter
+``ignore_patterns`` / ``ignore_regexes``  ``None``/``[]``       Spécifie les patterns (respectivement regex) à ignorer
+``ignore_directories``                    ``False``             Si mit à ``True`` ignore les dossiers
+``case_sensitive``                        ``False``             Si mit à ``True`` rend le patterns (respectivement regex) sensible à la casse
+========================================  ====================  ================================================================================
+
+
 
 Conclusion
 ----------
