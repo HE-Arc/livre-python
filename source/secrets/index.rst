@@ -3,7 +3,7 @@
 ``secrets``
 ===========
 
-.. image:: ./lock.png
+.. image:: ./img/lock.png
     :scale: 30%
     :align: right
     :alt: lock logo
@@ -13,18 +13,21 @@ Par Maël Pedretti [#mp]_
 
 Introduction
 ------------
-:py:mod:`secrets` est un module python utilisé pour générer des nombres aléatoirs cryptographiquement forts. Ceux-ci sont utilisables pour gérer des données telles que des mots de passe, des authentifications, des jetons de sécurité et autres secrets associés. Ce module n'est disponible que depuis la version 3.6 de python (:pep:`506`).
+Avec une croissance toujours plus rapide et s'intégrant de plus en plus dans notre quotidien, l'informatique moderne requiert une sécurité accrue. Les équipements devenant de plus en plus puissants, il n'est plus suffisant d'utiliser des chaînes pseudo-aléatoires pour sécuriser une transmission. Pour remédier à ce problème, Python s'est aggrandi du module suivant.
 
-:py:mod:`secrets` devrait en particulier être utilisé de préférence au générateur de nombres pseudo-aléatoires par défaut dans le module :py:mod:`random`, qui est conçu pour la modélisation et la simulation et non pas la sécurité ou la cryptographie.
+:py:mod:`secrets` est un module python utilisé pour générer des chaînes de caractères aléatoires cryptographiquement fortes. Celles-ci sont utilisables pour gérer des données telles que des mots de passe, des authentifications, des jetons de sécurité et autres secrets associés. Ce module n'est disponible que depuis la version 3.6 de python (:pep:`506`).
+
 
 Utilisations
 ------------
+Ce mode devrait être utilisé de préférence au générateur de nombres pseudo-aléatoires par défaut dans le module :py:mod:`random`, qui est conçu pour la modélisation et la simulation et non pas la sécurité ou la cryptographie.
+
 Nombres aléatoires
 ******************
 Ce module donne accès à la source d'aléatoire la plus sécurisée que votre système d'exploitation fournit.
 
 - Classe :py:class:`secrets.SystemRandom` permet de générer des nombres aléatoires, voir :py:class:`random.SystemRandom` pour plus de détails
-- :py:func:`secrets.choice(sequence) <secrets.choice()>` retourne un élément aléatoire à partir de *séquence*
+- :py:func:`secrets.choice(séquence) <secrets.choice()>` retourne un élément aléatoire à partir d'une *séquence*
 - :py:func:`secrets.randbelow(i) <secrets.randbelow()>` retourne un nombre entier aléatoire entre zéro et *i*
 - :py:func:`secrets.randbits(j) <secrets.randbits()>` retourne un nombre entier aléatoire composé de *j* bits
 
@@ -44,7 +47,7 @@ D'après la documentation python, des jetons de 32 bytes sont suffisament sécur
 Autre
 *****
 
-- :py:func:`secrets.compare_digest(a,b) <secrets.compare_digest()>` permet de comparer deux chaînes de texte de manière à réduire le risque d'`attaques temporelles`_.
+- :py:func:`secrets.compare_digest(a,b) <secrets.compare_digest()>` permet de comparer deux chaînes de texte de manière à réduire le risque d'`attaques temporelles`_. Pour faire court, une attaque temporelle consiste à mesurer le temps requis pour comparer deux chaînes et de ce fait en déduire l'algorithme de comparaison afin de pouvoir subtiliser un mot de passe ou une chaîne de chiffrement.
 
 Exemples
 --------
@@ -61,7 +64,7 @@ Génération d'un jeton hexadécimal d'une longueur de 16 bytes.
 .. code-block:: pycon
 
     >>> secrets.token_hex(16)
-    7e5e31e55f5a878980bb230b7e5c7fbe
+    b'7e5e31e55f5a878980bb230b7e5c7fbe'
 
 Génération d'un jeton d'une longueur de 16 bytes pouvant être utilisé dans une URL
 
@@ -71,11 +74,22 @@ Génération d'un jeton d'une longueur de 16 bytes pouvant être utilisé dans u
     k84RkJMyMpX6e3qzVXRqcw
 
 
+Utilisation d'un token
+
+L'image ci-dessous démontre l'utilisation de tokens. Lors de l'utilisation de l'`API Twitter`_, il est nécessaire de générer un jeton qui sera envoyé à twitter lors de chaque demande de connexion. De ce fait, twitter peut vérifier que l'application qui a requis les informations est bien autorisée à le faire et qu'elle respecte le niveau de confidentialité enregistré dans les paramètres.
+
+.. image:: ./img/exampleTwitterApi.PNG 
+    :scale: 100%
+    :align: center
+    :alt: twitter exemple of the use of tokens
+
+Note: Une partie des chaînes de caractère a été cachée car il s'agit de véritables tokens. L'application ne disposant cependant pas de privilèges élevées, aucune information personnelle ne pourra être dérobée même si ces tokens étaient découverts. Ils ne donnent, en effet, l'accès qu'aux données publiques du profil, soit celles que tout un chacun peut consulter.
+
 Conclusion
 ----------
 
-Le module :py:mod:`secrets` est un module destiné aux utilisateurs avancés ayant des besoins de sécurité supérieurs à la normale.
-Il offre différents outils permettant la création de mots de passe et jetons sécurisés.
+Le module :py:mod:`secrets` est un module destiné aux utilisateurs avancés ayant des besoins de sécurité supérieurs à la normale. 
+Il est simple d'utilisation et offre différents outils permettant la création de mots de passe et jetons sécurisés. Toutefois, ce module n'offre pas la sécurité absolue. Il est nécessaire de connaître le domaine de la sécurité avant d'utiliser les fonctions le composant en se disant que magiquement les données seront protégées. Par exemple, un token aléatoire de 8 bits ne tiendra pas longtemps face à une attaque de brute-force.
 
 
 
@@ -88,3 +102,4 @@ Il offre différents outils permettant la création de mots de passe et jetons s
 .. _force brute: https://fr.wikipedia.org/wiki/Attaque_par_force_brute
 .. _API: https://fr.wikipedia.org/wiki/Interface_de_programmation
 .. _attaques temporelles: https://fr.wikipedia.org/wiki/Attaque_temporelle
+.. _API Twitter: https://dev.twitter.com/oauth
