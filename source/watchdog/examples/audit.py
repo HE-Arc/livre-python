@@ -1,4 +1,4 @@
-"""Exemple d'audit."""
+"""Audit simple utilisé comme exemple pour watchdog."""
 
 import time
 

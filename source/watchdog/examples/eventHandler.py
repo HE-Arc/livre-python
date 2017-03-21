@@ -1,4 +1,4 @@
-"""Exemple de gestionnaire d'évènements."""
+"""Classes d'exemple d'utilisation pour watchdog."""
 
 from watchdog.events import FileSystemEventHandler
 from watchdog.events import PatternMatchingEventHandler
