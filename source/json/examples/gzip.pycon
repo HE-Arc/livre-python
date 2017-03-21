@@ -1,0 +1,7 @@
+>>> import gzip
+
+>>> len(gzip.compress(doc))
+14532
+
+>>> len(gzip.compress(pack))
+15002

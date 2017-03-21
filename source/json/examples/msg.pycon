@@ -1,9 +1,12 @@
->>> document = {"title": "HE-Arc!", "values": [1000, 2000, 3000]}
+>>> import json
+>>> from urllib2 import urlopen
+>>> document = json.load(urlopen('https://www.reddit.com/.json'))
+
+>>> doc = json.dumps(document, separators=',:').encode("utf-8")
+>>> len(doc)
+77244
 
 >>> import msgpack
->>> len(msgpack.packb(document))
-32
-
->>> import json
->>> len(json.dumps(document).encode("utf-8"))
-50
+>>> pack = msgpack.packb(document)
+>>> len(pack)
+67017

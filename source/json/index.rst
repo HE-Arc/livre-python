@@ -35,8 +35,8 @@ booléen (``true``, ``false``) et ``null``.
     }
 
 Il serait possible de lire directement cette structure de donnée en Python si
-les booléens et la valeur vide n'étaient pas écrites différemment : ``True``,
-``False`` et ``None``.
+les valeurs booléennes et la valeur vide n'étaient pas écrites différemment :
+``True``, ``False`` et ``None``.
 
 Le module :py:mod:`json` est des plus simples à utiliser. Il est présenté par
 le fameux Kenneith Reitz dans `Hitchhiker's Guide To Python
@@ -49,10 +49,14 @@ L'API du module :py:mod:`json` est similaire à celle utilisée par
 :py:mod:`marshal` et :py:mod:`pickle` qui permettent de sérialiser des objets
 Python.
 
-- :py:func:`json.load` charge un fichier JSON;
-- :py:func:`json.loads` charge une chaîne de caractères;
-- :py:func:`json.dump` écrit en JSON dans fichier;
-- :py:func:`json.dumps` écrit en JSON dans une chaîne de caractères.
+:py:func:`~json.load`:
+    charge un fichier JSON;
+:py:func:`~json.loads`:
+    charge une chaîne de caractères;
+:py:func:`~json.dump`:
+    écrit en JSON dans fichier;
+:py:func:`~json.dumps`:
+    écrit en JSON dans une chaîne de caractères.
 
 .. code-block:: pycon
 
@@ -99,6 +103,14 @@ module :py:mod:`msgpack`.
 
 .. literalinclude:: ./examples/msg.pycon
    :language: pycon
+
+Notez que cette petite différence n'est plus forcément intéressante si le
+contenu est compressé à l'aide de :py:mod:`gzip`.
+
+.. literalinclude:: ./examples/gzip.pycon
+   :language: pycon
+
+Parfois, le mieux est l'ennemi du bien.
 
 Streaming
 ---------
