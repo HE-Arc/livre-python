@@ -1,12 +1,12 @@
 =======
 .. _Invoke-tutorial:
-
+======
 invoke
 ======
 Par Jonathan Guerne
 
 Introduction
-------------
+============
 l'utilié de Invoke_ est de pouvoir très simplement lancer des tâches que vous
 aurez déjà préparé au par avant et qui exécuteront par exemple des lignes de
 commande.
@@ -34,12 +34,12 @@ arguments.
   def build(ctx):
     print("Building")
 
-*code source tiré de la documentation_  officielle de invoke*
+code source tiré de la documentation_  officielle de invoke
 
 
 
 Installation
-------------
+============
 pour pouvoir utiliser les commandes propres à la librairie Invoke il faut d'abord
 s'assurer de l'avoir installée dans son environnememt python.
 Comme d'habitude on utilise pip pour installer des librairies externe.
@@ -48,6 +48,8 @@ Comme d'habitude on utilise pip pour installer des librairies externe.
 
   $ pip install invoke
 
+Exemple
+=======
 
 lancer une tâche
 ----------------
@@ -96,7 +98,7 @@ cette commande :
 
 ::
 
-  $invoke build --help
+  $invoke --help build
 
 
 finalement pour lancer une commande en lui spécifiant ses arguments il faut écrire ceci :
@@ -124,8 +126,15 @@ de lancer nos commandes.
 le code en lui-même est très simple est au final ne contient pas beaucoup plus de ligne
 que le premier exemple présenter en haut de ce document. La seule subtilié est que
 pour pouvoir lancer une commande on va devoir utiliser un contexte (ici appelé **ctx**)
-qui sera placé en argument de la tâche. il suffit ensuite d'appelé la commande run dans
+qui sera placé en argument de la tâche. il suffit ensuite d'appelé la méthode run dans
 le contexte et de passer en argument une chaîne de caractère pour lancer la commande.
+
+.. Attention::
+   Sous windows on peut rencontrer des problèmes au lancemement des commandes.
+   En effet il est possible que Invoke ait besoin de connaître l'adresse de
+   l'invite de commande à utiliser. Pour cela on va mettre en place un fichier de
+   configuration contenant cette information (cf. WinError_3_)
+
 
 on peut également mettre en place un système plus poussé qui va par exemple nettoyer
 le dossier de destination avant de générer le contenu HTML
@@ -153,10 +162,36 @@ si un appel à la tâche A est fait, la sortie sera la suivante :
   task B
   task A
 
+Autres cas concret
+------------------
+Dans le cadre de l'écriture de ce livre python il m'a été proposé pour expérimenter
+**Invoke** d'automatiser la génération de la doc html (vu au chapitre précédent),
+les checks du code et de la doc ainsi que le rebase du projet(importation du contenu
+du git remote et ajout des modifications de la bracnhe locale).
+
+les checks restent simple à mettre en place car il s'agit uniquement de commande à lancer
+on ne cherche pas ici à avoir un coportement différent selon leur résultat
+
+.. literalinclude:: ./examples/check.py
+
+La mise en place de l'automatisation du rebase est elle plus poussée. Elle va en
+effet demander l'analyse des résultats des commandes pour déterminer les actions
+à suivre.
+
+
+.. literalinclude:: ./examples/git.py
 
 
 
+Conclusion
+==========
+Invoke_ est un outil très puissant, il est très utile par exemple pour automatisé
+des processus fastidieux dans la réalisation d'un projet. Au delà de l'automatidation
+utilisé **Invoke** permet de lancer n'importe quelle commande standard de l'invite de commande
+ce qui offre des possibilités immenses en termes par exemple de partage d'informations
+entre plusieurs applications.
 
 
+.. _WinError_3: https://github.com/pyinvoke/invoke/issues/345
 .. _Invoke: http://www.pyinvoke.org/
 .. _documentation: http://docs.pyinvoke.org/en/latest/
