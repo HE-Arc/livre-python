@@ -54,7 +54,7 @@ Pour afficher des apostrophes il y a deux solutions:
 		
 		ma chaine de caractères avec des 'apostrophes' 
 
-f-strings interprète les caractères spéciaux tel que \n donc si on veut afficher des \ il faut mettre fr avant la chaine de caractères et non f:
+Comme f-strings interprète les caractères spéciaux tel que \n il est nécessaire d'utiliser un echappement pour afficher des caractères spéciaux, il faut mettre fr avant la chaine de caractères et non f:
 
 .. code-block:: pycon
 
