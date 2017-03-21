@@ -1,13 +1,15 @@
 from invoke import task, run
 
+
 @task
 def html(ctx):
-    ctx.run("sphinx-build -b html source build/html")
+    result = ctx.run("sphinx-build -b html source build/html")
 
 
 @task
 def do_i_need_to_rebase(ctx):
-    ctx.run("echo test")
+    result = ctx.run("git fetch")
+
 
 @task
 def checks(ctx):
