@@ -44,50 +44,54 @@ Voici les étapes nécessaires pour créer un test unitaire:
        :start-after: func:carré
        :end-before: endfunc:carré
 
-3) Créer une classe en héritant de :py:class:`unittest.TestCase`, puis écrire les tests sous forme de méthodes. Les noms des méthodes doivent impérativement commencer par 'test' afin d'indiquer au 'test runner' quelles sont les méthodes de tests. 
+3)  Créer une classe en héritant de :py:class:`unittest.TestCase`, puis écrire les tests sous forme de méthodes. Les noms des méthodes doivent impérativement commencer par 'test' afin d'indiquer au 'test runner' quelles sont les méthodes de tests. 
 
-   De plus, chaque test doit appeller une fonction assertion de la classe TestCase. La classe TestCase possède plusieurs types de 'assert'. Ici nous utiliseront 'assertEquals()' qui permet de comparer deux valeurs (valeur retournée par la fonction et la valeur attendue).
+	De plus, chaque test doit appeller une fonction assertion de la classe TestCase. La classe TestCase possède plusieurs types de 'assert'. Ici nous utiliseront 'assertEquals()' qui permet de comparer deux valeurs (valeur retournée par la fonction et la valeur attendue).
 
     .. literalinclude:: examples/carre.py
        :start-after: class:TestCase
        :end-before: endclass:TestCase
 
-4) Exécuter les tests :
+4)  Exécuter les tests :
 
-   - en appelant la fonction py:func:`unittest.main`
+	- en appelant la fonction py:func:`unittest.main`
 
-    .. literalinclude:: examples/carre.py
-       :start-after: main
-       :end-before: endmain
+	.. literalinclude:: examples/carre.py
+		:start-after: main
+		:end-before: endmain
 
-   - via la ligne de commande. La ligne de commande permet aussi de spécifier les modules, classes ou même des méthodes individuelles à tester.
+	- via la ligne de commande. La ligne de commande permet aussi de spécifier les modules, classes ou même des méthodes individuelles à tester.
 
-   .. code-block:: console
+	.. code-block:: console
 
         $ python -m unittest test_module
         $ python -m unittest test_module.TestClass
         $ python -m unittest test_module.TestClass.test_methode
 
-   Il est aussi possible de laisser 'Unittest' rechercher tous les tests grâce à l'option 'discover'. Ainsi tout les modules qui contiennent des tests depuis le répertoire courant seront exécutés, de même que pour tous les sous-répertoires.
+	Il est aussi possible de laisser 'Unittest' rechercher tous les tests grâce à l'option 'discover'. Ainsi tout les modules qui contiennent des tests depuis le répertoire courant seront exécutés, de même que pour tous les sous-répertoires.
 
-   .. code-block:: console
+	.. code-block:: console
 
         $ python -m unittest discover
 
-5) Analyser la sortie du test:
+5)  Analyser la sortie du test:
 
-   .. code-block:: console
+	.. code-block:: console
 
-          ----------------------------------------------------------------------
+          ------------------------------------------------------------
           Ran 1 test in 0.001s
 
           OK
 
-   Il y a trois possibilités de sortie:
+	Il y a trois possibilités de sortie:
 
    - OK : Le test est passé sans erreurs
    - FAIL : Le test n'est pas passé et a levé une exception (AssertionError). 
    - ERROR : Le test n'est pas passé et a levé une exception autre que "AssertionError"
+   
+.. note:: 
+
+	Les tests sont éxécutés par ordre alphabétique et non par ordre dans lequel ils sont écrit dans le fichier.
 
 
 Classes et méthodes
@@ -111,54 +115,63 @@ Voici quelques méthodes utiles définies dans TestCase:
 
 Cette classe possède aussi beaucoup de méthodes "assert" qui testent une condition particulière. Voici quelques 'Asserts' souvent utiles:
 
-+---------------------+----------------------+
-|         Type        | vérifie que          |
-+=====================+======================+
-| assertEqual(a, b)   | a == b               |
-+---------------------+----------------------+
-| assertNotequal(a, b)| a != b               |
-+---------------------+----------------------+
-| assertTrue(x)       | bool(x) vaut 'True'  |
-+---------------------+----------------------+
-| assertFalse(x)      | bool(x) vaut 'False' |
-+---------------------+----------------------+
-
-Depuis la version 3.1 de python il existe encore:
-
-+---------------------+----------------------+
-|         Type        | vérifie que          |
-+=====================+======================+
-| assertIs(a, b)      | a est b              |
-+---------------------+----------------------+
-| assertIsNot(a, b)   | a n'est pas b        |
-+---------------------+----------------------+
-| assertIsNone(x)     | x est 'None'         |
-+---------------------+----------------------+
-| assertIsNotNone(x)  | x n'est pas 'None'   |
-+---------------------+----------------------+
-| assertIn(a, b)      | a est dans b         |
-+---------------------+----------------------+
-| assertNotIn(a, b)   | a n'est pas dans b   |
-+---------------------+----------------------+
-
-et depuis la version 3.2 ils ont rajouté:
-
 +--------------------------+-------------------------------+
-|         Type             | vérifie que                   |
+|           Type           |          vérifie que          |
 +==========================+===============================+
+| assertEqual(a, b)        | a == b                        |
++--------------------------+-------------------------------+
+| assertNotequal(a, b)     | a != b                        |
++--------------------------+-------------------------------+
+| assertTrue(x)            | bool(x) vaut 'True'           |
++--------------------------+-------------------------------+
+| assertFalse(x)           | bool(x) vaut 'False'          |
++--------------------------+-------------------------------+
+| assertIs(a, b)           | a est b                       |
++--------------------------+-------------------------------+
+| assertIsNot(a, b)        | a n'est pas b                 |
++--------------------------+-------------------------------+
+| assertIsNone(x)          | x est 'None'                  |
++--------------------------+-------------------------------+
+| assertIsNotNone(x)       | x n'est pas 'None'            |
++--------------------------+-------------------------------+
+| assertIn(a, b)           | a est dans b                  |
++--------------------------+-------------------------------+
+| assertNotIn(a, b)        | a n'est pas dans b            |
++--------------------------+-------------------------------+
 | assertIsInstance(a,b)    | a est une instance de b       |
 +--------------------------+-------------------------------+
 | assertNotIsInstance(a,b) | a n'est pas une instance de b |
 +--------------------------+-------------------------------+
 
-.. todo:: Vous pouvez partir du principe qu'on utilise au moins la version 3.5.
-
-
 De plus, chaque méthode 'assert' peut accepter un message comme dernier argument. Si ce message est spécifié, alors il viendra affiché lors d'un échec de test.
 
-.. todo:: Une démonstration vaut tous les mots.
+Voici un exemple de test qui échoue:
 
+.. literalinclude:: examples/carre.py
+		:start-after: class:CarreTestCaseFail
+		:end-before: endclass:CarreTestCaseFail
+	   
+ainsi que la sortie lorsque le test est exécuté :
 
+.. code-block:: console
+	
+	.F
+	======================================================================
+	FAIL: test_assert_fail (carre.CarreTestCaseFail)
+	Affichage d'un message d'erreur spécifique.
+	----------------------------------------------------------------------
+	Traceback (most recent call last):
+	  File "FilePath\carre.py", line 36, in test_assert_fail
+		self.assertEqual(2, carré(value), "Message d'erreur personnalisé")
+	AssertionError: 2 != 4 : Message d'erreur personnalisé
+
+	----------------------------------------------------------------------
+	Ran 1 tests in 0.010s
+
+	FAILED (failures=1)
+
+On constate bien que le message d'erreur spécifié au moment de l'assert, est affiché lors de l'échec du test.
+		
 TestSuite Class
 ///////////////
 
@@ -199,6 +212,67 @@ Mock
 Doctest
 =======
 
-**TODO**
+Un autre standard pour les tests unitaires en Python est: :py:mod:`doctest`. Ce concepte de test passe par l'utilisation des docstrings tout comme l'écriture de documentation. 
+
+.. glossary::
+
+	Docstring
+		Une docstring est essentiellement une chaîne de caractères. Elle commence et termine par trois guillemets. De plus l'indentation d'une docstring est importante car elle dépend directement de l'indentation de la classe ou de la méthode qu'elle documente.
+
+Création d'un test unitaire
+---------------------------
+
+Pour pouvoir créer des tests à l'intérieur d'une docstring il est nécessaire de respecter une syntaxe précise. On utilise un triple chevron >>> pour indiquer que l'on écrit un test, puis à la ligne suivante on écrit le résultat attendu.
+
+Voici un exemple avec la fonction carré:
+
+.. literalinclude:: examples/doctest_example.py
+		:start-after: func:carré
+		:end-before: endfunc:carrée
+		
+Ensuite pour éxécuter le(s) test(s), il faut importer le module doctest (ici fait dans le 'main'). Ensuite il faut appeller la méthode testmod() du module doctest qui va parser le fichier entier à la recherche de docstrings. Une fois la recherche effectué, il éxécute tout les tests qu'il a trouvé.
+
+.. literalinclude:: examples/doctest_example.py
+		:start-after: main
+		:end-before: endmain
+
+Cependant si on éxécute le fichier en ligne de commande:
+
+.. code-block:: console
+
+	$ python doctest_example.py
+		
+On constate qu'aucune sortie est affichée si aucun test échoue. Cependant si on voulait avoir un retour des tests, il faudrait utiliser l'option -v (verbose):
+
+.. code-block:: console
+
+	$ python doctest_example.py -v
+	
+Ce qui produirai le résultat suivant:
+
+.. code-block:: console
+
+	Trying:
+		carré(-2)
+	Expecting:
+		4
+	ok
+	Trying:
+		carré(0)
+	Expecting:
+		0
+	ok
+	Trying:
+		carré(2)
+	Expecting:
+		4
+	ok
+	1 items had no tests:
+		__main__
+	1 items passed all tests:
+	   3 tests in __main__.carré
+	3 tests in 2 items.
+	3 passed and 0 failed.
+	Test passed.
 
 .. _Junit: http://junit.org/junit4/
