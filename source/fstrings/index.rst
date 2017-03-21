@@ -22,4 +22,19 @@ Pour utiliser f-strings il suffit de mettre un f devant la chaine de caractères 
 	
 	Votre nom est un Paul et vous avez 23 ans
 	
+-----------	
+Echappement
+-----------
+Certain cractères ne peuvent pas être afficher tel quel il est nécaissaire de les échapper.
+
+Pour les accolade {} il faut en mettre 2 a la suite:
+
+.. code-block:: pycon
+
+	>>> nombre = 34
+	>>> print(f'Le nombre est {{{nombre}}}')
+	
+	Le nombre est {34}
+	
+	
 Thibaut Piquerez
