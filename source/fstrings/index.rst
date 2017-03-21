@@ -20,4 +20,6 @@ Pour utiliser f-strings il suffit de mettre un f devant la chaine de caractères 
 	>>> age = 23
 	>>> print(f'Votre nom est un {name} et vous avez {age} ans')
 	
+	Votre nom est un Paul et vous avez 23 ans
+	
 Thibaut Piquerez
