@@ -7,7 +7,7 @@ f-strings
 ------------
 Introduction
 ------------
-f-strings permet d'insérer des expression dans des chaines de caractères en utilisant une syntaxe minimale.
+f-strings permet d'insérer des expressions dans des chaines de caractères en utilisant une syntaxe minimale.
 
 --------------
 Fonctionnement
@@ -35,6 +35,14 @@ Pour les accolade {} il faut en mettre 2 a la suite:
 	>>> print(f'Le nombre est {{{nombre}}}')
 	
 	Le nombre est {34}
+	
+Pour afficher des apostrophes il y a deux solutions:
+	Mettre la chaine entre guillemets :
+	.. code-block:: pycon
+		print(f"ma chaine de caractères avec des 'apostrophes' ")
+	Mettre la chaine entre 3 apostrophes :
+	.. code-block:: pycon
+		print(f'''ma chaine de caractères avec des 'apostrophes' ''')
 	
 	
 Thibaut Piquerez
