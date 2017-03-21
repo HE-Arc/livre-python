@@ -53,6 +53,14 @@ Pour afficher des apostrophes il y a deux solutions:
 		>>> print(f'''ma chaine de caractères avec des 'apostrophes' ''')
 		
 		ma chaine de caractères avec des 'apostrophes' 
+
+f-strings interprète les caractères spéciaux tel que \n donc si on veut afficher des \ il faut mettre fr avant la chaine de caractères et non f:
+
+.. code-block:: pycon
+
+		>>> print(fr'\n ma phrase')
+		
+		\n ma phrase
 	
 	
 Thibaut Piquerez
