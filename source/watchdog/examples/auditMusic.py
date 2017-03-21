@@ -1,7 +1,8 @@
 """Audit de fichier musique utilisé comme exemple pour watchdog."""
 
-import eventHandler
 import time
+
+import eventHandler
 from watchdog.observers import Observer
 
 observer = Observer()

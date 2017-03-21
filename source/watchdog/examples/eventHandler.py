@@ -1,7 +1,6 @@
 """Classes d'exemple d'utilisation pour watchdog."""
 
-from watchdog.events import FileSystemEventHandler
-from watchdog.events import PatternMatchingEventHandler
+from watchdog.events import FileSystemEventHandler, PatternMatchingEventHandler
 
 
 class AuditHandler(FileSystemEventHandler):
