@@ -8,7 +8,7 @@ from struct import *
 
 msg = bytes('exemple', encoding='utf-8')
 # où mais l'encodage par défaut sera utilisé.
-msg = b'exemple'
+msg = b"exemple$"
 
 b'exemple'
 
@@ -42,7 +42,7 @@ print(bin(22))
 
 # Bytes à Integer.
 # Crée un int avec un bytes (non signé par défaut).
-i = int.from_bytes(some_bytes, byteorder='big')
+i = int.from_bytes('12', byteorder='big')
 
 # Crée un int signé.
 i = int.from_bytes(b'\x00\x0F', byteorder='big', signed=True)
