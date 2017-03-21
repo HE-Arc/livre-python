@@ -1,5 +1,3 @@
-.. py:currentmodule:: PIL
-
 .. _pillow-tutorial:
 
 ======================

@@ -54,7 +54,7 @@ Traitement des données
 
 * :ref:`csv-tutorial`
 * :ref:`json-tutorial` ★
-* :ref:`pillow-tutorial`
+* :ref:`pillow-tutorial` ★
 
 Autres
 ------
