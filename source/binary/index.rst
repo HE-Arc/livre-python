@@ -32,7 +32,7 @@ Le b est affiché pour bien préciser que c'est une chaine de type bytes.
 Accès
 ~~~~~
 
-Accède la première valeur à la clé 0 donc b'e' dans l'exemple ci-dessus.
+Accède à la première valeur à la clé 0 donc b'e' dans l'exemple ci-dessus.
 
 .. code-block:: python
 
@@ -100,7 +100,7 @@ Lecture d'un fichier
     couple_bytes = binary_file.read(2)
     print(couple_bytes)
 
-`Un tableau résumant les opérations standards sur les bytes se trouve sur la documentation officiel <https://docs.python.org/3.1/library/stdtypes.html>`_.
+`Un tableau résumant les opérations standards sur les bytes se trouve sur la documentation officielle <https://docs.python.org/3.1/library/stdtypes.html>`_.
 
 BytesArray
 ----------
@@ -135,7 +135,7 @@ Accède la première valeur à la clé 0 donc b'exemple' dans l'exemple ci-dessu
 Opérations
 ~~~~~~~~~~
 
-En plus des opérations ci-dessous voir les opérations de bytes ci-dessus.
+En plus des opérations, ci-dessous voir les opérations de bytes ci-dessus.
 
 .. code-block:: python
 
@@ -149,7 +149,7 @@ En plus des opérations ci-dessous voir les opérations de bytes ci-dessus.
 MemoryView
 ----------
 
-Une memoryView est un objet qui sert d'API pour utiliser des buffers (C objet) afin de pouvoir le manipuler comme tout autre objet.
+Une memoryView est un objet permettant d'utiliser des buffers afin de pouvoir les manipuler comme tout autre objet Python.
 
 Instanciation
 ~~~~~~~~~~~~~
@@ -159,7 +159,7 @@ Instanciation
 	#Crée une memoryview à partir de l'objet qui définit le nouveau buffer.
 	PyObject *PyMemoryView_FromObject(PyObject *obj)
 
-	#Crée une memoryview et wrappe le buffer en structure view.
+	#Crée une memoryview et wrappe le buffer en structure de view.
 	#La memoryview détient le buffer qui sera désalloué automatiquement lors de la destruction de l'objet.
 	PyObject *PyMemoryView_FromBuffer(Py_buffer *view)
 
@@ -187,7 +187,7 @@ Exemple d'utilisation
 	mybuf = ... # un grand buffer de bytes
 	mv_mybuf = memoryview(mybuf) # une memoryview de mybuf
 	func(mv_mybuf[:len(mv_mybuf)//2])
-	# passe la première moitié de mybuf dans func comme une "sous-view" crée par le découpage de la memoryview
+	# passe la première moitié de mybuf dans func comme une "sous-view" créé par le découpage de la memoryview
 	# Aucune copie n'est faite ici!
 
 Avec bytearray:
@@ -204,7 +204,7 @@ Avec bytearray:
 Struct
 ------
 
-struct permet de convertir des structures C en valeurs de python représenté sous forme d'objets bytes.
+Un struct permet de convertir des structures C en valeurs de Python représenté sous forme d'objets bytes.
 
 Instanciation
 ~~~~~~~~~~~~~
@@ -214,7 +214,7 @@ Instanciation
 	#Crée une memoryview à partir de l'objet qui définit le nouveau buffer.
 	PyObject *PyMemoryView_FromObject(PyObject *obj)
 
-	#Crée une memoryview et wrappe le buffer en structure view.
+	#Crée une memoryview et wrappe le buffer en structure de view.
 	#La memoryview détient le buffer et il sera désalloué automatiquement lors de la destruction de l'objet.
 	PyObject *PyMemoryView_FromBuffer(Py_buffer *view)
 
@@ -226,7 +226,7 @@ Instanciation
 Opérations
 ~~~~~~~~~~
 
-`Un tableau résumant les opérations standards sur les structures se trouve sur la documentation officiel <https://docs.python.org/2/library/struct.html>`_.
+`Un tableau résumant les opérations standards sur les structures se trouve sur la documentation officielle <https://docs.python.org/2/library/struct.html>`_.
  
 	
 Exemple d'utilisation

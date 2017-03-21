@@ -1,4 +1,4 @@
-from collections import namedtuple
+ï»¿from collections import namedtuple
 from struct import *
 
 """Module d'exemple pour les types bytes, memoryview et struct."""
@@ -7,7 +7,8 @@ from struct import *
 # Bytes-------------------------------------------------------------------------------
 
 msg = bytes('exemple', encoding='utf-8')
-# où mais l'encodage par défaut sera utilisé.
+# On peut aussi affecter une chaine directement
+# mais l'encodage par dÃ©faut sera utilisÃ©.
 msg = b"exemple$"
 
 b'exemple'
@@ -20,31 +21,31 @@ bytes = str.encode(my_str)
 
 # Cast bytes en string.
 my_decoded_str = str.decode(bytes)
-type(my_decoded_str)  # vérifie que le type est string
+type(my_decoded_str)  # vÃ©rifie que le type est string
 
 i = 16
 
-# Crée 1 byte avec un int 16.
-# Attention à utiliser le bon encodage (little ou big endian).
-# vérifiez avec sys.byteorder.
+# CrÃ©e 1 byte avec un int 16.
+# Attention Ã  utiliser le bon encodage (little ou big endian).
+# vÃ©rifiez avec sys.byteorder.
 single_byte = i.to_bytes(1, byteorder='big', signed=True)
 print(single_byte)
 
-# Crée un bytes avec une liste dev int (0-255).
+# CrÃ©e un bytes avec une liste dev int (0-255).
 bytes_from_list = bytes([255, 254, 253, 252])
 
-# Crée un byte avec un int en base 2.
+# CrÃ©e un byte avec un int en base 2.
 one_byte = int('11110000', 2)
 print(one_byte)
 
 # Print out binary string (e.g. 0b010010).
 print(bin(22))
 
-# Bytes à Integer.
-# Crée un int avec un bytes (non signé par défaut).
+# Bytes Ã  Integer.
+# CrÃ©e un int avec un bytes (non signÃ© par dÃ©faut).
 i = int.from_bytes('12', byteorder='big')
 
-# Crée un int signé.
+# CrÃ©e un int signÃ©.
 i = int.from_bytes(b'\x00\x0F', byteorder='big', signed=True)
 
 # Utilise une liste d'entiers comme source pour le cast.
@@ -64,35 +65,35 @@ print(couple_bytes)
 
 # BytesArray--------------------------------------------------------------------
 
-# Crée un bytearray à partir d'un objet bytes.
+# CrÃ©e un bytearray Ã  partir d'un objet bytes.
 msg = bytearray(b"exemple")
-# Crée un  bytearray à partir d'une chaine de caractères.
+# CrÃ©e un  bytearray Ã  partir d'une chaine de caractÃ¨res.
 msg = bytearray("exemple", "utf-8")
-# Crée un  bytearray à partir d'une liste d'entiers entre 0 et 255.
+# CrÃ©e un  bytearray Ã  partir d'une liste d'entiers entre 0 et 255.
 msg = bytearray([94, 91, 101, 125, 111, 35, 120, 101, 115, 101, 200])
 
 msg[0]
 
-# Cast bytes à bytearray.
+# Cast bytes Ã  bytearray.
 mutable_bytes = bytearray(b'\x00\x0F')
 
-# Cast bytearray à bytes.
+# Cast bytearray Ã  bytes.
 immutable_bytes = bytes(mutable_bytes)
 
 
 # MemoryView-----------------------------------------------------------------------
 
-# Crée une memoryview à partir de l'objet qui définit le nouveau buffer.
+# CrÃ©e une memoryview Ã  partir de l'objet qui dÃ©finit le nouveau buffer.
 PyObject * PyMemoryView_FromObject(PyObject * obj)
 
-# Crée une memoryview et wrappe le buffer en structure view.
-# La memoryview détient le buffer qui sera désalloué automatiquement
+# CrÃ©e une memoryview et wrappe le buffer en structure de view.
+# La memoryview dÃ©tient le buffer qui sera dÃ©sallouÃ© automatiquement
 # lors de la destruction de l'objet.
 PyObject * PyMemoryView_FromBuffer(Py_buffer * view)
 
-# Crée une memoryview d'une partie mémoire contiguë.
-# Si dans la mémoire l'objet est stocké de manière contiguë,
-# le pointeur pointe sur cette zone mémoire
+# CrÃ©e une memoryview d'une partie mÃ©moire contiguÃ«.
+# Si dans la mÃ©moire l'objet est stockÃ© de maniÃ¨re contiguÃ«,
+# le pointeur pointe sur cette zone mÃ©moire
 # sinon une copie est faite.
 PyObject * PyMemoryView_GetContiguous
 (PyObject * obj, int buffertype, char order)
@@ -100,14 +101,14 @@ PyObject * PyMemoryView_GetContiguous
 # Retourne true si l'objet obj est une memoryview.
 int PyMemoryView_Check(PyObject * obj)
 
-# Retourne un pointer sur buffer wrapper par l'objet donné.
+# Retourne un pointer sur buffer wrapper par l'objet donnÃ©.
 Py_buffer * PyMemoryView_GET_BUFFER(PyObject * obj)
 
 # mybuf = ...  un grand buffer de bytes.
 mv_mybuf = memoryview(mybuf)  # une memoryview de mybuf.
 func(mv_mybuf[:len(mv_mybuf)//2])
-# passe la première moitié de mybuf dans func comme une "sous-view"
-# crée par le découpage de la memoryview.
+# passe la premiÃ¨re moitiÃ© de mybuf dans func comme une "sous-view"
+# crÃ©Ã© par le dÃ©coupage de la memoryview.
 # Aucune copie n'est faite ici!
 
 buf = bytearray(b'abcdefgh')
@@ -119,18 +120,18 @@ bytearray(b'abcdZAgh')
 
 # Struct----------------------------------------------------------------------------
 
-# Crée une memoryview à partir de l'objet qui définit le nouveau buffer.
+# CrÃ©e une memoryview Ã  partir de l'objet qui dÃ©finit le nouveau buffer.
 PyObject * PyMemoryView_FromObject(PyObject * obj)
 
-# Crée une memoryview et wrappe le buffer en structure view.
-# La memoryview détient le buffer et il sera désalloué automatiquement
+# CrÃ©e une memoryview et wrappe le buffer en structure de view.
+# La memoryview dÃ©tient le buffer et il sera dÃ©sallouÃ© automatiquement
 # lors de la destruction de l'objet.
 PyObject * PyMemoryView_FromBuffer(Py_buffer * view)
 
-# Crée une memoryview d'une partie mémoire contiguë.
-# Si dans la mémoire l'objet est stocké de manière contiguë,
+# CrÃ©e une memoryview d'une partie mÃ©moire contiguÃ«.
+# Si dans la mÃ©moire l'objet est stockÃ© de maniÃ¨re contiguÃ«,
 # le pointeur pointe sur cette.
-# zone mémoire sinon une copie est faite.
+# zone mÃ©moire sinon une copie est faite.
 PyObject * PyMemoryView_GetContiguous
 (PyObject * obj, int buffertype, char order)
 
