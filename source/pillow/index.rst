@@ -57,8 +57,8 @@ Exemple basique
 
 L'exemple suivant aborde de manière simple quelques notions de bases de Pillow_. Une image en couleur au format *.png* est récupérée et convertie en nuances de gris. Le résultat s'affiche puis est sauvegardé au format *.jpeg*.
 
-- :py:func:`open() <PIL.Image.open>` charge une image en mémoire;
-- :py:meth:`Image.convert() <PIL.Image.Image.convert>` change le mode de l'image. Ici, ``L`` représente les piexels sur 8 bits, en noir et blanc;
+- :py:func:`~PIL.Image.open` charge une image en mémoire;
+- :py:meth:`Image.convert() <PIL.Image.Image.convert>` change le mode de l'image. ``L`` représente :math:`256` nuances de gris (voir :ref:`modes <concept-modes>`).
 - :py:meth:`Image.show() <PIL.Image.Image.show>` ouvre l'image dans un outil externe;
 - :py:meth:`Image.save() <PIL.Image.Image.save>` sauvegarde l'image dans le format spécifié.
 
@@ -93,7 +93,7 @@ Le résultat obtenu est le suivant:
 Manipulation des bandes
 -----------------------
 
-Comme expliqué plus haut, Pillow_ utilise le concept de bandes de données, qu'il est possible de traiter séparément. L'exemple suivant illustre cette notion, en inversant l'ordre des bandes R, G et B.
+Pillow_ utilise le :ref:`concept des bandes de données<concept-bands>`, qu'il est possible de traiter séparément. L'exemple suivant illustre cette notion, en inversant l'ordre des bandes R, G et B.
 
 - :py:meth:`PIL.Image.Image.split` retourne un tuple contenant toutes les bandes de l'image;
 - :py:func:`PIL.Image.merge` fusionne un ensemble d'images monobande en une image multibandes.
