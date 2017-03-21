@@ -1,7 +1,8 @@
-﻿from collections import namedtuple
-from struct import *
+﻿"""Module d'exemple pour les types bytes, memoryview et struct."""
 
-"""Module d'exemple pour les types bytes, memoryview et struct."""
+
+from collections import namedtuple
+from struct import *
 
 
 # Bytes-------------------------------------------------------------------------------
