@@ -8,7 +8,7 @@ from struct import *
 
 msg = bytes('exemple', encoding='utf-8')
 # où mais l'encodage par défaut sera utilisé.
-msg = b"exemple"
+msg = b'exemple'
 
 b'exemple'
 
@@ -20,7 +20,7 @@ bytes = str.encode(my_str)
 
 # Cast bytes en string.
 my_decoded_str = str.decode(bytes)
-type(my_decoded_str)  # ensure it is string representation
+type(my_decoded_str)  # vérifie que le type est string
 
 i = 16
 
