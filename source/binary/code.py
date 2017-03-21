@@ -82,12 +82,12 @@ immutable_bytes = bytes(mutable_bytes)
 # MemoryView-----------------------------------------------------------------------
 
 # Crée une memoryview à partir de l'objet qui définit le nouveau buffer.
-PyObject * PyMemoryView_FromObject(PyObject *obj)
+PyObject * PyMemoryView_FromObject(PyObject * obj)
 
 # Crée une memoryview et wrappe le buffer en structure view.
 # La memoryview détient le buffer qui sera désalloué automatiquement
 # lors de la destruction de l'objet.
-PyObject * PyMemoryView_FromBuffer(Py_buffer *view)
+PyObject * PyMemoryView_FromBuffer(Py_buffer * view)
 
 # Crée une memoryview d'une partie mémoire contiguë.
 # Si dans la mémoire l'objet est stocké de manière contiguë,
@@ -97,10 +97,10 @@ PyObject * PyMemoryView_GetContiguous
 (PyObject * obj, int buffertype, char order)
 
 # Retourne true si l'objet obj est une memoryview.
-int PyMemoryView_Check(PyObject *obj)
+int PyMemoryView_Check(PyObject * obj)
 
 # Retourne un pointer sur buffer wrapper par l'objet donné.
-Py_buffer * PyMemoryView_GET_BUFFER(PyObject *obj)
+Py_buffer * PyMemoryView_GET_BUFFER(PyObject * obj)
 
 # mybuf = ...  un grand buffer de bytes.
 mv_mybuf = memoryview(mybuf)  # une memoryview de mybuf.
@@ -119,19 +119,19 @@ bytearray(b'abcdZAgh')
 # Struct----------------------------------------------------------------------------
 
 # Crée une memoryview à partir de l'objet qui définit le nouveau buffer.
-PyObject * PyMemoryView_FromObject(PyObject *obj)
+PyObject * PyMemoryView_FromObject(PyObject * obj)
 
 # Crée une memoryview et wrappe le buffer en structure view.
 # La memoryview détient le buffer et il sera désalloué automatiquement
 # lors de la destruction de l'objet.
-PyObject * PyMemoryView_FromBuffer(Py_buffer *view)
+PyObject * PyMemoryView_FromBuffer(Py_buffer * view)
 
 # Crée une memoryview d'une partie mémoire contiguë.
 # Si dans la mémoire l'objet est stocké de manière contiguë,
 # le pointeur pointe sur cette.
 # zone mémoire sinon une copie est faite.
 PyObject * PyMemoryView_GetContiguous
-(PyObject *obj, int buffertype, char order)
+(PyObject * obj, int buffertype, char order)
 
 # packing et unpacking de trois entiers.
 
@@ -146,4 +146,4 @@ name, serialnum, school, gradelevel = unpack('<10sHHb', record)
 
 Student = namedtuple('Student', 'name serialnum school gradelevel')
 Student._make(unpack('<10sHHb', record))
-Student(name = 'raymond   ', serialnum = 4658, school = 264, gradelevel = 8)
+Student(name='raymond   ', serialnum=4658, school=264, gradelevel=8)
