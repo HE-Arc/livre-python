@@ -1,7 +1,7 @@
 """Module d'automatisation de git."""
 
 
-from invoke import task, run
+from invoke import run, task
 
 
 @task

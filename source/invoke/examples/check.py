@@ -1,7 +1,7 @@
 """Module pour lancer les checks."""
 
 
-from invoke import task, run
+from invoke import run, task
 
 
 @task

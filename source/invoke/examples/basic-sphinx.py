@@ -1,7 +1,7 @@
 """Module basic sphinx generation."""
 
 
-from invoke import task, run
+from invoke import run, task
 
 
 @task
