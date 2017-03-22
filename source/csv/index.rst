@@ -1,8 +1,7 @@
 .. _csv-tutorial:
 
-======================
-         CSV
-======================
+``csv``
+=======
 
 .. image:: ../_static/csv.png
 	:align: right
@@ -10,10 +9,11 @@
 
 Par Axel Rieben [#email]_
 
+
 Introduction
 ============
 
-CSV est un format ouvert très populaire d'importation et d'exporation de données tel que des feuilles de calcul. Les données d'un fichier .csv sont sous forme textuelles séparées par des virgules d'où son nom "Comma Separeted Values".
+:py:mod:`csv` est un format ouvert très populaire d'importation et d'exportation de données tel que des feuilles de calcul. Les données d'un fichier .csv sont sous forme textuelles séparées par des virgules d'où son nom "Comma Separeted Values".
 
 Exemple d'un fichier .csv [#wikipedia]_ :
 
@@ -27,54 +27,84 @@ Exemple d'un fichier .csv [#wikipedia]_ :
 Représentation tabulaire :
 
 .. csv-table::
-	:widths: 15, 10, 30
 
-  "Robert","Dupont","rue du Verger, 12"
+	"Robert","Dupont","rue du Verger, 12"
 	"Michel","Durand","av. de la Ferme, 89"
 	"Michel ""Michele""","Durand","av. de la Ferme, 89"
 	"Michel;Michele","Durand","av. de la Ferme, 89"
 
-Il existe des différences de format parmis les applications utilisant CSV puisqu'il n'a pas été standardisé. Les guillemet peuvent par exemple être omis et les points virgules remplacé par des virgules. Toutefois, la RFC 41802 [#rfc]_ décrit la forme la plus courante.
+Il existe des différences de format parmi les applications utilisant :py:mod:`csv` puisqu'il n'a pas été standardisé. Les guillemets peuvent par exemple être omis et les points virgules remplacé par des virgules. Toutefois, la RFC 41802 [#rfc]_ décrit la forme la plus courante.
 
 Module [#doc]_
 ==============
 
-Le module :py:mod:`csv` python implémente des classes permettant de facilement lire et écrire des fichiers au format CSV. Pour tout les exemples qui suivent il ne faudra pas oublié d'importer ce module avec :
+Le module :py:mod:`csv` python implémente des classes permettant de facilement lire et écrire des fichiers au format CSV. Pour tous les exemples qui suivent, il ne faudra pas oublier d'importer ce module avec :
 
 .. literalinclude:: examples.py
-       :start-after: func:import
-       :end-before: endfunc:import
+	:start-after: func:import
+	:end-before: endfunc:import
 
 Lecture
 *******
 
-L'exemple ci-dessous illustre la lecture d'un fichier CSV nommé "data.csv". Dans un premier temps, le fichier est ouvert en mode lecture de texte 'rt'. Ensuite, on peut voir que la fonction :py:func:`~csv.reader` est utiliser afin d'obtenir un objet sur lequel il est possible d'itérer. Enfin, une boucle affiche chaque ligne du fichier.
+L'exemple ci-dessous illustre la lecture d'un fichier CSV nommé "data.csv". Dans un premier temps, le fichier est ouvert. Ensuite, on peut voir que la fonction :py:func:`~csv.reader` est utilisé afin d'obtenir un objet sur lequel il est possible d'itérer. Enfin, une boucle affiche chaque ligne du fichier.
 
 .. literalinclude:: examples.py
 	:start-after: func:read
 	:end-before: endfunc:read
 
-Il est possible de ne lire qu'une plusieurs colonnes en utilisant l'opérateur [].
+Il est possible de ne lire qu'une ou plusieurs colonnes en utilisant l'opérateur [].
 
 .. literalinclude:: examples.py
-      :start-after: func:readcol
-              :end-before: endfunc:readcol
+	:start-after: func:readcol
+	:end-before: endfunc:readcol
 
-Il est à noté qu'il est recommandé d'utiliser des fichier CSV encodé en UTF-8 pour éviter tout bug inopiné.
+Il est à noter qu'il est recommandé d'utiliser des fichier CSV encodé en UTF-8 pour éviter tout bug inopiné.
 
 Ecriture
 ********
 
-L'exemple ci-dessous illustre l'écriture d'un fichier CSV nommé "write.csv"
+L'exemple ci-dessous illustre l'écriture d'un fichier CSV nommé "write.csv". Comme pour la lecture, il faut tout d'abord ouvrir le fichier. Ensuite la fonction, :py:func:`~csv.writer` retourne un objet qui va convertir au format CSV les données qu'on lui donne. Il suffit donc de passer celles-ci à la fonction writerow().
 
 .. literalinclude:: examples.py
 	:start-after: func:write
 	:end-before: endfunc:write
 
-Dialectes
-*********
+Dialectes [#chicoree]_
+**********************
 
+Comme précisé dans l'introduction, CSV manque de standardisation. Les logiciels francophones auront tendance à utiliser des points virgules comme séparateur, et des guillemets comme caractère de délimitation de chaine. Ainsi, il n'y aura pas besoin d'échapper les caractères apostrophe et il n'y aura pas de confusion avec la virgule d'un chiffre ou d'une phrase. D'un autre côté le standard défini par la RFC est l'utilisation de l'apostrophe et de la virgule.
 
+Pour pallier à ces différents de formatage :py:mod:`csv` à créer les dialecte. Un dialecte permet de spécifier chacun des paramètres du formatage. Ils peuvent être spécifié soit directement lors de l'utilisation des fonctions :py:func:`~csv.reader` et :py:func:`~csv.writer` :
+
+.. literalinclude:: examples.py
+	:start-after: func:readdialect
+	:end-before: endfunc:readdialect
+
+Soit en utilisant une classe qui redéfini tous les attributs :
+
+.. literalinclude:: examples.py
+	:start-after: func:readdialectclass
+	:end-before: endfunc:readdialectclass
+
+Voici un tableau qui renseigne sur chacun des attributs :
+
+================  =================  ===============================================================================
+Attribut          Valeur par défaut  Signification
+================  =================  ===============================================================================
+delimiter         ,                  Séparateur de champ
+quotechar         "                  Délimiteur pour les chaînes
+quoting           QUOTE_MINIMAL      Contrôle l'adjonction de guillemets autour des données
+doublequote       True               Doubler les quotechar qui se trouvent dans les données
+escapechar        None               Caractère d'échappement pour protéger les caractères spéciaux dans les données
+lineterminator    \\r\\n             Séquence de caractères utilisée à la fin de chaque enregistrement (la fonction :py:func:`~csv.reader` ignore cet attribut et est configuré pour détecter automatiquement \\n ou \\r comme séquence de fin de ligne)
+skipinitialspace  False              Ignorer les espaces entre le délimiteur de chaîne et les données
+================  =================  ===============================================================================
+
+Conclusion
+==========
+
+:py:mod:`csv` est un module très pratique lorsqu'il s'agit de stocker ou de rechercher des données dans un fichier. Il est aussi facile d'utilisation et ne nécessite que quelques lignes de code pour être opérationnel. Un point négatif cependant, est que le format manque de standardisation, ce qui peut être problématique pour le partage d'informations entre plusieurs applications. Il n'est non plus pas adapté aux stockages d'informations en masse ayant de fortes dépendances entre elles. Là, une base de données serait plus judicieuse. Enfin, pour terminer il est à préciser que le module est bien plus vaste que cette courte page d'information. Il est donc recommandé de suivre les liens listés ci-dessous pour plus de détails.
 
 Références
 ==========
