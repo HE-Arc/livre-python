@@ -72,6 +72,9 @@ C'est ici que nous spécifierons le dossier qui devra être observer.
 
 .. code-block:: python3
 
+  import eventhandler
+  from watchdog.observers import Observer
+
   observer = Observer() # Création de l'observeur
   observer.schedule(eventHandler.AuditHandler(), path='U:', recursive=True) # Création du lien
   observer.start() # Démarrage de l'observateur
@@ -134,6 +137,9 @@ La classe de traitement ne change quasiment pas la seule différence est le chan
 La principale différence ce trouvera au moment de l'instantation de l'objet.
 
 .. code-block:: python3
+
+  import eventhandler
+  from watchdog.observers import Observer
 
   observer = Observer()
   handler = eventHandler.AuditHandlerMusic(patterns=["*.mp3","*.wav","*.flac"])
