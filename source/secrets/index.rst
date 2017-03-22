@@ -77,8 +77,9 @@ On notera la différence de longueur des deux chaînes de 16 bytes. L'encodage u
 
 
 Utilisation d'un token
+----------------------
 
-L'image ci-dessous démontre l'utilisation de tokens. Lors de l'utilisation de l'`API Twitter`_, il est nécessaire de générer un jeton qui sera envoyé à twitter lors de chaque demande de connexion. De ce fait, twitter peut vérifier que l'application qui a requis les informations est bien autorisée à le faire et qu'elle respecte le niveau de confidentialité enregistré dans les paramètres.
+L'image ci-dessous démontre l'utilisation de tokens. Lors de l'utilisation de l'`API Twitter`_, il est nécessaire de générer deux jetons qui seront envoyes à twitter lors de chaque demande de connexion. De ce fait, twitter peut vérifier que l'application qui a requis les informations est bien autorisée à le faire et qu'elle respecte le niveau de confidentialité enregistré dans les paramètres.
 
 .. image:: ./img/exampleTwitterApi.PNG 
     :scale: 100%
