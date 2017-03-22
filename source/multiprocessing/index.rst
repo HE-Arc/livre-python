@@ -25,7 +25,7 @@ Process
 
 :py:mod:`multiprocessing` contient plusieurs classes très utiles, je vais vous introduire à quelques unes. 
 
-Prenons tout d'abord la classe `Process <https://docs.python.org/3.6/library/multiprocessing.html#multiprocessing.Process>`_, la classe `Process <https://docs.python.org/3.6/library/multiprocessing.html#multiprocessing.Process>`_ nous permet de créer des processus en créant un objets `Process <https://docs.python.org/3.6/library/multiprocessing.html#multiprocessing.Process>`_, en appelant sa méthode start().
+Prenons tout d'abord la classe :py:class:`multiprocessing.Process`, la classe :py:class:`multiprocessing.Process` nous permet de créer des processus en créant un objets :py:class:`multiprocessing.Process`, en appelant sa méthode start().
 
 Dans l'exemple suivant nous avons deux fonction en plus du main, dans la première fonction 'info' nous affichons le titre passé en paramètre ainsi que le nom du module, le numero du processus parent et le numero du processus. La deuxième fonction appelle la première fonction et ensuite écrit 'hello + le nom passé en paramètre'.
 Dans le main, nous appelonr la fonction info puis nous créons un objet Process avec comme arguments 'target = f' qui est la fonction que le processus éxecutera et les arguments de la fonction 'args=('bob')', ensuite nous lancons le processus avec p.start() et p.join(). 
@@ -50,7 +50,7 @@ Warning : Si un processus est "tué", les données risquent d'être corrompu dan
 Pipe
 ^^^^
 
-La classe Pipe permet aussi la communication entre deux processus.
+La classe Pipe permet aussi la communication entre deux processus. Le constructeur du pipe retourne deux objet de connection qui sont l'entrée et la sortie du pipe.
 
 .. literalinclude:: ./exemples/pipe.py
 
@@ -74,11 +74,35 @@ Il y a plusieurs façon de demarrer un processus, le multiprocessing en contient
 Synchronisation entre les processus
 -----------------------------------
 
+:py:mod:`multiprocessing` contient les mêmes méthodes équivalente que la classe :py:mod:`threading`. Comme pour un thread, nous pouvons s'assurer qu'un processus accède à une ressource de manière atomique.
+
+.. literalinclude:: ./exemples/synchro.py
+
+Partage de ressources entre processus
+-------------------------------------
+
+En programmation multi-processus, il est souvent utile de pouvoir partager des ressources entre nos processus. Pour cela :py:mod:`multiprocessing` offre différentes manière de partager des ressources.
+
+La mémoire : 
+	on peut partage de la mémoire en utilisant les classes Value ou Array.
+
+	Exemple :
+
+.. literalinclude:: ./exemples/sharedmemory.py
+
+Serveur de processus :
+	Un objet renvoyé par la classe Manager() contrôle un serveur de processus qui contient des objets Python et permet à d'autres processus de les manipuler à l'aide de proxies.
+
+	Exemple :
+
+.. literalinclude:: ./exemples/manager.py
+
+
 
 Conclusion
 ----------
 
-Le module :py:mod:`multiprocessing` nous permet de gérer nos processeurs à notre guise.
+Le module :py:mod:`multiprocessing` nous permet de gérer nos processeurs.
 
 Reference
 ---------
