@@ -14,7 +14,7 @@ msg = bytearray([94, 91, 101, 125, 111, 35, 120, 101, 115, 101, 200])
 0b100  # sortie 4.
 
 # autres possibilitées.
-"{:x}".format(int.from_bytes("exemple".encode("utf-8"), byteorder="big"))                                
+"{:x}".format(int.from_bytes("exemple".encode("utf-8"), byteorder="big"))
 # sortie '6578656d706c65'.
 
 # 65 est la lettre 'e' en hexadécimal.

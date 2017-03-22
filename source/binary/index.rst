@@ -153,6 +153,8 @@ memoryview
 
 :py:mod:`struct`
 
+`<https://docs.python.org/3.6/library/struct.html#module-struct>`_
+
 `<https://docs.python.org/2/library/struct.html>`_
 
 `<http://stackoverflow.com/questions/35988/c-like-structures-in-python>`_
