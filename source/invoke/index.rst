@@ -141,7 +141,10 @@ le contexte et de passer en argument une chaîne de caractère pour lancer la co
 on peut également mettre en place un système plus poussé qui va par exemple nettoyer
 le dossier de destination avant de générer le contenu HTML
 
-.. literalinclude:: ./examples/sphinx.py
+.. literalinclude:: ./examples/tasks.py
+    :linenos:
+    :start-after: #html start
+    :end-before: #fetch start
 
 pour qu'une tâche A appelle une tâche B avant son exécution il suffit d'utiliser la
 syntaxe suivante.
@@ -174,14 +177,21 @@ du git remote et ajout des modifications de la bracnhe locale).
 les checks restent simple à mettre en place car il s'agit uniquement de commande à lancer
 on ne cherche pas ici à avoir un coportement différent selon leur résultat
 
-.. literalinclude:: ./examples/check.py
+.. literalinclude:: ./examples/tasks.py
+  :linenos:
+  :language: python
+  :start-after: #checks start
 
 La mise en place de l'automatisation du rebase est elle plus poussée. Elle va en
 effet demander l'analyse des résultats des commandes pour déterminer les actions
 à suivre.
 
+.. literalinclude:: ./examples/tasks.py
+    :linenos:
+    :language: python
+    :start-after: #fetch start
+    :end-before: #checks start
 
-.. literalinclude:: ./examples/git.py
 
 
 
