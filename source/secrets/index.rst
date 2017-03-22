@@ -73,37 +73,40 @@ Génération d'un jeton d'une longueur de 16 bytes pouvant être utilisé dans u
     >>> secrets.token_urlsafe(16)
     'k84RkJMyMpX6e3qzVXRqcw'
 
-On notera la différence de longueur des deux chaînes de 16 bytes. L'encodage utilisé dans la deuxième (base64) encode environ un caractère sur 6 bits tandis que dans la première ce ne sont que 4 bits qui sont convertis en un caractère.
+On notera la différence de longueur des deux chaînes de 16 bytes. L'encodage utilisé dans la deuxième (base64) encode environ 6 bits sur un caractère tandis que dans la première ce ne sont que 4 bits qui sont encodés en un caractère.
 
 
 Tokens, hachage et sécurité annexe
 ----------------------------------
 
-L'image ci-dessous démontre l'utilisation de tokens. Pour qu'une application tierce puisse se connecter à l'`API Twitter`_, OAuth_ est utilisé pour lui fournir un accès sécurisé. Dans ce cas, deux chaînes aléatoires et un jeton sont générés pour pouvoir se connecter. De ce fait, twitter peut vérifier que l'application qui a requis les informations est bien autorisée à le faire et qu'elle respecte le niveau de confidentialité enregistré dans les paramètres.
+L'image ci-dessous démontre l'utilisation de tokens. Pour qu'une application tierce puisse se connecter à l'`API Twitter`_, OAuth_ est utilisé pour lui fournir un accès sécurisé. Dans ce cas, deux chaînes aléatoires et deux jetons sont générés pour pouvoir se connecter. De ce fait, twitter peut vérifier que l'application qui a requis les informations est bien autorisée à le faire et qu'elle respecte le niveau de confidentialité enregistré dans les paramètres.
 
 .. image:: ./img/exampleTwitterApi.PNG
     :scale: 100%
     :align: center
     :alt: twitter exemple of the use of tokens
 
+Dans le cas de OAuth, la clé de signature est composée de la clé secrète (absente de l'image) et du jeton secret. Seul le jeton d'accès n'est pas fourni de base par l'API mais est regénéré à chaque requête. Il est ici présent sur l'image car il permet de faire des tests lors de l'implémentation de la connexion.
+
 Le processus de récupération des données à une API est le suivant:
 
-- 1 On envoie au serveur de vérification la clé d'utilisateur et la clé secrète lorsque le client essaye de se connecter
-- 2 Si le compte est autorisé (c'est la que :py:mod:`hmac` est utile), le serveur renvoie à l'application un jeton
-- 3 L'application envoie ce jeton au serveur de ressources qui vérifie grace au token si l'application est autorisée, et ses privilèges.
+- 1 On envoie au serveur de vérification le message de requête comprenant la clé d'utilisateur. À celui-ci est ajouté le hash généré à partir du message et de la clé de signature (c'est la que :py:mod:`hmac` est utile). Cette opération est effectuée à chaque fois que le client essaye de se connecter.
+- 2 Si le destinataire du message est vérifié et que le compte est autorisé, le serveur renvoie à l'application un jeton.
+- 3 L'application envoie ce jeton au serveur de ressources qui vérifie grace à celui-ci si l'application est autorisée, et ses privilèges.
 - 4 Si l'application est autorisée, le serveur renvoie les informations requises.
 
 Explications
 ************
-Les deux clés utilisées au point 1 permettent au serveur de vérifier l'autenticité de la requête. Via le hashage, le serveur vérifie que la clé d'utilisateur correspond à une chaîne hachée avec la clé secrète.
+Les deux clés utilisées au point 1 permettent au serveur de vérifier l'authenticité de la requête. Le serveur vérifie via hashage si la signature reçue correspond au message reçu haché avec la clé secrète. Pour ce faire, il hache lui-même le message avec sa clé et compare les résultats.
+Si le hash reçu est identique au hash calculé, l'origine du message est vérifiée. Il ne reste au serveur qu'à vérifier que la clé d'utilisateur est valide et possède bien le droit de faire une requête. Si tout est correct, le serveur envoie le token d'accès à l'application.
 
-Pour que la sécurité des échanges soit garantie, il ne faut pas que la clé secrète aléatoire puisse être prédite par le hacker. Une source d'aléatoire comme random est prédictible et permet donc au final de déduire la clé et ensuite de voler les données cryptées. En effet, il suffit de faire crypter le même message plusieurs fois, de le décrypter par force brute, d'en déduire les clés utilisées, de faire un peu de maths, et si la source n'est pas sûre, il est possible de prédire les futures clés produites et donc de décrypter toutes les communications. C'est ce qu'on appelle une `attaque de générateur de nombre aléatoire`_.
+Pour que la sécurité des échanges soit garantie, il ne faut pas que la clé secrète aléatoire puisse être prédite par le hacker. Une source d'aléatoire comme random est prédictible et permet donc au final de déduire la clé et ensuite de voler l'identité de l'application. En effet, il suffit de hasher le même message plusieurs fois, d'en déduire les clés utilisées, de faire un peu de maths, et si la source n'est pas sûre, il est possible de prédire les futures clés produites et donc de voler les identités des applications afin de récupérer des données. C'est ce qu'on appelle une `attaque de générateur de nombre aléatoire`_.
 
 C'est là qu'est tout l'intérêt du module secret et de ses fonctions de génération de chaînes aléatoires. En empêchant qui que ce soit de prédire les résultats aléatoires, il est possible d'empêcher que les clés soient découvertes.
 
 Cependant, le problème ne s'arrête pas là. Premièrement, lors des communications, si aucun protocole de sécurité de couche de transport n'est utilisé, la durée de validité d'un secret partagé ne doit pas être supérieur au temps qu'il faudrait à un hacker pour le découvrir via une attaque de force brute. Le serveur doit donc adapter la complexité du secret partagé. Une bonne pratique consiste à générer les secrets aussi longs que possibles afin d'avoir une sécurité maximum [#rfc5849]_.
 
-Deuxièmement, lorsque le serveur de vérification reçoit les deux clés et que le serveur de ressources reçoit le jeton, ils doivent les vérifier. Cette étape peut également créer des failles de sécurité. Il s'agit des attaques temporelles citées plus haut. Si la fonction de comparaison n'est pas assez sûre et ne prend pas toujours le même temps pour comparer les jetons et retourner la réponse, un hacker suffisament doué pourra récupérer des informations sur le système de comparaison, et de ce fait déduire le jeton correct en le devinant bytes après bytes par exemple.
+Deuxièmement, lorsque le serveur de vérification reçoit le message et le hash et que le serveur de ressources reçoit le jeton, ils doivent les vérifier. Cette étape peut également créer des failles de sécurité. Il s'agit des attaques temporelles citées plus haut. Si la fonction de comparaison n'est pas assez sûre et ne prend pas toujours le même temps pour comparer les jetons et retourner la réponse, un hacker suffisament doué pourra récupérer des informations sur le système de comparaison, et de ce fait déduire le jeton correct en le devinant bytes après bytes par exemple.
 
 La différence entre une comparaison normale et la fonction :py:func:`secrets.compare_digest()` réside dans le temps passé à comparer les chaînes.
 
