@@ -71,12 +71,12 @@ msg = bytearray("exemple", "utf-8")
 msg = bytearray([94, 91, 101, 125, 111, 35, 120, 101, 115, 101, 200])
 
 # hexadécimal.
-0xff  #sortie 255.
+0xff  # sortie 255.
 # binaire.
-0b100  #sortie 4.
+0b100  # sortie 4.
 
 # autres possibilitées.
-"{:x}".format(int.from_bytes("exemple".encode("utf-8"), byteorder="big"))                                     
+"{:x}".format(int.from_bytes("exemple".encode("utf-8"), byteorder="big"))                                
 # sortie '6578656d706c65'.
 
 # 65 est la lettre 'e' en hexadécimal.
@@ -92,9 +92,6 @@ immutable_bytes = bytes(mutable_bytes)
 
 
 # MemoryView-----------------------------------------------------------------------
-
-# Crée une memoryview à partir de l'objet qui définit le nouveau buffer.
-PyObject * PyMemoryView_FromObject(PyObject * obj)
 
 # retourne les données comme string de bytes.
 # sortie: b'abc'.
@@ -120,6 +117,7 @@ func(mv_mybuf[:len(mv_mybuf)//2])
 # créé par le découpage de la memoryview.
 # Aucune copie n'est faite ici!
 
+# Avec bytearray.
 buf = bytearray(b'abcdefgh')
 mv = memoryview(buf)
 mv[4:6] = b'ZA'
@@ -129,23 +127,7 @@ bytearray(b'abcdZAgh')
 
 # Struct----------------------------------------------------------------------------
 
-# Crée une memoryview à partir de l'objet qui définit le nouveau buffer.
-PyObject * PyMemoryView_FromObject(PyObject * obj)
-
-# Crée une memoryview et wrappe le buffer en structure de view.
-# La memoryview détient le buffer et il sera désalloué automatiquement
-# lors de la destruction de l'objet.
-PyObject * PyMemoryView_FromBuffer(Py_buffer * view)
-
-# Crée une memoryview d'une partie mémoire contiguë.
-# Si dans la mémoire l'objet est stocké de manière contiguë,
-# le pointeur pointe sur cette.
-# zone mémoire sinon une copie est faite.
-PyObject * PyMemoryView_GetContiguous
-(PyObject * obj, int buffertype, char order)
-
 # packing et unpacking de trois entiers.
-
 pack('hhl', 1, 2, 3)
 # sortie : '\x00\x01\x00\x02\x00\x00\x00\x03'
 unpack('hhl', '\x00\x01\x00\x02\x00\x00\x00\x03')
