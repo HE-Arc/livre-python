@@ -23,7 +23,7 @@ Utilisations
 Ce mode devrait être utilisé de préférence au générateur de nombres pseudo-aléatoires par défaut dans le module :py:mod:`random`, qui est conçu pour la modélisation et la simulation et non pas la sécurité ou la cryptographie.
 
 Nombres aléatoires
-******************
+*******************
 Ce module donne accès à la source d'aléatoire la plus sécurisée que votre système d'exploitation fournit. Pour fournir des nombres aléatoirs cryptographiquement sûres, le système ne se base pas sur des calculs mais sur un composant physique (`un générateur de nombres aléatoires matériel`_) réagissant à des phénomènes microscopiques qui créent de faibles signaux de bruit statistiquement aléatoires, comme le bruit thermique ou l'effet photoélectrique.
 
 - Classe :py:class:`secrets.SystemRandom` permet de générer des nombres aléatoires, voir :py:class:`random.SystemRandom` pour plus de détails
@@ -77,7 +77,7 @@ On notera la différence de longueur des deux chaînes de 16 bytes. L'encodage u
 
 
 Tokens, hachage et sécurité annexe
-----------------------------------
+------------------------------------
 
 L'image ci-dessous démontre l'utilisation de tokens. Pour qu'une application tierce puisse se connecter à l'`API Twitter`_, OAuth_ est utilisé pour lui fournir un accès sécurisé. Dans ce cas, deux chaînes aléatoires et deux jetons sont générés pour pouvoir se connecter. De ce fait, twitter peut vérifier que l'application qui a requis les informations est bien autorisée à le faire et qu'elle respecte le niveau de confidentialité enregistré dans les paramètres.
 
@@ -90,10 +90,10 @@ Dans le cas de OAuth, la clé de signature est composée de la clé secrète (ab
 
 Le processus de récupération des données à une API est le suivant:
 
-- 1 On envoie au serveur de vérification le message de requête comprenant la clé d'utilisateur. À celui-ci est ajouté le hash généré à partir du message et de la clé de signature (c'est la que :py:mod:`hmac` est utile). Cette opération est effectuée à chaque fois que le client essaye de se connecter.
-- 2 Si le destinataire du message est vérifié et que le compte est autorisé, le serveur renvoie à l'application un jeton.
-- 3 L'application envoie ce jeton au serveur de ressources qui vérifie grace à celui-ci si l'application est autorisée, et ses privilèges.
-- 4 Si l'application est autorisée, le serveur renvoie les informations requises.
+#. On envoie au serveur de vérification le message de requête comprenant la clé d'utilisateur. À celui-ci est ajouté le hash généré à partir du message et de la clé de signature (c'est la que :py:mod:`hmac` est utile). Cette opération est effectuée à chaque fois que le client essaye de se connecter.
+#. Si le destinataire du message est vérifié et que le compte est autorisé, le serveur renvoie à l'application un jeton.
+#. L'application envoie ce jeton au serveur de ressources qui vérifie grace à celui-ci si l'application est autorisée, et ses privilèges.
+#. Si l'application est autorisée, le serveur renvoie les informations requises.
 
 Explications
 ************
