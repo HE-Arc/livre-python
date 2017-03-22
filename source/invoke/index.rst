@@ -1,9 +1,11 @@
-=======
 .. _Invoke-tutorial:
+
+
 ======
 invoke
 ======
-Par Jonathan Guerne
+
+Par Jonathan Guerne [#email]_
 
 Introduction
 ============
@@ -191,6 +193,7 @@ utilisé **Invoke** permet de lancer n'importe quelle commande standard de l'inv
 ce qui offre des possibilités immenses en termes par exemple de partage d'informations
 entre plusieurs applications.
 
+.. [#email] <jonathan.guerne@he-arc.ch>
 
 .. _WinError_3: https://github.com/pyinvoke/invoke/issues/345
 .. _Invoke: http://www.pyinvoke.org/
