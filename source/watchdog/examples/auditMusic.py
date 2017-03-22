@@ -2,12 +2,12 @@
 
 import time
 
-import eventHandler
+import eventhandler
 from watchdog.observers import Observer
 
 observer = Observer()
 
-handler = eventHandler.AuditHandlerMusic(patterns=["*.mp3","*.wav","*.flac"])
+handler = eventhandler.AuditHandlerMusic(patterns=["*.mp3", "*.wav", "*.flac"])
 
 observer.schedule(handler, path='U:', recursive=True)
 observer.start()

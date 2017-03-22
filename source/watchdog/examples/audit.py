@@ -2,12 +2,12 @@
 
 import time
 
-import eventHandler
+import eventhandler
 from watchdog.observers import Observer
 
 observer = Observer()
 
-observer.schedule(eventHandler.AuditHandler(), path='U:', recursive=True)
+observer.schedule(eventhandler.AuditHandler(), path='U:', recursive=True)
 observer.start()
 
 try:
