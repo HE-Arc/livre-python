@@ -12,9 +12,11 @@ Introduction
 Watchdog est une librairie permettant l'utilisation d'événemement du système de f
 ichier (création de fichier, modification, ...).
 
-Cette librairie peut-être utilisée pour la mise en place d'un scanner de fichier dynamique
+Cette librairie peut-être utilisée (par exemple) pour la mise en place d'un scanner de fichier dynamique
 (exemple Scanner multimédia)
 ou pour la mise en place d'un système d'audit des événements sur les fichiers.
+Dans le cadre de cet article, notre fils rouge sera la création d'un programme d'audit
+des événements émis par les fichiers de musiques.
 
 Fonctionnement
 --------------
@@ -158,9 +160,17 @@ Noms                                      Default               Utilisation
 Conclusion
 ----------
 
-ToDo
+En conclusion, la librairie watchdog permet d'utiliser des événements, en provenance du système de fichiers, d'une manière facile et efficace.
+Watchdog permet aussi de filtrer les fichiers / dossiers émetant un événement.
+Cette librairie permet aussi une grande réusabilité du code grâce, entre autre, à l'utilisation de classe pour le traitement des événements.
 
 
 .. [#pj] <paul.jeanbourquin@he-arc.ch>
+
+Biliographie
+------------
+
+* watchdog documentation : http://pythonhosted.org/watchdog/
+* Tutoriel d'utilisation de watchdog : http://sametmax.com/reagir-a-un-changement-sur-un-fichier-avec-watchdog/
 
 .. Bibliographie (ceci est un commentaire)
