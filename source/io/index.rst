@@ -21,7 +21,7 @@ correspondant si le fichier s'ouvre, sinon une exception ``OSError``
 (anciennement ``IOError`` qui devient un alias de ``OSError``) est levée.
 
 
-.. code-block:: python3
+.. code-block:: python
 
     open(file, mode='r', buffering=-1, encoding=None, errors=None, newline=None, closefd=True, opener=None)
 
