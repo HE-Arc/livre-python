@@ -71,31 +71,47 @@ Génération d'un jeton d'une longueur de 16 bytes pouvant être utilisé dans u
 .. code-block:: pycon
 
     >>> secrets.token_urlsafe(16)
-    k84RkJMyMpX6e3qzVXRqcw
+    'k84RkJMyMpX6e3qzVXRqcw'
 
 On notera la différence de longueur des deux chaînes de 16 bytes. L'encodage utilisé dans la deuxième (base64) encode environ un caractère sur 6 bits tandis que dans la première ce ne sont que 4 bits qui sont convertis en un caractère.
 
 
-Tokens et sécurité annexe
--------------------------
+Tokens, hachage et sécurité annexe
+----------------------------------
 
-L'image ci-dessous démontre l'utilisation de tokens. Pour qu'une application tierce puisse se connecter à l'`API Twitter`_, OAuth_ est utilisé pour lui fournir un accès sécurisé. Dans ce cas, deux jetons sont générés pour pouvoir se connecter. De ce fait, twitter peut vérifier que l'application qui a requis les informations est bien autorisée à le faire et qu'elle respecte le niveau de confidentialité enregistré dans les paramètres.
-
-Dans ce cas, le jeton correspond à une chaîne de caractère hachée selon l'algorithme de cryptographie HMAC_ (Python comprend un module :py:mod:`hmac`). Afin de crypter correctement la chaîne d'origine, il est nécessaire d'avoir une clé suffisament sûre. Une clé sûre est une clé ayant été générée par une source suffisament aléatoire et étant suffisament longue.
-
-Pour que la sécurité des échanges soit garantie, il ne faut pas que la clé aléatoire puisse être prédite par le hacker. Une source d'aléatoire comme random est prédictible et permet donc au final de déduire la clé et ensuite de voler les données cryptées. En effet, il suffit de faire crypter le même message plusieurs fois, de le décrypter par force brute, d'en déduire les clés utilisées, de faire un peu de maths, et si la source n'est pas sûre, il est possible de prédire les futures clés produites et donc de décrypter toutes les communications. C'est ce qu'on appelle une `attaque de générateur de nombre aléatoire`_.
-
-C'est là qu'est tout l'intérêt du module secret et de ses fonctions de génération de chaînes aléatoires. En empêchant qui que ce soit de prédire les résultats aléatoires, il est possible d'empêcher que les clés soient découvertes.
+L'image ci-dessous démontre l'utilisation de tokens. Pour qu'une application tierce puisse se connecter à l'`API Twitter`_, OAuth_ est utilisé pour lui fournir un accès sécurisé. Dans ce cas, deux chaînes aléatoires et un jeton sont générés pour pouvoir se connecter. De ce fait, twitter peut vérifier que l'application qui a requis les informations est bien autorisée à le faire et qu'elle respecte le niveau de confidentialité enregistré dans les paramètres.
 
 .. image:: ./img/exampleTwitterApi.PNG
     :scale: 100%
     :align: center
     :alt: twitter exemple of the use of tokens
 
+Le processus de récupération des données à une API est le suivant:
+
+- 1 On envoie au serveur de vérification la clé d'utilisateur et la clé secrète lorsque le client essaye de se connecter
+- 2 Si le compte est autorisé (c'est la que :py:mod:`hmac` est utile), le serveur renvoie à l'application un jeton
+- 3 L'application envoie ce jeton au serveur de ressources qui vérifie grace au token si l'application est autorisée, et ses privilèges.
+- 4 Si l'application est autorisée, le serveur renvoie les informations requises.
+
+Explications
+************
+Les deux clés utilisées au point 1 permettent au serveur de vérifier l'autenticité de la requête. Via le hashage, le serveur vérifie que la clé d'utilisateur correspond à une chaîne hachée avec la clé secrète.
+
+Pour que la sécurité des échanges soit garantie, il ne faut pas que la clé secrète aléatoire puisse être prédite par le hacker. Une source d'aléatoire comme random est prédictible et permet donc au final de déduire la clé et ensuite de voler les données cryptées. En effet, il suffit de faire crypter le même message plusieurs fois, de le décrypter par force brute, d'en déduire les clés utilisées, de faire un peu de maths, et si la source n'est pas sûre, il est possible de prédire les futures clés produites et donc de décrypter toutes les communications. C'est ce qu'on appelle une `attaque de générateur de nombre aléatoire`_.
+
+C'est là qu'est tout l'intérêt du module secret et de ses fonctions de génération de chaînes aléatoires. En empêchant qui que ce soit de prédire les résultats aléatoires, il est possible d'empêcher que les clés soient découvertes.
 
 Cependant, le problème ne s'arrête pas là. Premièrement, lors des communications, si aucun protocole de sécurité de couche de transport n'est utilisé, la durée de validité d'un secret partagé ne doit pas être supérieur au temps qu'il faudrait à un hacker pour le découvrir via une attaque de force brute. Le serveur doit donc adapter la complexité du secret partagé. Une bonne pratique consiste à générer les secrets aussi longs que possibles afin d'avoir une sécurité maximum [#rfc5849]_.
 
-Deuxièmement, lorsque le jeton est reçu en retour et qu'il faut le comparer au jeton calculé à partir de la chaîne de référence et de la clé secrète, cela peut créer des failles de sécurité. Il s'agit des attaques temporelles citées plus haut. Si la fonction de comparaison n'est pas assez sûre et ne prend pas toujours le même temps pour comparer les jetons et retourner la réponse, un hacker suffisament doué pourra récupérer des informations sur le système de comparaison, et de ce fait déduire le jeton correct en le devinant bytes après bytes.
+Deuxièmement, lorsque le serveur de vérification reçoit les deux clés et que le serveur de ressources reçoit le jeton, ils doivent les vérifier. Cette étape peut également créer des failles de sécurité. Il s'agit des attaques temporelles citées plus haut. Si la fonction de comparaison n'est pas assez sûre et ne prend pas toujours le même temps pour comparer les jetons et retourner la réponse, un hacker suffisament doué pourra récupérer des informations sur le système de comparaison, et de ce fait déduire le jeton correct en le devinant bytes après bytes par exemple.
+
+La différence entre une comparaison normale et la fonction :py:func:`secrets.compare_digest()` réside dans le temps passé à comparer les chaînes.
+
+Lors du test de "AAA"=="BBB", lorsque le premier byte est faux, la fonction renvoie false tandis que secrets.compare_digest("AAA","BBB") continue comme si de rien était et renvoie false après avoir parcouru tous les bytes.
+
+Pour un pirate, le premier test offre une faille magnifique. Il suffit d'envoyer à la suite des chaînes de deux bytes en ne faisant varier que le premier, et regarder quelle combinaison prend le plus de temps à être vérifiée. Celle qui prend le plus de temps est celle dont la fonction a validé le premier byte et a renvoyé false au deuxième tandis que les temps plus courts correspondent à un renvoi de false déjà au premier byte.
+En connaissant ce problème, il est facile de deviner un mot de passe, en essayant pour chaque byte.
+
 
 Conclusion
 ----------
