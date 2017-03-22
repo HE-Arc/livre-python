@@ -32,12 +32,9 @@ i = 16
 single_byte = i.to_bytes(1, byteorder='big', signed=True)
 print(single_byte)
 
-# Crée un bytes avec une liste dev int (0-255).
+# Crée un bytes avec une liste de int (0-255).
+# sortie: b'\xff\xfe\xfd\xfc.
 bytes_from_list = bytes([255, 254, 253, 252])
-
-# Crée un byte avec un int en base 2.
-one_byte = int('11110000', 2)
-print(one_byte)
 
 # Print out binary string (e.g. 0b010010).
 print(bin(22))
@@ -73,6 +70,18 @@ msg = bytearray("exemple", "utf-8")
 # Crée un  bytearray à partir d'une liste d'entiers entre 0 et 255.
 msg = bytearray([94, 91, 101, 125, 111, 35, 120, 101, 115, 101, 200])
 
+# hexadécimal.
+0xff  #sortie 255.
+# binaire.
+0b100  #sortie 4.
+
+# autres possibilitées.
+"{:x}".format(int.from_bytes("exemple".encode("utf-8"), byteorder="big"))                                     
+# sortie '6578656d706c65'.
+
+# 65 est la lettre 'e' en hexadécimal.
+f"{ord('e'):x}"  # sortie '65'.
+
 msg[0]
 
 # Cast bytes à bytearray.
@@ -87,23 +96,22 @@ immutable_bytes = bytes(mutable_bytes)
 # Crée une memoryview à partir de l'objet qui définit le nouveau buffer.
 PyObject * PyMemoryView_FromObject(PyObject * obj)
 
-# Crée une memoryview et wrappe le buffer en structure de view.
-# La memoryview détient le buffer qui sera désalloué automatiquement
-# lors de la destruction de l'objet.
-PyObject * PyMemoryView_FromBuffer(Py_buffer * view)
+# retourne les données comme string de bytes.
+# sortie: b'abc'.
+mv = memoryview(b"abc")
+mv.tobytes()
 
-# Crée une memoryview d'une partie mémoire contiguë.
-# Si dans la mémoire l'objet est stocké de manière contiguë,
-# le pointeur pointe sur cette zone mémoire
-# sinon une copie est faite.
-PyObject * PyMemoryView_GetContiguous
-(PyObject * obj, int buffertype, char order)
+# retourne les données en hexadécimale.
+# sortie: '616263'.
+mv = memoryview(b"abc")
+mv.hex()
 
-# Retourne true si l'objet obj est une memoryview.
-int PyMemoryView_Check(PyObject * obj)
+# retourne les données en une lsite d'élements.
+# sortie: [97, 98, 99].
+memoryview(b'abc').tolist()
 
-# Retourne un pointer sur buffer wrapper par l'objet donné.
-Py_buffer * PyMemoryView_GET_BUFFER(PyObject * obj)
+# relacher le buffer.
+mv.release()
 
 # mybuf = ...  un grand buffer de bytes.
 mv_mybuf = memoryview(mybuf)  # une memoryview de mybuf.
