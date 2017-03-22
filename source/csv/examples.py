@@ -1,4 +1,4 @@
-"""Exemples"""
+"""Exemple."""
 
 # func:import
 
