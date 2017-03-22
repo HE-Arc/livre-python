@@ -3,6 +3,7 @@
 from watchdog.events import FileSystemEventHandler
 from watchdog.events import PatternMatchingEventHandler
 
+
 class AuditHandler(FileSystemEventHandler):
     """Gestion d'audit."""
 
@@ -17,6 +18,8 @@ class AuditHandler(FileSystemEventHandler):
     def on_deleted(self, event):
         """Un fichier a été supprimé."""
         print("Le fichier %s a été supprimé" % event.src_path)
+
+
 class AuditHandlerMusic(PatternMatchingEventHandler):
     """Gestion d'audit."""
 
