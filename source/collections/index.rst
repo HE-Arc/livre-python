@@ -30,6 +30,7 @@ Voici donc les conteneurs dont nous allons parler:
 | defaultDict    | une sous classe de dictionnaire permettant de spécifier une valeur par défaut dans le constructeur   |
 +----------------+------------------------------------------------------------------------------------------------------+
 
+
 ------------
 namedtuple()
 ------------
