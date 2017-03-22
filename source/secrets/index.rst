@@ -42,7 +42,7 @@ Ce module fournit également des fonctions pour générer des jetons sécurisés
 Si *k*, *l* ou *m* ne sont pas renseignés, un nombre raisonnable sera utilisé par défaut.
 
 Pour résister à une attaque de `force brute`_, les jetons doivent être suffisament longs pour être suffisament aléatoires. Cependant, cette notion de suffisance reste assez vague. Plus les ordinateurs deviennent puissants, plus les jetons devront être longs afin de ralonger le temps nécessaire à une machine pour le découvrir.
-D'après la documentation python, des jetons de 32 bytes sont suffisament sécurisés.
+D'après la documentation python, des jetons de 32 bytes sont suffisament sécurisés à l'heure actuelle.
 
 Autre
 *****
@@ -73,6 +73,8 @@ Génération d'un jeton d'une longueur de 16 bytes pouvant être utilisé dans u
     >>> secrets.token_urlsafe(16)
     k84RkJMyMpX6e3qzVXRqcw
 
+On notera la différence de longueur des deux chaînes de 16 bytes. L'encodage utilisé dans la deuxième est à l'origine de cette différence.
+
 
 Utilisation d'un token
 
@@ -89,7 +91,7 @@ Conclusion
 ----------
 
 Le module :py:mod:`secrets` est un module destiné aux utilisateurs avancés ayant des besoins de sécurité supérieurs à la normale. 
-Il est simple d'utilisation et offre différents outils permettant la création de mots de passe et jetons sécurisés. Toutefois, ce module n'offre pas la sécurité absolue. Il est nécessaire de connaître le domaine de la sécurité avant d'utiliser les fonctions le composant en se disant que magiquement les données seront protégées. Par exemple, un token aléatoire de 8 bits ne tiendra pas longtemps face à une attaque de brute-force.
+Il est simple d'utilisation et offre différents outils permettant la création de mots de passe et jetons sécurisés. Toutefois, ce module n'offre pas la sécurité absolue. Il est nécessaire de connaître le domaine de la sécurité avant d'utiliser les fonctions le composant en se disant que magiquement les données seront protégées. Par exemple, un token aléatoire de 8 bytes ne tiendra pas longtemps face à une attaque de brute-force.
 
 
 
