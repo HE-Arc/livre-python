@@ -5,5 +5,5 @@ set -xe
 pycodestyle source
 pydocstyle source
 isort --check-only --diff --recursive source
-rstcheck source/index.rst
+find source -iname "*.rst" | xargs rstcheck --report 2
 sphinx-build -Wn -b html source target/doc/build

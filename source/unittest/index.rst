@@ -187,10 +187,14 @@ voici les étapes pour regrouper un 'TestSuite':
 
 2) Ajouter le 'testCase' avec la méthode addTest() ou  makeSuite():
 
-.. code-block:: python
+.. todo::
 
-    suite.addTest(testcase class)
-    suite = unittest.makeSuite(testcase class)
+    Le code suivant n'est pas du Python.
+
+    .. code-block:: text
+
+        suite.addTest(testcase class)
+        suite = unittest.makeSuite(testcase class)
 
 3) Créer une instance de la class TestTestRunner:
 
