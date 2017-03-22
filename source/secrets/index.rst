@@ -79,7 +79,9 @@ On notera la différence de longueur des deux chaînes de 16 bytes. L'encodage u
 Utilisation d'un token
 ----------------------
 
-L'image ci-dessous démontre l'utilisation de tokens. Lors de l'utilisation de l'`API Twitter`_, il est nécessaire de générer deux jetons qui seront envoyes à twitter lors de chaque demande de connexion. De ce fait, twitter peut vérifier que l'application qui a requis les informations est bien autorisée à le faire et qu'elle respecte le niveau de confidentialité enregistré dans les paramètres.
+L'image ci-dessous démontre l'utilisation de tokens. Pour qu'une application tierce puisse se connecter à l'`API Twitter`_, OAuth_ est utilisé pour lui fournir un accès sécurisé. Dans ce cas, deux jetons sont générés pour pouvoir se connecter. De ce fait, twitter peut vérifier que l'application qui a requis les informations est bien autorisée à le faire et qu'elle respecte le niveau de confidentialité enregistré dans les paramètres.
+
+Dans cet exemple, il n'y pas besoin d'utiliser les fonctions du module secrets. C'est Twitter qui fournit les jetons aux développeurs désireux d'implémenter dans leur application une connexion à l'API. Cependant, si l'on voulait créer un système de connexion personnel utilisant des jetons, il serait tout à fait possible de les générer en utilisant ce module.
 
 .. image:: ./img/exampleTwitterApi.PNG 
     :scale: 100%
@@ -106,3 +108,4 @@ Il est simple d'utilisation et offre différents outils permettant la création 
 .. _API: https://fr.wikipedia.org/wiki/Interface_de_programmation
 .. _attaques temporelles: https://fr.wikipedia.org/wiki/Attaque_temporelle
 .. _API Twitter: https://dev.twitter.com/oauth
+.. _OAuth: https://oauth.net
