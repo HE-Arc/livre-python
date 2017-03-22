@@ -1,8 +1,8 @@
 """Module d'exemple struct."""
 
 
-from struct import *
 from collections import namedtuple
+from struct import *
 
 
 # packing et unpacking de trois entiers.
