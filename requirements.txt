@@ -4,9 +4,10 @@ Sphinx
 invoke
 
 # QA
+isort
 pycodestyle
 pydocstyle
-isort
+rstcheck
 
 # JSON
 jsonschema
