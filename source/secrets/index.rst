@@ -35,7 +35,7 @@ Jetons
 ******
 Ce module fournit également des fonctions pour générer des jetons sécurisés, adaptés à des applications telles que des réinitialisations de mots de passe via des URL_ difficiles à deviner, des authentifications via API_ tierces, et d'autres utilisations similaires.
 
-- :py:func:`secrets.token_bytes(k) <secrets.token_bytes()>` retourne une chaine binaire composé de *k* bytes. 
+- :py:func:`secrets.token_bytes(k) <secrets.token_bytes()>` retourne une chaine binaire composé de *k* bytes.
 - :py:func:`secrets.token_hex(l) <secrets.token_hex()>` retourne une chaine de texte hexadécimale composée de *l* bytes convertis chacun en deux digits hexadécimaux.
 - :py:func:`secrets.token_urlsafe(m) <secrets.token_urlsafe()>` retourne une chaine de texte de *m* bytes utilisable dans une URL_. Le texte est encodé en base64_ donc chaque byte est représenté par environ 1.3 charactère.
 
@@ -83,7 +83,7 @@ L'image ci-dessous démontre l'utilisation de tokens. Pour qu'une application ti
 
 Dans cet exemple, il n'y pas besoin d'utiliser les fonctions du module secrets. C'est Twitter qui fournit les jetons aux développeurs désireux d'implémenter dans leur application une connexion à l'API. Cependant, si l'on voulait créer un système de connexion personnel utilisant des jetons, il serait tout à fait possible de les générer en utilisant ce module.
 
-.. image:: ./img/exampleTwitterApi.PNG 
+.. image:: ./img/exampleTwitterApi.PNG
     :scale: 100%
     :align: center
     :alt: twitter exemple of the use of tokens
