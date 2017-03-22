@@ -15,7 +15,7 @@ Le `Multiprocessing <https://docs.python.org/3.6/library/multiprocessing.html>`_
 
 Multiprocessing de python permet d'utiliser un ensemble de processus qui consumeront une liste de tâche contenue dans une queue.
 
-:py:mod:`multiprocessing` met en place le verrouillage global de l'interpréteur en utilisant des sous-processus au lieu des threads. De ce fait, le module multiprocessing permet au programmeur d'exploiter pleinement plusieurs processeurs sur une machine donnée. Il fonctionne sur Unix et Windows.
+:py:mod:`multiprocessing` evite de bloquer le GIL (Global Interpreter Lock) en utilisant des sous-processus au lieu des threads et offre de la concurence local et distant. De ce fait, le module multiprocessing permet au programmeur d'exploiter pleinement plusieurs processeurs sur une machine donnée. Il fonctionne sur Unix et Windows.
 
 Les classes
 -----------
@@ -32,11 +32,30 @@ Dans le main, nous appelonr la fonction info puis nous créons un objet Process 
 
 .. literalinclude:: ./exemples/process.py
 
-Queue
-^^^^^
-
 Pool
 ^^^^
+
+Avec la classe Pool on peut avoir un objet pool qui contient une pool de processus qui est capable d'accomplir les tâches qui lui seront soumises.
+Pool contient plusieurs méthodes
+
+Queues
+^^^^^^
+
+La classe Queue permet la communication entre deux processus.
+
+.. literalinclude:: ./exemples/queue.py
+
+Warning : Si un processus est "tué", les données risquent d'être corrompu dans la queue, ce qui signifie qu'un autre processus qui tenterait d'acceder à la file queue risquerait de soulever une exception.
+
+Pipe
+^^^^
+
+La classe Pipe permet aussi la communication entre deux processus.
+
+.. literalinclude:: ./exemples/pipe.py
+
+Warning : la méthode recv() efface les données qu'elle recoit, ce qui peut être un problème de sécurité, c'est pourquoi vous devriez utiliser une authentification avant d'utiliser les métodes recv() et send(). Si un processus est tué alors qu'il essaie de lire ou d'écrire dans le pipe, il risquerait de corrompre les données dans le pipe.
+
 
 Contexte et méthode de démarrage
 --------------------------------
@@ -52,12 +71,16 @@ Il y a plusieurs façon de demarrer un processus, le multiprocessing en contient
 			Quand le programme est lancé et lance la méthode forkserver.start(), depuis ce moement, chaque fois qu'un processus est nécessaire, un processus est demandé au serveur par le processus parent. Fonctionne que sur Linux
 
 
-Echange de données
-------------------
+Synchronisation entre les processus
+-----------------------------------
 
 
 Conclusion
 ----------
 
-.. [Ref] http://bioinfo.iric.ca/fr/faites-travailler-vos-cpus/
+Le module :py:mod:`multiprocessing` nous permet de gérer nos processeurs à notre guise.
 
+Reference
+---------
+
+.. [Ref] http://bioinfo.iric.ca/fr/faites-travailler-vos-cpus/
