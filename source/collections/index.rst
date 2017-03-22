@@ -40,19 +40,18 @@ namedtuple()
 tout d'abord avant d'utiliser les :py:class:`collections.namedtuple()` il faut comprendre ce qu'est un tuple.
 un tuple est une liste que l'on ne peut pas modifier après sa création.
 
-.. code-block:: python3
+.. code-block:: pycon
 
-  >>> myTuple = ("a", "b", "c")
-  >>> myTuple
+  >>> t = ("a", "b", "c")
+  >>> t
   ('a', 'b','c')
-  >>> myTuple[0]
+  >>> t[0]
   'a'
-  >>> myTuple[-1]
+  >>> t[-1]
   'c'
 
 ci-dessus on remarque qu'on peut atteindre les champs de notre tuple seulement en spécifiant son index.
 En utilisant la fonction ``namedtuple()`` pour créer notre tuple, on peut nommer ses champs.
-
 
 .. code-block:: pycon
 
