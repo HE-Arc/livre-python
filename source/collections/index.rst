@@ -40,18 +40,19 @@ namedtuple()
 tout d'abord avant d'utiliser les :py:class:`collections.namedtuple()` il faut comprendre ce qu'est un tuple.
 un tuple est une liste que l'on ne peut pas modifier après sa création.
 
-.. code-block:: pycon
+.. code-block:: python3
 
-  >>> t = ("a", "b", "c")
-  >>> t
+  >>> myTuple = ("a", "b", "c")
+  >>> myTuple
   ('a', 'b','c')
-  >>> t[0]
+  >>> myTuple[0]
   'a'
-  >>> t[-1]
+  >>> myTuple[-1]
   'c'
 
 ci-dessus on remarque qu'on peut atteindre les champs de notre tuple seulement en spécifiant son index.
 En utilisant la fonction ``namedtuple()`` pour créer notre tuple, on peut nommer ses champs.
+
 
 .. code-block:: pycon
 
@@ -115,7 +116,6 @@ elle est utile si on veut créer un nouveau tuple avec les champs d'un tuple exi
 
   >>> p._fields            # retourne les noms de champs
   ('x', 'y')
-
   >>> Color = namedtuple('Color', 'red green blue')
   >>> Pixel = namedtuple('Pixel', Point._fields + Color._fields) #on créé un nouveau tuple avec les champs de point et de color
   >>> Pixel(11, 22, 128, 255, 0)
@@ -124,6 +124,7 @@ elle est utile si on veut créer un nouveau tuple avec les champs d'un tuple exi
 -----
 deque
 -----
+
 la classe :py:class:`collections.deque` est une généralisation des liste et des piles. les deque sont thread-safe et supporte l'ajout d'une
 valeur de chaque côté *(pile, liste)*. La preformance lors de l'ajout d'une valeur peut importe le côté
 est de O(1). Même si les objets de type *list* supportent des opérations similaires elles sont plus optimisées
