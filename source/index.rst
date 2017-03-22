@@ -23,7 +23,6 @@ Table des matières
    itertools/index.rst
    invoke/index.rst
    json/index.rst
-<<<<<<< 70b8307f349532e1c649e99b8afdbedbc7f1a30c
    math/index.rst
    multiprocessing/index.rst
    re/index.rst
@@ -89,7 +88,3 @@ Table des matières
 
 :Licence:
         :ref:`licence`
-=======
-   collections/index.rst
-   licence.rst
->>>>>>> test de pull request 4
