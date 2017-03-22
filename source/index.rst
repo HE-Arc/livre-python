@@ -1,4 +1,4 @@
-﻿======================
+======================
  Bibliothèques Python
 ======================
 
@@ -10,7 +10,6 @@ Table des matières
 .. toctree::
    :maxdepth: 1
 
-   introduction.rst
    builtins/index.rst
    dunders/index.rst
    super/index.rst
