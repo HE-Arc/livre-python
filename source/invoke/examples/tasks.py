@@ -1,3 +1,6 @@
+"""Module de demonstration."""
+
+
 from invoke import task
 
 
