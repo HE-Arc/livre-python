@@ -1,7 +1,9 @@
+"""Exemple de lecture et écriture avec io."""
+
 try:
-    with open('input.txt', 'r') as is, :
+    with open('input.txt', 'r') as inputStream:
         with open('output.txt', 'w') as os:
-            os.write(is.read(10))
+            os.write(inputStream.read(10))
 except PermissionError:
     print("PermissionError")
 except OSError:

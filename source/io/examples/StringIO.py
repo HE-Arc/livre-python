@@ -1,3 +1,5 @@
+"""Exemple de gestion de flux avec io.StrionIO."""
+
 import io
 
 output = io.StringIO()
