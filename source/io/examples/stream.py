@@ -3,6 +3,6 @@ try:
         with open('output.txt', 'w') as os:
             os.write(is.read(10))
 except PermissionError:
-    #...
+    print("PermissionError")
 except OSError:
-    #...
+    print("OSError/IOError")
