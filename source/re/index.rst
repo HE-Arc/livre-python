@@ -22,26 +22,26 @@ On utilisera différents types de syntaxe comme :
 
 ::
 
-	^		Marque le début de la chaine, la ligne...
-	$		Marque la fin d'une chaine, ligne...
-	.		N'importe quel caractère
-	*		0, 1 ou plusieurs occurrences
-	+		1 ou plusieurs occurrences
-	?		0 ou 1 occurrence
-	|		Alternative - ou reconnaît l'un ou l'autre
-	[ ]		Tous les caractères énumérés dans la classe
-	[^ ]		Tous les caractères sauf ceux énumérés
-	( )		Utilisée pour limiter la portée d'un masque ou de l'alternative
+	^     Marque le début de la chaine, la ligne...
+	$     Marque la fin d'une chaine, ligne...
+	.     N'importe quel caractère
+	*     0, 1 ou plusieurs occurrences
+	+     1 ou plusieurs occurrences
+	?     0 ou 1 occurrence
+	|     Alternative - ou reconnaît l'un ou l'autre
+	[ ]   Tous les caractères énumérés dans la classe
+	[^ ]  Tous les caractères sauf ceux énumérés
+	( )   Utilisée pour limiter la portée d'un masque ou de l'alternative
 
 Ainsi que de groupes de caractères :
 
 ::
 
-	\w		Les lettres (w pour word)
-	\d		Les chiffres (d pour digit)
-	\s		Les espaces (s pour spaces)
-	[A-Z]		Les majuscules
-	[abd;_]		Les lettres a, b, et d, le point-virgule (;), et l’underscore (_)
+	\w      Les lettres (w pour word)
+	\d      Les chiffres (d pour digit)
+	\s      Les espaces (s pour spaces)
+	[A-Z]   Les majuscules
+	[abd;_] Les lettres a, b, et d, le point-virgule (;), et l’underscore (_)
 
 Prenons un exemple :
 
@@ -73,7 +73,7 @@ La fonction "match()" va permettre de vérifier la correspondance avec la chaîn
 
 .. code:: pycon
 
-	>>> print(re.match(r"B(.)?NJO(.)?R", "BONJOUR"))
+	>>> re.match(r"B(.)?NJO(.)?R", "BONJOUR")
 	<_sre.SRE_Match object; span=(0, 7), match='BONJOUR'>
 
 re.search()
@@ -118,11 +118,10 @@ re.split()
 .. code:: pycon
 
 	>>> import re
-	>>> sep = re.split("-","+91-011-2711-1111") # Without maxsplit
-	>>> print(sep)
+	>>> re.split("-","+91-011-2711-1111") # Without maxsplit
 	['+91', '011', '2711', '1111']
-	>>> sep = re.split("-","+91-011-2711-1111", maxsplit=1) # With maxsplit
-	>>> print(sep)
+	
+	>>> re.split("-","+91-011-2711-1111", maxsplit=1) # With maxsplit
 	['+91', '011-2711-1111']
 
 re.sub()
@@ -145,6 +144,7 @@ Afin de remplacer des données, on peut passer par la fonction "sub()" :
 	>>> num = re.sub(r'#.*$', "", phone) # Suppresion des guillemets
 	>>> print("Phone Num : ", num)
 	Phone Num :  2004-959-559
+	
 	>>> num = re.sub(r'\D', "", phone) # Suppresion de tout sauf les digits 
 	>>> print( "Phone Num : ", num)
 	Phone Num :  2004959559
@@ -163,11 +163,14 @@ Si, dans votre programme, vous utilisez plusieurs fois les mêmes expressions r�
 .. code:: pycon
 
 	>>> import re
-	>>> regex = re.compile('Python')
-	>>> my_str = "I'm glad O'Reilly has Python courses and books!"
-	>>> result = regex.search(my_str)
-	>>> print(result)
-	<_sre.SRE_Match object; span=(22, 28), match='Python'>
+	>>> batRegex = re.compile(r'Bat(wo)?man')
+	>>> mo1 = batRegex.search('The Adventures of Batman')
+	>>> mo1.group()
+	'Batman'
+
+	>>> mo2 = batRegex.search('The Adventures of Batwoman')
+	>>> mo2.group()
+	'Batwoman'
 
 Conclusion
 ----------
