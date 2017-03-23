@@ -68,13 +68,20 @@ Pour afficher des apostrophes il y a trois solutions:
 raw f-strings		
 -------------
 	
-Un f-strings converti automatiquement les échapements avec des backslash comme par exemple : '\\n' , '\\"' , "\\'" , '\\xhh' , '\\uxxxx' , '\\Uxxxxxxxx'. Donc si on ne veut pas que python interprète ces échappement il faut utiliser les raw f-string en ecriant fr avant la chaine de caractères et non f.
+Un f-strings converti automatiquement les échapements avec des backslash comme par exemple : '\\n' , '\\"' , "\\'" , '\\xhh' , '\\uxxxx' , '\\Uxxxxxxxx'. Donc si on ne veut pas que python interprète ces échappements il faut utiliser les raw f-string en ecrivant fr avant la chaine de caractères et non f.
 
 .. code-block:: pycon
 
-		>>> print(fr'\n ma phrase')
+		>>> print(f'ma \n phrase')
 		
-		\n ma phrase
+		ma 
+		 phrase
+
+		>>> print(fr'ma \n phrase')
+		
+		ma \n phrase
+
+		
 	
 	
 
