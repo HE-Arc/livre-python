@@ -22,11 +22,13 @@ Référence faible
 .. warning::
     Tous les objects ne supporte pas les weakref. Par exemple les list et les dict ne supporte pas directement les weakref mais peuvent le faire si l'on les sous classe. Pour plus d'information sur les objets supporter `Weakref support`_
 
+Garbage collector
+"""""""""""""""""
 
-Example d'utilisation
+Exemple d'utilisation
 ---------------------
 
-Dans cet example nous allons montrer l'utilité que peut avoir l'utilisation des weakref. Prenons la classe trivial ci-dessous:
+Dans cet exemple nous allons montrer l'utilité que peut avoir l'utilisation des weakref. Prenons la classe trivial ci-dessous:
 
 .. code-block:: python3
 
@@ -58,7 +60,10 @@ Alors que si nous n'avions qu'une seul référence forte sur l'objet et une faib
 	>>> del a
 	destroyed
 
-L'utilité des weakref n'est pas des plus optimal dans cet example basic. Nous allons donc maintenant rajouter une méthode à notre class. Ce qui va nous permettre d'experimenter les références cyclique (c'est un objet qui a dans ces propriété une référence au même type que lui).
+Exemple n°2
+-----------
+
+L'utilité des weakref n'est pas des plus optimal dans cet exemple basic. Nous allons donc maintenant rajouter une méthode à notre class. Ce qui va nous permettre d'experimenter les références cyclique (c'est un objet qui a dans ces propriété une référence au même type que lui).
 
 .. code-block:: python3
 
@@ -86,8 +91,6 @@ Maintenant si nous tentons de faire des références cyclique sur notre objet. L
 
 Conclusion
 ----------
-
-
 
 
 .. [#ya] <anthony.gillioz@he-arc.ch>
