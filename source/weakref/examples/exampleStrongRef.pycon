@@ -1,0 +1,6 @@
+>>> a = ExampleWeakref()
+created
+>>> b = a
+>>> del a
+>>> del b
+destroyed

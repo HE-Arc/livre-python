@@ -1,0 +1,6 @@
+>>> import weakref
+>>> a = ExampleWeakref()
+created
+>>> b = weakref.ref(a)
+>>> del a
+destroyed
