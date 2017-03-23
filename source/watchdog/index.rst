@@ -24,7 +24,7 @@ Fonctionnement
 Traitement de l'événement
 =========================
 
-Pour intercepter les événements il faut créer un class qui va contenir les fonctions par événements.
+Pour intercepter les événements il faut créer une classe qui va contenir les fonctions par événements.
 
 Un exemple d'une classe pour un système d'audit :
 
@@ -49,7 +49,7 @@ Liste d'événements interceptable :
 ``on_created``    Création d'un fichier / dossier
 ``on_deleted``    Suppression d'un fichier / dossier
 ``on_moved``      Déplacement / renomage d'un fichier / dossier
-``on_any_event``  Dans tous le cas au-dessus
+``on_any_event``  Dans tous les cas ci-dessus
 ================  =============================================
 
 L'objet ``event`` est une instance de la classe ``FileSystemEvent``.
@@ -61,13 +61,13 @@ Attribut            Description
 ``event_type``      Le type d'événement en string
 ``is_directory``    Boolean signalant si l'événement s'applique à un dossier
 ``src_path``        Chemin du fichier ayant lancé l'événement
-``dest_path``       Fichier vers de destination (Uniquement lors ``on_moved``)
+``dest_path``       Fichier de destination (Uniquement lors d'un ``on_moved``)
 =================   ===========================================================
 
 Interception de l'événement
 ===========================
 
-La classs doit, ensuite, être liée à un observateur.
+La classe doit, ensuite, être liée à un observateur.
 C'est ici que nous spécifierons le dossier qui devra être observer.
 
 .. code-block:: python3
@@ -79,7 +79,7 @@ C'est ici que nous spécifierons le dossier qui devra être observer.
   observer.schedule(eventhandler.AuditHandler(), path='U:', recursive=True) # Création du lien
   observer.start() # Démarrage de l'observateur
 
-Dans ce cas l'observateur surveille le dossier ``"U:"`` de manière recursive.
+Dans ce cas, l'observateur surveille le dossier ``"U:"`` de manière recursive.
 
 Bloquer le script
 =================
