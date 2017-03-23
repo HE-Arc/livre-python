@@ -25,9 +25,9 @@ Référence faible
 Les références failbes (weakref) permettent de créer des références sur des objets sans augmenté le compteur du garbage collector.
 Le module :py:mod:`weakref` permet de créer et utilisé les weak références sur les objets.
 
-:py:func:`~weakref.ref()`:
+**weakref.ref()**
     Retourne une weak référence de l'objet;
-:py:func:`~weakref.proxy()`:
+**weakref.proxy()**
     Retourne une weak référence de l'objet, mais génère une erreur si l'objet qui essaie d'être atteint n'exite pas;
 
 .. warning::
