@@ -1,7 +1,7 @@
 """Exemple de dessin d'un graphe de networkX."""
 
-import networkx
 import matplotlib.pyplot as plt
+import networkx
 
 G1 = nwx.Graph()
 G1.add_nodes_from([1, 2, 3])
