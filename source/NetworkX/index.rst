@@ -20,7 +20,7 @@ ensuite découvrire les différentes sortes de graphes ainsi que les opérations
 et finalement comprendre les différents types d'affichages de graphes.
 
 Instanciation
--------
+-------------
 
 Voici un exemple d'instanciation d'un graphe simple avec NetworkX.
 Comme NetworkX prend nimporte quel objet hashable comme noeud, l'exemple prendra
@@ -29,14 +29,14 @@ des int.
 .. literalinclude:: ./examples/instanciation.py
 
 Opération sur des graphes
-----------
+-------------------------
 
 NetworkX permet différentes opérations sur les graphes. En voici un exemple :
 
 .. literalinclude:: ./examples/OperationGraphes.py
 
 Dessin d'un graphe
---------------
+------------------
 
 NetworkX n'est pas fait spécialement pour dessiner un graphe.
 
