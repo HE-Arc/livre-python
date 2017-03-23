@@ -4,11 +4,17 @@
 ``itertools``
 =============
 
+.. image:: img\python_logo.png
+    :scale: 40%
+    :align: right
+    :alt: lock logo
+    :target: https://www.iconfinder.com/icons/282809/logo_python_icon#size=512
+
 Par Johnny Da Costa [#jd]_
 
 Introduction
 ------------
-Le module itertools de Python nous propose un bon nombre de générateurs prêts à l'emploi. Qu'est-ce qu'un générateur ou un itérateur ? Pour comprendre ça, nous allons utiliser un exemple très simple. Imaginez que vous avez une liste et que vous voulez l'afficher. La première chose qui nous vient en tête est d'utiliser une boucle.
+Le module itertools de Python nous propose un bon nombre de générateurs prêts à l'emploi. Qu'est-ce qu'un générateur ou un itérateur ? Que permettent les Itérateurs. Pour comprendre ça, nous allons utiliser un exemple très simple. Imaginez que vous avez une liste et que vous voulez l'afficher. La première chose qui nous vient en tête est d'utiliser une boucle.
 
 .. code-block:: pycon
 
@@ -76,11 +82,19 @@ Exemple inspiré de la documentation Python : `Python3Doc`_
 
 - troisième étape utiliser notre itertools perso!
 
+.. code-block:: pycon
+
+    >>> liste = revList(list(islice(count(), 0, 10)))
+    >>> for i in liste:
+            print(i)
+        9
+        8
+        ...
 
 Les générateurs
 -----------------
 Les générateurs et les itérateurs sont intimement liés. Pour faire simple, un générateur est une fonction construite à l'aide
-du mot clef **yield**. Mais contrairement aux fonctions habituelles, elle n'a pas de **return**, mais ou plusieurs **yield**.
+du mot clef **yield**. Mais contrairement aux fonctions habituelles, elle n'a pas de **return**, mais un ou plusieurs **yield**. Mais à quoi servent-ils ? Ce sont en fait des objets **itérable**, c'est à dire qu'ils vont à chaque passage nous renvoyé différentes valeurs. Pour les récupérer soit une boucle classique **for ... in ... :** ou bien la méthode **next**.
 
 Un petit exemple simple :
 
@@ -150,12 +164,31 @@ Sortie :
     >>> print(distance)
     0
 
+Un peu de design pattern
+-------------------------
+Tout le monde utilise ce modèle de conception sans même le connaître vraiment. Imaginez le cas on nous voudrions itérer sur un répertoire pour obtenir son contenu ou appliquer un traitement sur chacun des fichiers. Sans  l'approche itérateur,  ils nous faudraient recupérer un flux sur le dossier courant est d'utiliser un **while** pour parcourir tout notre arborescence. Mais imaginons que notre problème change et que nous ne devons plus itérer sur un répertoire mais sur un autre type de structure... Et on est repartie pour réecrire du code fastidueux et compliqué. 
+
+Avec l'utilisation d'itérateur notre programme devient tout de suite plus robuste et plus élégant. Un gros avantage avec ce pattern est que si notre structure change il nous suffit d'adapter son comportement sur cette objet (`décorateur`_) pour lui indiquer comment itérer sur cette objet. Grâce à ça, nous cachons la compléxité de parcours à notre client qui ne se rend même pas compte de ce qui se passent réelement. Python implémente ce modèle de conception donc il serai dommage de ne pas en profiter !.
+
+Voici un exemple de parcour de fichier avec notre pattern qui est bien caché derrière tous ça.
+
+.. code-block:: pycon
+
+    >>> for element in os.listdir('./'):
+            if os.path.isdir(element):
+                print("'%s' un dossier" % element)
+            else:
+                print("'%s' est un fichier" % element)
+
 Conclusion
 -------------
 
-Itertools est un module permettant de faire des choses simpas avec cet objet qu'est l'itérateur. Ces itérateurs sont vraiment utile et important que Python a dédié un module pour les opérations d'itération qui sont les itertools.
+Itertools est un module permettant de faire des choses simpas avec cet objet qu'est l'itérateur. Ils sont tellement utile et important que Python a dédié un module pour les opérations d'itération qui sont les itertools. L'itérateur apporte un niveau d'abstraction (couche de code en plus pour réaliser une action.) L'avantage est que l'itérateur est un objet qui coûte `peu en utilisation mémoire`_. La syntaxe est peu plus élégante car on va masquer au client la complexité de notre code. Les itérateurs nous permettent d'itérer sur toute sorte de structure de données, ce qui rend notre code plus robuste et reutilisable.
 
 .. [#jd] <johnny.dacosta@he-arc.ch>
 
 .. _zeste de savoir: https://zestedesavoir.com/tutoriels/954/notions-de-python-avancees/5-generators/
 .. _Python3Doc : https://docs.python.org/3/tutorial/classes.html#iterators
+.. _peu en utilisation mémoire : http://apprendre-python.com/page-iterateurs-iterator-generateur-generator-python
+.. _itérateur : https://fr.wikipedia.org/wiki/Itérateur
+.. _décorateur : https://fr.wikipedia.org/wiki/D%C3%A9corateur_(patron_de_conception)

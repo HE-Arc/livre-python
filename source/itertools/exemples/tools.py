@@ -60,4 +60,4 @@ def sayHello(name):
     """SayHello(name)."""
     yield "Bienvenu, "
     yield  # return none
-    yield name
+    yield names

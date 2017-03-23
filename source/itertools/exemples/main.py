@@ -1,5 +1,6 @@
 """Exemple principale."""
 
+import os
 from itertools import chain, cycle
 
 
@@ -26,3 +27,11 @@ print(distances)
 distance = sum(distances)
 print(distance)
 # sortie_end
+
+# parcours_de_fichier_begin
+for element in os.listdir('./'):
+    if os.path.isdir(element):
+        print("'%s' un dossier" % element)
+    else:
+        print("'%s' est un fichier" % element)
+# parcours_de_fichier_end
