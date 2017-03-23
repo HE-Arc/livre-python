@@ -3,7 +3,7 @@
 ------------------------------------------
 
 Python est un langage assez petit et rapide à aborder, via par exemple
-:ref:`tutorial-index`. Cependant le nombre de modules pouvant être utilisés
+:py:ref:`tutorial-index`. Cependant le nombre de modules pouvant être utilisés
 est gigantesque, plus de 95'000 sur `PyPI <https://pypi.python.org/pypi>`_ fin
 2016.
 
