@@ -73,9 +73,11 @@ La fonction "match()" va permettre de vérifier la correspondance avec la chaîn
 
 .. code:: python
 
-	print re.match(r"B(.)?NJO(.)?R", "BONJOUR")
+	print(re.match(r"B(.)?NJO(.)?R", "BONJOUR"))
+	
+La sortie :	
 
-.. code:: python
+::
   
 	# true
 	<_sre.SRE_Match object at 0x7f61685fc690>
@@ -104,19 +106,19 @@ Afin de rechercher une expression, on utilisera la fonction "search()" :
 	searchObj = re.search( r'(.*) are (.*?) .*', line, re.M|re.I)
 
 	if searchObj:
-	   print "searchObj.group() : ", searchObj.group()
-	   print "searchObj.group(1) : ", searchObj.group(1)
-	   print "searchObj.group(2) : ", searchObj.group(2)
+	   print("searchObj.group() : ", searchObj.group())
+	   print("searchObj.group(1) : ", searchObj.group(1))
+	   print("searchObj.group(2) : ", searchObj.group(2))
 	else:
-	   print "Nothing found!!"
+	   print("Nothing found!!")
 
-Sortie :
+La sortie :
 
-.. code:: python
+::
 
-	matchObj.group() :  Cats are smarter than dogs
-	matchObj.group(1) :  Cats
-	matchObj.group(2) :  smarter
+	('searchObj.group() : ', 'Cats are smarter than dogs')
+	('searchObj.group(1) : ', 'Cats')
+	('searchObj.group(2) : ', 'smarter')
 
 re.split()
 ----------
@@ -135,15 +137,15 @@ re.split()
         
 	# Without maxsplit
 	sep = re.split("-","+91-011-2711-1111")
-	print spe
+	print(spe)
 
 	# With maxsplit
 	sep = re.split("-","+91-011-2711-1111", maxsplit=1)
-	print spe
+	print(spe)
 
 La sortie :
 
-.. code:: python
+::
 
 	# Without maxsplit
 	['+91', '011', '2711', '1111']
@@ -172,15 +174,15 @@ Afin de remplacer des données, on peut passer par la fonction "sub()" :
         
     # Suppresion des guillemets
 	num = re.sub(r'#.*$', "", phone)
-	print "Phone Num : ", num
+	print("Phone Num : ", num)
 	
 	# Suppresion de tout sauf les digits
 	num = re.sub(r'\D', "", phone)    
-	print "Phone Num : ", num
+	print( "Phone Num : ", num)
 
 La sortie :
 
-.. code:: python
+::
 
 	Phone Num :  2004-959-559
 	Phone Num :  2004959559
@@ -205,13 +207,13 @@ Si, dans votre programme, vous utilisez plusieurs fois les mêmes expressions r�
 	name = raw_input ("Please, enter your name: ")
 
 	while name_check.search(name):
-		print "Please enter your name correctly!"
+		print("Please enter your name correctly!")
 		name = raw_input ("Please, enter your name: ")
-	print "Welcome !"
+	print("Welcome !")
 
 La sortie :
 
-.. code:: python
+::
 
 	Please, enter your name:  12
 	Please enter your name correctly!
