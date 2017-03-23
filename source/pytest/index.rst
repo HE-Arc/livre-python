@@ -196,7 +196,7 @@ TempdirFactory.getbasetemp() : return la base du dossier temporaire.
 The default base temporary directory
 ------------------------------------
 
-Les répertoires temporaires sont crées par défaut comme sous-répertoire dans le répertoire temporaire du système.
+Les répertoires temporaires sont créés par défaut comme sous-répertoire dans le répertoire temporaire du système.
 Le nom de base sera "pytest-NUM". Le NUM est un nombre qui est incrémenter à chaque exécution.
 De plus, les entrées plus vielles de 3 dossiers temporaires sont supprimées.
 
@@ -237,7 +237,7 @@ Cela permet de lancer le système de capture des outputs. Une fois le test des f
 capsys
 ~~~~~~
 
-Capsys est un moyen de réalisé les tests sans se soucier des paramètres et des réinitialisation des outputs.
+Capsys est un moyen de réalisé les tests sans se soucier des paramètres et des réinitialisations des outputs.
 
 capfd
 ~~~~~
