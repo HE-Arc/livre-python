@@ -119,6 +119,7 @@ faciliter l'utilisation de la librairie sphinx en générant des pages HTML avec
 fichiers écrits au format rst (comme celui-ci)
 
 .. literalinclude:: ./examples/basic-sphinx.py
+   :linenos:
 
 La première ligne sert évidemment à importer les éléments de la librairies Invoke
 avec lesquels on désir travailler. Ici en l'occurence comme dans tous les programme utilisant
@@ -141,7 +142,7 @@ le contexte et de passer en argument une chaîne de caractère pour lancer la co
 On peut également mettre en place un système plus poussé qui va par exemple nettoyer
 le dossier de destination avant de générer le contenu HTML
 
-.. literalinclude:: ./examples/tasks.py
+.. literalinclude:: ../../tasks.py
     :linenos:
     :start-after: # html start
     :end-before: # checks start
@@ -187,7 +188,7 @@ les checks du code et de la doc.
 Les checks restent simple à mettre en place car il s'agit uniquement de commande à lancer
 on ne cherche pas ici à avoir un comportement différent selon leur résultat
 
-.. literalinclude:: ./examples/tasks.py
+.. literalinclude:: ../../tasks.py
   :linenos:
   :language: python
   :start-after: # checks start
