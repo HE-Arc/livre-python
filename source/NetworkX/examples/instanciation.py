@@ -19,11 +19,11 @@ G.add_edge(1, 2)  # création d'un pont dans le graphe
 e = (2, 3)
 G.add_edge(*e)  # ajout d'un pont déjà existant
 G.add_edges_from([(1, 2), (1, 3)])  # ajout de plusieurs edges
-G.remove_edge(1, 2)  
-# suppression du pont (1,2) on peut aussi supprimer des 
-#groupes de ponts et des noeuds de la même façon avec 
-#Graph.remove_node(), Graph.remove_nodes_from(),   
-#Graph.remove_edges_from()
+G.remove_edge(1, 2)
+# suppression du pont (1,2) on peut aussi supprimer des
+# groupes de ponts et des noeuds de la même façon avec
+# Graph.remove_node(), Graph.remove_nodes_from(),
+# Graph.remove_edges_from()
 
 G.clear()  # supprime tout les noeuds et ponts du graphe
 
@@ -65,4 +65,3 @@ MG.add_weighted_edges_from([(1, 2, 0.5), (3, 1, 0.75)])
 
 # code pris sur :
 # https://networkx.github.io/documentation/networkx-1.10/tutorial/tutorial.html
-

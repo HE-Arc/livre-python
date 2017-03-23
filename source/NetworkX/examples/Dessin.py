@@ -8,7 +8,7 @@ G1.add_nodes_from([1, 2, 3])
 
 # dessin avec Mathplotlib
 
-nx.draw(G)  # on peut aussi essayer avec : 
+nx.draw(G)  # on peut aussi essayer avec :
 # nx.draw_random(G), nx.draw_circular(G), nx.draw_spectral(G)
 
 plt.show()  # pour afficher ensuite
