@@ -1,4 +1,4 @@
-.. _fstrings-tutorial:
+Ôªø.. _fstrings-tutorial:
 
 =========
 f-strings
@@ -9,12 +9,12 @@ Ecrit par : Thibaut Piquerez
 ------------
 Introduction
 ------------
-f-strings permet d'insÈrer des expressions dans des chaines de caractËres en utilisant une syntaxe minimale.
+f-strings permet d'ins√©rer des expressions dans des chaines de caract√®res en utilisant une syntaxe minimale.
 
 --------------
 Fonctionnement
 --------------
-Pour utiliser f-strings il suffit de mettre un f devant la chaine de caractËres et pour insÈrer la valeur d'une variable dans la chaine il suffit de mettre la variable entre accolade.
+Pour utiliser f-strings il suffit de mettre un f devant la chaine de caract√®res et pour ins√©rer la valeur d'une variable dans la chaine il suffit de mettre la variable entre accolade.
 
 .. code-block:: pycon
 
@@ -27,7 +27,7 @@ Pour utiliser f-strings il suffit de mettre un f devant la chaine de caractËres 
 -----------	
 Echappement
 -----------
-Certain cractËres ne peuvent pas Ítre afficher tel quel il est nÈcaissaire de les Èchapper.
+Certain cract√®res ne peuvent pas √™tre afficher tel quel il est n√©caissaire de les √©chapper.
 
 Pour les accolade {} il faut en mettre 2 a la suite:
 
@@ -44,31 +44,31 @@ Pour afficher des apostrophes il y a trois solutions:
 	
 	.. code-block:: pycon
 	
-		>>> print(f"ma chaine de caractËres avec des 'apostrophes' ")
+		>>> print(f"ma chaine de caract√®res avec des 'apostrophes' ")
 		
-		ma chaine de caractËres avec des 'apostrophes' 
+		ma chaine de caract√®res avec des 'apostrophes' 
 		
 	Mettre la chaine entre 3 apostrophes :
 	
 	.. code-block:: pycon
 	
-		>>> print(f'''ma chaine de caractËres avec des 'apostrophes' ''')
+		>>> print(f'''ma chaine de caract√®res avec des 'apostrophes' ''')
 		
-		ma chaine de caractËres avec des 'apostrophes' 
+		ma chaine de caract√®res avec des 'apostrophes' 
 
 	Mettre des backslash avant les apostrophes :
 
 	.. code-block:: pycon
 	
-		>>> print(f'''ma chaine de caractËres avec une \'apostrophe ''')
+		>>> print(f'''ma chaine de caract√®res avec une \'apostrophe ''')
 		
-		ma chaine de caractËres avec des 'apostrophes
+		ma chaine de caract√®res avec des 'apostrophes
 
 -------------		
 raw f-strings		
 -------------
 	
-Un f-strings converti automatiquement les Èchapements avec des backslash comme par exemple : '\\n' , '\\"' , "\\'" , '\\xhh' , '\\uxxxx' , '\\Uxxxxxxxx'. Donc si on ne veut pas que python interprËte ces Èchappements il faut utiliser les raw f-string en ecrivant fr avant la chaine de caractËres et non f.
+Un f-strings converti automatiquement les √©chapements avec des backslash comme par exemple : '\\n' , '\\"' , "\\'" , '\\xhh' , '\\uxxxx' , '\\Uxxxxxxxx'. Donc si on ne veut pas que python interpr√®te ces √©chappements il faut utiliser les raw f-string en ecrivant fr avant la chaine de caract√®res et non f.
 
 .. code-block:: pycon
 
