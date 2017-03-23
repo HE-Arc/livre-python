@@ -1,10 +1,14 @@
-Pytest
-******
+.. image:: pytest.png
+   :height: 300px
+   :width: 486 px
+   :scale: 50 %
+   :alt: alternate text
+   :align: center
 
 Introduction
 ============
 
-Pytest est un framework permettant de faire des tests et de vérifier si les différente condition sont juste ou fausse.
+Pytest est un framework permettant de faire des tests et de vérifier si les différentes conditions sont juste ou fausse.
 Il permet de tester les éléments un à un mais on peut aussi lui demander de faire une série de test.
 Ces méthodes de test dépendent de comment l'on implémente dans notre code.
 Dans ce document, je vais traiter plusieurs systèmes de test.
@@ -59,8 +63,7 @@ Code
 Modulaire
 ---------
 
-On peut aussi utiliser un fixture dans un autre fixture. Dans notre exemple,
-nous allons instancier un objet "app" dans lequel nous allons y ajouter la ressource "smtp" (la ressource est déjà définie).
+On peut aussi utiliser un fixture dans un autre fixture. Dans notre exemple, nous allons instancier un objet "app" dans lequel nous allons y ajouter la ressource "smtp" (la ressource est déjà définie).
 
 Code
 ~~~~
@@ -84,9 +87,9 @@ Exception
 =========
 
 Afin de gérer les exceptions, il faut utiliser "pytest.raises".
-En utilisant pytest.raises, on peut délibéremment tester nos exceptions.
-Un autre system (pytest.mark.xfail), permet de tester aussi les exeptions.
-Il est surtout utiliser pour trouver des bugs dans des dépendances.
+En utilisant pytest.raises, on peut délibérément tester nos exceptions.
+Un autre system (pytest.mark.xfail), permet de tester aussi les exceptions.
+Il est surtout utilisé pour trouver des bugs dans des dépendances.
 
 Simple exception
 ----------------
@@ -106,14 +109,13 @@ Code
 Test expression régulière
 -------------------------
 
-Si on veux tester la correspondance d'une expressions régulière qui représente un exception,
-on peut utiliser "ExceptionInfo.match".
+Si on veut tester la correspondance d'une expression régulière qui représente un exception, on peut utiliser "ExceptionInfo.match".
 
 Exemple
 ~~~~~~~
 
-Dans l'exemple ci-dessous, on va regarder l'exeption qui contient le 123.
-Cela peut être utiliser dans une longue liste, et on en recherche que une seule.
+Dans l'exemple ci-dessous, on va regarder l'exception qui contient le 123.
+Cela peut être utiliser dans une longue liste, et on en recherche qu'une seule.
 
 .. code-block:: pycon
 
@@ -128,7 +130,7 @@ Cela peut être utiliser dans une longue liste, et on en recherche que une seule
 Temporary directories and files
 ===============================
 
-Dans cette partie, nous allons voir l'utilisation des fichier et des dossiers temporaires.
+Dans cette partie, nous allons voir l'utilisation des fichiers et des dossiers temporaires.
 
 tmpdir
 ------
@@ -157,8 +159,8 @@ Cette fonction permet de créer un autre répertoire pour n'importe quel autre f
 Exemple
 ~~~~~~~
 
-Dans cette exemple, on va imaginer que notre test demande une grande part du disque.
-On va générer cette partie procédurallement. On va donc calculer et attribué l'espace à chaque session du test.
+Dans cet exemple, on va imaginer que notre test demande une grande part du disque.
+On va générer cette partie procéduralement. On va donc calculer et attribué l'espace à chaque session du test.
 
 Code
 ~~~~
@@ -188,9 +190,9 @@ TempdirFactory.getbasetemp() : return la base du dossier temporaire.
 The default base temporary directory
 ------------------------------------
 
-Les répertoires temporaires sont créer par défaut comme sous-répertoire dans le répertoire temporaire du système.
+Les répertoires temporaires sont crées par défaut comme sous-répertoire dans le répertoire temporaire du système.
 Le nom de base sera "pytest-NUM". Le NUM est un nombre qui est incrémenter à chaque exécution.
-De plus, les entrées plus vielles de 3 dossier temporaires sont supprimées.
+De plus, les entrées plus vielles de 3 dossiers temporaires sont supprimées.
 
 Modifier le dossier temporaire
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -204,7 +206,7 @@ Capture
 =======
 
 Pour réaliser une capture, il faut utiliser les fixtures capsys et capfd.
-Cest deux fixtures permettent l'accès aux entrées-sorties durant la phase de test.
+Ces deux fixtures permettent l'accès aux entrées-sorties durant la phase de test.
 
 Simple exemple
 --------------
@@ -229,7 +231,7 @@ Cela permet de lancer le système de capture des outputs. Une fois le test des f
 capsys
 ~~~~~~
 
-Capsys est un moyen de réalisé les test sans se soucier des paramètres et des réinitialisation des outputs.
+Capsys est un moyen de réalisé les tests sans se soucier des paramètres et des réinitialisation des outputs.
 
 capfd
 ~~~~~
@@ -244,7 +246,7 @@ On peut choisir de désactiver la capture afin de ne pas enregistrer certaines i
 Exemple
 ~~~~~~~
 
-Dans le morceau de code ci-dessous, l'avant-dernière ligne ne sera pas enregistrer, car elle fait parti du block du while.
+Dans le morceau de code ci-dessous, l'avant-dernière ligne ne sera pas enregistrée, car elle fait partie du block du while.
 
 .. code-block:: pycon
 
@@ -256,3 +258,5 @@ Dans le morceau de code ci-dessous, l'avant-dernière ligne ne sera pas enregist
 
 Conclusion
 ==========
+
+Pytest est un outil très puissant quand il s'agit de faire toute sortes de tests. De plus, il dispose d'un large panel de compléments, ce qui lui permet un plus grande maniabilité et adaptation en fonction de nos besoins.
