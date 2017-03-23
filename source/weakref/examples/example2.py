@@ -1,3 +1,5 @@
+"""This is an example of a circular reference"""
+
 class CircularRef(object):
     def __init__(self):
         self.obj = None
