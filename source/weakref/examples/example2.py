@@ -1,10 +1,10 @@
 class CircularRef(object):
     def __init__(self):
         self.obj = None
-        print ('created')
+        print('created')
 
     def __destroy__(self):
-        print ('destroy')
+        print('destroy')
 
     def store(self,obj)
         self.obj = obj
