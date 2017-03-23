@@ -1,4 +1,4 @@
-======================
+﻿======================
  Bibliothèques Python
 ======================
 
@@ -45,6 +45,7 @@ Table des matières
    watchdog/index.rst
    datetime/index.rst
    binary/index.rst
+   NetworkX/index.rst
 
 
 À propos de ce livre
@@ -61,6 +62,7 @@ Table des matières
  - Christophe Hirschi <christophe.hirshi@he-arc.ch>
  - Cédric Pahud <cedric.pahud@he-arc.ch>
  - Dany Chea <dany.chea@he-arc.ch>
+ - Deni Gahlinger <deni.gahlinger@he-arc.ch>
  - Dylan Santos de Pinho <dylan.santosdeppinho@he-arc.ch>
  - Florian Fasmeyer <florian.fasmeyer@he-arc.ch>
  - Gabriel Griesser <gabriel.griesser@he-arc.ch>
