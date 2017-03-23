@@ -83,8 +83,8 @@ Maintenant si nous tentons de faire des références cyclique sur notre objet. L
 	>>> a = ExampleWeakref()
 	created
 	>>> b = ExampleWeakref()
-	created
-	>>> a.store(b)
+     created
+     >>> a.store(b)
 	>>> b.store(a)
 	>>> del a
 	>>> del b

@@ -9,7 +9,7 @@ Table des matières
 
 .. toctree::
    :maxdepth: 1
-   
+
    builtins/index.rst
    dunders/index.rst
    super/index.rst
@@ -85,24 +85,6 @@ Table des matières
  - Yoan Blanc <yoan.blanc@he-arc.ch>
 
 :Date:  2017-03-16
-=======
-         - Adrien Mendes <adrien.mendes@he-arc.ch>,
-         - André Neto Da Silva <andre.netodas@he-arc.ch>,
-         - Anthony Fleury <anth.fleury@gmail.com>,
-	 - Anthony Gillioz <anthony.gillioz@he-arc.ch>,
-         - Axel Rieben <axel.rieben@he-arc.ch>,
-         - Cédric Pahud <cedric.pahud@he-arc.ch>,
-         - Dany Chea <dany.chea@he-arc.ch>,
-         - Dylan Santos de Pinho <dylan.santosdeppinho@he-arc.ch>,
-         - Julien Feuillade <julien.feuillade@he-arc.ch>,
-         - Killian Castella <killian.castella@he-arc.ch>,
-         - Maël Pedretti <mael.pedretti@hotmail.fr>,
-         - Pedro Costa <pedro.costa@he-arc.ch>,
-         - Quentin Vaucher <quentin.vaucher@protonmail.com>,
-         - Sylvain Renaud <sylvain.renaud@he-arc.ch>,
-         - Guillaume Noguera <guillaume.noguera@he-arc.ch>,
-         - Yoan Blanc <yoan.blanc@he-arc.ch>
-:Date:  2017-03-15
->>>>>>> stil correcting errors
+
 :Licence:
         :ref:`licence`
