@@ -7,4 +7,4 @@ class ExampleWeakref(object):
         print('destroy')
 
     def store(self, obj)
-       self.obj = obj
+        self.obj = obj

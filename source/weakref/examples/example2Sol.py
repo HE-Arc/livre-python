@@ -1,6 +1,5 @@
 import weakref
 
-
 class CircularRef(object):
     def __init__(self):
         self.obj = None
@@ -10,7 +9,7 @@ class CircularRef(object):
         print('destroy')
 
     def store(self, obj)
-       self.obj = weakref.ref(obj)
+        self.obj = weakref.ref(obj)
 
     """
     Solution équivalente:
