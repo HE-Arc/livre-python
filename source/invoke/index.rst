@@ -19,8 +19,8 @@ que l'on peut l'utiliser dans le cas où l'on souhaite simplement lancer une com
 .. code-block:: python3
 
   @task
-    def ouverture(ctx):
-        print("bonjour")
+  def ouverture(ctx):
+      print("bonjour")
 
 Ou alors pour des groupes de tâches plus complexe pouvant également utiliser des
 arguments.
@@ -28,13 +28,13 @@ arguments.
 .. code-block:: python3
 
  @task
-  def clean(ctx, which=None):
-    which = which or 'pyc'
-    print("Cleaning {0}".format(which))
+ def clean(ctx, which=None):
+     which = which or 'pyc'
+     print("Cleaning {0}".format(which))
 
   @task(pre=[call(clean, which='all')]) # or call(clean, 'all')
   def build(ctx):
-    print("Building")
+      print("Building")
 
 Code source tiré de la documentation_  officielle de invoke
 
@@ -74,7 +74,7 @@ celle d'une simple fonction :
 .. code-block:: python3
 
   @task
-   def build(args)
+  def build(args)
       print("do stuff")
 
 La seule nouveauté quand on a déjà codé des fonctions en python est la ligne ``@task`` précédant
@@ -152,8 +152,8 @@ syntaxe suivante.
 .. code-block:: python3
 
   @task
-   def B()
-        print("task B")
+  def B()
+      print("task B")
 
   @task(B)
   def A()
@@ -169,13 +169,13 @@ Si un appel à la tâche A est fait, la sortie sera la suivante :
 
 Finalement il peut être intéressant de savoir que l’on peut tester l’exécution
 d’une commande. Son comportement sera le suivant :
-Retourne ``True`` s’il n’y a pas eu d’erreur et False sinon.
+Retourne ``True`` s’il n’y a pas eu d’erreur et ``False`` sinon.
 
 .. code-block:: python3
 
   @task
-   def A(ctx):
-        if(ctx.run("your command")):
+  def A(ctx):
+      if(ctx.run("your command")):
           print("ok")
 
 Autres cas concret
@@ -192,7 +192,7 @@ on ne cherche pas ici à avoir un comportement différent selon leur résultat
   :language: python
   :start-after: # checks start
 
-Exécuter une commande va retourner un objet ``Runner`` il possède différents attributs
+Exécuter une commande va retourner un objet Runner_ il possède différents attributs
 tel que par exemple le retour de la commande (ainsi que l’erreur) qui
 peut permettre de choisir une action à réaliser en fonction de son contenu.
 
@@ -209,3 +209,4 @@ entre plusieurs applications.
 .. _WinError_3: https://github.com/pyinvoke/invoke/issues/345
 .. _Invoke: http://www.pyinvoke.org/
 .. _documentation: http://docs.pyinvoke.org/en/latest/
+.. _Runner: http://docs.pyinvoke.org/en/0.11.1/api/runners.html
