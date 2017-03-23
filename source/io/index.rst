@@ -8,9 +8,9 @@ Par Dylan Santos de Pinho [#yb]_
 Introduction
 ------------
 
-io est un module qui permet de gérer des flux d’entrées et de sorties,
+:py:mod:`io` est un module qui permet de gérer des flux d’entrées et de sorties,
 que ce soit pour écrire avec des données en byte(string) ou avec des
-données en binaire. io est le module par défaut pour gérer les flux et les fichiers en
+données en binaire. :py:mod:`io` est le module par défaut pour gérer les flux et les fichiers en
 python 3.\*.
 
 Ouverture de fichier
@@ -169,12 +169,11 @@ Exemple d'un programme qui change des caractères se trouvant au milieu d'un Byt
 Conclusion
 ----------
 
-io est un module simple à utiliser pour s’occuper des flux et pour
+:py:mod:`io` est un module simple à utiliser pour s’occuper des flux et pour
 modifier les fichiers. Ce document ne cite que les méthodes les plus courantes, il ne faut
-pas hésiter à aller voir la documentation officielle de io.
+pas hésiter à aller voir la documentation officielle de :py:mod:`io`.
 
 .. [#yb] <dylan.santosdepinho@he-arc.ch>
 
 .. Bibliographie
 .. https://docs.python.org/3/library/io.html
-.. :py:mod:`io`

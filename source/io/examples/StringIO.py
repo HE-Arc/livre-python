@@ -3,7 +3,7 @@
 import io
 
 output = io.StringIO()
-output.write(u'First line.\n') # u is for Unicode
+output.write(u'First line.\n')  # u is for Unicode
 output.write(u'Second line.\n')
 
 # Retrieve file contents
