@@ -33,32 +33,32 @@ Dans cet exemple nous allons montrer l'utilité que peut avoir l'utilisation des
 .. code-block:: python3
 
     class ExampleWeakref(object):
-    	def __init__(self):
-    	    print 'created'
+     def __init__(self):
+      print 'created'
 
-	def __destroy__(self):
-    	    print 'destroy'
+     def __destroy__(self):
+      print 'destroy'
 
 Et que nous executons le code ci-dessous, avec des références fortes sur les objets créer. Il faut que les deux références sur l'objet sois détruite pour que le garbage collector libère la mémoire de l'objet.
 
 .. code-block:: python3
 
-	>>> a = ExampleWeakref()
-	created
-	>>> b = a
-	>>> del a
-	>>> del b
-	destroyed
+    >>> a = ExampleWeakref()
+    created
+    >>> b = a
+    >>> del a
+    >>> del b
+    destroyed
 
 Alors que si nous n'avions qu'une seul référence forte sur l'objet et une faible comme dans l'exemple ci-dessous. La supression ce fait directement après la destruction de la référence forte. Grace à cela nous pouvons savoir exactement quand l'espace mémoire sera libéré.
 
 .. code-block:: python3
 
-	>>> a = ExampleWeakref()
-	created
-	>>> b = weakref.ref(a)
-	>>> del a
-	destroyed
+    >>> a = ExampleWeakref()
+    created
+    >>> b = weakref.ref(a)
+    >>> del a
+    destroyed
 
 Exemple n°2
 -----------
@@ -68,26 +68,25 @@ L'utilité des weakref n'est pas des plus optimal dans cet exemple basic. Nous a
 .. code-block:: python3
 
     class ExampleWeakref(object):
-    	def __init__(self):
-	    self.obj = None
-    	    print 'created'
-    	...
-
-    	def store(self,obj)
-	    self.obj = obj
+     def __init__(self):
+	 self.obj = None
+	  print 'created'
+	 ...
+     def store(self,obj)
+	 self.obj = obj
 
 Maintenant si nous tentons de faire des références cyclique sur notre objet. Les destructeurs de nos objets a et b ne sont jamais appelé
 
 .. code-block:: python3
 
-	>>> a = ExampleWeakref()
-	created
-	>>> b = ExampleWeakref()
-     created
-     >>> a.store(b)
-	>>> b.store(a)
-	>>> del a
-	>>> del b
+    >>> a = ExampleWeakref()
+    created
+    >>> b = ExampleWeakref()
+    created
+    >>> a.store(b)
+    >>> b.store(a)
+    >>> del a
+    >>> del b
 
 Conclusion
 ----------
