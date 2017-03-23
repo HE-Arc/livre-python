@@ -15,7 +15,7 @@ Le `Multiprocessing <https://docs.python.org/3.6/library/multiprocessing.html>`_
 
 Multiprocessing de python permet d'utiliser un ensemble de processus qui consumeront une liste de tâche contenue dans une queue.
 
-:py:mod:`multiprocessing` evite de bloquer le GIL (Global Interpreter Lock) en utilisant des sous-processus au lieu des threads et offre de la concurence local et distant. De ce fait, le module multiprocessing permet au programmeur d'exploiter pleinement plusieurs processeurs sur une machine donnée. Il fonctionne sur Unix et Windows.
+:py:mod:`multiprocessing` evite d'être bloqué par le GIL (Global Interpreter Lock) en utilisant des sous-processus au lieu des threads et offre de la concurence local et distant. De ce fait, le module multiprocessing permet au programmeur d'exploiter pleinement plusieurs processeurs sur une machine donnée. Il fonctionne sur Unix et Windows.
 
 Les classes
 -----------
@@ -61,14 +61,14 @@ Contexte et méthode de démarrage
 --------------------------------
 
 Il y a plusieurs façon de demarrer un processus, le multiprocessing en contient trois :
-		spawn
-			L'interpréteur Python sera demarrer par le processus parent, son enfant n'héritera que des ressources nécessaire pour éxecuter le méthode run().
+        spawn
+            L'interpréteur Python sera demarrer par le processus parent, son enfant n'héritera que des ressources nécessaire pour éxecuter le méthode run().
 
-		fork
-			os.fork() est utilisé par le processus parent pour forcer l'interpreteur Python. Quand le processus enfant est lancé est identique au processus parent. fork est disponible uniquement sur Linux
+        fork
+            os.fork() est utilisé par le processus parent pour forcer l'interpreteur Python. Quand le processus enfant est lancé est identique au processus parent. fork est disponible uniquement sur Linux
 
-		forkserver
-			Quand le programme est lancé et lance la méthode forkserver.start(), depuis ce moement, chaque fois qu'un processus est nécessaire, un processus est demandé au serveur par le processus parent. Fonctionne que sur Linux
+        forkserver
+            Quand le programme est lancé et lance la méthode forkserver.start(), depuis ce moement, chaque fois qu'un processus est nécessaire, un processus est demandé au serveur par le processus parent. Fonctionne que sur Linux
 
 
 Synchronisation entre les processus
@@ -84,16 +84,16 @@ Partage de ressources entre processus
 En programmation multi-processus, il est souvent utile de pouvoir partager des ressources entre nos processus. Pour cela :py:mod:`multiprocessing` offre différentes manière de partager des ressources.
 
 La mémoire : 
-	on peut partage de la mémoire en utilisant les classes Value ou Array.
+    on peut partage de la mémoire en utilisant les classes Value ou Array.
 
-	Exemple :
+    Exemple :
 
 .. literalinclude:: ./exemples/sharedmemory.py
 
 Serveur de processus :
-	Un objet renvoyé par la classe Manager() contrôle un serveur de processus qui contient des objets Python et permet à d'autres processus de les manipuler à l'aide de proxies.
+    Un objet renvoyé par la classe Manager() contrôle un serveur de processus qui contient des objets Python et permet à d'autres processus de les manipuler à l'aide de proxies.
 
-	Exemple :
+    Exemple :
 
 .. literalinclude:: ./exemples/manager.py
 
@@ -102,9 +102,27 @@ Serveur de processus :
 Conclusion
 ----------
 
-Le module :py:mod:`multiprocessing` nous permet de gérer nos processeurs.
+Pour conclure, le module de python sur le multiprocessing nous permet de contourner le problème des threads en python, éffectivement l'interpreteur Python n'est pas thread safe. Le langage python n'a qu'un seul fil d'exécution, donc il n'est pas possible d'utiliser tout les coeurs en n'utilisant que des threads. C'est pourquoi, on utilise plutôt le module multiprocessing malgré le problème du partage de mémoire entre les processus qui malgré tout sont gérer par les classes Value, Array et Manager. 
+ 
+
+Pour de plus amples informations :
+
+    Process          : :py:class:`multiprocessing.Process`
+
+    Queues           : :py:class:`multiprocessing.Queue`
+
+    Pipe             : https://docs.python.org/3/library/multiprocessing.html#multiprocessing.Pipe
+
+    Pool             : :py:class:`multiprocessing.pool.Pool`
+
+    Connexion        : :py:class:`multiprocessing.Connection`
+
+    Synchronisation  : https://docs.python.org/3/library/multiprocessing.html#synchronization-primitives
 
 Reference
 ---------
 
+Les exemples sont repris de la documentation officielle de python : :py:mod:`multiprocessing`
+
 .. [Ref] http://bioinfo.iric.ca/fr/faites-travailler-vos-cpus/
+
