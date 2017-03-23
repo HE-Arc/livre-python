@@ -161,15 +161,12 @@ Noms                                      Default               Utilisation
 ``case_sensitive``                        ``False``             Si mit à ``True`` rend le patterns (respectivement regex) sensible à la casse
 ========================================  ====================  ================================================================================
 
-
-
 Conclusion
 ----------
 
-En conclusion, la librairie watchdog permet d'utiliser des événements, en provenance du système de fichiers, d'une manière facile et efficace.
+En conclusion, la bibliothèque watchdog permet d'utiliser des événements, en provenance du système de fichiers, d'une manière facile et efficace.
 Watchdog permet aussi de filtrer les fichiers / dossiers émetant un événement.
-Cette librairie permet aussi une grande réusabilité du code grâce, entre autre, à l'utilisation de classe pour le traitement des événements.
-
+Cette bibliothèque permet aussi une grande réusabilité du code grâce, entre autre, à l'utilisation de classe pour le traitement des événements.
 
 .. [#pj] <paul.jeanbourquin@he-arc.ch>
 
