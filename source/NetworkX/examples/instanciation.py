@@ -29,7 +29,7 @@ G.remove_edge(1, 2)
 G.clear()  # supprime tout les noeuds et ponts du graphe
 
 
-G.add_node([1, 2, 3]
+G.add_node([1, 2, 3])
 
 G.add_edges_from([(1, 2), (1, 3)]
 
