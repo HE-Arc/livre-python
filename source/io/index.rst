@@ -34,21 +34,21 @@ dans le tableau ci-dessous:
 +---------+----------------------------------------------------------------------------------------------+
 | Modes   | Signification                                                                                |
 +=========+==============================================================================================+
-| ‘r’     | Ouvre le fichier en lecture (par défaut).                                                    |
+| r       | Ouvre le fichier en lecture (par défaut).                                                    |
 +---------+----------------------------------------------------------------------------------------------+
-| ‘w’     | Ouvre le fichier en écriture en effaçant le fichier s'il existe sinon le crée.               |
+| w       | Ouvre le fichier en écriture en effaçant le fichier s'il existe sinon le crée.               |
 +---------+----------------------------------------------------------------------------------------------+
-| ‘x’     | Ouvre le fichier en création, échoue si le fichier existait déjà.                            |
+| x       | Ouvre le fichier en création, échoue si le fichier existait déjà.                            |
 +---------+----------------------------------------------------------------------------------------------+
-| ‘a’     | Ouvre le fichier en écriture et écrit à la fin du fichier si existant.                       |
+| a       | Ouvre le fichier en écriture et écrit à la fin du fichier si existant.                       |
 +---------+----------------------------------------------------------------------------------------------+
-| ‘b’     | Mode binaire.                                                                                |
+| b       | Mode binaire.                                                                                |
 +---------+----------------------------------------------------------------------------------------------+
-| ‘t’     | Mode texte (par défaut).                                                                     |
+| t       | Mode texte (par défaut).                                                                     |
 +---------+----------------------------------------------------------------------------------------------+
-| ‘+’     | Ouvre le fichier en lecture et écriture.                                                     |
+| +       | Ouvre le fichier en lecture et écriture.                                                     |
 +---------+----------------------------------------------------------------------------------------------+
-| ‘U’     | Mode Universal newlines (pour la rétrocompatibilité, ne pas utiliser dans le nouveau code).  |
+| U       | Mode Universal newlines (pour la rétrocompatibilité, ne pas utiliser dans le nouveau code).  |
 +---------+----------------------------------------------------------------------------------------------+
 
 
@@ -83,7 +83,7 @@ mode texte):
 newline: Spécifie comment les sauts de ligne fonctionnent. Valeurs
 possible: None, ‘’, ‘\\n’, ‘\\r’ ou ‘\\r\\n’.
 
-closefd: Doit être à true(par défaut) si un nom de fichier a été donné.
+closefd: Doit être à True(par défaut) si un nom de fichier a été donné.
 Si il est à False et qu'un descripteur de fichier a été donné, le descripteur de fichier
 restera ouvert quand le fichier sera fermé.
 
@@ -176,5 +176,5 @@ pas hésiter à aller voir la documentation officielle de io.
 .. [#yb] <dylan.santosdepinho@he-arc.ch>
 
 .. Bibliographie
-
+.. https://docs.python.org/3/library/io.html
 .. :py:mod:`io`
