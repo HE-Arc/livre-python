@@ -11,13 +11,13 @@ class CircularRef(object):
                 print('created')
 
         def __destroy__(self):
-		"""Destructor"""
+                """Destructor"""
                 print('destroy')
 
         def store(self, obj):
                 """Store a weakref in the object"""
                 self.obj = weakref.ref(obj)
 
-        def storeProxy(self,obj):
+        def storeProxy(self, obj):
                 """Store a ref in the object with the proxy weakref"""
                 self.obj = weakref.proxy(obj)
