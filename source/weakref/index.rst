@@ -79,6 +79,7 @@ Maintenant si nous tentons de faire des références cyclique sur notre objet. L
 
 .. code-block:: python3
 
+<<<<<<< d5b7f1ad4a9829073dff7e1fb48ae86559fe9277
     >>> a = ExampleWeakref()
     created
     >>> b = ExampleWeakref()
@@ -87,6 +88,16 @@ Maintenant si nous tentons de faire des références cyclique sur notre objet. L
     >>> b.store(a)
     >>> del a
     >>> del b
+=======
+	>>> a = ExampleWeakref()
+	created
+	>>> b = ExampleWeakref()
+     created
+     >>> a.store(b)
+	>>> b.store(a)
+	>>> del a
+	>>> del b
+>>>>>>> tututu
 
 Conclusion
 ----------
