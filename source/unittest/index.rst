@@ -1,8 +1,8 @@
 .. _unittest-tutorial:
 
-===================================
-``unittest``, ``doctest``, ``mock``
-===================================
+=========================
+``unittest``, ``doctest``
+=========================
 
 Introduction
 ============
@@ -177,24 +177,19 @@ TestSuite Class
 
 Chaque instance de 'testCase' peut être regroupée selon la fonctionnalité du programme qu'elle teste. Ce mécanisme est mis à disposition grâce à la classe 'TestSuite'.
 
-voici les étapes pour regrouper un 'TestSuite':
+Voici les étapes pour regrouper un 'TestSuite':
 
-1) Créer une instance de 'TestSuite'
+1) Créer une instance de 'TestSuite':
 
 .. code-block:: python
 
     suite = unittest.TestSuite()
 
-2) Ajouter le 'testCase' avec la méthode addTest() ou  makeSuite():
+2) Ajouter le 'testCase' avec la méthode addTest(). Voici l'exemple avec   'class CarreTestCase(unittest.TestCase)':
 
-.. todo::
+.. code-block:: python
 
-    Le code suivant n'est pas du Python.
-
-    .. code-block:: text
-
-        suite.addTest(testcase class)
-        suite = unittest.makeSuite(testcase class)
+	suite.addTest(CarreTestCase())
 
 3) Créer une instance de la class TestTestRunner:
 
@@ -202,36 +197,23 @@ voici les étapes pour regrouper un 'TestSuite':
 
     runner = unittest.TextTestRunner()
 
-4) Appeller la méthode run() pour exécuter tous les tests
+4) Appeller la méthode run() pour exécuter tous les tests:
 
 .. code-block:: python
 
     runner.run(suite)
 
-Mock
-====
-
-**TODO**
-
-.. todo::
-
-    Vous avez pas mal de contenu déjà, renforcez-le si nécessaire mais il ça me parait difficile d'explorer :py:mod:`unittest.mock`.
-
 Doctest
 =======
 
-Un autre standard pour les tests unitaires en Python est: :py:mod:`doctest`. Ce concepte de test passe par l'utilisation des docstrings tout comme l'écriture de documentation.
+Un autre standard pour les tests unitaires en Python est: :py:mod:`doctest`. Ce concept de test passe par l'utilisation des docstrings tout comme l'écriture de documentation. L'idée des doctest est de mettre ses tests dans sa documentation afin de s'assurer que les exemples dans la documentation fonctionnent.
 
 .. glossary::
 
-    Docstring
-        Une docstring est essentiellement une chaîne de caractères. Elle commence et termine par trois guillemets. De plus l'indentation d'une docstring est importante car elle dépend directement de l'indentation de la classe ou de la méthode qu'elle documente.
+Docstring:
+	Les docstrings sont des chaînes de documentation qui doivent être placées en dessous des définitions de méthodes, fonctions, classe ou au début d'un module. De plus l'indentation d'une docstring est importante car elle dépend directement de l'indentation de la classe ou de la méthode qu'elle documente.
 
-.. todo::
-
-    une docstring c'est juste une chaine de caractère pour documenter une fonction, variable, classe, etc. Le triple guillemets est un choix esthétique.
-
-    L'idée des doctest est de mettre ses tests dans sa documentation afin de s'assurer que les exemples dans la documentation fonctionnent.
+    
 
 Création d'un test unitaire
 ---------------------------
@@ -244,7 +226,7 @@ Voici un exemple avec la fonction carré:
         :start-after: func:carré
         :end-before: endfunc:carrée
 
-Ensuite pour éxécuter le(s) test(s), il faut importer le module doctest (ici fait dans le 'main'). Ensuite il faut appeller la méthode testmod() du module doctest qui va parser le fichier entier à la recherche de docstrings. Une fois la recherche effectué, il éxécute tout les tests qu'il a trouvé.
+Ensuite pour exécuter le(s) test(s), il faut importer le module doctest (ici fait dans le 'main'). Ensuite il faut appeller la méthode testmod() du module doctest qui va parser le fichier entier à la recherche de docstrings. Une fois la recherche effectuée, il exécute tous les tests qu'il a trouvé.
 
 .. literalinclude:: examples/doctest_example.py
         :start-after: main
@@ -288,5 +270,13 @@ Ce qui produirait le résultat suivant:
     3 tests in 2 items.
     3 passed and 0 failed.
     Test passed.
+	
+Conclusion
+==========
+
+L'écriture des tests est une pratique primordiale afin d'apporter un gain en qualité du logiciel et en maintenance. 
+De plus l'écriture des tests n'est pas difficile en soi, ni même longue comme vous avez pu le constater dans ce tutoriel. Afin d'écrire efficacement des tests unitaires, il faut de la pratique, cependant mieux vaut des tests "peu efficaces" que de ne pas en écrire. Pour terminer, s'il y a bien une chose à retenir de ce tutoriel c'est qu'il n'y a pas de désavantages à en écrire, c'est pour cela que je vous invite à vous y mettre dès demain!
+
+	
 
 .. _Junit: http://junit.org/junit4/
