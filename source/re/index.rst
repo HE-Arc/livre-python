@@ -1,7 +1,7 @@
 .. _re-tutorial:
 
-``Expression régulière (re)``
-=============================
+Expression régulière (re)
+=========================
 
 Par Julien Feuillade
 
