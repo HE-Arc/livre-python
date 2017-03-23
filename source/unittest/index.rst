@@ -275,7 +275,7 @@ Conclusion
 ==========
 
 L'écriture des tests est une pratique primordiale afin d'apporter un gain en qualité du logiciel et en maintenance. 
-De plus l'écriture des tests n'est pas difficile en soi, ni même longue comme vous avez pu le constater dans ce tutoriel. Afin d'écrire efficacement des tests unitaires, il faut de la pratique, cependant mieux vaut des tests "peu efficaces" que de ne pas en écrire. Pour terminer, s'il y a bien une chose à retenir de ce tutoriel c'est qu'il n'y a pas de désavantages à en écrire, c'est pour cela que je vous invite à vous y mettre dès demain!
+De plus l'écriture des tests n'est pas difficile en soi, ni même longue comme vous avez pu le constater dans ce tutoriel. Afin d'écrire efficacement des tests unitaires, il faut de la pratique, cependant mieux vaut des tests "peu efficaces" que de ne pas en écrire. Pour terminer, s'il y a bien une chose à retenir de ce tutoriel c'est qu'il n'y a pas de désavantages à en écrire, c'est pour cela que je vous invite à vous y mettre dès demain! 
 
 	
 
