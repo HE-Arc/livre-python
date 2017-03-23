@@ -2,6 +2,7 @@
 
 import weakref
 
+
 class CircularRef(object):
         """Class of a circular ref"""
 
