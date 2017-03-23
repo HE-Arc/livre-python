@@ -14,7 +14,7 @@ f-strings permet d'insérer des expressions dans des chaines de caractères en u
 --------------
 Fonctionnement
 --------------
-Pour utiliser f-strings il suffit de mettre un f devant la chaine de caractères et pour insérer la valeur d'une variable dans la chaine il suffit de mettre la variable entre accolade.
+Pour utiliser f-strings il suffit de mettre un f devant la chaine de caractères et pour insérer la valeur d'une variable dans la chaine il suffit de mettre la variable entre accolade. Si il n'y a pas de variable a substituer il n'est pas nécaissaire de mettre le f devant.
 
 .. code-block:: pycon
 
@@ -44,7 +44,7 @@ Pour afficher des apostrophes il y a trois solutions:
 	
 	.. code-block:: pycon
 	
-		>>> print(f"ma chaine de caractères avec des 'apostrophes' ")
+		>>> print("ma chaine de caractères avec des 'apostrophes' ")
 		
 		ma chaine de caractères avec des 'apostrophes' 
 		
@@ -52,7 +52,7 @@ Pour afficher des apostrophes il y a trois solutions:
 	
 	.. code-block:: pycon
 	
-		>>> print(f'''ma chaine de caractères avec des 'apostrophes' ''')
+		>>> print('''ma chaine de caractères avec des 'apostrophes' ''')
 		
 		ma chaine de caractères avec des 'apostrophes' 
 
@@ -60,7 +60,7 @@ Pour afficher des apostrophes il y a trois solutions:
 
 	.. code-block:: pycon
 	
-		>>> print(f'''ma chaine de caractères avec une \'apostrophe ''')
+		>>> print('ma chaine de caractères avec une \'apostrophe ')
 		
 		ma chaine de caractères avec des 'apostrophes
 
@@ -68,16 +68,16 @@ Pour afficher des apostrophes il y a trois solutions:
 raw f-strings		
 -------------
 	
-Un f-strings converti automatiquement les échapements avec des backslash comme par exemple : '\\n' , '\\"' , "\\'" , '\\xhh' , '\\uxxxx' , '\\Uxxxxxxxx'. Donc si on ne veut pas que python interprète ces échappements il faut utiliser les raw f-string en ecrivant fr avant la chaine de caractères et non f.
+Un string converti automatiquement les échapements avec des backslash comme par exemple : '\\n' , '\\"' , etc. Donc si on ne veut pas que python interprète ces échappements il faut utiliser les raw string en ecrivant r avant la chaine de caractères et si on veut utiliser des raw f-strings il faut mettre fr.
 
 .. code-block:: pycon
 
-		>>> print(f'ma \n phrase')
+		>>> print('ma \n phrase')
 		
 		ma 
 		 phrase
 
-		>>> print(fr'ma \n phrase')
+		>>> print(r'ma \n phrase')
 		
 		ma \n phrase
 
