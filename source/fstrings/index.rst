@@ -4,6 +4,8 @@
 f-strings
 =========
 
+Ecrit par : Thibaut Piquerez
+
 ------------
 Introduction
 ------------
@@ -36,7 +38,7 @@ Pour les accolade {} il faut en mettre 2 a la suite:
 	
 	Le nombre est {34}
 	
-Pour afficher des apostrophes il y a deux solutions:
+Pour afficher des apostrophes il y a trois solutions:
 
 	Mettre la chaine entre guillemets :
 	
@@ -54,7 +56,19 @@ Pour afficher des apostrophes il y a deux solutions:
 		
 		ma chaine de caractères avec des 'apostrophes' 
 
-Comme f-strings interprète les caractères spéciaux tel que \\n il est nécessaire d'utiliser un echappement pour afficher des caractères spéciaux, il faut mettre fr avant la chaine de caractères et non f:
+	Mettre des backslash avant les apostrophes :
+
+	.. code-block:: pycon
+	
+		>>> print(f'''ma chaine de caractères avec une \'apostrophe ''')
+		
+		ma chaine de caractères avec des 'apostrophes
+
+-------------		
+raw f-strings		
+-------------
+	
+Un f-strings converti automatiquement les échapements avec des backslash comme par exemple : '\\n' , '\\"' , "\\'" , '\\xhh' , '\\uxxxx' , '\\Uxxxxxxxx'. Donc si on ne veut pas que python interprète ces échappement il faut utiliser les raw f-string en ecriant fr avant la chaine de caractères et non f.
 
 .. code-block:: pycon
 
@@ -63,4 +77,4 @@ Comme f-strings interprète les caractères spéciaux tel que \\n il est nécessaire
 		\n ma phrase
 	
 	
-Thibaut Piquerez
+
