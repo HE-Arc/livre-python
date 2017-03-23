@@ -4,7 +4,7 @@ from fractions import Fraction
 
 
 def Farey(a, b):
-	"""Définition fonction de création de la suite de Farey"""
+    """Définition fonction de création de la suite de Farey"""
     n = a.numerator + b.numerator
     d = a.denominator + b.denominator
     return Fraction(n, d)
