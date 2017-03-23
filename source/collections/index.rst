@@ -11,7 +11,6 @@ Par Cédric Pahud <cedric.pahud@he-arc.ch>
 --------------
 
 :py:mod:`collections` contient des conteneurs de donées spécialisés qui offrent une alternative aux conteneurs généraux de python.
->>>>>>> création index
 Ces conteneurs vont souvent plus loin que les conteneurs de données *built-in* et ont des fonctionnalités plus avancées que nous allons voir ici.
 
 Voici donc les conteneurs dont nous allons parler:
