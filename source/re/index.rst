@@ -1,5 +1,3 @@
-.. re-tutorial:
-
 Expression régulière (re)
 =========================
 
@@ -64,7 +62,7 @@ re.match()
 
 La fonction "match()" va permettre de vérifier la correspondance avec la chaîne de caractère.
 
-.. code:: python
+::
 
 	re.match(pattern, string)
 
