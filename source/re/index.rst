@@ -57,7 +57,7 @@ Afin de mettre les différentes expressions en place, la bibliothèque ``re`` no
 
 .. code:: python
 
-    import re
+	import re
 
 re.match()
 ----------
@@ -90,7 +90,7 @@ re.search()
 
 Afin de rechercher une expression, on utilisera la fonction "search()" :
 
-.. code:: python
+::
 
 	re.search(pattern, string)
 
@@ -116,16 +116,16 @@ La sortie :
 
 ::
 
-	('searchObj.group() : ', 'Cats are smarter than dogs')
-	('searchObj.group(1) : ', 'Cats')
-	('searchObj.group(2) : ', 'smarter')
+	searchObj.group() : Cats are smarter than dogs
+	searchObj.group(1) : Cats
+	searchObj.group(2) : smarter
 
 re.split()
 ----------
 
-.. code:: python
+::
 
-	re.split(pattern, string, [maxsplit=0])
+	re.split(pattern, string, maxsplit)
 
 - Pattern est l'expression avec lequelle on séparera
 - String est la chaîne d'origine
@@ -134,7 +134,7 @@ re.split()
 .. code:: python
 
 	import re
-        
+		
 	# Without maxsplit
 	sep = re.split("-","+91-011-2711-1111")
 	print(spe)
@@ -158,7 +158,7 @@ re.sub()
 
 Afin de remplacer des données, on peut passer par la fonction "sub()" :
 
-.. code:: python
+::
 
 	re.sub(pattern, replace, string)
 
@@ -171,11 +171,11 @@ Afin de remplacer des données, on peut passer par la fonction "sub()" :
 	import re
 
 	phone = "2004-959-559"
-        
-    # Suppresion des guillemets
+
+	# Suppresion des guillemets
 	num = re.sub(r'#.*$', "", phone)
 	print("Phone Num : ", num)
-	
+
 	# Suppresion de tout sauf les digits
 	num = re.sub(r'\D', "", phone)    
 	print( "Phone Num : ", num)
@@ -192,7 +192,7 @@ re.compile()
 
 Si, dans votre programme, vous utilisez plusieurs fois les mêmes expressions régulières, il peut être utile de les compiler. Le module re propose en effet de conserver votre expression régulière sous la forme d'un objet que vous pouvez stocker dans votre programme.
 
-.. code:: python
+::
 
 	re.compile(pattern)
 
