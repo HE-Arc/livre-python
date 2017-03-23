@@ -265,4 +265,4 @@ Dans le morceau de code ci-dessous, l'avant-dernière ligne ne sera pas enregist
 Conclusion
 ==========
 
-Pytest est un outil très puissant quand il s'agit de faire toute sortes de tests. De plus, il dispose d'un large panel de compléments, ce qui lui permet un plus grande maniabilité et adaptation en fonction de nos besoins.
+Pytest est un outil très puissant quand il s'agit de faire différents tests. De plus, il dispose d'un large panel de compléments, ce qui lui permet un plus grande maniabilité et adaptation en fonction de nos besoins.
