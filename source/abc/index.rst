@@ -17,7 +17,7 @@ Ce mécanisme est utile pour généraliser un objet.
 .. Par exemple tout le monde sait à quoi ressemble une Porsche (c'est un terme précis), on peut donc instancier. Mais si l'on demande de représenter un véhicule (terme englobant), tout le monde a une idée différente du terme. La classe véhicule serait donc abstraite et la classe Porsche dérive de Véhicule.
 Exemple de classe abstraite : Shape (forme en français)
 
-.. image:: ./abstract_class_shape.jpg
+.. image:: ./img_shape.jpg
    :align: center
    :alt: Abstract class Shape
 
@@ -99,8 +99,6 @@ Ensuite faisons une autre classe, ``Triangle``, qui implémente ``Shape``. Elle 
 Nous pouvons ensuite créer une liste de Rectangle et de Triangle puis calculer l'aire de chacun d'entre
 eux en une instruction, comme présenté avant.
 
-
-
 Création d'une structure de données
 -----------------------------------
 Les classes abstraites peuvent également être utilisées pour créer sa propre structure de données.
@@ -138,6 +136,20 @@ Je propose comme exemple une classe ``Garage`` qui contient une liste de ``Voitu
          for v in self.voitures :
             v.afficher()
 
+Lors de la création d'un garage, on vérifie que les éléments de la liste soient de type ``Voiture``.
+Si ce n'est pas le cas, on lève une erreur.
+Par exemple cette ligne là lève l'erreur:
+
+.. code-block:: python
+
+   # Création des voitures.
+   v1 = Voiture('BMW', 'Noir')
+   v2 = Voiture('Subaru', 'Bleu')
+   v3 = Voiture('Dacia', 'Rouge')
+
+   # On place les voitures dans un garage ainsi qu'un nombre.
+   g = Garage(v1, v2, v3, 42)
+   # L'erreur 'La liste ne contient pas que des Voiture.' sera levée.
 
 De même que l'exemple précédent, on aimerait afficher toutes les voitures d'un garage. Mais en appelant simplement
 une méthode du garage:
@@ -165,3 +177,10 @@ méthodes semblables à l'utilisation d'une ``list``.
    BMW, Noir
    >>> g.__len__()
    3
+
+
+Conclusion
+----------
+Les classes abstraite en python permettent avant tout de créer unu architecture logicielle convenable.
+De plus, python possède déjà des classes abstraites qu'il est possible d'implémenter.
+Cette option peut s'apparenter aux ``Interface`` Java.
