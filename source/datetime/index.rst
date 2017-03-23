@@ -4,7 +4,7 @@
 ``datetime``
 ============
 
-Par Mohamed Jmaa [#email]_
+Par Mohamed Jmaa 
 
 Introduction
 ============
