@@ -2,13 +2,13 @@
 
 
 class ExampleWeakref(object):
-	"""Class of a simple strong ref"""
+        """Class of a simple strong ref"""
 
-    def __init__(self):
-		"""Constructor"""
-        self.obj = None
-        print('created')
+        def __init__(self):
+                """Constructor"""
+                self.obj = None
+                print('created')
 
-    def __destroy__(self):
-		"""Destructor"""
-        print('destroy')
+        def __destroy__(self):
+                """Destructor"""
+                print('destroy')
