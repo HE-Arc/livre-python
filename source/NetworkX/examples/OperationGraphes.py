@@ -1,4 +1,4 @@
-﻿"""Opération sur les graphes avec NetworkX"""
+﻿"""Exemple d'opérations sur les graphes avec NetworkX."""
 
 import NetworkX as nwx
 
@@ -9,11 +9,13 @@ G1.add_nodes_from([4, 5, 6])
 
 # operations classiques sur les graphes :
 
-nb = subgraph(G1, nbunch)  # induit un subgraphe de G en noeuds d'un nBrunch
+nb = subgraph(G1, nbunch)
+# induit un subgraphe de G en noeuds d'un nBrunch
 G3 = union(G1, G2)  # union de deux graphes
 G3 = disjoint_union(G1, G2)  # union sans doublure
 G3 = cartesian_product(G1, G2)  # produit cartésien
-G3 = compose(G1, G2)  # combine les graphes en détectant les mêmes noeuds
+G3 = compose(G1, G2)
+# combine les graphes en détectant les mêmes noeuds
 G3 = complement(G1)  # complements de G1
 G3 = create_empty_copy(G1)  # crée une copie vide de G1
 G3 = convert_to_directed(G1)  # convertis un graphe dirigé
