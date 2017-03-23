@@ -15,7 +15,7 @@ def clean(ctx):
 @task(clean)
 def html(ctx):
     """Generation de l'html."""
-    result = ctx.run("sphinx-build -b html source build/html")
+    result = ctx.run("sphinx-build -b html source build/html", hide=True)
 
 # fetch start
 
@@ -23,8 +23,11 @@ def html(ctx):
 @task
 def do_i_need_to_rebase(ctx):
     """Rebase si necaissaire."""
-    if(ctx.run("git fetch")):
-        print("ok")
+    result = ctx.run("git fetch", hide=True)
+    if(result.stdout != ""):
+        print("need rebase")
+    else:
+        print("dont need rebase")
 
 
 # checks start
