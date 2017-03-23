@@ -22,26 +22,26 @@ On utilisera différents types de syntaxe comme :
 
 ::
 
-	^	    Marque le début de la chaine, la ligne...
-	$	    Marque la fin d'une chaine, ligne...
-	.	    N'importe quel caractère
-	*	    0, 1 ou plusieurs occurrences
-	+	    1 ou plusieurs occurrences
-	?	    0 ou 1 occurrence
-	|	    Alternative - ou reconnaît l'un ou l'autre
-	[ ]	    Tous les caractères énumérés dans la classe
-	[^ ]    Tous les caractères sauf ceux énumérés
-	( )	    Utilisée pour limiter la portée d'un masque ou de l'alternative
+	^		Marque le début de la chaine, la ligne...
+	$		Marque la fin d'une chaine, ligne...
+	.		N'importe quel caractère
+	*		0, 1 ou plusieurs occurrences
+	+		1 ou plusieurs occurrences
+	?		0 ou 1 occurrence
+	|		Alternative - ou reconnaît l'un ou l'autre
+	[ ]		Tous les caractères énumérés dans la classe
+	[^ ]		Tous les caractères sauf ceux énumérés
+	( )		Utilisée pour limiter la portée d'un masque ou de l'alternative
 
 Ainsi que de groupes de caractères :
 
 ::
 
-	\w	    Les lettres (w pour word)
-	\d	    Les chiffres (d pour digit)
-	\s	    Les espaces (s pour spaces)
-	[A-Z]   Les majuscules
-	[abd;_] Les lettres a, b, et d, le point-virgule (;), et l’underscore (_)
+	\w		Les lettres (w pour word)
+	\d		Les chiffres (d pour digit)
+	\s		Les espaces (s pour spaces)
+	[A-Z]		Les majuscules
+	[abd;_]		Les lettres a, b, et d, le point-virgule (;), et l’underscore (_)
 
 Prenons un exemple :
 
