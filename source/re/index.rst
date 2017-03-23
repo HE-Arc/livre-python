@@ -22,25 +22,25 @@ On utilisera différents types de syntaxe comme :
 
 ::
 
-	^		Marque le début de la chaine, la ligne...
-	$		Marque la fin d'une chaine, ligne...
+	^	    Marque le début de la chaine, la ligne...
+	$	    Marque la fin d'une chaine, ligne...
 	.	    N'importe quel caractère
-	*		0, 1 ou plusieurs occurrences
-	+		1 ou plusieurs occurrences
-	?		0 ou 1 occurrence
-	|		Alternative - ou reconnaît l'un ou l'autre
-	[ ]		Tous les caractères énumérés dans la classe
-	[^ ]	Tous les caractères sauf ceux énumérés
-	( )		Utilisée pour limiter la portée d'un masque ou de l'alternative
+	*	    0, 1 ou plusieurs occurrences
+	+	    1 ou plusieurs occurrences
+	?	    0 ou 1 occurrence
+	|	    Alternative - ou reconnaît l'un ou l'autre
+	[ ]	    Tous les caractères énumérés dans la classe
+	[^ ]    Tous les caractères sauf ceux énumérés
+	( )	    Utilisée pour limiter la portée d'un masque ou de l'alternative
 
 Ainsi que de groupes de caractères :
 
 ::
 
-	\w 		Les lettres (w pour word)
-	\d 	 	Les chiffres (d pour digit)
-	\s 		Les espaces (s pour spaces)
-	[A-Z] 	Les majuscules
+	\w	    Les lettres (w pour word)
+	\d	    Les chiffres (d pour digit)
+	\s	    Les espaces (s pour spaces)
+	[A-Z]   Les majuscules
 	[abd;_] Les lettres a, b, et d, le point-virgule (;), et l’underscore (_)
 
 Prenons un exemple :
@@ -55,9 +55,9 @@ La bibliothèque re
 
 Afin de mettre les différentes expressions en place, la bibliothèque ``re`` nous est proposé avec ces différentes fonctions qui permettra essentiellement de rechercher / modifier / supprimer des expressions. Pour cela :
 
-.. code:: python
+.. code:: pycon
 
-	import re
+	>>> import re
 
 re.match()
 ----------
@@ -71,19 +71,10 @@ La fonction "match()" va permettre de vérifier la correspondance avec la chaîn
 - Pattern est l'expression à faire correspondre
 - String est la chaîne d'origine
 
-.. code:: python
+.. code:: pycon
 
-	print(re.match(r"B(.)?NJO(.)?R", "BONJOUR"))
-	
-La sortie :	
-
-::
-  
-	# true
-	<_sre.SRE_Match object at 0x7f61685fc690>
-
-	# false
-	None
+	>>> print(re.match(r"B(.)?NJO(.)?R", "BONJOUR"))
+	<_sre.SRE_Match object; span=(0, 7), match='BONJOUR'>
 
 re.search()
 -----------
@@ -97,28 +88,21 @@ Afin de rechercher une expression, on utilisera la fonction "search()" :
 - Pattern est l'expression à rechercher
 - String est la chaîne d'origine 
 
-.. code:: python
+.. code:: pycon
 
-	import re
-
-	line = "Cats are smarter than dogs";
-
-	searchObj = re.search( r'(.*) are (.*?) .*', line, re.M|re.I)
-
-	if searchObj:
-	   print("searchObj.group() : ", searchObj.group())
-	   print("searchObj.group(1) : ", searchObj.group(1))
-	   print("searchObj.group(2) : ", searchObj.group(2))
-	else:
-	   print("Nothing found!!")
-
-La sortie :
-
-::
-
-	searchObj.group() : Cats are smarter than dogs
-	searchObj.group(1) : Cats
-	searchObj.group(2) : smarter
+	>>> import re
+	>>> line = "Cats are smarter than dogs";
+	>>> searchObj = re.search( r'(.*) are (.*?) .*', line, re.M|re.I)
+	>>> if searchObj:
+	...  print("searchObj.group() : ", searchObj.group())
+	...  print("searchObj.group(1) : ", searchObj.group(1))
+	...  print("searchObj.group(2) : ", searchObj.group(2))
+	... else:
+	...  print("Nothing found!!")
+	... 
+	searchObj.group() :  Cats are smarter than dogs
+	searchObj.group(1) :  Cats
+	searchObj.group(2) :  smarter
 
 re.split()
 ----------
@@ -131,26 +115,14 @@ re.split()
 - String est la chaîne d'origine
 - Maxsplit est le nombre de séparations faite au maximum
 
-.. code:: python
+.. code:: pycon
 
-	import re
-		
-	# Without maxsplit
-	sep = re.split("-","+91-011-2711-1111")
-	print(spe)
-
-	# With maxsplit
-	sep = re.split("-","+91-011-2711-1111", maxsplit=1)
-	print(spe)
-
-La sortie :
-
-::
-
-	# Without maxsplit
+	>>> import re
+	>>> sep = re.split("-","+91-011-2711-1111") # Without maxsplit
+	>>> print(sep)
 	['+91', '011', '2711', '1111']
-
-	# With maxsplit
+	>>> sep = re.split("-","+91-011-2711-1111", maxsplit=1) # With maxsplit
+	>>> print(sep)
 	['+91', '011-2711-1111']
 
 re.sub()
@@ -166,25 +138,15 @@ Afin de remplacer des données, on peut passer par la fonction "sub()" :
 - Replace est le remplacent de cette expression
 - String est la chaîne d'origine
 
-.. code:: python
+.. code:: pycon
 
-	import re
-
-	phone = "2004-959-559"
-
-	# Suppresion des guillemets
-	num = re.sub(r'#.*$', "", phone)
-	print("Phone Num : ", num)
-
-	# Suppresion de tout sauf les digits
-	num = re.sub(r'\D', "", phone)    
-	print( "Phone Num : ", num)
-
-La sortie :
-
-::
-
+	>>> import re
+	>>> phone = "2004-959-559"      
+	>>> num = re.sub(r'#.*$', "", phone) # Suppresion des guillemets
+	>>> print("Phone Num : ", num)
 	Phone Num :  2004-959-559
+	>>> num = re.sub(r'\D', "", phone) # Suppresion de tout sauf les digits 
+	>>> print( "Phone Num : ", num)
 	Phone Num :  2004959559
 
 re.compile()
@@ -198,28 +160,14 @@ Si, dans votre programme, vous utilisez plusieurs fois les mêmes expressions r�
 
 - Pattern est l'expression à compiler
 
-.. code:: python
+.. code:: pycon
 
-	import re
-
-	name_check = re.compile(r"[^A-Za-zs.]")
-
-	name = raw_input ("Please, enter your name: ")
-
-	while name_check.search(name):
-		print("Please enter your name correctly!")
-		name = raw_input ("Please, enter your name: ")
-	print("Welcome !")
-
-La sortie :
-
-::
-
-	Please, enter your name:  12
-	Please enter your name correctly!
-
-	Please, enter your name:  Julien
-	Welcome !
+	>>> import re
+	>>> regex = re.compile('Python')
+	>>> my_str = "I'm glad O'Reilly has Python courses and books!"
+	>>> result = regex.search(my_str)
+	>>> print(result)
+	<_sre.SRE_Match object; span=(22, 28), match='Python'>
 
 Conclusion
 ----------
