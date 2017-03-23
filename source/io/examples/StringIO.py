@@ -1,4 +1,4 @@
-"""Exemple de gestion de flux avec io.StrionIO."""
+"""Exemple de gestion de flux avec io.StringIO."""
 
 import io
 
