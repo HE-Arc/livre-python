@@ -23,7 +23,7 @@ On utilise :py:func:`open` pour ouvrir un fichier. Il retourne le flux
 correspondant si le fichier s'ouvre, sinon une exception ``OSError`` est levée.
 
 
-.. code-block:: python
+.. code-block:: python3
 
     open(file, mode='r', buffering=-1, encoding=None, errors=None, newline=None, closefd=True, opener=None)
 
