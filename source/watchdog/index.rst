@@ -76,7 +76,7 @@ C'est ici que nous spécifierons le dossier qui devra être observer.
   from watchdog.observers import Observer
 
   observer = Observer() # Création de l'observeur
-  observer.schedule(eventHandler.AuditHandler(), path='U:', recursive=True) # Création du lien
+  observer.schedule(eventhandler.AuditHandler(), path='U:', recursive=True) # Création du lien
   observer.start() # Démarrage de l'observateur
 
 Dans ce cas l'observateur surveille le dossier ``"U:"`` de manière recursive.
@@ -142,7 +142,7 @@ La principale différence ce trouvera au moment de l'instantation de l'objet.
   from watchdog.observers import Observer
 
   observer = Observer()
-  handler = eventHandler.AuditHandlerMusic(patterns=["*.mp3","*.wav","*.flac"])
+  handler = eventhandler.AuditHandlerMusic(patterns=["*.mp3", "*.wav", "*.flac"])
   observer.schedule(handler, path='U:', recursive=True)
   observer.start()
 
@@ -173,7 +173,7 @@ Cette librairie permet aussi une grande réusabilité du code grâce, entre autr
 
 .. [#pj] <paul.jeanbourquin@he-arc.ch>
 
-Biliographie
+Bibliographie
 ------------
 
 * watchdog documentation : http://pythonhosted.org/watchdog/
