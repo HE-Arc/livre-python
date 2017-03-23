@@ -1,7 +1,7 @@
 ﻿.. _networkX-tutorial:
 
 ``networkX``
-========
+============
 
 Par Deni Gahlinger [#dg]_
 
