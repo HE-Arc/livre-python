@@ -6,5 +6,5 @@ class CircularRef(object):
     def __destroy__(self):
         print('destroy')
 
-    def store(self, obj)
+    def store(self, obj):
         self.obj = obj
