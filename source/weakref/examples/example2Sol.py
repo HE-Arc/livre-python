@@ -1,5 +1,6 @@
 import weakref
 
+
 class CircularRef(object):
     def __init__(self):
         self.obj = None
