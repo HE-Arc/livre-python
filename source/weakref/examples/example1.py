@@ -1,14 +1,14 @@
-"""This is a simple example of weakref"""
+"""This is a simple example of weakref."""
 
 
 class ExampleWeakref(object):
-        """Class of a simple strong ref"""
+        """Class of a simple strong ref."""
 
         def __init__(self):
-                """Constructor"""
+                """Constructor."""
                 self.obj = None
                 print('created')
 
         def __destroy__(self):
-                """Destructor"""
+                """Destructor."""
                 print('destroy')
