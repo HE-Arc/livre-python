@@ -4,7 +4,7 @@ import random
 
 # Préparation des cartes.
 valeur = ["Deux", "Trois", "Quatre", "Cinq", "Six", "Sept",
-    "Huit", "Neuf", "Dix", "Valet", "Dame", "Roi", "As"]
+          "Huit", "Neuf", "Dix", "Valet", "Dame", "Roi", "As"]
 enseigne = ["Coeur", "Pique", "Carreau", "Trèfle"]
 
 # Préparation du jeu de cartes (52 cartes).
