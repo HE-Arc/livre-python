@@ -32,7 +32,7 @@ entière dans un intervalle donné.
 
 Les fonctions de nombres réels, en plus de sélectionner des valeurs dans un
 intervalle (avec les fonctions :py:func:`random.random` et
-:py:func:`random.unifrom` par exemple), permettent aussi de réaliser des
+:py:func:`random.uniform` par exemple), permettent aussi de réaliser des
 distributions gaussienne, exponentielles et logarithmiques.
 
 Les fonctions de séquences permettent de manipuler des éléments dans une liste
