@@ -59,7 +59,7 @@ Il est possible de ne lire qu'une ou plusieurs colonnes en utilisant l'opérateu
     :start-after: func:readcol
     :end-before: endfunc:readcol
 
-Il est commun de spécifier des en-têtes au dessus de chaque colonne. [#stack]_
+Il est commun de spécifier des en-têtes au dessus de chaque colonne, comme sur l'exemple de fichier CSV ci-dessous avec les en-têtes FirstColumn et SecondColumn. [#stack]_
 
 .. code-block:: text
 
@@ -67,13 +67,13 @@ Il est commun de spécifier des en-têtes au dessus de chaque colonne. [#stack]_
     asdf,1234
     qwer,5678
 
-Pour les ignorer, il suffit de passer la première ligne avec la fonction next() :
+Pour les ignorer lors de la lecture, il suffit de passer la première ligne avec la fonction next() :
 
 .. literalinclude:: examples.py
     :start-after: func:readskip
     :end-before: endfunc:readskip
 
-Ou alors en utilisant un DictReader :
+Ou alors en utilisant un DictReader, qui permettra de lire chaque colonne en spécifiant son en-tête plutôt que son index numérique :
 
 .. literalinclude:: examples.py
     :start-after: func:readdict
@@ -90,12 +90,21 @@ L'exemple ci-dessous illustre l'écriture d'un fichier CSV nommé "write.csv". C
     :start-after: func:write
     :end-before: endfunc:write
 
+Le résultat du code ci-dessus sera un fichier "write.csv" placé au même endroit que le script python et contenant :
+
+.. code-block:: text
+
+    abc,def,ghi
+    123,456,789
+
+Suivant le système d'exploitation et l'éditeur de texte utilisé, il est possible de voir apparaître des lignes vides entre chaque ligne de données. Ceci est dû au fait que le délimiteur de fin de ligne par défaut utilisé par :py:func:`~csv.writer` est \\r\\n.
+
 Dialectes [#chicoree]_
 **********************
 
-Comme précisé dans l'introduction, CSV manque de standardisation. Les logiciels francophones auront tendance à utiliser des points virgules comme séparateur, et des guillemets comme caractère de délimitation de chaine. Ainsi, il n'y aura pas besoin d'échapper les caractères apostrophe et il n'y aura pas de confusion avec la virgule d'un chiffre ou d'une phrase. D'un autre côté le standard défini par la RFC est l'utilisation de l'apostrophe et de la virgule.
+Comme précisé dans l'introduction, CSV manque de standardisation. Les logiciels francophones auront tendance à utiliser des points virgules comme séparateur, et des guillemets comme caractère de délimitation de chaine. Ainsi, il n'y aura pas besoin d'échapper les caractères apostrophe et il n'y aura pas de confusion avec la virgule d'un chiffre ou d'une phrase. D'un autre côté, le standard défini par la RFC est l'utilisation de l'apostrophe et de la virgule. Pour complexifier le tout, chacun peut plus ou moins définir son propre format.
 
-Pour pallier à ces différents de formatage :py:mod:`csv` à créer les dialecte. Un dialecte permet de spécifier chacun des paramètres du formatage. Ils peuvent être spécifié soit directement lors de l'utilisation des fonctions :py:func:`~csv.reader` et :py:func:`~csv.writer` :
+Pour pallier à ces différents de formatage :py:mod:`csv` à créer les dialectes. Un dialecte permet de spécifier chacun des paramètres du formatage. Ils peuvent être spécifié soit directement lors de l'utilisation des fonctions :py:func:`~csv.reader` et :py:func:`~csv.writer` :
 
 .. literalinclude:: examples.py
     :start-after: func:readdialect
@@ -121,10 +130,11 @@ lineterminator    \\r\\n             Séquence de caractères utilisée à la fi
 skipinitialspace  False              Ignorer les espaces entre le délimiteur de chaîne et les données
 ================  =================  ===============================================================================
 
+
 Conclusion
 ==========
 
-:py:mod:`csv` est un module très pratique lorsqu'il s'agit de stocker ou de rechercher des données dans un fichier. Il est aussi facile d'utilisation et ne nécessite que quelques lignes de code pour être opérationnel. Un point négatif cependant, est que le format manque de standardisation, ce qui peut être problématique pour le partage d'informations entre plusieurs applications. Il n'est non plus pas adapté aux stockages d'informations en masse ayant de fortes dépendances entre elles. Là, une base de données serait plus judicieuse. Enfin, pour terminer il est à préciser que le module est bien plus vaste que cette courte page d'information. Il est donc recommandé de suivre les liens listés ci-dessous pour plus de détails.
+:py:mod:`csv` est un module très pratique lorsqu'il s'agit de stocker ou de rechercher des données dans un fichier. Il est aussi facile d'utilisation et ne nécessite que quelques lignes de code pour être opérationnel. Un point négatif cependant, est que le format manque de standardisation, ce qui peut être problématique pour le partage d'informations entre plusieurs applications. Il n'est non plus pas adapté aux stockages d'informations en masse ayant de fortes dépendances entre elles. Là, une base de données serait plus judicieuse. Enfin, pour terminer, beaucoup d'autre fonctionnalités du module n'ont pas pu être exposé dans cette courte page d'information. Il est donc recommandé de suivre les liens listés ci-dessous pour plus de détails.
 
 Références
 ==========

@@ -52,8 +52,8 @@ with open('data.csv', newline='') as csvfile:
 
 with open('write.csv', 'w', newline='') as csvfile:
     writer = csv.writer(csvfile)
-    writer.writerow(["abc", "def", "ghi"])
-    writer.writerow(["123", "456", "789"])
+    writer.writerow(('abc', 'def', 'ghi'))
+    writer.writerow(('123', '456', '789'))
 
 # endfunc:write
 
