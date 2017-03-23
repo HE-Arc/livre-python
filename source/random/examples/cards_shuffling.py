@@ -9,8 +9,8 @@ enseigne = ["Coeur", "Pique", "Carreau", "Trèfle"]
 
 # Préparation du jeu de cartes (52 cartes).
 jeu = []
-for e in range(4):
-    for v in range(13):
+for e in enseigne:
+    for v in valeur:
         carte = valeur[v] + " de " + enseigne[e]
         jeu.append(carte)
 

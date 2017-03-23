@@ -4,6 +4,12 @@
 ``random``
 ==========
 
+.. image:: ./img/dice.png
+    :scale: 45%
+    :align: right
+    :alt: Dice logo
+    :target: http://silabs.se/media/1060/dice-2x.png
+
 Par Christophe Hirschi [#email]_
 
 Introduction
@@ -46,6 +52,35 @@ d'une liste (:py:func:`random.sample`).
     applications liées à la cryptographie ou la sécurité en général (génération
     de mots de passe, authentification de compte, etc.) et de préférer le
     module :py:mod:`secrets` à la place.
+
+*Seeding*
+=========
+
+Comme spécifiés dans l'introduction, les nombres générés par :py:mod:`random`
+sont de nature pseudo-aléatoire, c'est-à-dire qu'une *graine*, *seed* en
+anglais, génère la suite de nombres. Dans le cas de :py:mod:`random`, la période
+des *graines* est suffisamment élevée pour éviter de tomber sur les mêmes
+numéros lors d'un usage commun. Cependant, il peut être utile dans certains cas
+de répéter la même suite aléatoire de nombres. Pour cela, il est possible
+d'indiquer à :py:mod:`random` la graine que l'on souhaite utiliser avec la
+fonction :py:func:`random.seed` qui reçoit un nombre en argument, la *graine*.
+
+.. literalinclude:: ./examples/random_seeding.py
+   :linenos:
+
+Résultats :
+
+.. code-block:: console
+
+    $ python random_seeding.py
+    0.13436424411240122
+    0.8474337369372327
+    0.763774618976614
+
+    $ python random_seeding.py
+    0.13436424411240122
+    0.8474337369372327
+    0.763774618976614
 
 Exemples
 ========
