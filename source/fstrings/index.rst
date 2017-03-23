@@ -1,10 +1,10 @@
-﻿.. _fstrings-tutorial:
+.. _fstrings-tutorial:
 
 =========
 f-strings
 =========
 
-Ecrit par : Thibaut Piquerez
+Écrit par : Thibaut Piquerez
 
 ------------
 Introduction
@@ -14,7 +14,7 @@ f-strings permet d'insérer des expressions dans des chaines de caractères en u
 --------------
 Fonctionnement
 --------------
-Pour utiliser f-strings il suffit de mettre un f devant la chaine de caractères et pour insérer la valeur d'une variable dans la chaine il suffit de mettre la variable entre accolade. Si il n'y a pas de variable a substituer il n'est pas nécaissaire de mettre le f devant.
+Pour utiliser f-strings il suffit de mettre un f devant la chaine de caractères et pour insérer la valeur d'une variable dans la chaine il suffit de mettre la variable entre accolade. Si il n'y a pas de variable a substituer il n'est pas nécessaire de mettre le ``f`` devant.
 
 .. code-block:: pycon
 
@@ -27,9 +27,9 @@ Pour utiliser f-strings il suffit de mettre un f devant la chaine de caractères
 -----------	
 Echappement
 -----------
-Certain cractères ne peuvent pas être afficher tel quel il est nécaissaire de les échapper.
+Certains cractères ne peuvent pas être afficher tel quel il est nécessaire de les échapper.
 
-Pour les accolade {} il faut en mettre 2 a la suite:
+Pour les accolade ``{}`` il faut en mettre deux à la suite :
 
 .. code-block:: pycon
 
@@ -38,7 +38,7 @@ Pour les accolade {} il faut en mettre 2 a la suite:
 	
 	Le nombre est {34}
 	
-Pour afficher des apostrophes il y a trois solutions:
+Pour afficher des apostrophes, il y a trois solutions:
 
 	Mettre la chaine entre guillemets :
 	
@@ -68,7 +68,7 @@ Pour afficher des apostrophes il y a trois solutions:
 raw f-strings		
 -------------
 	
-Un string converti automatiquement les échapements avec des backslash comme par exemple : '\\n' , '\\"' , etc. Donc si on ne veut pas que python interprète ces échappements il faut utiliser les raw string en ecrivant r avant la chaine de caractères et si on veut utiliser des raw f-strings il faut mettre fr.
+Un string convertit automatiquement les échappements avec des backslashs comme par exemple : ``\n`` , ``\"``, ``\t``, etc. Donc si on ne veut pas que python interprète ces échappements il faut utiliser les raw string en ecrivant ``r`` avant la chaine de caractères et si on veut utiliser des raw f-strings il faut mettre ``fr``.
 
 .. code-block:: pycon
 
