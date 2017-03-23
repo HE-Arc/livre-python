@@ -4,8 +4,8 @@
 =======
 
 .. image:: ../_static/csv.png
-	:align: right
-	:alt: CSV logo
+    :align: right
+    :alt: CSV logo
 
 Par Axel Rieben [#email]_
 
@@ -13,36 +13,36 @@ Par Axel Rieben [#email]_
 Introduction
 ============
 
-:py:mod:`csv` est un format ouvert très populaire d'importation et d'exportation de données tel que des feuilles de calcul. Les données d'un fichier .csv sont sous forme textuelles séparées par des virgules d'où son nom "Comma Separeted Values".
+CSV est un format ouvert très populaire d'importation et d'exportation de données tel que des feuilles de calcul. Les données d'un fichier .csv sont sous forme textuelles séparées par des virgules d'où son nom "Comma Separeted Values".
 
 Exemple d'un fichier .csv [#wikipedia]_ :
 
 .. code-block:: text
 
-	"Robert;"Dupont";"rue du Verger, 12"
-	"Michel";"Durand";" av. de la Ferme, 89"
-	"Michel ""Michele""";"Durand";" av. de la Ferme, 89"
-	"Michel;Michele";"Durand";"av. de la Ferme, 89"
+    "Robert;"Dupont";"rue du Verger, 12"
+    "Michel";"Durand";" av. de la Ferme, 89"
+    "Michel ""Michele""";"Durand";" av. de la Ferme, 89"
+    "Michel;Michele";"Durand";"av. de la Ferme, 89"
 
 Représentation tabulaire :
 
 .. csv-table::
 
-	"Robert","Dupont","rue du Verger, 12"
-	"Michel","Durand","av. de la Ferme, 89"
-	"Michel ""Michele""","Durand","av. de la Ferme, 89"
-	"Michel;Michele","Durand","av. de la Ferme, 89"
+    "Robert","Dupont","rue du Verger, 12"
+    "Michel","Durand","av. de la Ferme, 89"
+    "Michel ""Michele""","Durand","av. de la Ferme, 89"
+    "Michel;Michele","Durand","av. de la Ferme, 89"
 
-Il existe des différences de format parmi les applications utilisant :py:mod:`csv` puisqu'il n'a pas été standardisé. Les guillemets peuvent par exemple être omis et les points virgules remplacé par des virgules. Toutefois, la RFC 41802 [#rfc]_ décrit la forme la plus courante.
+Il existe des différences de format parmi les applications utilisant CSV puisqu'il n'a pas été standardisé. Les guillemets peuvent par exemple être omis et les points virgules remplacé par des virgules. Toutefois, la RFC 41802 [#rfc]_ décrit la forme la plus courante.
 
-Module [#doc]_
-==============
+Module :py:mod:`csv`
+====================
 
 Le module :py:mod:`csv` python implémente des classes permettant de facilement lire et écrire des fichiers au format CSV. Pour tous les exemples qui suivent, il ne faudra pas oublier d'importer ce module avec :
 
 .. literalinclude:: examples.py
-	:start-after: func:import
-	:end-before: endfunc:import
+    :start-after: func:import
+    :end-before: endfunc:import
 
 Lecture
 *******
@@ -50,14 +50,34 @@ Lecture
 L'exemple ci-dessous illustre la lecture d'un fichier CSV nommé "data.csv". Dans un premier temps, le fichier est ouvert. Ensuite, on peut voir que la fonction :py:func:`~csv.reader` est utilisé afin d'obtenir un objet sur lequel il est possible d'itérer. Enfin, une boucle affiche chaque ligne du fichier.
 
 .. literalinclude:: examples.py
-	:start-after: func:read
-	:end-before: endfunc:read
+    :start-after: func:read
+    :end-before: endfunc:read
 
 Il est possible de ne lire qu'une ou plusieurs colonnes en utilisant l'opérateur [].
 
 .. literalinclude:: examples.py
-	:start-after: func:readcol
-	:end-before: endfunc:readcol
+    :start-after: func:readcol
+    :end-before: endfunc:readcol
+
+Il est commun de spécifier des en-têtes au dessus de chaque colonne. [#stack]_
+
+.. code-block:: text
+
+    FirstColumn,SecondColumn
+    asdf,1234
+    qwer,5678
+
+Pour les ignorer, il suffit de passer la première ligne avec la fonction next() :
+
+.. literalinclude:: examples.py
+    :start-after: func:readskip
+    :end-before: endfunc:readskip
+
+Ou alors en utilisant un DictReader :
+
+.. literalinclude:: examples.py
+    :start-after: func:readdict
+    :end-before: endfunc:readdict
 
 Il est à noter qu'il est recommandé d'utiliser des fichier CSV encodé en UTF-8 pour éviter tout bug inopiné.
 
@@ -67,8 +87,8 @@ Ecriture
 L'exemple ci-dessous illustre l'écriture d'un fichier CSV nommé "write.csv". Comme pour la lecture, il faut tout d'abord ouvrir le fichier. Ensuite la fonction, :py:func:`~csv.writer` retourne un objet qui va convertir au format CSV les données qu'on lui donne. Il suffit donc de passer celles-ci à la fonction writerow().
 
 .. literalinclude:: examples.py
-	:start-after: func:write
-	:end-before: endfunc:write
+    :start-after: func:write
+    :end-before: endfunc:write
 
 Dialectes [#chicoree]_
 **********************
@@ -78,14 +98,14 @@ Comme précisé dans l'introduction, CSV manque de standardisation. Les logiciel
 Pour pallier à ces différents de formatage :py:mod:`csv` à créer les dialecte. Un dialecte permet de spécifier chacun des paramètres du formatage. Ils peuvent être spécifié soit directement lors de l'utilisation des fonctions :py:func:`~csv.reader` et :py:func:`~csv.writer` :
 
 .. literalinclude:: examples.py
-	:start-after: func:readdialect
-	:end-before: endfunc:readdialect
+    :start-after: func:readdialect
+    :end-before: endfunc:readdialect
 
 Soit en utilisant une classe qui redéfini tous les attributs :
 
 .. literalinclude:: examples.py
-	:start-after: func:readdialectclass
-	:end-before: endfunc:readdialectclass
+    :start-after: func:readdialectclass
+    :end-before: endfunc:readdialectclass
 
 Voici un tableau qui renseigne sur chacun des attributs :
 
@@ -114,4 +134,5 @@ Références
 .. [#wikipedia] https://fr.wikipedia.org/wiki/Comma-separated_values
 .. [#rfc] https://tools.ietf.org/html/rfc4180
 .. [#doc] https://docs.python.org/3.6/library/csv.html#module-csv
+.. [#stack] http://stackoverflow.com/questions/14257373/skip-the-headers-when-editing-a-csv-file-using-python
 .. [#chicoree] http://www.chicoree.fr/w/Fichiers_CSV_en_Python

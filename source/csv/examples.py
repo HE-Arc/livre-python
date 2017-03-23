@@ -27,6 +27,27 @@ with open('data.csv', newline='') as csvfile:
 # endfunc:readcol
 
 
+# func:readskip
+
+with open('data.csv', newline='') as csvfile:
+    reader = csv.reader(csvfile)
+    next(reader, None)
+    for row in reader:
+        print(row)
+
+# endfunc:readskip
+
+# func:readdict
+
+with open('data.csv', newline='') as csvfile:
+    reader = csv.DictReader(csvfile, delimiter=',')
+    for row in reader:
+        print(row['FirstColumn'])
+        print(row['SecondColumn'])
+
+# endfunc:readdict
+
+
 # func:write
 
 with open('write.csv', 'w', newline='') as csvfile:
