@@ -1,5 +1,6 @@
 """This is a simple example of weakref"""
 
+
 class ExampleWeakref(object):
     def __init__(self):
         self.obj = None
