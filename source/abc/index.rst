@@ -8,13 +8,10 @@ Par Sylvain Renaud <sylvain.renaud@he-arc.ch>
 Introduction
 ------------
 Les classes abstraites sont comme des classes standard, avec la particulatrité qu'on ne pourra pas créer d'objets de ces classes.
-
-Les classes abstraites doivent être spécifiées. Les classes qui spécifient notre classe abstraite pourront elles être instanciées.
-
-Lors de la spécialisation, la classe dérivée aura toutes les méthodes de la classe mère (notre classe abstraite).
-
+Les classes abstraites doivent être spécifiées. Les classes qui spécifient les classes abstraites pourront elles être instanciées.
+Lors de la spécialisation, la classe dérivée aura toutes les méthodes de la classe mère (la classe abstraite).
 Ce mécanisme est utile pour généraliser un objet.
-.. Par exemple tout le monde sait à quoi ressemble une Porsche (c'est un terme précis), on peut donc instancier. Mais si l'on demande de représenter un véhicule (terme englobant), tout le monde a une idée différente du terme. La classe véhicule serait donc abstraite et la classe Porsche dérive de Véhicule.
+
 Exemple de classe abstraite : Shape (forme en français)
 
 .. image:: ./img_shape.jpg
@@ -24,23 +21,24 @@ Exemple de classe abstraite : Shape (forme en français)
 La classe abstraite ``Shape`` possède la méthode ``calculateArea()``.
 Nous savons qu'une forme géométrique possède une aire.
 Mais nous ne savons pas comment la calculer sans connaître la forme.
-C'est pourquoi il est nécessaire de créer des classes qui dérives de Shape.
+C'est pourquoi il est nécessaire de créer des classes qui dérivent de Shape.
 Par exemple un rectange possède une aire calculable par ``hauteur*largeur``.
-Idem pour d'autres formes géométriques qui ont leurs propre manière de calculer leur aire.
+Idem pour d'autres formes géométriques qui ont leurs propre manière de calculer leurs aires.
 
 Grâce au polymorphisme, nous pouvons par exemple créer des listes de ``Shape``.
-Dans ces listes il y aura des rectangles, triangles, etc.
+Dans ces listes il y aura des Shape dont les types effectifs sont ``Rectangle``, Triangle, etc.
 Si nous demandons à chaque élément de la liste de calculer son aire, il l'a calculera grâce à sa propre formule.
-De plus, nous sommes certains que chaque élément de la liste possède la méthode ``calculateArea()`` puisqu'il est une ``Shape``.
+De plus, nous sommes certains que chaque élément de la liste possède la méthode ``calculateArea()``
+puisqu'il implémente ``Shape``.
 
 
-Exemple
--------
+Exemples
+--------
 Nous voulons donc pouvoir faire cela.
 
 .. code-block:: python
 
-   for shape in listeShape:
+   for shape in shapes:
       print(shape.calculateArea())
 
 Pour cela, il faut une classe abstraite Shape qui contienne la méthode abstraite ``calculateArea()``.
@@ -73,11 +71,12 @@ Ensuite, on créé une classe ``Rectange`` qui implémente (hérite de) ``Shape`
            return self.hauteur * self.largeur
 
 Ici on impémente la méthode ``calculateArea()`` avec la méthode de calcul ``largeur * hauteur``.
-Si on oublie d'implémenter les méthodes abstraites dans une classe sensée implémenter une classe abstraite, une erreur se produit :
-``TypeError: Can't instantiate abstract class Rectangle with abstract methods calculateArea``
+Si on oublie d'implémenter les méthodes abstraites dans une classe sensée implémenter une classe abstraite,
+une erreur se produit : ``TypeError: Can't instantiate abstract class Rectangle with abstract methods calculateArea``
 
 En revanche on peut tout à fait, dans la classe abstraite implémenter complètement une méthode.
-Les enfants hériteront alors de cette méthode. Il suffit de ne pas la marquer comme ``@abstractmethod``.
+Les enfants hériteront alors de cette méthode sans devoir la redéfinir.
+Il suffit de ne pas la marquer comme ``@abstractmethod``.
 
 Ensuite faisons une autre classe, ``Triangle``, qui implémente ``Shape``. Elle aura le même prototype que
 ``Rectangle`` mais la méthode ``calculateArea()`` calculera l'aire différement.
@@ -102,11 +101,11 @@ eux en une instruction, comme présenté avant.
 Création d'une structure de données
 -----------------------------------
 Les classes abstraites peuvent également être utilisées pour créer sa propre structure de données.
-En implémentant par exemple ``collections.abc.Sequence``, nous devrons redéfinir quelques méthodes qui
-permettront d'utiliser notre classe comme une liste. Nous pouvons par des assertions vérifier les
-éléments de cette liste pour qu'ils soient tous du même type.
+En implémentant par exemple ``collections.abc.Sequence`` (une classe abstraite built-in de Python),
+nous devrons redéfinir quelques méthodes qui permettront d'utiliser notre classe comme une liste.
+Nous pouvons par des assertions vérifier les éléments de cette liste pour qu'ils soient tous du même type.
 
-Je propose comme exemple une classe ``Garage`` qui contient une liste de ``Voiture``.
+Prenons comme exemple une classe ``Garage`` qui contient une liste de ``Voiture``.
 
 .. code-block:: python
 
@@ -151,7 +150,7 @@ Par exemple cette ligne là lève l'erreur:
    g = Garage(v1, v2, v3, 42)
    # L'erreur 'La liste ne contient pas que des Voiture.' sera levée.
 
-De même que l'exemple précédent, on aimerait afficher toutes les voitures d'un garage. Mais en appelant simplement
+De même que l'exemple ``Shape``, on aimerait afficher toutes les voitures d'un garage. Mais en appelant simplement
 une méthode du garage:
 
 .. code-block:: python
@@ -181,6 +180,6 @@ méthodes semblables à l'utilisation d'une ``list``.
 
 Conclusion
 ----------
-Les classes abstraite en python permettent avant tout de créer unu architecture logicielle convenable.
+Les classes abstraite en python permettent avant tout de créer une architecture logicielle convenable.
 De plus, python possède déjà des classes abstraites qu'il est possible d'implémenter.
 Cette option peut s'apparenter aux ``Interface`` Java.
