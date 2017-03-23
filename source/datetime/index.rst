@@ -22,8 +22,8 @@ Représenter une date
 
 c'est bien d'avoir accès au temps actuel avec une précision d'une seconde sinon plus… 
 mais parfois, cette précision est inutile. Dans certains cas, on a juste besoin d'une date, c'est-à-dire un jour, un mois et une année.
-Il est naturellement possible d'extraire cette information de notre timestamp. Le module :py:mod:`datetime` propose une classe :py:mod:`date`,
- représentant une date, rien qu'une date.
+Il est naturellement possible d'extraire cette information de notre timestamp. Le module :py:mod:`datetime` propose une classe :py:class:`~datetime.date`,
+représentant une date, rien qu'une date.
 
 L'objet possède trois attributs :
 ---------------------------------
@@ -45,8 +45,8 @@ Il y a plusieurs façons de procéder. Le constructeur de cette classe prend tro
 	
 Il existe deux méthodes de classe qui peuvent etre intéresser :
 
-	:py:func:`date.today()` : renvoie la date d'aujourd'hui ;
-	:py:func:`date.fromtimestamp(timestamp)` : renvoie la date correspondant au timestamp passé en argument.
+	:py:meth:`datetime.date.today()` : renvoie la date d'aujourd'hui ;
+	:py:meth:`datetime.date.fromtimestamp()` : renvoie la date correspondant au timestamp passé en argument.
 
 Exemple	:
 
@@ -66,28 +66,28 @@ Bien sur npus pouvons manipuler ces dates simplement et les comparer grâce aux 
 Représenter une heure
 ---------------------
 
-C'est moins courant mais on peut également être amené à manipuler une heure, indépendemment de toute date. La classe :py:class:`time` du module :py:mod:`datetime` est là pour cela.
+C'est moins courant mais on peut également être amené à manipuler une heure, indépendemment de toute date. La classe :py:class:`datetime.time` du module :py:mod:`datetime` est là pour cela.
 
 On construit une heure avec non pas trois mais cinq paramètres, tous optionnels :
 
-:py:attr:`hour` (0 par défaut) : les heures, valeur comprise entre 0 et 23 ;
-:py:attr:`minute` (0 par défaut) : les minutes, valeur comprise entre 0 et 59 ;
-:py:attr:`second` (0 par défaut) : les secondes, valeur comprise entre 0 et 59 ;
-:py:attr:`microsecond` (0 par défaut) : la précision de l'heure en micro-secondes, entre 0 et 1.000.000 ;
-:py:attr:`tzinfo` (None par défaut) : l'information de fuseau horaire (je ne détaillerai pas cette information ici).
-Cette classe est moins utilisée que :py:mod:`datetime.date` mais elle peut se révéler utile dans certains cas.
+:py:obj:`datetime.time.hour` (0 par défaut) : les heures, valeur comprise entre 0 et 23 ;
+:py:obj:`datetime.time.minute` (0 par défaut) : les minutes, valeur comprise entre 0 et 59 ;
+:py:obj:`datetime.time.second` (0 par défaut) : les secondes, valeur comprise entre 0 et 59 ;
+:py:obj:`datetime.time.microsecond` (0 par défaut) : la précision de l'heure en micro-secondes, entre 0 et 1.000.000 ;
+:py:obj:`datetime.time.tzinfo` (None par défaut) : l'information de fuseau horaire (je ne détaillerai pas cette information ici).
+Cette classe est moins utilisée que :py:class:`~datetime.date` mais elle peut se révéler utile dans certains cas.
 
 Représenter des dates et heures
 -------------------------------
 
-On peut naturellement représenter une date et une heure dans le même objet, ce sera probablement la classe que nous utiliserons le plus souvent. Celle qui nous intéresse s'appelle :py:class:`datetime`, comme son module.
+On peut naturellement représenter une date et une heure dans le même objet, ce sera probablement la classe que nous utiliserons le plus souvent. Celle qui nous intéresse s'appelle :py:mod:`datetime`, comme son module.
 
-Elle prend d'abord les paramètres de :py:mod:`datetime.date` (année, mois, jour) et ensuite les paramètres de :py:mod:`datetime.time` (heures, minutes, secondes, micro-secondes et fuseau horaire).
+Elle prend d'abord les paramètres de :py:class:`datetime.date` (année, mois, jour) et ensuite les paramètres de :py:class:`datetime.time` (heures, minutes, secondes, micro-secondes et fuseau horaire).
 
 les deux méthodes de classe que nous utiliserons le plus souvent :
 
-:py:meth:`datetime.now()` : renvoie l'objet datetime avec la date et l'heure actuelles ;
-:py:meth:`datetime.fromtimestamp` (timestamp) : renvoie la date et l'heure d'un timestamp précis.
+`datetime.date.now()` : renvoie l'objet datetime avec la date et l'heure actuelles ;
+`datetime.date.fromtimestamp()` (timestamp) : renvoie la date et l'heure d'un timestamp précis.
 
 .. code-block:: python3
 
