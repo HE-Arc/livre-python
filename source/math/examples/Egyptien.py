@@ -1,10 +1,10 @@
-"""Exemple de fraction égyptiennes"""
+"""Exemple de fraction égyptiennes."""
 from fractions import Fraction
 from math import *
 
 
 def function(f):
-    """Définition de la fonction fournissant une liste de fractions"""
+    """Définition de la fonction fournissant une liste de fractions."""
     e = int(f)
     f -= e
     liste = [e]
