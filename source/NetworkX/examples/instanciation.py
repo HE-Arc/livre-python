@@ -48,7 +48,7 @@ G.node[1]  # affiche le noeud 1
 # DiGraph.out_edges(), DiGraph.in_degree(), DiGraph.predecessors(),
 # DiGraph.successors().
 
-DG=nx.DiGraph()
+DG = nx.DiGraph()
 
 # ajout de ponts ayant différents poids
 
@@ -57,7 +57,7 @@ DG.add_weighted_edges_from([(1, 2, 0.5), (3, 1, 0.75)])
 # Multigraph
 # Les multigraph permettent d'avoir plusieurs ponts entre deux mêmes points.
 
-MG=nx.DiGraph()
+MG = nx.DiGraph()
 
 # ajout de ponts ayant différents poids
 
