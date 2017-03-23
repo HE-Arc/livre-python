@@ -174,7 +174,7 @@ Cette librairie permet aussi une grande réusabilité du code grâce, entre autr
 .. [#pj] <paul.jeanbourquin@he-arc.ch>
 
 Bibliographie
-------------
+-------------
 
 * watchdog documentation : http://pythonhosted.org/watchdog/
 * Tutoriel d'utilisation de watchdog : http://sametmax.com/reagir-a-un-changement-sur-un-fichier-avec-watchdog/
