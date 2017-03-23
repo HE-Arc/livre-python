@@ -36,7 +36,7 @@ Voici donc les conteneurs dont nous allons parler:
 namedtuple()
 ------------
 
-tout d'abord avant d'utiliser les :py:class:`collections.namedtuple()` il faut comprendre ce qu'est un tuple.
+tout d'abord avant d'utiliser les ``namedtuple()`` il faut comprendre ce qu'est un tuple.
 un tuple est une liste que l'on ne peut pas modifier après sa création.
 
 .. code-block:: pycon
