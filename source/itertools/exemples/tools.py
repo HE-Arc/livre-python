@@ -1,5 +1,6 @@
 """Utilitaire pour l'index.rst."""
-from itertools import *
+
+from itertools import count, islice
 
 liste = ["I", "do", "love", "programming", "in", "Python"]
 for i in liste:
@@ -9,15 +10,7 @@ for i in liste:
 chaine = "Python"
 iterateur = iter(chaine)  # va nous retourner un itérateur sur notre chaine
 print(next(iterateur))  # va nous afficher la première lettre de notre string
-<<<<<<< HEAD
-<<<<<<< HEAD
 for i in iterateur:  # va parcourir tous les caractère un à un
-=======
-for i in chaine:  # va parcourir tous les caractère un à un
->>>>>>> Revert "Revert "syntaxe pycon pour les exemples chain()""
-=======
-for i in iterateur:  # va parcourir tous les caractère un à un
->>>>>>> ajout de la conclusion + exemple générateur
     print(i)
 
 # iterateur_perso_begin
@@ -36,7 +29,7 @@ class itRevListe:
         self.position = len(liste)
 
     def __next__(self):
-        """On renvoie l'élément suivant dans notre liste après le parcours."""
+        """On renvoie l'élément suivant dans notre liste."""
         if self.position == 0:
             raise StopIteration
         self.position -= 1
@@ -61,10 +54,6 @@ class revList(list):
 liste = revList(list(islice(count(), 0, 10)))
 for i in liste:
     print(i)
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> ajout de la conclusion + exemple générateur
 
 
 def sayHello(name):
@@ -72,12 +61,3 @@ def sayHello(name):
     yield "Bienvenu, "
     yield  # return none
     yield name
-
-
-for i in sayHello("Johnny"):
-    print(i)
-<<<<<<< HEAD
-=======
->>>>>>> Revert "Revert "syntaxe pycon pour les exemples chain()""
-=======
->>>>>>> ajout de la conclusion + exemple générateur
