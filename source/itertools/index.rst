@@ -165,7 +165,7 @@ Sortie :
     0
 
 Un peu de design pattern
--------------------------
+-----------------------------
 Tout le monde utilise ce modèle de conception sans même le connaître vraiment. Imaginez le cas on nous voudrions itérer sur un répertoire pour obtenir son contenu ou appliquer un traitement sur chacun des fichiers. Sans  l'approche itérateur,  ils nous faudraient recupérer un flux sur le dossier courant est d'utiliser un **while** pour parcourir tout notre arborescence. Mais imaginons que notre problème change et que nous ne devons plus itérer sur un répertoire mais sur un autre type de structure... Et on est repartie pour réecrire du code fastidueux et compliqué. 
 
 Avec l'utilisation d'itérateur notre programme devient tout de suite plus robuste et plus élégant. Un gros avantage avec ce pattern est que si notre structure change il nous suffit d'adapter son comportement sur cette objet (`décorateur`_) pour lui indiquer comment itérer sur cette objet. Grâce à ça, nous cachons la compléxité de parcours à notre client qui ne se rend même pas compte de ce qui se passent réelement. Python implémente ce modèle de conception donc il serai dommage de ne pas en profiter !.
