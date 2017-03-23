@@ -9,6 +9,7 @@ Par Jonathan Guerne [#email]_
 
 Introduction
 ============
+
 L'utilité de Invoke_ est de pouvoir très simplement lancer des tâches que vous
 aurez déjà préparé au pare avant et qui exécuteront par exemple des lignes de
 commande.
@@ -36,19 +37,7 @@ arguments.
   def build(ctx):
       print("Building")
 
-Code source tiré de la documentation_  officielle de invoke
-
-
-
-Installation
-============
-Pour pouvoir utiliser les commandes propres à la librairie Invoke il faut d'abord
-s'assurer de l'avoir installée dans son environnement python.
-Comme d'habitude on utilise pip pour installer des librairies externes.
-
-::
-
-  $ pip install invoke
+Code source tiré de la documentation_  officielle de invoke.
 
 Exemple
 =======
@@ -74,7 +63,7 @@ celle d'une simple fonction :
 .. code-block:: python3
 
   @task
-  def build(args)
+  def build(args):
       print("do stuff")
 
 La seule nouveauté quand on a déjà codé des fonctions en python est la ligne ``@task`` précédant
@@ -85,32 +74,32 @@ Une fois les tâches écrites on peut lancer un invite de commande afin de les t
 Pour pouvoir savoir quelle tâches sont disponible pour notre projet on peut utiliser la commande suivante
 pour les lister :
 
-::
+.. code-block:: console
 
   $ invoke -l
 
 Maintenant, si on veut lancer la tâche **build** il faut le faire de cette façon :
 
-::
+.. code-block:: console
 
   $ invoke build
 
 Si on a envie d'obtenir de l'aide sur la commande **build** notamment ses paramètres on utilise
 cette commande :
 
-::
+.. code-block:: console
 
-  $invoke --help build
+  $ invoke --help build
 
 
 Finalement pour lancer une commande en lui spécifiant ses arguments il faut écrire ceci :
 
-::
+.. code-block:: console
 
-  $invoke build -args lalala
+  $ invoke build -args lalala
 
-Ici on passe comme paramètre args la valeur "lalala". Par défaut les paramètres sont interprétés
-comme des chaînes de caractères.
+Ici on passe comme paramètre args la valeur ``"lalala"``. Par défaut les
+paramètres sont interprétés comme des chaînes de caractères.
 
 Lancer une commande
 -------------------
@@ -153,16 +142,16 @@ syntaxe suivante.
 .. code-block:: python3
 
   @task
-  def B()
+  def B():
       print("task B")
 
   @task(B)
-  def A()
+  def A():
       print("task A")
 
 Si un appel à la tâche A est fait, la sortie sera la suivante :
 
-::
+.. code-block:: console
 
   $ invoke A
   task B
@@ -176,11 +165,11 @@ Retourne ``True`` s’il n’y a pas eu d’erreur et ``False`` sinon.
 
   @task
   def A(ctx):
-      if(ctx.run("your command")):
+      if ctx.run("your command"):
           print("ok")
 
-Autres cas concret
-------------------
+Autres cas concrets
+-------------------
 Dans le cadre de l'écriture de ce livre python il m'a été proposé pour expérimenter
 **Invoke** d'automatiser la génération de la doc html (vu au chapitre précédent) et
 les checks du code et de la doc.
@@ -193,9 +182,10 @@ on ne cherche pas ici à avoir un comportement différent selon leur résultat
   :language: python
   :start-after: # checks start
 
-Exécuter une commande va retourner un objet Runner_ il possède différents attributs
-tel que par exemple le retour de la commande (ainsi que l’erreur) qui
-peut permettre de choisir une action à réaliser en fonction de son contenu.
+Exécuter une commande va retourner un objet :py:class:`~invoke.runners.Runner`
+il possède différents attributs tel que par exemple le retour de la commande
+(ainsi que l’erreur) qui peut permettre de choisir une action à réaliser en
+fonction de son contenu.
 
 Conclusion
 ==========
@@ -210,4 +200,3 @@ entre plusieurs applications.
 .. _WinError_3: https://github.com/pyinvoke/invoke/issues/345
 .. _Invoke: http://www.pyinvoke.org/
 .. _documentation: http://docs.pyinvoke.org/en/latest/
-.. _Runner: http://docs.pyinvoke.org/en/0.11.1/api/runners.html
