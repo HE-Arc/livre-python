@@ -79,21 +79,35 @@ On notera la différence de longueur des deux chaînes de 16 bytes. L'encodage u
 Tokens, hachage et sécurité annexe
 ------------------------------------
 
-L'image ci-dessous démontre l'utilisation de tokens. Pour qu'une application tierce puisse se connecter à l'`API Twitter`_, OAuth_ est utilisé pour lui fournir un accès sécurisé. Dans ce cas, deux chaînes aléatoires et deux jetons sont générés pour pouvoir se connecter. De ce fait, twitter peut vérifier que l'application qui a requis les informations est bien autorisée à le faire et qu'elle respecte le niveau de confidentialité enregistré dans les paramètres.
+L'image ci-dessous démontre l'utilisation de tokens. Pour qu'une application tierce puisse se connecter à l'`API Twitter`_, OAuth_ est utilisé pour lui fournir un accès sécurisé. Dans ce cas, deux chaînes aléatoires sont générés pour pouvoir se connecter. La première identifie l'application et la deuxième sert à signer les messages. De ce fait, twitter peut vérifier que l'application qui a requis les informations est bien autorisée à le faire et qu'elle respecte le niveau de confidentialité enregistré dans les paramètres.
 
 .. image:: ./img/exampleTwitterApi.PNG
     :scale: 100%
     :align: center
     :alt: twitter exemple of the use of tokens
 
-Dans le cas de OAuth, la clé de signature est composée de la clé secrète (absente de l'image) et du jeton secret. Seul le jeton d'accès n'est pas fourni de base par l'API mais est regénéré à chaque requête. Il est ici présent sur l'image car il permet de faire des tests lors de l'implémentation de la connexion.
+Dans le cas de OAuth, la clé de signature est composée de la clé secrète (absente de l'image) et du jeton secret. Les deux jetons ne sont pas fourni de base par l'API mais sont regénérés à chaque requête. Il sont ici présents sur l'image car ils permettent de faire des tests lors de l'implémentation de la connexion.
 
-Le processus de récupération des données à une API est le suivant:
+Le processus de récupération des données à l'API Twitter est le suivant:
 
-#. On envoie au serveur de vérification le message de requête comprenant la clé d'utilisateur. À celui-ci est ajouté le hash généré à partir du message et de la clé de signature (c'est la que :py:mod:`hmac` est utile). Cette opération est effectuée à chaque fois que le client essaye de se connecter.
-#. Si le destinataire du message est vérifié et que le compte est autorisé, le serveur renvoie à l'application un jeton.
-#. L'application envoie ce jeton au serveur de ressources qui vérifie grace à celui-ci si l'application est autorisée, et ses privilèges.
-#. Si l'application est autorisée, le serveur renvoie les informations requises.
+#. L'application doit obtenir un jeton de demande en envoyant un message signé (en utilisant :py:mod:`hmac` par exemple) contenant la clé d'utilisateur.
+#. Si la provenance du message est confirmée (voir exemple pratique ci-dessous) et que l'application est autorisée, le serveur renvoie un token (:py:func:`secrets.token_hex()`) et un token secret
+#. L'application redirige l'utilisateur pour qu'il puisse accepter la demande de connexion à son compte. Lors de la redirection, l'application précise le jeton reçu à l'étape précédente.
+#. Si l'utilisateur accepte et que le jeton est correct, le serveur renvoie une clé de vérification
+#. L'application recontacte alors Twitter en précisant la clé de vérification, le jeton, etc.
+#. Si tout est vérifié, Twitter renvoie alors un jeton, un jeton secret, et les informations demandées par l'application.
+
+Exemple pratique
+****************
+
+.. literalinclude:: ./examples/hash.py
+
+.. code-block:: console
+
+    $ python hash.py
+    Client digest -- b'\x9f5\xe5\x87\xda\x94\x10\x9e\x92\x92\x04\x81<o^\t'
+    Server digest -- b'\x9f5\xe5\x87\xda\x94\x10\x9e\x92\x92\x04\x81<o^\t'
+    -> Provenance confirmée
 
 Explications
 ************
