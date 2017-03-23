@@ -21,9 +21,9 @@ correspondant si le fichier s’ouvre, sinon une exception OSError
 (anciennement IOError qui devient un alias de OSError) est levée.
 
 
-.. code-block:: python
+.. code-block:: python3
 
-    open(file, mode=’r’, buffering=-1, encoding=None, errors=None, newline=None, closefd=True, opener=None)
+    open(file, mode='r', buffering=-1, encoding=None, errors=None, newline=None, closefd=True, opener=None)
 
 
 file : String, contenant le chemin absolu ou relatif pour accéder au fichier, ou un Integer, descripteur  de fichier (clé abstraite pour accéder à un fichier).
@@ -142,7 +142,7 @@ Exemple d'un programme qui affiche deux lignes dans une console:
 io.BytesIO
 ----------
 
-.. code-block:: python
+.. code-block:: python3
 
     io.BytesIO([initial_bytes])
 
