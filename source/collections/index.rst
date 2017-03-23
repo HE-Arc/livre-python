@@ -36,18 +36,18 @@ Voici donc les conteneurs dont nous allons parler:
 namedtuple()
 ------------
 
-tout d'abord avant d'utiliser les ``namedtuple()`` il faut comprendre ce qu'est un tuple.
-un tuple est une liste que l'on ne peut pas modifier après sa création.
+tout d'abord avant d'utiliser la fonction ``namedtuple()`` il faut comprendre ce qu'est un tuple.
+un tuple est une collection immuable de données souvent hétérogène.
 
 .. code-block:: pycon
 
-  >>> t = ("a", "b", "c")
+  >>> t = ("cheval", "voiture", "bateau")
   >>> t
-  ('a', 'b','c')
+  ('cheval', 'voiture','bateau')
   >>> t[0]
-  'a'
+  'cheval'
   >>> t[-1]
-  'c'
+  'voiture'
 
 ci-dessus on remarque qu'on peut atteindre les champs de notre tuple seulement en spécifiant son index.
 En utilisant la fonction ``namedtuple()`` pour créer notre tuple, on peut nommer ses champs.
