@@ -1,8 +1,10 @@
+"""Exemple de fraction égyptiennes"""
 from fractions import Fraction
 from math import *
 
 
-def egypt(f):
+def function(f):
+	"""Définition de la fonction fournissant une liste de fractions"""
     e = int(f)
     f -= e
     liste = [e]
@@ -16,4 +18,4 @@ def egypt(f):
 
 a = Fraction(21, 13)
 
-print(egypt(a))
+print(function(a))

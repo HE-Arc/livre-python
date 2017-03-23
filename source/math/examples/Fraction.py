@@ -1,3 +1,4 @@
+"""Exemple calculs mathématiques en utilisant les fractions"""
 from fractions import Fraction
 
 a = Fraction(23, 42)
