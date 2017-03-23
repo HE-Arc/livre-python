@@ -1,5 +1,9 @@
 .. _pytest-tutorial:
 
+======
+Pytest
+======
+
 .. image:: pytest.png
    :height: 300px
    :width: 486 px
