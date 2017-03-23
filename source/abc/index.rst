@@ -99,7 +99,7 @@ Nous pouvons ensuite créer une liste de Rectangle et de Triangle puis calculer 
 eux en une instruction, comme présenté avant.
 
 Création d'une structure de données
------------------------------------
+-------------------------------------
 Les classes abstraites peuvent également être utilisées pour créer sa propre structure de données.
 En implémentant par exemple ``collections.abc.Sequence`` (une classe abstraite built-in de Python),
 nous devrons redéfinir quelques méthodes qui permettront d'utiliser notre classe comme une liste.
@@ -110,7 +110,7 @@ Prenons comme exemple une classe ``Garage`` qui contient une liste de ``Voiture`
 .. code-block:: python
 
    class Garage(Sequence):
-   """Classe iterable."""
+      """Classe iterable."""
 
       def __init__(self, *voitures):
          """Constructeur."""
