@@ -4,7 +4,7 @@
 ``itertools``
 =============
 
-.. image:: img\python_logo.png
+.. image:: ./img/python_logo.png
     :scale: 40%
     :align: right
     :alt: lock logo
