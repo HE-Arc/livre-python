@@ -186,7 +186,15 @@ Une combinaison d'une date et d'un temps. Ses attributs sont year, month, day, h
 - timedelta
 Une durée exprimant la différence entre deux date, time ou datetime.
 
+.. code:: python
+>>> from datetime import timedelta
+>>> d = timedelta(microseconds=-1)
+>>> (d.days, d.seconds, d.microseconds)
 
+Affichera : 
+
+
+(-1, 86399, 999999)
 
 
 
