@@ -138,14 +138,14 @@ Voici un exemple d'utilisation :
 
 .. code-block:: python
 
->>>t = (2009, 2, 17, 17, 3, 38, 1, 48, 0)
->>>secs = time.mktime( t )
->>>print "time.mktime(t) : %f" %  secs
->>>print "asctime(localtime(secs)): %s" % time.asctime(time.localtime(secs))
+>>>t = (2009, 2, 17, 17, 3, 38, 1, 48, 0)  
+>>>secs = time.mktime( t )  
+>>>print "time.mktime(t) : %f" %  secs  
+>>>print "asctime(localtime(secs)): %s" % time.asctime(time.localtime(secs))  
 
 
 Qui retournera le résultat suivant :
 
-time.mktime(t) : 1234915418.000000
+time.mktime(t) : 1234915418.000000  
 asctime(localtime(secs)): Tue Feb 17 17:03:38 2009
 
