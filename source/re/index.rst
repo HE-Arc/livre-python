@@ -118,11 +118,13 @@ re.split()
 .. code:: pycon
 
 	>>> import re
-	>>> re.split('-','+91-011-2711-1111') # Without maxsplit
-	['+91', '011', '2711', '1111']
-	
-	>>> re.split(r'[-]', '+91-011-2711-1111', maxsplit=1) # With maxsplit
-	['+91', '011-2711-1111']
+	>>> line = 'Je Suis; Le, Gars,Qui,      Joue'
+
+	>>> re.split(r'[;,\s]\s*', line)
+	['Je', 'Suis', 'Le', 'Gars', 'Qui', 'Joue']
+
+	>>> re.split(r'[;,\s]\s*', line, maxsplit=1)
+	['Je', 'Suis; Le, Gars,Qui,      Joue']
 
 re.sub()
 --------
