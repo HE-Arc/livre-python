@@ -4,8 +4,7 @@
 ``time``
 ========
 
-Par Kaser Nicolas
-
+Par Nicolas Kaser
 
 --------------
 Introduction
