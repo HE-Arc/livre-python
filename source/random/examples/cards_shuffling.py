@@ -3,24 +3,24 @@
 import random
 
 # Préparation des cartes.
-valeur = ["Deux", "Trois", "Quatre", "Cinq", "Six", "Sept",
+valeurs = ["Deux", "Trois", "Quatre", "Cinq", "Six", "Sept",
           "Huit", "Neuf", "Dix", "Valet", "Dame", "Roi", "As"]
-enseigne = ["Coeur", "Pique", "Carreau", "Trèfle"]
+enseignes = ["Coeur", "Pique", "Carreau", "Trèfle"]
 
 # Préparation du jeu de cartes (52 cartes).
-jeu = []
-for e in enseigne:
-    for v in valeur:
-        carte = v + " de " + e
-        jeu.append(carte)
+jeu_de_cartes = []
+for enseigne in enseignes:
+    for valeur in valeurs:
+        nouvelle_carte = valeur + " de " + enseigne
+        jeu_de_cartes.append(nouvelle_carte)
 
 # Mélange du jeu de cartes.
-random.shuffle(jeu)
+random.shuffle(jeu_de_cartes)
 
 # Création de la main du joueur (5 cartes).
-main = jeu[:5]
+main = jeu_de_cartes[:5]
 
 # Affichage de la main du joueur.
 print("Main du joueur :")
-for c in main:
-    print("- " + c)
+for carte in main:
+    print("- " + carte)
