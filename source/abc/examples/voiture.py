@@ -1,5 +1,6 @@
 """Classe voiture."""
 
+
 class Voiture():
     """Des voitures à mettre dans un garage."""
 
