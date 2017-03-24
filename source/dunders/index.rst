@@ -164,7 +164,7 @@ Différence entre str et repr :
 
 .. code-block:: python3
 
-        print(str(3)==str("3")) # return True car ambigu
+        print(str(3)==str("3")) # return True car str est ambigu
         print(repr(3)==repr("3")) # return False car non-ambigu (Int != String)
 
 
