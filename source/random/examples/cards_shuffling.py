@@ -9,6 +9,7 @@ enseignes = ["Coeur", "Pique", "Carreau", "Trèfle"]
 
 # Préparation du jeu de cartes (52 cartes).
 jeu_de_cartes = []
+
 for enseigne in enseignes:
     for valeur in valeurs:
         nouvelle_carte = valeur + " de " + enseigne
