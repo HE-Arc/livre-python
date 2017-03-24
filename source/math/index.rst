@@ -16,8 +16,7 @@ Par Gabriel Griesser [#gg]_
 ----------------
 
 Le principe du module :py:mod:`math` est d'effectuer diverses opérations mathématiques avec Python. 
-Dans ce chapitre, nous verrons les principales opérations possibles en utilisant le module *MATH*
- et les fractions en Python en utilisant ce module.
+Dans ce chapitre, nous verrons les principales opérations possibles en utilisant le module *MATH* et les fractions en Python en utilisant ce module.
 
 Les nombres entiers sont relativement simple a utiliser en Python. 
 Ce langage devine facilement si un nombre est entier ou pas grâce à la virgule (ou point décimal dans *Python*).
@@ -168,13 +167,13 @@ Dans cet exemple, comme aucune des variables ne possède de virgule, Python les 
 	>>> b
 	1000.0
 
-La fonction ``log(x[,*base*])`` retourne le logarithme naturel de *x* (en base *e*).
+La fonction :py:func:`log(x, [base]) <~math.log>` retourne le logarithme naturel de *x* (en base *e*).
 Avec deux arguments, cette fonction retourne le logerithme de *x* dans la base donnée.
 Il est possible d'utiliser les fonction ``log2(x)`` ou ``log10(x)`` pour retourner le logarithme en base 2 ou 10.
 
 .. code-block:: pycon
 
-	>>> from math import *
+	>>> from math import log, log2, log10
 	>>> log(4)
 	1.386294361119
 	>>> log(4, 2)
@@ -194,7 +193,7 @@ La conversions d'angle est également une propriété de notre module :
 
 .. code-block:: pycon
 
-	>>> from math import *
+	>>> from math import radians, degrees
 	>>> x=radians(180)
 	>>> print(x)
 	3.141592653589793
@@ -212,7 +211,7 @@ Les fonctions hyperboliques sont aussi présentes en rajoutant la lettre ``h`` �
 
 .. code-block:: pycon
 
-	>>> from math import *
+	>>> from math import sin, cos, tan, tanh, cosh, sinh
 	>>> x=radians(180)
 	>>> y=degrees(x)
 	>>> sin(y)
@@ -234,7 +233,7 @@ Attention cependant aux limites, *x* doit être compris entre -1 et 1.
 
 .. code-block:: pycon
 	
-	>>> from math import *
+	>>> from math import acos, asin, atan
 	>>> acos(1)
 	0.0
 	>>> acos(1.9)
@@ -251,7 +250,7 @@ Pour l'utiliser, il suffit simplement d'écrire ``pi`` en commande. Cela va de m
 
 .. code-block:: pycon
 	
-	>>> from math import *
+	>>> from math import pi, cos, tan
 	>>> pi
 	3.141592653589793
 	>>> cos(pi)
@@ -497,17 +496,6 @@ Voici le code résumé de toutes ces opérations en python :
 
 .. literalinclude:: ./examples/Fraction.py
 	
-	
-================
-    Algorithmes
-================
-Le module :py:mod:`fractions` permet également la création de la suite de `Farey
-<http://fr.wikipedia.org/wiki/Suite_de_Farey>`_.
-
-En important le module :py:mod:`fractions` de Python, il est facile de créer une suite de Farey :
-
-.. literalinclude:: ./examples/Farey.py
-
 	
 ----------------------
 Fractions égyptiennes
