@@ -3,7 +3,7 @@
 
 class SomeClass:
     """Class d'exemple."""
-    
+
     grammar = {
         1: "Some string",
         2: "Another string",

@@ -19,7 +19,7 @@ class Main:
         return str(u'; '.join(self.cartes).encode('utf8'))
 
     def __len__(self):
-        """Reféfinition de len."""
+        """Redéfinition de len."""
         return len(self.cartes)
 
     def __getitem__(self, key):
