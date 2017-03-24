@@ -166,11 +166,25 @@ En c# par exemple cette ligne bloque le thread en question pendant une seconde. 
 ---------
 Datetime
 ---------
-Il faut également importer la librairie datetime :
+Datetime permet également de manipuler des dates et des temps. Il faut aussi importer la librairie datetime :
 
 .. code:: python
 >>>import datetime
 
+
+Ce module, plus orienté objet, possède plusieurs types :
+
+- date
+Représente une date du calendrier Grégorien. Ses attributs sont year, month et day
+
+- time
+Représente un temps. Ses attributs sont hour, minute, second, microsecond et tzinfo.
+
+- datetime
+Une combinaison d'une date et d'un temps. Ses attributs sont year, month, day, hour, minute, second, microsecond et tzinfo.
+
+- timedelta
+Une durée exprimant la différence entre deux date, time ou datetime.
 
 
 
