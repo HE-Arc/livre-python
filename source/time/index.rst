@@ -87,7 +87,6 @@ D'autres commandes peuvent retourner une date au format struct_time qui est une 
 
 
 Index	      Attribute	   Values  
-
 =====       =========      =============================  
 
 0	         tm_year        (for example, 1993)  
