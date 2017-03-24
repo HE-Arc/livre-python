@@ -122,7 +122,7 @@ La fonction ``frexp(x)`` retourne la mantisse et l'exposant de *x* comme la pair
 	
 La fonction ``gcd(a, b)`` retourne la plus grand diviseur commun des int *a* et *b*.
 	
-	.. code-block:: pycon
+.. code-block:: pycon
 
 	>>> from math import gcd
 	>>> gcd(24, 6)
@@ -131,7 +131,7 @@ La fonction ``gcd(a, b)`` retourne la plus grand diviseur commun des int *a* et 
 La fonction ``isfinite(x)`` retourne **TRUE** si *x* n'est ni un nombre infini, ni un NaN (*not a number*). 
 Renvoie **FALSE** sinon.
 
-	.. code-block:: pycon
+.. code-block:: pycon
 
 	>>> from math import isfinite
 	>>> isfinite(2)
@@ -161,10 +161,7 @@ Dans cet exemple, comme aucune des variables ne possède de virgule, Python les 
 	10.0
 	>>> a.is_integer()
 	True
-	>>>	b=pow(a,3)
-	>>>	b.is_integer()
-	True
-	>>> b
+	>>>	pow(a,3)
 	1000.0
 
 La fonction :py:func:`log(x, [base]) <~math.log>` retourne le logarithme naturel de *x* (en base *e*).
@@ -183,7 +180,6 @@ Il est possible d'utiliser les fonction ``log2(x)`` ou ``log10(x)`` pour retourn
 	>>> log10(100)
 	2.0
 
-	
 -------------------------------------------
 Angles, fonctions trigonométriques et *PI*
 -------------------------------------------
@@ -504,12 +500,9 @@ fractions. Les opérations sur les fractions se font comme pour les nombres, au 
 
 .. [#gg] <gabriel.griesser@he-arc.ch>
 
---------------
-Bibliographie
---------------
-
- - Nombres : <https://fr.wikibooks.org/wiki/Math%C3%A9matiques_avec_Python_et_Ruby/Nombres_en_Python>`
- - Nombres opérations : <https://fr.wikibooks.org/wiki/Math%C3%A9matiques_avec_Python_et_Ruby/Nombres_entiers_en_Python>`
- - Nombres complexes : <https://fr.wikibooks.org/wiki/Math%C3%A9matiques_avec_Python_et_Ruby/Nombres_complexes_en_Python>`
- - Fractions : <https://fr.wikibooks.org/wiki/Math%C3%A9matiques_avec_Python_et_Ruby/Fractions_en_Python>`
+.. Bibliographie (en commentaire)
+.. - Nombres : <https://fr.wikibooks.org/wiki/Math%C3%A9matiques_avec_Python_et_Ruby/Nombres_en_Python>`
+.. - Nombres opérations : <https://fr.wikibooks.org/wiki/Math%C3%A9matiques_avec_Python_et_Ruby/Nombres_entiers_en_Python>`
+.. - Nombres complexes : <https://fr.wikibooks.org/wiki/Math%C3%A9matiques_avec_Python_et_Ruby/Nombres_complexes_en_Python>`
+.. - Fractions : <https://fr.wikibooks.org/wiki/Math%C3%A9matiques_avec_Python_et_Ruby/Fractions_en_Python>`
 	
