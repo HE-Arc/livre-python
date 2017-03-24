@@ -86,7 +86,6 @@ Affichera : 'Thu Mar 12 16:30:22 2674'
 D'autres commandes peuvent retourner une date au format struct_time qui est une structure possédant les informations sur une date et ayant la forme suivante :
 
 
-
 +----------+--------------+---------------------------------------------+
 |Index	  |Attribute	  |Values                                       |
 +==========+==============+=============================================+
