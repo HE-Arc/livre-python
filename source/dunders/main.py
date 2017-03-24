@@ -1,33 +1,37 @@
 class Main(object):
+    '''Class simulant une main aux cartes'''
     def __init__(self, *args):
+        '''initialisateur'''
         self.cartes = args
 
     def ajouter(self, carte):
+        '''méthode pour add une carte'''
         obj2 = list(self.cartes)  # Converti en liste
         obj2.append(carte)
         self.cartes = tuple(obj2)
 
     def __str__(self):
+        '''Redéfinition de str'''
         return str(u'; '.join(self.cartes).encode('utf8'))
 
     def __len__(self):
+        '''Reféfinition de len'''
         return len(self.cartes)
 
     def __getitem__(self, key):
-        # Est appelé quand on fait objet[index] ou objet[key].
+        '''Est appelé quand on fait objet[index] ou objet[key].'''
         return self.cartes[key]
 
     def __iter__(self):
-        # Est appelé quand on fait un iter(objet).
-        # La valeur retournée doit être un iterateur.
+        '''Est appelé quand on fait un iter(objet).'''
         return iter(self.cartes)
 
     def __reversed__(self):
-        # Est appelé quand on fait reversed(objt)
+        '''Est appelé quand on fait reversed(objt)'''
         return reversed(self.cartes)
 
     def __contains__(self, item):
-        # Est appelé quand "in objet"
+        '''Est appelé quand "in objet" '''
         return item in self.cartes
 
 

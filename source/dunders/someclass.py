@@ -1,4 +1,5 @@
 class SomeClass(object):
+    '''Class d'exemple'''
     grammar = {
         1: "Some string",
         2: "Another string",
@@ -7,6 +8,7 @@ class SomeClass(object):
     }
 
     def __init__(self, name):
+        '''initialisateur'''
         self.name = name
 
 
