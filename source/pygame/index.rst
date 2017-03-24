@@ -60,7 +60,7 @@ c’est dans cette partie que l’on va initialiser la fenêtre, ainsi que tout 
 
 par exemple, pour afficher une fenêtre:
 
-.. code-block:: python
+.. code-block:: pycon
   >>> fenetre = pygame.display.set_mode((200, 200))
 
 Dans cet exemple, on appelle la fonction :py:meth: set_mode du module display. Ce que l’on obtient en retour, c’est un objet de la classe Surface qui est défini par Pygame.
@@ -83,7 +83,7 @@ Cet exemple provient de la `documentation pygame <http://www.pygame.org/docs/tut
 Exemples:
 ---------
 
-Son au maintient d'une touche:
+Son au maintien d'une touche:
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Cet exemple provient du `tutoriel Openclassroom <https://openclassrooms.com/courses/interface-graphique-pygame-pour-python/le-son-5>`_
 
@@ -100,13 +100,13 @@ Affichage simple d'images:
 
 Dans cet exemple, on commence par charger une image. Cette image n’étant pas forcément dans un format supporté par pygame, la fonction pygame.convert est utilisée afin de s’assurer que l’image pourra s’afficher correctement.
 
-.. code-block:: python
+.. code-block:: pycon
 
   >>> fond = pygame.image.load("background.jpg").convert()
 
 Enfin, on peut afficher l’image en la “collant” sur la fenêtre de base, avec la fonction blit().
 
-.. code-block:: python
+.. code-block:: pycon
 
   >>> fenetre.blit(fond,(0,0))
 

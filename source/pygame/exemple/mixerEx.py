@@ -3,8 +3,8 @@
 import pygame
 from pygame.locals import *
 pygame.init()
-fenetre=pygame.display.set_mode((200, 200), RESIZABLE)
-son=pygame.mixer.Sound("./exemple/Tinquen.wav")
+fenetre = pygame.display.set_mode((200, 200), RESIZABLE)
+son = pygame.mixer.Sound("./exemple/Tinquen.wav")
 
 continuer = 1
 joue = 0
