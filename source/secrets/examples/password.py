@@ -5,7 +5,7 @@ Mot de passe aléatoire de 10 charactères contenant au minimum :
 
 - une lettre majuscule,
 - une lettre minuscule,
-- et un chiffre.
+- et 3 chiffres.
 """
 
 import string
