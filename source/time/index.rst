@@ -37,7 +37,6 @@ D'autres fonction comme clock_gettres(clk_id), clock_gettime(clk_id), clock_sett
 La commande Time.time() affichera le nombre de seconde écoulées depuis la date appellée "L'Epoch Unix" qui est le 1er Janvier 1970 à 00:00. 
 Pourquoi cette date ? L'année 1970 a été considérée comme un bon départ, compte tenu de l'essor qu'a pris l'informatique à partir de cette époque. D'autre part, un ordinateur est inévitablement limité quand il traite des entiers ; dans les langages de l'époque, il fallait tenir compte de ce fait tout simple : on ne pouvait pas compter un nombre de secondes trop important. La date de l'Epoch ne pouvait donc pas être trop reculée dans le temps. (Source : openclassromm).  
 
--- --
    
 Donc:
 
@@ -46,3 +45,42 @@ Donc:
 
 
 Affichera : 1490354301.5397666
+
+
+La fonction ctime([secs]), quand elle est appellée sans paramètre retourne la date d'ajourd'hui au format texte.
+
+
+.. code:: python 
+>>> time.ctime()
+
+
+Affichera : 'Thu Mar 23 12:34:03 2017'
+
+
+En revanche avec un paramètre qui correspond à un nombre de secondes, ça affichera la date de l'Epoch après que ce nombre de secondes se soit écoulé.
+
+
+
+.. code:: python 
+>>> time.ctime(2000)
+
+
+Affichera : 'Thu Jan  1 01:33:20 1970'
+
+
+
+.. code:: python 
+>>> time.ctime(400000000)
+
+
+Affichera : 'Sat Sep  4 17:06:40 1982'
+
+
+.. code:: python 
+>>> time.ctime(22222222222)
+
+
+Affichera : 'Thu Mar 12 16:30:22 2674'
+
+
+
