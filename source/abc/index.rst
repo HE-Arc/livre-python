@@ -25,8 +25,8 @@ C'est pourquoi il est nécessaire de créer des classes qui dérivent de Shape.
 Par exemple un rectange possède une aire calculable par ``hauteur*largeur``.
 Idem pour d'autres formes géométriques qui ont leurs propre manière de calculer leurs aires.
 
-Grâce au polymorphisme, nous pouvons par exemple créer des listes de ``Shape``.
-Dans ces listes il y aura des Shape dont les types effectifs sont ``Rectangle``, Triangle, etc.
+Nous pouvons par exemple créer des listes de ``Shape``.
+Dans ces listes il y aura des Shape ``Rectangle``, ``Triangle``, etc.
 Si nous demandons à chaque élément de la liste de calculer son aire, il l'a calculera grâce à sa propre formule.
 De plus, nous sommes certains que chaque élément de la liste possède la méthode ``calculateArea()``
 puisqu'il implémente ``Shape``.
@@ -127,7 +127,7 @@ Par exemple cette ligne là lève l'erreur:
 De même que l'exemple ``Shape``, on aimerait afficher toutes les voitures d'un garage. Mais en appelant simplement
 une méthode du garage:
 
-.. code-block:: pytcon
+.. code-block:: pycon
 
    >>> # Création des voitures.
    >>> v1 = Voiture('BMW', 'Noir')
