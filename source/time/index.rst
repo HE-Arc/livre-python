@@ -18,5 +18,8 @@ Le module DateTime affiche et formate des dates et heures avec une méthode un p
 ---------
 Time
 ---------
+Avant tout il faut importer la librairie time comme ceci :
 
+.. code: python
+import time
 
