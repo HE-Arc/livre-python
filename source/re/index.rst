@@ -118,7 +118,7 @@ re.split()
 .. code:: pycon
 
 	>>> import re
-	>>> re.split(r'[-]', '+91-011-2711-1111') # Without maxsplit
+	>>> re.split('-','+91-011-2711-1111') # Without maxsplit
 	['+91', '011', '2711', '1111']
 	
 	>>> re.split(r'[-]', '+91-011-2711-1111', maxsplit=1) # With maxsplit
