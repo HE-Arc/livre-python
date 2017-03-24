@@ -20,5 +20,6 @@ Time
 ---------
 Avant tout il faut importer la librairie time comme ceci :
 
-.. code: python import time
+.. code: python 
+import time
 
