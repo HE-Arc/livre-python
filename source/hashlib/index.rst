@@ -88,38 +88,57 @@ fonctionnement est le suivant :
 - Si il ne sait pas lequel entrer, il peut taper la commande help et les
   types de hachage possibles lui seront affichés.
 - Une fois un type correct entré, l'utilisateur peut saisir son mot-de-passe.
-- La version hachée de ce dernier sera affichée ainsi qu'un salt permettant un
+- La version hachée de ce dernier sera affichée ainsi qu'un sel permettant un
   meilleur hachage.
 - Finalement, l'utilisateur peut saisir à nouveau son mot-de-passe pour
   vérifier s'il est le bon en fonction du mot-de-passe haché.
 
-Résultat de l'exemple avec comme mot-de-passe "Salut" :
+Résultat de l'exemple avec comme mot-de-passe ``Salut`` ::
 
-.. image:: ../_static/resultat_e.png
-   :alt: Résultat exemple hachage
+    Entrez le type de hachage souhaité : ?
+
+    Entrez help pour voir les types de hachage possibles
+
+    Veuillez entrer un type de hachage valide : help
+    {'sha3_256', 'md5', 'DSA-SHA', 'sha', 'blake2b', 'DSA', 'sha224',
+     'sha3_384', 'shake_256', 'SHA256', 'whirlpool', 'sha3_512', 'shake_128',
+     'md4', 'dsaWithSHA', 'SHA1', 'SHA512', 'RIPEMD160', 'ecdsa-with-SHA1',
+     'MD4', 'sha256', 'sha1', 'sha512', 'ripemd160', 'sha3_224', 'blake2s',
+     'MD5', 'dsaEncryption', 'SHA384', 'SHA', 'SHA224', 'sha384'}
+
+    Veuillez entrer un type de hachage valide : sha1
+
+    Entrez votre mot de passe :
+
+    Le mot-de-passe qui devrait être enregistré dans la BDD est :
+    3e0344e856be1a34e13ad8179156f30eb324ac22:f27229afd30c8b91898d32a796cc4b57
+
+    Entrez-à nouveau votre mot-de-passe pour vérifier :
+
+    Votre mot-de-passe est correct
 
 Les parties importantes dans le code sont les fonctions de hachage du mot-de-passe
 et la fonction de vérification. Voici leur code respectif.
 
 .. literalinclude:: ./examples/exemple.py
   :linenos:
-  :lines: 11,26-30
+  :lines: 13,28-32
 
-La 2ème ligne permet d'initialiser un salt à un nombre aléatoire hexadécimale.
-``uuid4()`` génère un objet UUID aléatoire, ce qui fait que ce n'est au final pas
-réellement alétoire.
+La 2ème ligne permet d'initialiser un sel à un nombre aléatoire hexadécimale.
+``secrets`` génère ce nombre aléatoire à l'aide de la fonction
+:py:func:`secrets.token_hex`.
 
 Le contenu qui sera haché doit être encodé correctement sous forme binaire pour
 qu'il puisse être passé à la fonction update vue précédemment.
 
-Le contenu haché est finalement renvoyé avec le salt qui permettra d'en suite tester
+Le contenu haché est finalement renvoyé avec le sel qui permettra d'en suite tester
 la validité de la donnée dans l'autre fonction.
 
 .. literalinclude:: ./examples/exemple.py
   :linenos:
-  :lines: 33,48-52
+  :lines: 35,50-54
 
-Dés la 2ème ligne on sépare le mot-de-passe haché du salt. On pense bien à
+Dés la 2ème ligne on sépare le mot-de-passe haché du sel. On pense bien à
 réencoder comme il faut le contenu.
 
 On fait en suite une comparaison entre le mot-de-passe haché et le mot-de-passe
@@ -138,7 +157,7 @@ hachage particulièrement puissant concernant les mots-de-passe. Nous parlons ic
 de la fonction :py:func:`hashlib.pbkdf2_hmac`, cette dernière permet de fortement
 hacher un mot-de-passe. Cette fonction utilise une fonction pseudo-random de hmac.
 Le fonctionnement de ce hachage est basé sur l'utilisation d'un type de hachage
-vu précédemment, un salt ainsi qu'un nombre d'itérations correspondant au
+vu précédemment, un sel ainsi qu'un nombre d'itérations correspondant au
 type du hachage choisi (nous observons que cela diminue fortement la vitesse de
 ce hachage). Voici un exemple simple venant de la documentation de :py:mod:`hashlib`
 (hexlify encode la valeur binaire en héxadécimale).
@@ -158,7 +177,7 @@ ces prédécesseurs.
 En outre, Blake 2 permet de configurer la taille de digest permettant des outputs
 différents pour une même donnée, il peut haché des clés d'authentifications mais
 aussi est capable de signer des cookies. Ce type de hachage est bien pratique
-pour le hachage aléatoire en utilisant le paramètre salt qui permettra donc
+pour le hachage aléatoire en utilisant le paramètre sel qui permettra donc
 d'obtenir des signatures différentes pour une même donnée.
 
 Finalement, il peut mettre en place une personnalisation de son hachage,
@@ -200,10 +219,10 @@ de se protéger d'attaques extérieures.
 
 Cependant, utilisé uniquement hashlib risque de ne pas suffire à la bonne sécurité
 d'une application. Rien que dans mes exemples j'ai eu besoin d'utiliser la fonction
-`compare_digest()` afin de comparer deux signatures. Car le "==" n'est simplement
+:py:func:`~hmac.compare_digest` afin de comparer deux signatures. Car le "==" n'est simplement
 pas suffisant et assez solide à cause des temps de comparaisons.
 Le meilleur moyen est donc de coupler ces modules tel que `hmac` ou autres afin
-d'avoir une application viable et stable. 
+d'avoir une application viable et stable.
 
 .. [#pc] <pedro.costa@he-arc.ch>
 

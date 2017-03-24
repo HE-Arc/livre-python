@@ -1,4 +1,4 @@
-"""Exemple de hashage simple avec hashlib."""
+"""Exemple de hachage simple avec hashlib."""
 
 import getpass
 import hashlib
@@ -7,23 +7,25 @@ import uuid
 
 from hmac import compare_digest
 
+import secrets
+
 
 def hash_mdp(mdp, hashage):
-    """Hashe le mot-de-passe.
+    """Hache le mot-de-passe.
 
     Ceci à l'aide de l'algorithme passé
     en argument avec un salt permettant
-    un hashage plus efficace.
+    un hachage plus efficace.
 
     Args:
         Mot-de-passe normale.
-        Type du hashage souhaité.
+        Type du hachage souhaité.
 
     Returns:
-        Retourne le mot-de-passe hashé en hexadécimale.
+        Retourne le mot-de-passe haché en hexadécimale.
     """
-    # uuid génère un nombre aléatoire en héxadécimale
-    salt = uuid.uuid4().hex
+    # secrets génère un nombre aléatoire en héxadécimale
+    salt = secrets.token_hex(16)
     contenu = salt.encode() + mdp.encode()
     h = hashlib.new(hashage)
     h.update(contenu)
@@ -31,15 +33,15 @@ def hash_mdp(mdp, hashage):
 
 
 def check_mdp(hashed_mdp, utilisateur_mdp, hashage):
-    """Check le mot-de-passe hashé.
+    """Check le mot-de-passe haché.
 
-    Ceci en récupérant le mot de passe hashé
-    et le salt du mdp hashé passée en argument.
-    L'objet hashage est construit en fonction du type.
+    Ceci en récupérant le mot de passe haché
+    et le salt du mdp haché passée en argument.
+    L'objet hachage est construit en fonction du type.
 
     Args:
-        Le mot-de-passe hashé,le mot-de-passe
-        normale ainsi que le type de hashage.
+        Le mot-de-passe haché,le mot-de-passe
+        normale ainsi que le type de hachage.
 
     Returns:
         Retourne true ou false en fonction
@@ -52,14 +54,14 @@ def check_mdp(hashed_mdp, utilisateur_mdp, hashage):
     return compare_digest(mdp, h.hexdigest())
 
 
-hashage_type = input("Entrez le type de hashage souhaité : ")
+hashage_type = input("Entrez le type de hachage souhaité : ")
 
-# Boucle permettant de récupérer un type de hashage correct !
+# Boucle permettant de récupérer un type de hachage correct !
 while hashage_type not in hashlib.algorithms_available:
     if hashage_type != "help":
-        print("\nEntrez help pour voir les types de hashage possibles")
+        print("\nEntrez help pour voir les types de hachage possibles")
 
-    hashage_type = input("\nVeuillez entrer un type de hashage valide : ")
+    hashage_type = input("\nVeuillez entrer un type de hachage valide : ")
 
     if hashage_type == "help":
         print(hashlib.algorithms_available)
