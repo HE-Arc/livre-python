@@ -1,7 +1,7 @@
 .. _re-tutorial:
 
-Expression régulière (re)
-=========================
+Expression régulière (``re``)
+=============================
 
 Par Julien Feuillade
 
@@ -22,8 +22,8 @@ On utilisera différents types de syntaxe comme :
 
 ::
 
-	^     Marque le début de la chaine, la ligne...
-	$     Marque la fin d'une chaine, ligne...
+	^     Marque le début de la chaine, la ligne.
+	$     Marque la fin d'une chaine, la ligne.
 	.     N'importe quel caractère
 	*     0, 1 ou plusieurs occurrences
 	+     1 ou plusieurs occurrences
@@ -50,26 +50,22 @@ Prenons un exemple :
 	k|\d{2} : la lettre k, ou bien deux chiffres
 	BRA{,10} : on attend à ce que le segment BRA ne soit pas présent du tout ou présent jusqu'à 10 fois consécutives.
 
-La bibliothèque re
-------------------
+La bibliothèque ``re``
+----------------------
 
-Afin de mettre les différentes expressions en place, la bibliothèque ``re`` nous est proposé avec ces différentes fonctions qui permettra essentiellement de rechercher / modifier / supprimer des expressions. Pour cela :
-
-.. code:: pycon
-
-	>>> import re
+Afin de mettre les différentes expressions en place, la bibliothèque :py:mod:`re` nous est proposé avec ces différentes fonctions qui permettra essentiellement de rechercher / modifier / supprimer des expressions.
 
 re.match()
 ----------
 
-La fonction "match()" va permettre de vérifier la correspondance avec la chaîne de caractère.
+La fonction :py:func:`~re.match()` va permettre de vérifier la correspondance avec la chaîne de caractères.
 
 ::
 
 	re.match(pattern, string)
 
-- Pattern est l'expression à faire correspondre
-- String est la chaîne d'origine
+- ``pattern`` est l'expression à faire correspondre
+- ``string`` est la chaîne d'origine
 
 .. code:: pycon
 
@@ -79,7 +75,7 @@ La fonction "match()" va permettre de vérifier la correspondance avec la chaîn
 re.search()
 -----------
 
-Afin de rechercher une expression, on utilisera la fonction "search()" :
+Afin de rechercher une expression, on utilisera la fonction :py:func:`~re.search()` :
 
 ::
 
