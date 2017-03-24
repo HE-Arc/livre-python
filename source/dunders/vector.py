@@ -2,31 +2,32 @@ from math import hypot
 
 
 class Vector:
+    '''Class de vecteurs.'''
     def __init__(self, x=0, y=0):
-        '''initialisateur'''
+        '''Initialisateur.'''
         self.x = x
         self.y = y
 
     def __repr__(self):
-        '''redéfinition de repr'''
+        '''Redéfinition de repr.'''
         return 'Vecteur(%r, %r)' % (self.x, self.y)
 
     def __abs__(self):
-        '''redéfinition de abs'''
+        '''Redéfinition de abs.'''
         return hypot(self.x, self.y)
 
     def __add__(self, other):
-        '''redéfinition de add'''
+        '''Redéfinition de add.'''
         x = self.x + other.x
         y = self.y + other.y
         return Vector(x, y)
 
     def __mul__(self, scalar):
-        '''redéfition de mul'''
+        '''Redéfition de mul.'''
         return Vector(self.x * scalar, self.y * scalar)
 
     def __truediv__(self, other):
-        '''redéfinition de div'''
+        '''Redéfinition de div.'''
         raise TypeError("On ne peut pas diviser un vecteur !")
 
 
