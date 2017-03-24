@@ -1,8 +1,8 @@
-'''Travis est très très compliqué.'''
+"""Travis est très très compliqué."""
 
 
-class SomeClass(object):
-    '''Class d'exemple.'''
+class SomeClass:
+    """Class d'exemple."""
     grammar = {
         1: "Some string",
         2: "Another string",
@@ -11,7 +11,7 @@ class SomeClass(object):
     }
 
     def __init__(self, name):
-        '''Initialisateur.'''
+        """Initialisateur."""
         self.name = name
 
 
