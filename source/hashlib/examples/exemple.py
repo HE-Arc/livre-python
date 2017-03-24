@@ -79,3 +79,4 @@ if check_mdp(hashed_mdp, ancien_mdp, hashage_type):
     print('\nVotre mot-de-passe est correct')
 else:
     print('\nJe suis désolé, ce n\'est pas le bon mot-de-passe')
+

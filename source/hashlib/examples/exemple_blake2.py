@@ -40,3 +40,4 @@ if compare_digest(cookie_signé, sign(cookie, user_name.encode())):
 else:
     # Génère une erreure dans le cas ou le hashage n'est plus le même
     print("\nVous avez changé d'identité")
+
