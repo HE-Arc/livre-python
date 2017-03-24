@@ -107,35 +107,7 @@ Nous pouvons par des assertions vérifier les éléments de cette liste pour qu'
 
 Prenons comme exemple une classe ``Garage`` qui contient une liste de ``Voiture``.
 
-.. code-block:: python
-
-   class Garage(Sequence):
-      """Classe iterable."""
-
-      def __init__(self, *voitures):
-         """Constructeur."""
-
-         for v in voitures:
-            if isinstance(v, Voiture):
-               pass
-            else:
-               raise TypeError(f"{v!r} n'est pas une voiture.")
-
-         self.voitures = voitures
-
-      def __getitem__(self, index):
-         """ Trouve la voiture à l'index 'index'"""
-         return self.voitures[index]
-
-      def __len__(self):
-         """Retourne le nombre de voitures"""
-         return len(self.voitures)
-
-      def afficher(self):
-         """Affiche toutes les voitures du garage."""
-         for v in self.voitures :
-            v.afficher()
-
+.. literalinclude:: examples/garage.py
 
 Lors de la création d'un garage, on vérifie que les éléments de la liste soient de type ``Voiture``.
 Si ce n'est pas le cas, on lève une erreur.
