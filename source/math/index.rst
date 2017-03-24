@@ -319,13 +319,12 @@ Pour le conjugé, c'est la propriétés ``conjugate()`` que nous appelerons :
 	(4-3j)
 	
 Le module et l'arguments, qui sont 2 notions biens propres aux nombres complexes, peuvent être 
-obtenus avec ``abs()`` et ``phase()`` 
-
-.. warning::foo bar pour la propriété *phase()*, il faut importer le module :py:mod:`cmath` 
+obtenus avec ``abs()`` et ``phase()``.
+Pour la propriété *phase()*, il faut importer le module :py:mod:`cmath` 
 
 .. code-block:: pycon
 
-	>>> from cmath import *
+	>>> from cmath import phase
 	>>> z=complex(4,3)
 	>>> abs(z)
 	5.0
