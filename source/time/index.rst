@@ -225,11 +225,11 @@ Affichera :
 
 (-1, 86399, 999999)
 
--tzinfo
+- tzinfo
 Classe abstraite utilisée par datetime et time pour fournir une notion personnalisable de réglage de l'heure (par exemple, pour l'heure d'été).
 
 
--timezone
+- timezone
 Classe qui implémente tzinfo
 
 
