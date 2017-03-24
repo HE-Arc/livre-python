@@ -41,7 +41,7 @@ Nous voulons donc pouvoir faire cela.
    for shape in shapes:
       print(shape.calculateArea())
 
-Pour cela, il faut une classe abstraite Shape qui contienne la méthode abstraite ``calculateArea()``.
+Pour cela, il faut une classe abstraite Shape
 
 .. code-block:: python
 
@@ -119,7 +119,7 @@ Prenons comme exemple une classe ``Garage`` qui contient une liste de ``Voiture`
             if isinstance(v, Voiture):
                pass
             else:
-               raise TypeError('La liste ne contient pas que des Voiture.')
+               raise TypeError(f"{v!r} n'est pas une voiture.")
 
          self.voitures = voitures
 
