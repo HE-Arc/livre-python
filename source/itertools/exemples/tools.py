@@ -51,7 +51,7 @@ class revList(list):
 # revlist_end
 
 
-liste = revList(list(islice(count(), 0, 10)))
+liste = revList(islice(count(), 0, 10))
 for i in liste:
     print(i)
 

@@ -4,11 +4,11 @@
 ``itertools``
 =============
 
-.. image:: ./img/python_logo.png
+.. image:: ./img/toolsbox.png
     :scale: 40%
     :align: right
     :alt: lock logo
-    :target: https://www.iconfinder.com/icons/282809/logo_python_icon#size=512
+    :target: https://www.iconfinder.com/icons/286688/tool_kit_toolbox_tools_icon#size=512
 
 Par Johnny Da Costa [#jd]_
 
@@ -28,7 +28,7 @@ Le module itertools de Python nous propose un bon nombre de générateurs prêts
     in
     python
 
-Derrière cette boucle **for** ce cache enfet un itérateur. C'est un objet qui va être chargé de parcourir un objet conteneur, dans  notre cas notre liste. Quand Python va tomber sur la ligne **for i in liste:**, il va appeler l'itérateur de notre liste pour pouvoir la parcourir. L'itérateur se crée dans la méthode **__iter__** de notre objet liste dans notre cas. Et va nous retourner notre itérateur pour pouvoir parcourir notre petite liste.
+Derrière cette boucle **for** se cache enfet un itérateur. C'est un objet qui va être chargé de parcourir un objet conteneur, dans  notre cas notre liste. Quand Python va tomber sur la ligne **for i in liste:**, il va appeler l'itérateur de notre liste pour pouvoir la parcourir. L'itérateur se crée dans la méthode **__iter__** de notre objet liste dans notre cas. Et va nous retourner notre itérateur pour pouvoir parcourir notre petite liste.
 
 A chaque itération python va appeler la méthode **__next__** de notre liste pour itérer à l'élément suivant ou s'arrêter avec l'execption **StopIteration** si le parcours est fini.
 
@@ -84,7 +84,7 @@ Exemple inspiré de la documentation Python : `Python3Doc`_
 
 .. code-block:: pycon
 
-    >>> liste = revList(list(islice(count(), 0, 10)))
+    >>> liste = revList(islice(count(), 0, 10))
     >>> for i in liste:
             print(i)
         9
@@ -168,7 +168,9 @@ Un peu de design pattern
 -----------------------------
 Tout le monde utilise ce modèle de conception sans même le connaître vraiment. Imaginez le cas on nous voudrions itérer sur un répertoire pour obtenir son contenu ou appliquer un traitement sur chacun des fichiers. Sans  l'approche itérateur,  ils nous faudraient recupérer un flux sur le dossier courant est utiliser un **while** pour parcourir tout notre arborescence et vérifier le type (fichier ou dossier ?) et ensuite afficher. Mais imaginons que notre problème change et que nous ne devons plus itérer sur un répertoire mais sur un autre type de structure... Et on est repartie pour réecrire du code fastidueux et compliqué.
 
-Avec l'utilisation d'itérateur notre programme devient tout de suite plus robuste et plus élégant. Un gros avantage avec ce pattern est que si notre structure change, il nous suffit d'adapter son comportement sur cette objet (`décorateur`_) pour lui indiquer comment itérer sur cette objet. Grâce à ça, nous cachons la compléxité de parcours à notre client qui ne se rend même pas compte de ce qui se passent réelement. Python implémente ce modèle de conception donc il est dommage de ne pas en profiter !
+Avec l'utilisation d'itérateur notre programme devient tout de suite plus robuste et plus élégant. Un gros avantage avec ce pattern est que si notre structure change, il nous suffit d'adapter son comportement sur cette objet (`décorateur`_) pour lui indiquer comment itérer sur cette objet. Grâce à ça, nous cachons la compléxité de parcours à notre client qui ne se rend même pas compte de ce qui se passent réelement. 
+
+Mais en Python ce patron de conception est complétement intégré au language. Ce qui nous simplifie grandement la vie!
 
 Voici un `exemple`_ de parcour de fichier.
 
