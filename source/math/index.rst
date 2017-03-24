@@ -321,8 +321,7 @@ Pour le conjugé, c'est la propriétés ``conjugate()`` que nous appelerons :
 Le module et l'arguments, qui sont 2 notions biens propres aux nombres complexes, peuvent être 
 obtenus avec ``abs()`` et ``phase()`` 
 
-.. warning::
-foo bar pour la propriété *phase()*, il faut importer le module :py:mod:`cmath` 
+.. warning::foo bar pour la propriété *phase()*, il faut importer le module :py:mod:`cmath` 
 
 .. code-block:: pycon
 
@@ -338,9 +337,9 @@ Si on intègre le tout en un fichier, voilà ce que ça donne :
 .. literalinclude:: ./examples/Complexes.py
 	
 	
-==========
+----------
 Fractions
-==========
+----------
 
 L'écriture de nombres non entiers sous forme de fractions est un concept fondamental des mathématiques.
 Chaque fois que le dénominateur n'est pas une puissance de  10, on utilise une écriture fractionnaire.
@@ -351,8 +350,10 @@ Par exemple : J'ai attendu trois quarts-d'heure, je peux l'écrite aussi ``J'ai 
 Vous l'avez compris, l'utilisation des fractions se fait quotidiennement. Pour exprimer une telle forme
 en *Python*, il faut importer le module :py:mod:`fractions`
 
+--------
 Exemple
--------
+--------
+
 Voici quelques exemples simples mais efficaces de l'utilisation de ce module.
 Pour rentrer la fraction n/d dans *Python*, on utilise le module *fractions*.
 Si on rentre 0 comme dénominateur, la fraction ne se crée pas et on a un message d'erreur :
