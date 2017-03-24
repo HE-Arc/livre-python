@@ -10,8 +10,11 @@
 
 Par Gabriel Griesser [#gg]_
 
+
+----------------
    Introduction
 ----------------
+
 Le principe du module :py:mod:`math` est d'effectuer diverses opérations mathématiques avec Python. 
 Dans ce chapitre, nous verrons les principales opérations possibles en utilisant le module *MATH*
  et les fractions en Python en utilisant ce module.
@@ -40,8 +43,9 @@ Python comporte cinq catégories de nombres :
  * `decimal` et `float` pour les réels (ou *nombres décimaux*).
  * `complex` pour les nombres complexes.
 
+---------
 Exemples
---------
+---------
 Voici un exemple tout simple pour commencer.
 
 .. code-block:: pycon
@@ -85,8 +89,9 @@ Cette méthode est disponible que depuis *Python 3*, en *Python 2.X*, il était 
 	1
 	
 	
+---------------------
 Fonctions de nombres
---------------------
+---------------------
 
 La fonction ``fabs(x)`` retourne la valeur absolue de *x*.
 
@@ -138,8 +143,9 @@ Renvoie **FALSE** sinon.
 	True
 	
 	
+---------------------------------------
 Fonctions logarithmiques et puissances
---------------------------------------
+---------------------------------------
 
 On peut également utiliser diverses fonctions du module :py:mod:`math` comme les `racines` ou les `puissances`.
 Ici, *a* est la racine carrée de 100, la commande ``a.is_integer()`` 
@@ -179,6 +185,7 @@ Il est possible d'utiliser les fonction ``log2(x)`` ou ``log10(x)`` pour retourn
 	2.0
 
 	
+-------------------------------------------
 Angles, fonctions trigonométriques et *PI*
 -------------------------------------------
 
@@ -253,6 +260,7 @@ Pour l'utiliser, il suffit simplement d'écrire ``pi`` en commande. Cela va de m
 	0.9999999999999999
 	
 	
+------------------
 Nombres complexes
 ------------------
 Pour utiliser les nombres complexes en *Python*, il suffit d'écrire ``complex(x,y)``.
@@ -267,8 +275,9 @@ Rappelons que les physiciens  notant *j* le nombre complexe dont le carré vaut 
 	(4 + 3j)
 	
 	
+-----------
 Opérations
-----------
+-----------
 Les quatre opérations se notent respectivement +, -, * et /, et donnent toujours un complexe, 
 même si celui-ci est réel (exemple de la soustraction ci-dessous).
 Bien entendu, il est possible de combiner les nombres complexes aux autres types de nombres :
@@ -289,8 +298,9 @@ Bien entendu, il est possible de combiner les nombres complexes aux autres types
 	(5+3j)
 
 	
+-----------
 Propriétés
-----------
+-----------
 Les parties réelle et imaginaire d'un complexe sont des propriétés de l'objet :
 
 .. code-block:: pycon
@@ -379,8 +389,9 @@ Cette méthode n'étant vraiment pas jolie, on préfère ajouter ``float()`` à 
 	2.4
 		
 
+-----------
 Opérations
-----------
+-----------
 Les opérations sur les fractions se notent comme avec des nombres, mais le résultat sortant est en général une fraction.
 Les opérations unaires (de bases) se font comme si l'on manipulait des nombres. *Python* les reconnaîtra néanmoins comme 
 des fractions.
@@ -498,8 +509,9 @@ En important le module :py:mod:`fractions` de Python, il est facile de créer un
 .. literalinclude:: ./examples/Farey.py
 
 	
+----------------------
 Fractions égyptiennes
----------------------
+----------------------
 .. image:: img/egyptien.png
    :align: right
    :alt: Egyptien
@@ -546,8 +558,9 @@ fractions. Les opérations sur les fractions se font comme pour les nombres, au 
 
 .. [#gg] <gabriel.griesser@he-arc.ch>
 
+--------------
 Bibliographie
--------------
+--------------
 
  - Nombres : <https://fr.wikibooks.org/wiki/Math%C3%A9matiques_avec_Python_et_Ruby/Nombres_en_Python>`
  - Nombres opérations : <https://fr.wikibooks.org/wiki/Math%C3%A9matiques_avec_Python_et_Ruby/Nombres_entiers_en_Python>`
