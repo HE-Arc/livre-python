@@ -32,19 +32,19 @@ Création d'un test unitaire
 
 Voici les étapes nécessaires pour créer un test unitaire:
 
-1)  Importer le module 'unittest'
+1.  Importer le module 'unittest'
 
     .. code-block:: python
 
         import unittest
 
-2)  Définir la fonction à tester ou l'importer depuis un module. Ici on prend l'exemple avec la fonction carre(x):
+2.  Définir la fonction à tester ou l'importer depuis un module. Ici on prend l'exemple avec la fonction carre(x):
 
     .. literalinclude:: examples/carre.py
        :start-after: func:carré
        :end-before: endfunc:carré
 
-3)  Créer une classe en héritant de :py:class:`unittest.TestCase`, puis écrire les tests sous forme de méthodes. Les noms des méthodes doivent impérativement commencer par 'test' afin d'indiquer au 'test runner' quelles sont les méthodes de tests.
+3.  Créer une classe en héritant de :py:class:`unittest.TestCase`, puis écrire les tests sous forme de méthodes. Les noms des méthodes doivent impérativement commencer par 'test' afin d'indiquer au 'test runner' quelles sont les méthodes de tests.
 
     De plus, chaque test doit appeller une fonction assertion de la classe TestCase. La classe TestCase possède plusieurs types de 'assert'. Ici nous utiliseront 'assertEquals()' qui permet de comparer deux valeurs (valeur retournée par la fonction et la valeur attendue).
 
@@ -52,7 +52,7 @@ Voici les étapes nécessaires pour créer un test unitaire:
        :start-after: class:TestCase
        :end-before: endclass:TestCase
 
-4)  Exécuter les tests :
+4.  Exécuter les tests :
 
     - en appelant la fonction :py:func:`unittest.main`
 
@@ -74,7 +74,7 @@ Voici les étapes nécessaires pour créer un test unitaire:
 
         $ python -m unittest discover
 
-5)  Analyser la sortie du test:
+5.  Analyser la sortie du test:
 
     .. code-block:: console
 
@@ -179,25 +179,25 @@ Chaque instance de 'testCase' peut être regroupée selon la fonctionnalité du 
 
 Voici les étapes pour regrouper un 'TestSuite':
 
-1) Créer une instance de 'TestSuite':
+1. Créer une instance de 'TestSuite':
 
 .. code-block:: python
 
     suite = unittest.TestSuite()
 
-2) Ajouter le 'testCase' avec la méthode addTest(). Voici l'exemple avec   'class CarreTestCase(unittest.TestCase)':
+2. Ajouter le 'testCase' avec la méthode addTest(). Voici l'exemple avec   'class CarreTestCase(unittest.TestCase)':
 
 .. code-block:: python
 
 	suite.addTest(CarreTestCase())
 
-3) Créer une instance de la class TestTestRunner:
+3. Créer une instance de la class TestTestRunner:
 
 .. code-block:: python
 
     runner = unittest.TextTestRunner()
 
-4) Appeller la méthode run() pour exécuter tous les tests:
+4. Appeller la méthode :py:meth:`unittest.TextTestRunner.run` pour exécuter tous les tests:
 
 .. code-block:: python
 
