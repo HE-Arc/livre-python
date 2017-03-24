@@ -7,7 +7,7 @@ Par Jérémy dubois [jd]_
 
 Introduction
 --------------
-le module statistics_ est un ensemble de fonctions offrant la possibilité de résoudre des problèmes
+le module :py:mod:`statistics` est un ensemble de fonctions offrant la possibilité de résoudre des problèmes
 mathématiques de statistiques avec des valeures "real".
 
 Il faut noté que ces méthodes ne supportent pas tous les types de variable. Sans précision explicite,
@@ -304,7 +304,16 @@ Si les données sont vides, l'erreur :ref:`statisticsError <error>` est signalé
 
 Cette méthode supporte aussi les types *Decimal* et *Fraction*.
 
-Exemple: DecimalFraction_
+Exemple:
+
+..code-block:: pycon
+
+    >>> from decimal import Decimal as D
+    >>> statistics.pvariance([D("42.00"), D("48.25"), D("48.25"), D("49.5"), D("51.25")])
+    9.765
+    >>> from fractions import Fraction as F
+    >>> statistics.pvariance([F(1, 4), F(5, 4), F(1, 2)])
+    13/72
 
 .. _stdev:
 
@@ -363,7 +372,16 @@ Si il y a moins de deux valeurs, l'erreur :ref:`statisticsError <error>` est sig
 
 Cette méthode supporte aussi les types *Decimal* et *Fraction*.
 
-Exemple: DecimalFraction_
+Exemple:
+
+..code-block:: pycon
+
+    >>> from decimal import Decimal as D
+    >>> statistics.variance([D("42.00"), D("48.25"), D("48.25"), D("49.5"), D("51.25")])
+    12.20625
+    >>> from fractions import Fraction as F
+    >>> statistics.variance([F(1, 4), F(5, 4), F(1, 2)])
+    13/48
 
 Conclusion
 ----------
@@ -372,8 +390,3 @@ Cette bibliothèque permet de ne pas devoir recoder les outils mathématique
 de statistique.
 
 .. [jd] <jeremy.dubois@he-arc.ch>
-
-.. Bibliographie
-
-.. _statistics: https://docs.python.org/3/library/statistics.html
-.. _DecimalFraction: https://docs.python.org/3/library/statistics.html
