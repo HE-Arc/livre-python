@@ -155,18 +155,21 @@ Par exemple cette ligne là lève l'erreur:
 De même que l'exemple ``Shape``, on aimerait afficher toutes les voitures d'un garage. Mais en appelant simplement
 une méthode du garage:
 
-.. code-block:: python
+.. code-block:: pytcon
 
-   # Création des voitures.
-   v1 = Voiture('BMW', 'Noir')
-   v2 = Voiture('Subaru', 'Bleu')
-   v3 = Voiture('Dacia', 'Rouge')
+   >>> # Création des voitures.
+   >>> v1 = Voiture('BMW', 'Noir')
+   >>> v2 = Voiture('Subaru', 'Bleu')
+   >>> v3 = Voiture('Dacia', 'Rouge')
 
-   # On place les voitures dans un garage.
-   g = Garage(v1, v2, v3)
+   >>> # On place les voitures dans un garage.
+   >>> g = Garage(v1, v2, v3)
 
-   # On affiche le garage (toutes les voitures qu'il contient)
-   g.afficher()
+   >>> # On affiche le garage (toutes les voitures qu'il contient)
+   >>> g.afficher()
+   BMW, Noir
+   Subaru, Bleu
+   Dacia, Rouge
 
 La classe ``Garage`` implémente la classe abstraite ``collections.abc.Sequence``. Tout comme les ``list``.
 On peut donc accéder à une voiture du garage par son index, obtenir le nombre de voiture du garage et d'autres
@@ -184,3 +187,5 @@ Conclusion
 ----------
 Les classes abstraite en python permettent de créer nos propres structures de données se
 comportant comme les classes fournies (built-in).
+Grâce aux instructions ``isinstance`` et ``issubclass`` nous pouvons vérifier directement le type d'une variable.
+Cela permet, par exemple, de pouvoir utiliser la classe garage comme une liste.
