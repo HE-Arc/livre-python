@@ -3,8 +3,8 @@
 import getpass
 import hashlib
 import hmac
-from hmac import compare_digest
 import uuid
+from hmac import compare_digest
 import secrets
 
 
