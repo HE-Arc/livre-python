@@ -4,6 +4,7 @@
 from math import hypot
 
 
+'''Mieux vaut trop que pas assez.'''
 class Vector:
     '''Class de vecteurs.'''
     def __init__(self, x=0, y=0):
@@ -13,7 +14,7 @@ class Vector:
 
     def __repr__(self):
         '''Redéfinition de repr.'''
-        return 'Vecteur(%r, %r)' % (self.x, self.y)
+        return f'<Vector ({x!r}, {y!r})>'
 
     def __abs__(self):
         '''Redéfinition de abs.'''
@@ -35,7 +36,7 @@ class Vector:
 
 
 vect = Vector(4, 7)
-print(repr(vect) + " a pour norme " + str(abs(vect)))
+print(f"{vect!r} a pour norme {abs(vect)}")
 vect *= 2  # (8,14)
 vect += Vector(2, 5)  # (10,19)
 vect /= Vector(4, 5)  # lève une erreur
