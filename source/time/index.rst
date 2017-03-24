@@ -139,18 +139,16 @@ Voici un exemple d'utilisation :
 .. code:: python
 >>>t = (2009, 2, 17, 17, 3, 38, 1, 48, 0)
 
-.. code:: python
 >>>secs = time.mktime( t )
 
-.. code:: python
 >>>print "time.mktime(t) : %f" %  secs
 
-.. code:: python
 >>>print "asctime(localtime(secs)): %s" % time.asctime(time.localtime(secs))
 
 
 Qui retournera le résultat suivant :
 
 time.mktime(t) : 1234915418.000000  
+
 asctime(localtime(secs)): Tue Feb 17 17:03:38 2009
 
