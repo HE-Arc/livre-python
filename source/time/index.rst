@@ -87,7 +87,7 @@ D'autres commandes peuvent retourner une date au format struct_time qui est une 
 
 
 Index	      Attribute	   Values                                       
-=====       =========      =============================================
+=====       =========      =============================
 0	         tm_year        (for example, 1993)                          
 1	         tm_mon         range [1, 12]                                
 2           tm_mday        range [1, 31]                                
@@ -99,4 +99,4 @@ Index	      Attribute	   Values
 8	         tm_isdst	      0, 1 or -1                                   
 N/A	      tm_zone	      abbreviation of timezone name                
 N/A	      tm_gmtoff	   offset east of UTC in seconds       
-=====       =========      =============================================
+=====       =========      =============================
