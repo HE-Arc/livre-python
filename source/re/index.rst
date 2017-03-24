@@ -14,7 +14,7 @@ Ils permettent aussi de modifier ou de supprimer tous les éléments indésirabl
 Les bases de la syntaxe
 -----------------------
 
-Une des premières choses à réaliser dans la conception d'une expression régulière, c'est de définir le motif (pattern en anglais)
+Une des premières choses à réaliser dans la conception d'une expression régulière, c'est de définir le motif (pattern en anglais).
 
 Pour construire ces motifs, vous avez besoin de créer une structure formée de caractères littéraux, puis de symboles qui sont définis en tant que méta caractères et délimiteurs et qui seront utilisés séparément ou en combinaison à l'intérieur d'un même groupement ou d'une classe.
 
@@ -24,36 +24,40 @@ On utilisera différents types de syntaxe comme :
 
 	^     Marque le début de la chaine, la ligne.
 	$     Marque la fin d'une chaine, la ligne.
-	.     N'importe quel caractère
-	*     0, 1 ou plusieurs occurrences
-	+     1 ou plusieurs occurrences
-	?     0 ou 1 occurrence
-	|     Alternative - ou reconnaît l'un ou l'autre
-	[ ]   Tous les caractères énumérés dans la classe
-	[^ ]  Tous les caractères sauf ceux énumérés
-	( )   Utilisée pour limiter la portée d'un masque ou de l'alternative
+	.     N'importe quel caractère.
+	*     0, 1 ou plusieurs occurrences.
+	+     1 ou plusieurs occurrences.
+	?     0 ou 1 occurrence.
+	|     Alternative - ou reconnaît l'un ou l'autre.
+	[ ]   Tous les caractères énumérés dans la classe.
+	[^ ]  Tous les caractères sauf ceux énumérés.
+	( )   Utilisée pour limiter la portée d'un masque ou de l'alternative.
 
 Ainsi que de groupes de caractères :
 
 ::
 
-	\w      Les lettres (w pour word)
-	\d      Les chiffres (d pour digit)
-	\s      Les espaces (s pour spaces)
-	[A-Z]   Les majuscules
-	[abd;_] Les lettres a, b, et d, le point-virgule (;), et l’underscore (_)
+	\w      Les lettres (w pour word).
+	\d      Les chiffres (d pour digit).
+	\s      Les espaces (s pour spaces).
+	[A-Z]   Les majuscules.
+	[abd;_] Les lettres a, b, et d, le point-virgule (;), et l’underscore (_).
 
 Prenons un exemple :
 
 ::
 
-	k|\d{2} : la lettre k, ou bien deux chiffres
+	k|\d{2} : la lettre k, ou bien deux chiffres.
 	BRA{,10} : on attend à ce que le segment BRA ne soit pas présent du tout ou présent jusqu'à 10 fois consécutives.
 
 La bibliothèque ``re``
 ----------------------
 
 Afin de mettre les différentes expressions en place, la bibliothèque :py:mod:`re` nous est proposé avec ces différentes fonctions qui permettra essentiellement de rechercher / modifier / supprimer des expressions.
+
+.. code:: pycon
+
+	>>> import re
 
 re.match()
 ----------
@@ -64,8 +68,8 @@ La fonction :py:func:`~re.match()` va permettre de vérifier la correspondance a
 
 	re.match(pattern, string)
 
-- ``pattern`` est l'expression à faire correspondre
-- ``string`` est la chaîne d'origine
+- ``pattern`` est l'expression à faire correspondre.
+- ``string`` est la chaîne d'origine.
 
 .. code:: pycon
 
@@ -81,8 +85,8 @@ Afin de rechercher une expression, on utilisera la fonction :py:func:`~re.search
 
 	re.search(pattern, string)
 
-- Pattern est l'expression à rechercher
-- String est la chaîne d'origine 
+- ``pattern`` est l'expression à rechercher.
+- ``string`` est la chaîne d'origine.
 
 .. code:: pycon
 
@@ -103,13 +107,15 @@ Afin de rechercher une expression, on utilisera la fonction :py:func:`~re.search
 re.split()
 ----------
 
+La fonction :py:func:`~re.split()` va permettre de découper une chaîne ``string`` selon un pattern.
+
 ::
 
 	re.split(pattern, string, maxsplit)
 
-- Pattern est l'expression avec lequelle on séparera
-- String est la chaîne d'origine
-- Maxsplit est le nombre de séparations faite au maximum
+- ``pattern`` est l'expression avec lequelle on séparera.
+- ``string`` est la chaîne d'origine.
+- ``maxsplit`` est le nombre de séparations faite au maximum.
 
 .. code:: pycon
 
@@ -125,15 +131,15 @@ re.split()
 re.sub()
 --------
 
-Afin de remplacer des données, on peut passer par la fonction "sub()" :
+Afin de remplacer des données, on peut passer par la fonction :py:func:`~re.sub()` :
 
 ::
 
 	re.sub(pattern, replace, string)
 
-- Pattern est l'expression à rechercher
-- Replace est le remplacent de cette expression
-- String est la chaîne d'origine
+- ``pattern`` est l'expression à rechercher.
+- ``replace`` est le remplacent de cette expression.
+- ``string`` est la chaîne d'origine.
 
 .. code:: pycon
 
@@ -150,13 +156,13 @@ Afin de remplacer des données, on peut passer par la fonction "sub()" :
 re.compile()
 ------------
 
-Si, dans votre programme, vous utilisez plusieurs fois les mêmes expressions régulières, il peut être utile de les compiler. Le module re propose en effet de conserver votre expression régulière sous la forme d'un objet que vous pouvez stocker dans votre programme.
+Si, dans votre programme, vous utilisez plusieurs fois les mêmes expressions régulières, il peut être utile de les compiler. La bibliothèque :py:mod:`re` propose en effet de conserver votre expression régulière sous la forme d'un objet que vous pouvez stocker dans votre programme. On utilisera ainsi la fonction :py:func:`~re.compile()` :
 
 ::
 
 	re.compile(pattern)
 
-- Pattern est l'expression à compiler
+- ``pattern`` est l'expression à compiler.
 
 .. code:: pycon
 
