@@ -11,7 +11,7 @@ def cf(ni, n):  # fréquence cumulée
     for i in ni:
         cumulFreq = (i / n) + cumulFreq
         r.append(cumulFreq)
-    return(r)
+    return r
 
 
 def f(ni, n):  # fréquence

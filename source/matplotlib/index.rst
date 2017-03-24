@@ -56,8 +56,8 @@ Matplotlib_ est généralement utilisé avec numpy_, permettant l'usage de fonct
 comme arange_ qui dans notre cas est utilisé pour la création de valeures à intervals réguliers
 de 0 à 5. 
 
-Matplotlib_ dispose de plus d'une centaine d'exemples_ pour tous les cas possibles et imaginables.
-Il vous est conseillé de vous rendre sur le site officiel et de jetter un oeuil à la gallerie_.
+Matplotlib_ dispose de plus d'une centaine d'exemples (:ref:`examples-index`) pour tous les cas possibles et imaginables.
+Il vous est conseilé de vous rendre sur le site officiel et de jeter un  œil à la galerie_.
 
 
 `Cas simple`
@@ -89,13 +89,22 @@ Liste non exhaustive expliquant comment utiliser matplotlib.
 Le but est d'expliquer simplement des conceptes sur lesquels
 vous risquez autrement de perdre du temps.
 
-N'hésitez pas à visiter la page de tutoriel_ sur le site officiel
+N'hésitez pas à visiter la page de :ref:`pyplot-tutorial` sur le site officiel
 si vous comprenez l'anglais ou le code_.
 
+Conseil, regardez les fonctions suivantes en détail
+
+- plot(\*args, \*\*kwargs)
+- triplot(\*args, \*\*kwargs)
+- bar(left, height, width=0.8, bottom=None, hold=None, data=None, \*\*kwargs)
+- hist(x, bins=None, ..., \*\*kwargs)
+- boxplot(x, notch=None, ...)
+	
+	
 `plot simple`
 
 Le plot est la fonction la plus important de Matplotlib_ (on se demande pourquoi), pour cette
-raison il vous est recommandé de regarder la doc_ du plot en détail.
+raison il vous est recommandé de regarder la doc :py:mod:`matplotlib.pyplot` en détail.
 
 .. image:: ./sources/simplesimple.png
    :alt: matPlotLib ro
@@ -109,7 +118,7 @@ raison il vous est recommandé de regarder la doc_ du plot en détail.
    :alt: matPlotLib ro
 
 Pour changer l'affichage de ligne à points ou traitillé, il suffit d'ajouter
-un argument au moment de plot! Voir plot_
+un argument au moment de plot! Voir :py:func:`matplotlib.pyplot.plot`
 
 .. literalinclude:: code/ro.py	
 
@@ -166,14 +175,12 @@ Matplotlib_.org
 PythonProgramming_.net
 StackOverflow.com subPlot_
 
-
 .. Bibliographie
 
 .. _Matplotlib: http://matplotlib.org/
-.. _exemples: http://matplotlib.org/examples/index.html
 .. _numpy: http://www.numpy.org/
 .. _arange: https://docs.scipy.org/doc/numpy-1.10.1/reference/generated/numpy.arange.html
-.. _gallerie: http://matplotlib.org/gallery.html
+.. _galerie: http://matplotlib.org/gallery.html
 .. _site: http://matplotlib.org/2.0.0/index.html
 .. _spectres: https://fr.wikipedia.org/wiki/Densit%C3%A9_spectrale_de_puissance
 .. _installation: http://matplotlib.org/2.0.0/users/installing.html
@@ -181,10 +188,6 @@ StackOverflow.com subPlot_
 .. _citation: http://matplotlib.org/2.0.0/citing.html
 .. _PythonProgramming: https://pythonprogramming.net/conclusion-matplotlib-tutorial/
 .. _subPlot: http://stackoverflow.com/questions/3584805/in-matplotlib-what-does-the-argument-mean-in-fig-add-subplot111
-.. _GridSpec: http://matplotlib.org/users/gridspec.html
 .. _logarithmiques: https://www.ilemaths.net/img/forum_img/0416/forum_416807_1.JPG
-.. _plot: http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.plot
-.. _tutoriel: http://matplotlib.org/users/pyplot_tutorial.html
 .. _code: https://2.bp.blogspot.com/-2mxHUrtNNQI/VvCP1V94pNI/AAAAAAAAEqw/h9IWBjCeMowykzM8uXWWoOb3BymaZNTIQ/s1600/matrix-600x400.jpg
-.. _doc: http://matplotlib.org/api/pyplot_api.html
 
