@@ -24,17 +24,18 @@ user_name = input("Entrez votre nom d'utilisateur : ")
 cookie = 'user:'+user_name
 cookie = cookie.encode()
 
-print("\nBienvenu " + user_name + " votre cookie hashé est le suivant : ")
+print("\nBienvenue "
+      f"{user_name} votre cookie hashé est le suivant : ")
 # Récupère le cookie signé en fonction de la personne qui s'identifie
-cookie_signe = sign(cookie, user_name.encode())
+cookie_signé = sign(cookie, user_name.encode())
 # Affiche ce dernier pour montrer ce qui devrait être utilisé dans une
 # vraie application
-print("\n" + cookie_signe)
+print("\n" + cookie_signé)
 
 user_name = input("\nConfirmez votre identité : ")
 
 # Si le cookie est hashé par la même personne, on sait que cela n'a pas changé
-if compare_digest(cookie_signe, sign(cookie, user_name.encode())):
+if compare_digest(cookie_signé, sign(cookie, user_name.encode())):
     print("\nVous êtes bien vous-même")
 else:
     # Génère une erreure dans le cas ou le hashage n'est plus le même

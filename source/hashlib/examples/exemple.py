@@ -3,10 +3,9 @@
 import getpass
 import hashlib
 import hmac
-import secrets
-import uuid
-
 from hmac import compare_digest
+import uuid
+import secrets
 
 
 def hash_mdp(mdp, hashage):
@@ -69,8 +68,9 @@ while hashage_type not in hashlib.algorithms_available:
 mdp = getpass.getpass("\nEntrez votre mot de passe : ")
 
 hashed_mdp = hash_mdp(mdp, hashage_type)
-print('\nLe mot-de-passe qui devrait être ' +
-      'enregistré dans la BDD est : ' + hashed_mdp)
+print("\n"
+      "Le mot de passe devrant être "
+      f"enregistré dans la bdd est: {hashed_mdp}")
 
 ancien_mdp = getpass.getpass('\nEntrez-à nouveau votre ' +
                              'mot-de-passe pour vérifier : ')

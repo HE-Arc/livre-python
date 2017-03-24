@@ -35,9 +35,9 @@ bibliothèque OpenSSL que python utilise sur votre plateforme. Sur la plupart,
 des plateformes les constructeurs SHA3 (Keccak) et SHAKE sont disponibles.
 Ceci depuis la version 3.6 de Python.
 
-Fonctions
----------
-Les fonctions de ce module répondent à une grande partie de nos besoins
+Fonctions et méthodes
+---------------------
+Les fonctions et méthodes de ce module répondent à une grande partie de nos besoins
 concernant le hachage de données. Parmis ces fonctions voici les plus
 importantes :
 
@@ -48,7 +48,7 @@ importantes :
 - :py:meth:`hashlib.hash.digest` retourne les données hachées passées à la méthode update
 - :py:meth:`hashlib.hash.hexdigest` pareil que digest mais le résultat est en hexadécimale
 
-À l'aide de SHAKE_ (Keccak) vous pouvez passer en argument des fonctions ``digest()``
+À l'aide de SHAKE_ (Keccak) vous pouvez passer en argument des méthodes ``digest()``
 la taille souhaitée qu'aura votre résultat.
 
 Exemple :
@@ -74,7 +74,7 @@ Exemple
 Rien de mieux pour mettre en pratique une librairie de hachage que de faire
 un système très basique de hachage de mot-de-passe. Dès qu'il nous faut stocker
 une donnée sensible dans une base de données, il faut la hacher. Pour cela,
-l'algorithme ``md5()`` était utilisé à l'époque. Cependant il a rapidement été
+l'algorithme ``MD5`` était utilisé à l'époque. Cependant il a rapidement été
 cassé et du coup est maintenant déprécié.
 
 Nous utilisons actuellement sha1 et ses paires, malgré le fait qu'il a à son tour
