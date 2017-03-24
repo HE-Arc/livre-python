@@ -11,7 +11,7 @@ enseigne = ["Coeur", "Pique", "Carreau", "Trèfle"]
 jeu = []
 for e in enseigne:
     for v in valeur:
-        carte = valeur[v] + " de " + enseigne[e]
+        carte = v + " de " + e
         jeu.append(carte)
 
 # Mélange du jeu de cartes.
