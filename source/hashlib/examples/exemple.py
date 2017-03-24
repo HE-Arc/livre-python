@@ -3,10 +3,9 @@
 import getpass
 import hashlib
 import hmac
+import secrets
 import uuid
 from hmac import compare_digest
-
-import secrets
 
 
 def hash_mdp(mdp, hashage):
