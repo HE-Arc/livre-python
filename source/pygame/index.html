@@ -1,0 +1,342 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Pygame &#8212; documentation Bibliothèques Python 0.1.1</title>
+    
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Recherche" href="../search.html" />
+    <link rel="next" title="pytest" href="../pytest/index.html" />
+    <link rel="prev" title="pycrypto" href="../pycrypto/index.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="pygame">
+<h1>Pygame<a class="headerlink" href="#pygame" title="Lien permanent vers ce titre">¶</a></h1>
+<img alt="Pygame logo" class="align-right" src="../_images/logo_pygame.png" />
+<p>Par Dany Chea <a class="footnote-reference" href="#dc" id="id1">[1]</a></p>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Pygame est un module qui offre des outils permettant de créer des jeux.
+Le module est lui-même subdivisé en plusieurs sous-modules, ce qui permet de ne pas appeler des modules
+qui seraient inutiles.
+On se contentera ici de présenter les bases de l&#8217;utilisation de Pygame, ainsi que le fonctionnement de certains sous-modules.</p>
+<p>Liste des sous-modules de Pygame:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="24%" />
+<col width="24%" />
+<col width="27%" />
+<col width="24%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><cite>pygame.camera</cite></td>
+<td><cite>pygame.cdrom</cite></td>
+<td><cite>pygame.cursors</cite></td>
+<td><cite>pygame.display</cite></td>
+</tr>
+<tr class="row-even"><td><cite>pygame.draw</cite></td>
+<td><cite>pygame.event</cite></td>
+<td><cite>pygame.example</cite></td>
+<td><cite>pygame.font</cite></td>
+</tr>
+<tr class="row-odd"><td><cite>pygame.freetype</cite></td>
+<td><cite>pygame.gfxdraw</cite></td>
+<td><cite>pygame.image</cite></td>
+<td><cite>pygame.joystick</cite></td>
+</tr>
+<tr class="row-even"><td><cite>pygame.key</cite></td>
+<td><cite>pygame.locals</cite></td>
+<td><cite>pygame.mask</cite></td>
+<td><cite>pygame.math</cite></td>
+</tr>
+<tr class="row-odd"><td><cite>pygame.midi</cite></td>
+<td><cite>pygame.mixer</cite></td>
+<td><cite>pygame.mouse</cite></td>
+<td><cite>pygame.pixelcopy</cite></td>
+</tr>
+<tr class="row-even"><td><cite>pygame.scrap</cite></td>
+<td><cite>pygame.sndarray</cite></td>
+<td><cite>pygame.sprite</cite></td>
+<td><cite>pygame.surfarray</cite></td>
+</tr>
+<tr class="row-odd"><td><cite>pygame.tests</cite></td>
+<td><cite>pygame.time</cite></td>
+<td><cite>pygame.transform</cite></td>
+<td><cite>pygame.version</cite></td>
+</tr>
+</tbody>
+</table>
+<p>Indépendemment du jeu que l&#8217;on veut créer, sa réalisation passe nécessairement par 5 étapes:</p>
+<ol class="arabic simple">
+<li>Initialisation de pygame</li>
+<li>Appel des modules nécessaires</li>
+<li>L&#8217;affichage</li>
+<li>Boucle infinie</li>
+<li>Fermeture du programme</li>
+</ol>
+</div>
+<div class="section" id="l-initialisation">
+<h2>L&#8217;initialisation:<a class="headerlink" href="#l-initialisation" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Afin de pouvoir utiliser le module Pygame, il va falloir d&#8217;abord l&#8217;importer, puis l&#8217;initier de la manière suivante:</p>
+<div class="highlight-pycon"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pygame</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pygame</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="section" id="pygame-locals">
+<h3>Pygame.locals:<a class="headerlink" href="#pygame-locals" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Pygame contient une quantité de constantes prédéfinies, qui sont chargées dans le namespace pygame, lors de l&#8217;importation de celui-ci.
+Ainsi, lorsque l&#8217;on veut utiliser une des constantes, il faut à chaque fois l&#8217;appeler en préfixant <cite>pygame.</cite> suivi du nom de la constante.
+Afin d&#8217;éviter ce préfixe, on peut faire une importation des constantes depuis pygame.locals, comme ci-dessous:</p>
+<div class="highlight-pycon"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pygame.locals</span> <span class="kn">import</span> <span class="o">*</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="appel-des-fonctions-utiles">
+<h2>Appel des fonctions utiles<a class="headerlink" href="#appel-des-fonctions-utiles" title="Lien permanent vers ce titre">¶</a></h2>
+<p>c&#8217;est dans cette partie que l&#8217;on va initialiser la fenêtre, ainsi que tout les éléments dont on aura besoin.</p>
+<p>par exemple, pour afficher une fenêtre:</p>
+<div class="highlight-pycon"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fenetre</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">set_mode</span><span class="p">((</span><span class="mi">200</span><span class="p">,</span><span class="mi">200</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Dans cet exemple, on appelle la fonction :py:meth: <cite>set_mode</cite> du module display.
+Ce que l&#8217;on obtient en retour, c&#8217;est un objet de la classe Surface qui est défini par Pygame.</p>
+<p>Résultat:</p>
+<img alt="../_images/firstWindow.PNG" src="../_images/firstWindow.PNG" />
+</div>
+<div class="section" id="la-boucle-infinie">
+<h2>La boucle infinie<a class="headerlink" href="#la-boucle-infinie" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Si on se contentait d&#8217;exécuter le code ci-dessus, on n&#8217;obtiendrait le résultat que pendant une fraction de seconde, car au moment où le code a fini de s&#8217;exécuter,
+il se termine. Il faut donc créer une boucle infinie, de laquelle on peut sortir au moyen d&#8217;une action de l&#8217;utilisateur.</p>
+</div>
+<div class="section" id="exemple-de-fenetre-simple">
+<h2>Exemple de fenêtre simple:<a class="headerlink" href="#exemple-de-fenetre-simple" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Cet exemple provient de la <a class="reference external" href="http://www.pygame.org/docs/tut/tom_games2.html#makegames-2">documentation pygame</a></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>
+<span class="sd">&quot;&quot;&quot;Exemple d&#39;affichage d&#39;une fenêtre simple&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">pygame</span>
+<span class="kn">from</span> <span class="nn">pygame.locals</span> <span class="k">import</span> <span class="o">*</span>
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="c1"># Initialise screen</span>
+    <span class="n">pygame</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+    <span class="n">screen</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">set_mode</span><span class="p">((</span><span class="mi">600</span><span class="p">,</span> <span class="mi">480</span><span class="p">))</span>
+    <span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">set_caption</span><span class="p">(</span><span class="s1">&#39;Basic Pygame program&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Fill background</span>
+    <span class="n">background</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">Surface</span><span class="p">(</span><span class="n">screen</span><span class="o">.</span><span class="n">get_size</span><span class="p">())</span>
+    <span class="n">background</span> <span class="o">=</span> <span class="n">background</span><span class="o">.</span><span class="n">convert</span><span class="p">()</span>
+    <span class="n">background</span><span class="o">.</span><span class="n">fill</span><span class="p">((</span><span class="mi">250</span><span class="p">,</span> <span class="mi">250</span><span class="p">,</span> <span class="mi">250</span><span class="p">))</span>
+
+    <span class="c1"># Display some text</span>
+    <span class="n">font</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">font</span><span class="o">.</span><span class="n">Font</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="mi">36</span><span class="p">)</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">font</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="s2">&quot;Hello There&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+    <span class="n">textpos</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">get_rect</span><span class="p">()</span>
+    <span class="n">textpos</span><span class="o">.</span><span class="n">centerx</span> <span class="o">=</span> <span class="n">background</span><span class="o">.</span><span class="n">get_rect</span><span class="p">()</span><span class="o">.</span><span class="n">centerx</span>
+    <span class="n">background</span><span class="o">.</span><span class="n">blit</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">textpos</span><span class="p">)</span>
+
+    <span class="c1"># Blit everything to the screen</span>
+    <span class="n">screen</span><span class="o">.</span><span class="n">blit</span><span class="p">(</span><span class="n">background</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+    <span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">flip</span><span class="p">()</span>
+
+    <span class="c1"># Event loop</span>
+    <span class="k">while</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">pygame</span><span class="o">.</span><span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">QUIT</span><span class="p">:</span>
+                <span class="k">return</span>
+
+        <span class="n">screen</span><span class="o">.</span><span class="n">blit</span><span class="p">(</span><span class="n">background</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+        <span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">flip</span><span class="p">()</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span> <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="exemples">
+<h2>Exemples:<a class="headerlink" href="#exemples" title="Lien permanent vers ce titre">¶</a></h2>
+<div class="section" id="son-au-maintient-d-une-touche">
+<h3>Son au maintient d&#8217;une touche:<a class="headerlink" href="#son-au-maintient-d-une-touche" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Cet exemple provient du <a class="reference external" href="https://openclassrooms.com/courses/interface-graphique-pygame-pour-python/le-son-5">tutoriel Openclassroom</a></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pygame</span>
+<span class="kn">from</span> <span class="nn">pygame.locals</span> <span class="k">import</span> <span class="o">*</span>
+<span class="n">pygame</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">fenetre</span><span class="o">=</span><span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">set_mode</span><span class="p">((</span><span class="mi">200</span><span class="p">,</span><span class="mi">200</span><span class="p">),</span><span class="n">RESIZABLE</span><span class="p">)</span>
+<span class="n">son</span><span class="o">=</span><span class="n">pygame</span><span class="o">.</span><span class="n">mixer</span><span class="o">.</span><span class="n">Sound</span><span class="p">(</span><span class="s2">&quot;./exemple/Tinquen.wav&quot;</span><span class="p">)</span>
+
+<span class="n">continuer</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">joue</span><span class="o">=</span><span class="mi">0</span>
+<span class="k">while</span> <span class="n">continuer</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">pygame</span><span class="o">.</span><span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">type</span><span class="o">==</span><span class="n">QUIT</span><span class="p">:</span>
+            <span class="n">continuer</span><span class="o">=</span><span class="mi">0</span>
+        <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">KEYDOWN</span> <span class="ow">and</span> <span class="n">event</span><span class="o">.</span><span class="n">key</span> <span class="o">==</span> <span class="n">K_SPACE</span> <span class="ow">and</span> <span class="n">joue</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">son</span><span class="o">.</span><span class="n">play</span><span class="p">()</span>
+            <span class="n">joue</span><span class="o">=</span><span class="mi">1</span>
+        <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">KEYDOWN</span> <span class="ow">and</span> <span class="n">event</span><span class="o">.</span><span class="n">key</span> <span class="o">==</span> <span class="n">K_SPACE</span> <span class="ow">and</span> <span class="n">joue</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">pygame</span><span class="o">.</span><span class="n">mixer</span><span class="o">.</span><span class="n">unpause</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">KEYUP</span> <span class="ow">and</span> <span class="n">event</span><span class="o">.</span><span class="n">key</span> <span class="o">==</span> <span class="n">K_SPACE</span><span class="p">:</span>
+            <span class="n">pygame</span><span class="o">.</span><span class="n">mixer</span><span class="o">.</span><span class="n">pause</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">KEYDOWN</span> <span class="ow">and</span> <span class="n">event</span><span class="o">.</span><span class="n">key</span> <span class="o">==</span> <span class="n">K_RETURN</span><span class="p">:</span>
+            <span class="n">son</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+            <span class="n">joue</span><span class="o">=</span><span class="mi">0</span>
+<span class="n">pygame</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Dans cet exemple, on a utilisé 2 modules: pygame.mixer, qui est utilisé pour la gestion de sons et pygame.event, qui est utilisé pour la gestion des touches au clavier.
+Lors de l&#8217;appui, et du maintient de la touche espace, on joue le son qui a été chargé, ou on continue la lecture si le son était sur pause.
+Lorsque la touche est relâchée, le son est mis sur pause.</p>
+</div>
+<div class="section" id="affichage-simple-d-images">
+<h3>Affichage simple d&#8217;images:<a class="headerlink" href="#affichage-simple-d-images" title="Lien permanent vers ce titre">¶</a></h3>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pygame</span>
+<span class="kn">from</span> <span class="nn">pygame.locals</span> <span class="k">import</span> <span class="o">*</span>
+<span class="n">pygame</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">fenetre</span><span class="o">=</span><span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">set_mode</span><span class="p">((</span><span class="mi">640</span><span class="p">,</span><span class="mi">480</span><span class="p">),</span><span class="n">RESIZABLE</span><span class="p">)</span>
+
+<span class="n">fond</span> <span class="o">=</span><span class="n">pygame</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;./exemple/background.jpg&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">convert</span><span class="p">()</span>
+<span class="n">continuer</span><span class="o">=</span><span class="mi">1</span>
+<span class="k">while</span> <span class="n">continuer</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">pygame</span><span class="o">.</span><span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">type</span><span class="o">==</span><span class="n">QUIT</span><span class="p">:</span>
+            <span class="n">continuer</span><span class="o">=</span><span class="mi">0</span>
+    <span class="n">fenetre</span><span class="o">.</span><span class="n">blit</span><span class="p">(</span><span class="n">fond</span><span class="p">,(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
+
+    <span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">flip</span><span class="p">()</span>
+<span class="n">pygame</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Dans cet exemple, on commence par charger une image.
+Cette image n&#8217;étant pas forcément dans un format supporté par pygame, la fonction pygame.convert est utilisée
+afin de s&#8217;assurer que l&#8217;image pourra s&#8217;afficher correctement.</p>
+<div class="highlight-pycon"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fond</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;background.jpg&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">convert</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Enfin, on peut afficher l&#8217;image en la &#8220;collant&#8221; sur la fenêtre de base, avec la fonction blit().</p>
+<div class="highlight-pycon"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fenetre</span><span class="o">.</span><span class="n">blit</span><span class="p">(</span><span class="n">fond</span><span class="p">,(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Il est a noter que la fonction <cite>blit</cite> prend en paramètre une Surface, donc l&#8217;objet à afficher, ainsi que la position, en sachant que la coordonnée (0,0) est en haut à gauche de la fenêtre.</p>
+</div>
+</div>
+<div class="section" id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Pygame est un module très complet, qui nous permet de réaliser des jeux avec une certaine rapidité. Les quelques méthodes présentées ici ne sont qu&#8217;une infime partie des méthodes que
+propose pygame. Afin d&#8217;en avoir une liste exhaustive, il est recommandé d&#8217;aller consulter la documentation officielle de pygame, disponible à cet endroit: <a class="reference external" href="https://www.pygame.org/docs/genindex.html">documentation pygame</a></p>
+<table class="docutils footnote" frame="void" id="dc" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>&lt;<a class="reference external" href="mailto:dany&#46;chea&#37;&#52;&#48;he-arc&#46;ch">dany<span>&#46;</span>chea<span>&#64;</span>he-arc<span>&#46;</span>ch</a>&gt;</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table des Matières</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Pygame</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#l-initialisation">L&#8217;initialisation:</a><ul>
+<li><a class="reference internal" href="#pygame-locals">Pygame.locals:</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#appel-des-fonctions-utiles">Appel des fonctions utiles</a></li>
+<li><a class="reference internal" href="#la-boucle-infinie">La boucle infinie</a></li>
+<li><a class="reference internal" href="#exemple-de-fenetre-simple">Exemple de fenêtre simple:</a></li>
+<li><a class="reference internal" href="#exemples">Exemples:</a><ul>
+<li><a class="reference internal" href="#son-au-maintient-d-une-touche">Son au maintient d&#8217;une touche:</a></li>
+<li><a class="reference internal" href="#affichage-simple-d-images">Affichage simple d&#8217;images:</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#conclusion">Conclusion</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="../pycrypto/index.html" title="Chapitre précédent"><code class="docutils literal"><span class="pre">pycrypto</span></code></a></li>
+      <li>Next: <a href="../pytest/index.html" title="Chapitre suivant"><code class="docutils literal"><span class="pre">pytest</span></code></a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>Cette page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/pygame/index.rst.txt"
+            rel="nofollow">Montrer le code source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Recherche rapide</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016-2017, HE-Arc.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="../_sources/pygame/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
