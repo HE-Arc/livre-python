@@ -1,6 +1,6 @@
 """Exemple de fraction égyptiennes."""
 from fractions import Fraction
-from math import *
+from math import ceil
 
 
 def function(f):
