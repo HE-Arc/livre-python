@@ -5,6 +5,8 @@ from math import hypot
 
 
 '''Mieux vaut trop que pas assez.'''
+
+
 class Vector:
     '''Class de vecteurs.'''
     def __init__(self, x=0, y=0):
