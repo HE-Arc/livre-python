@@ -164,7 +164,7 @@ Dans cet exemple, comme aucune des variables ne possède de virgule, Python les 
 	>>>	pow(a,3)
 	1000.0
 
-La fonction :py:func:`log(x, [base])` retourne le logarithme naturel de *x* (en base *e*).
+La fonction log(x, [base]) retourne le logarithme naturel de *x* (en base *e*).
 Avec deux arguments, cette fonction retourne le logerithme de *x* dans la base donnée.
 Il est possible d'utiliser les fonction ``log2(x)`` ou ``log10(x)`` pour retourner le logarithme en base 2 ou 10.
 
