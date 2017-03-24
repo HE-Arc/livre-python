@@ -91,20 +91,21 @@ opener: On peut spécifier un opener à utiliser.
 
 Méthode de io.IOBase
 --------------------
+Quelques méthodes parmi les plus utiles de :py:mod:`io` :
 
-    -  read(n): Lis le fichier jusqu'à avoir n bit(mode binaire) ou n
+    -  ``read(n)``: Lis le fichier jusqu'à avoir n bit(mode binaire) ou n
        bytes(mode texte). Si n est négatif ou n'est pas spécifié, lis jusqu'à la fin
        du fichier.
-    -  write(b): Ecrit b dans le fichier.
-    -  close(): Flush et ferme le flux. N'a aucun effet si le fichier est
+    -  ``write(b)``: Ecrit b dans le fichier.
+    -  ``close()``: Flush et ferme le flux. N'a aucun effet si le fichier est
        déjà fermé, seulement le premier appel à effet.
-    -  closed: Retourne True si le fichier est fermé.
-    -  flush(): Vide le flux d'écriture, ne fait rien en lecture.
-    -  isatty(): Retourne True si le flux est connecté à un terminal.
-    -  readable(): Retourne True si on peut lire depuis le flux. Si False,
-       read() lève une exception OSError.
-    -  writable(): Retourne True si on peut écrire depuis le flux. Si False,
-       write() lève une exception OSError.
+    -  ``closed``: Retourne True si le fichier est fermé.
+    -  ``flush()``: Vide le flux d'écriture, ne fait rien en lecture.
+    -  ``isatty()``: Retourne True si le flux est connecté à un terminal.
+    -  ``readable()``: Retourne True si on peut lire depuis le flux. Si False,
+       ``read()`` lève une exception ``OSError``.
+    -  ``writable()``: Retourne True si on peut écrire depuis le flux. Si False,
+       ``write()`` lève une exception ``OSError``.
 
 Exemple
 ~~~~~~~
