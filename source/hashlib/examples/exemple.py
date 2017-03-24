@@ -4,7 +4,6 @@ import getpass
 import hashlib
 import hmac
 import secrets
-import uuid
 from hmac import compare_digest
 
 
