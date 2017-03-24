@@ -5,7 +5,7 @@
 matplotlib
 ==========
 
-Par Florian Fasmeyer
+Par Florian Fasmeyer [#ff]_
 
 .. image:: ./sources/matplotlib.png
 	:alt: matPlotLib membranePlot
@@ -171,9 +171,9 @@ ce travail en le citant dans votre projet. Vous pouvez utiliser cette citation_ 
 
 Sources
 -------
-Matplotlib_.org
-PythonProgramming_.net
-StackOverflow.com subPlot_
+- Matplotlib_.org
+- PythonProgramming_.net
+- StackOverflow.com subPlot_
 
 .. Bibliographie
 
@@ -190,4 +190,5 @@ StackOverflow.com subPlot_
 .. _subPlot: http://stackoverflow.com/questions/3584805/in-matplotlib-what-does-the-argument-mean-in-fig-add-subplot111
 .. _logarithmiques: https://www.ilemaths.net/img/forum_img/0416/forum_416807_1.JPG
 .. _code: https://2.bp.blogspot.com/-2mxHUrtNNQI/VvCP1V94pNI/AAAAAAAAEqw/h9IWBjCeMowykzM8uXWWoOb3BymaZNTIQ/s1600/matrix-600x400.jpg
+.. [#ff] <florian.fasmeyer@he-arc.ch>
 
