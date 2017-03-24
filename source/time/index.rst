@@ -10,9 +10,9 @@ Par Kaser Nicolas
 --------------
 Introduction
 --------------
-Le module Time en python (et également en d'autres languages) est une des façons les plus simple de manipuler le temps dans un programme. Ca permet par exemple d'attendre un certain nombre de millisecondes, d'afficher une date avec un format spécifique ou encore de connaître le nombre de secondes écoulées depuis le 1er Janvier 1970 à 00:00 ... Pas forcément utile mais possible. 
+Le module Time en python (et également en d'autres languages) est une des façons les plus simple de manipuler le temps dans un programme. Un temp en python est, par défaut, un nombre représentant des secondes. Ca permet par exemple d'attendre un certain nombre de millisecondes, d'afficher une date avec un format spécifique ou encore de connaître le nombre de secondes écoulées depuis le 1er Janvier 1970 à 00:00 ... Pas forcément utile mais possible. 
 
-Le module DateTime affiche et formate des dates et heures avec une méthode un peu plus orientée objets (une date sera un objet et une heure également).
+Le module DateTime affiche et formate des dates et heures avec une méthode un peu plus orientée objets (une date et une heure seront des objets).
 
 
 ---------
@@ -128,4 +128,22 @@ Affichera : time.struct_time(tm_year=2017, tm_mon=3, tm_mday=24, tm_hour=13, tm_
 
 
 Affichera : time.struct_time(tm_year=1982, tm_mon=9, tm_mday=4, tm_hour=17, tm_min=6, tm_sec=40, tm_wday=5, tm_yday=247, tm_isdst=1)
+
+
+La fonction Time.mktime(t) fais l'inverse de localtime() en prenant une struct_time en argument et en retournant un nombre de secondes (par rapport à l'Epoch).
+
+Voici un exemple d'utilisation :
+
+
+
+.. code:: python
+>>>t = (2009, 2, 17, 17, 3, 38, 1, 48, 0)
+>>>secs = time.mktime( t )
+>>>print "time.mktime(t) : %f" %  secs
+>>>print "asctime(localtime(secs)): %s" % time.asctime(time.localtime(secs))
+
+Qui retournera le résultat suivant :
+
+time.mktime(t) : 1234915418.000000
+asctime(localtime(secs)): Tue Feb 17 17:03:38 2009
 
