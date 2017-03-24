@@ -10,7 +10,7 @@ Par Kaser Nicolas
 --------------
 Introduction
 --------------
-Le module Time en python (et également en d'autres languages) est une des façons les plus simple de manipuler le temps dans un programme. Un temp en python est, par défaut, un nombre représentant des secondes. Ca permet par exemple d'attendre un certain nombre de millisecondes, d'afficher une date avec un format spécifique ou encore de connaître le nombre de secondes écoulées depuis le 1er Janvier 1970 à 00:00 ... Pas forcément utile mais possible. 
+Le module Time en python (et également en d'autres languages) est une des façons les plus simple de manipuler le temps dans un programme. Un temp en python est, par défaut, un nombre représentant des secondes. Ca permet par exemple d'attendre un certain nombre de secondes, d'afficher une date avec un format spécifique ou encore de connaître le nombre de secondes écoulées depuis le 1er Janvier 1970 à 00:00 ... Pas forcément utile mais possible. 
 
 Le module DateTime affiche et formate des dates et heures avec une méthode un peu plus orientée objets (une date et une heure seront des objets).
 
@@ -151,4 +151,15 @@ Qui retournera le résultat suivant :
 time.mktime(t) : 1234915418.000000  
 
 asctime(localtime(secs)): Tue Feb 17 17:03:38 2009
+
+
+Il existe également un moyen de faire attendre le programme avec le module Time. 
+Il s'agit de Time.sleep(secs) avec secs = le nombre de secondes à attendre. Il bloquera ainsi le thread appellant pendant ce laps de temps. Attention. Contrairement à d'autres langages, l'argument est bien en secondes et pas en millisecondes.
+
+
+.. code:: python
+>>>Time.sleep(1000)
+
+En c# par exemple cette ligne bloque le thread en question pendant une seconde. Ici en python il le bloque bien pendant 1000 secondes !!
+
 
