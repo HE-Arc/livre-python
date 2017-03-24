@@ -12,7 +12,7 @@ Les caractères d'échappement ANSI sont depuis longtemps utilisé pour produire
 Seulement, ces caractères d'échappement ne sont pas compatibles avec le terminal natif de Windows.
 La bibliothèque externe de python Colorama est la pour palier à ce problème en convertissant ces caractères en appels win32 appropriés.
 
-Grace à Colorama il est possible d'utiliser de nombreuses bilbiothèques se basant sur Les caractères d'échappement ANSI d’être utilisées sur Windows.
+Grace à Colorama il est possible d'utiliser de nombreuses bibliothèques se basant sur Les caractères d'échappement ANSI d’être utilisées sur Windows.
 
 Pour résumer, Colorama est une bibliothèque python multiplateforme pour afficher des terminaux colorés en Python. 
 
@@ -96,8 +96,8 @@ Ce qui nous donne :
 Conclusion
 ------------------
 
-Colorama est une bilbiothèque très simple d'utilisation et très utile pour faire fonctioner diverses autres bilbiothèques se basant sur les séquences ANSI sous Windows.
+Colorama est une bibliothèque très simple d'utilisation et très utile pour faire fonctionner diverses autres bibliothèques se basant sur les séquences ANSI sous Windows.
 Il est également possible de l'utiliser en stand-alone pour certaines applications simples.
-Malheureusement en l'état actuel, il y a encore un grand nombre de séquences non prises en charge, ceci est toutefois probablement ammené à changer étant donné que Colorama est mis à jour régulièrement.
+Malheureusement en l'état actuel, il y a encore un grand nombre de séquences non prises en charge, ceci est toutefois probablement amené à changer étant donné que Colorama est mis à jour régulièrement.
 
 .. [#contact] <killian.castella@he-arc.ch>
