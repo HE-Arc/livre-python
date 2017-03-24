@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 
 
 def cf(ni, n):
-    """cumule une list de fréquences par addition."""
+    """Cumule une list de fréquences par addition."""
     r = []
     cumulFreq = 0
     for i in ni:
@@ -16,7 +16,7 @@ def cf(ni, n):
 
 
 def f(ni, n):
-    """prend une liste d'occurence et calcule la fréquence."""
+    """Prend une liste d'occurence et calcule la fréquence."""
     r = []
     freq = 0
     for i in ni:
