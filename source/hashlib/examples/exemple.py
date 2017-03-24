@@ -1,0 +1,81 @@
+"""Exemple de hashage simple avec hashlib."""
+
+import getpass
+import hashlib
+import hmac
+import uuid
+
+from hmac import compare_digest
+
+
+def hash_mdp(mdp, hashage):
+    """Hashe le mot-de-passe.
+
+    Ceci à l'aide de l'algorithme passé
+    en argument avec un salt permettant
+    un hashage plus efficace.
+
+    Args:
+        Mot-de-passe normale.
+        Type du hashage souhaité.
+
+    Returns:
+        Retourne le mot-de-passe hashé en hexadécimale.
+    """
+    # uuid génère un nombre aléatoire en héxadécimale
+    salt = uuid.uuid4().hex
+    contenu = salt.encode() + mdp.encode()
+    h = hashlib.new(hashage)
+    h.update(contenu)
+    return h.hexdigest() + ':' + salt
+
+
+def check_mdp(hashed_mdp, utilisateur_mdp, hashage):
+    """Check le mot-de-passe hashé.
+
+    Ceci en récupérant le mot de passe hashé
+    et le salt du mdp hashé passée en argument.
+    L'objet hashage est construit en fonction du type.
+
+    Args:
+        Le mot-de-passe hashé,le mot-de-passe
+        normale ainsi que le type de hashage.
+
+    Returns:
+        Retourne true ou false en fonction
+        du test d'égalité.
+    """
+    mdp, salt = hashed_mdp.split(':')
+    contenu = salt.encode() + utilisateur_mdp.encode()
+    h = hashlib.new(hashage)
+    h.update(contenu)
+    return compare_digest(mdp, h.hexdigest())
+
+
+hashage_type = input("Entrez le type de hashage souhaité : ")
+
+# Boucle permettant de récupérer un type de hashage correct !
+while hashage_type not in hashlib.algorithms_available:
+    if hashage_type != "help":
+        print("\nEntrez help pour voir les types de hashage possibles")
+
+    hashage_type = input("\nVeuillez entrer un type de hashage valide : ")
+
+    if hashage_type == "help":
+        print(hashlib.algorithms_available)
+
+# Getpass permet de ne pas afficher en claire le mot-de-passe saisi
+mdp = getpass.getpass("\nEntrez votre mot de passe : ")
+
+hashed_mdp = hash_mdp(mdp, hashage_type)
+print('\nLe mot-de-passe qui devrait être ' +
+      'enregistré dans la BDD est : ' + hashed_mdp)
+
+ancien_mdp = getpass.getpass('\nEntrez-à nouveau votre ' +
+                             'mot-de-passe pour vérifier : ')
+
+# Si le mot-de-passe est correct, alors on affiche un message de confirmation
+if check_mdp(hashed_mdp, ancien_mdp, hashage_type):
+    print('\nVotre mot-de-passe est correct')
+else:
+    print('\nJe suis désolé, ce n\'est pas le bon mot-de-passe')
