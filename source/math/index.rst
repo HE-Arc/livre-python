@@ -394,45 +394,6 @@ Opérations
 Les opérations sur les fractions se notent comme avec des nombres, mais le résultat sortant est en général une fraction.
 Les opérations unaires (de bases) se font comme si l'on manipulait des nombres. *Python* les reconnaîtra néanmoins comme 
 des fractions.
-
-- Addition
-
-La somme de deux fractions est une fraction :
-
-.. code-block:: pycon
-	
-	>>> from fractions import Fraction
-	>>> a=Fraction(23,42)
-	>>> b=Fraction(34,13)
-	>>> a+b
-	
-	
-- Soustraction
-	
-La différence de deux fractions est également une fraction :
-	
-.. code-block:: pycon
-	
-	>>> from fractions import Fraction
-	>>> a=Fraction(23,42)
-	>>> b=Fraction(34,13)
-	>>> a-b
-	-1129/546
-	
-- Multiplication
-	
-Le produit de deux fractions est également une fraction :
-	
-.. code-block:: pycon
-	
-	>>> from fractions import Fraction
-	>>> a=Fraction(23,42)
-	>>> b=Fraction(34,13)
-	>>> a*b
-	391/273	
-		
-- Division
-	
 Le quotient de deux fractions est également une fraction, pour autant que la 2ème fractions ne soit pas nulle :
 Il est également possible d'afficher le reste euclidien avec le pourcent %. Ce reste est une fraction.
 	
@@ -500,10 +461,7 @@ Voici le code résumé de toutes ces opérations en python :
 ----------------------
 Fractions égyptiennes
 ----------------------
-.. image:: img/egyptien.png
-   :align: right
-   :alt: Egyptien
-	
+
 Une `fraction égyptienne <http://fr.wikipedia.org/wiki/Suite_de_Farey>`_ est une somme de fractions unitaires.
 C'est-à-dire de fractions qui ont des numérateurs égaux à un et des dénominateurs entiers positifs, 
 avec ces dénominateurs tous différents.
