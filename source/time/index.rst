@@ -21,6 +21,5 @@ Time
 Avant tout il faut importer la librairie time comme ceci :
 
 .. code:: python 
-:linenos:
 import time
 
