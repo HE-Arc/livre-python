@@ -136,11 +136,13 @@ Voici un exemple d'utilisation :
 
 
 
-.. code-block:: python
-
+.. code:: python
 >>>t = (2009, 2, 17, 17, 3, 38, 1, 48, 0)  
+.. code:: python
 >>>secs = time.mktime( t )  
+.. code:: python
 >>>print "time.mktime(t) : %f" %  secs  
+.. code:: python
 >>>print "asctime(localtime(secs)): %s" % time.asctime(time.localtime(secs))  
 
 
