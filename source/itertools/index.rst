@@ -14,7 +14,7 @@ Par Johnny Da Costa [#jd]_
 
 Introduction
 ------------
-Le module itertools de Python nous propose un bon nombre de générateurs prêts à l'emploi. Qu'est-ce qu'un générateur ou un itérateur ? Que permettent les Itérateurs. Pour comprendre ça, nous allons utiliser un exemple très simple. Imaginez que vous avez une liste et que vous voulez l'afficher. La première chose qui nous vient en tête est d'utiliser une boucle.
+Le module itertools de Python nous propose un bon nombre de générateurs prêts à l'emploi. Qu'est-ce qu'un générateur ou un itérateur ? Que permettent les itérateurs. Pour comprendre ça, nous allons utiliser un exemple très simple. Imaginez que vous avez une liste et que vous voulez l'afficher. La première chose qui nous vient à l'esprit est d'utiliser une boucle.
 
 .. code-block:: pycon
 
@@ -28,11 +28,11 @@ Le module itertools de Python nous propose un bon nombre de générateurs prêts
     in
     python
 
-Derrière cette boucle **for** se cache enfet un itérateur. C'est un objet qui va être chargé de parcourir un objet conteneur, dans  notre cas notre liste. Quand Python va tomber sur la ligne **for i in liste:**, il va appeler l'itérateur de notre liste pour pouvoir la parcourir. L'itérateur se crée dans la méthode **__iter__** de notre objet liste dans notre cas. Et lui va nous retourner notre itérateur pour pouvoir parcourir notre petit liste.
+Derrière cette boucle **for** ce cache enfet un itérateur. C'est un objet qui va être chargé de parcourir un objet conteneur, dans  notre cas notre liste. Quand Python va tomber sur la ligne **for i in liste:**, il va appeler l'itérateur de notre liste pour pouvoir la parcourir. L'itérateur se crée dans la méthode **__iter__** de notre objet liste dans notre cas. Et va nous retourner notre itérateur pour pouvoir parcourir notre petite liste.
 
-A chaque itération python va appeler la méthode **__next__** de notre liste pour itérer à l'élément suivant ou s'arrêter avec l'execption **StopIteration** si le parcours à fini de parcour la liste.
+A chaque itération python va appeler la méthode **__next__** de notre liste pour itérer à l'élément suivant ou s'arrêter avec l'execption **StopIteration** si le parcours est fini.
 
-Voici un autre exemple mais avec une chaine string.
+Voici un autre exemple mais avec une chaine caractère.
 
 .. code-block:: pycon
 
@@ -166,11 +166,11 @@ Sortie :
 
 Un peu de design pattern
 -----------------------------
-Tout le monde utilise ce modèle de conception sans même le connaître vraiment. Imaginez le cas on nous voudrions itérer sur un répertoire pour obtenir son contenu ou appliquer un traitement sur chacun des fichiers. Sans  l'approche itérateur,  ils nous faudraient recupérer un flux sur le dossier courant est d'utiliser un **while** pour parcourir tout notre arborescence. Mais imaginons que notre problème change et que nous ne devons plus itérer sur un répertoire mais sur un autre type de structure... Et on est repartie pour réecrire du code fastidueux et compliqué. 
+Tout le monde utilise ce modèle de conception sans même le connaître vraiment. Imaginez le cas on nous voudrions itérer sur un répertoire pour obtenir son contenu ou appliquer un traitement sur chacun des fichiers. Sans  l'approche itérateur,  ils nous faudraient recupérer un flux sur le dossier courant est utiliser un **while** pour parcourir tout notre arborescence et vérifier le type (fichier ou dossier ?) et ensuite afficher. Mais imaginons que notre problème change et que nous ne devons plus itérer sur un répertoire mais sur un autre type de structure... Et on est repartie pour réecrire du code fastidueux et compliqué.
 
-Avec l'utilisation d'itérateur notre programme devient tout de suite plus robuste et plus élégant. Un gros avantage avec ce pattern est que si notre structure change il nous suffit d'adapter son comportement sur cette objet (`décorateur`_) pour lui indiquer comment itérer sur cette objet. Grâce à ça, nous cachons la compléxité de parcours à notre client qui ne se rend même pas compte de ce qui se passent réelement. Python implémente ce modèle de conception donc il serai dommage de ne pas en profiter !.
+Avec l'utilisation d'itérateur notre programme devient tout de suite plus robuste et plus élégant. Un gros avantage avec ce pattern est que si notre structure change, il nous suffit d'adapter son comportement sur cette objet (`décorateur`_) pour lui indiquer comment itérer sur cette objet. Grâce à ça, nous cachons la compléxité de parcours à notre client qui ne se rend même pas compte de ce qui se passent réelement. Python implémente ce modèle de conception donc il est dommage de ne pas en profiter !
 
-Voici un exemple de parcour de fichier avec notre pattern qui est bien caché derrière tous ça.
+Voici un `exemple`_ de parcour de fichier.
 
 .. code-block:: pycon
 
@@ -185,6 +185,7 @@ Conclusion
 
 Itertools est un module permettant de faire des choses simpas avec cet objet qu'est l'itérateur. Ils sont tellement utile et important que Python a dédié un module pour les opérations d'itération qui sont les itertools. L'itérateur apporte un niveau d'abstraction (couche de code en plus pour réaliser une action.) L'avantage est que l'itérateur est un objet qui coûte `peu en utilisation mémoire`_. La syntaxe est peu plus élégante car on va masquer au client la complexité de notre code. Les itérateurs nous permettent d'itérer sur toute sorte de structure de données, ce qui rend notre code plus robuste et reutilisable.
 
+
 .. [#jd] <johnny.dacosta@he-arc.ch>
 
 .. _zeste de savoir: https://zestedesavoir.com/tutoriels/954/notions-de-python-avancees/5-generators/
@@ -192,3 +193,4 @@ Itertools est un module permettant de faire des choses simpas avec cet objet qu'
 .. _peu en utilisation mémoire : http://apprendre-python.com/page-iterateurs-iterator-generateur-generator-python
 .. _itérateur : https://fr.wikipedia.org/wiki/Itérateur
 .. _décorateur : https://fr.wikipedia.org/wiki/D%C3%A9corateur_(patron_de_conception)
+.. _exemple : http://sametmax.com/appliquer-un-traitement-a-tous-les-fichiers-dun-dossier-en-python/
