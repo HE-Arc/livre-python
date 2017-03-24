@@ -44,7 +44,7 @@ l'initialisation:
 -----------------
 Afin de pouvoir utiliser le module Pygame, il va falloir d'abord l'importer, puis l'initier de la manière suivante:
 
-.. code-block:: python
+.. code-block:: pycon
   >>> import pygame
   >>> pygame.init()
 
