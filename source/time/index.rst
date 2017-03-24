@@ -20,6 +20,13 @@ Time
 ---------
 Avant tout il faut importer la librairie time comme ceci :
 
-.. code:: python 
-import time
 
+.. code:: python 
+>>> import time
+
+
+Maintenant le module Time est disponible pour l'utilisation. 
+Il permet plusieurs choses. Notamment d'avoir des informations sur l'horloge du processeur. La ligne suivante retournera la valeur de l'horloge du CPU sous forme de nombre flottant.
+
+.. code:: python 
+>>> time.clock()
