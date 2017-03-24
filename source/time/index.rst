@@ -242,6 +242,7 @@ Conclusion
 -----------
 
 Pour conclure on peut dire que Time et DateTime sont des modules tout de même assez proches dans le cadre de leur utilisation. La principale différence est que DateTime est plus orienté objet et permet de faire des manipulations plus complexes et terme de traitement et d'affichage. 
+
 Time en revanche à accès à l'horloge, aux données CPU et également à son thread parent (Time.sleep(x) et l'équivalent d'un thread.sleep(x) dans d'autre languages). 
 
 
