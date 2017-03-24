@@ -3,8 +3,9 @@
 
 class Main:
     """Class simulant une main aux cartes."""
+
     def __init__(self, *args):
-        """initialisateur"""
+        """Initialisateur."""
         self.cartes = args
 
     def ajouter(self, carte):

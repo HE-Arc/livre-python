@@ -9,6 +9,7 @@ from math import hypot
 
 class Vector:
     """Class de vecteurs."""
+    
     def __init__(self, x=0, y=0):
         """Initialisateur."""
         self.x = x
