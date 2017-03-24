@@ -226,7 +226,22 @@ Affichera :
 
 (-1, 86399, 999999)
 
+-tzinfo
+Classe abstraite utilisée par datetime et time pour fournir une notion personnalisable de réglage de l'heure (par exemple, pour l'heure d'été).
 
+
+-timezone
+Classe qui implémente tzinfo
+
+
+La méthode strftime(format) converti une date en string et permet le formatage de celle-ci. Strptime(format) permet,quand à elle, de convertir en datetime.
+
+
+-----------
+Conclusion
+-----------
+
+Pour conclure on peut dire que Time et DateTime sont des modules tout de même assez proches dans le cadre de leur utilisation. La principale différence est que DateTime est un module plus orienté objet et permet de faire des manipulations plus complexes et terme de traitement et d'affichage.
 
 
 
