@@ -137,7 +137,7 @@ Voici un exemple d'utilisation :
 
 
 .. code-block:: python
-:emphasize-lines: 3,5
+
 >>>t = (2009, 2, 17, 17, 3, 38, 1, 48, 0)
 >>>secs = time.mktime( t )
 >>>print "time.mktime(t) : %f" %  secs
