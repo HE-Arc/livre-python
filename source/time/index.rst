@@ -109,3 +109,23 @@ Index-------Attribute----------------Values
 N/A ----------> tm_zone ----------> abbreviation of timezone name  
 
 N/A ----------> tm_gmtoff ----------> offset east of UTC in seconds  
+
+
+Contrairement au langage C, la valeur du mois se donne en valeur entre 1 et 12 alors qu'en C c'est entre 0 et 11.
+
+La fonction Time.localtime([secs]) retourne la même chose que Time.ctime([secs]) mais cette fois ci au format struct_time.
+
+
+.. code:: python 
+>>> time.localtime()
+
+
+Affichera : time.struct_time(tm_year=2017, tm_mon=3, tm_mday=24, tm_hour=13, tm_min=30, tm_sec=4, tm_wday=4, tm_yday=83, tm_isdst=0)
+
+
+.. code:: python 
+>>> time.localtime(400000000)
+
+
+Affichera : time.struct_time(tm_year=1982, tm_mon=9, tm_mday=4, tm_hour=17, tm_min=6, tm_sec=40, tm_wday=5, tm_yday=247, tm_isdst=1)
+
