@@ -3,6 +3,7 @@
 
 from math import hypot
 
+
 '''Mieux vaut trop que pas assez.'''
 class Vector:
     '''Class de vecteurs.'''
