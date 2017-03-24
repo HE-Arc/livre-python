@@ -125,15 +125,17 @@ Prenons comme exemple une classe ``Garage`` qui contient une liste de ``Voiture`
 
       def __getitem__(self, index):
          """ Trouve la voiture à l'index 'index'"""
-         return self.voitures.__getitem__(index)
+         return self.voitures[index]
 
       def __len__(self):
          """Retourne le nombre de voitures"""
-         return self.voitures.__len__()
+         return len(self.voitures)
 
       def afficher(self):
+         """Affiche toutes les voitures du garage."""
          for v in self.voitures :
             v.afficher()
+
 
 Lors de la création d'un garage, on vérifie que les éléments de la liste soient de type ``Voiture``.
 Si ce n'est pas le cas, on lève une erreur.
@@ -172,14 +174,13 @@ méthodes semblables à l'utilisation d'une ``list``.
 
 .. code-block:: pycon
 
-   >>> g.__getitem__(0).afficher()
+   >>> g[0].afficher()
    BMW, Noir
-   >>> g.__len__()
+   >>> len(g)
    3
 
 
 Conclusion
 ----------
-Les classes abstraite en python permettent avant tout de créer une architecture logicielle convenable.
-De plus, python possède déjà des classes abstraites qu'il est possible d'implémenter.
-Cette option peut s'apparenter aux ``Interface`` Java.
+Les classes abstraite en python permettent de créer nos propres structures de données se
+comportant comme les classes fournies (built-in).
