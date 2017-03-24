@@ -91,6 +91,7 @@ opener: On peut spécifier un opener à utiliser.
 
 Méthode de io.IOBase
 --------------------
+
 Quelques méthodes parmi les plus utiles de :py:mod:`io` :
 
     -  ``read(n)``: Lis le fichier jusqu'à avoir n bit(mode binaire) ou n
