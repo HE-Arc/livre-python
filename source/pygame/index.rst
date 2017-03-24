@@ -61,6 +61,7 @@ c’est dans cette partie que l’on va initialiser la fenêtre, ainsi que tout 
 par exemple, pour afficher une fenêtre:
 
 .. code-block:: pycon
+
   >>> fenetre = pygame.display.set_mode((200, 200))
 
 Dans cet exemple, on appelle la fonction :py:meth: set_mode du module display. Ce que l’on obtient en retour, c’est un objet de la classe Surface qui est défini par Pygame.
