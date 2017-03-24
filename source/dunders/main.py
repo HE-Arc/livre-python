@@ -1,3 +1,4 @@
+'''Travis est trop compliqué.'''
 class Main(object):
     '''Class simulant une main aux cartes.'''
     def __init__(self, *args):

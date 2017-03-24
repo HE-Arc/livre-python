@@ -1,3 +1,4 @@
+'''Travis est très très compliqué'''
 class SomeClass(object):
     '''Class d'exemple.'''
     grammar = {
