@@ -1,5 +1,6 @@
 ﻿# source : PythonProgramming.net
 
+""" Plot 3D."""
 from mpl_toolkits.mplot3d import axes3d
 import matplotlib.pyplot as plt
 import numpy as np

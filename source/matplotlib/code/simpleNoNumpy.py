@@ -1,7 +1,6 @@
 ﻿# Florian Fasmeyer 23.03.2017
-# La statistique :-)
 
-
+""" De la statistique fait rapidement :-)."""
 import matplotlib.mlab as mlab
 import matplotlib.pyplot as plt
 

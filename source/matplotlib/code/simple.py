@@ -1,3 +1,4 @@
+""" L'exemple le plus simple du monde."""
 import numpy as np
 import matplotlib.pyplot as plt
 

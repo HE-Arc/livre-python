@@ -1,6 +1,7 @@
 ﻿# Made by Florian Fasmeyer 27.02.2017
 # Fréquences cumulés & médiane
 
+""" Un exercice fait il y a fort longtemps."""
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -20,7 +21,7 @@ def f(ni, n):  # fréquence
     for i in ni:
         freq = (i / n)
         r.append(freq)
-    return(r)
+    return r
 
 
 # Variables
