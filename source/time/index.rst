@@ -177,11 +177,41 @@ Ce module, plus orienté objet, possède plusieurs types :
 - date
 Représente une date du calendrier Grégorien. Ses attributs sont year, month et day
 
+.. code:: python
+>>> d = datetime.date.today()
+>>> d.day
+24
+>>> d.month
+3
+>>> d.year
+2017
+
+
+Ainsi on voit qu'on peut afficher les attribut dans l'ordre qu'on veut et ou l'on veut
+
+
 - time
 Représente un temps. Ses attributs sont hour, minute, second, microsecond et tzinfo.
 
+.. code:: python
+>>> time(hour=12, minute=34, second=56, microsecond=123456).isoformat(timespec='minutes')
+'12:34'
+>>> dt = time(hour=12, minute=34, second=56, microsecond=0)
+>>> dt.isoformat(timespec='microseconds')
+'12:34:56.000000'
+>>> dt.isoformat(timespec='auto')
+'12:34:56'
+
 - datetime
 Une combinaison d'une date et d'un temps. Ses attributs sont year, month, day, hour, minute, second, microsecond et tzinfo.
+
+.. code:: python
+>>> datetime.now().isoformat(timespec='minutes')
+'2002-12-25T00:00'
+>>> dt = datetime(2015, 1, 1, 12, 30, 59, 0)
+>>> dt.isoformat(timespec='microseconds')
+'2015-01-01T12:30:59.000000'
+
 
 - timedelta
 Une durée exprimant la différence entre deux date, time ou datetime.
