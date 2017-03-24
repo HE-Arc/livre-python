@@ -1,6 +1,5 @@
 # source: stackoverflow
-
-""" exemple subplot."""
+"""exemple subplot."""
 import matplotlib.pyplot as plt
 fig = plt.figure()
 

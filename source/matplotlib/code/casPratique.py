@@ -1,12 +1,12 @@
 ﻿# Made by Florian Fasmeyer 27.02.2017
 # Fréquences cumulés & médiane
-
-""" Un exercice fait il y a fort longtemps."""
+"""Un exercice fait il y a fort longtemps."""
 import numpy as np
 import matplotlib.pyplot as plt
 
 
-def cf(ni, n):  # fréquence cumulée
+def cf(ni, n):
+    """cumule une list de fréquences par addition."""
     r = []
     cumulFreq = 0
     for i in ni:
@@ -15,7 +15,8 @@ def cf(ni, n):  # fréquence cumulée
     return r
 
 
-def f(ni, n):  # fréquence
+def f(ni, n):
+    """prend une liste d'occurence et calcule la fréquence."""
     r = []
     freq = 0
     for i in ni:

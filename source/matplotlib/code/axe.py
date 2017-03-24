@@ -1,6 +1,5 @@
 ﻿# Florian Fasmeyer 22.03.2017
-
-""" plot un axe tout mignion."""
+"""plot un axe tout mignion."""
 import numpy as np
 import matplotlib.pyplot as plt
 
