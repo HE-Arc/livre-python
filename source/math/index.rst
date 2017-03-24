@@ -10,11 +10,11 @@
 
 Par Gabriel Griesser [#gg]_
 
-=================
-    Introduction
-=================
-Le principe du module *MATH* est d'effectuer diverses opérations mathématiques avec Python. 
-Dans ce chapitre, nous verrons les nombres et les fractions en Python en utilisant ce module.
+   Introduction
+----------------
+Le principe du module :py:mod:`math` est d'effectuer diverses opérations mathématiques avec Python. 
+Dans ce chapitre, nous verrons les principales opérations possibles en utilisant le module *MATH*
+ et les fractions en Python en utilisant ce module.
 
 Les nombres entiers sont relativement simple a utiliser en Python. 
 Ce langage devine facilement si un nombre est entier ou pas grâce à la virgule (ou point décimal dans *Python*).
@@ -35,8 +35,7 @@ Avant tout, il faut savoir que les nombres sont déclarés comme des variables e
 sont reconnu à l'initialisation de la variable.
 Python comporte cinq catégories de nombres :
 
- * `int` pour les nombres entiers.
- * `long` pour les grands entiers.
+ * `int` (ou long) pour les nombres entiers, les *int* et les *long* on été unifiés récemment.
  * `fraction` pour les fractions (quotients d'entiers par des entiers).
  * `decimal` et `float` pour les réels (ou *nombres décimaux*).
  * `complex` pour les nombres complexes.
@@ -62,7 +61,87 @@ et *c* qui peut être entier même s'il est obtenu à partir de *b*.
 *c* sera converti en entier grâce à *int()* qui s'occupera de faire la conversion d'un nombre décimal en un entier.
 Ici, *c* vaut 3.
 
-On peut également utiliser diverses fonctions de la librairie *MATH* comme les `racines` ou les `puissances`.
+En Python, la priorité des opérations s'effectue comme en algère. On effectue dans l'ordre
+1. Les parenthèses
+2. Les fonctions (racines, puissances)
+3. Les multiplications et divisions
+3. Les additions et soustractions.
+	
+Outre les additions, soustractions et multiplication ``print (a+b), print(a-b), print(a*b)``,
+la division se présente sous deux formes : `Le quotient euclidien` qui est un entier, et le `quotient exact`
+qui est une fraction, donc un réel pour Python.
+Pour choisir quelle forme utiliser, il suffit de dédoubler le *slash* de la division. 
+Ici, le premier *print* affichera ``1.5`` alors que le dédoublement du *slash* changera la réponse en ``1``.
+Cette méthode est disponible que depuis *Python 3*, en *Python 2.X*, il était nécessaire d'écrire
+``float(a/b)`` afin d'avoir la valeur en réel.
+	
+.. code-block:: pycon
+
+	>>> a=3
+	>>> b=2	
+	>>> a/b
+	1.5
+	>>> a//b
+	1
+	
+	
+Fonctions de nombres
+--------------------
+
+La fonction ``fabs(x)`` retourne la valeur absolue de *x*.
+
+.. code-block:: pycon
+
+	>>> from math import fabs
+	>>> fabs(10)
+	10.0
+	>>> fabs(-10)
+	10.0
+	
+La fonction ``factorial(x)`` retourne *x* factoriel. Si *x* n'est pas un int ou est négatif, la fonction retourne 
+une erreur de type *ValueError*.
+
+.. code-block:: pycon
+
+	>>> from math import factorial
+	>>> factorial(4)
+	24
+
+La fonction ``frexp(x)`` retourne la mantisse et l'exposant de *x* comme la paire *(m, e)*
+*m* est un float et *e* est un int. Si *x* est nul, la fonction renvoie ``(0.0, 0)``.
+
+.. code-block:: pycon
+
+	>>> from math import frexp
+	>>> frexp(3)
+	(0.75, 2)
+	
+La fonction ``gcd(a, b)`` retourne la plus grand diviseur commun des int *a* et *b*.
+	
+	.. code-block:: pycon
+
+	>>> from math import gcd
+	>>> gcd(24, 6)
+	6
+	
+La fonction ``isfinite(x)`` retourne **TRUE** si *x* n'est ni un nombre infini, ni un NaN (*not a number*). 
+Renvoie **FALSE** sinon.
+
+	.. code-block:: pycon
+
+	>>> from math import isfinite
+	>>> isfinite(2)
+	True
+	>>> isfinite(0.0)
+	True
+	>>> isfinite(0/1)
+	True
+	
+	
+Fonctions logarithmiques et puissances
+--------------------------------------
+
+On peut également utiliser diverses fonctions du module :py:mod:`math` comme les `racines` ou les `puissances`.
 Ici, *a* est la racine carrée de 100, la commande ``a.is_integer()`` 
 renvoi ``true`` si le nombre est un *int*, ``false`` sinon.
 *b* est la puissance cubique de *a*, c'est à dire 1'000.
@@ -71,84 +150,144 @@ Dans cet exemple, comme aucune des variables ne possède de virgule, Python les 
 
 .. code-block:: pycon
 
-	>>> from math import *
+	>>> from math import sqrt, pow
 	>>> a=sqrt(100)
-	>>> print(a)
+	>>> a
 	10.0
-	>>> print(a.is_integer())
+	>>> a.is_integer()
 	True
 	>>>	b=pow(a,3)
-	>>>	print(b.is_integer())
+	>>>	b.is_integer()
 	True
-	>>> print(b)
+	>>> b
 	1000.0
-	
-Les opération comme l'addition, la soustraction et la multiplication sont également faciles et rapides à utiliser.
-Notons que pour ce genre d'opération, Python ne demande pas l'importation du module *MATH* car ce sont des opérations
-standards.
+
+La fonction ``log(x[,*base*])`` retourne le logarithme naturel de *x* (en base *e*).
+Avec deux arguments, cette fonction retourne le logerithme de *x* dans la base donnée.
+Il est possible d'utiliser les fonction ``log2(x)`` ou ``log10(x)`` pour retourner le logarithme en base 2 ou 10.
 
 .. code-block:: pycon
 
-	>>> a=5
-	>>> b=-8
-	>>> print(a+b)
-	-3
-	>>> print(a-b)
-	13
-	>>> print(a*b)
-	-40
+	>>> from math import *
+	>>> log(4)
+	1.386294361119
+	>>> log(4, 2)
+	2.0
+	>>> log2(8)
+	3.0
+	>>> log10(100)
+	2.0
+
 	
-La division se présente sous deux formes : `Le quotient euclidien` qui est un entier, et le `quotient exact`
-qui est une fraction, donc un réel pour Python.
-Pour choisir quelle forme utiliser, il suffit de dédoubler le *slash* de la division. 
-Ici, le premier *print* affichera ``1.5`` alors que le dédoublement du *slash* changera la réponse en ``1``.
-	
+Angles, fonctions trigonométriques et *PI*
+-------------------------------------------
+
+La conversions d'angle est également une propriété de notre module :
+``degrees(x)`` et ``radians(x)`` permettent la conversion de l'angle *x* en degré ou en radians selon la fonction.
+
 .. code-block:: pycon
 
-	>>> a=3
-	>>> b=2	
-	>>> print(a/b)
-	1.5
-	>>> print(a//b)
-	1
+	>>> from math import *
+	>>> x=radians(180)
+	>>> print(x)
+	3.141592653589793
+	>>> y=degrees(x)
+	>>> print(y)
+	180.0
+	
 
-En Python, la priorité des opérations s'effectue comme en algère. On effectue dans l'ordre
-1. Les parenthèses
-2. Les fonctions (racines, puissances)
-3. Les multiplications et divisions
-3. Les additions et soustractions.
+Qui dit conversion d'angle dit aussi fonctions trigonométriques.
+Ces dernières, *sin, cos* et *tan*, font également parties du module *math*.
+Elles s'expriment toutes sous la forme ``sin(x), cos(x), tan(x)`` et renvoient le sinus, cosinus et tangante de *x* en radians.
 
+Les fonctions hyperboliques sont aussi présentes en rajoutant la lettre ``h`` à la suite des fonctions trigonométriques.
+À noter que la différence du type d'angle (degré ou radian) se montre très nettement au dernier *print*.
 
-==========
-Complexes
-==========
-Pour utiliser les nombres complexes en *Python*, il suffit d'écrite ``complex(x,y)``.
+.. code-block:: pycon
+
+	>>> from math import *
+	>>> x=radians(180)
+	>>> y=degrees(x)
+	>>> sin(y)
+	-0.8011526357338304
+	>>> cos(y)
+	-0.5984600690578581
+	>>> tan(y)
+	1.3386902103511544
+	>>> tanh(x)
+	0.99627207622075
+	>>> cosh(x)
+	11.591953275521519
+	>>> sinh(y)
+	7.446921003909191e+77
+	
+
+Les fonctions ``asin(x), acos(x), atan(x)``, qui correspondent aux *arc sin, arc cos*, et *arc tan* peuvent être utilisées.
+Attention cependant aux limites, *x* doit être compris entre -1 et 1.
+
+.. code-block:: pycon
+	
+	>>> from math import *
+	>>> acos(1)
+	0.0
+	>>> acos(1.9)
+	Traceback (most recent call last):
+	  File "<stdin>", line 1, in <module>
+	ValueError: math domain error
+	>>> asin(0.5)
+	0.5235987755982989
+	>>> atan(0.333333)
+	0.3217502543966122
+	
+Le nombre très connu, *pi* fait également partie de notre module, comme bien d'autres constantes (*e*, *tau*, etc.).
+Pour l'utiliser, il suffit simplement d'écrire ``pi`` en commande. Cela va de même pour les autres constantes.
+
+.. code-block:: pycon
+	
+	>>> from math import *
+	>>> pi
+	3.141592653589793
+	>>> cos(pi)
+	-1.0
+	>>> tan(pi/4)
+	0.9999999999999999
+	
+	
+Nombres complexes
+------------------
+Pour utiliser les nombres complexes en *Python*, il suffit d'écrire ``complex(x,y)``.
 Rappelons que les physiciens  notant *j* le nombre complexe dont le carré vaut -1, *Python* suit ce choix.
 
 
 .. code-block:: pycon
 
-	>>> z=complex(4,3)
-	>>> print(z)
-	(4+3j)
+	>>> 4 + 3j
+	(4 + 3j)
+	>>> complex(4, 3)
+	(4 + 3j)
+	
 	
 Opérations
 ----------
 Les quatre opérations se notent respectivement +, -, * et /, et donnent toujours un complexe, 
-même si celui-ci est réel (exemple de la soustraction ci-dessous) :
+même si celui-ci est réel (exemple de la soustraction ci-dessous).
+Bien entendu, il est possible de combiner les nombres complexes aux autres types de nombres :
 
 .. code-block:: pycon
 
 	>>> a=complex(2,3)
 	>>> z=complex(4,3)
-	>>> print(a+z)
+	>>> a+z
 	(6+6j)
-	>>> print(a-z)
+	>>> a-z
 	(-2+0j)
-	>>> print(a*z)
+	>>> a*z
 	(-1+18j)
-	>>> print(a/z)
+	>>> a/z
 	(0.68+0.24j)
+	>>> a+3
+	(5+3j)
+
 	
 Propriétés
 ----------
@@ -157,9 +296,9 @@ Les parties réelle et imaginaire d'un complexe sont des propriétés de l'objet
 .. code-block:: pycon
 
 	>>> z=complex(4,3)
-	>>> print(z.real)
+	>>> z.real
 	4.0
-	>>> print(z.imag)
+	>>> z.imag
 	3.0
 
 Pour le conjugé, c'est la propriétés ``conjugate()`` que nous appelerons :
@@ -167,29 +306,33 @@ Pour le conjugé, c'est la propriétés ``conjugate()`` que nous appelerons :
 .. code-block:: pycon
 
 	>>> z=complex(4,3)
-	>>> print(z.conjugate())
+	>>> z.conjugate()
 	(4-3j)
 	
 Le module et l'arguments, qui sont 2 notions biens propres aux nombres complexes, peuvent être 
 obtenus avec ``abs()`` et ``phase()`` 
-**ATTENTION**, pour la propriété *phase()*, il faut importer le module :py:mod:`cmath` 
+
+.. warning::
+foo bar pour la propriété *phase()*, il faut importer le module :py:mod:`cmath` 
 
 .. code-block:: pycon
 
 	>>> from cmath import *
 	>>> z=complex(4,3)
-	>>> print(abs(z))
+	>>> abs(z)
 	5.0
-	>>> print(phase(z))
+	>>> phase(z)
 	0.6435011087932
 
 Si on intègre le tout en un fichier, voilà ce que ça donne :
 
 .. literalinclude:: ./examples/Complexes.py
 	
+	
 ==========
 Fractions
 ==========
+
 L'écriture de nombres non entiers sous forme de fractions est un concept fondamental des mathématiques.
 Chaque fois que le dénominateur n'est pas une puissance de  10, on utilise une écriture fractionnaire.
 Par exemple : Si l'on souhaite afficher ``9 heures 17``, cela correspond à ``9 + 17/60 = 493/60``;
@@ -210,7 +353,7 @@ Comme une fraction est un quotient, on ne peut pas diviser par 0.
 
 	>>> from fractions import Fraction
 	>>> a=Fraction(24,10)
-	>>> print(a)
+	>>> a
 	12/5
 	
 Une fois la fraction calculée, on peut afficher son numérateur et son dénominateur avec ``a.numerator`` et ``a.denominator``.
@@ -220,27 +363,19 @@ Bien entendu, le numérateur de ``24/10`` n'est pas 24, ce dernier est réduit. 
 
 	>>> from fractions import Fraction
 	>>> a=Fraction(24,10)
-	>>> print(a.numerator)
+	>>> a.numerator
 	12
-	>>> print(a.denominator)
+	>>> a.denominator
 	5
 	
-Pour obtenir le résultat de la fraction en nombre réel, nous pouvons additionner *a* à 0.0 
-
-.. code-block:: pycon
-	
-	>>> from fractions import Fraction
-	>>> a=Fraction(24,10)
-	>>> print(a+0.0)
-	2.4
-
+Pour obtenir le résultat de la fraction en nombre réel, nous pouvons additionner *a* à 0.0 ``print(a+0.0)``.
 Cette méthode n'étant vraiment pas jolie, on préfère ajouter ``float()`` à l'affichage comme cela
 
 .. code-block:: pycon
 	
 	>>> from fractions import Fraction
 	>>> a=Fraction(24,10)
-	>>> print(float(a))
+	>>> float(a)
 	2.4
 		
 
@@ -259,7 +394,7 @@ La somme de deux fractions est une fraction :
 	>>> from fractions import Fraction
 	>>> a=Fraction(23,42)
 	>>> b=Fraction(34,13)
-	>>> print(a+b)
+	>>> a+b
 	
 	
 - Soustraction
@@ -271,7 +406,7 @@ La différence de deux fractions est également une fraction :
 	>>> from fractions import Fraction
 	>>> a=Fraction(23,42)
 	>>> b=Fraction(34,13)
-	>>> print(a-b)
+	>>> a-b
 	-1129/546
 	
 - Multiplication
@@ -283,7 +418,7 @@ Le produit de deux fractions est également une fraction :
 	>>> from fractions import Fraction
 	>>> a=Fraction(23,42)
 	>>> b=Fraction(34,13)
-	>>> print(a*b)
+	>>> a*b
 	391/273	
 		
 - Division
@@ -296,9 +431,9 @@ Il est également possible d'afficher le reste euclidien avec le pourcent %. Ce 
 	>>> from fractions import Fraction
 	>>> a=Fraction(23,42)
 	>>> b=Fraction(34,13)
-	>>> print(a/b)
+	>>> a/b
 	299/1428
-	>>> print(a%b)
+	>>> a%b
 	23/42
 	
 - Puissance
@@ -309,7 +444,7 @@ L'exposant d'une fraction est une fraction, pour autant que l'exposant est un en
 	
 	>>> from fractions import Fraction
 	>>> a=Fraction(23,42)
-	>>> print(a**3)
+	>>> a**3
 	12167/74088
 	>>> print(a**(-3))
 	74088/12167
@@ -394,10 +529,13 @@ pour que celle-ci soit complète.
    Conclusion
 ================
 
-Le calcul mathématique peut largement se faire en *Python*. À savoir que ce dernier reconnaît automatiquement
-le type de la variable selon si cette dernière possède une virgule ou pas. Il est aisé de demander à *Python*
+Le calcul mathématique est facile à réaliser en *Python*. À savoir que ce dernier reconnaît automatiquement
+le type de la variable, si cette dernière possède une virgule ou pas. Il est aisé de demander à *Python*
 de nous indiquer le type d'une variable. Toutes les opérations mathématiques sur les nombres se font à l'affichage.
 Au moment du ``print()``, on spécifie quelques paramètres afin d'avoir la sortie voulue.
+
+La librairie :py:mod:`math` propose un vaste choix de fonctions. Celles montrées dans ce chapitres sont les plus courantes,
+il en existent encore bien d'autres. 
 *Python* reconnaît et manipule également les nombres complexes. Il suffit de rentrer ``complex()`` afin 
 d'utiliser ces derniers. Bien entendu, toutes les manipulations propres aux nombres complexes 
 (réel, imaginaire, module, argument) sont possibles.
