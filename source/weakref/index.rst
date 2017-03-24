@@ -23,11 +23,11 @@ Référence faible
 """"""""""""""""
 
 Les références failbes (weakref) permettent de créer des références sur des objets sans augmenté le compteur du garbage collector.
-Le module :py:mod:`weakref` permet de créer et utilisé les weak références sur les objets. Un des principal utilité de ce module est pour les caches et le mapping de gros objet en mémoire.
+Le module :py:mod:`weakref` permet de créer et utilisé les weak références sur les objets. Une des principal utilité de ce module est pour les caches et le mapping de gros objet en mémoire.
 
-**weakref.ref()**
+:py:class:`~weakref.ref`:
     Retourne une weak référence de l'objet;
-**weakref.proxy()**
+:py:func:`~weakref.proxy`:
     Retourne une weak référence de l'objet, mais génère une erreur si l'objet qui essaie d'être atteint n'exite pas;
 
 .. warning::
@@ -89,7 +89,7 @@ Le module :py:mod:`weakref` est obligatoire pour les applications on l'on a beso
 Weakref est un module puisant, les exemples présentés sur cette page sont très basique et sont desitné a comprendre le module sans rentré en profondeur dans les détails.
 Pour approfondir vos connaissance sur se sujet vous pouvez vous rendre sur la doc officiel : :py:mod:`weakref`.
 
-    *Les nazis robots n’ont ni choix à faire ni décisions à prendre.*
+    *Les robots n’ont ni choix à faire ni décisions à prendre.*
 
     -- Travis fan club
 
