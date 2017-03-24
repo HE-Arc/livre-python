@@ -106,7 +106,7 @@ Il est possible de filtrer les fichiers sur lesquelles les events sont intercept
 ce qui est utile si l'on souhaite (par exemple) traiter que certain type de fichiers (par ex. les .mp3).
 
 Pour ce faire, il faut utiliser une autre classe de base pour la classe de traitement.
-Il existe 2 autre classes qui dérive :py:class:`watchdog.events.FileSystemEventHandler` voici la liste complète :
+Deux classes dérivant de :py:class:`watchdog.events.FileSystemEventHandler` sont fournies (liste dans le tableau ci-dessous).
 
 ===============================   ===========================================
 Nom                               Utilisation
@@ -116,7 +116,7 @@ Nom                               Utilisation
 ``RegexMatchingEventHandler``     Handler utilisant un regex pour filtrer
 ===============================   ===========================================
 
-L'utilisation de la version avec les patterns étant la même que celle avec les regex,
+L'utilisation de la version avec les patterns étant la même que celle avec les regexes,
 nous utiliserons la version patterns dans la suite.
 Par exemple si l'on souhaite reprendre le code du programme d'audit fait plus haut mais,
 qui s'occupe que des fichiers de musique (.mp3, .flac, .wav).
@@ -155,8 +155,8 @@ Les autres arguments possible sont dans l'ordre :
 ========================================  ====================  ================================================================================
 Noms                                      Default               Utilisation
 ========================================  ====================  ================================================================================
-``patterns``/``regexes``                  ``None``/``[".*"]``   Spécifie les patterns (respectivement regex) à traiter
-``ignore_patterns`` / ``ignore_regexes``  ``None``/``[]``       Spécifie les patterns (respectivement regex) à ignorer
+``patterns``/``regexes``                  ``None``/``[".*"]``   Spécifie les patterns (respectivement regexes) à traiter
+``ignore_patterns`` / ``ignore_regexes``  ``None``/``[]``       Spécifie les patterns (respectivement regexes) à ignorer
 ``ignore_directories``                    ``False``             Si mit à ``True`` ignore les dossiers
 ``case_sensitive``                        ``False``             Si mit à ``True`` rend le patterns (respectivement regex) sensible à la casse
 ========================================  ====================  ================================================================================
