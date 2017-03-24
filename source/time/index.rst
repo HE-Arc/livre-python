@@ -175,7 +175,7 @@ Datetime permet également de manipuler des dates et des temps. Il faut aussi im
 Ce module, plus orienté objet, possède plusieurs types :
 
 - date
-Représente une date du calendrier Grégorien. Ses attributs sont year, month et day
+Représente une date du calendrier Grégorien. Ses attributs sont: year, month et day
 
 .. code:: python
 >>> d = datetime.date.today()
@@ -187,11 +187,11 @@ Représente une date du calendrier Grégorien. Ses attributs sont year, month et
 2017
 
 
-Ainsi on voit qu'on peut afficher les attribut dans l'ordre qu'on veut et ou l'on veut
+Ainsi on voit qu'on peut afficher les attributs dans l'ordre qu'on veut et ou l'on veut
 
 
 - time
-Représente un temps. Ses attributs sont hour, minute, second, microsecond et tzinfo.
+Représente un temps. Ses attributs sont: hour, minute, second, microsecond et tzinfo.
 
 .. code:: python
 >>> time(hour=12, minute=34, second=56, microsecond=123456).isoformat(timespec='minutes')
@@ -203,7 +203,7 @@ Représente un temps. Ses attributs sont hour, minute, second, microsecond et tz
 '12:34:56'
 
 - datetime
-Une combinaison d'une date et d'un temps. Ses attributs sont year, month, day, hour, minute, second, microsecond et tzinfo.
+Une combinaison d'une date et d'un temps. Ses attributs sont: year, month, day, hour, minute, second, microsecond et tzinfo.
 
 .. code:: python
 >>> datetime.now().isoformat(timespec='minutes')
