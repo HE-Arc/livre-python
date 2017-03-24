@@ -55,10 +55,6 @@ La bibliothèque ``re``
 
 Afin de mettre les différentes expressions en place, la bibliothèque :py:mod:`re` nous est proposé avec ces différentes fonctions qui permettra essentiellement de rechercher / modifier / supprimer des expressions.
 
-.. code:: pycon
-
-	>>> import re
-
 re.match()
 ----------
 
@@ -72,7 +68,8 @@ La fonction :py:func:`~re.match()` va permettre de vérifier la correspondance a
 - ``string`` est la chaîne d'origine.
 
 .. code:: pycon
-
+	
+	>>> import re
 	>>> re.match(r"B(.)?NJO(.)?R", "BONJOUR")
 	<_sre.SRE_Match object; span=(0, 7), match='BONJOUR'>
 
