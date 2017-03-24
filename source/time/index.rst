@@ -30,3 +30,9 @@ Il permet plusieurs choses. Notamment d'avoir des informations sur l'horloge du 
 
 .. code:: python 
 >>> time.clock()
+
+
+D'autres fonction comme clock_gettres(clk_id), clock_gettime(clk_id), clock_settime(clk_id, time) permettent d'obtenir la résolution d'une horloge spécifique, le temps ou de setter le temps de cette horloge avec 'clk_id' l'id de l'horloge spécifique.
+
+La commande Time.time() affichera le nombre de seconde écoulées depuis la date appellée "L'Epoch Unix" qui est le 1er Janvier 1970 à 00:00. 
+Pourquoi cette date ? L'année 1970 a été considérée comme un bon départ, compte tenu de l'essor qu'a pris l'informatique à partir de cette époque. D'autre part, un ordinateur est inévitablement limité quand il traite des entiers ; dans les langages de l'époque, il fallait tenir compte de ce fait tout simple : on ne pouvait pas compter un nombre de secondes trop important. La date de l'Epoch ne pouvait donc pas être trop reculée dans le temps. (Source : openclassromm)
