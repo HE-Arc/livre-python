@@ -163,3 +163,18 @@ Il s'agit de Time.sleep(secs) avec secs = le nombre de secondes à attendre. Il 
 En c# par exemple cette ligne bloque le thread en question pendant une seconde. Ici en python il le bloque bien pendant 1000 secondes !!
 
 
+---------
+Datetime
+---------
+Il faut également importer la librairie datetime :
+
+.. code:: python
+>>>import datetime
+
+
+
+
+
+
+
+
