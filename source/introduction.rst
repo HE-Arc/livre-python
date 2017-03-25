@@ -59,7 +59,11 @@ Traitement des données
 Autres
 ------
 
-* :ref:`hug-tutorial`
+.. toctree::
+    :maxdepth: 1
+
+    hug/index
+
 * :ref:`invoke-tutorial`
 * :ref:`matplotlib-tutorial`
 * :ref:`pycrypto-tutorial`

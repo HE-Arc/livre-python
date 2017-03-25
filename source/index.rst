@@ -34,7 +34,6 @@ Table des matières
    weakref/index.rst
    licence.rst
    colorama/index.rst
-   hug/index.rst
    invoke/index.rst
    matplotlib/index.rst
    pillow/index.rst
