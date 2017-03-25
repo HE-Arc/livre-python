@@ -1,6 +1,5 @@
 """Module de taches pour l'automatisation de la creation de rst."""
 
-
 from invoke import run, task
 
 # html start

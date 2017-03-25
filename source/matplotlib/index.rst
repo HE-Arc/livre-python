@@ -1,90 +1,85 @@
 ﻿.. _matplotlib-tutorial:
 
 
-==========
-matplotlib
-==========
+==============
+``matplotlib``
+==============
 
 Par Florian Fasmeyer [#ff]_
 
 .. image:: ./sources/matplotlib.png
-	:alt: matPlotLib membranePlot
+    :alt: matPlotLib membranePlot
 
 
 Introduction
 ------------
 
-Matplotlib_ est une librairie python 2D capable de produire des graphes de qualité. 
-Matplotlib_ peut être utilisé dans des scripts Python, le shell Python et IPython, 
-le notebook jupyter, des serveurs d'application web et dans quatre outils d'interface graphique.
- 
+matplotlib_ est une bibliothèque Python capable de produire des graphes de qualité.
+matplotlib_ peut être utilisé dans des scripts Python, le shell Python et IPython_,
+le notebook Jupyter_, des serveurs d'application web et dans quatre outils d'interface graphique.
+
 
 .. image:: ./sources/surface3d_frontpage.png
    :alt: matPlotLib membranePlot
- 
+
 .. image:: ./sources/contour_frontpage.png
    :alt: matPlotLib contourPlot
 
-   
+
 .. image:: ./sources/membrane_frontpage.png
    :alt: matPlotLib membranePlot
- 
+
 .. image:: ./sources/histogram_frontpage.png
    :alt: matPlotLib histogramPlot
-  
+
 Matplotlib essai de rendre les tâches simples 'simples' et de rendre possible les choses compliqués.
 Vous pouvez générer des graphes, histogrames, des spectres_ de puissance (lié à la transformée de Fourier),
 des graphiques à bares, des graphiques d'erreur, des nuages de dispersion_, etc... en quelques lignes de code.
-  
-Pour des graphiques simples, le module pyplot fournit une interface comme MATLAB spécialement adapté avec IPython.
-  
-Installation
-------------
 
-Rendez-vous sur le site officiel dans la section installation_. :-)
-
-Documentation
--------------
-
-Vous trouverez la documentation complète sur le site_ officiel dont ce tutoriel est inspiré/traduit.
-
+Pour des graphiques simples, le module :py:mod:`matplotlib.pyplot` fournit une
+interface comme MATLAB spécialement adaptée avec IPython_.
 
 Exemple
 -------
 
-Matplotlib_ est généralement utilisé avec numpy_, permettant l'usage de fonctions utiles
-comme arange_ qui dans notre cas est utilisé pour la création de valeures à intervals réguliers
-de 0 à 5. 
+Matplotlib_ est généralement utilisé avec :py:mod:`numpy`, permettant l'usage
+de fonctions utiles comme :py:func:`~numpy.arange` qui dans notre cas est
+utilisé pour la création de valeures à intervals réguliers de 0 à 5.
 
-Matplotlib_ dispose de plus d'une centaine d'exemples (:ref:`examples-index`) pour tous les cas possibles et imaginables.
+Matplotlib_ dispose de plus d'une centaine d'exemples (:ref:`examples-index`)
+pour tous les cas possibles et imaginables.
+
 Il vous est conseilé de vous rendre sur le site officiel et de jeter un  œil à la galerie_.
 
-
-`Cas simple`
+Cas simple
+^^^^^^^^^^
 
 .. image:: ./sources/exempleImportant.png
    :alt: matPlotLib exemple2
 
 .. literalinclude:: code/simple.py
 
-`Cas pratique de statistique avec matplotlib`
+Cas pratique de statistique
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. image:: ./sources/example.png
    :alt: matPlotLib exemple1
-   
+
 .. literalinclude:: code/casPratique.py
-	
-	
-`Cas particulier avec toolkits pour la 3D`
+
+
+Cas particulier avec toolkits pour la 3D
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. image:: ./sources/matplotlib-3d-graph-wire_frame-tutorial.png
    :alt: matPlotLib exemple3D
-   
+
 .. literalinclude:: code/exemple3d.py
 
 
 How to
 ------
+
 Liste non exhaustive expliquant comment utiliser matplotlib.
 Le but est d'expliquer simplement des conceptes sur lesquels
 vous risquez autrement de perdre du temps.
@@ -99,75 +94,86 @@ Conseil, regardez les fonctions suivantes en détail
 - bar(left, height, width=0.8, bottom=None, hold=None, data=None, \*\*kwargs)
 - hist(x, bins=None, ..., \*\*kwargs)
 - boxplot(x, notch=None, ...)
-	
-	
-`plot simple`
 
-Le plot est la fonction la plus important de Matplotlib_ (on se demande pourquoi), pour cette
-raison il vous est recommandé de regarder la doc :py:mod:`matplotlib.pyplot` en détail.
+.. todo::
+
+    Il manque les liens *intersphinx*.
+
+Graphique simple
+^^^^^^^^^^^^^^^^
+
+Le :py:func:`~matplotlib.pyplot.plot` est la fonction la plus importante de
+`matplotlib`_ (on se demande pourquoi), pour cette raison il vous est
+recommandé de regarder la doc :py:mod:`matplotlib.pyplot` en détail.
 
 .. image:: ./sources/simplesimple.png
    :alt: matPlotLib ro
-	
-.. literalinclude:: code/simpleNoNumpy.py
-	
 
-`Lignes, points, tirets`
+.. literalinclude:: code/simpleNoNumpy.py
+
+
+Lignes, points, tirets
+^^^^^^^^^^^^^^^^^^^^^^
 
 .. image:: ./sources/ro.png
    :alt: matPlotLib ro
 
 Pour changer l'affichage de ligne à points ou traitillé, il suffit d'ajouter
-un argument au moment de plot! Voir :py:func:`matplotlib.pyplot.plot`
+un argument au moment de plot! Voir :py:func:`~matplotlib.pyplot.plot`.
 
-.. literalinclude:: code/ro.py	
+.. literalinclude:: code/ro.py
 
+Axes et axes mineurs
+^^^^^^^^^^^^^^^^^^^^
 
-`Axes et axes mineurs`
-	
 .. image:: ./sources/axe.png
    :alt: matPlotLib axes
-   
+
 Pour modifier les axes l'on a besoin d'un objet que subplot retourne, d'où
-l'étrange subplot(111).
+l'étrange ``subplot(111)``.
 
-Vous remarquerez l'axe mineur, qui s'affiche tous les 0.1 ticks. 
+Vous remarquerez l'axe mineur, qui s'affiche tous les :math:`0.1` ticks.
 
-Dans cet exemple l'on ne touche qu'à 'x'. 'y' est en mode par défaut, il se met directement à la bonne position.
-Notez bien qu rien ne vous empèche de faire des échelles étranges ou logarithmiques_. Voir numpy_.
+Dans cet exemple l'on ne touche qu'à 'x'. 'y' est en mode par défaut, il se met
+directement à la bonne position. Notez bien qu rien ne vous empèche de faire
+des échelles étranges ou logarithmiques_. Voir :py:mod:`numpy`.
 
 .. literalinclude:: code/axe.py
-	
 
-`Afficher plusieur graphes`
-	
+
+Afficher plusieurs graphes
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 .. image:: ./sources/AEGXG.png
    :alt: matPlotLib subplot
-   
-.. literalinclude:: code/sub.py
-	
 
-Vous pouvez aussi produire des assemblements asymmétriques
+.. literalinclude:: code/sub.py
+
+
+Vous pouvez aussi produire des assemblements asymétriques:
 
 .. image:: ./sources/subPlot.png
    :alt: matPlotLib subPlot2 printscreen Florian Fasmeyer 22.03.2017
-   
+
 .. literalinclude:: code/sub2.py
-		
-	
+
+
 Conclusion
 ----------
-Matplotlib est une librairie extraordinaire permettant de gagner beaucoup de temps
-dans les applications nécessitant un affichage de données sous forme de graphiques.
+
+Matplotlib est une bibliothèque extraordinaire permettant de gagner beaucoup de
+temps dans les applications nécessitant un affichage de données sous forme de
+graphiques.
 
 Crédits
 -------
-Matplotlib_ est un projet par John Hunter (1968 - 2012) qui à l'aide de nombreux
-contributeurs, ont donné une quantité incommensurable de travail dans la production
-de ce software. Dans le cas ou Matplotlib contribue à un projet
-menant à des publications scientifiques, il vous est prié de faire reconnaitre
-ce travail en le citant dans votre projet. Vous pouvez utiliser cette citation_ prête
-à l'usage.
+
+    Matplotlib_ est un projet par John Hunter (1968 - 2012) qui à l'aide de
+    nombreux contributeurs, ont donné une quantité incommensurable de travail
+    dans la production de ce software. Dans le cas ou Matplotlib contribue à un
+    projet menant à des publications scientifiques, il vous est prié de faire
+    reconnaitre ce travail en le citant dans votre projet. Vous pouvez utiliser
+    cette citation_ prête à l'usage.
 
 Sources
 -------
@@ -177,18 +183,16 @@ Sources
 
 .. Bibliographie
 
-.. _Matplotlib: http://matplotlib.org/
-.. _numpy: http://www.numpy.org/
-.. _arange: https://docs.scipy.org/doc/numpy-1.10.1/reference/generated/numpy.arange.html
+.. _matplotlib: http://matplotlib.org/
+.. _IPython: https://ipython.org/
+.. _Jupyter: http://jupyter.org/
 .. _galerie: http://matplotlib.org/gallery.html
-.. _site: http://matplotlib.org/2.0.0/index.html
 .. _spectres: https://fr.wikipedia.org/wiki/Densit%C3%A9_spectrale_de_puissance
-.. _installation: http://matplotlib.org/2.0.0/users/installing.html
 .. _dispersion: http://spss.espaceweb.usherbrooke.ca/media/images/Site%20v17/nuage1.jpg
 .. _citation: http://matplotlib.org/2.0.0/citing.html
 .. _PythonProgramming: https://pythonprogramming.net/conclusion-matplotlib-tutorial/
 .. _subPlot: http://stackoverflow.com/questions/3584805/in-matplotlib-what-does-the-argument-mean-in-fig-add-subplot111
 .. _logarithmiques: https://www.ilemaths.net/img/forum_img/0416/forum_416807_1.JPG
 .. _code: https://2.bp.blogspot.com/-2mxHUrtNNQI/VvCP1V94pNI/AAAAAAAAEqw/h9IWBjCeMowykzM8uXWWoOb3BymaZNTIQ/s1600/matrix-600x400.jpg
-.. [#ff] <florian.fasmeyer@he-arc.ch>
 
+.. [#ff] <florian.fasmeyer@he-arc.ch>

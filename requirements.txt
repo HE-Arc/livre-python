@@ -14,6 +14,9 @@ jsonschema
 msgpack-python
 ijson
 
+# matplotlib
+matplotlib
+
 # PIL
 Pillow
 #PyQt5

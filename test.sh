@@ -1,17 +1,17 @@
 #!/bin/sh
 
-set -x
+set -xe
 
 # invoke
 cd source/invoke/examples
-invoke ouverture
+#invoke ouverture
 cd ../../..
 
 # itertools
 cd source/itertools
 python use_itertools.py
-python main.py
-python tools.py
+#python main.py
+#python tools.py
 cd ../..
 
 # json
@@ -37,5 +37,5 @@ cd ../../..
 
 # unittest
 cd source/unittest/examples
-python carre.py
+python carre.py || echo ":-)"
 cd ../../..

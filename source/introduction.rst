@@ -67,9 +67,9 @@ Autres
    :maxdepth: 1
 
    hug/index
+   matplotlib/index
 
 * :ref:`invoke-tutorial`
-* :ref:`matplotlib-tutorial`
 * :ref:`pycrypto-tutorial`
 * :ref:`pygame-tutorial`
 * :ref:`sphinx-tutorial`

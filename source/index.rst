@@ -34,7 +34,6 @@ Table des matières
    licence.rst
    colorama/index.rst
    invoke/index.rst
-   matplotlib/index.rst
    pillow/index.rst
    pycrypto/index.rst
    pygame/index.rst

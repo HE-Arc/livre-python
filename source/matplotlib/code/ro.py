@@ -1,9 +1,11 @@
 """Affiche des points."""
-import numpy as np
 import matplotlib.pyplot as plt
+import numpy as np
 
-x = np.arange(0, np.pi * 2, 0.1)
-y = np.cos(x)
-plt.plot(x, y, "ro")  # ro r:red o:rond
+xs = np.arange(0, 2 * np.pi, 0.1)
+ys = np.cos(xs)
+# r -> red
+# o -> dot
+plt.plot(xs, ys, "ro")
 
 plt.show()

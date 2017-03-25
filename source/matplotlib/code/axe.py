@@ -1,16 +1,17 @@
-﻿# Florian Fasmeyer 22.03.2017
-"""plot un axe tout mignion."""
-import numpy as np
+"""plot un axe tout mignon."""
 import matplotlib.pyplot as plt
+import numpy as np
 
 fig = plt.figure()
-axeX = np.arange(5, 10, 1)      # de 5 à 10, par saut de 1 [5,6,7,8,9]
-axeXmineur = np.arange(5, 10, 0.1)
+# de 5 à 10, par saut de 1 [5,6,7,8,9]
+axe_x = np.arange(5, 10, 1)
+axe_x_mineur = np.arange(5, 10, 0.1)
 
 ax = fig.add_subplot(111)
-ax.set_xticks(axeX)
-ax.set_xticks(axeXmineur, minor=True)
+ax.set_xticks(axe_x)
+ax.set_xticks(axe_x_mineur, minor=True)
 
-plt.plot(axeX, [1, 2, 3, 1, 2], "ro")       # pour axeX, donner var Y
+# pour axe_x, donner var Y
+plt.plot(axe_x, [1, 2, 3, 1, 2], "ro")
 
 plt.show()

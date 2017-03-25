@@ -1,9 +1,13 @@
-"""L'exemple le plus simple du monde."""
-import numpy as np
+"""Dessine cos(x) entre 0 et 2 PI."""
 import matplotlib.pyplot as plt
+import numpy as np
 
-x = np.arange(0, np.pi * 2, 0.1)  # [0, 0.1, 0.2, ..., pi*2]
-y = np.cos(x)
-plt.plot(x, y)
+# [0, 0.1, 0.2, ..., pi*2)
+xs = np.arange(0, 2 * np.pi, 0.1)
+# calcule chaque y pour chaque x dans xs.
+ys = np.cos(xs)
+# dessine
+plt.plot(xs, ys)
 
-plt.show()  # huh, important!
+# affiche le graphe
+plt.show()

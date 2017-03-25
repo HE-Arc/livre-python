@@ -1,37 +1,33 @@
-﻿# Made by Florian Fasmeyer 27.02.2017
-# Fréquences cumulés & médiane
-"""Un exercice fait il y a fort longtemps."""
-import numpy as np
+"""
+Fréquences cumulées et médiane.
+
+# Made by Florian Fasmeyer 27.02.2017
+"""
 import matplotlib.pyplot as plt
+import numpy as np
 
 
 def cf(ni, n):
-    """Cumule une list de fréquences par addition."""
-    r = []
+    """Cumule une liste de fréquences par addition."""
     cumulFreq = 0
     for i in ni:
-        cumulFreq = (i / n) + cumulFreq
-        r.append(cumulFreq)
-    return r
+        cumulFreq += (i / n)
+        yield cumulFreq
 
 
 def f(ni, n):
     """Prend une liste d'occurence et calcule la fréquence."""
-    r = []
-    freq = 0
     for i in ni:
-        freq = (i / n)
-        r.append(freq)
-    return r
+        yield i / n
 
 
 # Variables
-ni = ([4, 21, 104, 163, 121, 57, 22, 10])
-i = float(len(ni))
+ni = (4, 21, 104, 163, 121, 57, 22, 10)
+i = len(ni)
 n = sum(ni)
 cash = np.arange(27, 51, 3)
-frequence = f(ni, n)
-frequenceCumule = cf(ni, n)
+frequence = list(f(ni, n))
+frequence_cumule = list(cf(ni, n))
 
 major_ticksX = np.arange(24, 51, 3)
 major_ticksY = np.arange(0, 163, 10)
@@ -39,14 +35,14 @@ major_ticksX2 = np.arange(27, 51, 3)
 major_ticksY2 = np.arange(0, 1.1, 0.1)
 
 # Mod
-mod = cash[2] + (cash[3] - cash[2]) * (ni[3] - ni[2]) / \
-    ((ni[3] - ni[2]) + (ni[3] - ni[4]))
+mod = (cash[2] + (cash[3] - cash[2]) * (ni[3] - ni[2]) /
+       ((ni[3] - ni[2]) + (ni[3] - ni[4])))
 
 # Médiane
-ccf = cf(ni, n)
+ccf = list(cf(ni, n))
 med = (0.5 - ccf[2]) * (cash[3] - cash[2]) / (ccf[3] - ccf[2]) + cash[2]
-print("médianne = {:f}".format(med))
-print("mod = {:f}".format(mod))
+print(f"médiane = {med:.3f}")
+print(f"mod     = {mod:.3f}")
 
 # Plot Graphes
 fig = plt.figure()
@@ -67,8 +63,8 @@ ax.set_xticks(major_ticksX2)
 ax.set_yticks(major_ticksY2)
 plt.subplot(122)
 plt.grid(True)
-plt.plot(np.arange(27, 51, 3), cf(ni, n))
-plt.plot(np.arange(27, 51, 3), cf(ni, n), "ro")
+plt.plot(np.arange(27, 51, 3), ccf)
+plt.plot(np.arange(27, 51, 3), ccf, "ro")
 
 a = np.empty(8)
 a.fill(0.5)
@@ -77,6 +73,5 @@ a.fill(0.75)
 plt.plot(np.arange(27, 51, 3), a)
 a.fill(0.25)
 plt.plot(np.arange(27, 51, 3), a)
-
 
 plt.show()
