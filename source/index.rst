@@ -14,7 +14,6 @@ Table des matières
    dunders/index.rst
    super/index.rst
    fstrings/index.rst
-   email/index.rst
    abc/index.rst
    collections/index.rst
    csv/index.rst

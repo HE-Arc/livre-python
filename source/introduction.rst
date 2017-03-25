@@ -33,8 +33,12 @@ Bases
 Avancé
 ------
 
+.. toctree::
+   :maxdepth: 1
+
+   email/index
+
 * :ref:`abc-tutorial`
-* :ref:`email-tutorial`
 * :ref:`multiprocessing-tutorial`
 * :ref:`re-tutorial`
 
@@ -60,9 +64,9 @@ Autres
 ------
 
 .. toctree::
-    :maxdepth: 1
+   :maxdepth: 1
 
-    hug/index
+   hug/index
 
 * :ref:`invoke-tutorial`
 * :ref:`matplotlib-tutorial`

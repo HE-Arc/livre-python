@@ -1,16 +1,18 @@
 .. _email-tutorial:
 
-``email``
-=========
+======
+E-mail
+======
 
 Par Karim Gehrig [#KG]_
 
 Introduction
 ------------
 
-Les mails sont la base de communication et d'alert à ce jour,
+Les mails sont la base de communication et d'alerte à ce jour,
 
-les mail se découpe en deux partie, ``envoie`` et ``réception``
+les mail se découpe en deux partie, *envoi* et *réception*, respectivement
+les protocoles SMTP_, POP3_ et IMAP_.
 
 Nous allons voir des exemple de code simple, et divers astuce afin de comprendre
 le principe de base.
@@ -18,30 +20,35 @@ le principe de base.
 
 SMTP
 ====
-Pour l'envoie de mail (DOCSMTP_)
-l'envoir est plus courrent que la réception pour un script.
 
-Par exemple si on veur etre averti d'un acces sur un serveur ou encore une alert
-d'un fichier log ou autres.
+Pour l'envoi de mail, on utilise :py:mod:`smtplib`.
+L'envoi est plus courant que la réception pour un script.
 
-Voici un exemple de code utilisant la gestion de l'HTML dans les messages
+Par exemple si on veut être averti d'un accès sur un serveur ou encore une
+alerte d'un fichier *log* ou autres.
 
-.. note:: C'est bien si on utilise de l'html de également mettre le texte en plain text, afin de support pour
-les programme qui ne gérerai pas ou ont le html de désactivé.
+.. ah bon.
 
+Voici un exemple de code utilisant la gestion de l'HTML dans les messages.
+
+.. note::
+
+    C'est bien si on utilise de l'HTML de également mettre le texte en
+    ``plain/text``, afin de support pour les programme qui ne gérerai pas ou
+    ont le HTML de désactivé.
 
 
 On commence par importer ``import smtplib``
 
-.. code:: python3 
-    :number-lines:
+.. code-block:: python3
+    :linenos:
 
     import smtplib
     import os
     from email.mime.multipart import MIMEMultipart
     from email.mime.text import MIMEText
 
-    me = "<ADRESSE MAIL EXPEITEUR>"
+    me = "<ADRESSE MAIL EXPEDITEUR>"
     you = "<ADRESSE MAIL DESTINATAIRE>"
 
     # Create message container - the correct MIME type is multipart/alternative.
@@ -83,18 +90,23 @@ On commence par importer ``import smtplib``
 
 
 
-Changer ce qu'il y a dans les ``<>`` avec vos informations
+Changer ce qu'il y a dans les ``<>`` avec vos informations.
+
+.. fixme:
+
+    On pourrait créer des variables placées au début du fichier pour représenter
+    ces informations.
 
 Ce code simple permet d'envoyer un mail avec uun serveur relai SMTP en mode html et plain/text
 
 
 IMAP
 ====
-Pour la réception de mail (DOCIMAP_)
 
+Pour la réception de mail :py:mod:`imaplib`.
 
-.. code:: python3 
-    :number-lines:
+.. code-block:: python3
+    :linenos:
 
     import imaplib
     M = imaplib.IMAP4("<SERVEUR SMTP>")
@@ -111,18 +123,20 @@ Pour la réception de mail (DOCIMAP_)
     print (data[0][1].decode("utf-8"))
     M.close()
     M.logout()
-    
 
-Changer ce qu'il y a dans les ``<>`` avec vos informations
+
+Changer ce qu'il y a dans les ``<>`` avec vos informations.
 
 Ce code simple récupère le dernier mail sur le serveur et affiche la source
 du message décodé en UTF8
 
 
-Conclusion
-----------
+.. todo::
+
+    Conclusion
 
 .. [#KG] <karim.gehrig@he-arc.ch>
 
-.. _DOCIMAP: https://docs.python.org/3/library/imaplib.html
-.. _DOCSMTP: https://docs.python.org/3/library/smtplib.html
+.. _SMTP: https://tools.ietf.org/html/rfc5321
+.. _POP3: https://tools.ietf.org/html/rfc1939
+.. _IMAP: https://tools.ietf.org/html/rfc3501
