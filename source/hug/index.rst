@@ -194,6 +194,7 @@ On voit bien dans le bloc inputs la clé tpye, on peut clairement voir que l'ent
 Si on entre l'adresse http://localhost:8000/annota?text=salut on a en retour une belle erreur comme celle ci-dessous:
 
 .. code-block:: json
+
     {"errors": {"text": "invalid literal for int() with base 10: 'salut'"}}
     
 Il est important de noter que les annotations permettent implicitement de faire la validation automatique des données.
