@@ -6,7 +6,7 @@
 Par Charles Ombang Ndo [#contact]_
 
 Introduction
-------------
+============
 
 Une API (Application Programming Interface) est une façade regroupant des services qu'une application, offre à d'autres. Ces services sont définis sous forme de classes, de méthodes et généralement suivis d'une documentation décrivant le rôle de chaque composant de l'interface, exposant les utilisations possibles et les normes d'utilisation. La plupart des applications actuelles offrent ces 'web services' plus connues sous RESTful web service.
 
@@ -28,12 +28,12 @@ Pourquoi choisir HUG
 Les très célèbres frameworks que sont Flash et Django sont bousculés par les performances qu'apportent HUG. HUG permet d'écrire une API de manière simplifiée. Les API implémentées dans d'autres frameworks peuvent l'être en quelques lignes avec HUG. HUG supporte le versioning, il permet la documentation par le code et HUG intègre la validation des données.
 
 Installation de HUG
--------------------
+===================
 
 Les commandes HUG peuvent être installées en ligne de commande via la commande : ``pip3 install hug --upgrade``.
 
 Fonctionnement
---------------
+==============
 
 Supposons une simple fonction permettant de faire la somme de deux nombres passés en paramètre.
 
@@ -93,7 +93,7 @@ Maintenant pour voir le résultat de notre (petite) API, il suffit d'entrer dans
 
 
 HUG et le versioning
----------------------
+====================
 
 Comme souligné auparavant, HUG supporte et gère très bien le versioning. On peut avoir plusieurs versions de l'API dans la même application.
 
@@ -151,7 +151,7 @@ Si on compare ce rendu JSON au précédent, on remarque la présence du champ `v
 
 
 Type annotation et validation
------------------------------
+=============================
 
 Il est possible d'ajouter des fonctions aux paramètres de nos méthodes, pour expliciter comment ils sont validés et transcris en type python, on parle de type annotation. ``argument:type``. L'avantage de l'utilisation d'une telle spécification est de clairement indiquer au niveau de la documentation le type de données attendues.
 
@@ -202,7 +202,7 @@ Il est important de noter que les annotations permettent implicitement de faire 
    
     
 Les directives
---------------
+==============
 
 Les directives sont globalement des arguments enregistrés pour fournir automatiquement des valeurs. Un exemple serait meilleur pour expliquer le rôle des directives. HUG possède des directives prédéfinies, mais il donne la possibilité de créer des directives personnalisées.
 
@@ -224,7 +224,7 @@ Les directives sont globalement des arguments enregistrés pour fournir automati
 Ci-dessus, on a créé une directive basée sur la fonction ``salutation_general(..)``. Cette fonction possède un paramètre avec une valeur par défaut. Si on va à l'adresse http://localhost:8000/salut_anglais on aura en retour ``hello there``, http://localhost:8000/salut_anglais retournera ``hi there``. En effet, dans la fonction ``salut_anglais(..)``, on passe la directive avec une nouvelle valeur par défaut qui est ``hello``. Cela a pour effet d'écraser la valeur par défaut ``hi``. Par contre la fonction ``salut_americain(..)`` prend en argument la même directive, mais aucune valeur n'est redéfinie, cela va conserver la valeur par défaut ``hi``.
 
 Utilisation des directives
---------------------------
+==========================
 
 Pour utiliser les directives dans nos fonctions, il existe deux méthodes. La première apparaît clairement, il s'agit de l'utilisation des types annotation ``greeting::directive``. On peut aussi utiliser le préfixe ``hug_``ce qui d'après notre exemple précédent deviendra avec la fonction ``salut_americain(...)`` :
 
@@ -233,14 +233,16 @@ Pour utiliser les directives dans nos fonctions, il existe deux méthodes. La pr
   ......
   
   @hug.get()
-    def salut_americain(hug_salutation_general='Yoo man'):. 
+    def salut_americain(hug_salutation_general='Yoo man'): 
         ...
+
+
 Il est aussi possible d'ajouter une valeur ``hug_salutation_general='Yoo man'``.
 
 Note: il est important d'ajouter **kwargs.
 
 Format de sortie
-----------------
+================
 
 HUG utilise le JSON comme format par défaut. Heureusement, il offre la possibilité de définir des formats autres que JSON. Il existe différentes façons de spécifier le format que l'on veut utiliser
 
@@ -279,13 +281,13 @@ Les APIs écrit avec HUG peuvent être accédées depuis la ligne de commande, p
 
 
 Conclusion
-----------
+==========
     
 La librairie HUG offre un moyen très simplifié d'écrire des API. La syntaxe est assez claire, la documentation bien élaborée depuis le code, le versioning est réalisé en une seule ligne de code.
 
 
 Bibliographie
---------------
+-------------
 
 http://toilal.github.io/talk-python3-hug/#/hug-directives et http://www.hug.rest/website/learn/routing
 
