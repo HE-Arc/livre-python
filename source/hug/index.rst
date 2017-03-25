@@ -239,7 +239,7 @@ Pour utiliser les directives dans nos fonctions, il existe deux méthodes. La pr
 
 Il est aussi possible d'ajouter une valeur ``hug_salutation_general='Yoo man'``.
 
-Note: il est important d'ajouter **kwargs.
+Note: il est important d'ajouter ``**kwargs``.
 
 Format de sortie
 ================
@@ -263,7 +263,7 @@ HUG utilise le JSON comme format par défaut. Heureusement, il offre la possibil
         return # le code html généré
         
         
- Il est possible de créer des formats de sortie personnalisés. Cela se passe comme le montre le code ci-dessous
+Il est possible de créer des formats de sortie personnalisés. Cela se passe comme le montre le code ci-dessous
  
 .. code-block:: python3
  
