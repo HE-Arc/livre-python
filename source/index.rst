@@ -31,11 +31,9 @@ Table des matières
    time/index.rst
    unittest/index.rst
    weakref/index.rst
-   licence.rst
    colorama/index.rst
    invoke/index.rst
    pillow/index.rst
-   pycrypto/index.rst
    pygame/index.rst
    pytest/index.rst
    sphinx/index.rst

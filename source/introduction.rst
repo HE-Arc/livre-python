@@ -16,6 +16,11 @@ Python
 Bases
 -----
 
+.. toctree::
+   :maxdepth: 1
+
+   enum/index
+
 * :ref:`builtins-tutorial`
 * :ref:`dunder-tutorial`
 * :ref:`collections-tutorial`
@@ -68,9 +73,9 @@ Autres
 
    hug/index
    matplotlib/index
+   pycrypto/index
 
 * :ref:`invoke-tutorial`
-* :ref:`pycrypto-tutorial`
 * :ref:`pygame-tutorial`
 * :ref:`sphinx-tutorial`
 * :ref:`watchdog-tutorial`
