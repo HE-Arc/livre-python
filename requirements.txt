@@ -23,3 +23,6 @@ Pillow
 
 # pycrypto
 pycrypto
+
+# pygame
+pygame

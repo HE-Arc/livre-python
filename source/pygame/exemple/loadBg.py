@@ -1,4 +1,3 @@
-
 """Exemple d'affichage d'une image de fond."""
 import pygame
 from pygame.locals import *

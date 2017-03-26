@@ -75,8 +75,8 @@ Autres
    hug/index
    matplotlib/index
    pycrypto/index
+   pygame/index
 
 * :ref:`invoke-tutorial`
-* :ref:`pygame-tutorial`
 * :ref:`sphinx-tutorial`
 * :ref:`watchdog-tutorial`

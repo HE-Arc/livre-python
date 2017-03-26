@@ -126,8 +126,9 @@ latex_elements = {
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
-latex_documents = [(master_doc, 'main.tex', 'Livre Python', 'HE-Arc',
-                    'scrbook'), ]
+latex_documents = [
+    (master_doc, 'main.tex', 'Livre Python', 'HE-Arc', 'scrbook'),
+]
 
 # -- Options for manual page output ---------------------------------------
 
@@ -173,6 +174,7 @@ intersphinx_mapping = {
     'matplotlib': ('http://matplotlib.org/2.0.0', None),
     'numpy': ('https://docs.scipy.org/doc/numpy/', None),
     'Pillow': ('https://pillow.readthedocs.io/en/latest/', None),
+    'pygame': ('http://pygame.org/docs/', None),
     'watchdog': ('http://pythonhosted.org/watchdog/', None),
     'msgpack-python': ('http://msgpack-python.readthedocs.io/en/latest/', None)
 }

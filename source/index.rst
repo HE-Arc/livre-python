@@ -30,7 +30,6 @@ Table des matières
    colorama/index.rst
    invoke/index.rst
    pillow/index.rst
-   pygame/index.rst
    pytest/index.rst
    sphinx/index.rst
    watchdog/index.rst
