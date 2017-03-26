@@ -1,61 +1,62 @@
 .. _pycrypto-tutorial:
 
 ============
-``Pycrypto``
+``pycrypto``
 ============
 
-Par Luca Srdjenovic INF2dlm-a [1]_
+Par Luca Srdjenovic [#ls]_
 
 Introduction
 ------------
 
-``Pycrypto`` est une bibliothèque qui fournit  des outils de cryptographie primitive
-implémententés en language Python.  Par exemple quand on fait du réseau, on a souvent
-besoin d'utiliser la cryptographie. En effet des méchants peuvent se situer entres deux machines
-qui commmuniquent pour les écouter. Et le méchant s'il le désire peut faire encore pire,
-c'est-à-dire remplacer un bout ou totalement une partie du message envoyé. A noter que pour
-des raisons de sécurité, il est recommandé d'utiliser une bibliothèque de haut niveau
-ce qui donnera moins de travail au programmeur pour éviter des longues analyses de sécurité.
-Pycrypto correspond bien à cette demande mais est une approche dangereuse qui demande de
-porter un grand détail à son fonctionnement. Cependant il permet de faire ce que l'on désire en
-cryptographie.
+`pycrypto`_ est une bibliothèque qui fournit  des outils de cryptographie
+primitive implémententés en langage Python.  Par exemple quand on fait du
+réseau, on a souvent besoin d'utiliser la cryptographie. En effet des méchants
+peuvent se situer entres deux machines qui commmuniquent pour les écouter. Et
+le méchant s'il le désire peut faire encore pire, c'est-à-dire remplacer un
+bout ou totalement une partie du message envoyé. À noter que pour des raisons
+de sécurité, il est recommandé d'utiliser une bibliothèque de haut niveau ce
+qui donnera moins de travail au programmeur pour éviter des longues analyses de
+sécurité. pycrypto_ correspond bien à cette demande mais est une approche
+dangereuse qui demande de porter un grand détail à son fonctionnement.
+Cependant il permet de faire ce que l'on désire en cryptographie.
 
 Mots clefs
 ----------
 
 Quelques mots clefs pour aider la compréhension pour la suite :
-  - `plaintext`: message original
-  - `ciphertext`: message après la transformation cryptograhpique appliqué au
-                  message orignal
-  - `encrypt`: produit le ciphertext en appliquant la transformation
-               cryptograhpique au plaintext
-  - `decrypt`: produit le plaintext en appliquant la transformation
-               cryptograhpique au ciphertext
-  - `cipher`: une composition particulière de la transformation
-              cryptograhpique fournissant encryptage et décryptage
-  - `hash`: transformation cryptographique qui prend une grande entrée
-            et la transforme en une unique sortie (de taille fixée).
+
+:`plaintext`: message original
+:`ciphertext`: message après la transformation cryptograhpique appliqué au
+               message original
+:`encrypt`: produit le ciphertext en appliquant la transformation
+            cryptographique au plaintext
+:`decrypt`: produit le plaintext en appliquant la transformation
+            cryptographique au ciphertext
+:`cipher`: une composition particulière de la transformation cryptographique
+           fournissant encryptage et décryptage
+:`hash`: transformation cryptographique qui prend une grande entrée et la
+         transforme en une unique sortie (de taille fixée).
 
 Type de cryptage
 ----------------
 
 En cryptographie, il existe deux types de chiffrement.
-Le symmétrique et l'asymmétrique. Comme PyCrypto est vaste, nous allons juste
+Le symétrique et l'asymétrique. Comme PyCrypto est vaste, nous allons juste
 nous intéresser au chiffrement symétrique.
 
-Pour le symmétrique, il y a deux types de clef :
+Pour le symétrique, il y a deux types de clef :
   - ``stream ciphers``: opération sur des flux de données un byte à la fois
   - ``block ciphers``: opération de blocks sur des données, en 16 bytes
     à la fois.
 
-Nous allons utiliser le block cipher. Le plus commun et standard avancé est l'AES
-(https://secure.wikimedia.org/wikipedia/en/wiki/Advanced_Encryption_Standard) si
+Nous allons utiliser le block cipher. Le plus commun et standard avancé est l'AES_ si
 on n'a pas trop d'idée de quel algorithme de cryptage à utiliser.
 Un peu moins commun est le DES.c'est le standard de la cryptographie car il
 était très utilisé dans le passé mais sa clef est trop petitE aujourd'hui à cause
 de ces 56-bit de taille.
 
-Voici une liste des différents alogorithmes possibles :
+Voici une liste des différents algorithmes possibles :
 
    +-----------------------+-----------------------+
    | Nom du module         | Type                  |
@@ -78,7 +79,7 @@ Voici une liste des différents alogorithmes possibles :
    +-----------------------+-----------------------+
 
 
-Cryptographie symmétrique ``AES``
+Cryptographie symétrique ``AES``
 ---------------------------------
 
 Les données d'entrées qui sont la plupart du temps des chaînes de caractères
@@ -101,7 +102,7 @@ sont les modes les plus communs.
 .. image:: ./img/penguin.png
     :scale: 50%
     :align: center
-    :alt: alternate text
+    :alt: Tux encrypté avec ECB et CBC.
 
 Exemple
 -------
@@ -127,6 +128,8 @@ si notre message est "Bonjoure Bonjoure", nous devons ajouter encore 8 byte. Un 
 d'ajout est de mettre "0x80" au premier byte et "0x00" aux byte qui suivent
 le reste de l'ajout. Ceci donnerai alors sur l'exemple:
 "Bonjoure Bonjoure\0x80\0x00\0x00\0x00\0x00\0x00\0x00\0x00\0x00".
+
+.. todo:: Bonjour sans e, même lorsqu'on s'adresse à la gente féminine.
 
 .. code-block:: python3
 
@@ -158,10 +161,14 @@ La fonction pour enlever l'ajout
       else:
           return data
 
-Maintenant il nous faut une clef pour le symmétrique ciphers.
-Il y a 3 taille de clefs, 16 byte (128 bit), 24 byte (192 bit) ou 32 byte (256 bit).
+Maintenant il nous faut une clef pour le symétrique ciphers. Il y a trois
+tailles de clefs :
 
-Nous allons simplement générer une clef aléatoire de 32 byte avec une fonction.
+- 16 bytes (128 bits),
+- 24 bytes (192 bits),
+- et 32 bytes (256 bits).
+
+Nous allons simplement générer une clef aléatoire de 32 bytes avec une fonction.
 
 
 .. code-block:: python3
@@ -201,27 +208,34 @@ Maintenant, on peut utiliser cette clef pour crypter et decrypter des données.
 
       return desajout_data(data) #Enleve le padding ajouter
 
-Nous avons sécurisé notre message maintenant, mais ce n'est pas encore optimale.
-Il faut ajouter un algorithme de hashage à nos fonctions encrypt et decrypt. Nous
-allons utiliser un SHA-384 qui va augmenter de 48 byte note AES qui lui est à 32
-byte pour qu'on soit vraiment performant.
+.. todo:: ce code devrait être sorti.
 
+Nous avons sécurisé notre message maintenant, mais ce n'est pas encore
+optimale. Il faut ajouter un algorithme de hashage à nos fonctions encrypt et
+decrypt. Nous allons utiliser un SHA-384 qui va augmenter de 48 bytes notre AES
+qui lui est à 32 bytes pour qu'on soit vraiment performant.
 
-Par exemple, crééons un hash
+Par exemple, crééons un hash:
 
-.. code-block:: python3
+.. code-block:: pycon
 
   >>> import hashlib
   >>> sha = hashlib.sha1(b'Hello Python').hexdigest()
   >>> sha
   '422fbfbc67fe17c86642c5eaaa48f8b670cbed1b'
 
-Cryptographie symmétrique ``DES``
----------------------------------
+.. todo::
+
+    pycrypto ne le fait-il pas?
+
+    https://www.dlitz.net/software/pycrypto/api/current/Crypto.Hash.SHA-module.html
+
+Cryptographie symétrique ``DES``
+--------------------------------
 
 Voici un code pour crypter un string en DES
 
-.. code-block:: python3
+.. code-block:: pycon
 
     >>> from Crypto.Cipher import DES
 
@@ -237,14 +251,14 @@ Voici un code pour crypter un string en DES
     >>> encrypted_text
     b'>\xfc\x1f\x16x\x87\xb2\x93\x0e\xfcH\x02\xd59VQ'
 
-La taille de la clef en DES est de 8 byte. Pour encrypter le string, il doit
-être multiplié par 8 dans sa longeur. La fonction qui fait fait ça s'appelle
+La taille de la clef en DES est de 8 bytes. Pour encrypter le string, il doit
+être multiplié par 8 dans sa longueur. La fonction qui fait ça s'appelle
 "pad". Elle ajoute des espaces jusqu'a que ce soit un multiple de 8.
 Ensuite on crée une instance DES avec le text qu'on veut encrypter.
 
 Pour décrypter, il suffit simplement de faire la commande suivante :
 
-.. code-block:: python3
+.. code-block:: pycon
 
     >>> des.decrypt(encrypted_text)
     b'test'
@@ -255,16 +269,16 @@ Chiffrement avec clés publiques
 -------------------------------
 
 Quand on fait du chiffrement avec clefs, on va crée des clés publiques. Si une
-personne voudra recevoir des fichiers auxquels il sera le seul à avoir l'
-authorisation de lire, il devra avoir une clef privée. Avec la clef pubique, tous
-pourront y avoir accès quand elle est diffusée. Mais seulement les personnes qui
-ont la clef privée pourront decrypter le message.
+personne voudra recevoir des fichiers auxquels il sera le seul à avoir
+l'authorisation de lire, il devra avoir une clef privée. Avec la clef pubique,
+tous pourront y avoir accès quand elle est diffusée. Mais seulement les
+personnes qui ont la clef privée pourront decrypter le message.
 
 
 Exemple code avec AES et DES en mode CFB
 ----------------------------------------
 
-.. literalinclude:: ./Example/aes_des.py
+.. literalinclude:: ./example/aes_des.py
     :linenos:
 
 Resultat:
@@ -275,25 +289,32 @@ Resultat:
     b'Hello! World'
 
     #Output DES
-    b"\xc8\x1a\x9a'\x1f\x97\xc8<\x05\xc2A<"
+    b'Hello! World'
+
+.. todo::
+
+   Séparer ces deux exemples rendrait leur compréhension facilitée. Surtout quand
+   ils comportent des erreurs.
 
 Conclusion
 ----------
 
 Aujourd'hui, la cryptographie est une importante partie pour quiconque voudrait
-rendre sûr leur donnée. Il existe plus de dizaines de système de chiffrement rien
-qu'en python.
-Si l'on désire faire des systèmes de communications sécurisés ou des vote
-électronique, il est recommandé d'utiliser des protocoles de haut niveau.
-Python fournit un large panel d'outil pour y remédier,c'est pour ça qu'il est
-important d'avoir quelques notions pour éviter de se perdre.
+rendre sûr leur donnée. Il existe plus de dizaines de système de chiffrement
+rien qu'en Python. Si l'on désire faire des systèmes de communications
+sécurisés ou des votes électroniques, il est recommandé d'utiliser des
+protocoles de haut niveau. Python fournit un large panel d'outils pour y
+remédier, c'est pour ça qu'il est important d'avoir quelques notions pour
+éviter de se perdre.
 
 Bibliographie
 -------------
 
-  - https://www.blog.pythonlibrary.org/2016/05/18/python-3-an-intro-to-encryption
-  - https://erroneousthoughts.org/2014/04/27/introduction-to-pycrypto/
-  - https://leanpub.com/pycrypto/read
+- https://www.blog.pythonlibrary.org/2016/05/18/python-3-an-intro-to-encryption
+- https://erroneousthoughts.org/2014/04/27/introduction-to-pycrypto/
+- https://leanpub.com/pycrypto/read
 
+.. [#ls] <luca.srdjenovic@he-arc.ch>
 
-.. [1] <luca.srdjenovic@he-arc.ch>
+.. _AES: https://secure.wikimedia.org/wikipedia/en/wiki/Advanced_Encryption_Standard
+.. _pycrypto: https://www.dlitz.net/software/pycrypto/

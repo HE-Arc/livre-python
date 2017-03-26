@@ -2,8 +2,9 @@
 from Crypto import Random
 from Crypto.Cipher import AES, DES
 
-iv_AES = Random.new().read(AES.block_size)  # Vetor d'initialisation
-iv_DES = Random.get_random_bytes(8)  # Vector d'initialisation
+# Vecteurs d'initialisation
+iv_AES = Random.new().read(AES.block_size)
+iv_DES = Random.get_random_bytes(8)
 
 key_AES = 'abcdefghijklmnop'
 key_DES = 'abcdefgh'
@@ -19,6 +20,6 @@ plaintext = aesd.decrypt(aese.encrypt(plaintext))
 
 print(plaintext)
 
-plaintext = aesd.decrypt(dese.encrypt(plaintext))
+plaintext = desd.decrypt(dese.encrypt(plaintext))
 
 print(plaintext)
