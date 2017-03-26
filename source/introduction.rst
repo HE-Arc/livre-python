@@ -20,6 +20,7 @@ Bases
    :maxdepth: 1
 
    enum/index
+   time/index
 
 * :ref:`builtins-tutorial`
 * :ref:`dunder-tutorial`
@@ -33,7 +34,6 @@ Bases
 * :ref:`secrets-tutorial` ★
 * :ref:`statistics-tutorial`
 * :ref:`super-tutorial`
-* :ref:`time-tutorial`
 
 Avancé
 ------
