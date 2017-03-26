@@ -27,7 +27,6 @@ Table des matières
    statistics/index.rst
    random/index.rst
    unittest/index.rst
-   weakref/index.rst
    colorama/index.rst
    invoke/index.rst
    pillow/index.rst
@@ -78,6 +77,6 @@ Table des matières
  - Thibaut Piquerez <thibaut.piquerez@he-arc.ch>
  - Yoan Blanc <yoan.blanc@he-arc.ch>
 
-:Date:  2017-03-16
+:Date:  2017-03-26
 :Licence:
         :ref:`licence`

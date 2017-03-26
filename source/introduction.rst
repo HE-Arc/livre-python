@@ -42,6 +42,7 @@ Avancé
 
    email/index
    hashlib/index
+   weakref/index
 
 * :ref:`abc-tutorial`
 * :ref:`multiprocessing-tutorial`
