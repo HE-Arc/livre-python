@@ -13,7 +13,6 @@ Table des matières
    builtins/index.rst
    dunders/index.rst
    super/index.rst
-   fstrings/index.rst
    abc/index.rst
    collections/index.rst
    csv/index.rst

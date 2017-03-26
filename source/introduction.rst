@@ -21,12 +21,12 @@ Bases
 
    enum/index
    time/index
+   fstrings/index
 
 * :ref:`builtins-tutorial`
 * :ref:`dunder-tutorial`
 * :ref:`collections-tutorial`
 * :ref:`hashlib-tutorial`
-* :ref:`fstrings-tutorial`
 * :ref:`io-tutorial`
 * :ref:`itertools-tutorial` ★
 * :ref:`random-tutorial` ★
