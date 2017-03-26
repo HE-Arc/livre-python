@@ -23,9 +23,9 @@ def hash_mdp(mdp, hashage):
     """
     # secrets génère un nombre aléatoire en héxadécimale
     salt = secrets.token_hex(16)
-    contenu = salt.encode() + mdp.encode()
+    contenu = salt + mdp
     h = hashlib.new(hashage)
-    h.update(contenu)
+    h.update(contenu.encode('utf-8'))
     return h.hexdigest() + ':' + salt
 
 
@@ -45,9 +45,9 @@ def check_mdp(hashed_mdp, utilisateur_mdp, hashage):
         du test d'égalité.
     """
     mdp, salt = hashed_mdp.split(':')
-    contenu = salt.encode() + utilisateur_mdp.encode()
+    contenu = salt + utilisateur_mdp
     h = hashlib.new(hashage)
-    h.update(contenu)
+    h.update(contenu.encode('utf-8'))
     return compare_digest(mdp, h.hexdigest())
 
 
@@ -71,12 +71,11 @@ print("\n"
       "Le mot de passe devrant être "
       f"enregistré dans la bdd est: {hashed_mdp}")
 
-ancien_mdp = getpass.getpass('\nEntrez-à nouveau votre ' +
+ancien_mdp = getpass.getpass('\nEntrez-à nouveau votre '
                              'mot-de-passe pour vérifier : ')
 
 # Si le mot-de-passe est correct, alors on affiche un message de confirmation
 if check_mdp(hashed_mdp, ancien_mdp, hashage_type):
     print('\nVotre mot-de-passe est correct')
 else:
-    print('\nJe suis désolé, ce n\'est pas le bon mot-de-passe')
-
+    print("\nJe suis désolé, ce n'est pas le bon mot-de-passe")

@@ -16,7 +16,6 @@ Table des matières
    abc/index.rst
    collections/index.rst
    csv/index.rst
-   hashlib/index.rst
    io/index.rst
    itertools/index.rst
    invoke/index.rst

@@ -26,7 +26,6 @@ Bases
 * :ref:`builtins-tutorial`
 * :ref:`dunder-tutorial`
 * :ref:`collections-tutorial`
-* :ref:`hashlib-tutorial`
 * :ref:`io-tutorial`
 * :ref:`itertools-tutorial` ★
 * :ref:`random-tutorial` ★
@@ -42,6 +41,7 @@ Avancé
    :maxdepth: 1
 
    email/index
+   hashlib/index
 
 * :ref:`abc-tutorial`
 * :ref:`multiprocessing-tutorial`

@@ -16,7 +16,7 @@ Ce module comprend les algorithmes suivants :
 est déprécié. Le terme synthèse de messages est l'ancêtre de hachage sécurisé.
 
 Attention à ne pas confondre le hachage_ qui fourni une empreinte à une donnée
-avec le cryptage_ qui transforme une donnée en une autre incompréhensible.
+avec le chiffrement_ qui transforme une donnée en une autre incompréhensible.
 
 Pour chaque type de hachage il y a un constructeur correspondant, ces derniers
 retournent tous un objet ``hash``. Par exemple un objet SHA1 pour le construceur
@@ -69,6 +69,8 @@ Exemple :
     xd4nkJm\x086\xf5@\x8ac\xe5\x04\x9f|Q\xca\xa6\xc1\xf6\x15{C\xda\
     xea1A\x16\x15B\x0fB(`a\x12\xb7l/\xbe6\xef\xdc\xb0'
 
+.. todo:: un affichage en hexa ou base64 serait appréciable.
+
 Exemple
 --------
 Rien de mieux pour mettre en pratique une librairie de hachage que de faire
@@ -92,6 +94,11 @@ fonctionnement est le suivant :
   meilleur hachage.
 - Finalement, l'utilisateur peut saisir à nouveau son mot-de-passe pour
   vérifier s'il est le bon en fonction du mot-de-passe haché.
+
+.. warning::
+
+    N'utilisez pas ce code directement. Utilisez ``brypt`` ou faites confiance
+    à votre framework favori.
 
 Résultat de l'exemple avec comme mot-de-passe ``Salut`` ::
 
@@ -122,7 +129,7 @@ et la fonction de vérification. Voici leur code respectif.
 
 .. literalinclude:: ./examples/exemple.py
   :linenos:
-  :lines: 13,28-32
+  :lines: 10,24-29
 
 La 2ème ligne permet d'initialiser un sel à un nombre aléatoire hexadécimale.
 ``secrets`` génère ce nombre aléatoire à l'aide de la fonction
@@ -136,7 +143,7 @@ la validité de la donnée dans l'autre fonction.
 
 .. literalinclude:: ./examples/exemple.py
   :linenos:
-  :lines: 35,50-54
+  :lines: 32,47-51
 
 Dés la 2ème ligne on sépare le mot-de-passe haché du sel. On pense bien à
 réencoder comme il faut le contenu.
@@ -150,24 +157,27 @@ l'article "Secrets" de Monsieur Pedretti.
 Comme dit précédemment, cet exemple est caduque avec les type de hachage shaXXX
 et md5. C'est pour cela qu'un deuxième exemple est nécessaire avec Blake 2.
 
-Blake 2
--------
-Avant de parler de Blake2, nous faisons une rapide paranthèse sur un type de
-hachage particulièrement puissant concernant les mots-de-passe. Nous parlons ici
-de la fonction :py:func:`hashlib.pbkdf2_hmac`, cette dernière permet de fortement
-hacher un mot-de-passe. Cette fonction utilise une fonction pseudo-random de hmac.
+PBKDF2-HMAC
+^^^^^^^^^^^
+
+:py:func:`hashlib.pbkdf2_hmac` permet de fortement
+hacher un mot-de-passe. Cette fonction utilise une fonction pseudo-random de :py:mod:`hmac`.
 Le fonctionnement de ce hachage est basé sur l'utilisation d'un type de hachage
 vu précédemment, un sel ainsi qu'un nombre d'itérations correspondant au
 type du hachage choisi (nous observons que cela diminue fortement la vitesse de
-ce hachage). Voici un exemple simple venant de la documentation de :py:mod:`hashlib`
-(hexlify encode la valeur binaire en héxadécimale).
+ce hachage). Voici un exemple simple venant de la documentation de :py:mod:`hashlib`.
 
 .. code-block:: pycon
 
-    >>> import hashlib, binascii
+    >>> import hashlib
     >>> dk = hashlib.pbkdf2_hmac('sha256', b'password', b'salt', 100000)
     >>> binascii.hexlify(dk)
     b'0394a2ede332c9a13eb82e9b24631604c31df978b4e2f0fbd2c549944f9d79a5'
+
+.. sha256 et 100000 sont des valeurs recommandées.
+
+BLAKE 2
+^^^^^^^
 
 Maintenant que la parenthèse est fermée, nous pouvons aborder le sujet de Blake 2.
 Ce dernier permet de résoudre un bon éventail de problèmes concernant l'adressage
@@ -183,24 +193,29 @@ d'obtenir des signatures différentes pour une même donnée.
 Finalement, il peut mettre en place une personnalisation de son hachage,
 cette démarche est fortement conseillée car il a été remarqué que la signature de
 données connexes facilite l'attaque et le forçage de ces dernières. C'est pour cela,
-que nous pouvons utiliser le paramètre person qui va lui aussi donner des
+que nous pouvons utiliser le paramètre ``person`` qui va lui aussi donner des
 signatures distinctes pour une seule et même donnée. L'avantage d'utiliser ce
-paramètre est que nous pouvons utiliser une même taille de digest ou une même clé !!
+paramètre est que nous pouvons utiliser une même taille de digest ou une même clé !
 
 Un exemple pertinant serait celui des cookies, car c'est une obligation pour
-tout développeur web de signer ce type de données sensible.
+tout développeur web de signer ce type de données modifiables.
 
 Ce dernier ressemble beaucoup à son précédent, nous voulons ici spécialement
 montrer la force de blake2 qui permet une personnalisation poussée de notre hachage.
 
 .. literalinclude:: ./examples/exemple_blake2.py
   :linenos:
-  :lines: 14-18
+  :lines: 15-19
 
 Précisément cette fonction, où nous voyons bien la personnalisation lors de
 l'inisalisation. Cette dernière se fait précisément en fonction de la personne
 s'étant identifiée, de cette manière, en même temps que nous hachons le cookie,
 on pourra vérifier l'authenticité de l'utilisateur.
+
+.. todo::
+
+    Le code initial casse si l'utilisateur a un nom trop long. L'explication sur
+    la personnalisation me parait fausse. Voir: https://blake2.net/blake2.pdf
 
 Conclusion
 ----------
@@ -217,12 +232,12 @@ Il ne suffit pas d'implémenter sans réfléchir du hachage avec ce module mais 
 savoir comment manipuler ces fonctions et en faire quelque chose de solide afin
 de se protéger d'attaques extérieures.
 
-Cependant, utilisé uniquement hashlib risque de ne pas suffire à la bonne sécurité
-d'une application. Rien que dans mes exemples j'ai eu besoin d'utiliser la fonction
-:py:func:`~hmac.compare_digest` afin de comparer deux signatures. Car le "==" n'est simplement
-pas suffisant et assez solide à cause des temps de comparaisons.
-Le meilleur moyen est donc de coupler ces modules tel que `hmac` ou autres afin
-d'avoir une application viable et stable.
+Cependant, utilisé uniquement hashlib risque de ne pas suffire à la bonne
+sécurité d'une application. Rien que dans mes exemples j'ai eu besoin
+d'utiliser la fonction :py:func:`~hmac.compare_digest` afin de comparer deux
+signatures. Car le ``==`` n'est simplement pas suffisant et assez solide à
+cause des temps de comparaisons. Le meilleur moyen est donc de coupler ces
+modules tel que `hmac` ou autres afin d'avoir une application viable et stable.
 
 .. [#pc] <pedro.costa@he-arc.ch>
 
@@ -230,6 +245,6 @@ d'avoir une application viable et stable.
 
 .. _FIPS 180-2: http://csrc.nist.gov/publications/fips/fips180-2/fips180-2.pdf
 .. _hachage: https://fr.wikipedia.org/wiki/Fonction_de_hashage
-.. _cryptage: https://fr.wikipedia.org/wiki/Chiffrement
+.. _chiffrement: https://fr.wikipedia.org/wiki/Chiffrement
 .. _BLAKE2: https://blake2.net/blake2_20130129.pdf
 .. _SHAKE: https://docs.python.org/3/library/hachlib.html#shake-variable-length-digests
