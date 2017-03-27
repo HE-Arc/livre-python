@@ -24,11 +24,11 @@ Bases
    dunders/index
    enum/index
    fstrings/index
+   itertools/index
    io/index
    time/index
    super/index
 
-* :ref:`itertools-tutorial` ★
 * :ref:`random-tutorial` ★
 * :ref:`math-tutorial`
 * :ref:`secrets-tutorial` ★
