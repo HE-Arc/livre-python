@@ -19,11 +19,11 @@ Bases
 .. toctree::
    :maxdepth: 1
 
+   builtins/index
    enum/index
    time/index
    fstrings/index
 
-* :ref:`builtins-tutorial`
 * :ref:`dunder-tutorial`
 * :ref:`collections-tutorial`
 * :ref:`io-tutorial`

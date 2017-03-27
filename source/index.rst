@@ -10,7 +10,6 @@ Table des matières
 .. toctree::
    :maxdepth: 1
 
-   builtins/index.rst
    dunders/index.rst
    super/index.rst
    abc/index.rst
@@ -43,7 +42,7 @@ Table des matières
 
 :Auteurs:
 
- - Adrien Mendes <adrien.mendes@he-arc.ch>
+ - Adrien Ferreira Mendes <adrien.mendes@he-arc.ch>
  - André Neto Da Silva <andre.netodasilva@he-arc.ch>
  - Anthony Fleury <anth.fleury@gmail.com>
  - Anthony Gillioz <anthony.gillioz@he-arc.ch>

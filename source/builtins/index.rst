@@ -1,8 +1,8 @@
 .. _builtins-tutorial:
 
-=========
+========
 Builtins
-=========
+========
 
 Par Adrien Ferreira Mendes [#afm]_
 
@@ -10,20 +10,22 @@ Par Adrien Ferreira Mendes [#afm]_
 Introduction
 -------------
 
-L'interpréteur Python contient des fonctions et classes "embarquées" qui sont disponibles dans n'importe quel section d'un script. Cette section du livre va donc présenter ces différentes classes et fonctions avec une brève explication et des exemples pour rendre leur compréhension et utilisation plus claire.
+L'interpréteur Python contient des fonctions et classes *"embarquées"* qui sont disponibles dans n'importe quel section d'un script. Cette section du livre va donc présenter ces différentes classes et fonctions avec une brève explication et des exemples pour rendre leur compréhension et utilisation plus claire.
 
-Dans une première partie se trouvera la présentation des différentes classes puis une deuxième partie traitera des fonctions qui font aussi parties des "builtins". Il a été choisit de décrire le plus de fonctions possible par ordre alphabétique pour atteindre le maximum de sept pages. Cette section est beaucoup inspirée de la documentation officielle en anglais des "builtins" de python [#python]_
+Dans une première partie se trouvera la présentation des différentes classes puis une deuxième partie traitera des fonctions qui font aussi parties des "builtins". Il a été choisit de décrire le plus de fonctions possible par ordre alphabétique pour atteindre le maximum de sept pages. Cette section est beaucoup inspirée de la documentation officielle en anglais des "builtins" de python: :ref:`built-in-funcs`.
 
-============
+===========
 Les classes
-============
+===========
 
 .. _bool:
 
 ------------------
 *class* bool([x])
 ------------------
-Retourne une valeur booléenne entre True ou False. Si x est faut ou est omis, retourne False. Sinon la classe retourne vrai. Cette classe hérite de la classe :ref:`int <int>` , elle ne peut pas être héritée et ces seules instances sont True ou false.
+Retourne une valeur booléenne entre ``True`` ou ``False``. Si ``x`` est faux ou est omis, retourne False. Sinon la classe retourne vrai. Cette classe hérite de la classe :ref:`int <int>` , elle ne peut pas être héritée et ces seules instances sont ``True`` ou ``False``.
+
+.. il aurait été intéressant de montrer quoi est True et quoi est False. en fonction de `x`.
 
 .. _bytearray:
 
@@ -124,12 +126,14 @@ Retourne vrai si tout les éléments de l'iterable sont vrai ou si  il est vide.
 Voici l'algorithme de all:
 
 .. code-block:: pycon
-   
+
    >>> def all(iterable)
           for element in iterable
              if not element:
                 return False
           return True
+
+.. todo:: exemple cassé.
 
 .. _any:
 
@@ -140,13 +144,14 @@ Retourne vrai si un des éléments de la table
 est vrai. Retourne faux si l'itérable est vide.
 
 .. code-block:: pycon
-   
+
    >>> def all(iterable)
           for element in iterable
              if  element:
                 return True
           return False
 
+.. todo:: exemple cassé.
 
 .. _ascii:
 
@@ -160,7 +165,7 @@ Retourne un string qui contient une représentation affichable d'un objet mais �
 ---------
 bin(*nb*)
 ---------
-Convertit un entier en binaire. Si nb n'est pas un objet :ref:`int <int>` Python, il doit définir une méthode _index_()  qui retourne un entier
+Convertit un entier en binaire. Si nb n'est pas un objet :ref:`int <int>` Python, il doit définir une méthode ``__index__()``  qui retourne un entier
 
 
 .. _callable:
@@ -211,7 +216,7 @@ Si l'objet possède une méthode _dir_(), cette méthode sera appelée et devra 
 -------------
 divmod(*a,b*)
 -------------
-Prends les deux nombres non-complexes passés en paramètre et retourne leurs quotients et le reste. 
+Prends les deux nombres non-complexes passés en paramètre et retourne leurs quotients et le reste.
 
 .. _enumerate:
 
@@ -221,7 +226,7 @@ enumerate(*iterable,start=0*)
 Retourne un objet *enumerate*, le paramètre *iterable* doit être un iterateur ou un objet qui supporte l'itération. La méthode _next_() retournée par enumerate est composée de deux éléments, un index et la valeur de l'index.
 
 .. code-block:: pycon
-   
+
    >>> saison = ['Eté', 'Printemps','Automne','Hiver']
    >>> list(enumerate(saison))
    [(0,'Eté'),(1,'Printemps'),(2,'Automne'),(3,'Hiver')]
@@ -303,13 +308,13 @@ hex(*x*)
 Convertit un nombre entier en une chaine hexadécimale préfixée par "0x" par exemple:
 
 .. code-block:: pycon
-   
+
    >>> hex(255)
    '0xff'
    >>> hex(-42)
    '0x2a'
 
-Si l'entier n'est pas un entier Python, il doit définir une méthode _index_() qui retourne un entier.
+Si l'entier n'est pas un entier Python, il doit définir une méthode ``__index__()`` qui retourne un entier.
 
 .. _id:
 
@@ -328,11 +333,13 @@ Permet d'ajouter du texte supplémentaire à une chaine de caractères avant l'a
 Exemple: 
 
 .. code-block:: pycon
-   
+
    >>> str = input('J'aime')
    J'aime le chocolat au lait!
    >>> s
    le chocolat au lait!
+
+.. todo:: Cet exemple est cassé.
 
 .. _isinstance:
 
@@ -354,6 +361,8 @@ Retourne un objet *iterator*. Le premier argument est interprété très différ
 len(s)
 ---------
 Retourne la taille (le nombre d'attributs) d'un objet. L'argument s peut être une séquence comme un string, des bytes ou une liste. Il peut aussi être une collection comme un dictionnaire ou un set.
+
+.. très imprécis. http://lucumr.pocoo.org/2011/7/9/python-and-pola/
 
 .. _locals:
 
@@ -381,7 +390,10 @@ Retourne le plus grand objet d'un itérable composé de tout les objets de *arg1
 -----------------
 memoryview(*obj*)
 -----------------
+
 Retourne une "memory view" d'un objet créé à partir de *obj* passé en argument.
+
+.. memoryview est une classe, cette fonction est un constructeur.
 
 .. _min:
 
@@ -396,7 +408,7 @@ Retourne le plus petit objet d'un itérable composé de tout les objets de *arg1
 ---------------------------
 next(*iterator[, default]*)
 ---------------------------
-Donne le prochain item d'*iterator* en appelant sa fonction _next_().
+Donne le prochain item d'*iterator* en appelant sa fonction ``__next_()``.
 
 
 
@@ -405,7 +417,7 @@ Donne le prochain item d'*iterator* en appelant sa fonction _next_().
 ---------
 oct(*x*)
 ---------
-Convertit un entier en octale. Si x n'est pas un entier Python il doit avoir définit une méthode _index_() qui retourne un entier.
+Convertit un entier en octale. Si x n'est pas un entier Python il doit avoir définit une méthode ``__index__()`` qui retourne un entier.
 
 .. _open:
 
@@ -419,20 +431,20 @@ Ouvre un fichier et retourne le *file object* correspondant. Si le fichier ne pe
 mode est un paramètre qui permet de déterminer le mode d'ouverture du fichier. Par défaut le mode 'r' est choisi. Ce qui signifie que le fichier est ouvert en lecture. Un autre mode commun est 'w' pour passer en mode écriture.
 
 * **'r'** - Ouvert en lecture
-* **'w'** - Ouvert en écriture 
+* **'w'** - Ouvert en écriture
 * **'x'** - Ouvert en création, échoue si le fichier existe déjà
 * **'b'** - Mode binaire
 * **'t'** - Mode texte (par défaut)
 * **'+'** - Ouvre un fichier disque en écriture et lecture
 
+Voir: :ref:`io-tutorial`
+
 ==========
 Conclusion
 ==========
+
 Malheureusement, ce document ne contient pas une liste exhaustive de toutes les classes et fonctions inclue dans l’interpréteur Python. En effet, la limite de page pour chaque article ne permettait pas de toutes les décrire de façon complète.
 
 Pour conclure, les fonctions et classes présentées dans cette section font parties des plus basiques et les plus utilisées des commandes. La plupart du temps, nous les utilisons sans trop réfléchir à leur implémentation ou bien même sans savoir tout les possibilités quelles détiennent. En effet il est parfois intéressant de regarder la documentation pour pouvoir exploiter le plein potentiel de certaines classes ou fonctions.
 
 .. [#afm] <adrien.ferreiramendes@he-arc.ch>
-.. [#python] https://docs.python.org/3/library/functions.html#built-in-funcs
-
-
