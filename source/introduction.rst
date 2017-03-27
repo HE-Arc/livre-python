@@ -40,11 +40,11 @@ Avancé
 .. toctree::
    :maxdepth: 1
 
+   abc/index
    email/index
    hashlib/index
    weakref/index
 
-* :ref:`abc-tutorial`
 * :ref:`multiprocessing-tutorial`
 * :ref:`re-tutorial`
 

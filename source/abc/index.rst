@@ -3,7 +3,7 @@
 Abstract Base Class
 ===================
 
-Par Sylvain Renaud <sylvain.renaud@he-arc.ch>
+Par Sylvain Renaud [#sr]_
 
 Introduction
 ------------
@@ -43,6 +43,11 @@ Nous voulons donc pouvoir faire cela.
 
 Pour cela, il faut une classe abstraite Shape
 
+.. todo::
+
+    Ceci est faux. Python utilise le *Duck Typing* qui n'oblige persone à
+    utiliser une interface ou une classe abstraite pour que ce code fonctionne.
+
 .. code-block:: python
 
    class Shape(metaclass=abc.ABCMeta):
@@ -52,9 +57,13 @@ Pour cela, il faut une classe abstraite Shape
       @abc.abstractmethod
       def calculateArea():
          """Calcul l'aire. Méthode abstraite."""
-         pass
 
 Ensuite, on créé une classe ``Rectange`` qui implémente (hérite de) ``Shape``.
+
+.. todo::
+
+    Évitez de mélanger les termes liés à l'héritage à la réalisation d'une
+    interface.
 
 .. code-block:: python
 
@@ -104,6 +113,10 @@ Les classes abstraites peuvent également être utilisées pour créer sa propre
 En implémentant par exemple ``collections.abc.Sequence`` (une classe abstraite built-in de Python),
 nous devrons redéfinir quelques méthodes qui permettront d'utiliser notre classe comme une liste.
 Nous pouvons par des assertions vérifier les éléments de cette liste pour qu'ils soient tous du même type.
+
+.. todo::
+
+    L'héritage multiple et les mixin's permettent ceci.
 
 Prenons comme exemple une classe ``Garage`` qui contient une liste de ``Voiture``.
 
@@ -161,3 +174,7 @@ Les classes abstraite en python permettent de créer nos propres structures de d
 comportant comme les classes fournies (built-in).
 Grâce aux instructions ``isinstance`` et ``issubclass`` nous pouvons vérifier directement le type d'une variable.
 Cela permet, par exemple, de pouvoir utiliser la classe garage comme une liste.
+
+.. Je ne suis pas sûr que vous aillez compris...
+
+.. [#sr] <sylvain.renaud@he-arc.ch>
