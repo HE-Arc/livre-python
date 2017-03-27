@@ -22,8 +22,9 @@ Bases
    builtins/index
    dunders/index
    enum/index
-   time/index
    fstrings/index
+   time/index
+   super/index
 
 * :ref:`collections-tutorial`
 * :ref:`io-tutorial`
@@ -32,7 +33,6 @@ Bases
 * :ref:`math-tutorial`
 * :ref:`secrets-tutorial` ★
 * :ref:`statistics-tutorial`
-* :ref:`super-tutorial`
 
 Avancé
 ------
