@@ -1,5 +1,6 @@
 .. _csv-tutorial:
 
+=======
 ``csv``
 =======
 
@@ -35,14 +36,10 @@ Représentation tabulaire :
 
 Il existe des différences de format parmi les applications utilisant CSV puisqu'il n'a pas été standardisé. Les guillemets peuvent par exemple être omis et les points virgules remplacé par des virgules. Toutefois, la RFC 41802 [#rfc]_ décrit la forme la plus courante.
 
-Module :py:mod:`csv`
-====================
+Exemples
+========
 
-Le module :py:mod:`csv` python implémente des classes permettant de facilement lire et écrire des fichiers au format CSV. Pour tous les exemples qui suivent, il ne faudra pas oublier d'importer ce module avec :
-
-.. literalinclude:: examples.py
-    :start-after: func:import
-    :end-before: endfunc:import
+Le module :py:mod:`csv` python implémente des classes permettant de facilement lire et écrire des fichiers au format CSV.
 
 Lecture
 *******
@@ -55,11 +52,13 @@ L'exemple ci-dessous illustre la lecture d'un fichier CSV nommé "data.csv". Dan
 
 Il est possible de ne lire qu'une ou plusieurs colonnes en utilisant l'opérateur ``[]``.
 
+.. car ``row`` est une séquence, rien d'exceptionnel à celà.
+
 .. literalinclude:: examples.py
     :start-after: func:readcol
     :end-before: endfunc:readcol
 
-Il est commun de spécifier des en-têtes au dessus de chaque colonne, comme sur l'exemple de fichier CSV ci-dessous avec les en-têtes FirstColumn et SecondColumn. [#stack]_
+Il est commun de spécifier des entêtes au dessus de chaque colonne, comme sur l'exemple de fichier CSV ci-dessous avec les entêtes FirstColumn et SecondColumn. [#stack]_
 
 .. code-block:: text
 
@@ -69,11 +68,13 @@ Il est commun de spécifier des en-têtes au dessus de chaque colonne, comme sur
 
 Pour les ignorer lors de la lecture, il suffit de passer la première ligne avec la fonction :py:func:`next()` :
 
+.. à quoi sert None?
+
 .. literalinclude:: examples.py
     :start-after: func:readskip
     :end-before: endfunc:readskip
 
-Ou alors en utilisant un :py:class:`~csv.DictReader`, qui permettra de lire chaque colonne en spécifiant son en-tête plutôt que son index numérique :
+Ou alors en utilisant un :py:class:`~csv.DictReader`, qui permettra de lire chaque colonne en spécifiant son entête plutôt que son index numérique :
 
 .. literalinclude:: examples.py
     :start-after: func:readdict

@@ -62,7 +62,11 @@ Tests
 Traitement des données
 ----------------------
 
-* :ref:`csv-tutorial`
+.. toctree::
+   :maxdepth: 1
+
+   csv/index
+
 * :ref:`json-tutorial` ★
 * :ref:`pillow-tutorial` ★
 

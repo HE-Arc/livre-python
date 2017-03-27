@@ -10,7 +10,6 @@ Table des matières
 .. toctree::
    :maxdepth: 1
 
-   csv/index.rst
    io/index.rst
    itertools/index.rst
    invoke/index.rst
