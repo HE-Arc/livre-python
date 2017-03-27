@@ -20,11 +20,11 @@ Bases
    :maxdepth: 1
 
    builtins/index
+   dunders/index
    enum/index
    time/index
    fstrings/index
 
-* :ref:`dunder-tutorial`
 * :ref:`collections-tutorial`
 * :ref:`io-tutorial`
 * :ref:`itertools-tutorial` ★

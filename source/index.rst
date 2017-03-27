@@ -10,7 +10,6 @@ Table des matières
 .. toctree::
    :maxdepth: 1
 
-   dunders/index.rst
    super/index.rst
    abc/index.rst
    collections/index.rst
