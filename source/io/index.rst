@@ -1,9 +1,10 @@
 .. _io-tutorial:
 
-io
-==
+======
+``io``
+======
 
-Par Dylan Santos de Pinho [#yb]_
+Par Dylan Santos de Pinho [#ds]_
 
 Introduction
 ------------
@@ -13,12 +14,13 @@ que ce soit pour écrire avec des données en byte(string) ou avec des
 données en binaire. :py:mod:`io` est le module par défaut pour gérer les flux et les fichiers en
 python 3.\*.
 
+.. Quelle différence entre bytes et binaire?
+
 Ouverture de fichier
 --------------------
 
-On utilise ``open`` pour ouvrir un fichier. Il retourne le flux
-correspondant si le fichier s'ouvre, sinon une exception ``OSError``
-(anciennement ``IOError`` qui devient un alias de ``OSError``) est levée.
+On utilise :py:func:`open` pour ouvrir un fichier. Il retourne le flux
+correspondant si le fichier s'ouvre, sinon une exception ``OSError`` est levée.
 
 
 .. code-block:: python3
@@ -175,7 +177,4 @@ Conclusion
 modifier les fichiers. Ce document ne cite que les méthodes les plus courantes, il ne faut
 pas hésiter à aller voir la documentation officielle de :py:mod:`io`.
 
-.. [#yb] <dylan.santosdepinho@he-arc.ch>
-
-.. Bibliographie
-.. https://docs.python.org/3/library/io.html
+.. [#ds] <dylan.santosdepinho@he-arc.ch>

@@ -24,10 +24,10 @@ Bases
    dunders/index
    enum/index
    fstrings/index
+   io/index
    time/index
    super/index
 
-* :ref:`io-tutorial`
 * :ref:`itertools-tutorial` ★
 * :ref:`random-tutorial` ★
 * :ref:`math-tutorial`
