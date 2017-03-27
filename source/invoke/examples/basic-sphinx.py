@@ -1,10 +1,9 @@
 """Module basic sphinx generation."""
 
-
-from invoke import run, task
+from invoke import task
 
 
 @task
 def html(ctx):
-    """Generation de l'html en fonction des rst."""
+    """Génération de la documentation Sphinx en HTML."""
     ctx.run("sphinx-build -b html source build/html")

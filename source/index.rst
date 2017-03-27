@@ -10,7 +10,6 @@ Table des matières
 .. toctree::
    :maxdepth: 1
 
-   invoke/index.rst
    json/index.rst
    math/index.rst
    multiprocessing/index.rst

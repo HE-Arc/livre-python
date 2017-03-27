@@ -51,6 +51,11 @@ Avancé
 Ligne de commande
 -----------------
 
+.. toctree::
+   :maxdepth: 1
+
+   invoke/index
+
 * :ref:`colorama-tutorial`
 
 Tests
@@ -66,8 +71,8 @@ Traitement des données
    :maxdepth: 1
 
    csv/index
+   json/index
 
-* :ref:`json-tutorial` ★
 * :ref:`pillow-tutorial` ★
 
 Autres
@@ -81,6 +86,5 @@ Autres
    pycrypto/index
    pygame/index
 
-* :ref:`invoke-tutorial`
 * :ref:`sphinx-tutorial`
 * :ref:`watchdog-tutorial`
