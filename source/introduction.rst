@@ -20,13 +20,13 @@ Bases
    :maxdepth: 1
 
    builtins/index
+   collections/index
    dunders/index
    enum/index
    fstrings/index
    time/index
    super/index
 
-* :ref:`collections-tutorial`
 * :ref:`io-tutorial`
 * :ref:`itertools-tutorial` ★
 * :ref:`random-tutorial` ★

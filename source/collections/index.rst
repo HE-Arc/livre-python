@@ -1,16 +1,16 @@
 .. _collections-tutorial:
 
-=============
- Collections
-=============
+===============
+``collections``
+===============
 
-Par Cédric Pahud <cedric.pahud@he-arc.ch>
+Par Cédric Pahud [#cp]_
 
 --------------
  Introduction
 --------------
 
-:py:mod:`collections` contient des conteneurs de donées spécialisés qui offrent une alternative aux conteneurs généraux de python.
+:py:mod:`collections` contient des conteneurs de données spécialisés qui offrent une alternative aux conteneurs généraux de python.
 Ces conteneurs vont souvent plus loin que les conteneurs de données *built-in* et ont des fonctionnalités plus avancées que nous allons voir ici.
 
 Voici donc les conteneurs dont nous allons parler:
@@ -43,18 +43,19 @@ un tuple est une collection immuable de données souvent hétérogène.
 
   >>> t = ("cheval", "voiture", "bateau")
   >>> t
-  ('cheval', 'voiture','bateau')
+  ('cheval', 'voiture', 'bateau')
   >>> t[0]
   'cheval'
   >>> t[-1]
   'voiture'
+
+.. todo:: c'est exemple ne fonctionne pas comme montré.
 
 ci-dessus on remarque qu'on peut atteindre les champs de notre tuple seulement en spécifiant son index.
 En utilisant la fonction ``namedtuple()`` pour créer notre tuple, on peut nommer ses champs.
 
 .. code-block:: pycon
 
-  >>> # exemple namedtuple
   >>> Point = namedtuple('Point', ['x', 'y'])
   >>> p = Point(11, y=22)     # instanciation par position ou en utilisant le nom du champs
   >>> p[0] + p[1]             # indexable comme les tuples de base (11, 22)
@@ -62,10 +63,12 @@ En utilisant la fonction ``namedtuple()`` pour créer notre tuple, on peut nomme
   >>> x, y = p                # on peut le diviser en plusieurs variables (comme un tuple normal)
   >>> x, y
   (11, 22)
-  >>> p.x + p.y               # les champs sont accessible par nom
+  >>> p.x + p.y               # les champs sont accessibles par nom
   33
   >>> p                       # lisible dans un style nom=valeur
   Point(x=11, y=22)
+
+.. diviser?
 
 ~~~~~~~~~~~~~~~~~~
 quelques fonctions
@@ -79,8 +82,14 @@ cette fonction permet de créer un tuple a partir d'un objet *iterable*.
 .. code-block:: pycon
 
   >>> t = [11, 22]
+
+  >>> Point(*t)
+  Point(11, 12)
+
   >>> Point._make(t)
   Point(x=11, y=22)
+
+.. sans _make ça fonctionne aussi.
 
 mytuple._asdict()
 #################
@@ -93,16 +102,20 @@ cette fonction retourne un nouveau OrderedDict qui *map* les noms de champs avec
   >>> p._asdict()
   OrderedDict([('x', 11), ('y', 22)])
 
+.. pourquoi pas un `dict` normal?
+
 mytuple._replace(key=args)
 ##########################
 
-cette fonction permet de retourner une nouvelle insatnce de notre tuple avec une valeures modifiée.
+cette fonction permet de retourner une nouvelle instance de notre tuple avec une valeures modifiée.
 
 .. code-block:: pycon
 
   >>> p = Point(x=11, y=22)
   >>> p._replace(x=33)
-  Point(x=33, y=22
+  Point(x=33, y=22)
+
+.. et pourquoi pas ``p.x = 33`` ?
 
 mytuple._fields
 ###############
@@ -209,8 +222,8 @@ Dans cet exemple on remarque que la clé b a pris la valeur 10 et pas 2 car
 Counter
 -------
 
-:py:class:`collections.Counter` est une sous classe de `dict`_
-qui permet de compter des objets *hachable*. Enfaite c'est un dictionnaire avec comme clé les
+:py:class:`collections.Counter` est une sous classe de :py:class:`dict`.
+qui permet de compter des objets *hachable*. En fait c'est un dictionnaire avec comme clé les
 éléments et comme valeurs leur nombre.
 
 ``class collections.Counter([iterable-or-mapping])`` ceci nous retourne un Counter. L'argument
@@ -274,15 +287,15 @@ permet de soustraire des éléments d'un compteur (mais pas de les supprimer) :
 OrderedDict
 -----------
 
-les :py:class:`collections.OrderedDict` sont comme les `dict`_
+les :py:class:`collections.OrderedDict` sont comme les :py:class:`dict`.
 mais ils se rappelent l'ordre d'entrée des valeurs. Si on itère dessus les données seront
 retournées dans l'ordre d'ajout dans notre dict.
 
 ``class collections.OrderedDict([items])`` cette fonction nous retourn un OrderedDict.
 
-~~~~~~~~~~~~~~~~~~
-quelques fonctions
-~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~
+Quelques méthodes
+~~~~~~~~~~~~~~~~~
 
 popitem(last=True)
 ##################
@@ -311,17 +324,17 @@ last est à ``True`` sinon au début de notre dict.
 defaultdict
 -----------
 
-La classe :py:class:`collections.defaultdict` est une sous classe de `dict`_.
-Elle rajoute une variable et une fonction à la classe `dict`_.
+La classe :py:class:`collections.defaultdict` est une sous classe de :py:class:`dict`.
+Elle ajoute une variable et une fonction à la classe :py:class:`dict`.
 ``class collections.defaultdict([default_factory[, ...]])`` cette commande nous retourne un objet
 de type defaultdict.L'argument ``default_factory`` est par défaut à ``None`` et les reste des arguments
 sont traité comme si on utilisait le constructeur de dict.
 
 La fonction ajoutée par defaultdict est ``__missing(key)__`` elle est appelée par ``__getitem()__`` de la
-classe `dict`_.
+classe :py:class:`dict`.
 
 l'argument ``default_factory`` permet de spécifier quelle structure de données va correspondre
-à une clé dans notre defaultdict. Voici 2 exemples pour mieu comprendre:
+à une clé dans notre defaultdict. Voici 2 exemples pour mieux comprendre:
 
 .. code-block:: pycon
 
@@ -333,7 +346,7 @@ l'argument ``default_factory`` permet de spécifier quelle structure de données
   >>> sorted(d.items())
   [('blue', [2, 4]), ('red', [1]), ('yellow', [1, 3])]
 
-Dans cette exemple on initialise ``default_factory`` comme une list ce qui nous permet d'utiliser
+Dans cette exemple on initialise ``default_factory`` comme une :py:class:`list` ce qui nous permet d'utiliser
 ``append()`` pour ajouter des éléments à la liste correspondant à une clé donnée.
 
 .. code-block:: pycon
@@ -349,6 +362,8 @@ Dans cette exemple on initialise ``default_factory`` comme une list ce qui nous 
 Dans cet exemple on va utiliser un int au lieu d'une liste et notre defaultdict
 va s'utiliser comme un compteur.
 
+.. todo:: cette exemple ferait mieux d'utilise :py:class:`~collections.Counter`.
+
 ----------
 Conclusion
 ----------
@@ -360,4 +375,4 @@ sagement votre conteneur en fonction de votre problème pour vous simplifier la 
 
     -- Maître Yoda
 
-.. _dict: https://docs.python.org/3.6/tutorial/datastructures.html#dictionaries
+.. [#cp] <cedric.pahud@he-arc.ch>
