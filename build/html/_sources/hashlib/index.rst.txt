@@ -1,5 +1,0 @@
-.. _hashlib-tutorial:
-
-===========
-``hashlib``
-===========
