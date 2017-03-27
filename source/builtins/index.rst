@@ -6,15 +6,13 @@ Builtins
 
 Par Adrien Ferreira Mendes [#afm]_
 
--------------
 Introduction
--------------
+============
 
 L'interpréteur Python contient des fonctions et classes *"embarquées"* qui sont disponibles dans n'importe quel section d'un script. Cette section du livre va donc présenter ces différentes classes et fonctions avec une brève explication et des exemples pour rendre leur compréhension et utilisation plus claire.
 
 Dans une première partie se trouvera la présentation des différentes classes puis une deuxième partie traitera des fonctions qui font aussi parties des "builtins". Il a été choisit de décrire le plus de fonctions possible par ordre alphabétique pour atteindre le maximum de sept pages. Cette section est beaucoup inspirée de la documentation officielle en anglais des "builtins" de python: :ref:`built-in-funcs`.
 
-===========
 Les classes
 ===========
 
@@ -105,7 +103,6 @@ Retourne un objet entier  construit grâce à un nombre ou à une chaine de cara
 --------------
 Retourne un nouvel objet dépourvu de fonctionnalité. C'est une base à toute les classes. Cette classe contient toutes les méthodes communes à toute les classes Python. Le constructeur de la classe  n'accepte aucun argument.
 
-==============
 Les fonctions
 ==============
 
@@ -439,7 +436,6 @@ mode est un paramètre qui permet de déterminer le mode d'ouverture du fichier.
 
 Voir: :ref:`io-tutorial`
 
-==========
 Conclusion
 ==========
 
