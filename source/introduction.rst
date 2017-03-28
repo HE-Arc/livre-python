@@ -73,8 +73,7 @@ Traitement des données
 
    csv/index
    json/index
-
-* :ref:`pillow-tutorial` ★
+   pillow/index
 
 Autres
 ------

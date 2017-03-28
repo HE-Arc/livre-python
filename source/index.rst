@@ -10,7 +10,6 @@ Table des matières
 .. toctree::
    :maxdepth: 1
 
-   pillow/index.rst
    pytest/index.rst
    sphinx/index.rst
    watchdog/index.rst
