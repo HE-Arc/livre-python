@@ -1,6 +1,3 @@
-.. py:module:: colorama
-.. py:currentmodule:: colorama
-
 .. _colorama-tutorial:
 
 ``colorama``
@@ -17,7 +14,7 @@ La bibliothèque externe de python colorama est la pour palier à ce problème e
 
 Grace à colorama, il est possible à de nombreuses bibliothèques se basant sur les caractères d'échappement ANSI d'être utilisées sur Windows.
 
-Pour résumer, ``colorama`` est une bibliothèque Python multiplateforme pour afficher des terminaux colorés.
+Pour résumer, :py:mod:`colorama` est une bibliothèque Python multiplateforme pour afficher des terminaux colorés.
 
 Exemples
 --------
@@ -36,9 +33,16 @@ Pour commencer avant d'utiliser colorama il faut importer les fonctionnalités d
 
 On peut ensuite utiliser les diverses fonctionnalités :
 
-- :py:class:`Fore` : permet de changer la couleur de l'arrière-plan,
-- :py:class:`Back` : permet de changer la couleur de l'écriture,
-- :py:class:`Style` : permet de changer la brillance de la police.
+- :py:class:`Fore <colorama.ansi.AnsiFore>` : permet de changer la couleur de l'arrière-plan,
+- :py:class:`Back <colorama.ansi.AnsiBack>` : permet de changer la couleur de l'écriture,
+- :py:class:`Style <colorama.ansi.AnsiStyle>` : permet de changer la brillance de la police.
+
+Et la liste des attributs associés ::
+
+       Fore: BLACK, RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, WHITE, RESET.
+       Back: BLACK, RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, WHITE, RESET.
+       Style: DIM, NORMAL, BRIGHT, RESET_ALL
+
 
 Utilisation :
 
@@ -56,7 +60,7 @@ Pour arrêter colorama avant la fin du programme il suffit d'appeler deinit() :
     >>> deinit()
 
 
-Avant l’arrêt, colorama va appeler :py:attr:`~Style.RESET_ALL` afin de rétablir le style initial.
+Avant l’arrêt, colorama va appeler :py:attr:`~colorama.ansi.AnsiStyle.RESET_ALL` afin de rétablir le style initial.
 
 Déplacement du curseur
 **********************
@@ -99,89 +103,6 @@ Il est également possible de l'utiliser en *standalone* pour certaines applicat
 Malheureusement en l'état actuel, il y a encore un grand nombre de séquences non prises en charge, ceci est toutefois probablement amené à changer étant donné que :py:mod:`colorama` est mis à jour régulièrement.
 
 .. séquences non pris en charge? Avez-vous des exemples?
-
-Classes
--------
-
-.. py:class:: Fore
-
-    .. py:attribute:: BLACK
-
-        ``30``
-
-    .. py:attribute:: RED
-
-        ``31``
-
-    .. py:attribute:: GREEN
-
-        ``32``
-
-    .. py:attribute:: YELLOW
-
-        ``33``
-
-    .. py:attribute:: BLUE
-
-        ``34``
-
-    .. py:attribute:: MAGENTA
-
-        ``35``
-
-    .. py:attribute:: CYAN
-
-        ``36``
-
-    .. py:attribute:: WHITE
-
-        ``37``
-
-    .. py:attribute:: RESET
-
-        ``39``
-
-
-    et des extensions ne faisant pas partie du standard.
-
-    .. py:attribute:: LIGHTBLACK_EX
-
-        ``90``
-
-    *etc.*
-
-.. py:class:: Back
-
-    .. py:attribute:: BLACK
-    .. py:attribute:: RED
-    .. py:attribute:: GREEN
-    .. py:attribute:: YELLOW
-    .. py:attribute:: BLUE
-    .. py:attribute:: MAGENTA
-    .. py:attribute:: CYAN
-    .. py:attribute:: WHITE
-    .. py:attribute:: RESET
-
-    *etc.*
-
-.. py:class:: Style
-
-    .. py:attribute:: DIM
-
-        ``1``
-
-    .. py:attribute:: NORMAL
-
-        ``2``
-
-    .. py:attribute:: BRIGHT
-
-        ``22``
-
-    .. py:attribute:: RESET_ALL
-
-        ``0``
-
 
 .. [#contact] <killian.castella@he-arc.ch>
 
