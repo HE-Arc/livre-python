@@ -1,8 +1,8 @@
 .. _multiprocessing-tutorial:
 
-===============
-Multiprocessing
-===============
+===================
+``multiprocessing``
+===================
 
 Par Laurent Gander [#gl]_
 
