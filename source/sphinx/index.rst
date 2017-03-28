@@ -321,7 +321,12 @@ Finalement, la documentation se fait en invoquant::
         :members:
 
 Ainsi, lors de la compilation avec sphinx-build, Sphinx extraira les docstrings des classes concernées, générant ainsi une doc automatique.
-Néanmoins, cette méthode comporte un soucis évident : on doit quand même inclure tous les modules et classes manuellement, et ça c'est tout pourri.
+Nous nous retrouvons donc avec une chatoyante doc : 
 
+.. image:: img/flappydoc.png
+   :alt: a fine doc
+   :align: center
+
+Néanmoins, cette méthode comporte un soucis évident : on doit quand même inclure tous les modules et classes manuellement, et ça c'est tout pourri.
 Heureusement, un utilisateur a créé un script remédiant à ce soucis : il s'agit d'apidoc. 
     
