@@ -44,9 +44,8 @@ Avancé
    email/index
    hashlib/index
    multiprocessing/index
+   re/index
    weakref/index
-
-* :ref:`re-tutorial`
 
 Ligne de commande
 -----------------

@@ -10,7 +10,6 @@ Table des matières
 .. toctree::
    :maxdepth: 1
 
-   re/index.rst
    secrets/index.rst
    statistics/index.rst
    random/index.rst
