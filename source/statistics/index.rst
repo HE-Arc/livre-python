@@ -1,17 +1,22 @@
 .. _statistics-tutorial:
 
-statistics
-==========
+``statistics``
+==============
 
-Par Jérémy dubois [jd]_
+Par Jérémy Dubois [#jd]_
 
 Introduction
---------------
+------------
+
 le module :py:mod:`statistics` est un ensemble de fonctions offrant la possibilité de résoudre des problèmes
 mathématiques de statistiques avec des valeures "real".
 
-Il faut noté que ces méthodes ne supportent pas tous les types de variable. Sans précision explicite,
+.. vous n'arrivez pas à traduire ce “real”?
+
+Il faut noter que ces méthodes ne supportent pas tous les types de variable. Sans précision explicite,
 seul les *int, float, decimal.Decimal* et *fraction.Fraction* sont supportés.
+
+.. ce ne sont pas des méthodes!!
 
 Fonctions
 ---------
@@ -48,14 +53,6 @@ Tandis que les fonctions ci-dessous calculent les valeurs de variations avec des
 
 :ref:`variance() <var>` : Retourne la variance de l'échantillon de données.
 
-.. _error:
-
-Exception
-----------
-
-Dans cette bibliothèque, il n'y a qu'une seule exception de définie; *statistics.StatisticError*.
-Cette erreur apparait lorsque les données fournies aux méthodes sont insuffisantes ou inexistantes.
-
 Descriptions et exemples
 ------------------------
 
@@ -72,6 +69,8 @@ d'itérateur.
 La logique de la fonction est de sommer toutes les valeurs fournies et et de diviser cette somme par
 le nombre de ces valeurs.
 
+    :math:`\bar{x} = \frac{x_1+x_2+\cdots +x_n}{n}`
+
 Exemples d'utilisation:
 
 .. code-block:: pycon
@@ -80,8 +79,6 @@ Exemples d'utilisation:
   6.25
   >>> mean([-2.0, 1.5, 4.35, 7.4])
   2.8125
-
-Si les données sont vides, l'erreur :ref:`statisticsError <error>` est signalée.
 
 .. _harmonic:
 
@@ -95,7 +92,9 @@ La moyenne harmonique est un type de moyenne utile pour trouver la mesure centra
 montre tout son intérêt lorsqu'il faut étudier des taux, par exemple les vitesses.
 
 On calcul la moyenne harmonique en utilisant l'inverse de la moyenne arithmétique avec des données inversées.
- Imaginons qu'il y aie trois valeur a, b et c; le calcul serait donc (3/(1/a + 1/b + 1/c))
+Imaginons qu'il y aie trois valeur a, b et c; le calcul serait donc (3/(1/a + 1/b + 1/c))
+
+    :math:`H = \frac{n}{\frac1{x_1} + \frac1{x_2} + \cdots + \frac1{x_n}}`
 
 Exemple d'utilisation:
 
@@ -103,8 +102,6 @@ Exemple d'utilisation:
 
   >>> harmonic_mean([2.5, 3, 10])
   3.6
-
-Si les données sont vides, l'erreur :ref:`statisticsError <error>` est signalée.
 
 .. _median:
 
@@ -134,9 +131,6 @@ Nombre de valeurs, paire.
   5.0
 
 On remarque que dans la série paire, la valeurs médiane a été interpolée.
-
-Si les données sont vides, l'erreur :ref:`statisticsError <error>` est signalée.
-
 
 .. _mLow:
 
@@ -168,8 +162,6 @@ Nombre de valeurs, paire.
 On utilise la médiane basse sur des données discrètes et dont la valeurs médiane doit appartenir
 à l'ensemble choisi.
 
-Si les données sont vides, l'erreur :ref:`statisticsError <error>` est signalée.
-
 .. _mHigh:
 
 statistics.median_high(*data*)
@@ -200,8 +192,6 @@ Nombre de valeurs, paire.
 On utilise la médiane haute sur des données discrètes et dont la valeurs médiane doit appartenir
 à l'ensemble choisi.
 
-Si les données sont vides, l'erreur :ref:`statisticsError <error>` est signalée.
-
 .. _mGr:
 
 statistics.median_grouped(*data, interval=1*)
@@ -229,8 +219,6 @@ Exemples d'utilisation:
 
 Cette fonciton ne vérifie pas si les valeurs sont séparées par au moins *interval*.
 
-Si les données sont vides, l'erreur :ref:`statisticsError <error>` est signalée.
-
 .. _mode:
 
 statistics.mode(*data*)
@@ -252,8 +240,6 @@ C'est la seule méthode de statistique qui s'applique aussi à des données nomi
   >>> mode(["red", "yellow", "blue", "blue", "yellow", "yellow", "yellow",])
   'yellow'
 
-Si les données sont vides ou si il n'y a pas qu'une seule valeur la plus représentée, l'erreur :ref:`statisticsError <error>` est signalée.
-
 .. _pstdev:
 
 statistics.pstdev(*data, mu=None*)
@@ -268,8 +254,6 @@ Exemple d'utilisation:
 
   >>> pstdev([0.5, 2.5, 5.5, 6.25, 9.5])
   3.1128764832546763
-
-Si les données sont vides, l'erreur :ref:`statisticsError <error>` est signalée.
 
 .. _pVar:
 
@@ -300,8 +284,6 @@ Exemples d'utilisation:
 La fonction n'essaie pas de vérifier la valeur de *mu* donc l'utilisation d'une valeur arbitraire
 pour *mu* peut mener à un résultat invalide ou impossible.
 
-Si les données sont vides, l'erreur :ref:`statisticsError <error>` est signalée.
-
 Cette méthode supporte aussi les types *Decimal* et *Fraction*.
 
 Exemple:
@@ -329,8 +311,6 @@ Exemple d'utilisation:
 
   >>> stdev([1.5, 2.5, 2.5, 2.75, 3.25, 4.75])
   1.0810874155219827
-
-Si il y a moins de deux valeurs, l'erreur :ref:`statisticsError <error>` est signalée.
 
 .. _var:
 
@@ -368,13 +348,13 @@ Si la moyenne a déjà été calculée on peut l'entrer dans l'argument *xbar*.
 La fonction n'essaie pas de vérifier la valeur de *xbar* donc l'utilisation d'une valeur arbitraire
 pour *xbar* peut mener à un résultat invalide ou impossible.
 
-Si il y a moins de deux valeurs, l'erreur :ref:`statisticsError <error>` est signalée.
+.. Vos codes ne montrent aucune différence. À quoi sert de spécifier ``xbar``?
 
 Cette méthode supporte aussi les types *Decimal* et *Fraction*.
 
 Exemple:
 
-..code-block:: pycon
+.. code-block:: pycon
 
     >>> from decimal import Decimal as D
     >>> statistics.variance([D("42.00"), D("48.25"), D("48.25"), D("49.5"), D("51.25")])
@@ -389,4 +369,4 @@ Conclusion
 Cette bibliothèque permet de ne pas devoir recoder les outils mathématique
 de statistique.
 
-.. [jd] <jeremy.dubois@he-arc.ch>
+.. [#jd] <jeremy.dubois@he-arc.ch>

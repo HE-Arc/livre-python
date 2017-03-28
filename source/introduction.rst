@@ -28,10 +28,10 @@ Bases
    io/index
    math/index
    time/index
+   statistics/index
    super/index
 
 * :ref:`random-tutorial` ★
-* :ref:`statistics-tutorial`
 
 Avancé
 ------

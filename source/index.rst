@@ -10,7 +10,6 @@ Table des matières
 .. toctree::
    :maxdepth: 1
 
-   statistics/index.rst
    random/index.rst
    unittest/index.rst
    colorama/index.rst
