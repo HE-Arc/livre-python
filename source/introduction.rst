@@ -84,6 +84,5 @@ Autres
    matplotlib/index
    pycrypto/index
    pygame/index
-
-* :ref:`sphinx-tutorial`
-* :ref:`watchdog-tutorial`
+   sphinx/index
+   watchdog/index

@@ -33,12 +33,15 @@ Un exemple d'une classe pour un système d'audit :
   from watchdog.events import FileSystemEventHandler
 
   class AuditHandler(FileSystemEventHandler):
-    def on_modified(self, event):
-      print("Le fichier %s a été modifié" % event.src_path)
-    def on_created(self,event):
-      print("Le fichier %s a été créé" % event.src_path)
-    def on_deleted(self,event):
-      print("Le fichier %s a été supprimé" % event.src_path)
+
+        def on_modified(self, event):
+            print("Le fichier %s a été modifié" % event.src_path)
+
+        def on_created(self,event):
+            print("Le fichier %s a été créé" % event.src_path)
+
+        def on_deleted(self,event):
+            print("Le fichier %s a été supprimé" % event.src_path)
 
 Liste d'événements interceptable :
 
@@ -68,36 +71,54 @@ Interception de l'événement
 ===========================
 
 La classe doit, ensuite, être liée à un observateur.
-C'est ici que nous spécifierons le dossier qui devra être observer.
+C'est ici que nous spécifierons le dossier qui devra être observé.
 
 .. code-block:: python3
 
-  import eventhandler
-  from watchdog.observers import Observer
+    import eventhandler
+    from watchdog.observers import Observer
 
-  observer = Observer() # Création de l'observeur
-  observer.schedule(eventhandler.AuditHandler(), path='U:', recursive=True) # Création du lien
-  observer.start() # Démarrage de l'observateur
+    # Création de l'observeur
+    observer = Observer()
+    # Création du lien
+    observer.schedule(eventhandler.AuditHandler(), path='U:', recursive=True)
+    # Démarrage de l'observateur
+    observer.start()
 
-Dans ce cas, l'observateur surveille le dossier ``"U:"`` de manière recursive.
+.. Des commentaires sont sensés améliorer la compréhension, pas faire doublon.
+
+Dans ce cas, l'observateur surveille le dossier ``"U:"`` de manière récursive.
 
 Bloquer le script
 =================
 
-Un observateur étant lancer dans un thread sépraré, il faut bloquer l'éxecution du script.
-Mais, nous aimerions aussi pouvoir fermer le script par interuption du clavier.
+Un observateur étant lancé dans un thread séparé, il faut bloquer l'éxecution du script.
+Mais, nous aimerions aussi pouvoir fermer le script par interruption du clavier.
 La fermeture de l'observateur doit aussi être douce. Pour ce faire nous utiliserons le code ci-dessous.
+
 
 .. code-block:: python3
 
-  import time
+    import time
 
-  try:
-    while True: # Boucle infinie bloquant l'execution du script
-        time.sleep(1) # petite attente d'une millisecondes
-  except KeyboardInterrupt: # Prise en charge de l'interuption par le clavier
+    try:
+        while True: # Boucle infinie bloquant l'execution du script
+            time.sleep(1) # petite attente d'une milliseconde
+    except KeyboardInterrupt: # Prise en charge de l'interuption par le clavier
         observer.stop() # Arret de l'observateur
-        observer.join() # Attend que l'observateur se soit bien fermer
+    observer.join() # Attend que l'observateur se soit bien fermé
+..
+    interruption du/sur le clavier? ça sent le google translate
+
+    Une milliseconde? non. ref:`time-tutorial`
+
+.. todo::
+
+    Votre exemple n'est pas super bon. En tant qu'expert de la programmation
+    concurrente vous remarquerez que qu'il y a une opération bloquante dans ce
+    bout de code. La placer dans le ``try``/``except`` vous permet d'éviter
+    ce très vilain ``while True``.
+
 
 Filtrage
 ============
@@ -146,9 +167,9 @@ La principale différence ce trouvera au moment de l'instantation de l'objet.
   observer.schedule(handler, path='U:', recursive=True)
   observer.start()
 
-Ici nous avons instancier l'objet avant de le passer en arguments à la fonction.
-Nous spécifions aussi un 1er arguement du constructeur
-qui se trouve dans ce cas être les patterns à traités.
+Ici nous avons instancié l'objet avant de le passer en arguments à la fonction.
+Nous spécifions aussi un premier arguement du constructeur
+qui se trouve dans ce cas être les patterns à traiter.
 
 Les autres arguments possible sont dans l'ordre :
 
@@ -157,15 +178,15 @@ Noms                                      Default               Utilisation
 ========================================  ====================  ================================================================================
 ``patterns``/``regexes``                  ``None``/``[".*"]``   Spécifie les patterns (respectivement regexes) à traiter
 ``ignore_patterns`` / ``ignore_regexes``  ``None``/``[]``       Spécifie les patterns (respectivement regexes) à ignorer
-``ignore_directories``                    ``False``             Si mit à ``True`` ignore les dossiers
-``case_sensitive``                        ``False``             Si mit à ``True`` rend le patterns (respectivement regex) sensible à la casse
+``ignore_directories``                    ``False``             Si mis à ``True`` ignore les dossiers
+``case_sensitive``                        ``False``             Si mis à ``True`` rend le patterns (respectivement regex) sensible à la casse
 ========================================  ====================  ================================================================================
 
 Conclusion
 ----------
 
 En conclusion, la bibliothèque watchdog permet d'utiliser des événements, en provenance du système de fichiers, d'une manière facile et efficace.
-Watchdog permet aussi de filtrer les fichiers / dossiers émetant un événement.
+Watchdog permet aussi de filtrer les fichiers / dossiers émettant un événement.
 Cette bibliothèque permet aussi une grande réusabilité du code grâce, entre autre, à l'utilisation de classe pour le traitement des événements.
 
 .. [#pj] <paul.jeanbourquin@he-arc.ch>

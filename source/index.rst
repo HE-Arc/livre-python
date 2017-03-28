@@ -10,8 +10,6 @@ Table des matières
 .. toctree::
    :maxdepth: 1
 
-   sphinx/index.rst
-   watchdog/index.rst
    datetime/index.rst
    binary/index.rst
    NetworkX/index.rst
