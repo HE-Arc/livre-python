@@ -4,23 +4,23 @@
 ``datetime``
 ============
 
-Par Mohamed Jmaa 
+Par Mohamed Jmaa [#mj]_
 
 Introduction
 ============
 
-Le module :py:mod:`datetime` propose plusieurs classes pour représenter des dates et heures. Vous n'allez rien découvrir d'absolument 
-spectaculaire dans cette section mais nous nous avançons petit à petit vers une façon de gérer les dates et heures qui est 
+Le module :py:mod:`datetime` propose plusieurs classes pour représenter des dates et heures. Vous n'allez rien découvrir d'absolument
+spectaculaire dans cette section mais nous nous avançons petit à petit vers une façon de gérer les dates et heures qui est
 davantage orientée objet.
 
-Encore et toujours, je ne prétends pas remplacer la documentation. Je me contente d'extraire de celle-ci les informations 
-qui me semblent les plus importantes. Je vous encourage, là encore, à jeter un coup d'œil du côté de la documentation du module 
+Encore et toujours, je ne prétends pas remplacer la documentation. Je me contente d'extraire de celle-ci les informations
+qui me semblent les plus importantes. Je vous encourage, là encore, à jeter un coup d'œil du côté de la documentation du module
 datetime.
 
 Représenter une date
 ====================
 
-c'est bien d'avoir accès au temps actuel avec une précision d'une seconde sinon plus… 
+c'est bien d'avoir accès au temps actuel avec une précision d'une seconde sinon plus…
 mais parfois, cette précision est inutile. Dans certains cas, on a juste besoin d'une date, c'est-à-dire un jour, un mois et une année.
 Il est naturellement possible d'extraire cette information de notre timestamp. Le module :py:mod:`datetime` propose une classe :py:class:`~datetime.date`,
 représentant une date, rien qu'une date.
@@ -28,40 +28,37 @@ représentant une date, rien qu'une date.
 L'objet possède trois attributs :
 ---------------------------------
 
-year : l'année ;
-month : le mois ;
-day : le jour du mois.
+- year : l'année ;
+- month : le mois ;
+- day : le jour du mois.
 
 Il y a plusieurs façons de procéder. Le constructeur de cette classe prend trois arguments qui sont, dans l'ordre, l'année, le mois et le jour du mois.
 
 .. code-block:: python3
 
-	>>> import datetime
-	>>> date = datetime.date(2017, 3, 21)
-	>>> print (date)
-	2017-03-21
-	>>> 
+    >>> import datetime
+    >>> datetime.date(2017, 3, 21)
+    2017-03-21
 
-	
+.. trois arguments obligatoire oui, il y a neuf au total.
+
 Il existe deux méthodes de classe qui peuvent etre intéresser :
 
-	:py:meth:`datetime.date.today()` : renvoie la date d'aujourd'hui ;
-	:py:meth:`datetime.date.fromtimestamp()` : renvoie la date correspondant au timestamp passé en argument.
+    :py:meth:`datetime.date.today()` : renvoie la date d'aujourd'hui ;
+    :py:meth:`datetime.date.fromtimestamp()` : renvoie la date correspondant au timestamp passé en argument.
 
-Exemple	:
+Exemple    :
 
 .. code-block:: python3
 
-	>>> import time
-	>>> import datetime
-	>>> aujourdhui = datetime.date.today()
-	>>> aujourdhui
-	datetime.date(2017, 3, 23)
-	>>> datetime.date.fromtimestamp(time.time()) 
-	datetime.date(2017, 3, 23)
-	>>>
-	
-Bien sur npus pouvons manipuler ces dates simplement et les comparer grâce aux opérateurs usuels.
+    >>> import time
+    >>> import datetime
+    >>> datetime.date.today()
+    datetime.date(2017, 3, 23)
+    >>> datetime.date.fromtimestamp(time.time())
+    datetime.date(2017, 3, 23)
+
+Bien sûr, nous pouvons manipuler ces dates simplement et les comparer grâce aux opérateurs usuels.
 
 Représenter une heure
 ---------------------
@@ -91,11 +88,13 @@ les deux méthodes de classe que nous utiliserons le plus souvent :
 
 .. code-block:: python3
 
-	>>> import datetime
-	>>> datetime.datetime.now()
-	datetime.datetime(2017, 3, 21, 5, 8, 22, 359000)
-	>>>
-	
+    >>> import datetime
+    >>> datetime.datetime.now()
+    datetime.datetime(2017, 3, 21, 5, 8, 22, 359000)
+
 Conclusion
 ==========
-Il y a bien d'autres choses à voir dans ce module :py:mod:`datetime` que je n'ai pas traiter dans ce document vous pouvez toujours vous y referer au documentation officielle du module.
+
+Il y a bien d'autres choses à voir dans ce module :py:mod:`datetime` que je n'ai pas traitées dans ce document vous pouvez toujours vous y référer au documentation officielle du module.
+
+.. [#mj] <mohamed.jmaa@he-arc.ch>
