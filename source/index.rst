@@ -10,8 +10,6 @@ Table des matières
 .. toctree::
    :maxdepth: 1
 
-   random/index.rst
-   unittest/index.rst
    colorama/index.rst
    invoke/index.rst
    pillow/index.rst

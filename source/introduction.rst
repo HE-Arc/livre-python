@@ -27,11 +27,10 @@ Bases
    itertools/index
    io/index
    math/index
+   random/index
    time/index
    statistics/index
    super/index
-
-* :ref:`random-tutorial` ★
 
 Avancé
 ------
@@ -60,8 +59,12 @@ Ligne de commande
 Tests
 -----
 
+.. toctree::
+   :maxdepth: 1
+
+   unittest/index
+
 * :ref:`pytest-tutorial`
-* :ref:`unittest-tutorial`
 
 Traitement des données
 ----------------------

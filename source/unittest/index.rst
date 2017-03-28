@@ -17,7 +17,7 @@ Unittest
 
 Le framework :py:mod:`unittest` a été à l'origine inspiré par JUnit_ et le fonctionnement est similaire aux frameworks de tests unitaires dans d'autres langages de programmation.
 
-Pour réaliser des tests unitaires, unittest s'appuie sur 4 concepts importants:
+Pour réaliser des tests unitaires, unittest s'appuie sur quatres concepts importants:
 
 - *test fixture* : un 'test fixture' représente la préparation nécessaire pour réaliser un test. Tout comme par exemple la création temporaire de base de données, dossiers ou même le démarrage de services.
 - *test case* : consiste à tester une fonctionnalité précise, et ainsi tester que la sortie corresponde bien à un résultat attendu.
@@ -102,7 +102,7 @@ Ce chapitre présentera les classes et méthodes définies dans le module unitte
 TestCase Classe
 ////////////////
 
-Une classe qui hérite de TestCase doit contenir toutes les méthodes nécessaires permettant de tester une seule et unique fonctionnalité.
+Une classe qui hérite de :py:class:`~unittest.TestCase` doit contenir toutes les méthodes nécessaires permettant de tester une seule et unique fonctionnalité.
 
 Voici quelques méthodes utiles définies dans TestCase:
 
@@ -175,7 +175,7 @@ On constate bien que le message d'erreur spécifié au moment de l'assert, est a
 TestSuite Class
 ///////////////
 
-Chaque instance de 'testCase' peut être regroupée selon la fonctionnalité du programme qu'elle teste. Ce mécanisme est mis à disposition grâce à la classe 'TestSuite'.
+Chaque instance de ``TestCase`` peut être regroupée selon la fonctionnalité du programme qu'elle teste. Ce mécanisme est mis à disposition grâce à la classe :py:class:`unittest.TestSuite`.
 
 Voici les étapes pour regrouper un 'TestSuite':
 
@@ -189,7 +189,7 @@ Voici les étapes pour regrouper un 'TestSuite':
 
 .. code-block:: python
 
-	suite.addTest(CarreTestCase())
+    suite.addTest(CarreTestCase())
 
 3. Créer une instance de la class TestTestRunner:
 
@@ -211,9 +211,9 @@ Un autre standard pour les tests unitaires en Python est: :py:mod:`doctest`. Ce 
 .. glossary::
 
 Docstring:
-	Les docstrings sont des chaînes de documentation qui doivent être placées en dessous des définitions de méthodes, fonctions, classe ou au début d'un module. De plus l'indentation d'une docstring est importante car elle dépend directement de l'indentation de la classe ou de la méthode qu'elle documente.
+    Les docstrings sont des chaînes de documentation qui doivent être placées en dessous des définitions de méthodes, fonctions, classe ou au début d'un module. De plus l'indentation d'une docstring est importante car elle dépend directement de l'indentation de la classe ou de la méthode qu'elle documente.
 
-    
+
 
 Création d'un test unitaire
 ---------------------------
@@ -270,13 +270,13 @@ Ce qui produirait le résultat suivant:
     3 tests in 2 items.
     3 passed and 0 failed.
     Test passed.
-	
+
 Conclusion
 ==========
 
-L'écriture des tests est une pratique primordiale afin d'apporter un gain en qualité du logiciel et en maintenance. 
-De plus l'écriture des tests n'est pas difficile en soi, ni même longue comme vous avez pu le constater dans ce tutoriel. Afin d'écrire efficacement des tests unitaires, il faut de la pratique, cependant mieux vaut des tests "peu efficaces" que de ne pas en écrire. Pour terminer, s'il y a bien une chose à retenir de ce tutoriel c'est qu'il n'y a pas de désavantages à en écrire, c'est pour cela que je vous invite à vous y mettre dès demain! 
+L'écriture des tests est une pratique primordiale afin d'apporter un gain en qualité du logiciel et en maintenance.
+De plus l'écriture des tests n'est pas difficile en soi, ni même longue comme vous avez pu le constater dans ce tutoriel. Afin d'écrire efficacement des tests unitaires, il faut de la pratique, cependant mieux vaut des tests "peu efficaces" que de ne pas en écrire. Pour terminer, s'il y a bien une chose à retenir de ce tutoriel c'est qu'il n'y a pas de désavantages à en écrire, c'est pour cela que je vous invite à vous y mettre dès demain!
 
-	
+
 
 .. _Junit: http://junit.org/junit4/
