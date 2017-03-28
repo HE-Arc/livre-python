@@ -2,8 +2,9 @@
 
 import time
 
-import eventhandler
 from watchdog.observers import Observer
+
+import eventhandler
 
 observer = Observer()
 

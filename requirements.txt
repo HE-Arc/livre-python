@@ -29,3 +29,6 @@ pycrypto
 
 # pygame
 pygame
+
+# watchdog
+watchdog
