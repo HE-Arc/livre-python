@@ -81,4 +81,49 @@ Le résultat :
 
 The :py:func:`enumerate` function can be used for ...
 
-Un référencement systématique me semble être une bonne pratique. La navigation est plus fluide et on évite ainsi des ctrl-f inutiles :)  
+Un référencement systématique me semble être une bonne pratique. La navigation est plus fluide et on évite ainsi des ctrl-f inutiles :)
+
+Autodoc
+-------
+
+Sphinx permet de générer la doc d'un module python ainsi que celle des classes le composant à partir des docstrings - *valides* - contenus dans sa source.
+La façon la plus simple est d'inclure l'extension sphinx.ext.autodoc lors de l'utilisation de sphinx-quickstart (desactivé par défaut)::
+	
+    ..
+    Please indicate if you want to use one of the following Sphinx extensions:
+    > autodoc: automatically insert docstrings from modules (y/n) [n]: y
+    ..
+
+Ensuite, si le module n'est pas inclus dans les variables d'environnement de python, il est possible de rajouter son chemin dans le fichier conf.py.
+Les 3 lignes suivantes sont présentes par défaut dans ce dernier::
+
+    # import os
+    # import sys
+    # sys.path.insert(0, os.path.abspath('.'))
+
+Il est donc possible de les décommenter, le chemin étant évidemment à adapter (L'option de mettre un chemin en dur comme en sale étant évidemment disponible à mon grand bonheur)::
+
+    import os
+    import sys
+    sys.path.insert(0,"C:\\Users\\Guillaume\\Desktop\\FlappyBird\\flappy")
+
+Finalement, la documentation se fait en invoquant::
+
+    Contents:
+ 
+    .. toctree::
+       :maxdepth: 2
+ 
+    .. automodule:: Flappy
+ 
+    .. autoclass:: Bird
+        :members:
+    
+    .. autoclass:: Pipe
+        :members:
+
+Ainsi, lors de la compilation avec sphinx-build, Sphinx extraira les docstrings des classes concernées, générant ainsi une doc automatique.
+Néanmoins, cette méthode comporte un soucis évident : on doit quand même inclure tous les modules et classes manuellement, et ça c'est tout pourri.
+
+Heureusement, un utilisateur a créé un script remédiant à ce soucis : il s'agit d'apidoc. 
+    
