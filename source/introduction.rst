@@ -31,7 +31,6 @@ Bases
    super/index
 
 * :ref:`random-tutorial` ★
-* :ref:`secrets-tutorial` ★
 * :ref:`statistics-tutorial`
 
 Avancé
@@ -45,6 +44,7 @@ Avancé
    hashlib/index
    multiprocessing/index
    re/index
+   secrets/index
    weakref/index
 
 Ligne de commande

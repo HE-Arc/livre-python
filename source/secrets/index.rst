@@ -27,17 +27,17 @@ Nombres aléatoires
 Ce module donne accès à la source d'aléatoire la plus sécurisée que votre système d'exploitation fournit. Pour fournir des nombres aléatoirs cryptographiquement sûres, le système ne se base pas sur des calculs mais sur un composant physique (`un générateur de nombres aléatoires matériel`_) réagissant à des phénomènes microscopiques qui créent de faibles signaux de bruit statistiquement aléatoires, comme le bruit thermique ou l'effet photoélectrique.
 
 - Classe :py:class:`secrets.SystemRandom` permet de générer des nombres aléatoires, voir :py:class:`random.SystemRandom` pour plus de détails
-- :py:func:`secrets.choice(séquence) <secrets.choice()>` retourne un élément aléatoire à partir d'une *séquence*
-- :py:func:`secrets.randbelow(i) <secrets.randbelow()>` retourne un nombre entier aléatoire entre zéro et *i*
-- :py:func:`secrets.randbits(j) <secrets.randbits()>` retourne un nombre entier aléatoire composé de *j* bits
+- :py:func:`choice(séquence) <secrets.choice()>` retourne un élément aléatoire à partir d'une *séquence*
+- :py:func:`randbelow(i) <secrets.randbelow()>` retourne un nombre entier aléatoire entre zéro et *i*
+- :py:func:`randbits(j) <secrets.randbits()>` retourne un nombre entier aléatoire composé de *j* bits
 
 Jetons
 ******
 Ce module fournit également des fonctions pour générer des jetons sécurisés, adaptés à des applications telles que des réinitialisations de mots de passe via des URL_ difficiles à deviner, des authentifications via API_ tierces, et d'autres utilisations similaires.
 
-- :py:func:`secrets.token_bytes(k) <secrets.token_bytes()>` retourne une chaine binaire composé de *k* bytes.
-- :py:func:`secrets.token_hex(l) <secrets.token_hex()>` retourne une chaine de texte hexadécimale composée de *l* bytes convertis chacun en deux digits hexadécimaux.
-- :py:func:`secrets.token_urlsafe(m) <secrets.token_urlsafe()>` retourne une chaine de texte de *m* bytes utilisable dans une URL_. Le texte est encodé en base64_ donc chaque byte est représenté par environ 1.3 charactère.
+- :py:func:`token_bytes(k) <secrets.token_bytes()>` retourne une chaine binaire composé de *k* bytes.
+- :py:func:`token_hex(l) <secrets.token_hex()>` retourne une chaine de texte hexadécimale composée de *l* bytes convertis chacun en deux digits hexadécimaux.
+- :py:func:`token_urlsafe(m) <secrets.token_urlsafe()>` retourne une chaine de texte de *m* bytes utilisable dans une URL_. Le texte est encodé en base64_ donc chaque byte est représenté par environ 1.3 charactère.
 
 Si *k*, *l* ou *m* ne sont pas renseignés, un nombre raisonnable sera utilisé par défaut.
 
@@ -114,9 +114,9 @@ Explications
 Les deux clés utilisées au point 1 permettent au serveur de vérifier l'authenticité de la requête. Le serveur vérifie via hashage si la signature reçue correspond au message reçu haché avec la clé secrète. Pour ce faire, il hache lui-même le message avec sa clé et compare les résultats.
 Si le hash reçu est identique au hash calculé, l'origine du message est vérifiée. Il ne reste au serveur qu'à vérifier que la clé d'utilisateur est valide et possède bien le droit de faire une requête. Si tout est correct, le serveur envoie le token d'accès à l'application.
 
-Pour que la sécurité des échanges soit garantie, il ne faut pas que la clé secrète aléatoire puisse être prédite par le hacker. Une source d'aléatoire comme random est prédictible et permet donc au final de déduire la clé et ensuite de voler l'identité de l'application. En effet, il suffit de hasher le même message plusieurs fois, d'en déduire les clés utilisées, de faire un peu de maths, et si la source n'est pas sûre, il est possible de prédire les futures clés produites et donc de voler les identités des applications afin de récupérer des données. C'est ce qu'on appelle une `attaque de générateur de nombre aléatoire`_.
+Pour que la sécurité des échanges soit garantie, il ne faut pas que la clé secrète aléatoire puisse être prédite par le hacker. Une source d'aléatoire comme :py:mod:`random` est prédictible et permet donc au final de déduire la clé et ensuite de voler l'identité de l'application. En effet, il suffit de hasher le même message plusieurs fois, d'en déduire les clés utilisées, de faire un peu de maths, et si la source n'est pas sûre, il est possible de prédire les futures clés produites et donc de voler les identités des applications afin de récupérer des données. C'est ce qu'on appelle une `attaque de générateur de nombre aléatoire`_.
 
-C'est là qu'est tout l'intérêt du module secret et de ses fonctions de génération de chaînes aléatoires. En empêchant qui que ce soit de prédire les résultats aléatoires, il est possible d'empêcher que les clés soient découvertes.
+C'est là qu'est tout l'intérêt du module *secrets* et de ses fonctions de génération de chaînes aléatoires. En empêchant qui que ce soit de prédire les résultats aléatoires, il est possible d'empêcher que les clés soient découvertes.
 
 Cependant, le problème ne s'arrête pas là. Premièrement, lors des communications, si aucun protocole de sécurité de couche de transport n'est utilisé, la durée de validité d'un secret partagé ne doit pas être supérieur au temps qu'il faudrait à un hacker pour le découvrir via une attaque de force brute. Le serveur doit donc adapter la complexité du secret partagé. Une bonne pratique consiste à générer les secrets aussi longs que possibles afin d'avoir une sécurité maximum [#rfc5849]_.
 
@@ -124,7 +124,7 @@ Deuxièmement, lorsque le serveur de vérification reçoit le message et le hash
 
 La différence entre une comparaison normale et la fonction :py:func:`secrets.compare_digest()` réside dans le temps passé à comparer les chaînes.
 
-Lors du test de "AAA"=="BBB", lorsque le premier byte est faux, la fonction renvoie false tandis que secrets.compare_digest("AAA","BBB") continue comme si de rien était et renvoie false après avoir parcouru tous les bytes.
+Lors du test de ``"AAA" == "BBB"``, lorsque le premier byte est faux, la fonction renvoie ``False`` tandis que ``secrets.compare_digest("AAA","BBB")`` continue comme si de rien était et renvoie ``False`` après avoir parcouru tous les bytes.
 
 Pour un pirate, le premier test offre une faille magnifique. Il suffit d'envoyer à la suite des chaînes de deux bytes en ne faisant varier que le premier, et regarder quelle combinaison prend le plus de temps à être vérifiée. Celle qui prend le plus de temps est celle dont la fonction a validé le premier byte et a renvoyé false au deuxième tandis que les temps plus courts correspondent à un renvoi de false déjà au premier byte.
 En connaissant ce problème, il est facile de deviner un mot de passe, en essayant pour chaque byte.
