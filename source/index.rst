@@ -10,7 +10,6 @@ Table des matières
 .. toctree::
    :maxdepth: 1
 
-   multiprocessing/index.rst
    re/index.rst
    secrets/index.rst
    statistics/index.rst
