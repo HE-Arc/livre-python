@@ -1,6 +1,6 @@
-﻿.. _networkX-tutorial:
+﻿.. _networkx-tutorial:
 
-``networkX``
+``networkx``
 ============
 
 Par Deni Gahlinger [#dg]_
@@ -8,12 +8,12 @@ Par Deni Gahlinger [#dg]_
 Introduction
 ------------
 
-:py:mod:´NetworkX´_ est une librairie Python qui permet d'instancier des graphes composés de noeuds
-et de ponts, ou liens. Grâce à cette librairie, la manipulation de ces graphes est simplifiée
+NetworkX_ est une bibiothèque Python qui permet d'instancier des graphes composés de nœuds
+et de ponts, ou liens. Grâce à cette bibliothèque, la manipulation de ces graphes est simplifiée
 
-Un graphe, c'est un ensemble d'objet ou noeud pouvant être reliés par des ponts. Il existe plusieurs
+Un graphe, c'est un ensemble d'objet ou nœud pouvant être reliés par des ponts. Il existe plusieurs
 opérations et calculs sur les graphes. les graphes que NetworkX permet d'instancier peuvent
-contenir comme noeud nimporte quel objet hashable.
+contenir comme nœud nimporte quel objet hashable.
 
 Nous allons donc voir premièrement un exemple d'instanciation de noeuds,
 ensuite découvrire les différentes sortes de graphes ainsi que les opérations sur elles,
@@ -40,7 +40,11 @@ Dessin d'un graphe
 
 NetworkX n'est pas fait spécialement pour dessiner un graphe.
 
+.. du coup?
+
 .. literalinclude:: ./examples/Dessin.py
+
+.. et l'image???
 
 Conclusion
 ----------
@@ -50,12 +54,14 @@ Cette librairie est vraiment utile pour différentes problématique touchant les
 comme le voyageur de commerce. Certains problèmes mathématiques dans ce domaine peuvent avoir une
 grande complexité (complexité non polynomiale).
 
+.. super...
+
 L'existance d'une librairie comme NetworkX permet de manipuler des graphes de façon simple et offre plusieurs
-options utile pour une utilisation assez large dans le domaine des graphes. 
+options utile pour une utilisation assez large dans le domaine des graphes.
 
 
 .. [#dg] <deni.gahlinger@he-arc.ch>
 
 .. Bibliographie
 
-.. _NetworkX: https://networkx.github.io/documentation/networkx-1.10/tutorial/tutorial.html
+.. _NetworkX: https://networkx.github.io/documentation/networkx-1.11/tutorial/tutorial.html

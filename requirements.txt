@@ -20,6 +20,9 @@ ijson
 # matplotlib
 matplotlib
 
+# networkx
+networkx
+
 # PIL
 Pillow
 #PyQt5
