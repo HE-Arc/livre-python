@@ -1,12 +1,18 @@
-Binaire
-=======
+.. _`binary-tutorial`:
 
-Bytes
------
-Le type bytes fait partie des types dits de séquence. Il permet de traiter les chaines d'octets.
+``bytes`` / ``bytearray`` / ``memoryview``, ``struct``
+======================================================
+
+Par Marc Schnaebele [#ms]_
+
+``bytes``
+---------
+
+Le type :py:class:`bytes` fait partie des types dits de séquence. Il permet de traiter les chaines d'octets.
 
 Instanciation
 ~~~~~~~~~~~~~
+
 syntaxe
 
 bytes([initializer[, encoding]])
@@ -18,11 +24,11 @@ exemple
 Affichage
 ~~~~~~~~~
 
-Le b est affiché pour bien préciser que c'est une chaine de type bytes.
+Le ``b`` est affiché pour bien préciser que c'est une chaine de type bytes.
 
 .. code-block:: python
 
-	b'exemple'
+    b'exemple'
 
 
 Accès
@@ -32,31 +38,35 @@ Accède à la première valeur à la clé 0 donc b'e' dans l'exemple ci-dessus.
 
 .. code-block:: python
 
-	msg[0]
+    msg[0]
 
 
 opérations
 ~~~~~~~~~~
 
-Cast bytes <--> string
+Cast bytes <--> str
 
 .. literalinclude:: ./examples/cast_bytes_string.py
-	
-Cast Int <--> Bytes
+
+.. en pratique, on utilise le fait que `str` est un objet.
+
+Cast int <--> bytes
 
 .. literalinclude:: ./examples/cast_bytes_int.py
-	
+
 Lecture d'un fichier
 
 .. literalinclude:: ./examples/lecture_fichier.py
 
 `Un tableau résumant les opérations standards sur les bytes se trouve sur la documentation officielle <https://docs.python.org/3.1/library/stdtypes.html>`_.
 
-BytesArray
-----------
+``bytearray``
+-------------
 
-Le type bytearray est un tableau de byte et contient donc un objet bytes dans chaque clé.
-Il n'y a donc pas de différence un bytarray est une collection de byte.
+Le type :py:class:`bytearray` est un tableau de ``bytes`` et contient donc un objet bytes dans chaque clé.
+Il n'y a donc pas de différence un ``bytarray`` est une collection de ``bytes``.
+
+.. Montrez la différence entre les deux, c'est important.
 
 Instanciation
 ~~~~~~~~~~~~~
@@ -66,16 +76,16 @@ bytearray([initializer[, encoding]])
 exemple
 
 .. literalinclude:: ./examples/bytearray.py
-	
+
 Accès
 ~~~~~
 
-Accède la première valeur à la clé 0 donc b'exemple' dans l'exemple ci-dessus.
+Accède la première valeur à l'emplacement donc ``b'exemple'`` dans l'exemple ci-dessus.
 
 .. code-block:: python
 
-	msg[0]
-	
+    msg[0]
+
 Opérations
 ~~~~~~~~~~
 
@@ -83,11 +93,13 @@ En plus des opérations, ci-dessous voir les opérations de bytes ci-dessus.
 
 .. literalinclude:: ./examples/bytearray_cast.py
 
-	
-MemoryView
-----------
 
-Une memoryView est un objet permettant d'utiliser des buffers afin de pouvoir les manipuler comme tout autre objet Python.
+``memoryview``
+--------------
+
+Une :py:class:`memoryview` est un objet permettant d'utiliser des buffers afin de pouvoir les manipuler comme tout autre objet Python.
+
+.. Ceci ne veut rien dire, pourtant tout est dans le titre.
 
 Instanciation
 ~~~~~~~~~~~~~
@@ -98,9 +110,7 @@ Opérations
 ~~~~~~~~~~
 
 .. literalinclude:: ./examples/memoryview_op.py
-	
-`Plus d'opérations ici <https://docs.python.org/3.1/library/stdtypes.html>`_.
-	
+
 Exemple d'utilisation
 ~~~~~~~~~~~~~~~~~~~~~
 
@@ -110,11 +120,11 @@ Avec bytearray:
 
 .. literalinclude:: ./examples/memoryview_ex_bytearray.py
 
-	
-Struct
-------
 
-Un struct permet de convertir des structures C en valeurs de Python représenté sous forme d'objets bytes.
+``struct``
+----------
+
+Un :py:mod:`struct` permet de convertir des structures C en valeurs de Python représenté sous forme d'objets bytes.
 
 Exemple d'utilisation
 ~~~~~~~~~~~~~~~~~~~~~
@@ -124,15 +134,12 @@ Exemple d'utilisation
 Opérations
 ~~~~~~~~~~
 
-`Un tableau résumant les opérations standards sur les structures se trouve sur la documentation officielle <https://docs.python.org/3.6/library/struct.html#module-struct>`_.
+Un tableau résumant les opérations standards sur les structures se trouve sur la documentation officielle. :py:mod:`struct`.
 
-	
 Sources
 -------
 
 bytes / bytearray
-
-`<https://docs.python.org/3.1/library/stdtypes.html>`_
 
 `<http://docs.python-guide.org/en/latest/scenarios/json/>`_
 
@@ -159,5 +166,4 @@ memoryview
 
 `<http://stackoverflow.com/questions/35988/c-like-structures-in-python>`_
 
-
-Schnaebele Marc 2017
+.. [#ms] <marc.schnebele@he-arc.ch>
