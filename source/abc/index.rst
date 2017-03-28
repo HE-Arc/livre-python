@@ -1,7 +1,7 @@
 .. _abc-tutorial:
 
-Abstract Base Class
-===================
+Abstract Base Class (``abc``)
+=============================
 
 Par Sylvain Renaud [#sr]_
 

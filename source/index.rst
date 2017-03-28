@@ -78,7 +78,7 @@ Autres
 
    hug/index
    matplotlib/index
-   NetworkX/index
+   networkx/index
    pycrypto/index
    pygame/index
    sphinx/index
@@ -124,6 +124,6 @@ Autres
  - Thibaut Piquerez <thibaut.piquerez@he-arc.ch>
  - Yoan Blanc <yoan.blanc@he-arc.ch>
 
-:Date:  2017-03-26
+:Date:  2017-03-28
 :Licence:
         :ref:`licence`

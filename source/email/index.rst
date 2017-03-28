@@ -1,8 +1,8 @@
 .. _email-tutorial:
 
-======
-E-mail
-======
+==================================
+E-mail (``smtplib`` / ``imaplib``)
+==================================
 
 Par Karim Gehrig [#KG]_
 

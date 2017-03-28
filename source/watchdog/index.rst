@@ -1,8 +1,8 @@
 .. _watchdog-tutorial:
 
-========
-WatchDog
-========
+============
+``watchdog``
+============
 
 Par Paul Jeanbourquin [#pj]_
 

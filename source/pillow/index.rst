@@ -1,8 +1,8 @@
 .. _pillow-tutorial:
 
-======================
-Python Imaging Library
-======================
+================================
+Python Imaging Library (``PIL``)
+================================
 
 .. image:: ../_static/pillow.png
    :align: right

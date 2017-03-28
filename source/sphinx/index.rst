@@ -1,6 +1,7 @@
 .. _sphinx-tutorial:
 
-Sphinx
-======
+==========
+``Sphinx``
+==========
 
 :3
