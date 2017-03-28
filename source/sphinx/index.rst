@@ -1,8 +1,8 @@
-.. _sphinx-tutorial:
+Sphinx
+======
 
-==========
-``Sphinx``
-==========
+Introduction
+------------
 
 Guillaume Noguera [#gn]_
 
@@ -22,7 +22,6 @@ Pré-réquis
 Python 2.7 ou Python 3.4 est impératif au fonctionnement de Sphinx.
 La librairie `Pygments <http://pygments.org>`_  peut-être installée si une colorisation syntaxique est nécessaire.
 
-	
 Installation et rapide mise en pratique
 ---------------------------------------
 
@@ -33,14 +32,8 @@ L'installation de sphinx se fait avec PyPI::
 Ensuite, il peut être intéressant d'appeler la commande sphinx-quickstart pour générer automatiquement l'arborescence utilisée par Sphinx, ainsi
 que les fichiers conf.py et index.rst (configuration par défaut de sphinx-quickstart).
 
-
->>>>>>>>>>>>>>>>>>>
-
-
 Structure des fichiers
 ----------------------
-
-.. highlight:: rest
 
 Le fichier index.rst placé à l'origine du dossier source, appelé *master document*, agit principalement comme une page d'accueil et contient la table des matières.
 Le toctree (*table of contents tree*) est une fonctionnalité ajoutée à reSt par Sphinx et permet de connecter plusieurs fichiers à l'intérieur d'un document::
@@ -66,9 +59,6 @@ On peut aussi choisir d'utiliser une liste ordonnée::
 	:numbered: 
 
 
->>>>>>>>>>>>>>>>>>>
-
-
 Documentation d'un objet
 ------------------------
 
@@ -76,7 +66,6 @@ La syntaxe pour documenter une fonction est la suivante::
 
 
     ..py:function::whatShouldIEat(hangoverLevel, politicalViews[])
-    
        Ignores parameters and returns humus.
 
     .. py:function:: enumerate(sequence[, start=0])
@@ -85,7 +74,6 @@ La syntaxe pour documenter une fonction est la suivante::
        *sequence*. (And so on.)
    
 Le résultat : 
-
 
 .. py:function:: whatShouldIEat(hangoverLevel, politicalViews[])
 
@@ -283,3 +271,12 @@ J'encourage donc mes éventuels lecteurs à s'y intéresser, quand bien même il
 
 .. [#gn] <guillaume.noguera@he-arc.ch> ou <guillaume.noguera@gmail.com> pour les trucs moins corpo
 
+Après une fonction documentée, il est possible de créer une référence vers cette dernière::
+
+    The :py:func:`enumerate` function can be used for ...
+
+Le résultat : 
+
+The :py:func:`enumerate` function can be used for ...
+
+Un référencement systématique me semble être une bonne pratique. La navigation est plus fluide et on évite ainsi des ctrl-f inutiles :)  
