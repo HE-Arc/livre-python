@@ -52,9 +52,8 @@ Ligne de commande
 .. toctree::
    :maxdepth: 1
 
+   colorama/index
    invoke/index
-
-* :ref:`colorama-tutorial`
 
 Tests
 -----
