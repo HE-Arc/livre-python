@@ -1,23 +1,24 @@
 .. _pytest-tutorial:
 
-======
-Pytest
-======
+==========
+``pytest``
+==========
 
 .. image:: pytest.png
-   :height: 300px
-   :width: 486 px
    :scale: 50 %
    :alt: alternate text
-   :align: center
+   :align: right
+
+Par Nicolas Beyeler [#nb]_
 
 Introduction
 ============
 
-Pytest est un framework permettant de faire des tests et de vérifier si les différentes conditions sont juste ou fausse.
-Il permet de tester les éléments un à un mais on peut aussi lui demander de faire une série de test.
-Ces méthodes de test dépendent de comment l'on implémente dans notre code.
-Dans ce document, je vais traiter plusieurs systèmes de test.
+:ref:`pytest <pytest:features>` est un framework permettant de faire des tests
+et de vérifier si les différentes conditions sont juste ou fausse. Il permet de
+tester les éléments un à un mais on peut aussi lui demander de faire une série
+de tests. Ces méthodes de test dépendent de comment on implémente dans notre
+code. Dans ce document, je vais traiter plusieurs systèmes de test.
 
 Exemple de base
 ===============
@@ -30,18 +31,25 @@ Cette méthode vérifie la valeur d'une fonction est égale à celle avec qui on
 Code
 ~~~~
 
-.. code-block:: pycon
+.. code-block:: python
 
-	def func(x):
-		return x + 1
-	def test_answer():
-		assert func(3) == 5
+    def func(x):
+        return x + 1
+    def test_answer():
+        assert func(3) == 5
+
+.. http://docs.pytest.org/en/latest/index.html
 
 Fixture
 =======
 
-Le but des fixtures est de fournir une base pour les tests afin qu'ils puissent être exécuté de manière fiable et répétitives. Les fixtures ont des nom explicit et sont activable en les déclarants dans les fonctions de tests, les modules,...
-Les fixtures sont implémenter de façon modulaire. Chaque fonction des fixtures peuvent être appelé depuis un autre.
+Le but des fixtures est de fournir une base pour les tests afin qu'ils puissent
+être exécuté de manière fiable et répétitives. Les fixtures ont des nom
+explicit et sont activable en les déclarants dans les fonctions de tests, les
+modules,... Les fixtures sont implémenter de façon modulaire. Chaque fonction
+des fixtures peuvent être appelé depuis un autre.
+
+.. traduction mot à mot.
 
 Avec argument
 -------------
@@ -51,20 +59,22 @@ Les fonctions de test peuvent recevoir des objets en les nommant comme argument 
 Code
 ~~~~
 
-.. code-block:: pycon
+.. code-block:: python
 
-	# content of ./test_smtpsimple.py
-	import pytest
+    # content of ./test_smtpsimple.py
+    import pytest
 
-	@pytest.fixture
-	def smtp():
-    	import smtplib
-    	return smtplib.SMTP("smtp.gmail.com")
+    @pytest.fixture
+    def smtp():
+        import smtplib
+        return smtplib.SMTP("smtp.gmail.com")
 
-			def test_ehlo(smtp):
-    	response, msg = smtp.ehlo()
-    	assert response == 250
-    	assert 0 # for demo purposes
+    def test_ehlo(smtp):
+        response, msg = smtp.ehlo()
+        assert response == 250
+        assert 0 # for demo purposes
+
+.. http://docs.pytest.org/en/latest/fixture.html#fixtures-as-function-arguments
 
 Modulaire
 ---------
@@ -74,20 +84,22 @@ On peut aussi utiliser un fixture dans un autre fixture. Dans notre exemple, nou
 Code
 ~~~~
 
-.. code-block:: pycon
+.. code-block:: python
 
-	import pytest
+    import pytest
 
-	class App:
-  	def __init__(self, smtp):
-    	self.smtp = smtp
+    class App:
+        def __init__(self, smtp):
+            self.smtp = smtp
 
-	@pytest.fixture(scope="module")
-	def app(smtp):
-    return App(smtp)
+    @pytest.fixture(scope="module")
+    def app(smtp):
+        return App(smtp)
 
-	def test_smtp_exists(app):
-    assert app.smtp
+    def test_smtp_exists(app):
+        assert app.smtp
+
+.. http://docs.pytest.org/en/latest/fixture.html#modularity-using-fixtures-from-a-fixture-function
 
 Exception
 =========
@@ -105,12 +117,14 @@ Dans l'exemple si dessous, on va "définir" la division par 0.
 Code
 ~~~~
 
-.. code-block:: pycon
+.. code-block:: python
 
-	import pytest
-	def test_zero_division():
-	with pytest.raises(ZeroDivisionError):
-	1 / 0
+    import pytest
+    def test_zero_division():
+        with pytest.raises(ZeroDivisionError):
+            1 / 0
+
+.. http://docs.pytest.org/en/latest/assert.html#assertions-about-expected-exceptions
 
 Test expression régulière
 -------------------------
@@ -123,15 +137,15 @@ Exemple
 Dans l'exemple ci-dessous, on va regarder l'exception qui contient le 123.
 Cela peut être utiliser dans une longue liste, et on en recherche qu'une seule.
 
-.. code-block:: pycon
+.. code-block:: python
 
-	import pytest
-	def myfunc():
-		raise ValueError("Exception 123 raised")
-	def test_match():
-		with pytest.raises(ValueError) as excinfo:
-			myfunc()
-		excinfo.match(r'.* 123 .*')
+    import pytest
+    def myfunc():
+        raise ValueError("Exception 123 raised")
+    def test_match():
+        with pytest.raises(ValueError) as excinfo:
+            myfunc()
+        excinfo.match(r'.* 123 .*')
 
 Temporary directories and files
 ===============================
@@ -146,16 +160,18 @@ tmpdir permet de créer un répertoire temporaire unique. tmpdir est un objet de
 Exemple
 ~~~~~~~
 
-.. code-block:: pycon
+.. code-block:: python
 
-	# content of test_tmpdir.py
-	import os
-	def test_create_file(tmpdir):
-		p = tmpdir.mkdir("sub").join("hello.txt")
-		p.write("content")
-		assert p.read() == "content"
-		assert len(tmpdir.listdir()) == 1
-		assert 0
+    # content of test_tmpdir.py
+    import os
+    def test_create_file(tmpdir):
+        p = tmpdir.mkdir("sub").join("hello.txt")
+        p.write("content")
+        assert p.read() == "content"
+        assert len(tmpdir.listdir()) == 1
+        assert 0
+
+.. http://docs.pytest.org/en/latest/tmpdir.html
 
 tmpdir_factory
 --------------
@@ -171,20 +187,20 @@ On va générer cette partie procéduralement. On va donc calculer et attribué 
 Code
 ~~~~
 
-.. code-block:: pycon
+.. code-block:: python
 
-	# contents of conftest.py
-	import pytest
-		@pytest.fixture(scope='session')
-		def image_file(tmpdir_factory):
-		img = compute_expensive_image()
-		fn = tmpdir_factory.mktemp('data').join('img.png')
-		img.save(str(fn))
-		return fn
-	# contents of test_image.py
-	def test_histogram(image_file):
-		img = load_image(image_file)
-		# compute and test histogram
+    # contents of conftest.py
+    import pytest
+        @pytest.fixture(scope='session')
+        def image_file(tmpdir_factory):
+            img = compute_expensive_image()
+            fn = tmpdir_factory.mktemp('data').join('img.png')
+            img.save(str(fn))
+            return fn
+    # contents of test_image.py
+    def test_histogram(image_file):
+        img = load_image(image_file)
+        # compute and test histogram
 
 Explication
 ~~~~~~~~~~~
@@ -203,9 +219,9 @@ De plus, les entrées plus vielles de 3 dossiers temporaires sont supprimées.
 Modifier le dossier temporaire
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. code-block:: pycon
+.. code-block:: python
 
-	pytest --basetemp=mydir
+    pytest --basetemp=mydir
 
 
 Capture
@@ -217,17 +233,19 @@ Ces deux fixtures permettent l'accès aux entrées-sorties durant la phase de te
 Simple exemple
 --------------
 
-.. code-block:: pycon
+.. code-block:: python
 
-	def test_myoutput(capsys): # or use "capfd" for fd-level
-		print ("hello")
-		sys.stderr.write("world\n")
-		out, err = capsys.readouterr()
-		assert out == "hello\n"
-		assert err == "world\n"
-		print ("next")
-		out, err = capsys.readouterr()
-		assert out == "next\n"
+    def test_myoutput(capsys): # or use "capfd" for fd-level
+        print ("hello")
+        sys.stderr.write("world\n")
+        out, err = capsys.readouterr()
+        assert out == "hello\n"
+        assert err == "world\n"
+        print ("next")
+        out, err = capsys.readouterr()
+        assert out == "next\n"
+
+.. http://docs.pytest.org/en/latest/capture.html#accessing-captured-output-from-a-test-function
 
 readouterr()
 ~~~~~~~~~~~~
@@ -254,15 +272,17 @@ Exemple
 
 Dans le morceau de code ci-dessous, l'avant-dernière ligne ne sera pas enregistrée, car elle fait partie du block du while.
 
-.. code-block:: pycon
+.. code-block:: python
 
-	def test_disabling_capturing(capsys):
-		print('this output is captured')
-		with capsys.disabled():
-			print('output not captured, going directly to sys.stdout')
-		print('this output is also captured')
+    def test_disabling_capturing(capsys):
+        print('this output is captured')
+        with capsys.disabled():
+            print('output not captured, going directly to sys.stdout')
+        print('this output is also captured')
 
 Conclusion
 ==========
 
 Pytest est un outil très puissant quand il s'agit de faire différents tests. De plus, il dispose d'un large panel de compléments, ce qui lui permet un plus grande maniabilité et adaptation en fonction de nos besoins.
+
+.. [#nb] <nicolas.beyeler@pindex.ch>

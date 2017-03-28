@@ -10,7 +10,6 @@ Table des matières
 .. toctree::
    :maxdepth: 1
 
-   pytest/index.rst
    sphinx/index.rst
    watchdog/index.rst
    datetime/index.rst
@@ -48,6 +47,7 @@ Table des matières
  - Maël Pedretti <mael.pedretti@hotmail.fr>
  - Marc Friedli <marc.friedli@he-arc.ch>
  - Mohamed Jmaa <mohamed.jmaa@he-arc.ch>
+ - Nicolas Beyeler <nicolas.beyeler@pindex.ch>
  - Nicolas Kaser <nicolas.kaser@he-arc.ch>
  - Paul Jeanbourquin <pa.jeanbourquin@gmail.com>
  - Pedro Costa <pedro.costa@he-arc.ch>

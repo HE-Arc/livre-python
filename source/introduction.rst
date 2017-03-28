@@ -62,8 +62,7 @@ Tests
    :maxdepth: 1
 
    unittest/index
-
-* :ref:`pytest-tutorial`
+   pytest/index
 
 Traitement des données
 ----------------------
