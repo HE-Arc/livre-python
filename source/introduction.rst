@@ -26,11 +26,11 @@ Bases
    fstrings/index
    itertools/index
    io/index
+   math/index
    time/index
    super/index
 
 * :ref:`random-tutorial` ★
-* :ref:`math-tutorial`
 * :ref:`secrets-tutorial` ★
 * :ref:`statistics-tutorial`
 
