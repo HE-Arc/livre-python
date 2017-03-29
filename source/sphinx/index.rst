@@ -1,6 +1,8 @@
 Sphinx
 ======
 
+Guillaume Noguera [#gn]_
+
 Introduction
 ------------
 
@@ -66,6 +68,7 @@ La syntaxe pour documenter une fonction est la suivante::
 
 
     ..py:function::whatShouldIEat(hangoverLevel, politicalViews[])
+
        Ignores parameters and returns humus.
 
     .. py:function:: enumerate(sequence[, start=0])
@@ -340,6 +343,33 @@ apidoc peut-être invoqué ainsi::
 
 Des informations suplémentaires sur son utilisation peuvent être trouvées `à cette adresse <http://sphinx.pocoo.org/man/sphinx-apidoc.html>`_. 
 
+Le fichier de configuration
+---------------------------
+
+Le fichier conf.py, présent à la racine de notre dossier, permet de paramétrer un grand nombre de paramètres.
+
+Configuration générale
+~~~~~~~~~~~~~~~~~~~~~~
+
+**extensions** ::
+    
+    import sys, os
+    sys.path.append(os.path.abspath('sphinxext'))
+    extensions = {'extensionname', '..'}
+
+utilisé pour indiquer à sphinx quels extensions (autodoc, par exemple) utiliser. A noter que comme pour les modules à documenter avec autodoc, il faudra ajouter les extensions au sys.path si ces dernières ne y sont pas déjà.
+
+**source_suffix**
+
+Définit l'extension à utiliser; sphinx ne prendra pas en compte les fichiers ne comportant pas cette extension. 
+Par défaut, le suffixe utilisé est ".rst".
+
+**exclude_patterns** 
+
+Similaire à un .gitignore, mais pour sphinx
+
+
+
 Domaines
 --------
 
@@ -406,6 +436,8 @@ Si l'on désire utiliser un des thèmes pre-installés, il suffit de modifier la
         "relbarbgcolor": "black"
     }  
 
+(On peut remarquer que des options sont disponibles, afficher ou non la barre latérale par exemple. Les options sont liées au thème utilisé)
+
 La manipulation est sensiblement la même pour un thème tiers, en admettant que l'on ait inclus le thème concerné dans un repértoire accessible par sphinx et indiquer son chemin ("html_theme_path = ["."]") dans conf.py. Les thèmes tiers statiques peuvent venir sous deux formes différentes : un dossier composé de sous-fichiers et d'un fichier theme.py, ou un dossier compressé (.zip). La forme que prennent ces derniers ne change néanmoins pas la démarche pour les activer.
 
 
@@ -415,3 +447,10 @@ Conclusion
 J'aurais pû couvrir bien des notions sur Sphinx et ai essayé d'en couvrir l'essentiel. Il s'agit d'un outil utile qui fera gagner un temps considérable: Après un build html, on peut simplement déposer la documentation sur un serveur. De plus, il est adapté pour un travail en équipe grâce à son aspect "modulaire" (plusieurs indexes séparés, un par librairie dans le cas de notre travail sur ce livre python). Enfin, sa capacité à produire de multiples formats de fichiers à partir du markup reST 
 
 J'encourage donc mes éventuels lecteurs à s'y intéresser, quand bien même il faudra se débattre un peu avec son fonctionnement de prime abord. Le retour sur investissement peut valoir le coup. 
+
+.. image:: img/o.png
+   :alt: sphinx
+   :align: center
+
+.. [#gn] <guillaume.noguera@he-arc.ch>
+
