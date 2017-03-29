@@ -203,22 +203,7 @@ Quelques exemples (`source <http://www.sphinx-doc.org/en/stable/domains.html>`_)
        :throws SomeError: For whatever reason in that case.
        :returns: Something.
 
-> > > 
-
-.. c:function:: PyObject* PyType_GenericAlloc(PyTypeObject *type, Py_ssize_t nitems)
-.. c:member:: PyObject* PyTypeObject.tp_bases
-.. js:function:: $.getJSON(href, callback[, errback])
-
-   :param string href: An URI to the location of the resource.
-   :param callback: Gets called with the object.
-   :param errback:
-       Gets called in case the request fails. And a lot of other
-       text so we need multiple lines.
-   :throws SomeError: For whatever reason in that case.
-   :returns: Something.
-
-(On appréciera la traduction baguette automatique de sphinx \\[T]/ )
-
+(On appréciera la traduction baguette automatique de sphinx \\[T]/)
 à noter que les extensions :function::, :member::, etc. sont liées au language qu'elles couvrent. 
 Ainsi, pour le C++, nous avons accès à ::
 
