@@ -6,7 +6,7 @@ Par Guillaume Noguera [#gn]_
 Introduction
 ------------
 
-:py:mod:`sphinx` `(site officiel) <http://www.sphinx-doc.org/>`_ est un générateur de documentation python libre (Licence `BSD <https://en.wikipedia.org/wiki/BSD_licenses>`_).
+`Sphinx <http://www.sphinx-doc.org/en/stable/>`_ est un générateur de documentation python libre (Licence `BSD <https://en.wikipedia.org/wiki/BSD_licenses>`_).
 Sphinx se charge de convertir un ensemble de sources `reSt <http://docutils.sourceforge.net/rst.html>`_ vers différents formats (LaTeX, PDF, Epub), en produisant les indices et références internes automatiquement.
 Il est également capable de générer une version html de la documentation pour une consultation directe et facile.
 On peut noter que sphinx se concentre sur une documentation écrite "à la main", plutôt que sur une documentation auto-générée.
