@@ -10,7 +10,7 @@ Introduction
 ------------
 
 `Sphinx <http://www.sphinx-doc.org/>`_ est un générateur de documentation python libre (Licence `BSD <https://en.wikipedia.org/wiki/BSD_licenses>`_).
-Sphinx se charge de convertir un ensemble de sources `reSt <http://docutils.sourceforge.net/rst.html>`_ vers différents formats (LateX, PDF, Epub), en produisant les indices et références internes automatiquement.
+Sphinx se charge de convertir un ensemble de sources `reSt <http://docutils.sourceforge.net/rst.html>`_ vers différents formats (LaTeX, PDF, Epub), en produisant les indices et références internes automatiquement.
 Il est également capable de générer une version html de la documentation pour une consultation directe et facile.
 On peut noter que sphinx se concentre sur une documentation écrite "à la main", plutôt que sur une documentation auto-générée.
 On peut donc considérer grossièrement Sphinx comme un programme qui prends des fichiers reST et les convertit en html.
@@ -91,6 +91,7 @@ Le résultat :
 
 The :py:func:`enumerate` function can be used for ...
 
+Il est à noter que la recherche générée par sphinx renvoie également aux définitions de fonctions. 
 Un référencement systématique me semble être une bonne pratique. La navigation est plus fluide et on évite ainsi des ctrl-f inutiles :)
 
 Autodoc
@@ -173,11 +174,40 @@ utilisé pour indiquer à sphinx quels extensions (autodoc, par exemple) utilise
 Définit l'extension à utiliser; sphinx ne prendra pas en compte les fichiers ne comportant pas cette extension. 
 Par défaut, le suffixe utilisé est ".rst".
 
+**master_doc**
+
+Indique le nom du master toctree.
+
 **exclude_patterns** 
 
-Similaire à un .gitignore, mais pour sphinx
+Un .gitignore, mais pour les sphinxes
 
+Information sur le projet
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
+**project, copyright, author, version, release** 
+
+Les informations sur le projet, plutôt éloquent
+
+**language**
+
+Utilisé par sphinx pour la traduction automatique de certain termes
+
+Options pour la sortie html
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**html_theme, html_theme_options**
+
+Comme expliqué dans la section thème, on indique ici le thème à utiliser. 
+On peut également donner une séquence d'éléments à html_theme_options afin d'ajuster le thème aux besoins.
+
+**html_static_path** 
+
+On peut indiquer ici un répértoire statique dont les fichiers doivent passer en priorité sur les builtins (par ex, les stylesheets)
+
+>>>>>>>>>>>>>>>>
+
+La quantité de paramètres à disposition dans le fichier conf.py est grande et il serait difficile de tout citer sans exploser la limite des 7 pages de cette documentation. Il existe notamment des paramètres propres à tous les formats d'exportation : ePub, LaTeX, pdf .. Tous sont spécifiques et peuvent être retrouvés à cette `adresse <http://www.sphinx-doc.org/en/stable/config.html>`_.
 
 Domaines
 --------
@@ -261,5 +291,5 @@ J'encourage donc mes éventuels lecteurs à s'y intéresser, quand bien même il
    :alt: sphinx
    :align: center
 
-.. [#gn] <guillaume.noguera@he-arc.ch>
+.. [#gn] <guillaume.noguera@he-arc.ch> ou <guillaume.noguera@gmail.com> pour les trucs moins corpo
 
