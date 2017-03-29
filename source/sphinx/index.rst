@@ -133,7 +133,7 @@ Néanmoins, cette méthode comporte un soucis évident : on doit quand même inc
 Heureusement, un utilisateur a créé un script remédiant à ce soucis : il s'agit d'apidoc. 
 
 APIDoc
-------
+~~~~~~
 
 APIDoc est un outil venant avec sphinx. Sa fonction est d'extraire la documentation d'un projet entier, générant ainsi les fichiers \*.rst pour chaque module.
 apidoc peut-être invoqué ainsi::
@@ -142,34 +142,78 @@ apidoc peut-être invoqué ainsi::
 
 Des informations suplémentaires sur son utilisation peuvent être trouvées `à cette adresse <http://sphinx.pocoo.org/man/sphinx-apidoc.html>`_. 
 
-Syntaxe spécifique à Sphinx
----------------------------
-
-*todo*
-
 Domaines
 --------
 
-*todo*
+Au départ, sphinx a été conçu comme un outil dédié au language python. Après quelques temps, l'intéret grandissant pour cet outil a poussé le développement de sphinx vers un support multi-language. Il est donc possible aujourd'hui de documenter des projets C, C++ ou Javascript avec sphinx. 
 
-Le fichier de configuration
----------------------------
+On peut remarquer que dans la définition de la fonction :py:func:`enumerate`, on utilise la notation **.. py:** function: . Ce même préfixe .. py: corresponds justement à un domaine sphinx.
+Ces domaines sont en fait une collection de directives reST qui évitent les conflits de noms si le document redigé corresponds à un projet utilisant une multitude de languages, par exemple. 
 
-*todo*
+Ainsi, le domaine C est representé par la notation **.. c:**, son équivalent C++ est **.. cpp:**. 
+
+Quelques exemples::
+
+    .. c:function:: PyObject* PyType_GenericAlloc(PyTypeObject *type, Py_ssize_t nitems)
+    .. c:member:: PyObject* PyTypeObject.tp_bases
+    .. js:function:: $.getJSON(href, callback[, errback])
+
+       :param string href: An URI to the location of the resource.
+       :param callback: Gets called with the object.
+       :param errback:
+           Gets called in case the request fails. And a lot of other
+           text so we need multiple lines.
+       :throws SomeError: For whatever reason in that case.
+       :returns: Something.
+
+> > > 
+
+.. c:function:: PyObject* PyType_GenericAlloc(PyTypeObject *type, Py_ssize_t nitems)
+.. c:member:: PyObject* PyTypeObject.tp_bases
+.. js:function:: $.getJSON(href, callback[, errback])
+
+   :param string href: An URI to the location of the resource.
+   :param callback: Gets called with the object.
+   :param errback:
+       Gets called in case the request fails. And a lot of other
+       text so we need multiple lines.
+   :throws SomeError: For whatever reason in that case.
+   :returns: Something.
+
+(On appréciera la traduction baguette automatique de sphinx \\[T]/ )
+
+à noter que les extensions :function::, :member::, etc. sont liées au language qu'elles couvrent. 
+Ainsi, pour le C++, nous avons accès à ::
+
+   .. cpp:class::
+   .. cpp:member::
+   .. cpp:function::
+   .. cpp:enum::
+   .. cpp:var::
+   .. cpp:type::
+
+La liste est longue et le mieux est de vous inviter à consuler la `page de référence <http://www.sphinx-doc.org/en/stable/domains.html>`_ prévue à cet effet. 
 
 Les thèmes
 ----------
 
-*todo*
+Comme pour un content manager tel que Wordpress ou Drupal, Sphinx utilise un système de thème pour déterminer l'aspect visuel du build (html uniquement).
 
-Configuration pour LaTeX
-------------------------
+Sphinx vient avec quelques thèmes pré-intallés : classic (semblable à la doc officielle python), alabaster (le thème actuellement utilisé pour ce livre python), sphinxdoc (thème utilisé pour le site officiel de sphinx) ... la liste exhaustive est `disponible ici <http://www.sphinx-doc.org/en/stable/theming.html#builtin-themes>`_ .
+Si l'on désire utiliser un des thèmes pre-installés, il suffit de modifier la ligne suivante dans le fichier conf.py::
 
-*todo*
+    html_theme = "classic"
+    html_theme_options = {
+        "rightsidebar": "true",
+        "relbarbgcolor": "black"
+    }  
+
+La manipulation est sensiblement la même pour un thème tiers, en admettant que l'on ait inclus le thème concerné dans un repértoire accessible par sphinx et indiquer son chemin ("html_theme_path = ["."]") dans conf.py. Les thèmes tiers statiques peuvent venir sous deux formes différentes : un dossier composé de sous-fichiers et d'un fichier theme.py, ou un dossier compressé (.zip). La forme que prennent ces derniers ne change néanmoins pas la démarche pour les activer.
+
 
 Conclusion
 ----------
 
-*todo*
+J'aurais pû couvrir bien des notions sur Sphinx et ai essayé d'en couvrir l'essentiel. Il s'agit d'un outil utile qui fera gagner un temps considérable: Après un build html, on peut simplement déposer la documentation sur un serveur. De plus, il est adapté pour un travail en équipe grâce à son aspect "modulaire" (plusieurs indexes séparés, un par librairie dans le cas de notre travail sur ce livre python). Enfin, sa capacité à produire de multiples formats de fichiers à partir du markup reST 
 
-
+J'encourage donc mes éventuels lecteurs à s'y intéresser, quand bien même il faudra se débattre un peu avec son fonctionnement de prime abord. Le retour sur investissement peut valoir le coup. 
