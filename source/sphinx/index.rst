@@ -34,6 +34,8 @@ que les fichiers conf.py et index.rst (configuration par défaut de sphinx-quick
 Structure des fichiers
 ----------------------
 
+.. highlight:: rest
+
 Le fichier index.rst placé à l'origine du dossier source, appelé *master document*, agit principalement comme une page d'accueil et contient la table des matières.
 Le toctree (*table of contents tree*) est une fonctionnalité ajoutée à reSt par Sphinx et permet de connecter plusieurs fichiers à l'intérieur d'un document::
 	
@@ -75,6 +77,7 @@ La syntaxe pour documenter une fonction est la suivante::
        *sequence*. (And so on.)
    
 Le résultat : 
+
 
 .. py:function:: whatShouldIEat(hangoverLevel, politicalViews[])
 
@@ -354,68 +357,10 @@ Des informations suplémentaires sur son utilisation peuvent être trouvées `à
 >>>>>>>>>>>>>>>>>>>
 
 
-Le fichier de configuration
----------------------------
-
-Le fichier conf.py, présent à la racine de notre dossier, permet de paramétrer un grand nombre de paramètres.
-
-Configuration générale
-~~~~~~~~~~~~~~~~~~~~~~
-
-**extensions** ::
-    
-    import sys, os
-    sys.path.append(os.path.abspath('sphinxext'))
-    extensions = {'extensionname', '..'}
-
-utilisé pour indiquer à sphinx quels extensions (autodoc, par exemple) utiliser. A noter que comme pour les modules à documenter avec autodoc, il faudra ajouter les extensions au sys.path si ces dernières ne y sont pas déjà.
-
-**source_suffix**
-
-Définit l'extension à utiliser; sphinx ne prendra pas en compte les fichiers ne comportant pas cette extension. 
-Par défaut, le suffixe utilisé est ".rst".
-
-**master_doc**
-
-Indique le nom du master toctree.
-
-**exclude_patterns** 
-
-Un .gitignore, mais pour les sphinxes
-
-Information sur le projet
-~~~~~~~~~~~~~~~~~~~~~~~~~
-
-**project, copyright, author, version, release** 
-
-Les informations sur le projet, plutôt éloquent
-
-**language**
-
-Utilisé par sphinx pour la traduction automatique de certain termes
-
-Options pour la sortie html
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-**html_theme, html_theme_options**
-
-Comme expliqué dans la section thème, on indique ici le thème à utiliser. 
-On peut également donner une séquence d'éléments à html_theme_options afin d'ajuster le thème aux besoins.
-
-**html_static_path** 
-
-On peut indiquer ici un répértoire statique dont les fichiers doivent passer en priorité sur les builtins (par ex, les stylesheets)
-
->>>>>>>>>>>>>>>>
-
-La quantité de paramètres à disposition dans le fichier conf.py est grande et il serait difficile de tout citer sans exploser la limite des 7 pages de cette documentation. Il existe notamment des paramètres propres à tous les formats d'exportation : ePub, LaTeX, pdf .. Tous sont spécifiques et peuvent être retrouvés à cette `adresse <http://www.sphinx-doc.org/en/stable/config.html>`_.
-
-
->>>>>>>>>>>>>>>>>>>
-
-
 Domaines
 --------
+
+.. highlight:: rest
 
 Au départ, sphinx a été conçu comme un outil dédié au language python. Après quelques temps, l'intéret grandissant pour cet outil a poussé le développement de sphinx vers un support multi-language. Il est donc possible aujourd'hui de documenter des projets C, C++ ou Javascript avec sphinx. 
 
@@ -466,12 +411,15 @@ Ainsi, pour le C++, nous avons accès à ::
 
 La liste est longue et le mieux est de vous inviter à consuler la `page de référence <http://www.sphinx-doc.org/en/stable/domains.html>`_ prévue à cet effet. 
 
+.. highlight:: none
 
 >>>>>>>>>>>>>>>>>>>
 
 
 Les thèmes
 ----------
+
+.. highlight:: python
 
 Comme pour un content manager tel que Wordpress ou Drupal, Sphinx utilise un système de thème pour déterminer l'aspect visuel du build (html uniquement).
 
@@ -483,6 +431,8 @@ Si l'on désire utiliser un des thèmes pre-installés, il suffit de modifier la
         "rightsidebar": "true",
         "relbarbgcolor": "black"
     }  
+
+.. highlight:: none
 
 (On peut remarquer que des options sont disponibles, afficher ou non la barre latérale par exemple. Les options sont liées au thème utilisé)
 
