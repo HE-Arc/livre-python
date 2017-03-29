@@ -9,7 +9,9 @@ Guillaume Noguera [#gn]_
 Introduction
 ------------
 
-`Sphinx <http://www.sphinx-doc.org/>`_ est un générateur de documentation python libre (Licence `BSD <https://en.wikipedia.org/wiki/BSD_licenses>`_).
+
+
+:py:mod:`sphinx` `(site officiel) <http://www.sphinx-doc.org/>`_ est un générateur de documentation python libre (Licence `BSD <https://en.wikipedia.org/wiki/BSD_licenses>`_).
 Sphinx se charge de convertir un ensemble de sources `reSt <http://docutils.sourceforge.net/rst.html>`_ vers différents formats (LaTeX, PDF, Epub), en produisant les indices et références internes automatiquement.
 Il est également capable de générer une version html de la documentation pour une consultation directe et facile.
 On peut noter que sphinx se concentre sur une documentation écrite "à la main", plutôt que sur une documentation auto-générée.
@@ -20,7 +22,7 @@ Pré-réquis
 Python 2.7 ou Python 3.4 est impératif au fonctionnement de Sphinx.
 La librairie `Pygments <http://pygments.org>`_  peut-être installée si une colorisation syntaxique est nécessaire.
 
-
+	
 Installation et rapide mise en pratique
 ---------------------------------------
 
@@ -37,6 +39,8 @@ que les fichiers conf.py et index.rst (configuration par défaut de sphinx-quick
 
 Structure des fichiers
 ----------------------
+
+.. highlight:: rest
 
 Le fichier index.rst placé à l'origine du dossier source, appelé *master document*, agit principalement comme une page d'accueil et contient la table des matières.
 Le toctree (*table of contents tree*) est une fonctionnalité ajoutée à reSt par Sphinx et permet de connecter plusieurs fichiers à l'intérieur d'un document::
@@ -70,6 +74,7 @@ Documentation d'un objet
 
 La syntaxe pour documenter une fonction est la suivante::
 
+
     ..py:function::whatShouldIEat(hangoverLevel, politicalViews[])
     
        Ignores parameters and returns humus.
@@ -81,6 +86,7 @@ La syntaxe pour documenter une fonction est la suivante::
    
 Le résultat : 
 
+
 .. py:function:: whatShouldIEat(hangoverLevel, politicalViews[])
 
    Ignores parameters and always returns humus.
@@ -90,7 +96,6 @@ Le résultat :
    Return an iterator that yields tuples of an index and an item of the
    *sequence*. (And so on.)
   
-
 Après une fonction documentée, il est possible de créer une référence vers cette dernière::
 
     La fonction :py:func:`enumerate` peut être utilisée pour ...
@@ -102,6 +107,7 @@ La fonction :py:func:`enumerate` peut être utilisée pour ...
 Il est à noter que la recherche générée par sphinx renvoie également aux définitions de fonctions. 
 Un référencement systématique me semble être une bonne pratique. La navigation est plus fluide et on évite ainsi des ctrl-f inutiles :)
 
+.. highlight:: none
 
 >>>>>>>>>>>>>>>>>>>
 
@@ -128,11 +134,15 @@ Les 3 lignes suivantes sont présentes par défaut dans ce dernier::
     # import sys
     # sys.path.insert(0, os.path.abspath('.'))
 
+.. highlight:: python
+
 Il est donc possible de les décommenter, le chemin étant évidemment à adapter (L'option de mettre un chemin en dur comme en sale étant évidemment disponible à votre désarroi et pour mon grand bonheur)::
 
     import os
     import sys
     sys.path.insert(0,"C:\\Users\\Guillaume\\Desktop\\FlappyBird\\flappy")
+
+.. highlight:: rest
 
 Finalement, la documentation se fait en ajoutant les modules, classes et fonctions désirées dans notre fichier reST::
 
@@ -156,6 +166,8 @@ Nous nous retrouvons donc avec une chatoyante doc :
    :alt: a fine doc
    :align: center
 
+.. highlight:: none
+
 Néanmoins, cette méthode comporte un soucis évident : on doit quand même inclure tous les modules et classes manuellement, et ça c'est tout pourri.
 Heureusement, un utilisateur a créé un script remédiant à ce soucis : il s'agit d'apidoc. 
 
@@ -173,68 +185,10 @@ Des informations suplémentaires sur son utilisation peuvent être trouvées `à
 >>>>>>>>>>>>>>>>>>>
 
 
-Le fichier de configuration
----------------------------
-
-Le fichier conf.py, présent à la racine de notre dossier, permet de paramétrer un grand nombre de paramètres.
-
-Configuration générale
-~~~~~~~~~~~~~~~~~~~~~~
-
-**extensions** ::
-    
-    import sys, os
-    sys.path.append(os.path.abspath('sphinxext'))
-    extensions = {'extensionname', '..'}
-
-utilisé pour indiquer à sphinx quels extensions (autodoc, par exemple) utiliser. A noter que comme pour les modules à documenter avec autodoc, il faudra ajouter les extensions au sys.path si ces dernières ne y sont pas déjà.
-
-**source_suffix**
-
-Définit l'extension à utiliser; sphinx ne prendra pas en compte les fichiers ne comportant pas cette extension. 
-Par défaut, le suffixe utilisé est ".rst".
-
-**master_doc**
-
-Indique le nom du master toctree.
-
-**exclude_patterns** 
-
-Un .gitignore, mais pour les sphinxes
-
-Information sur le projet
-~~~~~~~~~~~~~~~~~~~~~~~~~
-
-**project, copyright, author, version, release** 
-
-Les informations sur le projet, plutôt éloquent
-
-**language**
-
-Utilisé par sphinx pour la traduction automatique de certain termes
-
-Options pour la sortie html
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-**html_theme, html_theme_options**
-
-Comme expliqué dans la section thème, on indique ici le thème à utiliser. 
-On peut également donner une séquence d'éléments à html_theme_options afin d'ajuster le thème aux besoins.
-
-**html_static_path** 
-
-On peut indiquer ici un répértoire statique dont les fichiers doivent passer en priorité sur les builtins (par ex, les stylesheets)
-
->>>>>>>>>>>>>>>>
-
-La quantité de paramètres à disposition dans le fichier conf.py est grande et il serait difficile de tout citer sans exploser la limite des 7 pages de cette documentation. Il existe notamment des paramètres propres à tous les formats d'exportation : ePub, LaTeX, pdf .. Tous sont spécifiques et peuvent être retrouvés à cette `adresse <http://www.sphinx-doc.org/en/stable/config.html>`_.
-
-
->>>>>>>>>>>>>>>>>>>
-
-
 Domaines
 --------
+
+.. highlight:: rest
 
 Au départ, sphinx a été conçu comme un outil dédié au language python. Après quelques temps, l'intéret grandissant pour cet outil a poussé le développement de sphinx vers un support multi-language. Il est donc possible aujourd'hui de documenter des projets C, C++ ou Javascript avec sphinx. 
 
@@ -285,12 +239,15 @@ Ainsi, pour le C++, nous avons accès à ::
 
 La liste est longue et le mieux est de vous inviter à consuler la `page de référence <http://www.sphinx-doc.org/en/stable/domains.html>`_ prévue à cet effet. 
 
+.. highlight:: none
 
 >>>>>>>>>>>>>>>>>>>
 
 
 Les thèmes
 ----------
+
+.. highlight:: python
 
 Comme pour un content manager tel que Wordpress ou Drupal, Sphinx utilise un système de thème pour déterminer l'aspect visuel du build (html uniquement).
 
@@ -302,6 +259,8 @@ Si l'on désire utiliser un des thèmes pre-installés, il suffit de modifier la
         "rightsidebar": "true",
         "relbarbgcolor": "black"
     }  
+
+.. highlight:: none
 
 (On peut remarquer que des options sont disponibles, afficher ou non la barre latérale par exemple. Les options sont liées au thème utilisé)
 
