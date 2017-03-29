@@ -27,6 +27,10 @@ L'installation de sphinx se fait avec PyPI::
 Ensuite, il peut être intéressant d'appeler la commande sphinx-quickstart pour générer automatiquement l'arborescence utilisée par Sphinx, ainsi
 que les fichiers conf.py et index.rst (configuration par défaut de sphinx-quickstart).
 
+
+>>>>>>>>>>>>>>>>>>>
+
+
 Structure des fichiers
 ----------------------
 
@@ -53,6 +57,7 @@ On peut aussi choisir d'utiliser une liste ordonnée::
 	..toctree::
 	:numbered: 
 
+>>>>>>>>>>>>>>>>>>>
 
 Documentation d'un objet
 ------------------------
@@ -269,14 +274,18 @@ J'encourage donc mes éventuels lecteurs à s'y intéresser, quand bien même il
 
 Après une fonction documentée, il est possible de créer une référence vers cette dernière::
 
-    The :py:func:`enumerate` function can be used for ...
+    La fonction :py:func:`enumerate` peut être utilisée pour ...
 
 Le résultat : 
 
-The :py:func:`enumerate` function can be used for ...
+La fonction :py:func:`enumerate` peut être utilisée pour ...
 
 Il est à noter que la recherche générée par sphinx renvoie également aux définitions de fonctions. 
 Un référencement systématique me semble être une bonne pratique. La navigation est plus fluide et on évite ainsi des ctrl-f inutiles :)
+
+
+>>>>>>>>>>>>>>>>>>>
+
 
 Autodoc
 -------
@@ -289,6 +298,10 @@ La façon la plus simple est d'inclure l'extension sphinx.ext.autodoc lors de l'
     > autodoc: automatically insert docstrings from modules (y/n) [n]: y
     ..
 
+Sinon, on peut intégrer l'extension dans le fichier conf.py::
+
+    extensions = ['sphinx.ext.autodoc']
+
 Ensuite, si le module n'est pas inclus dans les variables d'environnement de python, il est possible de rajouter son chemin dans le fichier conf.py.
 Les 3 lignes suivantes sont présentes par défaut dans ce dernier::
 
@@ -296,13 +309,13 @@ Les 3 lignes suivantes sont présentes par défaut dans ce dernier::
     # import sys
     # sys.path.insert(0, os.path.abspath('.'))
 
-Il est donc possible de les décommenter, le chemin étant évidemment à adapter (L'option de mettre un chemin en dur comme en sale étant évidemment disponible à mon grand bonheur)::
+Il est donc possible de les décommenter, le chemin étant évidemment à adapter (L'option de mettre un chemin en dur comme en sale étant évidemment disponible à votre désarroi et pour mon grand bonheur)::
 
     import os
     import sys
     sys.path.insert(0,"C:\\Users\\Guillaume\\Desktop\\FlappyBird\\flappy")
 
-Finalement, la documentation se fait en invoquant::
+Finalement, la documentation se fait en ajoutant les modules, classes et fonctions désirées dans notre fichier reST::
 
     Contents:
  
@@ -336,6 +349,10 @@ apidoc peut-être invoqué ainsi::
     sphinx-apidoc [options] -o <destination> <source> [chemins ...]
 
 Des informations suplémentaires sur son utilisation peuvent être trouvées `à cette adresse <http://sphinx.pocoo.org/man/sphinx-apidoc.html>`_. 
+
+
+>>>>>>>>>>>>>>>>>>>
+
 
 Le fichier de configuration
 ---------------------------
@@ -393,6 +410,10 @@ On peut indiquer ici un répértoire statique dont les fichiers doivent passer e
 
 La quantité de paramètres à disposition dans le fichier conf.py est grande et il serait difficile de tout citer sans exploser la limite des 7 pages de cette documentation. Il existe notamment des paramètres propres à tous les formats d'exportation : ePub, LaTeX, pdf .. Tous sont spécifiques et peuvent être retrouvés à cette `adresse <http://www.sphinx-doc.org/en/stable/config.html>`_.
 
+
+>>>>>>>>>>>>>>>>>>>
+
+
 Domaines
 --------
 
@@ -401,9 +422,9 @@ Au départ, sphinx a été conçu comme un outil dédié au language python. Apr
 On peut remarquer que dans la définition de la fonction :py:func:`enumerate`, on utilise la notation **.. py:** function: . Ce même préfixe .. py: corresponds justement à un domaine sphinx.
 Ces domaines sont en fait une collection de directives reST qui évitent les conflits de noms si le document redigé corresponds à un projet utilisant une multitude de languages, par exemple. 
 
-Ainsi, le domaine C est representé par la notation **.. c:**, son équivalent C++ est **.. cpp:**. 
+Ainsi, le domaine C est representé par la notation **.. c:**, son équivalent C++ est **.. cpp:**. Javascript se verra malicieusement attribué le tag **.. js:**.
 
-Quelques exemples::
+Quelques exemples (`source <http://www.sphinx-doc.org/en/stable/domains.html>`_)::
 
     .. c:function:: PyObject* PyType_GenericAlloc(PyTypeObject *type, Py_ssize_t nitems)
     .. c:member:: PyObject* PyTypeObject.tp_bases
@@ -445,6 +466,10 @@ Ainsi, pour le C++, nous avons accès à ::
 
 La liste est longue et le mieux est de vous inviter à consuler la `page de référence <http://www.sphinx-doc.org/en/stable/domains.html>`_ prévue à cet effet. 
 
+
+>>>>>>>>>>>>>>>>>>>
+
+
 Les thèmes
 ----------
 
@@ -462,6 +487,9 @@ Si l'on désire utiliser un des thèmes pre-installés, il suffit de modifier la
 (On peut remarquer que des options sont disponibles, afficher ou non la barre latérale par exemple. Les options sont liées au thème utilisé)
 
 La manipulation est sensiblement la même pour un thème tiers, en admettant que l'on ait inclus le thème concerné dans un repértoire accessible par sphinx et indiquer son chemin ("html_theme_path = ["."]") dans conf.py. Les thèmes tiers statiques peuvent venir sous deux formes différentes : un dossier composé de sous-fichiers et d'un fichier theme.py, ou un dossier compressé (.zip). La forme que prennent ces derniers ne change néanmoins pas la démarche pour les activer.
+
+
+>>>>>>>>>>>>>>>>>>>
 
 
 Conclusion
