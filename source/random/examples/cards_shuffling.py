@@ -3,16 +3,14 @@
 import random
 
 # Préparation des cartes.
-valeurs = ["Deux", "Trois", "Quatre", "Cinq", "Six", "Sept",
-           "Huit", "Neuf", "Dix", "Valet", "Dame", "Roi", "As"]
-enseignes = ["Coeur", "Pique", "Carreau", "Trèfle"]
+valeurs = [
+    "Deux", "Trois", "Quatre", "Cinq", "Six", "Sept", "Huit", "Neuf", "Dix",
+    "Valet", "Dame", "Roi", "As"
+]
+enseignes = ["Cœur", "Pique", "Carreau", "Trèfle"]
 
 # Préparation du jeu de cartes (52 cartes).
-jeu_de_cartes = []
-for enseigne in enseignes:
-    for valeur in valeurs:
-        nouvelle_carte = valeur + " de " + enseigne
-        jeu_de_cartes.append(nouvelle_carte)
+jeu_de_cartes = [f"{v} de {e}" for v in valeurs for e in enseignes]
 
 # Mélange du jeu de cartes.
 random.shuffle(jeu_de_cartes)

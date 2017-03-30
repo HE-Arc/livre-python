@@ -51,7 +51,7 @@ d'une liste (:py:func:`random.sample`).
     Il est préférable d'éviter l'utilisation de :py:mod:`random` pour des
     applications liées à la cryptographie ou la sécurité en général (génération
     de mots de passe, authentification de compte, etc.) et de préférer le
-    module :py:mod:`secrets` à la place.
+    module :ref:`secrets-tutorial` à la place.
 
 *Seeding*
 =========
@@ -127,8 +127,10 @@ retourne un nombre entier de l'intervalle compris entre *a* et *b*
     >>> random.randint(2, 9)
     8
 
-**Notez que c'est la seule fonction qui prend en compte la valeur limite
-supérieur de l'intervalle dans son exécution**.
+.. note::
+
+    C'est la seule fonction qui prend en compte la valeur limite supérieur de
+    l'intervalle dans son exécution.
 
 :py:func:`random.randrange` accepte un nombre comme argument, *a*. Cette
 fonction retourne un nombre entier compris entre 0 et *a* non-compris
