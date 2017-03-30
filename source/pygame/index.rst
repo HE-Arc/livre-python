@@ -98,16 +98,19 @@ Cet exemple provient de :ref:`makegames-2`.
 Exemples
 ========
 
-Son au maintien d'une touche
-----------------------------
-
+Petit lecteur audio simple
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 Cet exemple provient du `tutoriel OpenClassrooms`_
-
 .. literalinclude:: exemple/mixerEx.py
 
-Dans cet exemple, on a utilisé deux modules: :py:mod:`pygame.mixer`, qui est utilisé pour la gestion de sons et :py:mod:`pygame.event`, qui est utilisé pour la gestion des touches au clavier.
+Dans cet exemple, plusieurs modules sont utilisés, notamment: pygame.mixer, qui est utilisé pour la gestion de sons, pygame.event, qui est utilisé pour la gestion des touches au clavier, pygame.draw, pour dessiner les boutons et pygame.mouse, pour récupérer les coordonnées de la souris.
+Ici, on a créé un petit lecteur audio. Lorsque l'on appuie sur play/stop, le son de lance/s'arrête.
+pour créer les boutons, on a utilisé la fonction de dessin de pygame.draw.
+pour l'illumination des boutons au passage de la souris, il faut récupérer la position de la souris, et la comparer avec la zone dans laquelle est dessinée le rectangle.
 
-Lors de l’appui, et du maintient de la touche espace, on joue le son qui a été chargé, ou on continue la lecture si le son était sur pause. Lorsque la touche est relâchée, le son est mis sur pause.
+résultat:
+
+.. image:: exemple/LecteurAudio.PNG
 
 Affichage simple d'images
 -------------------------
