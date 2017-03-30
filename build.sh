@@ -5,6 +5,7 @@ set -xe
 pycodestyle source
 pydocstyle source
 isort --check-only --diff --recursive source
+flake8 source
 find source -iname "*.rst" \
     | xargs rstcheck \
         --ignore-directives sphinx,automodule,autoclass,autofunction \

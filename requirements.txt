@@ -8,6 +8,7 @@ invoke
 
 # QA
 isort
+flake8
 pycodestyle
 pydocstyle
 rstcheck
