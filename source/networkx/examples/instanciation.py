@@ -6,8 +6,8 @@ import networkx as nwx
 # si on ne veut psa d'attributs)
 G = nwx.Graph(day="Friday")
 G.graph['day'] = 'Monday'
-G = add_node(1, time='5pm')  # ajout d'un noeud avec un attribu de temps (5pm)
-G = add_nodes_from([2, 3])  # ajout de plusieurs noeuds
+G.add_node(1, time='5pm')  # ajout d'un noeud avec un attribu de temps (5pm)
+G.add_nodes_from([2, 3])  # ajout de plusieurs noeuds
 
 Ns = nwx.path_graph(10)  # création d'un groupe de noeud
 G.add_nodes_from(Ns)  # ajour de chaque noeud dans le graphe
@@ -35,11 +35,11 @@ G.nodes()  # affiche les noeuds
 
 G.edges()  # affiche les ponts
 
-nx.connected_components(G)  # affiche les groupes de noeuds connectés entre eux
+nwx.connected_components(G)  # affiche les groupes de noeuds interconnectés
 
-nx.degree(G)  # affiche les noeuds avec leurs nombre de connexions
+nwx.degree(G)  # affiche les noeuds avec leurs nombre de connexions
 
-nx.degree(G).values()  # affiche le nombre de connexion des noeuds
+nwx.degree(G).values()  # affiche le nombre de connexion des noeuds
 
 G.node[1]  # affiche le noeud 1
 
@@ -48,7 +48,7 @@ G.node[1]  # affiche le noeud 1
 # DiGraph.out_edges(), DiGraph.in_degree(), DiGraph.predecessors(),
 # DiGraph.successors().
 
-DG = nx.DiGraph()
+DG = nwx.DiGraph()
 
 # ajout de ponts ayant différents poids
 
@@ -57,7 +57,7 @@ DG.add_weighted_edges_from([(1, 2, 0.5), (3, 1, 0.75)])
 # Multigraph
 # Les multigraph permettent d'avoir plusieurs ponts entre deux mêmes points.
 
-MG = nx.DiGraph()
+MG = nwx.DiGraph()
 
 # ajout de ponts ayant différents poids
 

@@ -1,6 +1,7 @@
 """Exemple d'affichage d'une image de fond."""
 import pygame
-from pygame.locals import *
+from pygame.locals import QUIT, RESIZABLE
+
 pygame.init()
 fenetre = pygame.display.set_mode((640, 480), RESIZABLE)
 

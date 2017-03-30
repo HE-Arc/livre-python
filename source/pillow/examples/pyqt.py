@@ -3,7 +3,7 @@
 import sys
 
 from PIL import Image, ImageFilter, ImageQt
-from PyQt5.QtGui import QImage, QPixmap
+from PyQt5.QtGui import QPixmap
 from PyQt5.QtWidgets import (QApplication, QHBoxLayout, QLabel, QPushButton,
                              QVBoxLayout, QWidget)
 

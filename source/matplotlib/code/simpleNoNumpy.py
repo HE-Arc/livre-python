@@ -1,6 +1,5 @@
-﻿# Florian Fasmeyer 23.03.2017
+# Florian Fasmeyer 23.03.2017
 """De la statistique fait rapidement :-)."""
-import matplotlib.mlab as mlab
 import matplotlib.pyplot as plt
 
 centreClasse = [44, 46, 48, 50, 52, 54, 56]

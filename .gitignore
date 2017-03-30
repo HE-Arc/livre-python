@@ -3,5 +3,6 @@ build
 include
 lib
 lib64
+share
 pip-selfcheck.json
 pyvenv.cfg

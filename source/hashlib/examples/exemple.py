@@ -2,7 +2,6 @@
 
 import getpass
 import hashlib
-import hmac
 import secrets
 from hmac import compare_digest
 

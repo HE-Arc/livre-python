@@ -1,6 +1,6 @@
 """Exemple d'utilisation des modules pygame.event et pygame.mixer."""
 import pygame
-from pygame.locals import *
+from pygame.locals import K_RETURN, K_SPACE, KEYDOWN, KEYUP, QUIT, RESIZABLE
 
 pygame.init()
 fenetre = pygame.display.set_mode((200, 200), RESIZABLE)

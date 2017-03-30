@@ -1,8 +1,5 @@
 """Exemple très simpliste de hashage de cookie en utilisant blake 2."""
 
-import hashlib
-import hmac
-
 from hashlib import blake2b
 from hmac import compare_digest
 from http import cookies

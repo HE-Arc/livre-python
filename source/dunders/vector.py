@@ -17,7 +17,7 @@ class Vector:
 
     def __repr__(self):
         """Redéfinition de repr."""
-        return f'<Vector ({x!r}, {y!r})>'
+        return f'<Vector ({self.x!r}, {self.y!r})>'
 
     def __abs__(self):
         """Redéfinition de abs."""

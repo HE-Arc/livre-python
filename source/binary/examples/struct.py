@@ -1,9 +1,7 @@
 """Module d'exemple struct."""
 
-
 from collections import namedtuple
-from struct import *
-
+from struct import pack, unpack
 
 # packing et unpacking de trois entiers.
 pack('hhl', 1, 2, 3)

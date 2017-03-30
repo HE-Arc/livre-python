@@ -1,7 +1,6 @@
-
 """Exemple d'affichage d'une fenêtre simple."""
 import pygame
-from pygame.locals import *
+from pygame.locals import QUIT
 
 # Initialise screen
 pygame.init()

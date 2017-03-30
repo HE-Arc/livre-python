@@ -1,7 +1,6 @@
 """Exemple de validation d'un fichier JSON avec JSON Schema."""
 
 import json
-import sys
 
 from jsonschema import validate
 
