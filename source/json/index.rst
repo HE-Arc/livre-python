@@ -75,12 +75,14 @@ Un exemple travaillant avec un fichier externe. Un point très important est
 que JSON est toujours encodé en UTF-8.
 
 .. literalinclude:: ./examples/test.json
+   :caption: test.json
 
 .. literalinclude:: ./examples/example.py
 
 Résultat :
 
 .. literalinclude:: ./examples/test.out.json
+   :caption: test.out.json
 
 
 Validation
@@ -90,6 +92,7 @@ Validation
 consultez la documentation de `JSON Schema`_ pour en savoir plus.
 
 .. literalinclude:: ./examples/schema.json
+   :caption: schema.json
 
 .. literalinclude:: ./examples/validation.py
 
@@ -117,9 +120,9 @@ Streaming
 
 Autre inconvénient majeur vis-à-vis du format XML est qu'il n'est pas aisé de
 lire un document au fur et à mesure qu'il est reçu, en *streaming*. En XML, on
-utilise une API nommée SAX (Simple API for XML). ``json`` propose un modèle
-demandant de charger l'entier d'un document en mémoire. Comme avec DOM en XML.
-Ce problème se résoud à l'aide de `YAJL`_ et du module `ijson`_.
+utilise une API nommée :abbr:`SAX (Simple API for XML)`. :py:mod:`json` propose
+un modèle demandant de charger l'entier d'un document en mémoire. Comme avec
+DOM en XML. Ce problème se résoud à l'aide de `YAJL`_ et du module `ijson`_.
 
 .. literalinclude:: ./examples/stream.py
    :linenos:
