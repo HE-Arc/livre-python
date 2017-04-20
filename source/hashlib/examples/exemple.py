@@ -19,6 +19,7 @@ def hash_mdp(mdp, hashage):
 
     Returns:
         Retourne le mot-de-passe haché en hexadécimale.
+
     """
     # secrets génère un nombre aléatoire en héxadécimale
     salt = secrets.token_hex(16)
@@ -42,6 +43,7 @@ def check_mdp(hashed_mdp, utilisateur_mdp, hashage):
     Returns:
         Retourne true ou false en fonction
         du test d'égalité.
+
     """
     mdp, salt = hashed_mdp.split(':')
     contenu = salt + utilisateur_mdp
