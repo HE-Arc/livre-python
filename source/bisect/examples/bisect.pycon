@@ -1,0 +1,18 @@
+>>> from bisect import bisect, insort
+
+>>> xs = []
+>>> insort(xs, 2)
+>>> insort(xs, 1)
+>>> insort(xs, 2)
+
+>>> xs
+[1, 2, 2]
+
+>>> bisect(xs, 1)
+1
+
+>>> bisect(xs, 2)
+3
+
+>>> xs
+[1, 2, 2]

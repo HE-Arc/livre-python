@@ -1,0 +1,9 @@
+>>> from bisect import bisect_left
+
+>>> xs = [1, 2, 2]
+
+>>> bisect_left(xs, 1)
+0
+
+>>> bisect_left(xs, 2)
+1

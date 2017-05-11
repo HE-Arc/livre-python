@@ -35,6 +35,7 @@ Avancé
 
    abc/index
    binary/index
+   bisect/index
    email/index
    hashlib/index
    multiprocessing/index

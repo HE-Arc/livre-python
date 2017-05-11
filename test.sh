@@ -2,6 +2,11 @@
 
 set -xe
 
+# bisect
+cd source/bisect/examples
+python sortedcollection.py
+cd ../../..
+
 # invoke
 cd source/invoke/examples
 #invoke ouverture
