@@ -1,6 +1,7 @@
 """Déplacement du curseur."""
 
 from colorama import deinit, init
+
 init()
 
 # ici on définit notre style

@@ -1,6 +1,7 @@
 """Modification des styles."""
 
 from colorama import Back, Fore, Style, deinit, init
+
 init()
 
 print(Fore.RED + Style.NORMAL + 'Un texte rouge')

@@ -1,5 +1,6 @@
 """Fichier test processus."""
 from multiprocessing import os
+
 import Process
 
 

@@ -2,6 +2,7 @@
 
 
 from collections.abc import Sequence
+
 from voiture import Voiture
 
 

@@ -8,7 +8,7 @@ colorama
 invoke
 
 # QA
-isort
+isort>=4.2.8
 flake8
 pycodestyle
 pydocstyle

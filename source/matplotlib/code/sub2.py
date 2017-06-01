@@ -1,6 +1,7 @@
 ﻿# Florian Fasmeyer 22.03.2017
 """exemple subplot cas spécial."""
 import matplotlib.pyplot as plt
+
 fig = plt.figure()
 # subplot(taille_x, taille_y, position)
 fig.add_subplot(1, 2, 1)  # taille(1,2) position(1)

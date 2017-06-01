@@ -1,9 +1,8 @@
 """Module itertools."""
 #  Chain, slice, ...
 #  Source : https://www.youtube.com/watch?v=xK7E2YmjyAc
-from itertools import (chain, compress, count, dropwhile,
-                       filterfalse, islice, takewhile)
-
+from itertools import (chain, compress, count, dropwhile, filterfalse, islice,
+                       takewhile)
 
 a = [1, 2, 3, 4, 5, 6, 7]
 b = ["Johnny", "David", "Mike", "Bali", "Noami"]

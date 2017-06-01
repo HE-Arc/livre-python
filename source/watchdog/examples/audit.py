@@ -6,7 +6,6 @@ from watchdog.observers import Observer
 
 import eventhandler
 
-
 observer = Observer()
 
 observer.schedule(eventhandler.AuditHandler(), path='U:', recursive=True)

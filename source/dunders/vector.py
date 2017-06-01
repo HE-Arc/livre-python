@@ -3,7 +3,6 @@
 
 from math import hypot
 
-
 """Mieux vaut trop que pas assez."""
 
 

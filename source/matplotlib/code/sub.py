@@ -1,6 +1,7 @@
 # source: stackoverflow
 """exemple subplot."""
 import matplotlib.pyplot as plt
+
 fig = plt.figure()
 
 # subplot(taille_x, taille_y, position)
