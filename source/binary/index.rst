@@ -52,7 +52,7 @@ Cast int <--> bytes
 
 .. literalinclude:: ./examples/cast_bytes_int.py
 
-`Un tableau résumant les opérations standards sur les bytes se trouve sur la documentation officielle <https://docs.python.org/3.1/library/stdtypes.html>`_.
+Un tableau résumant les opérations standards sur les bytes se trouve sur la documentation officielle des :ref:`Built-in Types<python:typebytes>`.
 
 ``bytearray``
 -------------
@@ -102,7 +102,7 @@ Opérations
 
 .. literalinclude:: ./examples/memoryview_op.py
 
-`Plus d'opérations ici <https://docs.python.org/3.1/library/stdtypes.html>`_.
+Plus d'opérations sur les memoryview dans la documentation des :ref:`Built-in Types <python:typememoryview>`.
 
 Exemple d'utilisation
 ~~~~~~~~~~~~~~~~~~~~~
@@ -133,7 +133,7 @@ Sources
 
 :py:class:`bytes` / :py:class:`bytearray`
 
-`<https://docs.python.org/3.1/library/stdtypes.html>`_
+:ref:`Built-in Types <python:bltin-types>`.
 
 `<http://docs.python-guide.org/en/latest/scenarios/json/>`_
 
