@@ -17,4 +17,3 @@ name, serialnum, school, gradelevel = unpack('<10sHHb', record)
 Student = namedtuple('Student', 'name serialnum school gradelevel')
 Student._make(unpack('<10sHHb', record))
 Student(name='raymond   ', serialnum=4658, school=264, gradelevel=8)
-

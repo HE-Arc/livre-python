@@ -7,3 +7,4 @@ mv = memoryview(buf)
 mv[4:6] = b'ZA'
 buf
 bytearray(b'abcdZAgh')
+

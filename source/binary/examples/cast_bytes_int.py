@@ -25,3 +25,4 @@ i = int.from_bytes(b'\x00\x0F', byteorder='big', signed=True)
 
 # Utilise une liste d'entiers comme source pour le cast.
 i = int.from_bytes([255, 0, 0, 0], byteorder='big')
+

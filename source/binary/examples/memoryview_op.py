@@ -17,3 +17,4 @@ memoryview(b'abc').tolist()
 
 # relacher le buffer.
 mv.release()
+

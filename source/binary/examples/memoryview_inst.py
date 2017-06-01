@@ -3,3 +3,4 @@
 
 # Crée une memoryview à partir d'un objet byte.
 mv = memoryview(b'exemple')
+
