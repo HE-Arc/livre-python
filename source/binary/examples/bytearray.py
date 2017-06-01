@@ -19,4 +19,3 @@ msg = bytearray([94, 91, 101, 125, 111, 35, 120, 101, 115, 101, 200])
 
 # 65 est la lettre 'e' en hexadécimal.
 f"{ord('e'):x}"  # sortie '65'.
-

@@ -52,10 +52,6 @@ Cast int <--> bytes
 
 .. literalinclude:: ./examples/cast_bytes_int.py
 
-Lecture d'un fichier
-
-.. literalinclude:: ./examples/lecture_fichier.py
-
 `Un tableau résumant les opérations standards sur les bytes se trouve sur la documentation officielle <https://docs.python.org/3.1/library/stdtypes.html>`_.
 
 ``bytearray``
@@ -164,4 +160,3 @@ Sources
 `<http://stackoverflow.com/questions/35988/c-like-structures-in-python>`_
 
 .. [#ms] <marc.schnebele@he-arc.ch>
-

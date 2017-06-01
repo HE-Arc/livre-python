@@ -6,4 +6,3 @@ mutable_bytes = bytearray(b'\x00\x0F')
 
 # Cast bytearray à bytes.
 immutable_bytes = bytes(mutable_bytes)
-

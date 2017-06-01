@@ -8,4 +8,3 @@ bytes = str.encode(my_str)
 # Cast bytes en string.
 my_decoded_str = str.decode(bytes)
 type(my_decoded_str)  # vérifie que le type est string
-
