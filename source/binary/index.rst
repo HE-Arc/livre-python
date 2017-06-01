@@ -24,7 +24,6 @@ exemple
 Affichage
 ~~~~~~~~~
 
-<<<<<<< 8c201756bfefb3a8877d52786a0d8290c49e8c31
 Le ``b`` est affiché pour bien préciser que c'est une chaine de type bytes.
 
 .. code-block:: python
@@ -43,7 +42,6 @@ Accède à la première valeur à la clé 0 donc b'e' dans l'exemple ci-dessus.
 opérations
 ~~~~~~~~~~
 
-<<<<<<< 8c201756bfefb3a8877d52786a0d8290c49e8c31
 Cast bytes <--> str
 
 .. literalinclude:: ./examples/cast_bytes_string.py

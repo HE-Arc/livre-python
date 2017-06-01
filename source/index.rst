@@ -85,6 +85,16 @@ Autres
    sphinx/index
    watchdog/index
 
+Annexes
+=======
+
+.. toctree::
+   :maxdepth: 1
+
+   misc/about
+   misc/contrib
+   licence
+
 À propos de ce livre
 ====================
 
