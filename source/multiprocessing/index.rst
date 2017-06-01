@@ -1,16 +1,15 @@
 .. _multiprocessing-tutorial:
 
-===================
-``multiprocessing``
-===================
+===============
+Multiprocessing
+===============
 
-Par Laurent Gander [#gl]_
+Par Gander Laurent
 
 Introduction
 ------------
 
 Le module :py:mod:`multiprocessing` utilise les processus plutôt que les threads. Il nous permet de créer plusieurs processus séparés.
-
 
 Bien que la plupart des CPUs modernes comportent plusieurs coeurs, le code que l’on écrit doit aussi être formatté adéquatement afin d’en tirer pleinement avantage.[#Ref]_
 
@@ -37,8 +36,6 @@ Dans le main, nous appelons la fonction info puis nous créons un objet Process 
 
 .. literalinclude:: ./exemples/process.py
 
-.. et le résultat?
-
 Pool
 ^^^^
 
@@ -54,21 +51,19 @@ La classe Queue permet la communication entre deux processus.
 
 .. warning:: Si un processus est "tué", les données risquent d'être corrompu dans la queue, ce qui signifie qu'un autre processus qui tenterait d'acceder à la file queue risquerait de soulever une exception.
 
-
 Pipe
 ^^^^
 
 La classe Pipe permet aussi la communication entre deux processus. Le constructeur du pipe retourne deux objets de connection qui sont l'entrée et la sortie du pipe.
+
 .. literalinclude:: ./exemples/pipe.py
 
 .. warning:: la méthode recv() efface les données qu'elle recoit, ce qui peut être un problème de sécurité, c'est pourquoi vous devriez utiliser une authentification avant d'utiliser les métodes recv() et send(). Si un processus est tué alors qu'il essaie de lire ou d'écrire dans le pipe, il risquerait de corrompre les données dans le pipe.
 
-.. warning:: la méthode recv() efface les données qu'elle recoit, ce qui peut être un problème de sécurité, c'est pourquoi vous devriez utiliser une authentification avant d'utiliser les méthodes recv() et send(). Si un processus est tué alors qu'il essaie de lire ou d'écrire dans le pipe, il risquerait de corrompre les données dans le pipe.
-
-.. Vous mélangez des choses ici... Il n'y a aucun lien entre l'authentificiation et l'accès concurrent à recv. Dans la documentation officielle, ce sont deux warnings séparés.
 
 Contexte et méthode de démarrage
 --------------------------------
+
 Il y a plusieurs façon de démarrer un processus, le multiprocessing en contient trois :
         :spawn:
             L'interpréteur Python sera démarré par le processus parent, son enfant n'héritera que des ressources nécessaire pour éxecuter le méthode run().
@@ -78,8 +73,6 @@ Il y a plusieurs façon de démarrer un processus, le multiprocessing en contien
 
         :forkserver:
             Quand le programme est lancé et lance la méthode forkserver.start(), depuis ce moement, chaque fois qu'un processus est nécessaire, un processus est demandé au serveur par le processus parent. Fonctionne que sur Linux
-
-.. au delà de traduire la documentation pourquoi utiliser l'un ou l'autre?
 
 
 Synchronisation entre les processus
@@ -128,7 +121,7 @@ Pour de plus amples informations :
 
     Connexion        : :py:class:`multiprocessing.Connection`
 
-.. attention:: Dire que Python n'est pas thread-safe est faux. Python peut utiliser les threads du système (pthread).
+    Synchronisation  : https://docs.python.org/3/library/multiprocessing.html#synchronization-primitives
 
 Référence
 ---------
