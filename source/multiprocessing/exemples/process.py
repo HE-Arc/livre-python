@@ -1,7 +1,6 @@
 """Fichier test processus."""
-from multiprocessing import Process
-
 import os
+from multiprocessing import Process
 
 
 def info(title, name):
