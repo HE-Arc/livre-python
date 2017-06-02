@@ -116,17 +116,14 @@ Avec bytearray:
 ``struct``
 ----------
 
-Un :py:mod:`struct` permet de convertir des structures C en valeurs de Python représenté sous forme d'objets bytes.
+Un :py:mod:`struct` permet de convertir des structures C en valeurs Python représenté sous forme d'objets bytes. Ceux-ci sont utilisés pour manipuler des données binaire depuis des fichiers, le réseau ou d'autres sources.
 
 Exemple d'utilisation
 ~~~~~~~~~~~~~~~~~~~~~
 
 .. literalinclude:: ./examples/struct.py
 
-Opérations
-~~~~~~~~~~
-
-Un tableau résumant les opérations standards sur les structures se trouve sur la documentation officielle. :py:mod:`struct`.
+Plus d'informations sur les methodes et caractéristiques des :py:mod:`struct`. se trouve sur la documentation officielle.
 	
 Sources
 -------
@@ -134,8 +131,6 @@ Sources
 :py:class:`bytes` / :py:class:`bytearray`
 
 :ref:`Built-in Types <python:bltin-types>`.
-
-`<http://docs.python-guide.org/en/latest/scenarios/json/>`_
 
 `<http://stackoverflow.com/questions/16678363/python-3-how-do-i-declare-an-empty-bytes-variable>`_
 
