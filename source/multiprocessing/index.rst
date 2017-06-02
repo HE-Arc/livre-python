@@ -11,7 +11,7 @@ Introduction
 
 Le module :py:mod:`multiprocessing` utilise les processus plutôt que les threads. Il nous permet de créer plusieurs processus séparés.
 
-Bien que la plupart des CPUs modernes comportent plusieurs coeurs, le code que l’on écrit doit aussi être formatté adéquatement afin d’en tirer pleinement avantage.[#Ref]_
+Bien que la plupart des CPUs modernes comportent plusieurs coeurs, le code que l’on écrit doit aussi être formatté adéquatement afin d’en tirer pleinement avantage. [#Ref]_
 
 Multiprocessing de python permet d'utiliser un ensemble de processus qui consumeront une liste de tâches contenues dans une :py:mod:`queue`.
 
