@@ -11,7 +11,7 @@ Introduction
 
 Le module :py:mod:`multiprocessing` utilise les processus plutôt que les threads. Il nous permet de créer plusieurs processus séparés.
 
-Bien que la plupart des CPUs modernes comportent plusieurs coeurs, le code que l’on écrit doit aussi être formatté adéquatement afin d’en tirer pleinement avantage. [#Ref]_
+Bien que la plupart des CPUs modernes comportent plusieurs coeurs, le code que l’on écrit doit aussi être formatté adéquatement afin d’en tirer pleinement avantage. [#Ref1]_
 
 Multiprocessing de python permet d'utiliser un ensemble de processus qui consumeront une liste de tâches contenues dans une :py:mod:`queue`.
 
@@ -19,7 +19,7 @@ Multiprocessing de python permet d'utiliser un ensemble de processus qui consume
 
 Le Global Interpreter Lock est un algorithme qui gère l'exécution de plusieurs threads dans un programme Python. la connaissance du GIL est indispensable lorsque vous travaillez avec plusieurs threads , car la gestion de la mémoire de CPython n'est pas thread-safe .
 Le GIL a été connu pour dégrader la performance des programmes.
-Un exemple est que cela peut prendre plus de temps pour deux threads d'appeler la même fonction qu'un thread appelant deux fois la fonction. [#Ref]_
+Un exemple est que cela peut prendre plus de temps pour deux threads d'appeler la même fonction qu'un thread appelant deux fois la fonction. [#Ref2]_
 
 Les classes
 -----------
@@ -159,8 +159,8 @@ Référence
 
 Les exemples sont repris de la documentation officielle de python : :py:mod:`multiprocessing`
 
-.. [#Ref] http://bioinfo.iric.ca/fr/faites-travailler-vos-cpus/
+.. [#Ref1] http://bioinfo.iric.ca/fr/faites-travailler-vos-cpus/
 
-.. [#Ref] http://www.ordinateur.cc/programmation/Programmation-Python/93447.html
+.. [#Ref2] http://www.ordinateur.cc/programmation/Programmation-Python/93447.html
 
 .. [#gl]<laurent.gander@he-arc.ch>
