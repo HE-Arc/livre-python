@@ -4,7 +4,7 @@
 Multiprocessing
 ===============
 
-Par Gander Laurent
+Par Laurent Gander [#gl]_
 
 Introduction
 ------------
@@ -37,6 +37,8 @@ Dans le main, nous appelons la fonction info puis nous créons un objet Process 
 .. literalinclude:: ./exemples/process.py
 
 Résultat de l'exemple ci-dessus :
+.. code-block:: console
+
   main line
   hello bob
   module name: __mp_main__
@@ -56,7 +58,10 @@ La classe Queue permet la communication entre deux processus.
 
 .. literalinclude:: ./exemples/queue.py
 
-L'exemple ci-dessus nous affiche : [42, None, 'hello']
+L'exemple ci-dessus nous affiche :
+.. code-block:: console
+
+    [42, None, 'hello']
 
 .. warning:: Si un processus est "tué", les données risquent d'être corrompu dans la queue, ce qui signifie qu'un autre processus qui tenterait d'acceder à la file queue risquerait de soulever une exception.
 
@@ -67,9 +72,12 @@ La classe Pipe permet aussi la communication entre deux processus. Le constructe
 
 .. literalinclude:: ./exemples/pipe.py
 
-L'exemple ci-dessus nous affiche : [42, None, 'hello']
+L'exemple ci-dessus nous affiche :
+.. code-block:: console
 
-.. warning:: la méthode recv() efface les données qu'elle recoit, ce qui peut être un problème de sécurité, c'est pourquoi vous devriez utiliser une authentification avant d'utiliser les métodes recv() et send(). Si un processus est tué alors qu'il essaie de lire ou d'écrire dans le pipe, il risquerait de corrompre les données dans le pipe.
+    [42, None, 'hello']
+
+La méthode recv() efface les données qu'elle recoit, ce qui peut être un problème de sécurité, c'est pourquoi vous devriez utiliser une authentification avant d'utiliser les méthodes recv() et send(). Si un processus est tué alors qu'il essaie de lire ou d'écrire dans le pipe, il risquerait de corrompre les données dans le pipe.
 
 
 Contexte et méthode de démarrage
@@ -94,16 +102,19 @@ Synchronisation entre les processus
 .. literalinclude:: ./exemples/synchro.py
 
 Résultat de l'exemple :
-  hello world 1
-  hello world 2
-  hello world 0
-  hello world 3
-  hello world 5
-  hello world 6
-  hello world 7
-  hello world 4
-  hello world 8
-  hello world 9
+
+.. code-block:: console
+
+    hello world 1
+    hello world 2
+    hello world 0
+    hello world 3
+    hello world 5
+    hello world 6
+    hello world 7
+    hello world 4
+    hello world 8
+    hello world 9
 
 Partage de ressources entre processus
 -------------------------------------
@@ -118,9 +129,10 @@ La mémoire :
 .. literalinclude:: ./exemples/sharedmemory.py
 
 Résultat :
-  3.1415927
-  [0, -1, -2, -3, -4, -5, -6, -7, -8, -9]
+.. code-block:: console
 
+    3.1415927
+    [0, -1, -2, -3, -4, -5, -6, -7, -8, -9]
 
 Serveur de processus :
     Un objet renvoyé par la classe Manager() contrôle un serveur de processus qui contient des objets Python et permet à d'autres processus de les manipuler à l'aide de proxies.
@@ -130,14 +142,15 @@ Serveur de processus :
 .. literalinclude:: ./exemples/manager.py
 
 Résultat :
-  {1: '1', '2': 2, 0.25: None}
-  [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+.. code-block:: console
 
+    {1: '1', '2': 2, 0.25: None}
+    [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
 
 Conclusion
 ----------
 
-Pour conclure, le module de python sur le multiprocessing nous permet de contourner le problème des threads en python, effectivement l'interpreteur Python n'est pas thread safe par défaut. Le langage python n'a qu'un seul fil d'exécution, donc il n'est pas possible d'utiliser tout les coeurs en n'utilisant que des threads. C'est pourquoi, on utilise plutôt le module multiprocessing malgré le problème du partage de mémoire entre les processus qui malgré tout sont gérer par les classes Value, Array et Manager.
+Pour conclure, le module de python sur le multiprocessing nous permet de contourner le problème des threads en python, effectivement l'interpreteur Python n'est pas fais pour le multi-threading à cause du GIL vu qu'il impose en pratique qu'un seul coeur travaille en même temps. Le langage python n'a qu'un seul fil d'exécution, donc il n'est pas possible d'utiliser tout les coeurs en n'utilisant que des threads. C'est pourquoi, on utilise plutôt le module multiprocessing malgré le problème du partage de mémoire entre les processus qui malgré tout sont gérer par les classes Value, Array et Manager ou en faisant de l'asynchrome avec :py:class:`asyncio`.
 
 
 Pour de plus amples informations :
@@ -163,4 +176,4 @@ Les exemples sont repris de la documentation officielle de python : :py:mod:`mul
 
 .. [#Ref2] http://www.ordinateur.cc/programmation/Programmation-Python/93447.html
 
-.. [#gl]<laurent.gander@he-arc.ch>
+.. [#gl] <laurent.gander@he-arc.ch>
