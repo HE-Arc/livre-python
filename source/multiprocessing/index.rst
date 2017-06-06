@@ -150,7 +150,7 @@ Résultat :
 Conclusion
 ----------
 
-Pour conclure, le module de python sur le multiprocessing nous permet de contourner le problème des threads en python, effectivement l'interpreteur Python n'est pas fais pour le multi-threading à cause du GIL vu qu'il impose en pratique qu'un seul coeur travaille en même temps. Le langage python n'a qu'un seul fil d'exécution, donc il n'est pas possible d'utiliser tout les coeurs en n'utilisant que des threads. C'est pourquoi, on utilise plutôt le module multiprocessing malgré le problème du partage de mémoire entre les processus qui malgré tout sont gérer par les classes Value, Array et Manager ou en faisant de l'asynchrome avec :py:class:`asyncio`.
+Pour conclure, le module de python sur le multiprocessing nous permet de contourner le problème des threads en python, effectivement l'interpreteur Python n'est pas fais pour le multi-threading à cause du GIL vu qu'il impose en pratique qu'un seul coeur travaille en même temps. Le langage python n'a qu'un seul fil d'exécution, donc il n'est pas possible d'utiliser tout les coeurs en n'utilisant que des threads. C'est pourquoi, on utilise plutôt le module multiprocessing malgré le problème du partage de mémoire entre les processus qui malgré tout sont gérer par les classes Value, Array et Manager ou en faisant de l'asynchrome avec py:mod:`asyncio`.
 
 
 Pour de plus amples informations :
