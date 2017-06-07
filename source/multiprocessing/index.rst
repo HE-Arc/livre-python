@@ -13,7 +13,7 @@ Le module :py:mod:`multiprocessing` utilise les processus plutôt que les thread
 
 Bien que la plupart des CPUs modernes comportent plusieurs coeurs, le code que l’on écrit doit aussi être formatté adéquatement afin d’en tirer pleinement avantage. [#Ref1]_
 
-Multiprocessing de python permet d'utiliser un ensemble de processus qui consumeront une liste de tâches contenue dans une :py:mod:`simplequeue`.
+Multiprocessing de python permet d'utiliser un ensemble de processus qui consumeront une liste de tâches contenue dans une :py:class:`multiprocessing.SimpleQueue`.
 
 :py:mod:`multiprocessing` évite d'être bloqué par le GIL (Global Interpreter Lock) en utilisant des sous-processus au lieu des threads et offre de la concurrence locale et distante. De ce fait, le module multiprocessing permet au programmeur d'exploiter pleinement plusieurs processeurs sur une machine donnée. Il fonctionne sur Unix et Windows.
 
@@ -126,7 +126,7 @@ En programmation multi-processus, il est souvent utile de pouvoir partager des r
 
 La mémoire :
     On peut partager de la mémoire en utilisant les fonctions:
-    
+
 .. function:: Value(typecode_or_type, *args, lock=True)
 
 .. function:: Array(typecode_or_type, *args, lock=True)
