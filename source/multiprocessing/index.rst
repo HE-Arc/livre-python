@@ -79,7 +79,10 @@ L'exemple ci-dessus nous affiche :
 Les objets de connexions ont deux méthodes : recv() et  send() qui leurs permet de lire et d'écrire dans un canal.
 Les données dans un tuyau peuvent être corrompues si deux processus (ou threads) tentent de lire ou d'écrire à la même extrémité du tuyau en même temps.
 
-La différence entre Pipe et Queue est qu'un pipe ne peut avoir qu'une connexion entre deux precessus alors que la Queue peut avoir plusieurs consommateurs et plusieurs producteurs.
+La différence entre Pipe et Queue est qu'un pipe ne peut avoir qu'une connexion entre deux processus alors que la Queue peut avoir plusieurs consommateurs et plusieurs producteurs.
+Si vous avez besoin de plus de deux points pour communiquer, utilisez une Queue.
+
+Si vous avez besoin d'une performance absolue, un Pipe est beaucoup plus rapide que Queue.
 
 
 Contexte et méthodes de démarrage
