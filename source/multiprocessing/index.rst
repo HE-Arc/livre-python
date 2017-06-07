@@ -126,7 +126,9 @@ En programmation multi-processus, il est souvent utile de pouvoir partager des r
 
 La mémoire :
     On peut partager de la mémoire en utilisant les fonctions:
+    
 .. function:: Value(typecode_or_type, *args, lock=True)
+
 .. function:: Array(typecode_or_type, *args, lock=True)
 
     Exemple :
