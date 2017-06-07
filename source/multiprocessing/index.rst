@@ -1,7 +1,7 @@
 .. _multiprocessing-tutorial:
 
 ===================
-``Multiprocessing``
+``multiprocessing``
 ===================
 
 Par Laurent Gander [#gl]_
@@ -13,11 +13,12 @@ Le module :py:mod:`multiprocessing` utilise les processus plutôt que les thread
 
   Bien que la plupart des CPUs modernes comportent plusieurs coeurs, le code que l’on écrit doit aussi être formatté adéquatement afin d’en tirer pleinement avantage. [#Ref1]_
 
-Multiprocessing de python permet d'utiliser un ensemble de processus.
-
 :py:mod:`multiprocessing` évite d'être bloqué par le GIL (Global Interpreter Lock) en utilisant des sous-processus au lieu des threads et offre de la concurrence locale et distante. De ce fait, le module multiprocessing permet au programmeur d'exploiter pleinement plusieurs processeurs sur une machine donnée. Il fonctionne sur Unix et Windows.
 
-Le Global Interpreter Lock est un verrou (lock) que l'interpréteur demande afin d'être thread-safe sur les types primitifs. La connaissance du GIL est indispensable lorsque vous travaillez avec plusieurs threads. Le GIL a été connu pour dégrader la performance des programmes.
+GIL?
+^^^^
+
+Le *Global Interpreter Lock* est un verrou (*lock*) que l'interpréteur demande afin d'être *thread-safe* sur le comptage des références du ramasse-miette. La connaissance du GIL est indispensable lorsque vous travaillez avec plusieurs threads. Le GIL a été connu pour dégrader la performance des programmes.
 Un exemple est que cela peut prendre plus de temps pour deux threads d'appeler la même fonction qu'un thread appelant deux fois la fonction. [#Ref2]_
 
 Les classes
@@ -36,6 +37,7 @@ Dans le main, nous appelons la fonction info puis, nous créons un objet Process
 .. literalinclude:: ./exemples/process.py
 
 Résultat de l'exemple ci-dessus :
+
 .. code-block:: console
 
   main line
@@ -44,19 +46,20 @@ Résultat de l'exemple ci-dessus :
   parent process: 1664
   process id: 14628
 
-Pool
-^^^^
-
-Avec la classe Pool on peut avoir un objet pool qui contient une pool de processus qui est capable d'accomplir les tâches qui lui seront soumises.
+.. manque d'exemple pour être utile.
+   Pool
+   ^^^^
+   Avec la classe Pool on peut avoir un objet pool qui contient une pool de processus qui est capable d'accomplir les tâches qui lui seront soumises.
 
 Queues
 ^^^^^^
 
-La classe Queue permet de créer un canal de communication entre deux processus.
+La classe Queue permet de créer un canal de communication entre plusieurs processus.
 
 .. literalinclude:: ./exemples/queue.py
 
 L'exemple ci-dessus nous affiche :
+
 .. code-block:: console
 
     [42, None, 'hello']
@@ -66,7 +69,7 @@ L'exemple ci-dessus nous affiche :
 Pipe
 ^^^^
 
-La classe Pipe permet aussi la création d'un canal entre deux processus. Le constructeur du pipe retourne deux objets de connexion qui sont l'entrée et la sortie du canal.
+La classe Pipe permet aussi la création d'un canal bidirectionnel entre deux processus. Le constructeur du pipe retourne deux objets de connexion qui sont l'entrée et la sortie du canal.
 
 .. literalinclude:: ./exemples/pipe.py
 
@@ -79,24 +82,19 @@ L'exemple ci-dessus nous affiche :
 Les objets de connexions ont deux méthodes : recv() et  send() qui leurs permet de lire et d'écrire dans un canal.
 Les données dans un tuyau peuvent être corrompues si deux processus (ou threads) tentent de lire ou d'écrire à la même extrémité du tuyau en même temps.
 
-La différence entre Pipe et Queue est qu'un pipe ne peut avoir qu'une connexion entre deux processus alors que la Queue peut avoir plusieurs consommateurs et plusieurs producteurs.
-Si vous avez besoin de plus de deux points pour communiquer, utilisez une Queue.
-
-Si vous avez besoin d'une performance absolue, un Pipe est beaucoup plus rapide que Queue.
-
 
 Contexte et méthodes de démarrage
 ---------------------------------
 
 Il y a plusieurs façons de démarrer un processus, le multiprocessing en contient trois :
         :spawn:
-            L'interpréteur Python sera démarré par le processus parent, son enfant n'héritera que des ressources nécessaires pour executer la méthode run().
+            L'interpréteur Python sera démarré par le processus parent, son enfant n'héritera que des ressources nécessaires pour executer la méthode ``run()``.
 
         :fork:
-            os.fork() est utilisé par le processus parent pour fork l'interpreteur Python. Quand le processus enfant est lancé, ses ressources sont identiques au processus parent. :fork: est disponible uniquement sur Unix.
+            ``os.fork()`` est utilisé par le processus parent pour fork l'interpreteur Python. Quand le processus enfant est lancé, ses ressources sont identiques au processus parent. **fork** est disponible uniquement sur Unix.
 
         :forkserver:
-            Quand le programme est lancé et lance la méthode forkserver.start(), depuis ce moment, chaque fois qu'un processus est nécessaire, un processus est demandé au serveur par le processus parent. :forkserver: fonctionne que sur Unix.
+            Quand le programme est lancé et lance la méthode forkserver.start(), depuis ce moment, chaque fois qu'un processus est nécessaire, un processus est demandé au serveur par le processus parent. **forkserver** fonctionne que sur Unix.
 
 
 Synchronisation entre les processus
@@ -138,6 +136,7 @@ La mémoire :
 .. literalinclude:: ./exemples/sharedmemory.py
 
 Résultat :
+
 .. code-block:: console
 
     3.1415927
@@ -153,6 +152,7 @@ Serveur de processus :
 .. literalinclude:: ./exemples/manager.py
 
 Résultat :
+
 .. code-block:: console
 
     {1: '1', '2': 2, 0.25: None}
