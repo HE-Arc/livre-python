@@ -62,7 +62,7 @@ L'exemple ci-dessus nous affiche :
 
     [42, None, 'hello']
 
-.. warning:: Si un processus est "tué" à l'aide des fonctions :py:func:`multiprocessing.Process.terminate` ou de :py:func:`os.kill`, les données risquent d'être corrompues dans la queue, en effet on ne sait pas si le processus est finit, des commandes risquent d'être encore à l'interieur. Ce qui signifie qu'un autre processus qui tenterait d'accéder à la queue risquerait de soulever une exception.
+.. warning:: Si un processus est "tué" à l'aide des fonctions terminate() ou de os.kill(), les données risquent d'être corrompues dans la queue, en effet on ne sait pas si le processus est finit, des commandes risquent d'être encore à l'interieur. Ce qui signifie qu'un autre processus qui tenterait d'accéder à la queue risquerait de soulever une exception.
 
 Pipe
 ^^^^
