@@ -1,7 +1,7 @@
 .. _multiprocessing-tutorial:
 
 ===================
-Multiprocessing
+``Multiprocessing``
 ===================
 
 Par Laurent Gander [#gl]_
@@ -17,8 +17,7 @@ Multiprocessing de python permet d'utiliser un ensemble de processus qui consume
 
 :py:mod:`multiprocessing` évite d'être bloqué par le GIL (Global Interpreter Lock) en utilisant des sous-processus au lieu des threads et offre de la concurrence locale et distante. De ce fait, le module multiprocessing permet au programmeur d'exploiter pleinement plusieurs processeurs sur une machine donnée. Il fonctionne sur Unix et Windows.
 
-Le Global Interpreter Lock est un verrou (lock) que l'interpréteur demande afin d'être thread-safe sur les types primitifs. La connaissance du GIL est indispensable lorsque vous travaillez avec plusieurs threads , car la gestion de la mémoire de CPython n'est pas thread-safe.
-Le GIL a été connu pour dégrader la performance des programmes.
+Le Global Interpreter Lock est un verrou (lock) que l'interpréteur demande afin d'être thread-safe sur les types primitifs. La connaissance du GIL est indispensable lorsque vous travaillez avec plusieurs threads. Le GIL a été connu pour dégrader la performance des programmes.
 Un exemple est que cela peut prendre plus de temps pour deux threads d'appeler la même fonction qu'un thread appelant deux fois la fonction. [#Ref2]_
 
 Les classes
@@ -127,9 +126,9 @@ En programmation multi-processus, il est souvent utile de pouvoir partager des r
 La mémoire :
     On peut partager de la mémoire en utilisant les fonctions:
 
-.. function:: Value(typecode_or_type, *args, lock=True)
+     :py:func:`multiprocessing.Value`
 
-.. function:: Array(typecode_or_type, *args, lock=True)
+     :py:func:`multiprocessing.Array`
 
     Exemple :
 
@@ -144,7 +143,7 @@ Résultat :
 
 Serveur de processus :
 
-    Un objet renvoyé par la classe Manager() contrôle un serveur de processus qui contient des objets Python et permet à d'autres processus de les manipuler à l'aide de proxies.
+    Un objet renvoyé par la classe :py:class:`multiprocessing.Manager` contrôle un serveur de processus qui contient des objets Python et permet à d'autres processus de les manipuler à l'aide de proxies.
 
     Exemple :
 
@@ -168,7 +167,7 @@ Pour de plus amples informations :
 
     Queues           : :py:class:`multiprocessing.Queue`
 
-    Pipe             : :py:class:`multiprocessing.Pipe`
+    Pipe             : :py:func:`multiprocessing.Pipe`
 
     Pool             : :py:class:`multiprocessing.pool.Pool`
 
@@ -184,8 +183,6 @@ Les exemples sont repris de la documentation officielle de python : :py:mod:`mul
 .. [#Ref1] http://bioinfo.iric.ca/fr/faites-travailler-vos-cpus/
 
 .. [#Ref2] http://www.ordinateur.cc/programmation/Programmation-Python/93447.html
-
-.. [#Pipe] https://docs.python.org/3/library/multiprocessing.html#multiprocessing.Pipe
 
 .. [#Synchronisation] https://docs.python.org/3/library/multiprocessing.html#synchronization-primitives
 
