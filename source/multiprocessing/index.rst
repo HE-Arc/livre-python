@@ -11,9 +11,9 @@ Introduction
 
 Le module :py:mod:`multiprocessing` utilise les processus plutôt que les threads. Il nous permet de créer plusieurs processus séparés.
 
-Bien que la plupart des CPUs modernes comportent plusieurs coeurs, le code que l’on écrit doit aussi être formatté adéquatement afin d’en tirer pleinement avantage. [#Ref1]_
+  Bien que la plupart des CPUs modernes comportent plusieurs coeurs, le code que l’on écrit doit aussi être formatté adéquatement afin d’en tirer pleinement avantage. [#Ref1]_
 
-Multiprocessing de python permet d'utiliser un ensemble de processus qui consumeront une liste de tâches contenue dans une :py:class:`multiprocessing.SimpleQueue`.
+Multiprocessing de python permet d'utiliser un ensemble de processus.
 
 :py:mod:`multiprocessing` évite d'être bloqué par le GIL (Global Interpreter Lock) en utilisant des sous-processus au lieu des threads et offre de la concurrence locale et distante. De ce fait, le module multiprocessing permet au programmeur d'exploiter pleinement plusieurs processeurs sur une machine donnée. Il fonctionne sur Unix et Windows.
 
@@ -66,7 +66,7 @@ L'exemple ci-dessus nous affiche :
 Pipe
 ^^^^
 
-La classe Pipe permet aussi la création d'un canal entre deux processus. Le constructeur du pipe retourne deux objets de connection qui sont l'entrée et la sortie du canal.
+La classe Pipe permet aussi la création d'un canal entre deux processus. Le constructeur du pipe retourne deux objets de connexion qui sont l'entrée et la sortie du canal.
 
 .. literalinclude:: ./exemples/pipe.py
 
@@ -79,7 +79,7 @@ L'exemple ci-dessus nous affiche :
 Les objets de connexions ont deux méthodes : recv() et  send() qui leurs permet de lire et d'écrire dans un canal.
 Les données dans un tuyau peuvent être corrompues si deux processus (ou threads) tentent de lire ou d'écrire à la même extrémité du tuyau en même temps.
 
-La différence entre Pipe et Queue est qu'un pipe ne peut avoir que deux extrémités alors que la Queue peut avoir plusieurs consommateurs et plusieurs producteurs.
+La différence entre Pipe et Queue est qu'un pipe ne peut avoir qu'une connexion entre deux precessus alors que la Queue peut avoir plusieurs consommateurs et plusieurs producteurs.
 
 
 Contexte et méthodes de démarrage
@@ -143,7 +143,7 @@ Résultat :
 
 Serveur de processus :
 
-    Un objet renvoyé par la classe :py:class:`multiprocessing.Manager` contrôle un serveur de processus qui contient des objets Python et permet à d'autres processus de les manipuler à l'aide de proxies.
+    Un objet renvoyé par Manager() contrôle un serveur de processus qui contient des objets Python et permet à d'autres processus de les manipuler à l'aide de proxies.
 
     Exemple :
 
