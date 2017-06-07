@@ -27,7 +27,7 @@ networkx
 
 # PIL
 Pillow
-#PyQt5
+PyQt5
 
 # pycrypto
 pycrypto
