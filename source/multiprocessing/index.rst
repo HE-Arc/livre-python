@@ -125,9 +125,9 @@ Partage de ressources entre processus
 En programmation multi-processus, il est souvent utile de pouvoir partager des ressources entre nos processus. Pour cela :py:mod:`multiprocessing` offre différentes manières de partager des ressources.
 
 La mémoire :
-    On peut partager de la mémoire en utilisant les fonctions
-    .. function:: Value(typecode_or_type, *args, lock=True)
-    .. function:: Array(typecode_or_type, *args, lock=True)
+    On peut partager de la mémoire en utilisant les fonctions:
+.. function:: Value(typecode_or_type, *args, lock=True)
+.. function:: Array(typecode_or_type, *args, lock=True)
 
     Exemple :
 
