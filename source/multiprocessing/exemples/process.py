@@ -14,6 +14,6 @@ def info(title, name):
 
 if __name__ == '__main__':
 
-    p = Process(target=info, args=('main line', 'bob', ))
+    p = Process(target=info, args=('main line', 'bob'))
     p.start()
     p.join()
