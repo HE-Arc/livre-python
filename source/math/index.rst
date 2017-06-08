@@ -131,6 +131,8 @@ Renvoie ``False`` sinon.
     True
     >>> isfinite(0/1)
     True
+	>>> isfinite(intinity)
+	False
 
 .. todo:: Un exemple à ``False`` serait intéressant.
 
