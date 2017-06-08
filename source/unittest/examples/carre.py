@@ -1,39 +1,39 @@
-"""Exemple simple de test unitaire sur une fonction carré."""
+"""Exemple simple de test unitaire sur une fonction carre."""
 
 import unittest
 
 
-# func:carré
-def carré(x):
-    """Élève au carré."""
+# func:carre
+def carre(x):
+    """Élève au carre."""
     return x ** 2
 
 
-# endfunc:carrée
+# endfunc:carre
 
 
 # class:TestCase
 class CarreTestCase(unittest.TestCase):
-    """Classe testeur pour la fonction carrée."""
+    """Classe testeur pour la fonction carre."""
 
     test_values = ((2, 4), (0, 0), (-2, 4))
 
-    def test_carré(self):
+    def test_carre(self):
         """Teste les valeurs références."""
         for value, expected in self.test_values:
-            self.assertEqual(expected, carré(value))
+            self.assertEqual(expected, carre(value))
 
 
 # endclass:TestCase
 
 # class:CarreTestCaseFail
 class CarreTestCaseFail(unittest.TestCase):
-    """Mauvaise classe testeur pour la fonction carrée."""
+    """Mauvaise classe testeur pour la fonction carre."""
 
     def test_assert_fail(self):
         """Affichage d'un message d'erreur personnalisé."""
         value = 2
-        self.assertEqual(2, carré(value), "Message d'erreur personnalisé")
+        self.assertEqual(2, carre(value), "Message d'erreur personnalisé")
 
 
 # endclass:CarreTestCaseFail
