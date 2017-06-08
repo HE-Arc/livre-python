@@ -1,5 +1,5 @@
 """Exemple calculs mathématiques en utilisant des nombres complexes."""
-from cmath import phase
+from cmath import *
 
 a = complex(2, 3)
 z = complex(4, 3)
