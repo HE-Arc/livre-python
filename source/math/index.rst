@@ -334,7 +334,8 @@ Il est également possible d'afficher le reste euclidien avec le pourcent %. Ce 
 	
 - Puissance
 
-L'exposant d'une fraction est une fraction, pour autant que l'exposant est un entier :
+L'exposant d'une fraction est une fraction, pour autant que l'exposant est un entier.
+Si l'exposant est un réel, le résultat sera un réel :
 	
 .. code-block:: pycon
 	
@@ -344,36 +345,20 @@ L'exposant d'une fraction est une fraction, pour autant que l'exposant est un en
 	12167/74088
 	>>> print(a**(-3))
 	74088/12167
-	
-Si l'exposant est un réel, le résultat sera un réel :
-
-.. code-block:: pycon
-	
-	>>> from fractions import Fraction
-	>>> a=Fraction(23,42)
 	>>> print(a**0.6);
 	0.6967662840791479
 	
-- Opposé
 
-L'opposé d'une fraction s'obtient en la faisant précéder du signe - :
+- Opposé et inverse
+
+L'opposé d'une fraction s'obtient en la faisant précéder du signe -
+L'inverse d'une fraction, elle, s'obtient en la divisant par 1 :
 
 .. code-block:: pycon
 	
-	>>> from fractions import Fraction
 	>>> a=Fraction(23,42)
 	>>> print(-a)
 	-23/42
-	
-	
-- Inverse
-
-L'inverse d'une fraction s'obtient en la divisant par 1 :
-
-.. code-block:: pycon
-	
-	>>> from fractions import Fraction
-	>>> a=Fraction(23,42)
 	>>> print(1/a)
 	42/23
 
@@ -388,10 +373,6 @@ avec ces dénominateurs tous différents.
 De ce fait, **toute fraction peut s'écrire comme une somme de fractions égyptiennes**.
 Dans l'exemple ci-dessous, l'algorithme fournit une liste de fractions, toutes de numérateur 1, dont la somme
 est une fraction donnée *f*.
-
-.. image:: img/egyptien.png
-   :align: right
-   :alt: Fraction
 
 
 .. literalinclude:: ./examples/Egyptien.py
