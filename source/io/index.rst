@@ -28,9 +28,9 @@ correspondant si le fichier s'ouvre, sinon une exception ``OSError`` est levée.
     open(file, mode='r', buffering=-1, encoding=None, errors=None, newline=None, closefd=True, opener=None)
 
 
-file : String, contenant le chemin absolu ou relatif pour accéder au fichier, ou un Integer, descripteur  de fichier (clé abstraite pour accéder à un fichier).
+``file`` : String, contenant le chemin absolu ou relatif pour accéder au fichier, ou un Integer, descripteur  de fichier (clé abstraite pour accéder à un fichier).
 
-mode : Spécifie comment ouvrir le fichier, voir tous les modes possibles
+``mode`` : Spécifie comment ouvrir le fichier, voir tous les modes possibles
 dans le tableau ci-dessous:
 
 +---------+----------------------------------------------------------------------------------------------+
@@ -57,7 +57,7 @@ dans le tableau ci-dessous:
 Les modes sont cumulables, par défaut le mode est 'rt'(lecture de
 texte).
 
-buffering: Permet de changer le fonctionnement du buffer:
+``buffering``: Permet de changer le fonctionnement du buffer:
 
     -  défaut:
         -  Pour les fichiers binaires, la taille du buffer est fixe en dépendant
@@ -70,29 +70,29 @@ buffering: Permet de changer le fonctionnement du buffer:
     -  >1: Spécifie la taille du buffer.
 
 
-encoding: Nom de l'encodage permettant de décoder le fichier(devrait
+``encoding``: Nom de l'encodage permettant de décoder le fichier(devrait
 être utilisé qu'en mode texte). Par défaut utilise le décodage du
 système, voir ce que retourne ``locale.getpreferredencoding()``.
 Préciser l'encodage est une bonne pratique.
 
-errors: Permet de spécifier comment traiter les erreurs (seulement en
+``errors``: Permet de spécifier comment traiter les erreurs (seulement en
 mode texte):
 
     -  strict(None, par défaut): Lève une exception ValueError
     -  ignore: Ignore l'erreur(risque de perte de données).
     -  replace: Remplace les erreurs par des '?'.
 
-newline: Spécifie comment les sauts de ligne fonctionnent. Valeurs
+``newline``: Spécifie comment les sauts de ligne fonctionnent. Valeurs
 possible: None, '', '\\n', '\\r' ou '\\r\\n'.
 
-closefd: Doit être à True(par défaut) si un nom de fichier a été donné.
+``closefd``: Doit être à True(par défaut) si un nom de fichier a été donné.
 Si il est à False et qu'un descripteur de fichier a été donné, le descripteur de fichier
 restera ouvert quand le fichier sera fermé.
 
-opener: On peut spécifier un opener à utiliser.
+``opener``: On peut spécifier un opener à utiliser.
 
-Méthode de io.IOBase
---------------------
+Méthode de :py:class:`io.IOBase`
+----------------------------------
 
 Quelques méthodes parmi les plus utiles de :py:mod:`io` :
 
@@ -119,19 +119,19 @@ premiers caractères d'un fichier dans un autre fichier:
 .. literalinclude:: ./examples/stream.py
    :linenos:
 
-io.StringIO
------------
+:py:class:`io.StringIO`
+------------------------
 
 .. code-block:: python
 
     io.StringIO(initial_value='', newline='\n')
 
-Permet d'ouvrir un flux textuel en mémoire. Le buffer est vidé lorsqu'on close() le flux.
-io.StringIO hérite de io.BaseIO. Lorsque qu'on appelle open(mode='t'), python crée, de façon caché, un io.StringIO.
+Permet d'ouvrir un flux textuel en mémoire. Le buffer est vidé lorsqu'on ``close()`` le flux.
+:py:class:`io.StringIO` hérite de :py:class:`io.IOBase`. Lorsque qu'on appelle ``open(mode='t')``, python crée, de façon caché, un :py:class:`io.StringIO`.
 
-initial_bytes: Permets d'avoir des données à la création.
+``initial_value``: Permets d'avoir des données à la création.
 
-newline: Spécifie comment les sauts de ligne fonctionnent. Valeurs
+``newline``: Spécifie comment les sauts de ligne fonctionnent. Valeurs
 possible: None, '', '\\n'(par défaut), '\\r' ou '\\r\\n'.
 
 Exemple
@@ -143,23 +143,23 @@ Exemple d'un programme qui affiche deux lignes dans une console:
    :linenos:
 
 
-io.BytesIO
-----------
+:py:class:`io.BytesIO`
+----------------------
 
 .. code-block:: python3
 
     io.BytesIO([initial_bytes])
 
 
-Permet d'ouvrir un flux binaire en mémoire avec buffer. Le buffer est vidé lorsqu'on close() le flux.
-io.BytesIO hérite de io.BaseIO. Lorsque qu'on appelle open(mode='b'), python crée, de façon caché, un io.BytesIO.
+Permet d'ouvrir un flux binaire en mémoire avec buffer. Le buffer est vidé lorsqu'on ``close()`` le flux.
+:py:class:`io.BytesIO` hérite de :py:class:`io.IOBase`. Lorsque qu'on appelle ``open(mode='b')``, python crée, de façon caché, un :py:class:`io.BytesIO`.
 
-initial_bytes: Permets d'avoir des données binaires à la création.
+``initial_bytes``: Permets d'avoir des données binaires à la création.
 
 Exemple
 ~~~~~~~
 
-Exemple d'un programme qui change des caractères se trouvant au milieu d'un BytesIO par d'autres caractères:
+Exemple d'un programme qui change des caractères se trouvant au milieu d'un :py:class:`io.BytesIO` par d'autres caractères:
 
 .. code-block:: pycon
 
