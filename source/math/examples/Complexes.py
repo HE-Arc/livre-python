@@ -1,4 +1,4 @@
-"""Exemple calculs mathématiques en utilisant des nombres complexes."""
+"""Exemple calculs mathématique en utilisant des nombres complexes."""
 from cmath import phase
 
 a = complex(2, 3)
