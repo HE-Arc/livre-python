@@ -1,8 +1,9 @@
 .. _math-tutorial:
 
-======================
+
+========================
     Math/Fractions
-======================
+========================
 
 .. image:: img/logo.png
    :align: right
@@ -37,7 +38,7 @@ Avant tout, il faut savoir que les nombres sont déclarés comme des variables e
 sont reconnu à l'initialisation de la variable.
 Python comporte cinq catégories de nombres :
 
- * `int` (ou long) pour les nombres entiers, les *int* et les *long* on été unifiés récemment.
+ * `int` pour les nombres entiers.
  * `fraction` pour les fractions (quotients d'entiers par des entiers).
  * `decimal` et `float` pour les réels (ou *nombres décimaux*).
  * `complex` pour les nombres complexes.
