@@ -425,7 +425,7 @@ La librairie :py:mod:`math` propose un vaste choix de fonctions. Celles montrée
 il en existent encore bien d'autres. 
 *Python* reconnaît et manipule également les nombres complexes. Il suffit de rentrer ``complex()`` afin 
 d'utiliser ces derniers. Bien entendu, toutes les manipulations propres aux nombres complexes 
-(réel, imaginaire, module, argument) sont possibles.
+(réels, imaginaires, modules, arguments) sont possibles.
 L'utilisation du module *cmath* est également possible (et conseillé) pour l'utilisation des nombres complexes.
 En important le module :py:mod:`fractions` , il est facile d'effectuer nos manipulations en utilisant des 
 fractions. Les opérations sur les fractions se font comme pour les nombres, au moment de l'impression.
