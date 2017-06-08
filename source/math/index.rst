@@ -110,16 +110,6 @@ une erreur de type *ValueError*.
     >>> factorial(4)
     24
 
-La fonction ``frexp(x)`` retourne la mantisse et l'exposant de *x* comme la paire *(m, e)*
-*m* est un float et *e* est un int. Si *x* est nul, la fonction renvoie ``(0.0, 0)``.
-
-.. code-block:: pycon
-
-    >>> from math import frexp
-    >>> frexp(3)
-    (0.75, 2)
-
-.. todo:: Et ça veut dire quoi concrétement ?
 
 La fonction ``gcd(a, b)`` retourne la plus grand diviseur commun des int *a* et *b*.
 
