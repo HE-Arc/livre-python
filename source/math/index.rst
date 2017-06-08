@@ -139,6 +139,7 @@ Renvoie **FALSE** sinon.
 
 .. code-block:: pycon
 
+	>>> import math
 	>>> from math import isfinite
 	>>> isfinite(2)
 	True
@@ -146,9 +147,7 @@ Renvoie **FALSE** sinon.
 	True
 	>>> isfinite(0/1)
 	True
-	>>> isfinite(nan)
-	False
-	>>> isfinite(inf)
+	>>> isfinite(math.inf)
 	False
 	
 	
