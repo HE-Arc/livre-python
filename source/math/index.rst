@@ -148,7 +148,7 @@ Ici, *a* est la racine carrée de 100, la commande ``a.is_integer()``
 renvoi ``true`` si le nombre est un *int*, ``false`` sinon.
 *b* est la puissance cubique de *a*, c'est à dire 1'000.
 Les puissances peuvent aussi s'écrire en dédoublant l'astérisque de la multiplication.
-Les racines, comme les puissances, peuvent êtres obtenues en dédoublant l'astérisque avec *0.5*
+Les racines comme les puissances peuvent êtres obtenues en dédoublant l'astérisque avec *0.5*
 Dans cet exemple, comme aucune des variables ne possède de virgule, Python les reconnait comme des *int*.
 
 .. code-block:: pycon
@@ -255,8 +255,9 @@ Pour l'utiliser, il suffit simplement d'écrire ``pi`` en commande. Cela va de m
 	0.9999999999999999
 	>>> tan(pi/4) == 1
 	False
-
-
+	>>> round(tan(pi/4), 0) == 1
+	True
+	
 Fractions
 ---------
 
@@ -381,8 +382,9 @@ on ne doit pas ajouter 1 car la suite serait infinie. On utilise alors la foncto
 Comme *Python* ne possède pas de boucle *do..while*, il faut ajouter la dernière fraction égyptienne à la liste, 
 pour que celle-ci soit complète.
 
-Le résultat, pour une 21/13 est [1, Fraction(1, 2), Fraction(1,9), Fraction(1,234)].
-Cela signifie que 1 + 1/2 + 1/9 + 1/234 = 21/13
+Le résultat, pour :math:`21/13` est : :math:`1 + 1/ 2 + 1/9 + 1/234`
+
+Cela signifie que la somme de ces fractions vaut :math:`21/13`
 
 
 Conclusion
@@ -402,7 +404,9 @@ fractions. Les opérations sur les fractions se font comme pour les nombres, au 
 
 .. [#gg] <gabriel.griesser@he-arc.ch>
 
-.. _Math: https://docs.python.org/3/library/math.html?highlight=math#module-math
-.. _Nombres: https://fr.wikibooks.org/wiki/Math%C3%A9matiques_avec_Python_et_Ruby/Nombres_en_Python
-.. _Fractions: https://fr.wikibooks.org/wiki/Math%C3%A9matiques_avec_Python_et_Ruby/Fractions_en_Python
-.. _Nombre opérations: https://fr.wikibooks.org/wiki/Math%C3%A9matiques_avec_Python_et_Ruby/Nombres_entiers_en_Python
+
+:py:mod:`math`
+
+.. - Nombres : <https://fr.wikibooks.org/wiki/Math%C3%A9matiques_avec_Python_et_Ruby/Nombres_en_Python>`
+.. - Nombres opérations : <https://fr.wikibooks.org/wiki/Math%C3%A9matiques_avec_Python_et_Ruby/Nombres_entiers_en_Python>`
+.. - Fractions : <https://fr.wikibooks.org/wiki/Math%C3%A9matiques_avec_Python_et_Ruby/Fractions_en_Python>`
