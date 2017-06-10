@@ -246,7 +246,7 @@ Pour l'utiliser, il suffit simplement d'écrire ``pi`` en commande. Cela va de m
 
 .. code-block:: pycon
 
-    >>> from math import pi, cos, tan
+    >>> from math import pi, cos, tan, isclose
     >>> pi
     3.141592653589793
     >>> cos(pi)
@@ -255,7 +255,7 @@ Pour l'utiliser, il suffit simplement d'écrire ``pi`` en commande. Cela va de m
 	0.9999999999999999
 	>>> tan(pi/4) == 1
 	False
-	>>> round(tan(pi/4), 0) == 1
+	>>> isclose(tan(pi/4), 1)
 	True
 	
 Fractions
