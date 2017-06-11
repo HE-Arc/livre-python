@@ -125,20 +125,22 @@ La fonction :py:func:`gcd(a, b) <math.gcd>` retourne la plus grand diviseur comm
 
 La fonction :py:func:`isfinite(x) <math.isfinite>` retourne ``True`` si *x* n'est ni un nombre infini, ni un NaN (*not a number*).
 Renvoie ``False`` sinon.
-Dans notre exemple, ``numpy.float64`` (venant du package NumPy) permet l'utilisation de types float spécifiques à numpy ce qui permet la division par zéro pour notre exemple.
+Pour calculer :math:`\frac{1}{0}`, nous utilisons la librairie :py:mod:`decimal`. Grâce à cette dernière, nous pouvons définir un environnement pour
+les calculs arithmétiques. En faisant cela, la division :math:`\frac{1}{0}` ne lèvera pas d'exception et pourra être testé avec ``isfinite()``.
 
 .. code-block:: pycon
 
     >>> from math import isfinite, inf
-	>>> import numpy
+	>>> from decimal import setcontext, ExtendedContext, Decimal 
     >>> isfinite(2)
     True
     >>> isfinite(0.0)
     True
     >>> isfinite(0/1)
     True
-	>>> isfinite(numpy.float64(1.0)/0.0)
-	False
+    >>> setcontext(ExtendedContext)
+    >>> isfinite(Decimal('1')/Decimal('0')
+    False
 
 
 ---------------------------------------
@@ -251,15 +253,15 @@ La fonction :py:func:`isclose(a, b) <math.isclose>` Nous permet de comparer deux
 
     >>> from math import pi, cos, tan, isclose
     >>> pi
-    3.141592653589793
+	3.141592653589793
     >>> cos(pi)
     -1.0
     >>> tan(pi/4)
-	0.9999999999999999
-	>>> tan(pi/4) == 1
-	False
-	>>> isclose(tan(pi/4), 1)
-	True
+    0.9999999999999999
+    >>> tan(pi/4) == 1
+    False
+    >>> isclose(tan(pi/4), 1)
+    True
 	
 Fractions
 ---------
