@@ -243,6 +243,7 @@ Attention cependant aux limites, *x* doit être compris entre -1 et 1.
 
 Le nombre *pi* fait également partie de notre module, comme bien d'autres constantes (*e*, *tau*, etc.).
 Pour l'utiliser, il suffit simplement d'écrire ``pi`` en commande. Cela va de même pour les autres constantes.
+La fonction ``isclose(a, b)`` Nous permet de comparer deux nombres en retournant *True* si ces derniers sont relativement proches l'un de l'autre.
 
 .. code-block:: pycon
 
