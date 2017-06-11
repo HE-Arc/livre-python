@@ -160,7 +160,7 @@ Dans cet exemple, comme aucune des variables ne possède de virgule, Python les 
 
 La fonction :py:func:`log(x, [base]) <math.log>` retourne le logarithme naturel de *x* (en base *e*).
 Avec deux arguments, cette fonction retourne le logerithme de *x* dans la base donnée.
-Il est possible d'utiliser les fonction :py:func:`log2(x) <math.log2>` ou :py:func:`log10(x) <math.log1>` pour retourner le logarithme en base 2 ou 10.
+Il est possible d'utiliser les fonction :py:func:`log2(x) <math.log2>` ou :py:func:`log10(x) <math.log10>` pour retourner le logarithme en base 2 ou 10.
 
 .. code-block:: pycon
 
