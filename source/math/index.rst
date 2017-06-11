@@ -139,7 +139,7 @@ les calculs arithmétiques. En faisant cela, la division :math:`\frac{1}{0}` ne 
     >>> isfinite(0/1)
     True
     >>> setcontext(ExtendedContext)
-    >>> isfinite(Decimal('1')/Decimal('0')
+    >>> isfinite(Decimal('1')/Decimal('0'))
     False
 
 
