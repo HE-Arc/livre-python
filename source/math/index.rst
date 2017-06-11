@@ -131,7 +131,7 @@ les calculs arithmétiques. En faisant cela, la division :math:`\frac{1}{0}` ne 
 .. code-block:: pycon
 
     >>> from math import isfinite, inf
-	>>> from decimal import setcontext, ExtendedContext, Decimal 
+    >>> from decimal import setcontext, ExtendedContext, Decimal 
     >>> isfinite(2)
     True
     >>> isfinite(0.0)
@@ -253,7 +253,7 @@ La fonction :py:func:`isclose(a, b) <math.isclose>` Nous permet de comparer deux
 
     >>> from math import pi, cos, tan, isclose
     >>> pi
-	3.141592653589793
+    3.141592653589793
     >>> cos(pi)
     -1.0
     >>> tan(pi/4)
