@@ -125,17 +125,19 @@ La fonction :py:func:`gcd(a, b) <math.gcd>` retourne la plus grand diviseur comm
 
 La fonction :py:func:`isfinite(x) <math.isfinite>` retourne ``True`` si *x* n'est ni un nombre infini, ni un NaN (*not a number*).
 Renvoie ``False`` sinon.
+Dans notre exemple, ``numpy.float64`` (venant du package NumPy) permet l'utilisation de types float spécifiques à numpy ce qui permet la division par zéro pour notre exemple.
 
 .. code-block:: pycon
 
     >>> from math import isfinite, inf
+	>>> import numpy
     >>> isfinite(2)
     True
     >>> isfinite(0.0)
     True
     >>> isfinite(0/1)
     True
-	>>> isfinite(inf)
+	>>> isfinite(numpy.float64(1.0)/0.0)
 	False
 
 
@@ -194,7 +196,7 @@ La conversions d'angle est également une propriété de notre module :
 
 Qui dit conversion d'angle dit aussi fonctions trigonométriques.
 Ces dernières, :py:func:`sin(x) <math.sin>`, :py:func:`cos(x) <math.cos>` et :py:func:`tan(x) <math.tan>`, font également parties du module *math*.
-Elles s'expriment toutes sous la forme ``sin(x)``, ``cos(x)``, ``tan(x)`` et renvoient le sinus, cosinus et tangante de *x* en radians.
+Elles s'expriment toutes sous la forme ``sin(x)``, ``cos(x)``, ``tan(x)`` et renvoient le sinus, cosinus et tangente de *x* en radians.
 
 Les fonctions hyperboliques sont aussi présentes en rajoutant la lettre ``h`` à la suite des fonctions trigonométriques.
 À noter que la différence du type d'angle (degré ou radian) se montre très nettement au dernier *print*.
@@ -383,9 +385,9 @@ on ne doit pas ajouter 1 car la suite serait infinie. On utilise alors la foncto
 Comme *Python* ne possède pas de boucle *do..while*, il faut ajouter la dernière fraction égyptienne à la liste, 
 pour que celle-ci soit complète.
 
-Le résultat, pour :math:`21/13` est : :math:`1 + 1/ 2 + 1/9 + 1/234`
+Le résultat, pour :math:`\frac{21}{13}` est : :math:`1 + \frac{1}{2} + \frac{1}{9} + \frac{1}{234}`
 
-Cela signifie que la somme de ces fractions vaut :math:`21/13`
+Cela signifie que la somme de ces fractions vaut :math:`\frac{21}{13}`
 
 
 Conclusion
@@ -405,8 +407,6 @@ fractions. Les opérations sur les fractions se font comme pour les nombres, au 
 
 .. [#gg] <gabriel.griesser@he-arc.ch>
 
-
-:py:mod:`math`
 
 .. - Nombres : <https://fr.wikibooks.org/wiki/Math%C3%A9matiques_avec_Python_et_Ruby/Nombres_en_Python>`
 .. - Nombres opérations : <https://fr.wikibooks.org/wiki/Math%C3%A9matiques_avec_Python_et_Ruby/Nombres_entiers_en_Python>`
