@@ -102,6 +102,18 @@ Afin de rechercher une expression, on utilisera la fonction :py:func:`~re.search
     searchObj.group() :  Cats are smarter than dogs
     searchObj.group(1) :  Cats
     searchObj.group(2) :  smarter
+	
+re.match() vs re.search()
+-------------------------
+
+La fonction :py:func:`~re.match()` va vérifier une correspondance seulement au début de la chaîne, tandis que :py:func:`~re.search()` va vérifier une correspondance sur toute la chaîne.
+
+.. code:: pycon
+
+    >>> import re
+    >>> re.match("c", "abcdef") # Pas de correspondance
+    >>> re.search("c", "abcdef") # Une correspondance
+    <_sre.SRE_Match object; span=(2, 3), match='c'>
 
 re.split()
 ----------
@@ -179,6 +191,29 @@ Si, dans votre programme, vous utilisez plusieurs fois les mêmes expressions r�
     >>> mo2.group()
     'Batwoman'
 
+Les entrées à plusieurs lignes
+------------------------------
+
+Les drapeaux MULTILINE contrôle comment la correspondance par le pattern traite des instructions d'ancrage pour le texte contenant des caractères de plusieurs lignes. Lorsque le mode multiligne est activé, les règles d'ancrage pour ^ et $ s'appliquent au début et à la fin de chaque ligne, en plus de la chaîne entière.	
+
+.. code:: pycon
+
+    >>>import re
+    >>>text = 'This is some text -- with punctuation.\nAnd a second line.'
+    >>>pattern = r'(^\w+)|(\w+\S*$)'
+    >>>single_line = re.compile(pattern)
+    >>>multiline = re.compile(pattern, re.MULTILINE)
+
+    >>>print('Text        :', repr(text))
+    >>>print('Pattern     :', pattern)
+    >>>print('Single Line :', single_line.findall(text))
+    >>>print('Multline    :', multiline.findall(text))
+	
+    Text        : 'This is some text -- with punctuation.\nAnd a second line.'
+    Pattern     : (^\w+)|(\w+\S*$)
+    Single Line : [('This', ''), ('', 'line.')]
+    Multline    : [('This', ''), ('', 'punctuation.'), ('And', ''), ('', 'line.')]
+	
 Conclusion
 ----------
 
