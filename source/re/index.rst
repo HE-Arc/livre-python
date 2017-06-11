@@ -50,8 +50,6 @@ Prenons un exemple :
     k|\d{2} : la lettre k, ou bien deux chiffres.
     BRA{,10} : on attend à ce que le segment BRA ne soit pas présent du tout ou présent jusqu'à 10 fois consécutives.
 
-.. todo:: Pourquoi ne pas utiliser une liste de définition comme la documentation officielle?
-
 La bibliothèque ``re``
 ----------------------
 
@@ -111,7 +109,8 @@ La fonction :py:func:`~re.match()` va vérifier une correspondance seulement au 
 .. code:: pycon
 
     >>> import re
-    >>> re.match("c", "abcdef") # Pas de correspondance
+    >>> re.match("c", "abcdef") is None # Pas de correspondance
+	True
     >>> re.search("c", "abcdef") # Une correspondance
     <_sre.SRE_Match object; span=(2, 3), match='c'>
 
@@ -171,8 +170,6 @@ re.compile()
 
 Si, dans votre programme, vous utilisez plusieurs fois les mêmes expressions régulières, il peut être utile de les compiler. La bibliothèque :py:mod:`re` propose en effet de conserver votre expression régulière sous la forme d'un objet que vous pouvez stocker dans votre programme. On utilisera ainsi la fonction :py:func:`~re.compile()` :
 
-.. pourquoi?
-
 ::
 
     re.compile(pattern)
@@ -196,23 +193,25 @@ Les entrées à plusieurs lignes
 
 Les drapeaux MULTILINE contrôle comment la correspondance par le pattern traite des instructions d'ancrage pour le texte contenant des caractères de plusieurs lignes. Lorsque le mode multiligne est activé, les règles d'ancrage pour ^ et $ s'appliquent au début et à la fin de chaque ligne, en plus de la chaîne entière.	
 
+Voici un exemple sans l'utilisation du drapeau multiline :
+
 .. code:: pycon
 
-    >>>import re
-    >>>text = 'This is some text -- with punctuation.\nAnd a second line.'
-    >>>pattern = r'(^\w+)|(\w+\S*$)'
-    >>>single_line = re.compile(pattern)
-    >>>multiline = re.compile(pattern, re.MULTILINE)
-
-    >>>print('Text        :', repr(text))
-    >>>print('Pattern     :', pattern)
-    >>>print('Single Line :', single_line.findall(text))
-    >>>print('Multline    :', multiline.findall(text))
+    >>> import re
+    >>> text = '''Hello
+    ... World'''
+    >>> re.findall(r'^\S+$', text)
+    []
 	
-    Text        : 'This is some text -- with punctuation.\nAnd a second line.'
-    Pattern     : (^\w+)|(\w+\S*$)
-    Single Line : [('This', ''), ('', 'line.')]
-    Multline    : [('This', ''), ('', 'punctuation.'), ('And', ''), ('', 'line.')]
+Voici un exemple avec l'utilisation du drapeau multiline :
+
+.. code:: pycon
+
+    >>> import re
+    >>> text = '''Hello
+    ... World'''
+    >>> re.findall(r'^\S+$', text, re.MULTILINE)
+    ['Hello', 'World']
 	
 Conclusion
 ----------
