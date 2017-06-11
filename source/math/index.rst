@@ -86,7 +86,7 @@ Cette méthode est disponible que depuis *Python 3*, en *Python 2.X*, il était 
 Fonctions de nombres
 ---------------------
 
-La fonction ``ceil(x)`` (x est donné en float) retourne la plus petite valeur entière, supérieure ou égale à x.
+La fonction :py:func:`ceil(x) <math.ceil>` (x est donné en float) retourne la plus petite valeur entière, supérieure ou égale à x.
 
 .. code-block:: pycon
 
@@ -98,7 +98,7 @@ La fonction ``ceil(x)`` (x est donné en float) retourne la plus petite valeur e
 	>>> ceil(0.00000001)
 	1
 	
-La fonction ``fabs(x)`` retourne la valeur absolue de *x*.
+La fonction :py:func:`fabs(x) <math.fabs>` retourne la valeur absolue de *x*.
 
 .. code-block:: pycon
 
@@ -106,7 +106,7 @@ La fonction ``fabs(x)`` retourne la valeur absolue de *x*.
     >>> fabs(-10)
     10.0
 
-La fonction ``factorial(x)`` retourne *x* factoriel. Si *x* n'est pas un int ou est négatif, la fonction retourne
+La fonction :py:func:`factorial(x) <math.factorial>` retourne *x* factoriel. Si *x* n'est pas un int ou est négatif, la fonction retourne
 une erreur de type *ValueError*.
 
 .. code-block:: pycon
@@ -115,7 +115,7 @@ une erreur de type *ValueError*.
     >>> factorial(4)
     24
 
-La fonction ``gcd(a, b)`` retourne la plus grand diviseur commun des int *a* et *b*.
+La fonction :py:func:`gcd(a, b) <math.gcd>` retourne la plus grand diviseur commun des int *a* et *b*.
 
 .. code-block:: pycon
 
@@ -145,7 +145,7 @@ Fonctions logarithmiques et puissances
 
 On peut également utiliser diverses fonctions du module :py:mod:`math` comme les `racines` ou les `puissances`.
 Ici, *a* est la racine carrée de 100, la commande ``a.is_integer()``
-renvoi ``true`` si le nombre est un *int*, ``false`` sinon.
+renvoi ``True`` si le nombre est un *int*, ``False`` sinon.
 *b* est la puissance cubique de *a*, c'est à dire 1'000.
 Les puissances peuvent aussi s'écrire en dédoublant l'astérisque de la multiplication.
 Les racines comme les puissances peuvent êtres obtenues en dédoublant l'astérisque avec *0.5*
@@ -158,9 +158,9 @@ Dans cet exemple, comme aucune des variables ne possède de virgule, Python les 
     >>> 10**3
     1000.0
 
-La fonction log(x, [base]) retourne le logarithme naturel de *x* (en base *e*).
+La fonction :py:func:`log(x, [base]) <math.log>` retourne le logarithme naturel de *x* (en base *e*).
 Avec deux arguments, cette fonction retourne le logerithme de *x* dans la base donnée.
-Il est possible d'utiliser les fonction ``log2(x)`` ou ``log10(x)`` pour retourner le logarithme en base 2 ou 10.
+Il est possible d'utiliser les fonction :py:func:`log2(x) <math.log2>` ou :py:func:`log10(x) <math.log1>` pour retourner le logarithme en base 2 ou 10.
 
 .. code-block:: pycon
 
@@ -179,7 +179,7 @@ Angles, fonctions trigonométriques et *PI*
 -------------------------------------------
 
 La conversions d'angle est également une propriété de notre module :
-``degrees(x)`` et ``radians(x)`` permettent la conversion de l'angle *x* en degré ou en radians selon la fonction.
+:py:func:`math.degrees` et :py:func:`math.radians` permettent la conversion de l'angle *x* en degré ou en radians selon la fonction.
 
 .. code-block:: pycon
 
@@ -193,7 +193,7 @@ La conversions d'angle est également une propriété de notre module :
 
 
 Qui dit conversion d'angle dit aussi fonctions trigonométriques.
-Ces dernières, *sin, cos* et *tan*, font également parties du module *math*.
+Ces dernières, :py:func:`sin(x) <math.sin>`, :py:func:`cos(x) <math.cos>` et :py:func:`tan(x) <math.tan>`, font également parties du module *math*.
 Elles s'expriment toutes sous la forme ``sin(x)``, ``cos(x)``, ``tan(x)`` et renvoient le sinus, cosinus et tangante de *x* en radians.
 
 Les fonctions hyperboliques sont aussi présentes en rajoutant la lettre ``h`` à la suite des fonctions trigonométriques.
@@ -220,7 +220,7 @@ Les fonctions hyperboliques sont aussi présentes en rajoutant la lettre ``h`` �
     7.446921003909191e+77
 
 
-Les fonctions ``asin(x)``, ``acos(x)``, ``atan(x)``, qui correspondent aux *arc sin, arc cos*, et *arc tan* peuvent être utilisées.
+Les fonctions :py:func:`asin(x) <math.asin>`, :py:func:`acos(x) <math.acos>`, :py:func:`atan(x) <math.atan>`, qui correspondent aux *arc sin, arc cos*, et *arc tan* peuvent être utilisées.
 Attention cependant aux limites, *x* doit être compris entre -1 et 1.
 
 .. code-block:: pycon
@@ -243,7 +243,7 @@ Attention cependant aux limites, *x* doit être compris entre -1 et 1.
 
 Le nombre *pi* fait également partie de notre module, comme bien d'autres constantes (*e*, *tau*, etc.).
 Pour l'utiliser, il suffit simplement d'écrire ``pi`` en commande. Cela va de même pour les autres constantes.
-La fonction ``isclose(a, b)`` Nous permet de comparer deux nombres en retournant *True* si ces derniers sont relativement proches l'un de l'autre.
+La fonction :py:func:`isclose(a, b) <math.isclose>` Nous permet de comparer deux nombres en retournant *True* si ces derniers sont relativement proches l'un de l'autre.
 
 .. code-block:: pycon
 
