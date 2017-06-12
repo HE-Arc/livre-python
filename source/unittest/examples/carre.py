@@ -9,12 +9,12 @@ def carré(x):
     return x ** 2
 
 
-# endfunc:carré
+# endfunc:carrée
 
 
 # class:TestCase
 class CarreTestCase(unittest.TestCase):
-    """Classe testeur pour la fonction carré."""
+    """Classe testeur pour la fonction carrée."""
 
     test_values = ((2, 4), (0, 0), (-2, 4))
 
@@ -28,7 +28,7 @@ class CarreTestCase(unittest.TestCase):
 
 # class:CarreTestCaseFail
 class CarreTestCaseFail(unittest.TestCase):
-    """Mauvaise classe testeur pour la fonction carré."""
+    """Mauvaise classe testeur pour la fonction carrée."""
 
     def test_assert_fail(self):
         """Affichage d'un message d'erreur personnalisé."""
