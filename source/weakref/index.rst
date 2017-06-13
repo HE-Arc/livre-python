@@ -117,13 +117,13 @@ L'utilité de ces listes est que plus l'objet est dans une liste de génération
 :py:func:`~gc.collect`:
     Permet de forcer l'utilisation du ramasse-miettes.
 
-:py:func:`~gc.garbage`:
+:py:obj:`~gc.garbage`:
     Retourne la liste des objets qui ne sont plus référencés mais qui ne peuvent pas être libéré.
 
 :py:func:`~gc.set_threshold`:
     Permet de changer le temps des différentes
 
-:py:func:`~gc.count`
+:py:func:`~gc.get_count`
     Retourne le nombre d'objet dans chaque liste de génération
 
 
