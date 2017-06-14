@@ -27,7 +27,7 @@ Référence faible
 """"""""""""""""
 
 Les références faibles (weakref) permettent de créer des références sur des objets sans augmenter le compteur du ramasse-miettes.
-Le module :py:mod:`weakref` permet de créer et utilisé les références faibles sur les objets. Une des principales utilités de ce module est pour les caches et le mapping de gros objet en mémoire.
+Le module :py:mod:`weakref` permet de créer et utilisé les références faibles sur les objets. Une des principales utilités de ce module est pour les caches et le mapping de gros objets en mémoire.
 
 :py:class:`~weakref.ref`:
     Retourne une référence faible de l'objet;
@@ -131,7 +131,7 @@ L'utilité de ces listes est que plus l'objet est dans une liste de génération
 Conclusion
 ----------
 
-Le module :py:mod:`weakref` est obligatoire pour les applications ou l'on a besoin de savoir exactement ce qui se passe en mémoire si notre mémoire est limité.
+Le module :py:mod:`weakref` est obligatoire pour les applications ou l'on a besoin de savoir exactement ce qui se passe en mémoire où si notre mémoire est limitée.
 *weakref* est un module puissant, les exemples présentés sur cette page sont très basiques et sont destinés à comprendre le module sans rentrer en profondeur dans les détails.
 Pour approfondir vos connaissances sur ce sujet vous pouvez vous rendre sur la doc officiel : :py:mod:`weakref`.
 
