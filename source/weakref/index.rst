@@ -86,7 +86,8 @@ mais le ramasse-miettes python va utiliser un détecteur de références circula
    :language: python
 
 Maintenant si nous tentons de faire des références cycliques sur notre objet. Que A a une référence sur B et que B a une référence sur A.
-Au moment où l'on veut détruire nos objets, les destructeurs de nos objets a et b ne sont jamais appelé et vont exister tant que l'interpréteur n'est pas quitté.
+Au moment où l'on veut détruire nos objets, les destructeurs de nos objets A et B ne sont jamais appelé et vont exister tant que l'interpréteur n'est pas quitté (dans le cas où
+le ramasse-miettes à été desactiver avec gc. :py:func:`~gc.disable`, pour éviter la collect automaitique de cette exemple).
 
 .. literalinclude:: ./examples/exampleStrongRef2.pycon
    :language: pycon
