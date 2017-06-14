@@ -76,27 +76,9 @@ ce fait directement après la destruction de la référence forte. Grace à cela
 Référence circulaire
 --------------------
 
-L'utilité des *weakref* n'est pas des plus optimal dans l'exemple présenté ci-dessus. Nous allons donc maintenant rajouter une méthode qui va faire une
-référence sur un autre objet. Et, en faisant deux objets qui se réfèrent mutuellement, on va créer une référence circulaire.
-Ce type de références arrive quand deux objets se référencent mutuellement, ce qui va augmenter leurs compteurs de référence. Et au moment où l'on n'utilise plus
+Les références circulaires arrivent quand deux objets se référencent mutuellement, ce qui va augmenter leurs compteurs de référence. Et au moment où l'on n'utilise plus
 ces objets, le ramasse-miettes ne va pas pouvoir les supprimer vu que leur compteur n'est pas à zéro. C'est le genre de faiblesses que peuvent avoir les ramasse-miettes traditionnels,
 mais le ramasse-miettes python va utiliser un détecteur de références circulaires et quand même supprimer l'objet s'il en trouve.
-
-.. literalinclude:: ./examples/example2.py
-   :language: python
-
-Maintenant si nous tentons de faire des références cycliques sur notre objet. Que A a une référence sur B et que B a une référence sur A.
-Au moment où l'on veut détruire nos objets, les destructeurs de nos objets A et B ne sont jamais appelé et vont exister tant que l'interpréteur n'est pas quitté (dans le cas où
-le ramasse-miettes à été desactiver avec gc. :py:func:`~gc.disable`, pour éviter la collect automaitique de cette exemple).
-
-.. literalinclude:: ./examples/exampleStrongRef2.pycon
-   :language: pycon
-
-La solution à ce problème est de stocker des références faibles sur nos objets, ce qui va permettre au ramasse-miettes de supprimer les objets qui sont coincés dans
-une référence cyclique (Le ramasse-miette de python est capable de détecter et supprimer directement des références cycliques).
-
-.. literalinclude:: ./examples/example2Sol.py
-   :language: python
 
 Module :py:mod:`gc`
 -------------------

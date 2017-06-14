@@ -1,8 +1,0 @@
->>> a = CircularRef()
-created
->>> b = CircularRef()
-created
->>> a.store(b)
->>> b.store(a)
->>> del a
->>> del b
