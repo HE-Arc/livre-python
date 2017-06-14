@@ -15,8 +15,6 @@ le ramasse-miettes est alors libre de détruire l'objet référencé. Ce qui ne 
 :py:mod:`gc` est un module qui met à disposition du programmeur une interface pour gérer manuellement le ramasse-miettes. Il permet entre autres,
 de désactiver ou de forcer la collection des ressources, ainsi que d'atteindre les objets que le collecteur a trouvés mais ne peut pas libérer.
 
-:py:mod:`gc` est un module qui met à disposition du programmeur une interface pour gérer manuellement le ramasse miette. Il permet entre autres,
-de désactiver ou de forcer la collection des ressources, ainsi que d'atteindre les objets que le collecteur a trouvés mais ne peut pas libérer.
 
 Référence (forte)
 """""""""""""""""
@@ -139,8 +137,6 @@ Le module :py:mod:`weakref` est obligatoire pour les applications ou l'on a beso
 Pour approfondir vos connaissances sur ce sujet vous pouvez vous rendre sur la doc officiel : :py:mod:`weakref`.
 
 En mode debug, le module :py:mod:`gc` est un module complémentaire au module :py:mod:`weakref`, il permet d'avoir une plus grande maîtrise de ce qui se passe en mémoire.
-
-Le module :py:mod:`gc` est un module complémentaire au module :py:mod:`weakref`, il permet d'avoir une plus grande maîtrise de ce qui ce passe en mémoire.
 
     *Les robots n’ont ni choix à faire ni décisions à prendre.*
 
