@@ -13,9 +13,9 @@ Introduction
 ------------
 
 JSON_ (*JavaScript Object Notation*) est un format simple, compact qui a, au
-fil des ans, remplacé XML comme format d'échange préféré. Standardisé au sein
-de l'*ECMA-404* :cite:`bray2014javascript`  il est supporté par l'énorme
-majorité des langages de programmation.
+fil des ans, remplacé XML_ comme format d'échange préféré. Standardisé au sein
+de l'Ecma :cite:`bray2014javascript`, il est devenu incontournable dans les
+systèmes actuels.
 
 JSON_ comporte six types : chaîne de caractères, nombre, objet, tableau,
 booléen (``true``, ``false``) et ``null``.
@@ -38,12 +38,15 @@ Il serait possible de lire directement cette structure de donnée en Python si
 les valeurs booléennes et la valeur vide n'étaient pas écrites différemment :
 ``True``, ``False`` et ``None``.
 
-Le module :py:mod:`json` est des plus simples à utiliser. Il est présenté par
-le fameux Kenneith Reitz dans `Hitchhiker's Guide To Python
-<http://docs.python-guide.org/en/latest/scenarios/json/>`_.
+.. literalinclude:: ./examples/ast.pycon
+   :language: pycon
 
 Exemple
 -------
+
+Le module :py:mod:`json` est des plus simples à utiliser. Il est présenté par
+le fameux Kenneith Reitz :cite:`schlusser2016` dans `Hitchhiker's Guide To Python
+<http://docs.python-guide.org/en/latest/scenarios/json/>`_.
 
 L'API du module :py:mod:`json` est similaire à celle utilisée par
 :py:mod:`marshal` et :py:mod:`pickle` qui permettent de sérialiser des objets
@@ -175,5 +178,6 @@ devant être chargés complétement en mémoire avoir de pouvoir être lus.
 .. _YAJL: http://lloyd.github.io/yajl/
 .. _ijson: https://pypi.python.org/pypi/ijson/
 .. _Apache Thrift: http://thrift.apache.org/
+.. _XML: https://www.w3.org/XML/
 
 .. bibliography:: refs.bib
