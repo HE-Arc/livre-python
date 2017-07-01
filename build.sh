@@ -8,6 +8,7 @@ isort --check-only --diff --recursive source
 flake8 source
 find source -iname "*.rst" \
     | xargs rstcheck \
-        --ignore-directives sphinx,automodule,autoclass,autofunction \
+        --ignore-directives sphinx,automodule,autoclass,autofunction,bibliography \
+        --ignore-roles cite \
         --report 2
 sphinx-build -Wn -b html source target/doc/build

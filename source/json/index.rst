@@ -14,7 +14,8 @@ Introduction
 
 JSON_ (*JavaScript Object Notation*) est un format simple, compact qui a, au
 fil des ans, remplacé XML comme format d'échange préféré. Standardisé au sein
-de l'`ECMA-404`_ il est supporté par l'énorme majorité des langages de
+de l'*ECMA-404* :cite:`bray2014javascript`  il est supporté par l'énorme
+majorité des langages de
 programmation.
 
 JSON_ comporte six types : chaîne de caractères, nombre, objet, tableau,
@@ -150,7 +151,8 @@ devant être chargés complétement en mémoire avoir de pouvoir être lus.
 .. _JSON: http://json.org/
 .. _JSON Schema: http://json-schema.org/
 .. _JSON-LD: http://json-ld.org/
-.. _ECMA-404: http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf
 .. _MessagePack: http://msgpack.org/
 .. _YAJL: http://lloyd.github.io/yajl/
 .. _ijson: https://pypi.python.org/pypi/ijson/
+
+.. bibliography:: refs.bib
