@@ -15,8 +15,7 @@ Introduction
 JSON_ (*JavaScript Object Notation*) est un format simple, compact qui a, au
 fil des ans, remplacé XML comme format d'échange préféré. Standardisé au sein
 de l'*ECMA-404* :cite:`bray2014javascript`  il est supporté par l'énorme
-majorité des langages de
-programmation.
+majorité des langages de programmation.
 
 JSON_ comporte six types : chaîne de caractères, nombre, objet, tableau,
 booléen (``true``, ``false``) et ``null``.
@@ -97,13 +96,36 @@ consultez la documentation de `JSON Schema`_ pour en savoir plus.
 
 .. literalinclude:: ./examples/validation.py
 
-Format binaire
---------------
+Formats binaires
+----------------
 
 Un document JSON est un fichier texte, qui consomme plus de place qu'une
-représentation binaire. `MessagePack`_ permet de réduire efficacement l'espace
-nécessaire au stockage et à l'échange de tels documents. En Python, c'est le
-module :py:mod:`msgpack`.
+représentation binaire. Python offre un format de sérialisation en binaire
+nommé :py:mod:`pickle`, comme il est possible d'utiliser des bibliothèques
+externes telles que :py:mod:`msgpack`, ou `Apache Thrift`_.
+
+Pickle
+^^^^^^
+
+:py:mod:`pickle` est le format utilisé par :ref:`multiprocessing-tutorial`
+pour échanger des données entre différents processus Python. C'est un format
+qui est pratique mais non intéropérable avec d'autres langages, voire même
+d'autres versions de Python.
+
+.. literalinclude:: ./examples/pickle.pycon
+   :language: pycon
+
+Ce format n'est pas recommandé pour de multiples raisons. La documentation du
+module informe que lire du ``pikle`` revient à faire un ``eval``. Ben
+Frederickson :cite:`fred2014` mentionne notamment la lenteur et la taille du
+``pickle``.
+
+MessagePack
+^^^^^^^^^^^
+
+En alternative à ``pickle``, `MessagePack`_ permet de réduire efficacement
+l'espace nécessaire au stockage et à l'échange de tels documents. En Python,
+c'est le module :py:mod:`msgpack`.
 
 .. literalinclude:: ./examples/msg.pycon
    :language: pycon
@@ -146,13 +168,12 @@ devant être chargés complétement en mémoire avoir de pouvoir être lus.
 
 .. [#yb] <yoan.blanc@he-arc.ch>
 
-.. Bibliographie (ceci est un commentaire)
-
 .. _JSON: http://json.org/
 .. _JSON Schema: http://json-schema.org/
 .. _JSON-LD: http://json-ld.org/
 .. _MessagePack: http://msgpack.org/
 .. _YAJL: http://lloyd.github.io/yajl/
 .. _ijson: https://pypi.python.org/pypi/ijson/
+.. _Apache Thrift: http://thrift.apache.org/
 
 .. bibliography:: refs.bib

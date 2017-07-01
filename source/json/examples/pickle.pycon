@@ -4,9 +4,9 @@
 
 >>> doc = json.dumps(document, separators=',:').encode("utf-8")
 >>> len(doc)
-77244
+77266
 
->>> import msgpack
->>> pack = msgpack.packb(document)
+>>> import pickle
+>>> pack = pickle.dumps(document, protocole=pickle.HIGHEST_PROTOCOL)
 >>> len(pack)
-67017
+52227
