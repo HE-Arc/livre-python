@@ -55,7 +55,7 @@ Liste d'événements interceptable :
 ``on_any_event``  Dans tous les cas ci-dessus
 ================  =============================================
 
-L'objet ``event`` est une instance de la classe :py:class:`watchdog.events.FileSystemEvent`.
+L'objet ``event`` est une instance de la classe ``watchdog.events.FileSystemEvent``.
 Cette classe est dérivée pour chaque type d'événement. Elle contient les attributs suivant :
 
 =================   ===========================================================
@@ -127,7 +127,7 @@ Il est possible de filtrer les fichiers sur lesquelles les events sont intercept
 ce qui est utile si l'on souhaite (par exemple) traiter que certain type de fichiers (par ex. les .mp3).
 
 Pour ce faire, il faut utiliser une autre classe de base pour la classe de traitement.
-Deux classes dérivant de :py:class:`watchdog.events.FileSystemEventHandler` sont fournies (liste dans le tableau ci-dessous).
+Deux classes dérivant de ``watchdog.events.FileSystemEventHandler`` sont fournies (liste dans le tableau ci-dessous).
 
 ===============================   ===========================================
 Nom                               Utilisation

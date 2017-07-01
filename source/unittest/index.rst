@@ -210,8 +210,8 @@ Un autre standard pour les tests unitaires en Python est: :py:mod:`doctest`. Ce 
 
 .. glossary::
 
-Docstring:
-    Les docstrings sont des chaînes de documentation qui doivent être placées en dessous des définitions de méthodes, fonctions, classe ou au début d'un module. De plus l'indentation d'une docstring est importante car elle dépend directement de l'indentation de la classe ou de la méthode qu'elle documente.
+    Docstring:
+        Les docstrings sont des chaînes de documentation qui doivent être placées en dessous des définitions de méthodes, fonctions, classe ou au début d'un module. De plus l'indentation d'une docstring est importante car elle dépend directement de l'indentation de la classe ou de la méthode qu'elle documente.
 
 
 

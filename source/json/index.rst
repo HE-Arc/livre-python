@@ -65,8 +65,8 @@ Python.
     >>> json.dumps(['foo', {'bar': ('baz', None, 1.0, 2)}])
     '["foo", {"bar": ["baz", null, 1.0, 2]}]'
 
-    >>> json.dumps("🐍")
-    '"\\ud83d\\udc0d"'
+    >>> json.dumps("€")
+    '"\\u20ac"'
 
     >>> json.loads('[1, 2, "Hello"]')
     [1, 2, 'Hello']

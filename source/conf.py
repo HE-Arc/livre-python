@@ -133,7 +133,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'main.tex', 'Livre Python', 'HE-Arc', 'scrbook'),
+    (master_doc, 'main.tex', 'Livre Python', 'HE-Arc', 'book'),
 ]
 
 # -- Options for manual page output ---------------------------------------
@@ -186,5 +186,5 @@ intersphinx_mapping = {
     'Pillow': ('https://pillow.readthedocs.io/en/latest/', None),
     'pygame': ('http://pygame.org/docs/', None),
     'pytest': ('http://docs.pytest.org/en/latest/', None),
-    'watchdog': ('http://pythonhosted.org/watchdog/', None),
+    # 'watchdog': ('http://pythonhosted.org/watchdog/', None),
 }
