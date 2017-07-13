@@ -1,6 +1,5 @@
-------------------------------------------
- Le petit guide des batteries à découvrir
-------------------------------------------
+Le petit guide des batteries à découvrir
+========================================
 
 Python est un langage assez petit et rapide à aborder, via par exemple
 :ref:`tutorial-index`. Cependant le nombre de modules pouvant être utilisés
