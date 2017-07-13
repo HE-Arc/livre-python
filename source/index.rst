@@ -4,11 +4,8 @@
 
 .. include:: introduction.rst
 
-Table des matières
-==================
-
 Bases
------
+=====
 
 .. toctree::
    :maxdepth: 1
@@ -28,7 +25,7 @@ Bases
    super/index
 
 Avancé
-------
+======
 
 .. toctree::
    :maxdepth: 1
@@ -44,7 +41,7 @@ Avancé
    weakref/index
 
 Ligne de commande
------------------
+=================
 
 .. toctree::
    :maxdepth: 1
@@ -53,7 +50,7 @@ Ligne de commande
    invoke/index
 
 Tests
------
+=====
 
 .. toctree::
    :maxdepth: 1
@@ -62,7 +59,7 @@ Tests
    pytest/index
 
 Traitement des données
-----------------------
+======================
 
 .. toctree::
    :maxdepth: 1
@@ -72,7 +69,7 @@ Traitement des données
    pillow/index
 
 Autres
-------
+======
 
 .. toctree::
    :maxdepth: 1

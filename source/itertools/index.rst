@@ -4,11 +4,11 @@
 ``itertools``
 =============
 
-.. image:: ./img/toolsbox.png
-    :scale: 40%
-    :align: right
-    :alt: lock logo
-    :target: https://www.iconfinder.com/icons/286688/tool_kit_toolbox_tools_icon#size=512
+.. image:: ../_static/toolsbox.png
+   :scale: 40%
+   :align: right
+   :alt: lock logo
+   :target: https://www.iconfinder.com/icons/286688/tool_kit_toolbox_tools_icon#size=512
 
 Par Johnny Da Costa [#jd]_
 
