@@ -9,14 +9,13 @@ Par Paul Jeanbourquin [#pj]_
 Introduction
 ------------
 
-Watchdog est une librairie permettant l'utilisation d'événemement du système de f
-ichier (création de fichier, modification, ...).
+Watchdog est une librairie permettant l'utilisation d'événemement du système de fichier (création de fichier, modification, ...).
 
 Cette librairie peut-être utilisée (par exemple) pour la mise en place d'un scanner de fichier dynamique
 (exemple Scanner multimédia)
 ou pour la mise en place d'un système d'audit des événements sur les fichiers.
 Dans le cadre de cet article, notre fils rouge sera la création d'un programme d'audit
-des événements émis par les fichiers de musiques.
+des événements émis par les fichiers de musiques (librement inspiré de l'article de Sam et Max :cite:`sametmax2015`).
 
 Fonctionnement
 --------------
@@ -55,7 +54,7 @@ Liste d'événements interceptable :
 ``on_any_event``  Dans tous les cas ci-dessus
 ================  =============================================
 
-L'objet ``event`` est une instance de la classe ``watchdog.events.FileSystemEvent``.
+L'objet ``event`` est une instance de la classe :py:class:`watchdog.events.FileSystemEvent`.
 Cette classe est dérivée pour chaque type d'événement. Elle contient les attributs suivant :
 
 =================   ===========================================================
@@ -127,7 +126,7 @@ Il est possible de filtrer les fichiers sur lesquelles les events sont intercept
 ce qui est utile si l'on souhaite (par exemple) traiter que certain type de fichiers (par ex. les .mp3).
 
 Pour ce faire, il faut utiliser une autre classe de base pour la classe de traitement.
-Deux classes dérivant de ``watchdog.events.FileSystemEventHandler`` sont fournies (liste dans le tableau ci-dessous).
+Deux classes dérivant de :py:class:`watchdog.events.FileSystemEventHandler` sont fournies (liste dans le tableau ci-dessous).
 
 ===============================   ===========================================
 Nom                               Utilisation
@@ -185,14 +184,10 @@ Noms                                      Default               Utilisation
 Conclusion
 ----------
 
-En conclusion, la bibliothèque watchdog permet d'utiliser des événements, en provenance du système de fichiers, d'une manière facile et efficace.
+En conclusion, la bibliothèque :ref:`watchdog <watchdog:quickstart>` permet d'utiliser des événements, en provenance du système de fichiers, d'une manière facile et efficace.
 Watchdog permet aussi de filtrer les fichiers / dossiers émettant un événement.
 Cette bibliothèque permet aussi une grande réusabilité du code grâce, entre autre, à l'utilisation de classe pour le traitement des événements.
 
 .. [#pj] <paul.jeanbourquin@he-arc.ch>
 
-Bibliographie
--------------
-
-* watchdog documentation : http://pythonhosted.org/watchdog/
-* Tutoriel d'utilisation de watchdog : http://sametmax.com/reagir-a-un-changement-sur-un-fichier-avec-watchdog/
+.. bibliography:: refs.bib

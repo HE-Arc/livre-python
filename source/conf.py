@@ -187,5 +187,5 @@ intersphinx_mapping = {
     'Pillow': ('https://pillow.readthedocs.io/en/latest/', None),
     'pygame': ('http://pygame.org/docs/', None),
     'pytest': ('http://docs.pytest.org/en/latest/', None),
-    # 'watchdog': ('http://pythonhosted.org/watchdog/', None),
+    'watchdog': ('http://pythonhosted.org/watchdog/', None),
 }
