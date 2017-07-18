@@ -125,7 +125,10 @@ latex_elements = {
 
     # Additional stuff for the LaTeX preamble.
     #
-    # 'preamble': '',
+    'preamble':
+        r'\pagestyle{fancy}'
+        r'\fancyhf{}'
+        r'\fancyfoot[R]{\textbf{\thepage}}',
 
     # Latex figure (float) alignment
     #
