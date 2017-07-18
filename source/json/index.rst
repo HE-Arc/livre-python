@@ -92,7 +92,7 @@ Validation
 ----------
 
 :py:mod:`jsonschema` permet de valider un document JSON selon un modèle.
-consultez la documentation de `JSON Schema`_ pour en savoir plus.
+Consultez la documentation de `JSON Schema`_ pour en savoir plus.
 
 .. literalinclude:: ./examples/schema.json
    :caption: schema.json
@@ -112,7 +112,7 @@ Pickle
 
 :py:mod:`pickle` est le format utilisé par :ref:`multiprocessing-tutorial`
 pour échanger des données entre différents processus Python. C'est un format
-qui est pratique mais non intéropérable avec d'autres langages, voire même
+qui est pratique mais non interopérable avec d'autres langages, voire même
 d'autres versions de Python.
 
 .. literalinclude:: ./examples/pickle.pycon
@@ -148,7 +148,7 @@ Autre inconvénient majeur vis-à-vis du format XML est qu'il n'est pas aisé de
 lire un document au fur et à mesure qu'il est reçu, en *streaming*. En XML, on
 utilise une API nommée :abbr:`SAX (Simple API for XML)`. :py:mod:`json` propose
 un modèle demandant de charger l'entier d'un document en mémoire. Comme avec
-DOM en XML. Ce problème se résoud à l'aide de `YAJL`_ et du module `ijson`_.
+DOM en XML. Ce problème se résout à l'aide de `YAJL`_ et du module `ijson`_.
 
 .. literalinclude:: ./examples/stream.py
    :linenos:
@@ -162,7 +162,7 @@ par de nombreuses API. Si vous devez consommer des données JSON externe, il
 n'est que vivement recommandé d'ajouter un schéma afin d'offrir un message
 d'erreur adéquat en cas de non respect du document espéré. Et des solutions
 existent afin de contourner des problèmes de fichiers inutilement volumineux ou
-devant être chargés complétement en mémoire avoir de pouvoir être lus.
+devant être chargés complètement en mémoire avoir de pouvoir être lus.
 
     *JSON c'est bon, mangez-en!*
 
