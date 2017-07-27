@@ -141,6 +141,8 @@ latex_elements = {
                r'Numbers=OldStyle,'
                r'Ligatures={Common,Rare,Discretionary,Historic}}',
     'fncychap': r'\usepackage[Bjornstrup]{fncychap}',
+
+    'tableofcontents': '',
 }
 
 latex_show_urls = 'footnote'
@@ -149,7 +151,7 @@ latex_show_urls = 'footnote'
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'main.tex', 'Livre Python', 'HE-Arc', 'scrbook'),
+    (master_doc, 'main.tex', 'Livre Python', 'HE-Arc', 'scrbook', False),
 ]
 
 # -- Options for manual page output ---------------------------------------

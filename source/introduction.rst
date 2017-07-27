@@ -8,3 +8,8 @@ est gigantesque, plus de 95'000 sur `PyPI <https://pypi.python.org/pypi>`_ fin
 
 Au travers de ce document, nous vous proposons d'aborder différents aspects en
 explorant l'un ou l'autre des modules standards, comme des plus populaires.
+
+
+.. raw:: latex
+
+   \sphinxtableofcontents
