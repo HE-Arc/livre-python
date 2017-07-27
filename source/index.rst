@@ -2,7 +2,15 @@
  Bibliothèques Python
 ======================
 
+.. raw:: latex
+
+   \frontmatter
+
 .. include:: introduction.rst
+
+.. raw:: latex
+
+   \mainmatter
 
 Bases
 =====
@@ -81,6 +89,10 @@ Autres
    pygame/index
    sphinx/index
    watchdog/index
+
+.. raw:: latex
+
+   \backmatter
 
 Annexes
 =======
