@@ -199,7 +199,7 @@ intersphinx_mapping = {
     'matplotlib': ('http://matplotlib.org/2.0.0', None),
     'msgpack-python': ('http://msgpack-python.readthedocs.io/en/latest/',
                        None),
-    'networkx': ('https://networkx.readthedocs.io/en/stable/', None),
+    'networkx': ('https://networkx.github.io/documentation/stable/', None),
     'numpy': ('https://docs.scipy.org/doc/numpy/', None),
     'Pillow': ('https://pillow.readthedocs.io/en/latest/', None),
     'pygame': ('http://pygame.org/docs/', None),
