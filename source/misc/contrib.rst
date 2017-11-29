@@ -22,3 +22,13 @@ Compilations sous Windows
 
     > pip install -r requirements.txt
     > invoke html
+
+Édition en direct
+-----------------
+
+`Sphinx view <http://pythonhosted.org/sphinx-view/>`_ permet de recompiler automatiqument un fichier ou un projet *Sphinx*.
+
+.. code-block:: bash
+
+    $ pip install sphinx-view
+    $ sphinx-view source
