@@ -6,9 +6,9 @@ pycodestyle source
 pydocstyle --add-ignore=D401 source
 isort --check-only --diff --recursive source
 flake8 source
-find source -iname "*.rst" \
-    | xargs rstcheck \
+rstcheck \
+        --recursive . \
         --ignore-directives sphinx,automodule,autoclass,autofunction,bibliography \
         --ignore-roles cite \
-        --report 2
+        --report warning
 sphinx-build -Wn -b html source target/doc/build
