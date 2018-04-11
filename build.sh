@@ -7,7 +7,7 @@ pydocstyle --add-ignore=D401 source
 isort --check-only --diff --recursive source
 flake8 source
 rstcheck \
-        --recursive . \
+        --recursive source \
         --ignore-directives sphinx,automodule,autoclass,autofunction,bibliography \
         --ignore-roles cite \
         --report warning

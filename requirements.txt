@@ -11,7 +11,7 @@ invoke
 # QA
 isort
 flake8
-pycodestyle
+pycodestyle<2.4
 pydocstyle
 rstcheck
 
