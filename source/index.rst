@@ -90,6 +90,15 @@ Autres
    sphinx/index
    watchdog/index
 
+Special guest
+=============
+
+.. toctree::
+   :maxdepth: 1
+
+   pbr/index
+
+
 .. raw:: latex
 
    \backmatter
