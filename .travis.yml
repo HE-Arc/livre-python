@@ -3,13 +3,27 @@ language: python
 python:
   - "3.6"
 
+cache: pip
+
+git:
+  depth: 1
+
 install:
   - pip install -r requirements.txt
   - pip install travis-sphinx
 
-script:
-  - ./build.sh
-  - ./test.sh
+stages:
+  - prepare cache
+  - test
 
-after_success:
-  - travis-sphinx deploy
+script: ./${TEST_CASE}.sh
+
+jobs:
+  include:
+    - stage: prepare cache
+      script: true
+    - stage: test
+      env: TEST_CASE=build
+      after_success: cd target && travis-sphinx deploy
+    - stage: test
+      env: TEST_CASE=test
