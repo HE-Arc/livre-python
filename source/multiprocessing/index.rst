@@ -174,7 +174,7 @@ Pour de plus amples informations :
 
     Pool             : :py:class:`multiprocessing.pool.Pool`
 
-    Connexion        : :py:class:`multiprocessing.Connection`
+    Connexion        : :py:class:`multiprocessing.conneciton.Connection`
 
     Synchronisation  : [#Synchronisation]_
 
