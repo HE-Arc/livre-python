@@ -2,8 +2,6 @@
 
 set -xe
 
-sh getPBR.sh
-
 pycodestyle source
 pydocstyle --add-ignore=D401 source
 isort --check-only --diff --recursive source

@@ -241,7 +241,7 @@ Ainsi, le domaine C est representé par la notation **.. c:**, son équivalent C
 Langage C
 ~~~~~~~~~
 
-Quelques exemples (:ref:`source <sphinx:domains>`)::
+Quelques exemples (:ref:`source <sphinx:basic-domain-markup>`)::
 
     .. c:function:: PyObject* PyType_GenericAlloc(PyTypeObject *type, Py_ssize_t nitems)
     .. c:member:: PyObject* PyTypeObject.tp_bases
@@ -274,7 +274,7 @@ langage qu'elles couvrent. Ainsi, pour le C++, nous avons accès à ::
    .. cpp:var::
    .. cpp:type::
 
-La liste est longue et le mieux est de vous inviter à consuler la page de référence : :ref:`sphinx:domains`.
+La liste est longue et le mieux est de vous inviter à consuler la page de référence : :ref:`sphinx:basic-domain-markup`.
 
 JavaScript
 ~~~~~~~~~~

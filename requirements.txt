@@ -1,4 +1,4 @@
-Sphinx
+Sphinx<1.8
 sphinxcontrib-bibtex
 sphinxcontrib-trio
 
