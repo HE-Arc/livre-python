@@ -252,6 +252,14 @@ Résultat :
 
     .. c:member:: PyObject* PyTypeObject.tp_bases
 
+    .. c:type:: PyTypeObject
+
+        The C structure of the objects used to describe built-in types.
+
+    .. c:type:: PyObject
+
+        All object type are extensions of this type.
+
     .. c:type:: Py_ssize_t
 
         signed int of at least 16 bits (just like ``size_t`` but signed.)

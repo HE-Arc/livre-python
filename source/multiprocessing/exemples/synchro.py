@@ -2,18 +2,22 @@
 from multiprocessing import Lock, Process
 
 
-def f(l, i):
-    """Fonction qui acquire le lock, affiche hello i, puis relâche le lock."""
-    l.acquire()
+def task(lock, i):
+    """Acquire le lock, affiche hello i, puis relâche le lock."""
+    lock.acquire()
     try:
         print('hello world', i)
     finally:
-        l.release()
+        lock.release()
 
 
-if __name__ == '__main__':
-
+def main():
+    """Main program."""
     lock = Lock()
 
     for num in range(10):
-        Process(target=f, args=(lock, num)).start()
+        Process(target=task, args=(lock, num)).start()
+
+
+if __name__ == '__main__':
+    main()

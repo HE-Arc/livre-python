@@ -2,12 +2,12 @@
 from multiprocessing import Manager, Process
 
 
-def f(d, l):
-    """Fonction qui associe 3 valeurs à leurs clé et inverse l'ordre de l[]."""
-    d[1] = '1'
-    d['2'] = 2
-    d[0.25] = None
-    l.reverse()
+def task(payload, lst):
+    """Associe 3 valeurs à leurs clé et inverse l'ordre de lst[]."""
+    payload[1] = '1'
+    payload['2'] = 2
+    payload[0.25] = None
+    lst.reverse()
 
 
 if __name__ == '__main__':
@@ -15,7 +15,7 @@ if __name__ == '__main__':
         d = manager.dict()
         e = manager.list(range(10))
 
-        p = Process(target=f, args=(d, e))
+        p = Process(target=task, args=(d, e))
         p.start()
         p.join()
 
