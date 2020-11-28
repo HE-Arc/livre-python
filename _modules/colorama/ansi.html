@@ -1,0 +1,258 @@
+
+<!DOCTYPE html>
+
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>colorama.ansi &#8212; Documentation Bibliothèques Python 1.0.0</title>
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script src="../../_static/translations.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Recherche" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Code source de colorama.ansi</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright Jonathan Hartley 2013. BSD 3-Clause license, see LICENSE file.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">This module generates ANSI character codes to printing colors to terminals.</span>
+<span class="sd">See: http://en.wikipedia.org/wiki/ANSI_escape_code</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="n">CSI</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\033</span><span class="s1">[&#39;</span>
+<span class="n">OSC</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\033</span><span class="s1">]&#39;</span>
+<span class="n">BEL</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\a</span><span class="s1">&#39;</span>
+
+
+<div class="viewcode-block" id="code_to_chars"><a class="viewcode-back" href="../../colorama/colorama.html#colorama.ansi.code_to_chars">[docs]</a><span class="k">def</span> <span class="nf">code_to_chars</span><span class="p">(</span><span class="n">code</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">CSI</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">code</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;m&#39;</span></div>
+
+<div class="viewcode-block" id="set_title"><a class="viewcode-back" href="../../colorama/colorama.html#colorama.ansi.set_title">[docs]</a><span class="k">def</span> <span class="nf">set_title</span><span class="p">(</span><span class="n">title</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">OSC</span> <span class="o">+</span> <span class="s1">&#39;2;&#39;</span> <span class="o">+</span> <span class="n">title</span> <span class="o">+</span> <span class="n">BEL</span></div>
+
+<div class="viewcode-block" id="clear_screen"><a class="viewcode-back" href="../../colorama/colorama.html#colorama.ansi.clear_screen">[docs]</a><span class="k">def</span> <span class="nf">clear_screen</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">CSI</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">mode</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;J&#39;</span></div>
+
+<div class="viewcode-block" id="clear_line"><a class="viewcode-back" href="../../colorama/colorama.html#colorama.ansi.clear_line">[docs]</a><span class="k">def</span> <span class="nf">clear_line</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">CSI</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">mode</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;K&#39;</span></div>
+
+
+<div class="viewcode-block" id="AnsiCodes"><a class="viewcode-back" href="../../colorama/colorama.html#colorama.ansi.AnsiCodes">[docs]</a><span class="k">class</span> <span class="nc">AnsiCodes</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># the subclasses declare class attributes which are numbers.</span>
+        <span class="c1"># Upon instantiation we define instance attributes, which are the same</span>
+        <span class="c1"># as the class attributes but wrapped with the ANSI escape sequence</span>
+        <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">dir</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">):</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+                <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">code_to_chars</span><span class="p">(</span><span class="n">value</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="AnsiCursor"><a class="viewcode-back" href="../../colorama/colorama.html#colorama.ansi.AnsiCursor">[docs]</a><span class="k">class</span> <span class="nc">AnsiCursor</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="AnsiCursor.UP"><a class="viewcode-back" href="../../colorama/colorama.html#colorama.ansi.AnsiCursor.UP">[docs]</a>    <span class="k">def</span> <span class="nf">UP</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">CSI</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;A&#39;</span></div>
+<div class="viewcode-block" id="AnsiCursor.DOWN"><a class="viewcode-back" href="../../colorama/colorama.html#colorama.ansi.AnsiCursor.DOWN">[docs]</a>    <span class="k">def</span> <span class="nf">DOWN</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">CSI</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;B&#39;</span></div>
+<div class="viewcode-block" id="AnsiCursor.FORWARD"><a class="viewcode-back" href="../../colorama/colorama.html#colorama.ansi.AnsiCursor.FORWARD">[docs]</a>    <span class="k">def</span> <span class="nf">FORWARD</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">CSI</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;C&#39;</span></div>
+<div class="viewcode-block" id="AnsiCursor.BACK"><a class="viewcode-back" href="../../colorama/colorama.html#colorama.ansi.AnsiCursor.BACK">[docs]</a>    <span class="k">def</span> <span class="nf">BACK</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">CSI</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;D&#39;</span></div>
+<div class="viewcode-block" id="AnsiCursor.POS"><a class="viewcode-back" href="../../colorama/colorama.html#colorama.ansi.AnsiCursor.POS">[docs]</a>    <span class="k">def</span> <span class="nf">POS</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">CSI</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;;&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;H&#39;</span></div></div>
+
+
+<div class="viewcode-block" id="AnsiFore"><a class="viewcode-back" href="../../colorama/colorama.html#colorama.ansi.AnsiFore">[docs]</a><span class="k">class</span> <span class="nc">AnsiFore</span><span class="p">(</span><span class="n">AnsiCodes</span><span class="p">):</span>
+    <span class="n">BLACK</span>           <span class="o">=</span> <span class="mi">30</span>
+    <span class="n">RED</span>             <span class="o">=</span> <span class="mi">31</span>
+    <span class="n">GREEN</span>           <span class="o">=</span> <span class="mi">32</span>
+    <span class="n">YELLOW</span>          <span class="o">=</span> <span class="mi">33</span>
+    <span class="n">BLUE</span>            <span class="o">=</span> <span class="mi">34</span>
+    <span class="n">MAGENTA</span>         <span class="o">=</span> <span class="mi">35</span>
+    <span class="n">CYAN</span>            <span class="o">=</span> <span class="mi">36</span>
+    <span class="n">WHITE</span>           <span class="o">=</span> <span class="mi">37</span>
+    <span class="n">RESET</span>           <span class="o">=</span> <span class="mi">39</span>
+
+    <span class="c1"># These are fairly well supported, but not part of the standard.</span>
+    <span class="n">LIGHTBLACK_EX</span>   <span class="o">=</span> <span class="mi">90</span>
+    <span class="n">LIGHTRED_EX</span>     <span class="o">=</span> <span class="mi">91</span>
+    <span class="n">LIGHTGREEN_EX</span>   <span class="o">=</span> <span class="mi">92</span>
+    <span class="n">LIGHTYELLOW_EX</span>  <span class="o">=</span> <span class="mi">93</span>
+    <span class="n">LIGHTBLUE_EX</span>    <span class="o">=</span> <span class="mi">94</span>
+    <span class="n">LIGHTMAGENTA_EX</span> <span class="o">=</span> <span class="mi">95</span>
+    <span class="n">LIGHTCYAN_EX</span>    <span class="o">=</span> <span class="mi">96</span>
+    <span class="n">LIGHTWHITE_EX</span>   <span class="o">=</span> <span class="mi">97</span></div>
+
+
+<div class="viewcode-block" id="AnsiBack"><a class="viewcode-back" href="../../colorama/colorama.html#colorama.ansi.AnsiBack">[docs]</a><span class="k">class</span> <span class="nc">AnsiBack</span><span class="p">(</span><span class="n">AnsiCodes</span><span class="p">):</span>
+    <span class="n">BLACK</span>           <span class="o">=</span> <span class="mi">40</span>
+    <span class="n">RED</span>             <span class="o">=</span> <span class="mi">41</span>
+    <span class="n">GREEN</span>           <span class="o">=</span> <span class="mi">42</span>
+    <span class="n">YELLOW</span>          <span class="o">=</span> <span class="mi">43</span>
+    <span class="n">BLUE</span>            <span class="o">=</span> <span class="mi">44</span>
+    <span class="n">MAGENTA</span>         <span class="o">=</span> <span class="mi">45</span>
+    <span class="n">CYAN</span>            <span class="o">=</span> <span class="mi">46</span>
+    <span class="n">WHITE</span>           <span class="o">=</span> <span class="mi">47</span>
+    <span class="n">RESET</span>           <span class="o">=</span> <span class="mi">49</span>
+
+    <span class="c1"># These are fairly well supported, but not part of the standard.</span>
+    <span class="n">LIGHTBLACK_EX</span>   <span class="o">=</span> <span class="mi">100</span>
+    <span class="n">LIGHTRED_EX</span>     <span class="o">=</span> <span class="mi">101</span>
+    <span class="n">LIGHTGREEN_EX</span>   <span class="o">=</span> <span class="mi">102</span>
+    <span class="n">LIGHTYELLOW_EX</span>  <span class="o">=</span> <span class="mi">103</span>
+    <span class="n">LIGHTBLUE_EX</span>    <span class="o">=</span> <span class="mi">104</span>
+    <span class="n">LIGHTMAGENTA_EX</span> <span class="o">=</span> <span class="mi">105</span>
+    <span class="n">LIGHTCYAN_EX</span>    <span class="o">=</span> <span class="mi">106</span>
+    <span class="n">LIGHTWHITE_EX</span>   <span class="o">=</span> <span class="mi">107</span></div>
+
+
+<div class="viewcode-block" id="AnsiStyle"><a class="viewcode-back" href="../../colorama/colorama.html#colorama.ansi.AnsiStyle">[docs]</a><span class="k">class</span> <span class="nc">AnsiStyle</span><span class="p">(</span><span class="n">AnsiCodes</span><span class="p">):</span>
+    <span class="n">BRIGHT</span>    <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">DIM</span>       <span class="o">=</span> <span class="mi">2</span>
+    <span class="n">NORMAL</span>    <span class="o">=</span> <span class="mi">22</span>
+    <span class="n">RESET_ALL</span> <span class="o">=</span> <span class="mi">0</span></div>
+
+<span class="n">Fore</span>   <span class="o">=</span> <span class="n">AnsiFore</span><span class="p">()</span>
+<span class="n">Back</span>   <span class="o">=</span> <span class="n">AnsiBack</span><span class="p">()</span>
+<span class="n">Style</span>  <span class="o">=</span> <span class="n">AnsiStyle</span><span class="p">()</span>
+<span class="n">Cursor</span> <span class="o">=</span> <span class="n">AnsiCursor</span><span class="p">()</span>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">Bibliothèques Python</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../builtins/index.html">Builtins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../collections/index.html"><code class="docutils literal notranslate"><span class="pre">collections</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../datetime/index.html"><code class="docutils literal notranslate"><span class="pre">datetime</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dunders/index.html">Dunders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../enum/index.html"><code class="docutils literal notranslate"><span class="pre">enum</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fstrings/index.html">f-strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../itertools/index.html"><code class="docutils literal notranslate"><span class="pre">itertools</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../io/index.html"><code class="docutils literal notranslate"><span class="pre">io</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../math/index.html"><code class="docutils literal notranslate"><span class="pre">math</span></code> / <code class="docutils literal notranslate"><span class="pre">fractions</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../random/index.html"><code class="docutils literal notranslate"><span class="pre">random</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../time/index.html"><code class="docutils literal notranslate"><span class="pre">time</span></code> / <code class="docutils literal notranslate"><span class="pre">datetime</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../statistics/index.html"><code class="docutils literal notranslate"><span class="pre">statistics</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../super/index.html"><code class="docutils literal notranslate"><span class="pre">super()</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../abc/index.html">Abstract Base Class (<code class="docutils literal notranslate"><span class="pre">abc</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../binary/index.html"><code class="docutils literal notranslate"><span class="pre">bytes</span></code> / <code class="docutils literal notranslate"><span class="pre">bytearray</span></code> / <code class="docutils literal notranslate"><span class="pre">memoryview</span></code>, <code class="docutils literal notranslate"><span class="pre">struct</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bisect/index.html"><code class="docutils literal notranslate"><span class="pre">bisect</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../email/index.html">E-mail (<code class="docutils literal notranslate"><span class="pre">smtplib</span></code> / <code class="docutils literal notranslate"><span class="pre">imaplib</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../hashlib/index.html"><code class="docutils literal notranslate"><span class="pre">hashlib</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../multiprocessing/index.html"><code class="docutils literal notranslate"><span class="pre">multiprocessing</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../re/index.html">Expressions régulières (<code class="docutils literal notranslate"><span class="pre">re</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../secrets/index.html"><code class="docutils literal notranslate"><span class="pre">secrets</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../weakref/index.html"><code class="docutils literal notranslate"><span class="pre">weakref</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../colorama/index.html"><code class="docutils literal notranslate"><span class="pre">colorama</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../invoke/index.html"><code class="docutils literal notranslate"><span class="pre">invoke</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../unittest/index.html"><code class="docutils literal notranslate"><span class="pre">unittest</span></code> / <code class="docutils literal notranslate"><span class="pre">doctest</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pytest/index.html"><code class="docutils literal notranslate"><span class="pre">pytest</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../csv/index.html"><code class="docutils literal notranslate"><span class="pre">csv</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../json/index.html"><code class="docutils literal notranslate"><span class="pre">json</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pillow/index.html">Python Imaging Library (<code class="docutils literal notranslate"><span class="pre">PIL</span></code>)</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../hug/index.html"><code class="docutils literal notranslate"><span class="pre">hug</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../matplotlib/index.html"><code class="docutils literal notranslate"><span class="pre">matplotlib</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../networkx/index.html"><code class="docutils literal notranslate"><span class="pre">networkx</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pycrypto/index.html"><code class="docutils literal notranslate"><span class="pre">pycrypto</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pygame/index.html"><code class="docutils literal notranslate"><span class="pre">pygame</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sphinx/index.html"><code class="docutils literal notranslate"><span class="pre">sphinx</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../watchdog/index.html"><code class="docutils literal notranslate"><span class="pre">watchdog</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../pbr/index.html"><cite>⚙️Automate your publishing to PyPI with PBR and Travis</cite></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../misc/about.html">À propos de ce livre</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../misc/contrib.html">Contribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../licence.html">Creative Commons Attribution-ShareAlike 4.0 International</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Code du module</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Recherche rapide</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016-2017, HE-Arc.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

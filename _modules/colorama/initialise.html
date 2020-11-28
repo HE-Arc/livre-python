@@ -1,0 +1,236 @@
+
+<!DOCTYPE html>
+
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>colorama.initialise &#8212; Documentation Bibliothèques Python 1.0.0</title>
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script src="../../_static/translations.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Recherche" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Code source de colorama.initialise</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright Jonathan Hartley 2013. BSD 3-Clause license, see LICENSE file.</span>
+<span class="kn">import</span> <span class="nn">atexit</span>
+<span class="kn">import</span> <span class="nn">contextlib</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="kn">from</span> <span class="nn">.ansitowin32</span> <span class="kn">import</span> <span class="n">AnsiToWin32</span>
+
+
+<span class="n">orig_stdout</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">orig_stderr</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="n">wrapped_stdout</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">wrapped_stderr</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="n">atexit_done</span> <span class="o">=</span> <span class="kc">False</span>
+
+
+<div class="viewcode-block" id="reset_all"><a class="viewcode-back" href="../../colorama/colorama.html#colorama.initialise.reset_all">[docs]</a><span class="k">def</span> <span class="nf">reset_all</span><span class="p">():</span>
+    <span class="k">if</span> <span class="n">AnsiToWin32</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>    <span class="c1"># Issue #74: objects might become None at exit</span>
+        <span class="n">AnsiToWin32</span><span class="p">(</span><span class="n">orig_stdout</span><span class="p">)</span><span class="o">.</span><span class="n">reset_all</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="init"><a class="viewcode-back" href="../../colorama/colorama.html#colorama.initialise.init">[docs]</a><span class="k">def</span> <span class="nf">init</span><span class="p">(</span><span class="n">autoreset</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">convert</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">strip</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">wrap</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">wrap</span> <span class="ow">and</span> <span class="nb">any</span><span class="p">([</span><span class="n">autoreset</span><span class="p">,</span> <span class="n">convert</span><span class="p">,</span> <span class="n">strip</span><span class="p">]):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;wrap=False conflicts with any other arg=True&#39;</span><span class="p">)</span>
+
+    <span class="k">global</span> <span class="n">wrapped_stdout</span><span class="p">,</span> <span class="n">wrapped_stderr</span>
+    <span class="k">global</span> <span class="n">orig_stdout</span><span class="p">,</span> <span class="n">orig_stderr</span>
+
+    <span class="n">orig_stdout</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span>
+    <span class="n">orig_stderr</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span>
+
+    <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">wrapped_stdout</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span> <span class="o">=</span> <span class="n">wrapped_stdout</span> <span class="o">=</span> \
+            <span class="n">wrap_stream</span><span class="p">(</span><span class="n">orig_stdout</span><span class="p">,</span> <span class="n">convert</span><span class="p">,</span> <span class="n">strip</span><span class="p">,</span> <span class="n">autoreset</span><span class="p">,</span> <span class="n">wrap</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">wrapped_stderr</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span> <span class="o">=</span> <span class="n">wrapped_stderr</span> <span class="o">=</span> \
+            <span class="n">wrap_stream</span><span class="p">(</span><span class="n">orig_stderr</span><span class="p">,</span> <span class="n">convert</span><span class="p">,</span> <span class="n">strip</span><span class="p">,</span> <span class="n">autoreset</span><span class="p">,</span> <span class="n">wrap</span><span class="p">)</span>
+
+    <span class="k">global</span> <span class="n">atexit_done</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">atexit_done</span><span class="p">:</span>
+        <span class="n">atexit</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">reset_all</span><span class="p">)</span>
+        <span class="n">atexit_done</span> <span class="o">=</span> <span class="kc">True</span></div>
+
+
+<div class="viewcode-block" id="deinit"><a class="viewcode-back" href="../../colorama/colorama.html#colorama.initialise.deinit">[docs]</a><span class="k">def</span> <span class="nf">deinit</span><span class="p">():</span>
+    <span class="k">if</span> <span class="n">orig_stdout</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span> <span class="o">=</span> <span class="n">orig_stdout</span>
+    <span class="k">if</span> <span class="n">orig_stderr</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span> <span class="o">=</span> <span class="n">orig_stderr</span></div>
+
+
+<div class="viewcode-block" id="colorama_text"><a class="viewcode-back" href="../../colorama/colorama.html#colorama.initialise.colorama_text">[docs]</a><span class="nd">@contextlib</span><span class="o">.</span><span class="n">contextmanager</span>
+<span class="k">def</span> <span class="nf">colorama_text</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="n">init</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">yield</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="n">deinit</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="reinit"><a class="viewcode-back" href="../../colorama/colorama.html#colorama.initialise.reinit">[docs]</a><span class="k">def</span> <span class="nf">reinit</span><span class="p">():</span>
+    <span class="k">if</span> <span class="n">wrapped_stdout</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span> <span class="o">=</span> <span class="n">wrapped_stdout</span>
+    <span class="k">if</span> <span class="n">wrapped_stderr</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span> <span class="o">=</span> <span class="n">wrapped_stderr</span></div>
+
+
+<div class="viewcode-block" id="wrap_stream"><a class="viewcode-back" href="../../colorama/colorama.html#colorama.initialise.wrap_stream">[docs]</a><span class="k">def</span> <span class="nf">wrap_stream</span><span class="p">(</span><span class="n">stream</span><span class="p">,</span> <span class="n">convert</span><span class="p">,</span> <span class="n">strip</span><span class="p">,</span> <span class="n">autoreset</span><span class="p">,</span> <span class="n">wrap</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">wrap</span><span class="p">:</span>
+        <span class="n">wrapper</span> <span class="o">=</span> <span class="n">AnsiToWin32</span><span class="p">(</span><span class="n">stream</span><span class="p">,</span>
+            <span class="n">convert</span><span class="o">=</span><span class="n">convert</span><span class="p">,</span> <span class="n">strip</span><span class="o">=</span><span class="n">strip</span><span class="p">,</span> <span class="n">autoreset</span><span class="o">=</span><span class="n">autoreset</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">wrapper</span><span class="o">.</span><span class="n">should_wrap</span><span class="p">():</span>
+            <span class="n">stream</span> <span class="o">=</span> <span class="n">wrapper</span><span class="o">.</span><span class="n">stream</span>
+    <span class="k">return</span> <span class="n">stream</span></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">Bibliothèques Python</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../builtins/index.html">Builtins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../collections/index.html"><code class="docutils literal notranslate"><span class="pre">collections</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../datetime/index.html"><code class="docutils literal notranslate"><span class="pre">datetime</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dunders/index.html">Dunders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../enum/index.html"><code class="docutils literal notranslate"><span class="pre">enum</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fstrings/index.html">f-strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../itertools/index.html"><code class="docutils literal notranslate"><span class="pre">itertools</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../io/index.html"><code class="docutils literal notranslate"><span class="pre">io</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../math/index.html"><code class="docutils literal notranslate"><span class="pre">math</span></code> / <code class="docutils literal notranslate"><span class="pre">fractions</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../random/index.html"><code class="docutils literal notranslate"><span class="pre">random</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../time/index.html"><code class="docutils literal notranslate"><span class="pre">time</span></code> / <code class="docutils literal notranslate"><span class="pre">datetime</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../statistics/index.html"><code class="docutils literal notranslate"><span class="pre">statistics</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../super/index.html"><code class="docutils literal notranslate"><span class="pre">super()</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../abc/index.html">Abstract Base Class (<code class="docutils literal notranslate"><span class="pre">abc</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../binary/index.html"><code class="docutils literal notranslate"><span class="pre">bytes</span></code> / <code class="docutils literal notranslate"><span class="pre">bytearray</span></code> / <code class="docutils literal notranslate"><span class="pre">memoryview</span></code>, <code class="docutils literal notranslate"><span class="pre">struct</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bisect/index.html"><code class="docutils literal notranslate"><span class="pre">bisect</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../email/index.html">E-mail (<code class="docutils literal notranslate"><span class="pre">smtplib</span></code> / <code class="docutils literal notranslate"><span class="pre">imaplib</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../hashlib/index.html"><code class="docutils literal notranslate"><span class="pre">hashlib</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../multiprocessing/index.html"><code class="docutils literal notranslate"><span class="pre">multiprocessing</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../re/index.html">Expressions régulières (<code class="docutils literal notranslate"><span class="pre">re</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../secrets/index.html"><code class="docutils literal notranslate"><span class="pre">secrets</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../weakref/index.html"><code class="docutils literal notranslate"><span class="pre">weakref</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../colorama/index.html"><code class="docutils literal notranslate"><span class="pre">colorama</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../invoke/index.html"><code class="docutils literal notranslate"><span class="pre">invoke</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../unittest/index.html"><code class="docutils literal notranslate"><span class="pre">unittest</span></code> / <code class="docutils literal notranslate"><span class="pre">doctest</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pytest/index.html"><code class="docutils literal notranslate"><span class="pre">pytest</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../csv/index.html"><code class="docutils literal notranslate"><span class="pre">csv</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../json/index.html"><code class="docutils literal notranslate"><span class="pre">json</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pillow/index.html">Python Imaging Library (<code class="docutils literal notranslate"><span class="pre">PIL</span></code>)</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../hug/index.html"><code class="docutils literal notranslate"><span class="pre">hug</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../matplotlib/index.html"><code class="docutils literal notranslate"><span class="pre">matplotlib</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../networkx/index.html"><code class="docutils literal notranslate"><span class="pre">networkx</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pycrypto/index.html"><code class="docutils literal notranslate"><span class="pre">pycrypto</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pygame/index.html"><code class="docutils literal notranslate"><span class="pre">pygame</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sphinx/index.html"><code class="docutils literal notranslate"><span class="pre">sphinx</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../watchdog/index.html"><code class="docutils literal notranslate"><span class="pre">watchdog</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../pbr/index.html"><cite>⚙️Automate your publishing to PyPI with PBR and Travis</cite></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../misc/about.html">À propos de ce livre</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../misc/contrib.html">Contribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../licence.html">Creative Commons Attribution-ShareAlike 4.0 International</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Code du module</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Recherche rapide</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016-2017, HE-Arc.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

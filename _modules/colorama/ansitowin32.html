@@ -1,0 +1,414 @@
+
+<!DOCTYPE html>
+
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>colorama.ansitowin32 &#8212; Documentation Bibliothèques Python 1.0.0</title>
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script src="../../_static/translations.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Recherche" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Code source de colorama.ansitowin32</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright Jonathan Hartley 2013. BSD 3-Clause license, see LICENSE file.</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">from</span> <span class="nn">.ansi</span> <span class="kn">import</span> <span class="n">AnsiFore</span><span class="p">,</span> <span class="n">AnsiBack</span><span class="p">,</span> <span class="n">AnsiStyle</span><span class="p">,</span> <span class="n">Style</span><span class="p">,</span> <span class="n">BEL</span>
+<span class="kn">from</span> <span class="nn">.winterm</span> <span class="kn">import</span> <span class="n">WinTerm</span><span class="p">,</span> <span class="n">WinColor</span><span class="p">,</span> <span class="n">WinStyle</span>
+<span class="kn">from</span> <span class="nn">.win32</span> <span class="kn">import</span> <span class="n">windll</span><span class="p">,</span> <span class="n">winapi_test</span>
+
+
+<span class="n">winterm</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="k">if</span> <span class="n">windll</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">winterm</span> <span class="o">=</span> <span class="n">WinTerm</span><span class="p">()</span>
+
+
+<div class="viewcode-block" id="StreamWrapper"><a class="viewcode-back" href="../../colorama/colorama.html#colorama.ansitowin32.StreamWrapper">[docs]</a><span class="k">class</span> <span class="nc">StreamWrapper</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Wraps a stream (such as stdout), acting as a transparent proxy for all</span>
+<span class="sd">    attribute access apart from method &#39;write()&#39;, which is delegated to our</span>
+<span class="sd">    Converter instance.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">wrapped</span><span class="p">,</span> <span class="n">converter</span><span class="p">):</span>
+        <span class="c1"># double-underscore everything to prevent clashes with names of</span>
+        <span class="c1"># attributes on the wrapped stream object.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__wrapped</span> <span class="o">=</span> <span class="n">wrapped</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__convertor</span> <span class="o">=</span> <span class="n">converter</span>
+
+    <span class="k">def</span> <span class="fm">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__wrapped</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="c1"># special method lookup bypasses __getattr__/__getattribute__, see</span>
+        <span class="c1"># https://stackoverflow.com/questions/12632894/why-doesnt-getattr-work-with-exit</span>
+        <span class="c1"># thus, contextlib magic methods are not proxied via __getattr__</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__wrapped</span><span class="o">.</span><span class="fm">__enter__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__wrapped</span><span class="o">.</span><span class="fm">__exit__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<div class="viewcode-block" id="StreamWrapper.write"><a class="viewcode-back" href="../../colorama/colorama.html#colorama.ansitowin32.StreamWrapper.write">[docs]</a>    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__convertor</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">text</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="StreamWrapper.isatty"><a class="viewcode-back" href="../../colorama/colorama.html#colorama.ansitowin32.StreamWrapper.isatty">[docs]</a>    <span class="k">def</span> <span class="nf">isatty</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">stream</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__wrapped</span>
+        <span class="k">if</span> <span class="s1">&#39;PYCHARM_HOSTED&#39;</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">stream</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="p">(</span><span class="n">stream</span> <span class="ow">is</span> <span class="n">sys</span><span class="o">.</span><span class="n">__stdout__</span> <span class="ow">or</span> <span class="n">stream</span> <span class="ow">is</span> <span class="n">sys</span><span class="o">.</span><span class="n">__stderr__</span><span class="p">):</span>
+                <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">stream_isatty</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">isatty</span>
+        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">stream_isatty</span><span class="p">()</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">closed</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">stream</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__wrapped</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">stream</span><span class="o">.</span><span class="n">closed</span>
+        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span></div>
+
+
+<div class="viewcode-block" id="AnsiToWin32"><a class="viewcode-back" href="../../colorama/colorama.html#colorama.ansitowin32.AnsiToWin32">[docs]</a><span class="k">class</span> <span class="nc">AnsiToWin32</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Implements a &#39;write()&#39; method which, on Windows, will strip ANSI character</span>
+<span class="sd">    sequences from the text, and if outputting to a tty, will convert them into</span>
+<span class="sd">    win32 function calls.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">ANSI_CSI_RE</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\001</span><span class="s1">?</span><span class="se">\033\\</span><span class="s1">[((?:</span><span class="se">\\</span><span class="s1">d|;)*)([a-zA-Z])</span><span class="se">\002</span><span class="s1">?&#39;</span><span class="p">)</span>   <span class="c1"># Control Sequence Introducer</span>
+    <span class="n">ANSI_OSC_RE</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\001</span><span class="s1">?</span><span class="se">\033\\</span><span class="s1">]([^</span><span class="se">\a</span><span class="s1">]*)(</span><span class="se">\a</span><span class="s1">)</span><span class="se">\002</span><span class="s1">?&#39;</span><span class="p">)</span>             <span class="c1"># Operating System Command</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">wrapped</span><span class="p">,</span> <span class="n">convert</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">strip</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">autoreset</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="c1"># The wrapped stream (normally sys.stdout or sys.stderr)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">wrapped</span> <span class="o">=</span> <span class="n">wrapped</span>
+
+        <span class="c1"># should we reset colors to defaults after every .write()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">autoreset</span> <span class="o">=</span> <span class="n">autoreset</span>
+
+        <span class="c1"># create the proxy wrapping our output stream</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stream</span> <span class="o">=</span> <span class="n">StreamWrapper</span><span class="p">(</span><span class="n">wrapped</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+
+        <span class="n">on_windows</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;nt&#39;</span>
+        <span class="c1"># We test if the WinAPI works, because even if we are on Windows</span>
+        <span class="c1"># we may be using a terminal that doesn&#39;t support the WinAPI</span>
+        <span class="c1"># (e.g. Cygwin Terminal). In this case it&#39;s up to the terminal</span>
+        <span class="c1"># to support the ANSI codes.</span>
+        <span class="n">conversion_supported</span> <span class="o">=</span> <span class="n">on_windows</span> <span class="ow">and</span> <span class="n">winapi_test</span><span class="p">()</span>
+
+        <span class="c1"># should we strip ANSI sequences from our output?</span>
+        <span class="k">if</span> <span class="n">strip</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">strip</span> <span class="o">=</span> <span class="n">conversion_supported</span> <span class="ow">or</span> <span class="p">(</span><span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">closed</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">isatty</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">strip</span> <span class="o">=</span> <span class="n">strip</span>
+
+        <span class="c1"># should we should convert ANSI sequences into win32 calls?</span>
+        <span class="k">if</span> <span class="n">convert</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">convert</span> <span class="o">=</span> <span class="n">conversion_supported</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">closed</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">isatty</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">convert</span> <span class="o">=</span> <span class="n">convert</span>
+
+        <span class="c1"># dict of ansi codes to win32 functions and parameters</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">win32_calls</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_win32_calls</span><span class="p">()</span>
+
+        <span class="c1"># are we wrapping stderr?</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">on_stderr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">wrapped</span> <span class="ow">is</span> <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span>
+
+<div class="viewcode-block" id="AnsiToWin32.should_wrap"><a class="viewcode-back" href="../../colorama/colorama.html#colorama.ansitowin32.AnsiToWin32.should_wrap">[docs]</a>    <span class="k">def</span> <span class="nf">should_wrap</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        True if this class is actually needed. If false, then the output</span>
+<span class="sd">        stream will not be affected, nor will win32 calls be issued, so</span>
+<span class="sd">        wrapping stdout is not actually required. This will generally be</span>
+<span class="sd">        False on non-Windows platforms, unless optional functionality like</span>
+<span class="sd">        autoreset has been requested using kwargs to init()</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">strip</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">autoreset</span></div>
+
+<div class="viewcode-block" id="AnsiToWin32.get_win32_calls"><a class="viewcode-back" href="../../colorama/colorama.html#colorama.ansitowin32.AnsiToWin32.get_win32_calls">[docs]</a>    <span class="k">def</span> <span class="nf">get_win32_calls</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert</span> <span class="ow">and</span> <span class="n">winterm</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{</span>
+                <span class="n">AnsiStyle</span><span class="o">.</span><span class="n">RESET_ALL</span><span class="p">:</span> <span class="p">(</span><span class="n">winterm</span><span class="o">.</span><span class="n">reset_all</span><span class="p">,</span> <span class="p">),</span>
+                <span class="n">AnsiStyle</span><span class="o">.</span><span class="n">BRIGHT</span><span class="p">:</span> <span class="p">(</span><span class="n">winterm</span><span class="o">.</span><span class="n">style</span><span class="p">,</span> <span class="n">WinStyle</span><span class="o">.</span><span class="n">BRIGHT</span><span class="p">),</span>
+                <span class="n">AnsiStyle</span><span class="o">.</span><span class="n">DIM</span><span class="p">:</span> <span class="p">(</span><span class="n">winterm</span><span class="o">.</span><span class="n">style</span><span class="p">,</span> <span class="n">WinStyle</span><span class="o">.</span><span class="n">NORMAL</span><span class="p">),</span>
+                <span class="n">AnsiStyle</span><span class="o">.</span><span class="n">NORMAL</span><span class="p">:</span> <span class="p">(</span><span class="n">winterm</span><span class="o">.</span><span class="n">style</span><span class="p">,</span> <span class="n">WinStyle</span><span class="o">.</span><span class="n">NORMAL</span><span class="p">),</span>
+                <span class="n">AnsiFore</span><span class="o">.</span><span class="n">BLACK</span><span class="p">:</span> <span class="p">(</span><span class="n">winterm</span><span class="o">.</span><span class="n">fore</span><span class="p">,</span> <span class="n">WinColor</span><span class="o">.</span><span class="n">BLACK</span><span class="p">),</span>
+                <span class="n">AnsiFore</span><span class="o">.</span><span class="n">RED</span><span class="p">:</span> <span class="p">(</span><span class="n">winterm</span><span class="o">.</span><span class="n">fore</span><span class="p">,</span> <span class="n">WinColor</span><span class="o">.</span><span class="n">RED</span><span class="p">),</span>
+                <span class="n">AnsiFore</span><span class="o">.</span><span class="n">GREEN</span><span class="p">:</span> <span class="p">(</span><span class="n">winterm</span><span class="o">.</span><span class="n">fore</span><span class="p">,</span> <span class="n">WinColor</span><span class="o">.</span><span class="n">GREEN</span><span class="p">),</span>
+                <span class="n">AnsiFore</span><span class="o">.</span><span class="n">YELLOW</span><span class="p">:</span> <span class="p">(</span><span class="n">winterm</span><span class="o">.</span><span class="n">fore</span><span class="p">,</span> <span class="n">WinColor</span><span class="o">.</span><span class="n">YELLOW</span><span class="p">),</span>
+                <span class="n">AnsiFore</span><span class="o">.</span><span class="n">BLUE</span><span class="p">:</span> <span class="p">(</span><span class="n">winterm</span><span class="o">.</span><span class="n">fore</span><span class="p">,</span> <span class="n">WinColor</span><span class="o">.</span><span class="n">BLUE</span><span class="p">),</span>
+                <span class="n">AnsiFore</span><span class="o">.</span><span class="n">MAGENTA</span><span class="p">:</span> <span class="p">(</span><span class="n">winterm</span><span class="o">.</span><span class="n">fore</span><span class="p">,</span> <span class="n">WinColor</span><span class="o">.</span><span class="n">MAGENTA</span><span class="p">),</span>
+                <span class="n">AnsiFore</span><span class="o">.</span><span class="n">CYAN</span><span class="p">:</span> <span class="p">(</span><span class="n">winterm</span><span class="o">.</span><span class="n">fore</span><span class="p">,</span> <span class="n">WinColor</span><span class="o">.</span><span class="n">CYAN</span><span class="p">),</span>
+                <span class="n">AnsiFore</span><span class="o">.</span><span class="n">WHITE</span><span class="p">:</span> <span class="p">(</span><span class="n">winterm</span><span class="o">.</span><span class="n">fore</span><span class="p">,</span> <span class="n">WinColor</span><span class="o">.</span><span class="n">GREY</span><span class="p">),</span>
+                <span class="n">AnsiFore</span><span class="o">.</span><span class="n">RESET</span><span class="p">:</span> <span class="p">(</span><span class="n">winterm</span><span class="o">.</span><span class="n">fore</span><span class="p">,</span> <span class="p">),</span>
+                <span class="n">AnsiFore</span><span class="o">.</span><span class="n">LIGHTBLACK_EX</span><span class="p">:</span> <span class="p">(</span><span class="n">winterm</span><span class="o">.</span><span class="n">fore</span><span class="p">,</span> <span class="n">WinColor</span><span class="o">.</span><span class="n">BLACK</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
+                <span class="n">AnsiFore</span><span class="o">.</span><span class="n">LIGHTRED_EX</span><span class="p">:</span> <span class="p">(</span><span class="n">winterm</span><span class="o">.</span><span class="n">fore</span><span class="p">,</span> <span class="n">WinColor</span><span class="o">.</span><span class="n">RED</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
+                <span class="n">AnsiFore</span><span class="o">.</span><span class="n">LIGHTGREEN_EX</span><span class="p">:</span> <span class="p">(</span><span class="n">winterm</span><span class="o">.</span><span class="n">fore</span><span class="p">,</span> <span class="n">WinColor</span><span class="o">.</span><span class="n">GREEN</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
+                <span class="n">AnsiFore</span><span class="o">.</span><span class="n">LIGHTYELLOW_EX</span><span class="p">:</span> <span class="p">(</span><span class="n">winterm</span><span class="o">.</span><span class="n">fore</span><span class="p">,</span> <span class="n">WinColor</span><span class="o">.</span><span class="n">YELLOW</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
+                <span class="n">AnsiFore</span><span class="o">.</span><span class="n">LIGHTBLUE_EX</span><span class="p">:</span> <span class="p">(</span><span class="n">winterm</span><span class="o">.</span><span class="n">fore</span><span class="p">,</span> <span class="n">WinColor</span><span class="o">.</span><span class="n">BLUE</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
+                <span class="n">AnsiFore</span><span class="o">.</span><span class="n">LIGHTMAGENTA_EX</span><span class="p">:</span> <span class="p">(</span><span class="n">winterm</span><span class="o">.</span><span class="n">fore</span><span class="p">,</span> <span class="n">WinColor</span><span class="o">.</span><span class="n">MAGENTA</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
+                <span class="n">AnsiFore</span><span class="o">.</span><span class="n">LIGHTCYAN_EX</span><span class="p">:</span> <span class="p">(</span><span class="n">winterm</span><span class="o">.</span><span class="n">fore</span><span class="p">,</span> <span class="n">WinColor</span><span class="o">.</span><span class="n">CYAN</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
+                <span class="n">AnsiFore</span><span class="o">.</span><span class="n">LIGHTWHITE_EX</span><span class="p">:</span> <span class="p">(</span><span class="n">winterm</span><span class="o">.</span><span class="n">fore</span><span class="p">,</span> <span class="n">WinColor</span><span class="o">.</span><span class="n">GREY</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
+                <span class="n">AnsiBack</span><span class="o">.</span><span class="n">BLACK</span><span class="p">:</span> <span class="p">(</span><span class="n">winterm</span><span class="o">.</span><span class="n">back</span><span class="p">,</span> <span class="n">WinColor</span><span class="o">.</span><span class="n">BLACK</span><span class="p">),</span>
+                <span class="n">AnsiBack</span><span class="o">.</span><span class="n">RED</span><span class="p">:</span> <span class="p">(</span><span class="n">winterm</span><span class="o">.</span><span class="n">back</span><span class="p">,</span> <span class="n">WinColor</span><span class="o">.</span><span class="n">RED</span><span class="p">),</span>
+                <span class="n">AnsiBack</span><span class="o">.</span><span class="n">GREEN</span><span class="p">:</span> <span class="p">(</span><span class="n">winterm</span><span class="o">.</span><span class="n">back</span><span class="p">,</span> <span class="n">WinColor</span><span class="o">.</span><span class="n">GREEN</span><span class="p">),</span>
+                <span class="n">AnsiBack</span><span class="o">.</span><span class="n">YELLOW</span><span class="p">:</span> <span class="p">(</span><span class="n">winterm</span><span class="o">.</span><span class="n">back</span><span class="p">,</span> <span class="n">WinColor</span><span class="o">.</span><span class="n">YELLOW</span><span class="p">),</span>
+                <span class="n">AnsiBack</span><span class="o">.</span><span class="n">BLUE</span><span class="p">:</span> <span class="p">(</span><span class="n">winterm</span><span class="o">.</span><span class="n">back</span><span class="p">,</span> <span class="n">WinColor</span><span class="o">.</span><span class="n">BLUE</span><span class="p">),</span>
+                <span class="n">AnsiBack</span><span class="o">.</span><span class="n">MAGENTA</span><span class="p">:</span> <span class="p">(</span><span class="n">winterm</span><span class="o">.</span><span class="n">back</span><span class="p">,</span> <span class="n">WinColor</span><span class="o">.</span><span class="n">MAGENTA</span><span class="p">),</span>
+                <span class="n">AnsiBack</span><span class="o">.</span><span class="n">CYAN</span><span class="p">:</span> <span class="p">(</span><span class="n">winterm</span><span class="o">.</span><span class="n">back</span><span class="p">,</span> <span class="n">WinColor</span><span class="o">.</span><span class="n">CYAN</span><span class="p">),</span>
+                <span class="n">AnsiBack</span><span class="o">.</span><span class="n">WHITE</span><span class="p">:</span> <span class="p">(</span><span class="n">winterm</span><span class="o">.</span><span class="n">back</span><span class="p">,</span> <span class="n">WinColor</span><span class="o">.</span><span class="n">GREY</span><span class="p">),</span>
+                <span class="n">AnsiBack</span><span class="o">.</span><span class="n">RESET</span><span class="p">:</span> <span class="p">(</span><span class="n">winterm</span><span class="o">.</span><span class="n">back</span><span class="p">,</span> <span class="p">),</span>
+                <span class="n">AnsiBack</span><span class="o">.</span><span class="n">LIGHTBLACK_EX</span><span class="p">:</span> <span class="p">(</span><span class="n">winterm</span><span class="o">.</span><span class="n">back</span><span class="p">,</span> <span class="n">WinColor</span><span class="o">.</span><span class="n">BLACK</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
+                <span class="n">AnsiBack</span><span class="o">.</span><span class="n">LIGHTRED_EX</span><span class="p">:</span> <span class="p">(</span><span class="n">winterm</span><span class="o">.</span><span class="n">back</span><span class="p">,</span> <span class="n">WinColor</span><span class="o">.</span><span class="n">RED</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
+                <span class="n">AnsiBack</span><span class="o">.</span><span class="n">LIGHTGREEN_EX</span><span class="p">:</span> <span class="p">(</span><span class="n">winterm</span><span class="o">.</span><span class="n">back</span><span class="p">,</span> <span class="n">WinColor</span><span class="o">.</span><span class="n">GREEN</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
+                <span class="n">AnsiBack</span><span class="o">.</span><span class="n">LIGHTYELLOW_EX</span><span class="p">:</span> <span class="p">(</span><span class="n">winterm</span><span class="o">.</span><span class="n">back</span><span class="p">,</span> <span class="n">WinColor</span><span class="o">.</span><span class="n">YELLOW</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
+                <span class="n">AnsiBack</span><span class="o">.</span><span class="n">LIGHTBLUE_EX</span><span class="p">:</span> <span class="p">(</span><span class="n">winterm</span><span class="o">.</span><span class="n">back</span><span class="p">,</span> <span class="n">WinColor</span><span class="o">.</span><span class="n">BLUE</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
+                <span class="n">AnsiBack</span><span class="o">.</span><span class="n">LIGHTMAGENTA_EX</span><span class="p">:</span> <span class="p">(</span><span class="n">winterm</span><span class="o">.</span><span class="n">back</span><span class="p">,</span> <span class="n">WinColor</span><span class="o">.</span><span class="n">MAGENTA</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
+                <span class="n">AnsiBack</span><span class="o">.</span><span class="n">LIGHTCYAN_EX</span><span class="p">:</span> <span class="p">(</span><span class="n">winterm</span><span class="o">.</span><span class="n">back</span><span class="p">,</span> <span class="n">WinColor</span><span class="o">.</span><span class="n">CYAN</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
+                <span class="n">AnsiBack</span><span class="o">.</span><span class="n">LIGHTWHITE_EX</span><span class="p">:</span> <span class="p">(</span><span class="n">winterm</span><span class="o">.</span><span class="n">back</span><span class="p">,</span> <span class="n">WinColor</span><span class="o">.</span><span class="n">GREY</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
+            <span class="p">}</span>
+        <span class="k">return</span> <span class="nb">dict</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="AnsiToWin32.write"><a class="viewcode-back" href="../../colorama/colorama.html#colorama.ansitowin32.AnsiToWin32.write">[docs]</a>    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">strip</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write_and_convert</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">wrapped</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">wrapped</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">autoreset</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">reset_all</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="AnsiToWin32.reset_all"><a class="viewcode-back" href="../../colorama/colorama.html#colorama.ansitowin32.AnsiToWin32.reset_all">[docs]</a>    <span class="k">def</span> <span class="nf">reset_all</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">call_win32</span><span class="p">(</span><span class="s1">&#39;m&#39;</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,))</span>
+        <span class="k">elif</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">strip</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">closed</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">wrapped</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">Style</span><span class="o">.</span><span class="n">RESET_ALL</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="AnsiToWin32.write_and_convert"><a class="viewcode-back" href="../../colorama/colorama.html#colorama.ansitowin32.AnsiToWin32.write_and_convert">[docs]</a>    <span class="k">def</span> <span class="nf">write_and_convert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Write the given text to our wrapped stream, stripping any ANSI</span>
+<span class="sd">        sequences from the text, and optionally converting them into win32</span>
+<span class="sd">        calls.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_osc</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">match</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">ANSI_CSI_RE</span><span class="o">.</span><span class="n">finditer</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+            <span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">span</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write_plain_text</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">cursor</span><span class="p">,</span> <span class="n">start</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">convert_ansi</span><span class="p">(</span><span class="o">*</span><span class="n">match</span><span class="o">.</span><span class="n">groups</span><span class="p">())</span>
+            <span class="n">cursor</span> <span class="o">=</span> <span class="n">end</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">write_plain_text</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">cursor</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">text</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="AnsiToWin32.write_plain_text"><a class="viewcode-back" href="../../colorama/colorama.html#colorama.ansitowin32.AnsiToWin32.write_plain_text">[docs]</a>    <span class="k">def</span> <span class="nf">write_plain_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">start</span> <span class="o">&lt;</span> <span class="n">end</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">wrapped</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">text</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">wrapped</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="AnsiToWin32.convert_ansi"><a class="viewcode-back" href="../../colorama/colorama.html#colorama.ansitowin32.AnsiToWin32.convert_ansi">[docs]</a>    <span class="k">def</span> <span class="nf">convert_ansi</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">paramstring</span><span class="p">,</span> <span class="n">command</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert</span><span class="p">:</span>
+            <span class="n">params</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extract_params</span><span class="p">(</span><span class="n">command</span><span class="p">,</span> <span class="n">paramstring</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">call_win32</span><span class="p">(</span><span class="n">command</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="AnsiToWin32.extract_params"><a class="viewcode-back" href="../../colorama/colorama.html#colorama.ansitowin32.AnsiToWin32.extract_params">[docs]</a>    <span class="k">def</span> <span class="nf">extract_params</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="p">,</span> <span class="n">paramstring</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">command</span> <span class="ow">in</span> <span class="s1">&#39;Hf&#39;</span><span class="p">:</span>
+            <span class="n">params</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">paramstring</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;;&#39;</span><span class="p">))</span>
+            <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">params</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="c1"># defaults:</span>
+                <span class="n">params</span> <span class="o">=</span> <span class="n">params</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span><span class="p">,)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">params</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">paramstring</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;;&#39;</span><span class="p">)</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">params</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="c1"># defaults:</span>
+                <span class="k">if</span> <span class="n">command</span> <span class="ow">in</span> <span class="s1">&#39;JKm&#39;</span><span class="p">:</span>
+                    <span class="n">params</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,)</span>
+                <span class="k">elif</span> <span class="n">command</span> <span class="ow">in</span> <span class="s1">&#39;ABCD&#39;</span><span class="p">:</span>
+                    <span class="n">params</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,)</span>
+
+        <span class="k">return</span> <span class="n">params</span></div>
+
+
+<div class="viewcode-block" id="AnsiToWin32.call_win32"><a class="viewcode-back" href="../../colorama/colorama.html#colorama.ansitowin32.AnsiToWin32.call_win32">[docs]</a>    <span class="k">def</span> <span class="nf">call_win32</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">command</span> <span class="o">==</span> <span class="s1">&#39;m&#39;</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">params</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">param</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">win32_calls</span><span class="p">:</span>
+                    <span class="n">func_args</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">win32_calls</span><span class="p">[</span><span class="n">param</span><span class="p">]</span>
+                    <span class="n">func</span> <span class="o">=</span> <span class="n">func_args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                    <span class="n">args</span> <span class="o">=</span> <span class="n">func_args</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+                    <span class="n">kwargs</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">on_stderr</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">on_stderr</span><span class="p">)</span>
+                    <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">command</span> <span class="ow">in</span> <span class="s1">&#39;J&#39;</span><span class="p">:</span>
+            <span class="n">winterm</span><span class="o">.</span><span class="n">erase_screen</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">on_stderr</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">on_stderr</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">command</span> <span class="ow">in</span> <span class="s1">&#39;K&#39;</span><span class="p">:</span>
+            <span class="n">winterm</span><span class="o">.</span><span class="n">erase_line</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">on_stderr</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">on_stderr</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">command</span> <span class="ow">in</span> <span class="s1">&#39;Hf&#39;</span><span class="p">:</span>     <span class="c1"># cursor position - absolute</span>
+            <span class="n">winterm</span><span class="o">.</span><span class="n">set_cursor_position</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">on_stderr</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">on_stderr</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">command</span> <span class="ow">in</span> <span class="s1">&#39;ABCD&#39;</span><span class="p">:</span>   <span class="c1"># cursor position - relative</span>
+            <span class="n">n</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="c1"># A - up, B - down, C - forward, D - back</span>
+            <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;A&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="n">n</span><span class="p">),</span> <span class="s1">&#39;B&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="p">),</span> <span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="s1">&#39;D&#39;</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="n">n</span><span class="p">,</span> <span class="mi">0</span><span class="p">)}[</span><span class="n">command</span><span class="p">]</span>
+            <span class="n">winterm</span><span class="o">.</span><span class="n">cursor_adjust</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">on_stderr</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">on_stderr</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="AnsiToWin32.convert_osc"><a class="viewcode-back" href="../../colorama/colorama.html#colorama.ansitowin32.AnsiToWin32.convert_osc">[docs]</a>    <span class="k">def</span> <span class="nf">convert_osc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">match</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">ANSI_OSC_RE</span><span class="o">.</span><span class="n">finditer</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+            <span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">span</span><span class="p">()</span>
+            <span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="p">[:</span><span class="n">start</span><span class="p">]</span> <span class="o">+</span> <span class="n">text</span><span class="p">[</span><span class="n">end</span><span class="p">:]</span>
+            <span class="n">paramstring</span><span class="p">,</span> <span class="n">command</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">groups</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">command</span> <span class="o">==</span> <span class="n">BEL</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">paramstring</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">&quot;;&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="n">params</span> <span class="o">=</span> <span class="n">paramstring</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;;&quot;</span><span class="p">)</span>
+                    <span class="c1"># 0 - change title and icon (we will only change title)</span>
+                    <span class="c1"># 1 - change icon (we don&#39;t support this)</span>
+                    <span class="c1"># 2 - change title</span>
+                    <span class="k">if</span> <span class="n">params</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="s1">&#39;02&#39;</span><span class="p">:</span>
+                        <span class="n">winterm</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">text</span></div></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">Bibliothèques Python</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../builtins/index.html">Builtins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../collections/index.html"><code class="docutils literal notranslate"><span class="pre">collections</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../datetime/index.html"><code class="docutils literal notranslate"><span class="pre">datetime</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dunders/index.html">Dunders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../enum/index.html"><code class="docutils literal notranslate"><span class="pre">enum</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fstrings/index.html">f-strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../itertools/index.html"><code class="docutils literal notranslate"><span class="pre">itertools</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../io/index.html"><code class="docutils literal notranslate"><span class="pre">io</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../math/index.html"><code class="docutils literal notranslate"><span class="pre">math</span></code> / <code class="docutils literal notranslate"><span class="pre">fractions</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../random/index.html"><code class="docutils literal notranslate"><span class="pre">random</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../time/index.html"><code class="docutils literal notranslate"><span class="pre">time</span></code> / <code class="docutils literal notranslate"><span class="pre">datetime</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../statistics/index.html"><code class="docutils literal notranslate"><span class="pre">statistics</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../super/index.html"><code class="docutils literal notranslate"><span class="pre">super()</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../abc/index.html">Abstract Base Class (<code class="docutils literal notranslate"><span class="pre">abc</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../binary/index.html"><code class="docutils literal notranslate"><span class="pre">bytes</span></code> / <code class="docutils literal notranslate"><span class="pre">bytearray</span></code> / <code class="docutils literal notranslate"><span class="pre">memoryview</span></code>, <code class="docutils literal notranslate"><span class="pre">struct</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bisect/index.html"><code class="docutils literal notranslate"><span class="pre">bisect</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../email/index.html">E-mail (<code class="docutils literal notranslate"><span class="pre">smtplib</span></code> / <code class="docutils literal notranslate"><span class="pre">imaplib</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../hashlib/index.html"><code class="docutils literal notranslate"><span class="pre">hashlib</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../multiprocessing/index.html"><code class="docutils literal notranslate"><span class="pre">multiprocessing</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../re/index.html">Expressions régulières (<code class="docutils literal notranslate"><span class="pre">re</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../secrets/index.html"><code class="docutils literal notranslate"><span class="pre">secrets</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../weakref/index.html"><code class="docutils literal notranslate"><span class="pre">weakref</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../colorama/index.html"><code class="docutils literal notranslate"><span class="pre">colorama</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../invoke/index.html"><code class="docutils literal notranslate"><span class="pre">invoke</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../unittest/index.html"><code class="docutils literal notranslate"><span class="pre">unittest</span></code> / <code class="docutils literal notranslate"><span class="pre">doctest</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pytest/index.html"><code class="docutils literal notranslate"><span class="pre">pytest</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../csv/index.html"><code class="docutils literal notranslate"><span class="pre">csv</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../json/index.html"><code class="docutils literal notranslate"><span class="pre">json</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pillow/index.html">Python Imaging Library (<code class="docutils literal notranslate"><span class="pre">PIL</span></code>)</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../hug/index.html"><code class="docutils literal notranslate"><span class="pre">hug</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../matplotlib/index.html"><code class="docutils literal notranslate"><span class="pre">matplotlib</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../networkx/index.html"><code class="docutils literal notranslate"><span class="pre">networkx</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pycrypto/index.html"><code class="docutils literal notranslate"><span class="pre">pycrypto</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pygame/index.html"><code class="docutils literal notranslate"><span class="pre">pygame</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sphinx/index.html"><code class="docutils literal notranslate"><span class="pre">sphinx</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../watchdog/index.html"><code class="docutils literal notranslate"><span class="pre">watchdog</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../pbr/index.html"><cite>⚙️Automate your publishing to PyPI with PBR and Travis</cite></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../misc/about.html">À propos de ce livre</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../misc/contrib.html">Contribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../licence.html">Creative Commons Attribution-ShareAlike 4.0 International</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Code du module</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Recherche rapide</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016-2017, HE-Arc.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

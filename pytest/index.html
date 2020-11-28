@@ -1,0 +1,396 @@
+
+<!DOCTYPE html>
+
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pytest &#8212; Documentation Bibliothèques Python 1.0.0</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/translations.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Recherche" href="../search.html" />
+    <link rel="next" title="csv" href="../csv/index.html" />
+    <link rel="prev" title="unittest / doctest" href="../unittest/index.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="pytest">
+<span id="pytest-tutorial"></span><h1><code class="docutils literal notranslate"><span class="pre">pytest</span></code><a class="headerlink" href="#pytest" title="Lien permanent vers ce titre">¶</a></h1>
+<a class="reference internal image-reference" href="../_images/pytest.png"><img alt="alternate text" class="align-right" src="../_images/pytest.png" style="width: 75.0px; height: 71.5px;" /></a>
+<p>Par Nicolas Beyeler <a class="footnote-reference brackets" href="#nb" id="id1">1</a></p>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Lien permanent vers ce titre">¶</a></h2>
+<p><a class="reference external" href="https://docs.pytest.org/en/latest/index.html#features" title="(disponible dans pytest v6.2.0.dev230+g775ba63c6)"><span class="xref std std-ref">pytest</span></a> est un framework permettant de faire des tests
+et de vérifier si les différentes conditions sont juste ou fausse. Il permet de
+tester les éléments un à un mais on peut aussi lui demander de faire une série
+de tests. Ces méthodes de test dépendent de comment on implémente dans notre
+code. Dans ce document, je vais traiter plusieurs systèmes de test.</p>
+</div>
+<div class="section" id="exemple-de-base">
+<h2>Exemple de base<a class="headerlink" href="#exemple-de-base" title="Lien permanent vers ce titre">¶</a></h2>
+<div class="section" id="verification-de-la-valeur-d-une-fonction">
+<h3>Vérification de la valeur d’une fonction<a class="headerlink" href="#verification-de-la-valeur-d-une-fonction" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Cette méthode vérifie la valeur d’une fonction est égale à celle avec qui on test.</p>
+<div class="section" id="code">
+<h4>Code<a class="headerlink" href="#code" title="Lien permanent vers ce titre">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="k">def</span> <span class="nf">test_answer</span><span class="p">():</span>
+    <span class="k">assert</span> <span class="n">func</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">==</span> <span class="mi">5</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="fixture">
+<h2>Fixture<a class="headerlink" href="#fixture" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Le but des fixtures est de fournir une base pour les tests afin qu’ils puissent
+être exécuté de manière fiable et répétitives. Les fixtures ont des nom
+explicit et sont activable en les déclarants dans les fonctions de tests, les
+modules,… Les fixtures sont implémenter de façon modulaire. Chaque fonction
+des fixtures peuvent être appelé depuis un autre.</p>
+<div class="section" id="avec-argument">
+<h3>Avec argument<a class="headerlink" href="#avec-argument" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Les fonctions de test peuvent recevoir des objets en les nommant comme argument d’entrée. Pour chaque argument de ce type, la fonction doit être enregistrer avec le &#64;pytest.fixure, comme dans l’exemple ci-dessous.</p>
+<div class="section" id="id2">
+<h4>Code<a class="headerlink" href="#id2" title="Lien permanent vers ce titre">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># content of ./test_smtpsimple.py</span>
+<span class="kn">import</span> <span class="nn">pytest</span>
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
+<span class="k">def</span> <span class="nf">smtp</span><span class="p">():</span>
+    <span class="kn">import</span> <span class="nn">smtplib</span>
+    <span class="k">return</span> <span class="n">smtplib</span><span class="o">.</span><span class="n">SMTP</span><span class="p">(</span><span class="s2">&quot;smtp.gmail.com&quot;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">test_ehlo</span><span class="p">(</span><span class="n">smtp</span><span class="p">):</span>
+    <span class="n">response</span><span class="p">,</span> <span class="n">msg</span> <span class="o">=</span> <span class="n">smtp</span><span class="o">.</span><span class="n">ehlo</span><span class="p">()</span>
+    <span class="k">assert</span> <span class="n">response</span> <span class="o">==</span> <span class="mi">250</span>
+    <span class="k">assert</span> <span class="mi">0</span> <span class="c1"># for demo purposes</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="modulaire">
+<h3>Modulaire<a class="headerlink" href="#modulaire" title="Lien permanent vers ce titre">¶</a></h3>
+<p>On peut aussi utiliser un fixture dans un autre fixture. Dans notre exemple, nous allons instancier un objet « app » dans lequel nous allons y ajouter la ressource « smtp » (la ressource est déjà définie).</p>
+<div class="section" id="id3">
+<h4>Code<a class="headerlink" href="#id3" title="Lien permanent vers ce titre">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pytest</span>
+
+<span class="k">class</span> <span class="nc">App</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">smtp</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">smtp</span> <span class="o">=</span> <span class="n">smtp</span>
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="s2">&quot;module&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">app</span><span class="p">(</span><span class="n">smtp</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">App</span><span class="p">(</span><span class="n">smtp</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">test_smtp_exists</span><span class="p">(</span><span class="n">app</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">app</span><span class="o">.</span><span class="n">smtp</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="exception">
+<h2>Exception<a class="headerlink" href="#exception" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Afin de gérer les exceptions, il faut utiliser « pytest.raises ».
+En utilisant pytest.raises, on peut délibérément tester nos exceptions.
+Un autre system (pytest.mark.xfail), permet de tester aussi les exceptions.
+Il est surtout utilisé pour trouver des bugs dans des dépendances.</p>
+<div class="section" id="simple-exception">
+<h3>Simple exception<a class="headerlink" href="#simple-exception" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Dans l’exemple si dessous, on va « définir » la division par 0.</p>
+<div class="section" id="id4">
+<h4>Code<a class="headerlink" href="#id4" title="Lien permanent vers ce titre">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pytest</span>
+<span class="k">def</span> <span class="nf">test_zero_division</span><span class="p">():</span>
+    <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">ZeroDivisionError</span><span class="p">):</span>
+        <span class="mi">1</span> <span class="o">/</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="test-expression-reguliere">
+<h3>Test expression régulière<a class="headerlink" href="#test-expression-reguliere" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Si on veut tester la correspondance d’une expression régulière qui représente un exception, on peut utiliser « ExceptionInfo.match ».</p>
+<div class="section" id="exemple">
+<h4>Exemple<a class="headerlink" href="#exemple" title="Lien permanent vers ce titre">¶</a></h4>
+<p>Dans l’exemple ci-dessous, on va regarder l’exception qui contient le 123.
+Cela peut être utiliser dans une longue liste, et on en recherche qu’une seule.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pytest</span>
+<span class="k">def</span> <span class="nf">myfunc</span><span class="p">():</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Exception 123 raised&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_match</span><span class="p">():</span>
+    <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">)</span> <span class="k">as</span> <span class="n">excinfo</span><span class="p">:</span>
+        <span class="n">myfunc</span><span class="p">()</span>
+    <span class="n">excinfo</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;.* 123 .*&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="temporary-directories-and-files">
+<h2>Temporary directories and files<a class="headerlink" href="#temporary-directories-and-files" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Dans cette partie, nous allons voir l’utilisation des fichiers et des dossiers temporaires.</p>
+<div class="section" id="tmpdir">
+<h3>tmpdir<a class="headerlink" href="#tmpdir" title="Lien permanent vers ce titre">¶</a></h3>
+<p>tmpdir permet de créer un répertoire temporaire unique. tmpdir est un objet de py.path.local.</p>
+<div class="section" id="id5">
+<h4>Exemple<a class="headerlink" href="#id5" title="Lien permanent vers ce titre">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># content of test_tmpdir.py</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="k">def</span> <span class="nf">test_create_file</span><span class="p">(</span><span class="n">tmpdir</span><span class="p">):</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">tmpdir</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="s2">&quot;sub&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;hello.txt&quot;</span><span class="p">)</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">p</span><span class="o">.</span><span class="n">read</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;content&quot;</span>
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">tmpdir</span><span class="o">.</span><span class="n">listdir</span><span class="p">())</span> <span class="o">==</span> <span class="mi">1</span>
+    <span class="k">assert</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="tmpdir-factory">
+<h3>tmpdir_factory<a class="headerlink" href="#tmpdir-factory" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Cette fonction permet de créer un autre répertoire pour n’importe quel autre fixture ou test.</p>
+<div class="section" id="id6">
+<h4>Exemple<a class="headerlink" href="#id6" title="Lien permanent vers ce titre">¶</a></h4>
+<p>Dans cet exemple, on va imaginer que notre test demande une grande part du disque.
+On va générer cette partie procéduralement. On va donc calculer et attribué l’espace à chaque session du test.</p>
+</div>
+<div class="section" id="id7">
+<h4>Code<a class="headerlink" href="#id7" title="Lien permanent vers ce titre">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># contents of conftest.py</span>
+<span class="kn">import</span> <span class="nn">pytest</span>
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="s1">&#39;session&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">image_file</span><span class="p">(</span><span class="n">tmpdir_factory</span><span class="p">):</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">compute_expensive_image</span><span class="p">()</span>
+    <span class="n">fn</span> <span class="o">=</span> <span class="n">tmpdir_factory</span><span class="o">.</span><span class="n">mktemp</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;img.png&#39;</span><span class="p">)</span>
+    <span class="n">img</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">fn</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">fn</span>
+<span class="c1"># contents of test_image.py</span>
+<span class="k">def</span> <span class="nf">test_histogram</span><span class="p">(</span><span class="n">image_file</span><span class="p">):</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">load_image</span><span class="p">(</span><span class="n">image_file</span><span class="p">)</span>
+    <span class="c1"># compute and test histogram</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="explication">
+<h4>Explication<a class="headerlink" href="#explication" title="Lien permanent vers ce titre">¶</a></h4>
+<p>TempdirFactory.mktemp : Cela créer le sous-dossier à la base du dossier temporaire et le renvoie.</p>
+<p>TempdirFactory.getbasetemp() : return la base du dossier temporaire.</p>
+</div>
+</div>
+<div class="section" id="the-default-base-temporary-directory">
+<h3>The default base temporary directory<a class="headerlink" href="#the-default-base-temporary-directory" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Les répertoires temporaires sont créés par défaut comme sous-répertoire dans le répertoire temporaire du système.
+Le nom de base sera « pytest-NUM ». Le NUM est un nombre qui est incrémenter à chaque exécution.
+De plus, les entrées plus vielles de 3 dossiers temporaires sont supprimées.</p>
+<div class="section" id="modifier-le-dossier-temporaire">
+<h4>Modifier le dossier temporaire<a class="headerlink" href="#modifier-le-dossier-temporaire" title="Lien permanent vers ce titre">¶</a></h4>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> pytest --basetemp<span class="o">=</span>mydir
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="capture">
+<h2>Capture<a class="headerlink" href="#capture" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Pour réaliser une capture, il faut utiliser les fixtures capsys et capfd.
+Ces deux fixtures permettent l’accès aux entrées-sorties durant la phase de test.</p>
+<div class="section" id="simple-exemple">
+<h3>Simple exemple<a class="headerlink" href="#simple-exemple" title="Lien permanent vers ce titre">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">test_myoutput</span><span class="p">(</span><span class="n">capsys</span><span class="p">):</span> <span class="c1"># or use &quot;capfd&quot; for fd-level</span>
+    <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">)</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;world</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">out</span><span class="p">,</span> <span class="n">err</span> <span class="o">=</span> <span class="n">capsys</span><span class="o">.</span><span class="n">readouterr</span><span class="p">()</span>
+    <span class="k">assert</span> <span class="n">out</span> <span class="o">==</span> <span class="s2">&quot;hello</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="k">assert</span> <span class="n">err</span> <span class="o">==</span> <span class="s2">&quot;world</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;next&quot;</span><span class="p">)</span>
+    <span class="n">out</span><span class="p">,</span> <span class="n">err</span> <span class="o">=</span> <span class="n">capsys</span><span class="o">.</span><span class="n">readouterr</span><span class="p">()</span>
+    <span class="k">assert</span> <span class="n">out</span> <span class="o">==</span> <span class="s2">&quot;next</span><span class="se">\n</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+<div class="section" id="readouterr">
+<h4>readouterr()<a class="headerlink" href="#readouterr" title="Lien permanent vers ce titre">¶</a></h4>
+<p>Cela permet de lancer le système de capture des outputs. Une fois le test des fonctions finis, les flux seront restaurés à leur état d’origine.</p>
+</div>
+<div class="section" id="capsys">
+<h4>capsys<a class="headerlink" href="#capsys" title="Lien permanent vers ce titre">¶</a></h4>
+<p>Capsys est un moyen de réalisé les tests sans se soucier des paramètres et des réinitialisations des outputs.</p>
+</div>
+<div class="section" id="capfd">
+<h4>capfd<a class="headerlink" href="#capfd" title="Lien permanent vers ce titre">¶</a></h4>
+<p>Capfd est utilisé au niveau du descripteur de fichier. Cela nous permet de faire des captures des outputs des librairies ou des sous-processus.</p>
+</div>
+</div>
+<div class="section" id="desactiver-la-capture">
+<h3>Désactiver la capture<a class="headerlink" href="#desactiver-la-capture" title="Lien permanent vers ce titre">¶</a></h3>
+<p>On peut choisir de désactiver la capture afin de ne pas enregistrer certaines informations.</p>
+<div class="section" id="id8">
+<h4>Exemple<a class="headerlink" href="#id8" title="Lien permanent vers ce titre">¶</a></h4>
+<p>Dans le morceau de code ci-dessous, l’avant-dernière ligne ne sera pas enregistrée, car elle fait partie du block du while.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">test_disabling_capturing</span><span class="p">(</span><span class="n">capsys</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;this output is captured&#39;</span><span class="p">)</span>
+    <span class="k">with</span> <span class="n">capsys</span><span class="o">.</span><span class="n">disabled</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;output not captured, going directly to sys.stdout&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;this output is also captured&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Pytest est un outil très puissant quand il s’agit de faire différents tests. De plus, il dispose d’un large panel de compléments, ce qui lui permet un plus grande maniabilité et adaptation en fonction de nos besoins.</p>
+<dl class="footnote brackets">
+<dt class="label" id="nb"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>&lt;<a class="reference external" href="mailto:nicolas&#46;beyeler&#37;&#52;&#48;pindex&#46;ch">nicolas<span>&#46;</span>beyeler<span>&#64;</span>pindex<span>&#46;</span>ch</a>&gt;</p>
+</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Bibliothèques Python</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../builtins/index.html">Builtins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../collections/index.html"><code class="docutils literal notranslate"><span class="pre">collections</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../datetime/index.html"><code class="docutils literal notranslate"><span class="pre">datetime</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dunders/index.html">Dunders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../enum/index.html"><code class="docutils literal notranslate"><span class="pre">enum</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fstrings/index.html">f-strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../itertools/index.html"><code class="docutils literal notranslate"><span class="pre">itertools</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../io/index.html"><code class="docutils literal notranslate"><span class="pre">io</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../math/index.html"><code class="docutils literal notranslate"><span class="pre">math</span></code> / <code class="docutils literal notranslate"><span class="pre">fractions</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../random/index.html"><code class="docutils literal notranslate"><span class="pre">random</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../time/index.html"><code class="docutils literal notranslate"><span class="pre">time</span></code> / <code class="docutils literal notranslate"><span class="pre">datetime</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../statistics/index.html"><code class="docutils literal notranslate"><span class="pre">statistics</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../super/index.html"><code class="docutils literal notranslate"><span class="pre">super()</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../abc/index.html">Abstract Base Class (<code class="docutils literal notranslate"><span class="pre">abc</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../binary/index.html"><code class="docutils literal notranslate"><span class="pre">bytes</span></code> / <code class="docutils literal notranslate"><span class="pre">bytearray</span></code> / <code class="docutils literal notranslate"><span class="pre">memoryview</span></code>, <code class="docutils literal notranslate"><span class="pre">struct</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bisect/index.html"><code class="docutils literal notranslate"><span class="pre">bisect</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email/index.html">E-mail (<code class="docutils literal notranslate"><span class="pre">smtplib</span></code> / <code class="docutils literal notranslate"><span class="pre">imaplib</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hashlib/index.html"><code class="docutils literal notranslate"><span class="pre">hashlib</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../multiprocessing/index.html"><code class="docutils literal notranslate"><span class="pre">multiprocessing</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../re/index.html">Expressions régulières (<code class="docutils literal notranslate"><span class="pre">re</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../secrets/index.html"><code class="docutils literal notranslate"><span class="pre">secrets</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../weakref/index.html"><code class="docutils literal notranslate"><span class="pre">weakref</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../colorama/index.html"><code class="docutils literal notranslate"><span class="pre">colorama</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../invoke/index.html"><code class="docutils literal notranslate"><span class="pre">invoke</span></code></a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../unittest/index.html"><code class="docutils literal notranslate"><span class="pre">unittest</span></code> / <code class="docutils literal notranslate"><span class="pre">doctest</span></code></a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">pytest</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../csv/index.html"><code class="docutils literal notranslate"><span class="pre">csv</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../json/index.html"><code class="docutils literal notranslate"><span class="pre">json</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pillow/index.html">Python Imaging Library (<code class="docutils literal notranslate"><span class="pre">PIL</span></code>)</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../hug/index.html"><code class="docutils literal notranslate"><span class="pre">hug</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../matplotlib/index.html"><code class="docutils literal notranslate"><span class="pre">matplotlib</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../networkx/index.html"><code class="docutils literal notranslate"><span class="pre">networkx</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pycrypto/index.html"><code class="docutils literal notranslate"><span class="pre">pycrypto</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pygame/index.html"><code class="docutils literal notranslate"><span class="pre">pygame</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sphinx/index.html"><code class="docutils literal notranslate"><span class="pre">sphinx</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../watchdog/index.html"><code class="docutils literal notranslate"><span class="pre">watchdog</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../pbr/index.html"><cite>⚙️Automate your publishing to PyPI with PBR and Travis</cite></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../misc/about.html">À propos de ce livre</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../misc/contrib.html">Contribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../licence.html">Creative Commons Attribution-ShareAlike 4.0 International</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="../unittest/index.html" title="Chapitre précédent"><code class="docutils literal notranslate"><span class="pre">unittest</span></code> / <code class="docutils literal notranslate"><span class="pre">doctest</span></code></a></li>
+      <li>Next: <a href="../csv/index.html" title="Chapitre suivant"><code class="docutils literal notranslate"><span class="pre">csv</span></code></a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Recherche rapide</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016-2017, HE-Arc.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/pytest/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,381 @@
+
+<!DOCTYPE html>
+
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>io &#8212; Documentation Bibliothèques Python 1.0.0</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/translations.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Recherche" href="../search.html" />
+    <link rel="next" title="math / fractions" href="../math/index.html" />
+    <link rel="prev" title="itertools" href="../itertools/index.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="io">
+<span id="io-tutorial"></span><h1><code class="docutils literal notranslate"><span class="pre">io</span></code><a class="headerlink" href="#io" title="Lien permanent vers ce titre">¶</a></h1>
+<p>Par Dylan Santos de Pinho <a class="footnote-reference brackets" href="#ds" id="id1">1</a></p>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Lien permanent vers ce titre">¶</a></h2>
+<p><a class="reference external" href="https://docs.python.org/3/library/io.html#module-io" title="(disponible dans Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">io</span></code></a> est un module qui permet de gérer des flux d’entrées et de sorties,
+que ce soit pour écrire avec des données en byte(string) ou avec des
+données en binaire. <a class="reference external" href="https://docs.python.org/3/library/io.html#module-io" title="(disponible dans Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">io</span></code></a> est le module par défaut pour gérer les flux et les fichiers en
+python 3.*.</p>
+</div>
+<div class="section" id="ouverture-de-fichier">
+<h2>Ouverture de fichier<a class="headerlink" href="#ouverture-de-fichier" title="Lien permanent vers ce titre">¶</a></h2>
+<p>On utilise <a class="reference external" href="https://docs.python.org/3/library/functions.html#open" title="(disponible dans Python v3.9)"><code class="xref py py-func docutils literal notranslate"><span class="pre">open()</span></code></a> pour ouvrir un fichier. Il retourne le flux
+correspondant si le fichier s’ouvre, sinon une exception <code class="docutils literal notranslate"><span class="pre">OSError</span></code> est levée.</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="nb">open</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">buffering</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">closefd</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">opener</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">file</span></code> : String, contenant le chemin absolu ou relatif pour accéder au fichier, ou un Integer, descripteur  de fichier (clé abstraite pour accéder à un fichier).</p>
+<p><code class="docutils literal notranslate"><span class="pre">mode</span></code> : Spécifie comment ouvrir le fichier, voir tous les modes possibles
+dans le tableau ci-dessous:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 9%" />
+<col style="width: 91%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Modes</p></th>
+<th class="head"><p>Signification</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">r</span></code></p></td>
+<td><p>Ouvre le fichier en lecture (par défaut).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">w</span></code></p></td>
+<td><p>Ouvre le fichier en écriture en effaçant le fichier s’il existe sinon le crée.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">x</span></code></p></td>
+<td><p>Ouvre le fichier en création, échoue si le fichier existait déjà.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">a</span></code></p></td>
+<td><p>Ouvre le fichier en écriture et écrit à la fin du fichier si existant.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">b</span></code></p></td>
+<td><p>Mode binaire.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">t</span></code></p></td>
+<td><p>Mode texte (par défaut).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">+</span></code></p></td>
+<td><p>Ouvre le fichier en lecture et écriture.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">U</span></code></p></td>
+<td><p>Mode Universal newlines (pour la rétrocompatibilité, ne pas utiliser dans le nouveau code).</p></td>
+</tr>
+</tbody>
+</table>
+<p>Les modes sont cumulables, par défaut le mode est “rt”(lecture de
+texte).</p>
+<p><code class="docutils literal notranslate"><span class="pre">buffering</span></code>: Permet de changer le fonctionnement du buffer:</p>
+<blockquote>
+<div><ul class="simple">
+<li><dl class="simple">
+<dt>défaut:</dt><dd><ul>
+<li><p>Pour les fichiers binaires, la taille du buffer est fixe en dépendant
+de <code class="docutils literal notranslate"><span class="pre">DEFAULT\_BUFFER\_SIZE</span></code>.</p></li>
+<li><p>Pour les fichiers qui retourne True avec isatty()(si c’est connecté à
+un terminal), ils ont un buffer de ligne. Sinon comme ci-dessus avec
+les fichiers binaires.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">0</span></code>: Permet de désactiver le buffer, seulement en mode binaire.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">1</span></code>: Mets une ligne dans le buffer, seulement en mode texte.</p></li>
+<li><p>&gt;1: Spécifie la taille du buffer.</p></li>
+</ul>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">encoding</span></code>: Nom de l’encodage permettant de décoder le fichier(devrait
+être utilisé qu’en mode texte). Par défaut utilise le décodage du
+système, voir ce que retourne <code class="docutils literal notranslate"><span class="pre">locale.getpreferredencoding()</span></code>.
+Préciser l’encodage est une bonne pratique.</p>
+<p><code class="docutils literal notranslate"><span class="pre">errors</span></code>: Permet de spécifier comment traiter les erreurs (seulement en
+mode texte):</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>strict(None, par défaut): Lève une exception ValueError</p></li>
+<li><p>ignore: Ignore l’erreur(risque de perte de données).</p></li>
+<li><p>replace: Remplace les erreurs par des “?”.</p></li>
+</ul>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">newline</span></code>: Spécifie comment les sauts de ligne fonctionnent. Valeurs
+possible: None, “”, “\n”, “\r” ou “\r\n”.</p>
+<p><code class="docutils literal notranslate"><span class="pre">closefd</span></code>: Doit être à True(par défaut) si un nom de fichier a été donné.
+Si il est à False et qu’un descripteur de fichier a été donné, le descripteur de fichier
+restera ouvert quand le fichier sera fermé.</p>
+<p><code class="docutils literal notranslate"><span class="pre">opener</span></code>: On peut spécifier un opener à utiliser.</p>
+</div>
+<div class="section" id="methode-de-io-iobase">
+<h2>Méthode de <a class="reference external" href="https://docs.python.org/3/library/io.html#io.IOBase" title="(disponible dans Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">io.IOBase</span></code></a><a class="headerlink" href="#methode-de-io-iobase" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Quelques méthodes parmi les plus utiles de <a class="reference external" href="https://docs.python.org/3/library/io.html#module-io" title="(disponible dans Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">io</span></code></a> :</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">read(n)</span></code>: Lis le fichier jusqu’à avoir n bit(mode binaire) ou n
+bytes(mode texte). Si n est négatif ou n’est pas spécifié, lis jusqu’à la fin
+du fichier.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">write(b)</span></code>: Ecrit b dans le fichier.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">close()</span></code>: Flush et ferme le flux. N’a aucun effet si le fichier est
+déjà fermé, seulement le premier appel à effet.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">closed</span></code>: Retourne True si le fichier est fermé.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">flush()</span></code>: Vide le flux d’écriture, ne fait rien en lecture.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">isatty()</span></code>: Retourne True si le flux est connecté à un terminal.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">readable()</span></code>: Retourne True si on peut lire depuis le flux. Si False,
+<code class="docutils literal notranslate"><span class="pre">read()</span></code> lève une exception <code class="docutils literal notranslate"><span class="pre">OSError</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">writable()</span></code>: Retourne True si on peut écrire depuis le flux. Si False,
+<code class="docutils literal notranslate"><span class="pre">write()</span></code> lève une exception <code class="docutils literal notranslate"><span class="pre">OSError</span></code>.</p></li>
+</ul>
+</div></blockquote>
+<div class="section" id="exemple">
+<h3>Exemple<a class="headerlink" href="#exemple" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Exemple d’un programme utilisant les flux d’entrée et de sortie, en copiant les 10
+premiers caractères d’un fichier dans un autre fichier:</p>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;Exemple de lecture et écriture avec io.&quot;&quot;&quot;</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;input.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">inputStream</span><span class="p">:</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;output.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">os</span><span class="p">:</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">inputStream</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+</div>
+<div class="section" id="io-stringio">
+<h2><a class="reference external" href="https://docs.python.org/3/library/io.html#io.StringIO" title="(disponible dans Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">io.StringIO</span></code></a><a class="headerlink" href="#io-stringio" title="Lien permanent vers ce titre">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">io</span><span class="o">.</span><span class="n">StringIO</span><span class="p">(</span><span class="n">initial_value</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Permet d’ouvrir un flux textuel en mémoire. Le buffer est vidé lorsqu’on <code class="docutils literal notranslate"><span class="pre">close()</span></code> le flux.
+<a class="reference external" href="https://docs.python.org/3/library/io.html#io.StringIO" title="(disponible dans Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">io.StringIO</span></code></a> hérite de <a class="reference external" href="https://docs.python.org/3/library/io.html#io.IOBase" title="(disponible dans Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">io.IOBase</span></code></a>. Lorsque qu’on appelle <code class="docutils literal notranslate"><span class="pre">open(mode='t')</span></code>, python crée, de façon caché, un <a class="reference external" href="https://docs.python.org/3/library/io.html#io.StringIO" title="(disponible dans Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">io.StringIO</span></code></a>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">initial_value</span></code>: Permets d’avoir des données à la création.</p>
+<p><code class="docutils literal notranslate"><span class="pre">newline</span></code>: Spécifie comment les sauts de ligne fonctionnent. Valeurs
+possible: None, “”, “\n”(par défaut), “\r” ou “\r\n”.</p>
+<div class="section" id="id2">
+<h3>Exemple<a class="headerlink" href="#id2" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Exemple d’un programme qui affiche deux lignes dans une console:</p>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;Exemple de gestion de flux avec io.StringIO.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">io</span>
+
+<span class="n">output</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">StringIO</span><span class="p">()</span>
+<span class="n">output</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">u</span><span class="s1">&#39;First line.</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>  <span class="c1"># u is for Unicode</span>
+<span class="n">output</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">u</span><span class="s1">&#39;Second line.</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="c1"># Retrieve file contents</span>
+<span class="n">contents</span> <span class="o">=</span> <span class="n">output</span><span class="o">.</span><span class="n">getvalue</span><span class="p">()</span>
+
+<span class="c1"># Display:</span>
+<span class="c1"># First Line.</span>
+<span class="c1"># Second line.</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">contents</span><span class="p">)</span>
+
+<span class="c1"># Close object and discard memory buffer --</span>
+<span class="c1"># .getvalue() will now raise an exception.</span>
+<span class="n">output</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+</div>
+<div class="section" id="io-bytesio">
+<h2><a class="reference external" href="https://docs.python.org/3/library/io.html#io.BytesIO" title="(disponible dans Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">io.BytesIO</span></code></a><a class="headerlink" href="#io-bytesio" title="Lien permanent vers ce titre">¶</a></h2>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">io</span><span class="o">.</span><span class="n">BytesIO</span><span class="p">([</span><span class="n">initial_bytes</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Permet d’ouvrir un flux binaire en mémoire avec buffer. Le buffer est vidé lorsqu’on <code class="docutils literal notranslate"><span class="pre">close()</span></code> le flux.
+<a class="reference external" href="https://docs.python.org/3/library/io.html#io.BytesIO" title="(disponible dans Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">io.BytesIO</span></code></a> hérite de <a class="reference external" href="https://docs.python.org/3/library/io.html#io.IOBase" title="(disponible dans Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">io.IOBase</span></code></a>. Lorsque qu’on appelle <code class="docutils literal notranslate"><span class="pre">open(mode='b')</span></code>, python crée, de façon caché, un <a class="reference external" href="https://docs.python.org/3/library/io.html#io.BytesIO" title="(disponible dans Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">io.BytesIO</span></code></a>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">initial_bytes</span></code>: Permets d’avoir des données binaires à la création.</p>
+<div class="section" id="id3">
+<h3>Exemple<a class="headerlink" href="#id3" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Exemple d’un programme qui change des caractères se trouvant au milieu d’un <a class="reference external" href="https://docs.python.org/3/library/io.html#io.BytesIO" title="(disponible dans Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">io.BytesIO</span></code></a> par d’autres caractères:</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">BytesIO</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;abcdef&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">view</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">getbuffer</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">view</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">&quot;56&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span><span class="o">.</span><span class="n">getvalue</span><span class="p">()</span>
+<span class="go">b&#39;ab56ef&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Lien permanent vers ce titre">¶</a></h2>
+<p><a class="reference external" href="https://docs.python.org/3/library/io.html#module-io" title="(disponible dans Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">io</span></code></a> est un module simple à utiliser pour s’occuper des flux et pour
+modifier les fichiers. Ce document ne cite que les méthodes les plus courantes, il ne faut
+pas hésiter à aller voir la documentation officielle de <a class="reference external" href="https://docs.python.org/3/library/io.html#module-io" title="(disponible dans Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">io</span></code></a>.</p>
+<dl class="footnote brackets">
+<dt class="label" id="ds"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>&lt;<a class="reference external" href="mailto:dylan&#46;santosdepinho&#37;&#52;&#48;he-arc&#46;ch">dylan<span>&#46;</span>santosdepinho<span>&#64;</span>he-arc<span>&#46;</span>ch</a>&gt;</p>
+</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Bibliothèques Python</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../builtins/index.html">Builtins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../collections/index.html"><code class="docutils literal notranslate"><span class="pre">collections</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../datetime/index.html"><code class="docutils literal notranslate"><span class="pre">datetime</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dunders/index.html">Dunders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../enum/index.html"><code class="docutils literal notranslate"><span class="pre">enum</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fstrings/index.html">f-strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../itertools/index.html"><code class="docutils literal notranslate"><span class="pre">itertools</span></code></a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">io</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../math/index.html"><code class="docutils literal notranslate"><span class="pre">math</span></code> / <code class="docutils literal notranslate"><span class="pre">fractions</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../random/index.html"><code class="docutils literal notranslate"><span class="pre">random</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../time/index.html"><code class="docutils literal notranslate"><span class="pre">time</span></code> / <code class="docutils literal notranslate"><span class="pre">datetime</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../statistics/index.html"><code class="docutils literal notranslate"><span class="pre">statistics</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../super/index.html"><code class="docutils literal notranslate"><span class="pre">super()</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../abc/index.html">Abstract Base Class (<code class="docutils literal notranslate"><span class="pre">abc</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../binary/index.html"><code class="docutils literal notranslate"><span class="pre">bytes</span></code> / <code class="docutils literal notranslate"><span class="pre">bytearray</span></code> / <code class="docutils literal notranslate"><span class="pre">memoryview</span></code>, <code class="docutils literal notranslate"><span class="pre">struct</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bisect/index.html"><code class="docutils literal notranslate"><span class="pre">bisect</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email/index.html">E-mail (<code class="docutils literal notranslate"><span class="pre">smtplib</span></code> / <code class="docutils literal notranslate"><span class="pre">imaplib</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hashlib/index.html"><code class="docutils literal notranslate"><span class="pre">hashlib</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../multiprocessing/index.html"><code class="docutils literal notranslate"><span class="pre">multiprocessing</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../re/index.html">Expressions régulières (<code class="docutils literal notranslate"><span class="pre">re</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../secrets/index.html"><code class="docutils literal notranslate"><span class="pre">secrets</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../weakref/index.html"><code class="docutils literal notranslate"><span class="pre">weakref</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../colorama/index.html"><code class="docutils literal notranslate"><span class="pre">colorama</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../invoke/index.html"><code class="docutils literal notranslate"><span class="pre">invoke</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../unittest/index.html"><code class="docutils literal notranslate"><span class="pre">unittest</span></code> / <code class="docutils literal notranslate"><span class="pre">doctest</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pytest/index.html"><code class="docutils literal notranslate"><span class="pre">pytest</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../csv/index.html"><code class="docutils literal notranslate"><span class="pre">csv</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../json/index.html"><code class="docutils literal notranslate"><span class="pre">json</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pillow/index.html">Python Imaging Library (<code class="docutils literal notranslate"><span class="pre">PIL</span></code>)</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../hug/index.html"><code class="docutils literal notranslate"><span class="pre">hug</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../matplotlib/index.html"><code class="docutils literal notranslate"><span class="pre">matplotlib</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../networkx/index.html"><code class="docutils literal notranslate"><span class="pre">networkx</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pycrypto/index.html"><code class="docutils literal notranslate"><span class="pre">pycrypto</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pygame/index.html"><code class="docutils literal notranslate"><span class="pre">pygame</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sphinx/index.html"><code class="docutils literal notranslate"><span class="pre">sphinx</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../watchdog/index.html"><code class="docutils literal notranslate"><span class="pre">watchdog</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../pbr/index.html"><cite>⚙️Automate your publishing to PyPI with PBR and Travis</cite></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../misc/about.html">À propos de ce livre</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../misc/contrib.html">Contribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../licence.html">Creative Commons Attribution-ShareAlike 4.0 International</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="../itertools/index.html" title="Chapitre précédent"><code class="docutils literal notranslate"><span class="pre">itertools</span></code></a></li>
+      <li>Next: <a href="../math/index.html" title="Chapitre suivant"><code class="docutils literal notranslate"><span class="pre">math</span></code> / <code class="docutils literal notranslate"><span class="pre">fractions</span></code></a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Recherche rapide</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016-2017, HE-Arc.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/io/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,378 @@
+
+<!DOCTYPE html>
+
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>csv &#8212; Documentation Bibliothèques Python 1.0.0</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/translations.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Recherche" href="../search.html" />
+    <link rel="next" title="json" href="../json/index.html" />
+    <link rel="prev" title="pytest" href="../pytest/index.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="csv">
+<span id="csv-tutorial"></span><h1><code class="docutils literal notranslate"><span class="pre">csv</span></code><a class="headerlink" href="#csv" title="Lien permanent vers ce titre">¶</a></h1>
+<img alt="CSV logo" class="align-right" src="../_images/csv.png" />
+<p>Par Axel Rieben <a class="footnote-reference brackets" href="#email" id="id1">1</a></p>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Lien permanent vers ce titre">¶</a></h2>
+<p>CSV est un format ouvert très populaire d’importation et d’exportation de données tel que des feuilles de calcul. Les données d’un fichier <code class="docutils literal notranslate"><span class="pre">.csv</span></code> sont sous forme textuelles séparées par des virgules d’où son nom <em>Comma Separeted Values</em>.</p>
+<p>Exemple d’un fichier .csv <a class="footnote-reference brackets" href="#wikipedia" id="id2">3</a> :</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>&quot;Robert;&quot;Dupont&quot;;&quot;rue du Verger, 12&quot;
+&quot;Michel&quot;;&quot;Durand&quot;;&quot; av. de la Ferme, 89&quot;
+&quot;Michel &quot;&quot;Michele&quot;&quot;&quot;;&quot;Durand&quot;;&quot; av. de la Ferme, 89&quot;
+&quot;Michel;Michele&quot;;&quot;Durand&quot;;&quot;av. de la Ferme, 89&quot;
+</pre></div>
+</div>
+<p>Représentation tabulaire :</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>Robert</p></td>
+<td><p>Dupont</p></td>
+<td><p>rue du Verger, 12</p></td>
+</tr>
+<tr class="row-even"><td><p>Michel</p></td>
+<td><p>Durand</p></td>
+<td><p>av. de la Ferme, 89</p></td>
+</tr>
+<tr class="row-odd"><td><p>Michel « Michele »</p></td>
+<td><p>Durand</p></td>
+<td><p>av. de la Ferme, 89</p></td>
+</tr>
+<tr class="row-even"><td><p>Michel;Michele</p></td>
+<td><p>Durand</p></td>
+<td><p>av. de la Ferme, 89</p></td>
+</tr>
+</tbody>
+</table>
+<p>Il existe des différences de format parmi les applications utilisant CSV puisqu’il n’a pas été standardisé. Les guillemets peuvent par exemple être omis et les points virgules remplacé par des virgules. Toutefois, la RFC 41802 <a class="footnote-reference brackets" href="#rfc" id="id3">4</a> décrit la forme la plus courante.</p>
+</div>
+<div class="section" id="exemples">
+<h2>Exemples<a class="headerlink" href="#exemples" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Le module <a class="reference external" href="https://docs.python.org/3/library/csv.html#module-csv" title="(disponible dans Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">csv</span></code></a> python implémente des classes permettant de facilement lire et écrire des fichiers au format CSV.</p>
+<div class="section" id="lecture">
+<h3>Lecture<a class="headerlink" href="#lecture" title="Lien permanent vers ce titre">¶</a></h3>
+<p>L’exemple ci-dessous illustre la lecture d’un fichier CSV nommé « data.csv ». Dans un premier temps, le fichier est ouvert. Ensuite, on peut voir que la fonction <a class="reference external" href="https://docs.python.org/3/library/csv.html#csv.reader" title="(disponible dans Python v3.9)"><code class="xref py py-func docutils literal notranslate"><span class="pre">reader()</span></code></a> est utilisé afin d’obtenir un objet sur lequel il est possible d’itérer. Enfin, une boucle affiche chaque ligne du fichier.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;data.csv&#39;</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">csvfile</span><span class="p">:</span>
+    <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">csvfile</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+
+</pre></div>
+</div>
+<p>Il est possible de ne lire qu’une ou plusieurs colonnes en utilisant l’opérateur <code class="docutils literal notranslate"><span class="pre">[]</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;data.csv&#39;</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">csvfile</span><span class="p">:</span>
+    <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">csvfile</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+
+</pre></div>
+</div>
+<p>Il est commun de spécifier des entêtes au dessus de chaque colonne, comme sur l’exemple de fichier CSV ci-dessous avec les entêtes FirstColumn et SecondColumn. <a class="footnote-reference brackets" href="#stack" id="id4">6</a></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>FirstColumn,SecondColumn
+asdf,1234
+qwer,5678
+</pre></div>
+</div>
+<p>Pour les ignorer lors de la lecture, il suffit de passer la première ligne avec la fonction <a class="reference external" href="https://docs.python.org/3/library/functions.html#next" title="(disponible dans Python v3.9)"><code class="xref py py-func docutils literal notranslate"><span class="pre">next()</span></code></a> :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;data.csv&#39;</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">csvfile</span><span class="p">:</span>
+    <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">csvfile</span><span class="p">)</span>
+    <span class="nb">next</span><span class="p">(</span><span class="n">reader</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+
+</pre></div>
+</div>
+<p>Ou alors en utilisant un <a class="reference external" href="https://docs.python.org/3/library/csv.html#csv.DictReader" title="(disponible dans Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DictReader</span></code></a>, qui permettra de lire chaque colonne en spécifiant son entête plutôt que son index numérique :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;data.csv&#39;</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">csvfile</span><span class="p">:</span>
+    <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">csvfile</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;FirstColumn&#39;</span><span class="p">])</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;SecondColumn&#39;</span><span class="p">])</span>
+
+</pre></div>
+</div>
+<p>Il est à noter qu’il est recommandé d’utiliser des fichier CSV encodé en UTF-8 pour éviter tout bogue inopiné.</p>
+</div>
+<div class="section" id="ecriture">
+<h3>Écriture<a class="headerlink" href="#ecriture" title="Lien permanent vers ce titre">¶</a></h3>
+<p>L’exemple ci-dessous illustre l’écriture d’un fichier CSV nommé « write.csv ». Comme pour la lecture, il faut tout d’abord ouvrir le fichier. Ensuite la fonction, <a class="reference external" href="https://docs.python.org/3/library/csv.html#csv.writer" title="(disponible dans Python v3.9)"><code class="xref py py-func docutils literal notranslate"><span class="pre">writer()</span></code></a> retourne un objet qui va convertir au format CSV les données qu’on lui donne. Il suffit donc de passer celles-ci à la fonction <a class="reference external" href="https://docs.python.org/3/library/csv.html#csv.csvwriter.writerow" title="(disponible dans Python v3.9)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">writerow()</span></code></a>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;write.csv&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">csvfile</span><span class="p">:</span>
+    <span class="n">writer</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="n">csvfile</span><span class="p">)</span>
+    <span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">((</span><span class="s1">&#39;abc&#39;</span><span class="p">,</span> <span class="s1">&#39;def&#39;</span><span class="p">,</span> <span class="s1">&#39;ghi&#39;</span><span class="p">))</span>
+    <span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">((</span><span class="s1">&#39;123&#39;</span><span class="p">,</span> <span class="s1">&#39;456&#39;</span><span class="p">,</span> <span class="s1">&#39;789&#39;</span><span class="p">))</span>
+
+</pre></div>
+</div>
+<p>Le résultat du code ci-dessus sera un fichier <code class="docutils literal notranslate"><span class="pre">write.csv</span></code> placé au même endroit que le script Python et contenant :</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>abc,def,ghi
+123,456,789
+</pre></div>
+</div>
+<p>Suivant le système d’exploitation et l’éditeur de texte utilisé, il est possible de voir apparaître des lignes vides entre chaque ligne de données. Ceci est dû au fait que le délimiteur de fin de ligne par défaut utilisé par <a class="reference external" href="https://docs.python.org/3/library/csv.html#csv.writer" title="(disponible dans Python v3.9)"><code class="xref py py-func docutils literal notranslate"><span class="pre">writer()</span></code></a> est <code class="docutils literal notranslate"><span class="pre">\r\n</span></code>.</p>
+</div>
+<div class="section" id="dialectes">
+<h3>Dialectes <a class="footnote-reference brackets" href="#chicoree" id="id5">7</a><a class="headerlink" href="#dialectes" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Comme précisé dans l’introduction, CSV manque de standardisation. Les logiciels francophones auront tendance à utiliser des points virgules comme séparateur, et des guillemets comme caractère de délimitation de chaine. Ainsi, il n’y aura pas besoin d’échapper les caractères apostrophe et il n’y aura pas de confusion avec la virgule d’un chiffre ou d’une phrase. D’un autre côté, le standard défini par la RFC est l’utilisation de l’apostrophe et de la virgule. Pour complexifier le tout, chacun peut plus ou moins définir son propre format.</p>
+<p>Pour pallier à ces différents de formatage <a class="reference external" href="https://docs.python.org/3/library/csv.html#module-csv" title="(disponible dans Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">csv</span></code></a> à créer les dialectes. Un dialecte permet de spécifier chacun des paramètres du formatage. Ils peuvent être spécifié soit directement lors de l’utilisation des fonctions <a class="reference external" href="https://docs.python.org/3/library/csv.html#csv.reader" title="(disponible dans Python v3.9)"><code class="xref py py-func docutils literal notranslate"><span class="pre">reader()</span></code></a> et <a class="reference external" href="https://docs.python.org/3/library/csv.html#csv.writer" title="(disponible dans Python v3.9)"><code class="xref py py-func docutils literal notranslate"><span class="pre">writer()</span></code></a> :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;data.csv&#39;</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">csvfile</span><span class="p">:</span>
+    <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">csvfile</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;;&#39;</span><span class="p">,</span> <span class="n">quotechar</span><span class="o">=</span><span class="s1">&#39;&quot;&#39;</span><span class="p">)</span>
+
+</pre></div>
+</div>
+<p>Soit en utilisant une classe qui redéfini tous les attributs :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+
+<span class="k">class</span> <span class="nc">MyDialect</span><span class="p">(</span><span class="n">csv</span><span class="o">.</span><span class="n">Dialect</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Redéfini les attributs de la classe Dialect.&quot;&quot;&quot;</span>
+
+    <span class="n">delimiter</span> <span class="o">=</span> <span class="s2">&quot;;&quot;</span>
+    <span class="n">quotechar</span> <span class="o">=</span> <span class="s1">&#39;&quot;&#39;</span>
+    <span class="n">escapechar</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">doublequote</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">lineterminator</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\r\n</span><span class="s2">&quot;</span>
+    <span class="n">quoting</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">QUOTE_NONE</span>
+    <span class="n">skipinitialspace</span> <span class="o">=</span> <span class="kc">False</span>
+
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;data.csv&#39;</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">csvfile</span><span class="p">:</span>
+    <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">csvfile</span><span class="p">,</span> <span class="n">MyDialect</span><span class="p">())</span>
+
+</pre></div>
+</div>
+<p>Voici un tableau qui renseigne sur chacun des attributs :</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 7%" />
+<col style="width: 7%" />
+<col style="width: 86%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Attribut</p></th>
+<th class="head"><p>Valeur par défaut</p></th>
+<th class="head"><p>Signification</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>delimiter</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">,</span></code></p></td>
+<td><p>Séparateur de champ</p></td>
+</tr>
+<tr class="row-odd"><td><p>quotechar</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;</span></code></p></td>
+<td><p>Délimiteur pour les chaînes</p></td>
+</tr>
+<tr class="row-even"><td><p>quoting</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">QUOTE_MINIMAL</span></code></p></td>
+<td><p>Contrôle l’adjonction de guillemets autour des données</p></td>
+</tr>
+<tr class="row-odd"><td><p>doublequote</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">True</span></code></p></td>
+<td><p>Doubler les quotechar qui se trouvent dans les données</p></td>
+</tr>
+<tr class="row-even"><td><p>escapechar</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p></td>
+<td><p>Caractère d’échappement pour protéger les caractères spéciaux dans les données</p></td>
+</tr>
+<tr class="row-odd"><td><p>lineterminator</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">\r\n</span></code></p></td>
+<td><p>Séquence de caractères utilisée à la fin de chaque enregistrement (la fonction <a class="reference external" href="https://docs.python.org/3/library/csv.html#csv.reader" title="(disponible dans Python v3.9)"><code class="xref py py-func docutils literal notranslate"><span class="pre">reader()</span></code></a> ignore cet attribut et est configuré pour détecter automatiquement \n ou \r comme séquence de fin de ligne)</p></td>
+</tr>
+<tr class="row-even"><td><p>skipinitialspace</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
+<td><p>Ignorer les espaces entre le délimiteur de chaîne et les données</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Lien permanent vers ce titre">¶</a></h2>
+<p><a class="reference external" href="https://docs.python.org/3/library/csv.html#module-csv" title="(disponible dans Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">csv</span></code></a> est un module très pratique lorsqu’il s’agit de stocker ou de rechercher des données dans un fichier. Il est aussi facile d’utilisation et ne nécessite que quelques lignes de code pour être opérationnel. Un point négatif cependant, est que le format manque de standardisation, ce qui peut être problématique pour le partage d’informations entre plusieurs applications. Il n’est non plus pas adapté aux stockages d’informations en masse ayant de fortes dépendances entre elles. Là, une base de données serait plus judicieuse. Enfin, pour terminer, beaucoup d’autre fonctionnalités du module n’ont pas pu être exposé dans cette courte page d’information. Il est donc recommandé de suivre les liens listés ci-dessous pour plus de détails.</p>
+</div>
+<div class="section" id="references">
+<h2>Références<a class="headerlink" href="#references" title="Lien permanent vers ce titre">¶</a></h2>
+<dl class="footnote brackets">
+<dt class="label" id="email"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>&lt;<a class="reference external" href="mailto:axel&#46;rieben&#37;&#52;&#48;he-arc&#46;ch">axel<span>&#46;</span>rieben<span>&#64;</span>he-arc<span>&#46;</span>ch</a>&gt;</p>
+</dd>
+<dt class="label" id="logo"><span class="brackets">2</span></dt>
+<dd><p><a class="reference external" href="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Text-csv-text.svg/262px-Text-csv-text.svg.png">https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Text-csv-text.svg/262px-Text-csv-text.svg.png</a></p>
+</dd>
+<dt class="label" id="wikipedia"><span class="brackets"><a class="fn-backref" href="#id2">3</a></span></dt>
+<dd><p><a class="reference external" href="https://fr.wikipedia.org/wiki/Comma-separated_values">https://fr.wikipedia.org/wiki/Comma-separated_values</a></p>
+</dd>
+<dt class="label" id="rfc"><span class="brackets"><a class="fn-backref" href="#id3">4</a></span></dt>
+<dd><p><a class="reference external" href="https://tools.ietf.org/html/rfc4180">https://tools.ietf.org/html/rfc4180</a></p>
+</dd>
+<dt class="label" id="doc"><span class="brackets">5</span></dt>
+<dd><p><a class="reference external" href="https://docs.python.org/3.6/library/csv.html#module-csv">https://docs.python.org/3.6/library/csv.html#module-csv</a></p>
+</dd>
+<dt class="label" id="stack"><span class="brackets"><a class="fn-backref" href="#id4">6</a></span></dt>
+<dd><p><a class="reference external" href="http://stackoverflow.com/questions/14257373/skip-the-headers-when-editing-a-csv-file-using-python">http://stackoverflow.com/questions/14257373/skip-the-headers-when-editing-a-csv-file-using-python</a></p>
+</dd>
+<dt class="label" id="chicoree"><span class="brackets"><a class="fn-backref" href="#id5">7</a></span></dt>
+<dd><p><a class="reference external" href="http://www.chicoree.fr/w/Fichiers_CSV_en_Python">http://www.chicoree.fr/w/Fichiers_CSV_en_Python</a></p>
+</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Bibliothèques Python</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../builtins/index.html">Builtins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../collections/index.html"><code class="docutils literal notranslate"><span class="pre">collections</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../datetime/index.html"><code class="docutils literal notranslate"><span class="pre">datetime</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dunders/index.html">Dunders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../enum/index.html"><code class="docutils literal notranslate"><span class="pre">enum</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fstrings/index.html">f-strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../itertools/index.html"><code class="docutils literal notranslate"><span class="pre">itertools</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../io/index.html"><code class="docutils literal notranslate"><span class="pre">io</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../math/index.html"><code class="docutils literal notranslate"><span class="pre">math</span></code> / <code class="docutils literal notranslate"><span class="pre">fractions</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../random/index.html"><code class="docutils literal notranslate"><span class="pre">random</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../time/index.html"><code class="docutils literal notranslate"><span class="pre">time</span></code> / <code class="docutils literal notranslate"><span class="pre">datetime</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../statistics/index.html"><code class="docutils literal notranslate"><span class="pre">statistics</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../super/index.html"><code class="docutils literal notranslate"><span class="pre">super()</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../abc/index.html">Abstract Base Class (<code class="docutils literal notranslate"><span class="pre">abc</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../binary/index.html"><code class="docutils literal notranslate"><span class="pre">bytes</span></code> / <code class="docutils literal notranslate"><span class="pre">bytearray</span></code> / <code class="docutils literal notranslate"><span class="pre">memoryview</span></code>, <code class="docutils literal notranslate"><span class="pre">struct</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bisect/index.html"><code class="docutils literal notranslate"><span class="pre">bisect</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email/index.html">E-mail (<code class="docutils literal notranslate"><span class="pre">smtplib</span></code> / <code class="docutils literal notranslate"><span class="pre">imaplib</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hashlib/index.html"><code class="docutils literal notranslate"><span class="pre">hashlib</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../multiprocessing/index.html"><code class="docutils literal notranslate"><span class="pre">multiprocessing</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../re/index.html">Expressions régulières (<code class="docutils literal notranslate"><span class="pre">re</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../secrets/index.html"><code class="docutils literal notranslate"><span class="pre">secrets</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../weakref/index.html"><code class="docutils literal notranslate"><span class="pre">weakref</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../colorama/index.html"><code class="docutils literal notranslate"><span class="pre">colorama</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../invoke/index.html"><code class="docutils literal notranslate"><span class="pre">invoke</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../unittest/index.html"><code class="docutils literal notranslate"><span class="pre">unittest</span></code> / <code class="docutils literal notranslate"><span class="pre">doctest</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pytest/index.html"><code class="docutils literal notranslate"><span class="pre">pytest</span></code></a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">csv</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../json/index.html"><code class="docutils literal notranslate"><span class="pre">json</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pillow/index.html">Python Imaging Library (<code class="docutils literal notranslate"><span class="pre">PIL</span></code>)</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../hug/index.html"><code class="docutils literal notranslate"><span class="pre">hug</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../matplotlib/index.html"><code class="docutils literal notranslate"><span class="pre">matplotlib</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../networkx/index.html"><code class="docutils literal notranslate"><span class="pre">networkx</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pycrypto/index.html"><code class="docutils literal notranslate"><span class="pre">pycrypto</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pygame/index.html"><code class="docutils literal notranslate"><span class="pre">pygame</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sphinx/index.html"><code class="docutils literal notranslate"><span class="pre">sphinx</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../watchdog/index.html"><code class="docutils literal notranslate"><span class="pre">watchdog</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../pbr/index.html"><cite>⚙️Automate your publishing to PyPI with PBR and Travis</cite></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../misc/about.html">À propos de ce livre</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../misc/contrib.html">Contribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../licence.html">Creative Commons Attribution-ShareAlike 4.0 International</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="../pytest/index.html" title="Chapitre précédent"><code class="docutils literal notranslate"><span class="pre">pytest</span></code></a></li>
+      <li>Next: <a href="../json/index.html" title="Chapitre suivant"><code class="docutils literal notranslate"><span class="pre">json</span></code></a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Recherche rapide</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016-2017, HE-Arc.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/csv/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

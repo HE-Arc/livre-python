@@ -1,0 +1,319 @@
+
+<!DOCTYPE html>
+
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>f-strings &#8212; Documentation Bibliothèques Python 1.0.0</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/translations.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Recherche" href="../search.html" />
+    <link rel="next" title="itertools" href="../itertools/index.html" />
+    <link rel="prev" title="enum" href="../enum/index.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="f-strings">
+<span id="fstrings-tutorial"></span><h1>f-strings<a class="headerlink" href="#f-strings" title="Lien permanent vers ce titre">¶</a></h1>
+<p>Par Thibaut Piquerez <a class="footnote-reference brackets" href="#tp" id="id1">1</a></p>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Depuis Python 3.6, f-strings (<span class="target" id="index-0"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0498"><strong>PEP 498</strong></a>) permet d’insérer des expressions dans des chaines de caractères en utilisant une syntaxe minimale. Ces expressions servent à insérer des variables dans les chaines de caractères et de les mettre en forme.</p>
+</div>
+<div class="section" id="fonctionnement">
+<h2>Fonctionnement<a class="headerlink" href="#fonctionnement" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Pour utiliser f-strings il suffit de mettre un f devant la chaine de caractères et pour insérer la valeur d’une variable dans la chaine il suffit de mettre la variable entre accolade. Si il n’y a pas de variable a substituer il n’est pas nécessaire de mettre le <code class="docutils literal notranslate"><span class="pre">f</span></code> devant.</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Paul&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">age</span> <span class="o">=</span> <span class="mi">23</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Votre nom est un </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1"> et vous avez </span><span class="si">{</span><span class="n">age</span><span class="si">}</span><span class="s1"> ans&#39;</span><span class="p">)</span>
+<span class="go">Votre nom est un Paul et vous avez 23 ans</span>
+</pre></div>
+</div>
+<p>f-strings prend également en compte les fonctions ce qui signigfie que les fonctions qui se trouvent dans la chaine de caractères sont exécutées et le résultat est affiché.</p>
+</div>
+<div class="section" id="echappement">
+<h2>Échappement<a class="headerlink" href="#echappement" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Certains cractères ne peuvent pas être afficher tel quel il est nécessaire de les échapper.</p>
+<p>Pour les accolade <code class="docutils literal notranslate"><span class="pre">{}</span></code> il faut en mettre deux à la suite :</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nombre</span> <span class="o">=</span> <span class="mi">34</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Le nombre est </span><span class="se">{{</span><span class="si">{</span><span class="n">nombre</span><span class="si">}</span><span class="se">}}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="go">Le nombre est {34}</span>
+</pre></div>
+</div>
+<p>Pour afficher des apostrophes, il y a trois solutions:</p>
+<blockquote>
+<div><p>Mettre la chaine entre guillemets :</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ma chaine de caractères avec des &#39;apostrophes&#39; &quot;</span><span class="p">)</span>
+
+<span class="go">ma chaine de caractères avec des &#39;apostrophes&#39;</span>
+</pre></div>
+</div>
+<p>Mettre la chaine entre 3 apostrophes :</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;ma chaine de caractères avec des &#39;apostrophes&#39; &#39;&#39;&#39;</span><span class="p">)</span>
+
+<span class="go">ma chaine de caractères avec des &#39;apostrophes&#39;</span>
+</pre></div>
+</div>
+<p>Mettre des backslash avant les apostrophes :</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;ma chaine de caractères avec une </span><span class="se">\&#39;</span><span class="s1">apostrophe &#39;</span><span class="p">)</span>
+
+<span class="go">ma chaine de caractères avec des &#39;apostrophes</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="raw-f-strings">
+<h2>Raw f-strings<a class="headerlink" href="#raw-f-strings" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Un string convertit automatiquement les échappements avec des backslashs comme par exemple : <code class="docutils literal notranslate"><span class="pre">\n</span></code> , <code class="docutils literal notranslate"><span class="pre">\&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">\t</span></code>, etc. Donc si on ne veut pas que python interprète ces échappements il faut utiliser les raw string en ecrivant <code class="docutils literal notranslate"><span class="pre">r</span></code> avant la chaine de caractères et si on veut utiliser des raw f-strings il faut mettre <code class="docutils literal notranslate"><span class="pre">fr</span></code>.</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;ma </span><span class="se">\n</span><span class="s1"> phrase&#39;</span><span class="p">)</span>
+<span class="go">ma</span>
+<span class="go"> phrase</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;ma \n phrase&#39;</span><span class="p">)</span>
+<span class="go">ma \n phrase</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="options-de-formattage">
+<h2>Options de formattage<a class="headerlink" href="#options-de-formattage" title="Lien permanent vers ce titre">¶</a></h2>
+<p>f-strings implémente également une manière de mettre en forme les nombres.</p>
+<p>Voici la syntaxe pour utiliser le formattage (voir <a class="reference external" href="https://docs.python.org/3/library/string.html#formatspec" title="(disponible dans Python v3.9)"><span>Format Specification Mini-Language</span></a>):</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="go">f &#39; &lt;texte&gt; { &lt;expression/variable&gt; : &lt;format&gt; } &lt;texte&gt; ... &#39;</span>
+</pre></div>
+</div>
+<p>Le format se trouve sous cette forme pour les nombres à virgule:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">alignement</span><span class="p">][</span><span class="n">signe</span><span class="p">][</span><span class="n">largeur</span><span class="p">][</span><span class="n">groupage</span><span class="p">][</span><span class="o">.</span><span class="n">précision</span><span class="p">][</span><span class="nb">type</span><span class="p">]</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><dl class="simple">
+<dt>alignement<span class="classifier">détermine ou le nombre est aligné dans sa zone</span></dt><dd><ul>
+<li><p>“&gt;”    aligne à droite</p></li>
+<li><p>“&lt;”    aligne à gauche</p></li>
+<li><p>“^”    centré</p></li>
+<li><p>“=”    aligne le signe à gauche et le nombre à droite</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>signe<span class="classifier">détermine l’affichage du signe</span></dt><dd><ul>
+<li><p>“+”     indique que le signe + doit être affiché ainsi que le -</p></li>
+<li><p>“-“   indique que le signe - doit être affiché (par defaut)</p></li>
+<li><p>“ “      n’affiche pas le + mais insére un espace à la place</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>largeur : détermine la place qui doit être réservée pour l’affichage du nombre</p></li>
+<li><dl class="simple">
+<dt>groupage<span class="classifier">détermine le symbole de séparation tous les 3 chiffres</span></dt><dd><ul>
+<li><p>“_”</p></li>
+<li><p>“,”</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>précision : détermine le nombre de chiffres après la virgule</p></li>
+<li><dl class="simple">
+<dt>type<span class="classifier">détermine le mode d’affichage</span></dt><dd><ul>
+<li><p>“e” ou “E”     notation scientifique</p></li>
+<li><p>“f” ou “F”    affichage classique</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Exemple :</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nombre</span> <span class="o">=</span> <span class="mf">357568.12312</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nombre2</span> <span class="o">=</span> <span class="mf">568.568768</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nombre3</span> <span class="o">=</span> <span class="o">-</span><span class="mf">34.3432</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nombre4</span> <span class="o">=</span> <span class="mi">23</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">nombre</span> <span class="si">:</span><span class="s1"> &gt;+20_.4f</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">nombre2</span> <span class="si">:</span><span class="s1"> &gt;+20_.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">nombre3</span> <span class="si">:</span><span class="s1"> &gt;+20_.4f</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">nombre4</span> <span class="si">:</span><span class="s1"> &gt;+20_.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="go">+357_568.1231            +568.5688</span>
+<span class="go">     -34.3432             +23.0000</span>
+</pre></div>
+</div>
+<p>C’est très pratique pour faire des tableaux de nombre.</p>
+<p>Il existe aussi des option de formattage pour les entiers il suffit simplement de mettre une lettre pour le format:</p>
+<ul class="simple">
+<li><p>“b”            : affiche en binaire</p></li>
+<li><p>“c”             : affiche le caractère correspondant au code unicode</p></li>
+<li><p>“d”            : affiche en decimal (par defaut)</p></li>
+<li><p>“o”            : affiche en octal</p></li>
+<li><p>“x” ou “X”    : affiche en hexa</p></li>
+</ul>
+<p>Exemple :</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">chmod</span> <span class="o">=</span> <span class="mo">0o644</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">chmod</span><span class="si">:</span><span class="s1">016b</span><span class="si">}</span><span class="s1">&#39;</span>
+<span class="go">&#39;0000110100100&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Avantage de f-strings:</p>
+<ul class="simple">
+<li><p>variable introduit directement dans les chaines de caractères</p></li>
+<li><p>concaténation des chaines de caractères sans “+”</p></li>
+<li><p>formattage simplifié des nombres</p></li>
+<li><p>alignement du texte simplifié</p></li>
+<li><p>temps d’execution plus court</p></li>
+</ul>
+<p>f-strings est un complément très utile aux string classiques en simplifiant la manière d’utiliser des chaines de caractères. Le code à taper est plus simple et également plus court et qui dit moins de code dit moins d’erreurs.</p>
+<dl class="footnote brackets">
+<dt class="label" id="tp"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>&lt;<a class="reference external" href="mailto:thibaut&#46;piquerez&#37;&#52;&#48;he-arc&#46;ch">thibaut<span>&#46;</span>piquerez<span>&#64;</span>he-arc<span>&#46;</span>ch</a>&gt;</p>
+</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Bibliothèques Python</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../builtins/index.html">Builtins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../collections/index.html"><code class="docutils literal notranslate"><span class="pre">collections</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../datetime/index.html"><code class="docutils literal notranslate"><span class="pre">datetime</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dunders/index.html">Dunders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../enum/index.html"><code class="docutils literal notranslate"><span class="pre">enum</span></code></a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">f-strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../itertools/index.html"><code class="docutils literal notranslate"><span class="pre">itertools</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../io/index.html"><code class="docutils literal notranslate"><span class="pre">io</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../math/index.html"><code class="docutils literal notranslate"><span class="pre">math</span></code> / <code class="docutils literal notranslate"><span class="pre">fractions</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../random/index.html"><code class="docutils literal notranslate"><span class="pre">random</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../time/index.html"><code class="docutils literal notranslate"><span class="pre">time</span></code> / <code class="docutils literal notranslate"><span class="pre">datetime</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../statistics/index.html"><code class="docutils literal notranslate"><span class="pre">statistics</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../super/index.html"><code class="docutils literal notranslate"><span class="pre">super()</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../abc/index.html">Abstract Base Class (<code class="docutils literal notranslate"><span class="pre">abc</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../binary/index.html"><code class="docutils literal notranslate"><span class="pre">bytes</span></code> / <code class="docutils literal notranslate"><span class="pre">bytearray</span></code> / <code class="docutils literal notranslate"><span class="pre">memoryview</span></code>, <code class="docutils literal notranslate"><span class="pre">struct</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bisect/index.html"><code class="docutils literal notranslate"><span class="pre">bisect</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email/index.html">E-mail (<code class="docutils literal notranslate"><span class="pre">smtplib</span></code> / <code class="docutils literal notranslate"><span class="pre">imaplib</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hashlib/index.html"><code class="docutils literal notranslate"><span class="pre">hashlib</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../multiprocessing/index.html"><code class="docutils literal notranslate"><span class="pre">multiprocessing</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../re/index.html">Expressions régulières (<code class="docutils literal notranslate"><span class="pre">re</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../secrets/index.html"><code class="docutils literal notranslate"><span class="pre">secrets</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../weakref/index.html"><code class="docutils literal notranslate"><span class="pre">weakref</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../colorama/index.html"><code class="docutils literal notranslate"><span class="pre">colorama</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../invoke/index.html"><code class="docutils literal notranslate"><span class="pre">invoke</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../unittest/index.html"><code class="docutils literal notranslate"><span class="pre">unittest</span></code> / <code class="docutils literal notranslate"><span class="pre">doctest</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pytest/index.html"><code class="docutils literal notranslate"><span class="pre">pytest</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../csv/index.html"><code class="docutils literal notranslate"><span class="pre">csv</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../json/index.html"><code class="docutils literal notranslate"><span class="pre">json</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pillow/index.html">Python Imaging Library (<code class="docutils literal notranslate"><span class="pre">PIL</span></code>)</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../hug/index.html"><code class="docutils literal notranslate"><span class="pre">hug</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../matplotlib/index.html"><code class="docutils literal notranslate"><span class="pre">matplotlib</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../networkx/index.html"><code class="docutils literal notranslate"><span class="pre">networkx</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pycrypto/index.html"><code class="docutils literal notranslate"><span class="pre">pycrypto</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pygame/index.html"><code class="docutils literal notranslate"><span class="pre">pygame</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sphinx/index.html"><code class="docutils literal notranslate"><span class="pre">sphinx</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../watchdog/index.html"><code class="docutils literal notranslate"><span class="pre">watchdog</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../pbr/index.html"><cite>⚙️Automate your publishing to PyPI with PBR and Travis</cite></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../misc/about.html">À propos de ce livre</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../misc/contrib.html">Contribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../licence.html">Creative Commons Attribution-ShareAlike 4.0 International</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="../enum/index.html" title="Chapitre précédent"><code class="docutils literal notranslate"><span class="pre">enum</span></code></a></li>
+      <li>Next: <a href="../itertools/index.html" title="Chapitre suivant"><code class="docutils literal notranslate"><span class="pre">itertools</span></code></a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Recherche rapide</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016-2017, HE-Arc.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/fstrings/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,394 @@
+
+<!DOCTYPE html>
+
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>hashlib &#8212; Documentation Bibliothèques Python 1.0.0</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/translations.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Recherche" href="../search.html" />
+    <link rel="next" title="multiprocessing" href="../multiprocessing/index.html" />
+    <link rel="prev" title="E-mail (smtplib / imaplib)" href="../email/index.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="hashlib">
+<span id="hashlib-tutorial"></span><h1><code class="docutils literal notranslate"><span class="pre">hashlib</span></code><a class="headerlink" href="#hashlib" title="Lien permanent vers ce titre">¶</a></h1>
+<p>Par Pedro Costa <a class="footnote-reference brackets" href="#pc" id="id1">1</a></p>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Lien permanent vers ce titre">¶</a></h2>
+<p><a class="reference external" href="https://docs.python.org/3/library/hashlib.html#module-hashlib" title="(disponible dans Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hashlib</span></code></a> est un module propre à Python implémenttant une interface commune à
+plusieurs algorithmes de hachage sécurisés et de synthèse de messsages.
+Ce module comprend les algorithmes suivants :
+<code class="docutils literal notranslate"><span class="pre">SHA1</span></code>, <code class="docutils literal notranslate"><span class="pre">SHA224</span></code>, <code class="docutils literal notranslate"><span class="pre">SHA256</span></code>, <code class="docutils literal notranslate"><span class="pre">SHA384</span></code>, and <code class="docutils literal notranslate"><span class="pre">SHA512</span></code>
+(défini dans <a class="reference external" href="http://csrc.nist.gov/publications/fips/fips180-2/fips180-2.pdf">FIPS 180-2</a>) tout comme l’algorithme <code class="docutils literal notranslate"><span class="pre">MD5</span></code> mais qui lui
+est déprécié. Le terme synthèse de messages est l’ancêtre de hachage sécurisé.</p>
+<p>Attention à ne pas confondre le <a class="reference external" href="https://fr.wikipedia.org/wiki/Fonction_de_hashage">hachage</a> qui fourni une empreinte à une donnée
+avec le <a class="reference external" href="https://fr.wikipedia.org/wiki/Chiffrement">chiffrement</a> qui transforme une donnée en une autre incompréhensible.</p>
+<p>Pour chaque type de hachage il y a un constructeur correspondant, ces derniers
+retournent tous un objet <code class="docutils literal notranslate"><span class="pre">hash</span></code>. Par exemple un objet SHA1 pour le construceur
+sha1().</p>
+<p>Afin d’utiliser le module <a class="reference external" href="https://docs.python.org/3/library/hashlib.html#module-hashlib" title="(disponible dans Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hashlib</span></code></a> il n’y a rien de plus simple que de
+l’importer dans votre fichier python.</p>
+<p><a class="reference external" href="https://docs.python.org/3/library/hashlib.html#module-hashlib" title="(disponible dans Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hashlib</span></code></a> ne contient pas uniquement les algorithmes cités précédemment, il y a
+également <a class="reference external" href="https://docs.python.org/3/library/hashlib.html#hashlib.blake2b" title="(disponible dans Python v3.9)"><code class="xref py py-func docutils literal notranslate"><span class="pre">hashlib.blake2b()</span></code></a> et <a class="reference external" href="https://docs.python.org/3/library/hashlib.html#hashlib.blake2s" title="(disponible dans Python v3.9)"><code class="xref py py-func docutils literal notranslate"><span class="pre">hashlib.blake2s()</span></code></a> qui sont des
+hachages plus efficaces et simple que les précédents.
+(Voir <a class="reference external" href="https://blake2.net/blake2_20130129.pdf">BLAKE2</a> pour plus de précisions)</p>
+<p>D’autres algorithmes peuvent également être disponibles en fonction de la
+bibliothèque OpenSSL que python utilise sur votre plateforme. Sur la plupart,
+des plateformes les constructeurs SHA3 (Keccak) et SHAKE sont disponibles.
+Ceci depuis la version 3.6 de Python.</p>
+</div>
+<div class="section" id="fonctions-et-methodes">
+<h2>Fonctions et méthodes<a class="headerlink" href="#fonctions-et-methodes" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Les fonctions et méthodes de ce module répondent à une grande partie de nos besoins
+concernant le hachage de données. Parmis ces fonctions voici les plus
+importantes :</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.python.org/3/library/hashlib.html#hashlib.new" title="(disponible dans Python v3.9)"><code class="xref py py-func docutils literal notranslate"><span class="pre">hashlib.new()</span></code></a> constructeur de l’objet <code class="docutils literal notranslate"><span class="pre">hash</span></code></p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/hashlib.html#hashlib.algorithms_available" title="(disponible dans Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">hashlib.algorithms_available</span></code></a> liste des algorithmes accessibles</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/hashlib.html#hashlib.hash.update" title="(disponible dans Python v3.9)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hashlib.hash.update()</span></code></a> met à jour l’objet <code class="docutils literal notranslate"><span class="pre">hash</span></code> avec l’argument sous forme
+de bytes. Va donc haché la valeur de l’argument.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/hashlib.html#hashlib.hash.digest" title="(disponible dans Python v3.9)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hashlib.hash.digest()</span></code></a> retourne les données hachées passées à la méthode update</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/hashlib.html#hashlib.hash.hexdigest" title="(disponible dans Python v3.9)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hashlib.hash.hexdigest()</span></code></a> pareil que digest mais le résultat est en hexadécimale</p></li>
+</ul>
+<p>À l’aide de <a class="reference external" href="https://docs.python.org/3/library/hachlib.html#shake-variable-length-digests">SHAKE</a> (Keccak) vous pouvez passer en argument des méthodes <code class="docutils literal notranslate"><span class="pre">digest()</span></code>
+la taille souhaitée qu’aura votre résultat.</p>
+<p>Exemple :</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">hashlib</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shake</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">shake_128</span><span class="p">()</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shake</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;Nobody expects the spanish inquisition&quot;</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shake</span><span class="o">.</span><span class="n">digest</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+<span class="go">b&#39;\xe4\x93\xff%\x84\x8d\xf2\xcd!\x1e\x90\x15&#39;</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shake</span><span class="o">.</span><span class="n">digest</span><span class="p">(</span><span class="mi">64</span><span class="p">)</span>
+<span class="go">b&#39;\xe4\x93\xff%\x84\x8d\xf2\xcd!\x1e\x90\x15\x1cAw\xd0f\xaf[\xa6\</span>
+<span class="go">xd4nkJm\x086\xf5@\x8ac\xe5\x04\x9f|Q\xca\xa6\xc1\xf6\x15{C\xda\</span>
+<span class="go">xea1A\x16\x15B\x0fB(`a\x12\xb7l/\xbe6\xef\xdc\xb0&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="exemple">
+<h2>Exemple<a class="headerlink" href="#exemple" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Rien de mieux pour mettre en pratique une librairie de hachage que de faire
+un système très basique de hachage de mot-de-passe. Dès qu’il nous faut stocker
+une donnée sensible dans une base de données, il faut la hacher. Pour cela,
+l’algorithme <code class="docutils literal notranslate"><span class="pre">MD5</span></code> était utilisé à l’époque. Cependant il a rapidement été
+cassé et du coup est maintenant déprécié.</p>
+<p>Nous utilisons actuellement sha1 et ses paires, malgré le fait qu’il a à son tour
+été aussi cassé. C’est pour cela qu’il est conseillé d’utiliser dorénavant
+Blake 2 ou pbkdf2_hmac afin de hacher un mot-de-passe (voir chapitre suivant).</p>
+<p>Un exemple utilisant la palette d’algorithme de hachage a été fait. Son
+fonctionnement est le suivant :</p>
+<ul class="simple">
+<li><p>L’utilisateur choisi son type de hachage</p></li>
+<li><p>Si il ne sait pas lequel entrer, il peut taper la commande help et les
+types de hachage possibles lui seront affichés.</p></li>
+<li><p>Une fois un type correct entré, l’utilisateur peut saisir son mot-de-passe.</p></li>
+<li><p>La version hachée de ce dernier sera affichée ainsi qu’un sel permettant un
+meilleur hachage.</p></li>
+<li><p>Finalement, l’utilisateur peut saisir à nouveau son mot-de-passe pour
+vérifier s’il est le bon en fonction du mot-de-passe haché.</p></li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Avertissement</p>
+<p>N’utilisez pas ce code directement. Utilisez <code class="docutils literal notranslate"><span class="pre">brypt</span></code> ou faites confiance
+à votre framework favori.</p>
+</div>
+<p>Résultat de l’exemple avec comme mot-de-passe <code class="docutils literal notranslate"><span class="pre">Salut</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Entrez le type de hachage souhaité : ?
+
+Entrez help pour voir les types de hachage possibles
+
+Veuillez entrer un type de hachage valide : help
+{&#39;sha3_256&#39;, &#39;md5&#39;, &#39;DSA-SHA&#39;, &#39;sha&#39;, &#39;blake2b&#39;, &#39;DSA&#39;, &#39;sha224&#39;,
+ &#39;sha3_384&#39;, &#39;shake_256&#39;, &#39;SHA256&#39;, &#39;whirlpool&#39;, &#39;sha3_512&#39;, &#39;shake_128&#39;,
+ &#39;md4&#39;, &#39;dsaWithSHA&#39;, &#39;SHA1&#39;, &#39;SHA512&#39;, &#39;RIPEMD160&#39;, &#39;ecdsa-with-SHA1&#39;,
+ &#39;MD4&#39;, &#39;sha256&#39;, &#39;sha1&#39;, &#39;sha512&#39;, &#39;ripemd160&#39;, &#39;sha3_224&#39;, &#39;blake2s&#39;,
+ &#39;MD5&#39;, &#39;dsaEncryption&#39;, &#39;SHA384&#39;, &#39;SHA&#39;, &#39;SHA224&#39;, &#39;sha384&#39;}
+
+Veuillez entrer un type de hachage valide : sha1
+
+Entrez votre mot de passe :
+
+Le mot-de-passe qui devrait être enregistré dans la BDD est :
+3e0344e856be1a34e13ad8179156f30eb324ac22:f27229afd30c8b91898d32a796cc4b57
+
+Entrez-à nouveau votre mot-de-passe pour vérifier :
+
+Votre mot-de-passe est correct
+</pre></div>
+</div>
+<p>Les parties importantes dans le code sont les fonctions de hachage du mot-de-passe
+et la fonction de vérification. Voici leur code respectif.</p>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span>    <span class="s2">&quot;&quot;&quot;Hache le mot-de-passe.</span>
+<span class="s2">    # secrets génère un nombre aléatoire en héxadécimale</span>
+<span class="s2">    salt = secrets.token_hex(16)</span>
+<span class="s2">    contenu = salt + mdp</span>
+<span class="s2">    h = hashlib.new(hashage)</span>
+<span class="s2">    h.update(contenu.encode(&#39;utf-8&#39;))</span>
+<span class="s2">    return h.hexdigest() + &#39;:&#39; + salt</span>
+</pre></div>
+</td></tr></table></div>
+<p>La 2ème ligne permet d’initialiser un sel à un nombre aléatoire hexadécimale.
+<code class="docutils literal notranslate"><span class="pre">secrets</span></code> génère ce nombre aléatoire à l’aide de la fonction
+<a class="reference external" href="https://docs.python.org/3/library/secrets.html#secrets.token_hex" title="(disponible dans Python v3.9)"><code class="xref py py-func docutils literal notranslate"><span class="pre">secrets.token_hex()</span></code></a>.</p>
+<p>Le contenu qui sera haché doit être encodé correctement sous forme binaire pour
+qu’il puisse être passé à la fonction update vue précédemment.</p>
+<p>Le contenu haché est finalement renvoyé avec le sel qui permettra d’en suite tester
+la validité de la donnée dans l’autre fonction.</p>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">check_mdp</span><span class="p">(</span><span class="n">hashed_mdp</span><span class="p">,</span> <span class="n">utilisateur_mdp</span><span class="p">,</span> <span class="n">hashage</span><span class="p">):</span>
+    <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    mdp, salt = hashed_mdp.split(&#39;:&#39;)</span>
+<span class="s2">    contenu = salt + utilisateur_mdp</span>
+<span class="s2">    h = hashlib.new(hashage)</span>
+<span class="s2">    h.update(contenu.encode(&#39;utf-8&#39;))</span>
+</pre></div>
+</td></tr></table></div>
+<p>Dés la 2ème ligne on sépare le mot-de-passe haché du sel. On pense bien à
+réencoder comme il faut le contenu.</p>
+<p>On fait en suite une comparaison entre le mot-de-passe haché et le mot-de-passe
+entré à nouveau qui est haché de la même façon afin de vérifier la validité de
+ce dernier. On utilise ici une fonction de comparaison de hmac permettant
+d’assurer parfaitement la comparaison. Voir l’explication de ce choix dans
+l’article « Secrets » de Monsieur Pedretti.</p>
+<p>Comme dit précédemment, cet exemple est caduque avec les type de hachage shaXXX
+et md5. C’est pour cela qu’un deuxième exemple est nécessaire avec Blake 2.</p>
+<div class="section" id="pbkdf2-hmac">
+<h3>PBKDF2-HMAC<a class="headerlink" href="#pbkdf2-hmac" title="Lien permanent vers ce titre">¶</a></h3>
+<p><a class="reference external" href="https://docs.python.org/3/library/hashlib.html#hashlib.pbkdf2_hmac" title="(disponible dans Python v3.9)"><code class="xref py py-func docutils literal notranslate"><span class="pre">hashlib.pbkdf2_hmac()</span></code></a> permet de fortement
+hacher un mot-de-passe. Cette fonction utilise une fonction pseudo-random de <a class="reference external" href="https://docs.python.org/3/library/hmac.html#module-hmac" title="(disponible dans Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hmac</span></code></a>.
+Le fonctionnement de ce hachage est basé sur l’utilisation d’un type de hachage
+vu précédemment, un sel ainsi qu’un nombre d’itérations correspondant au
+type du hachage choisi (nous observons que cela diminue fortement la vitesse de
+ce hachage). Voici un exemple simple venant de la documentation de <a class="reference external" href="https://docs.python.org/3/library/hashlib.html#module-hashlib" title="(disponible dans Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hashlib</span></code></a>.</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">hashlib</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dk</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">pbkdf2_hmac</span><span class="p">(</span><span class="s1">&#39;sha256&#39;</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;password&#39;</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;salt&#39;</span><span class="p">,</span> <span class="mi">100000</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">binascii</span><span class="o">.</span><span class="n">hexlify</span><span class="p">(</span><span class="n">dk</span><span class="p">)</span>
+<span class="go">b&#39;0394a2ede332c9a13eb82e9b24631604c31df978b4e2f0fbd2c549944f9d79a5&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="blake-2">
+<h3>BLAKE 2<a class="headerlink" href="#blake-2" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Maintenant que la parenthèse est fermée, nous pouvons aborder le sujet de Blake 2.
+Ce dernier permet de résoudre un bon éventail de problèmes concernant l’adressage
+d’empreintes aux données. De plus c’est le type de hachage le plus rapide parmis
+ces prédécesseurs.</p>
+<p>En outre, Blake 2 permet de configurer la taille de digest permettant des outputs
+différents pour une même donnée, il peut haché des clés d’authentifications mais
+aussi est capable de signer des cookies. Ce type de hachage est bien pratique
+pour le hachage aléatoire en utilisant le paramètre sel qui permettra donc
+d’obtenir des signatures différentes pour une même donnée.</p>
+<p>Finalement, il peut mettre en place une personnalisation de son hachage,
+cette démarche est fortement conseillée car il a été remarqué que la signature de
+données connexes facilite l’attaque et le forçage de ces dernières. C’est pour cela,
+que nous pouvons utiliser le paramètre <code class="docutils literal notranslate"><span class="pre">person</span></code> qui va lui aussi donner des
+signatures distinctes pour une seule et même donnée. L’avantage d’utiliser ce
+paramètre est que nous pouvons utiliser une même taille de digest ou une même clé !</p>
+<p>Un exemple pertinant serait celui des cookies, car c’est une obligation pour
+tout développeur web de signer ce type de données modifiables.</p>
+<p>Ce dernier ressemble beaucoup à son précédent, nous voulons ici spécialement
+montrer la force de blake2 qui permet une personnalisation poussée de notre hachage.</p>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span>    <span class="n">h</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">cookie</span><span class="o">.</span><span class="n">output</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
+    <span class="n">cookie</span><span class="p">[</span><span class="s1">&#39;signature&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
+
+
+<span class="n">user_name</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Entrez votre nom d&#39;utilisateur : &quot;</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<p>Précisément cette fonction, où nous voyons bien la personnalisation lors de
+l’inisalisation. Cette dernière se fait précisément en fonction de la personne
+s’étant identifiée, de cette manière, en même temps que nous hachons le cookie,
+on pourra vérifier l’authenticité de l’utilisateur.</p>
+</div>
+</div>
+<div class="section" id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Hashlib permet une utilisation plutôt complête concernant la signature de données.
+Toutes les fonctions de ce module n’ont pas été traitée ici, mais les fonctions
+les plus importantes ont étées expliquées et mise en pratique avec deux exemples.</p>
+<p>Le hachage de données est quelque chose de nécessaire au sein de l’informatique,
+la sécurité est certainement le point le plus sensible lors de la création
+d’applications. Le concepteur doit penser aux attaques possibles de personnes
+malveillantes et le hachage résout une légère partie de la question.</p>
+<p>Il ne suffit pas d’implémenter sans réfléchir du hachage avec ce module mais bien
+savoir comment manipuler ces fonctions et en faire quelque chose de solide afin
+de se protéger d’attaques extérieures.</p>
+<p>Cependant, utilisé uniquement hashlib risque de ne pas suffire à la bonne
+sécurité d’une application. Rien que dans mes exemples j’ai eu besoin
+d’utiliser la fonction <a class="reference external" href="https://docs.python.org/3/library/hmac.html#hmac.compare_digest" title="(disponible dans Python v3.9)"><code class="xref py py-func docutils literal notranslate"><span class="pre">compare_digest()</span></code></a> afin de comparer deux
+signatures. Car le <code class="docutils literal notranslate"><span class="pre">==</span></code> n’est simplement pas suffisant et assez solide à
+cause des temps de comparaisons. Le meilleur moyen est donc de coupler ces
+modules tel que <cite>hmac</cite> ou autres afin d’avoir une application viable et stable.</p>
+<dl class="footnote brackets">
+<dt class="label" id="pc"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>&lt;<a class="reference external" href="mailto:pedro&#46;costa&#37;&#52;&#48;he-arc&#46;ch">pedro<span>&#46;</span>costa<span>&#64;</span>he-arc<span>&#46;</span>ch</a>&gt;</p>
+</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Bibliothèques Python</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../builtins/index.html">Builtins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../collections/index.html"><code class="docutils literal notranslate"><span class="pre">collections</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../datetime/index.html"><code class="docutils literal notranslate"><span class="pre">datetime</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dunders/index.html">Dunders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../enum/index.html"><code class="docutils literal notranslate"><span class="pre">enum</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fstrings/index.html">f-strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../itertools/index.html"><code class="docutils literal notranslate"><span class="pre">itertools</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../io/index.html"><code class="docutils literal notranslate"><span class="pre">io</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../math/index.html"><code class="docutils literal notranslate"><span class="pre">math</span></code> / <code class="docutils literal notranslate"><span class="pre">fractions</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../random/index.html"><code class="docutils literal notranslate"><span class="pre">random</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../time/index.html"><code class="docutils literal notranslate"><span class="pre">time</span></code> / <code class="docutils literal notranslate"><span class="pre">datetime</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../statistics/index.html"><code class="docutils literal notranslate"><span class="pre">statistics</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../super/index.html"><code class="docutils literal notranslate"><span class="pre">super()</span></code></a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../abc/index.html">Abstract Base Class (<code class="docutils literal notranslate"><span class="pre">abc</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../binary/index.html"><code class="docutils literal notranslate"><span class="pre">bytes</span></code> / <code class="docutils literal notranslate"><span class="pre">bytearray</span></code> / <code class="docutils literal notranslate"><span class="pre">memoryview</span></code>, <code class="docutils literal notranslate"><span class="pre">struct</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bisect/index.html"><code class="docutils literal notranslate"><span class="pre">bisect</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email/index.html">E-mail (<code class="docutils literal notranslate"><span class="pre">smtplib</span></code> / <code class="docutils literal notranslate"><span class="pre">imaplib</span></code>)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">hashlib</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../multiprocessing/index.html"><code class="docutils literal notranslate"><span class="pre">multiprocessing</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../re/index.html">Expressions régulières (<code class="docutils literal notranslate"><span class="pre">re</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../secrets/index.html"><code class="docutils literal notranslate"><span class="pre">secrets</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../weakref/index.html"><code class="docutils literal notranslate"><span class="pre">weakref</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../colorama/index.html"><code class="docutils literal notranslate"><span class="pre">colorama</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../invoke/index.html"><code class="docutils literal notranslate"><span class="pre">invoke</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../unittest/index.html"><code class="docutils literal notranslate"><span class="pre">unittest</span></code> / <code class="docutils literal notranslate"><span class="pre">doctest</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pytest/index.html"><code class="docutils literal notranslate"><span class="pre">pytest</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../csv/index.html"><code class="docutils literal notranslate"><span class="pre">csv</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../json/index.html"><code class="docutils literal notranslate"><span class="pre">json</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pillow/index.html">Python Imaging Library (<code class="docutils literal notranslate"><span class="pre">PIL</span></code>)</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../hug/index.html"><code class="docutils literal notranslate"><span class="pre">hug</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../matplotlib/index.html"><code class="docutils literal notranslate"><span class="pre">matplotlib</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../networkx/index.html"><code class="docutils literal notranslate"><span class="pre">networkx</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pycrypto/index.html"><code class="docutils literal notranslate"><span class="pre">pycrypto</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pygame/index.html"><code class="docutils literal notranslate"><span class="pre">pygame</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sphinx/index.html"><code class="docutils literal notranslate"><span class="pre">sphinx</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../watchdog/index.html"><code class="docutils literal notranslate"><span class="pre">watchdog</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../pbr/index.html"><cite>⚙️Automate your publishing to PyPI with PBR and Travis</cite></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../misc/about.html">À propos de ce livre</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../misc/contrib.html">Contribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../licence.html">Creative Commons Attribution-ShareAlike 4.0 International</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="../email/index.html" title="Chapitre précédent">E-mail (<code class="docutils literal notranslate"><span class="pre">smtplib</span></code> / <code class="docutils literal notranslate"><span class="pre">imaplib</span></code>)</a></li>
+      <li>Next: <a href="../multiprocessing/index.html" title="Chapitre suivant"><code class="docutils literal notranslate"><span class="pre">multiprocessing</span></code></a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Recherche rapide</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016-2017, HE-Arc.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/hashlib/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

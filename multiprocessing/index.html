@@ -1,0 +1,443 @@
+
+<!DOCTYPE html>
+
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>multiprocessing &#8212; Documentation Bibliothèques Python 1.0.0</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/translations.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Recherche" href="../search.html" />
+    <link rel="next" title="Expressions régulières (re)" href="../re/index.html" />
+    <link rel="prev" title="hashlib" href="../hashlib/index.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="multiprocessing">
+<span id="multiprocessing-tutorial"></span><h1><code class="docutils literal notranslate"><span class="pre">multiprocessing</span></code><a class="headerlink" href="#multiprocessing" title="Lien permanent vers ce titre">¶</a></h1>
+<p>Par Laurent Gander <a class="footnote-reference brackets" href="#gl" id="id1">4</a></p>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Le module <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#module-multiprocessing" title="(disponible dans Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a> utilise les processus plutôt que les threads. Il nous permet de créer plusieurs processus séparés.</p>
+<blockquote>
+<div><p>Bien que la plupart des CPUs modernes comportent plusieurs coeurs, le code que l’on écrit doit aussi être formatté adéquatement afin d’en tirer pleinement avantage. <a class="footnote-reference brackets" href="#ref1" id="id2">1</a></p>
+</div></blockquote>
+<p><a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#module-multiprocessing" title="(disponible dans Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a> évite d’être bloqué par le GIL (Global Interpreter Lock) en utilisant des sous-processus au lieu des threads et offre de la concurrence locale et distante. De ce fait, le module multiprocessing permet au programmeur d’exploiter pleinement plusieurs processeurs sur une machine donnée. Il fonctionne sur Unix et Windows.</p>
+<div class="section" id="gil">
+<h3>GIL?<a class="headerlink" href="#gil" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Le <em>Global Interpreter Lock</em> est un verrou (<em>lock</em>) que l’interpréteur demande afin d’être <em>thread-safe</em> sur le comptage des références du ramasse-miette. La connaissance du GIL est indispensable lorsque vous travaillez avec plusieurs threads. Le GIL a été connu pour dégrader la performance des programmes.
+Un exemple est que cela peut prendre plus de temps pour deux threads d’appeler la même fonction qu’un thread appelant deux fois la fonction. <a class="footnote-reference brackets" href="#ref2" id="id3">2</a></p>
+</div>
+</div>
+<div class="section" id="les-classes">
+<h2>Les classes<a class="headerlink" href="#les-classes" title="Lien permanent vers ce titre">¶</a></h2>
+<div class="section" id="process">
+<h3>Process<a class="headerlink" href="#process" title="Lien permanent vers ce titre">¶</a></h3>
+<p><a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#module-multiprocessing" title="(disponible dans Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a> contient plusieurs classes très utiles, je vais vous en introduire quelques unes.</p>
+<p>Prenons tout d’abord la classe <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#multiprocessing.Process" title="(disponible dans Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">multiprocessing.Process</span></code></a>, la classe <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#multiprocessing.Process" title="(disponible dans Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">multiprocessing.Process</span></code></a> nous permet de créer des processus en créant un objets <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#multiprocessing.Process" title="(disponible dans Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">multiprocessing.Process</span></code></a>, en appelant sa méthode start().</p>
+<p>Dans l’exemple suivant nous avons deux fonctions en plus du main, dans la première fonction “info” nous affichons le titre passé en paramètre ainsi que le nom du module, le numero du processus parent et le numero du processus. La deuxième fonction appelle la première fonction et ensuite écrit “hello + le nom passé en paramètre”.
+Dans le main, nous appelons la fonction info puis, nous créons un objet Process avec comme arguments “target = f” qui est la fonction que le processus exécutera et les arguments de la fonction “args=(“bob”)”, ensuite nous lancons le processus avec p.start() et p.join().</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;Fichier test processus.&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">Process</span>
+
+
+<span class="k">def</span> <span class="nf">info</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Affiche les informations liées au processus, id et parent id.&quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;hello&#39;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;module name:&#39;</span><span class="p">,</span> <span class="vm">__name__</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;parent process:&#39;</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">getppid</span><span class="p">())</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;process id:&#39;</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">getpid</span><span class="p">())</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+
+    <span class="n">p</span> <span class="o">=</span> <span class="n">Process</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">info</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;main line&#39;</span><span class="p">,</span> <span class="s1">&#39;bob&#39;</span><span class="p">))</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Résultat de l’exemple ci-dessus :</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">main line</span>
+<span class="go">hello bob</span>
+<span class="go">module name: __mp_main__</span>
+<span class="go">parent process: 1664</span>
+<span class="go">process id: 14628</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="queues">
+<h3>Queues<a class="headerlink" href="#queues" title="Lien permanent vers ce titre">¶</a></h3>
+<p>La classe Queue permet de créer un canal de communication entre plusieurs processus.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;Exemple de la classe Queue.&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">Process</span><span class="p">,</span> <span class="n">Queue</span>
+
+
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">q</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Fonction qui envoie 42 None hello.&quot;&quot;&quot;</span>
+    <span class="n">q</span><span class="o">.</span><span class="n">put</span><span class="p">([</span><span class="mi">42</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;hello&#39;</span><span class="p">])</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+
+    <span class="n">q</span> <span class="o">=</span> <span class="n">Queue</span><span class="p">()</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">Process</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">f</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">q</span><span class="p">,))</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">get</span><span class="p">())</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>L’exemple ci-dessus nous affiche :</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">[42, None, &#39;hello&#39;]</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Avertissement</p>
+<p>Si un processus est « tué » à l’aide des fonctions terminate() ou de os.kill(), les données risquent d’être corrompues dans la queue, en effet on ne sait pas si le processus est finit, des commandes risquent d’être encore à l’interieur. Ce qui signifie qu’un autre processus qui tenterait d’accéder à la queue risquerait de soulever une exception.</p>
+</div>
+</div>
+<div class="section" id="pipe">
+<h3>Pipe<a class="headerlink" href="#pipe" title="Lien permanent vers ce titre">¶</a></h3>
+<p>La classe Pipe permet aussi la création d’un canal bidirectionnel entre deux processus. Le constructeur du pipe retourne deux objets de connexion qui sont l’entrée et la sortie du canal.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;Exemple de la classe Pipe.&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">Pipe</span><span class="p">,</span> <span class="n">Process</span>
+
+
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">conn</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Fonction qui envoie 42 None hello.&quot;&quot;&quot;</span>
+    <span class="n">conn</span><span class="o">.</span><span class="n">send</span><span class="p">([</span><span class="mi">42</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;hello&#39;</span><span class="p">])</span>
+    <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+
+    <span class="n">parent_conn</span><span class="p">,</span> <span class="n">child_conn</span> <span class="o">=</span> <span class="n">Pipe</span><span class="p">()</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">Process</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">f</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">child_conn</span><span class="p">,))</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">parent_conn</span><span class="o">.</span><span class="n">recv</span><span class="p">())</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>L’exemple ci-dessus nous affiche :
+.. code-block:: console</p>
+<blockquote>
+<div><p>[42, None, “hello”]</p>
+</div></blockquote>
+<p>Les objets de connexions ont deux méthodes : recv() et  send() qui leurs permet de lire et d’écrire dans un canal.
+Les données dans un tuyau peuvent être corrompues si deux processus (ou threads) tentent de lire ou d’écrire à la même extrémité du tuyau en même temps.</p>
+</div>
+</div>
+<div class="section" id="contexte-et-methodes-de-demarrage">
+<h2>Contexte et méthodes de démarrage<a class="headerlink" href="#contexte-et-methodes-de-demarrage" title="Lien permanent vers ce titre">¶</a></h2>
+<dl class="simple">
+<dt>Il y a plusieurs façons de démarrer un processus, le multiprocessing en contient trois :</dt><dd><dl class="field-list simple">
+<dt class="field-odd">spawn</dt>
+<dd class="field-odd"><p>L’interpréteur Python sera démarré par le processus parent, son enfant n’héritera que des ressources nécessaires pour executer la méthode <code class="docutils literal notranslate"><span class="pre">run()</span></code>.</p>
+</dd>
+<dt class="field-even">fork</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">os.fork()</span></code> est utilisé par le processus parent pour fork l’interpreteur Python. Quand le processus enfant est lancé, ses ressources sont identiques au processus parent. <strong>fork</strong> est disponible uniquement sur Unix.</p>
+</dd>
+<dt class="field-odd">forkserver</dt>
+<dd class="field-odd"><p>Quand le programme est lancé et lance la méthode forkserver.start(), depuis ce moment, chaque fois qu’un processus est nécessaire, un processus est demandé au serveur par le processus parent. <strong>forkserver</strong> fonctionne que sur Unix.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</div>
+<div class="section" id="synchronisation-entre-les-processus">
+<h2>Synchronisation entre les processus<a class="headerlink" href="#synchronisation-entre-les-processus" title="Lien permanent vers ce titre">¶</a></h2>
+<p><a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#module-multiprocessing" title="(disponible dans Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a> contient les mêmes méthodes que la classe <a class="reference external" href="https://docs.python.org/3/library/threading.html#module-threading" title="(disponible dans Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">threading</span></code></a>. Comme pour un thread, nous pouvons nous assurer qu’un processus accède à une ressource de manière atomique.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;Exemple de synchronisation.&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">Lock</span><span class="p">,</span> <span class="n">Process</span>
+
+
+<span class="k">def</span> <span class="nf">task</span><span class="p">(</span><span class="n">lock</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Acquire le lock, affiche hello i, puis relâche le lock.&quot;&quot;&quot;</span>
+    <span class="n">lock</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;hello world&#39;</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="n">lock</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Main program.&quot;&quot;&quot;</span>
+    <span class="n">lock</span> <span class="o">=</span> <span class="n">Lock</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+        <span class="n">Process</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">task</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">lock</span><span class="p">,</span> <span class="n">num</span><span class="p">))</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Résultat de l’exemple :</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">hello world 1</span>
+<span class="go">hello world 2</span>
+<span class="go">hello world 0</span>
+<span class="go">hello world 3</span>
+<span class="go">hello world 5</span>
+<span class="go">hello world 6</span>
+<span class="go">hello world 7</span>
+<span class="go">hello world 4</span>
+<span class="go">hello world 8</span>
+<span class="go">hello world 9</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="partage-de-ressources-entre-processus">
+<h2>Partage de ressources entre processus<a class="headerlink" href="#partage-de-ressources-entre-processus" title="Lien permanent vers ce titre">¶</a></h2>
+<p>En programmation multi-processus, il est souvent utile de pouvoir partager des ressources entre nos processus. Pour cela <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#module-multiprocessing" title="(disponible dans Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a> offre différentes manières de partager des ressources.</p>
+<dl>
+<dt>La mémoire :</dt><dd><p>On peut partager de la mémoire en utilisant les fonctions:</p>
+<blockquote>
+<div><p><a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#multiprocessing.Value" title="(disponible dans Python v3.9)"><code class="xref py py-func docutils literal notranslate"><span class="pre">multiprocessing.Value()</span></code></a></p>
+<p><a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#multiprocessing.Array" title="(disponible dans Python v3.9)"><code class="xref py py-func docutils literal notranslate"><span class="pre">multiprocessing.Array()</span></code></a></p>
+</div></blockquote>
+<p>Exemple :</p>
+</dd>
+</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;Exemple de mémoire partagé.&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">Array</span><span class="p">,</span> <span class="n">Process</span><span class="p">,</span> <span class="n">Value</span>
+
+
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Fonction qui assigne n, rend negatif les valeurs de a[].&quot;&quot;&quot;</span>
+    <span class="n">n</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="mf">3.1415927</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)):</span>
+        <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+
+    <span class="n">num</span> <span class="o">=</span> <span class="n">Value</span><span class="p">(</span><span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+    <span class="n">arr</span> <span class="o">=</span> <span class="n">Array</span><span class="p">(</span><span class="s1">&#39;i&#39;</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+
+    <span class="n">p</span> <span class="o">=</span> <span class="n">Process</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">f</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="n">arr</span><span class="p">))</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="n">num</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">arr</span><span class="p">[:])</span>
+</pre></div>
+</div>
+<p>Résultat :</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">3.1415927</span>
+<span class="go">[0, -1, -2, -3, -4, -5, -6, -7, -8, -9]</span>
+</pre></div>
+</div>
+<p>Serveur de processus :</p>
+<blockquote>
+<div><p>Un objet renvoyé par Manager() contrôle un serveur de processus qui contient des objets Python et permet à d’autres processus de les manipuler à l’aide de proxies.</p>
+<p>Exemple :</p>
+</div></blockquote>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;Exemple de la classe Manager.&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">Manager</span><span class="p">,</span> <span class="n">Process</span>
+
+
+<span class="k">def</span> <span class="nf">task</span><span class="p">(</span><span class="n">payload</span><span class="p">,</span> <span class="n">lst</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Associe 3 valeurs à leurs clé et inverse l&#39;ordre de lst[].&quot;&quot;&quot;</span>
+    <span class="n">payload</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;1&#39;</span>
+    <span class="n">payload</span><span class="p">[</span><span class="s1">&#39;2&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="n">payload</span><span class="p">[</span><span class="mf">0.25</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">lst</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="k">with</span> <span class="n">Manager</span><span class="p">()</span> <span class="k">as</span> <span class="n">manager</span><span class="p">:</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">dict</span><span class="p">()</span>
+        <span class="n">e</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+
+        <span class="n">p</span> <span class="o">=</span> <span class="n">Process</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">task</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">))</span>
+        <span class="n">p</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+        <span class="n">p</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Résultat :</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">{1: &#39;1&#39;, &#39;2&#39;: 2, 0.25: None}</span>
+<span class="go">[9, 8, 7, 6, 5, 4, 3, 2, 1, 0]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Pour conclure, le module de python sur le multiprocessing nous permet de contourner le problème des threads en python, effectivement l’interpreteur Python n’est pas fait pour le multi-threading à cause du GIL, vu qu’il impose en pratique qu’un seul coeur travaille en même temps. Le langage python n’a qu’un seul fil d’exécution, donc il n’est pas possible d’utiliser tous les coeurs en n’utilisant que des threads. C’est pourquoi, on utilise plutôt le module multiprocessing, en effet mettre chaque travail dans un thread séparé pourrait l’aider un peu parce que, lorsqu’une connexion est inactif, on peut obtenir un certain temps CPU, mais le traitement ne se fera pas en parallèle à cause du GIL. En mettant chaque travail dans un processus, chacun peut s’exécuter sur son propre processeur et s’exécuter à plein rendementm malgré le problème du partage de mémoire entre les processus qui malgré tout sont gérés par les fonctions Value, Array et Manager ou en faisant de l’asynchrome avec <a class="reference external" href="https://docs.python.org/3/library/asyncio.html#module-asyncio" title="(disponible dans Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">asyncio</span></code></a>.</p>
+<p>Pour de plus amples informations :</p>
+<blockquote>
+<div><p>Process          : <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#multiprocessing.Process" title="(disponible dans Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">multiprocessing.Process</span></code></a></p>
+<p>Queues           : <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#multiprocessing.Queue" title="(disponible dans Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">multiprocessing.Queue</span></code></a></p>
+<p>Pipe             : <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#multiprocessing.Pipe" title="(disponible dans Python v3.9)"><code class="xref py py-func docutils literal notranslate"><span class="pre">multiprocessing.Pipe()</span></code></a></p>
+<p>Pool             : <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#multiprocessing.pool.Pool" title="(disponible dans Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">multiprocessing.pool.Pool</span></code></a></p>
+<p>Connexion        : <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#multiprocessing.connection.Connection" title="(disponible dans Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">multiprocessing.connection.Connection</span></code></a></p>
+<p>Synchronisation  : <a class="footnote-reference brackets" href="#synchronisation" id="id4">3</a></p>
+</div></blockquote>
+</div>
+<div class="section" id="references">
+<h2>Références<a class="headerlink" href="#references" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Les exemples sont repris de la documentation officielle de python : <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#module-multiprocessing" title="(disponible dans Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a></p>
+<dl class="footnote brackets">
+<dt class="label" id="ref1"><span class="brackets"><a class="fn-backref" href="#id2">1</a></span></dt>
+<dd><p><a class="reference external" href="http://bioinfo.iric.ca/fr/faites-travailler-vos-cpus/">http://bioinfo.iric.ca/fr/faites-travailler-vos-cpus/</a></p>
+</dd>
+<dt class="label" id="ref2"><span class="brackets"><a class="fn-backref" href="#id3">2</a></span></dt>
+<dd><p><a class="reference external" href="http://www.ordinateur.cc/programmation/Programmation-Python/93447.html">http://www.ordinateur.cc/programmation/Programmation-Python/93447.html</a></p>
+</dd>
+<dt class="label" id="synchronisation"><span class="brackets"><a class="fn-backref" href="#id4">3</a></span></dt>
+<dd><p><a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#synchronization-primitives">https://docs.python.org/3/library/multiprocessing.html#synchronization-primitives</a></p>
+</dd>
+<dt class="label" id="gl"><span class="brackets"><a class="fn-backref" href="#id1">4</a></span></dt>
+<dd><p>&lt;<a class="reference external" href="mailto:laurent&#46;gander&#37;&#52;&#48;he-arc&#46;ch">laurent<span>&#46;</span>gander<span>&#64;</span>he-arc<span>&#46;</span>ch</a>&gt;</p>
+</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Bibliothèques Python</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../builtins/index.html">Builtins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../collections/index.html"><code class="docutils literal notranslate"><span class="pre">collections</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../datetime/index.html"><code class="docutils literal notranslate"><span class="pre">datetime</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dunders/index.html">Dunders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../enum/index.html"><code class="docutils literal notranslate"><span class="pre">enum</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fstrings/index.html">f-strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../itertools/index.html"><code class="docutils literal notranslate"><span class="pre">itertools</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../io/index.html"><code class="docutils literal notranslate"><span class="pre">io</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../math/index.html"><code class="docutils literal notranslate"><span class="pre">math</span></code> / <code class="docutils literal notranslate"><span class="pre">fractions</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../random/index.html"><code class="docutils literal notranslate"><span class="pre">random</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../time/index.html"><code class="docutils literal notranslate"><span class="pre">time</span></code> / <code class="docutils literal notranslate"><span class="pre">datetime</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../statistics/index.html"><code class="docutils literal notranslate"><span class="pre">statistics</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../super/index.html"><code class="docutils literal notranslate"><span class="pre">super()</span></code></a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../abc/index.html">Abstract Base Class (<code class="docutils literal notranslate"><span class="pre">abc</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../binary/index.html"><code class="docutils literal notranslate"><span class="pre">bytes</span></code> / <code class="docutils literal notranslate"><span class="pre">bytearray</span></code> / <code class="docutils literal notranslate"><span class="pre">memoryview</span></code>, <code class="docutils literal notranslate"><span class="pre">struct</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bisect/index.html"><code class="docutils literal notranslate"><span class="pre">bisect</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email/index.html">E-mail (<code class="docutils literal notranslate"><span class="pre">smtplib</span></code> / <code class="docutils literal notranslate"><span class="pre">imaplib</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hashlib/index.html"><code class="docutils literal notranslate"><span class="pre">hashlib</span></code></a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">multiprocessing</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../re/index.html">Expressions régulières (<code class="docutils literal notranslate"><span class="pre">re</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../secrets/index.html"><code class="docutils literal notranslate"><span class="pre">secrets</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../weakref/index.html"><code class="docutils literal notranslate"><span class="pre">weakref</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../colorama/index.html"><code class="docutils literal notranslate"><span class="pre">colorama</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../invoke/index.html"><code class="docutils literal notranslate"><span class="pre">invoke</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../unittest/index.html"><code class="docutils literal notranslate"><span class="pre">unittest</span></code> / <code class="docutils literal notranslate"><span class="pre">doctest</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pytest/index.html"><code class="docutils literal notranslate"><span class="pre">pytest</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../csv/index.html"><code class="docutils literal notranslate"><span class="pre">csv</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../json/index.html"><code class="docutils literal notranslate"><span class="pre">json</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pillow/index.html">Python Imaging Library (<code class="docutils literal notranslate"><span class="pre">PIL</span></code>)</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../hug/index.html"><code class="docutils literal notranslate"><span class="pre">hug</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../matplotlib/index.html"><code class="docutils literal notranslate"><span class="pre">matplotlib</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../networkx/index.html"><code class="docutils literal notranslate"><span class="pre">networkx</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pycrypto/index.html"><code class="docutils literal notranslate"><span class="pre">pycrypto</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pygame/index.html"><code class="docutils literal notranslate"><span class="pre">pygame</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sphinx/index.html"><code class="docutils literal notranslate"><span class="pre">sphinx</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../watchdog/index.html"><code class="docutils literal notranslate"><span class="pre">watchdog</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../pbr/index.html"><cite>⚙️Automate your publishing to PyPI with PBR and Travis</cite></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../misc/about.html">À propos de ce livre</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../misc/contrib.html">Contribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../licence.html">Creative Commons Attribution-ShareAlike 4.0 International</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="../hashlib/index.html" title="Chapitre précédent"><code class="docutils literal notranslate"><span class="pre">hashlib</span></code></a></li>
+      <li>Next: <a href="../re/index.html" title="Chapitre suivant">Expressions régulières (<code class="docutils literal notranslate"><span class="pre">re</span></code>)</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Recherche rapide</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016-2017, HE-Arc.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/multiprocessing/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

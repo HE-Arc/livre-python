@@ -1,0 +1,522 @@
+
+<!DOCTYPE html>
+
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>math / fractions &#8212; Documentation Bibliothèques Python 1.0.0</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/translations.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Recherche" href="../search.html" />
+    <link rel="next" title="random" href="../random/index.html" />
+    <link rel="prev" title="io" href="../io/index.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="math-fractions">
+<span id="math-tutorial"></span><h1><code class="docutils literal notranslate"><span class="pre">math</span></code> / <code class="docutils literal notranslate"><span class="pre">fractions</span></code><a class="headerlink" href="#math-fractions" title="Lien permanent vers ce titre">¶</a></h1>
+<a class="reference internal image-reference" href="../_images/logo.png"><img alt="Fraction" class="align-right" src="../_images/logo.png" style="width: 252.0px; height: 191.5px;" /></a>
+<p>Par Gabriel Griesser <a class="footnote-reference brackets" href="#gg" id="id1">1</a></p>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Le principe du module <a class="reference external" href="https://docs.python.org/3/library/math.html#module-math" title="(disponible dans Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">math</span></code></a> est d’effectuer diverses opérations mathématiques avec Python.
+Dans ce chapitre, nous verrons les principales opérations possibles en utilisant le module <a class="reference external" href="https://docs.python.org/3/library/math.html#module-math" title="(disponible dans Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">math</span></code></a> et les fractions en Python en utilisant ce module.</p>
+<p>Les nombres entiers sont relativement simple a utiliser en Python.
+Ce langage devine facilement si un nombre est entier ou pas grâce à la virgule (ou point décimal dans <em>Python</em>).
+Si le nombre ne possède pas de virgule, Python le reconnait comme un nombre entier.</p>
+<p>Pour effectuer des calculs exacts avec des fractions, on importe le module <a class="reference external" href="https://docs.python.org/3/library/fractions.html#module-fractions" title="(disponible dans Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">fractions</span></code></a>
+afin de transformer Python en un langage de programmation spécialisé dans les fractions.</p>
+</div>
+<div class="section" id="nombres">
+<h2>Nombres<a class="headerlink" href="#nombres" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Avant tout, il faut savoir que les nombres sont déclarés comme des variables en Python, et que le type de ces dernières
+sont reconnu à l’initialisation de la variable.
+Python comporte cinq catégories de nombres :</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(disponible dans Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> pour les nombres entiers,</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/fractions.html#module-fractions" title="(disponible dans Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">fractions</span></code></a> pour les fractions (quotients d’entiers par des entiers),</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/decimal.html#module-decimal" title="(disponible dans Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">decimal</span></code></a> et <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(disponible dans Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a> pour les réels (ou <em>nombres décimaux</em>),</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#complex" title="(disponible dans Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">complex</span></code></a> pour les nombres complexes.</p></li>
+</ul>
+</div></blockquote>
+<div class="section" id="exemples">
+<h3>Exemples<a class="headerlink" href="#exemples" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Voici un exemple tout simple pour commencer.</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="go">&lt;class &#39;int&#39;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="mf">3.14</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="go">&lt;class &#39;float&#39;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">int</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="go">3</span>
+</pre></div>
+</div>
+<p>On remarquera que Python reconnait <em>a</em> comme un entier,  <em>b</em> comme un nombre décimal,
+et <em>c</em> qui peut être entier même s’il est obtenu à partir de <em>b</em>.
+<em>c</em> sera converti en entier grâce à <em>int()</em> qui s’occupera de faire la conversion d’un nombre décimal en un entier.
+Ici, <em>c</em> vaut 3.</p>
+<p>En Python, la priorité des opérations s’effectue comme en algère. On effectue dans l’ordre</p>
+<ol class="arabic simple">
+<li><p>Les parenthèses</p></li>
+<li><p>Les fonctions (racines, puissances)</p></li>
+<li><p>Les multiplications et divisions</p></li>
+<li><p>Les additions et soustractions.</p></li>
+</ol>
+<p>Outre les additions, soustractions et multiplication <code class="docutils literal notranslate"><span class="pre">print</span> <span class="pre">(a+b),</span> <span class="pre">print(a-b),</span> <span class="pre">print(a*b)</span></code>,
+la division se présente sous deux formes : <cite>Le quotient euclidien</cite> qui est un entier, et le <cite>quotient exact</cite>
+qui est une fraction, donc un réel pour Python.
+Pour choisir quelle forme utiliser, il suffit de dédoubler le <em>slash</em> de la division.
+Ici, le premier <em>print</em> affichera <code class="docutils literal notranslate"><span class="pre">1.5</span></code> alors que le dédoublement du <em>slash</em> changera la réponse en <code class="docutils literal notranslate"><span class="pre">1</span></code>.
+Cette méthode est disponible que depuis <em>Python 3</em>, en <em>Python 2.X</em>, il était nécessaire d’écrire
+<code class="docutils literal notranslate"><span class="pre">float(a/b)</span></code> afin d’avoir la valeur en réel.</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">/</span> <span class="n">b</span>
+<span class="go">1.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">//</span> <span class="n">b</span>
+<span class="go">1</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="fonctions-de-nombres">
+<h3>Fonctions de nombres<a class="headerlink" href="#fonctions-de-nombres" title="Lien permanent vers ce titre">¶</a></h3>
+<p>La fonction <a class="reference external" href="https://docs.python.org/3/library/math.html#math.ceil" title="(disponible dans Python v3.9)"><code class="xref py py-func docutils literal notranslate"><span class="pre">ceil(x)</span></code></a> (x est donné en float) retourne la plus petite valeur entière, supérieure ou égale à x.</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">ceil</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ceil</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="go">10</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ceil</span><span class="p">(</span><span class="mf">10.1</span><span class="p">)</span>
+<span class="go">11</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ceil</span><span class="p">(</span><span class="mf">0.00000001</span><span class="p">)</span>
+<span class="go">1</span>
+</pre></div>
+</div>
+<p>La fonction <a class="reference external" href="https://docs.python.org/3/library/math.html#math.fabs" title="(disponible dans Python v3.9)"><code class="xref py py-func docutils literal notranslate"><span class="pre">fabs(x)</span></code></a> retourne la valeur absolue de <em>x</em>.</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">fabs</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fabs</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">)</span>
+<span class="go">10.0</span>
+</pre></div>
+</div>
+<p>La fonction <a class="reference external" href="https://docs.python.org/3/library/math.html#math.factorial" title="(disponible dans Python v3.9)"><code class="xref py py-func docutils literal notranslate"><span class="pre">factorial(x)</span></code></a> retourne <em>x</em> factoriel. Si <em>x</em> n’est pas un int ou est négatif, la fonction retourne
+une erreur de type <em>ValueError</em>.</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">factorial</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">factorial</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="go">24</span>
+</pre></div>
+</div>
+<p>La fonction <a class="reference external" href="https://docs.python.org/3/library/math.html#math.gcd" title="(disponible dans Python v3.9)"><code class="xref py py-func docutils literal notranslate"><span class="pre">gcd(a,</span> <span class="pre">b)</span></code></a> retourne la plus grand diviseur commun des int <em>a</em> et <em>b</em>.</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">gcd</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span><span class="p">(</span><span class="mi">24</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">6</span>
+</pre></div>
+</div>
+<p>La fonction <a class="reference external" href="https://docs.python.org/3/library/math.html#math.isfinite" title="(disponible dans Python v3.9)"><code class="xref py py-func docutils literal notranslate"><span class="pre">isfinite(x)</span></code></a> retourne <code class="docutils literal notranslate"><span class="pre">True</span></code> si <em>x</em> n’est ni un nombre infini, ni un NaN (<em>not a number</em>).
+Renvoie <code class="docutils literal notranslate"><span class="pre">False</span></code> sinon.
+Pour calculer <span class="math notranslate nohighlight">\(\frac{1}{0}\)</span>, nous utilisons la librairie <a class="reference external" href="https://docs.python.org/3/library/decimal.html#module-decimal" title="(disponible dans Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">decimal</span></code></a>. Grâce à cette dernière, nous pouvons définir un environnement pour
+les calculs arithmétiques. En faisant cela, la division <span class="math notranslate nohighlight">\(\frac{1}{0}\)</span> ne lèvera pas d’exception et pourra être testé avec <code class="docutils literal notranslate"><span class="pre">isfinite()</span></code>.</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">isfinite</span><span class="p">,</span> <span class="n">inf</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">setcontext</span><span class="p">,</span> <span class="n">ExtendedContext</span><span class="p">,</span> <span class="n">Decimal</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">isfinite</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">isfinite</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">isfinite</span><span class="p">(</span><span class="mi">0</span><span class="o">/</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">setcontext</span><span class="p">(</span><span class="n">ExtendedContext</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">isfinite</span><span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">)</span><span class="o">/</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0&#39;</span><span class="p">))</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="fonctions-logarithmiques-et-puissances">
+<h3>Fonctions logarithmiques et puissances<a class="headerlink" href="#fonctions-logarithmiques-et-puissances" title="Lien permanent vers ce titre">¶</a></h3>
+<p>On peut également utiliser diverses fonctions du module <a class="reference external" href="https://docs.python.org/3/library/math.html#module-math" title="(disponible dans Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">math</span></code></a> comme les <cite>racines</cite> ou les <cite>puissances</cite>.
+Ici, <em>a</em> est la racine carrée de 100, la commande <code class="docutils literal notranslate"><span class="pre">a.is_integer()</span></code>
+renvoi <code class="docutils literal notranslate"><span class="pre">True</span></code> si le nombre est un <em>int</em>, <code class="docutils literal notranslate"><span class="pre">False</span></code> sinon.
+<em>b</em> est la puissance cubique de <em>a</em>, c’est à dire 1’000.
+Les puissances peuvent aussi s’écrire en dédoublant l’astérisque de la multiplication.
+Les racines comme les puissances peuvent êtres obtenues en dédoublant l’astérisque avec <em>0.5</em>
+Dans cet exemple, comme aucune des variables ne possède de virgule, Python les reconnait comme des <em>int</em>.</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="mi">100</span><span class="o">**</span><span class="mf">0.5</span>
+<span class="go">10.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="mi">10</span><span class="o">**</span><span class="mi">3</span>
+<span class="go">1000.0</span>
+</pre></div>
+</div>
+<p>La fonction <a class="reference external" href="https://docs.python.org/3/library/math.html#math.log" title="(disponible dans Python v3.9)"><code class="xref py py-func docutils literal notranslate"><span class="pre">log(x,</span> <span class="pre">[base])</span></code></a> retourne le logarithme naturel de <em>x</em> (en base <em>e</em>).
+Avec deux arguments, cette fonction retourne le logerithme de <em>x</em> dans la base donnée.
+Il est possible d’utiliser les fonction <a class="reference external" href="https://docs.python.org/3/library/math.html#math.log2" title="(disponible dans Python v3.9)"><code class="xref py py-func docutils literal notranslate"><span class="pre">log2(x)</span></code></a> ou <a class="reference external" href="https://docs.python.org/3/library/math.html#math.log10" title="(disponible dans Python v3.9)"><code class="xref py py-func docutils literal notranslate"><span class="pre">log10(x)</span></code></a> pour retourner le logarithme en base 2 ou 10.</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">log</span><span class="p">,</span> <span class="n">log2</span><span class="p">,</span> <span class="n">log10</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">log</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="go">1.386294361119</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">log</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">2.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">log2</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+<span class="go">3.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">log10</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="go">2.0</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="angles-fonctions-trigonometriques-et-pi">
+<h3>Angles, fonctions trigonométriques et <em>PI</em><a class="headerlink" href="#angles-fonctions-trigonometriques-et-pi" title="Lien permanent vers ce titre">¶</a></h3>
+<p>La conversions d’angle est également une propriété de notre module :
+<a class="reference external" href="https://docs.python.org/3/library/math.html#math.degrees" title="(disponible dans Python v3.9)"><code class="xref py py-func docutils literal notranslate"><span class="pre">math.degrees()</span></code></a> et <a class="reference external" href="https://docs.python.org/3/library/math.html#math.radians" title="(disponible dans Python v3.9)"><code class="xref py py-func docutils literal notranslate"><span class="pre">math.radians()</span></code></a> permettent la conversion de l’angle <em>x</em> en degré ou en radians selon la fonction.</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">radians</span><span class="p">,</span> <span class="n">degrees</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">=</span><span class="n">radians</span><span class="p">(</span><span class="mi">180</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="go">3.141592653589793</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span><span class="o">=</span><span class="n">degrees</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="go">180.0</span>
+</pre></div>
+</div>
+<p>Qui dit conversion d’angle dit aussi fonctions trigonométriques.
+Ces dernières, <a class="reference external" href="https://docs.python.org/3/library/math.html#math.sin" title="(disponible dans Python v3.9)"><code class="xref py py-func docutils literal notranslate"><span class="pre">sin(x)</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/math.html#math.cos" title="(disponible dans Python v3.9)"><code class="xref py py-func docutils literal notranslate"><span class="pre">cos(x)</span></code></a> et <a class="reference external" href="https://docs.python.org/3/library/math.html#math.tan" title="(disponible dans Python v3.9)"><code class="xref py py-func docutils literal notranslate"><span class="pre">tan(x)</span></code></a>, font également parties du module <em>math</em>.
+Elles s’expriment toutes sous la forme <code class="docutils literal notranslate"><span class="pre">sin(x)</span></code>, <code class="docutils literal notranslate"><span class="pre">cos(x)</span></code>, <code class="docutils literal notranslate"><span class="pre">tan(x)</span></code> et renvoient le sinus, cosinus et tangente de <em>x</em> en radians.</p>
+<p>Les fonctions hyperboliques sont aussi présentes en rajoutant la lettre <code class="docutils literal notranslate"><span class="pre">h</span></code> à la suite des fonctions trigonométriques.
+À noter que la différence du type d’angle (degré ou radian) se montre très nettement au dernier <em>print</em>.</p>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>les fonctions hyperboliques ne travaillent pas sur un cercle (donc un angle), mais une hyperbole. Des exemples avec des degrés et des radians n’ont donc aucun sens.</p>
+</div>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">degrees</span><span class="p">,</span> <span class="n">radians</span><span class="p">,</span> <span class="n">sin</span><span class="p">,</span> <span class="n">cos</span><span class="p">,</span> <span class="n">tan</span><span class="p">,</span> <span class="n">tanh</span><span class="p">,</span> <span class="n">cosh</span><span class="p">,</span> <span class="n">sinh</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">=</span><span class="n">radians</span><span class="p">(</span><span class="mi">180</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span><span class="o">=</span><span class="n">degrees</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sin</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="go">-0.8011526357338304</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cos</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="go">-0.5984600690578581</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tan</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="go">1.3386902103511544</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tanh</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="go">0.99627207622075</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cosh</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="go">11.591953275521519</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sinh</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="go">7.446921003909191e+77</span>
+</pre></div>
+</div>
+<p>Les fonctions <a class="reference external" href="https://docs.python.org/3/library/math.html#math.asin" title="(disponible dans Python v3.9)"><code class="xref py py-func docutils literal notranslate"><span class="pre">asin(x)</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/math.html#math.acos" title="(disponible dans Python v3.9)"><code class="xref py py-func docutils literal notranslate"><span class="pre">acos(x)</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/math.html#math.atan" title="(disponible dans Python v3.9)"><code class="xref py py-func docutils literal notranslate"><span class="pre">atan(x)</span></code></a>, qui correspondent aux <em>arc sin, arc cos</em>, et <em>arc tan</em> peuvent être utilisées.
+Attention cependant aux limites, <em>x</em> doit être compris entre -1 et 1.</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">acos</span><span class="p">,</span> <span class="n">asin</span><span class="p">,</span> <span class="n">atan</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">acos</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">0.0</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">acos</span><span class="p">(</span><span class="mf">1.9</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+  File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span>
+<span class="gr">ValueError</span>: <span class="n">math domain error</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">asin</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="go">0.5235987755982989</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">atan</span><span class="p">(</span><span class="mf">0.333333</span><span class="p">)</span>
+<span class="go">0.3217502543966122</span>
+</pre></div>
+</div>
+<p>Le nombre <em>pi</em> fait également partie de notre module, comme bien d’autres constantes (<em>e</em>, <em>tau</em>, etc.).
+Pour l’utiliser, il suffit simplement d’écrire <code class="docutils literal notranslate"><span class="pre">pi</span></code> en commande. Cela va de même pour les autres constantes.
+La fonction <a class="reference external" href="https://docs.python.org/3/library/math.html#math.isclose" title="(disponible dans Python v3.9)"><code class="xref py py-func docutils literal notranslate"><span class="pre">isclose(a,</span> <span class="pre">b)</span></code></a> Nous permet de comparer deux nombres en retournant <em>True</em> si ces derniers sont relativement proches l’un de l’autre.</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">pi</span><span class="p">,</span> <span class="n">cos</span><span class="p">,</span> <span class="n">tan</span><span class="p">,</span> <span class="n">isclose</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pi</span>
+<span class="go">3.141592653589793</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cos</span><span class="p">(</span><span class="n">pi</span><span class="p">)</span>
+<span class="go">-1.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tan</span><span class="p">(</span><span class="n">pi</span><span class="o">/</span><span class="mi">4</span><span class="p">)</span>
+<span class="go">0.9999999999999999</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tan</span><span class="p">(</span><span class="n">pi</span><span class="o">/</span><span class="mi">4</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">isclose</span><span class="p">(</span><span class="n">tan</span><span class="p">(</span><span class="n">pi</span><span class="o">/</span><span class="mi">4</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="fractions">
+<h2>Fractions<a class="headerlink" href="#fractions" title="Lien permanent vers ce titre">¶</a></h2>
+<p>L’écriture de nombres non entiers sous forme de fractions est un concept fondamental des mathématiques.
+Chaque fois que le dénominateur n’est pas une puissance de  10, on utilise une écriture fractionnaire.
+Par exemple : Si l’on souhaite afficher <code class="docutils literal notranslate"><span class="pre">9</span> <span class="pre">heures</span> <span class="pre">17</span></code>, cela correspond à <code class="docutils literal notranslate"><span class="pre">9</span> <span class="pre">+</span> <span class="pre">17/60</span> <span class="pre">=</span> <span class="pre">493/60</span></code>;
+Encore ici, lorsque qu’on exprime une attente sous forme de quart d’heure, cela correspond à une fraction.
+Par exemple : J’ai attendu trois quarts-d’heure, je peux l’écrite aussi <code class="docutils literal notranslate"><span class="pre">J'ai</span> <span class="pre">attendu</span> <span class="pre">3/4</span> <span class="pre">d'heure</span></code>;</p>
+<p>Vous l’avez compris, l’utilisation des fractions se fait quotidiennement. Pour exprimer une telle forme
+en <em>Python</em>, il faut importer le module <a class="reference external" href="https://docs.python.org/3/library/fractions.html#module-fractions" title="(disponible dans Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">fractions</span></code></a></p>
+<div class="section" id="exemple">
+<h3>Exemple<a class="headerlink" href="#exemple" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Voici quelques exemples simples mais efficaces de l’utilisation de ce module.
+Pour rentrer la fraction n/d dans <em>Python</em>, on utilise le module <em>fractions</em>.
+Si on rentre 0 comme dénominateur, la fraction ne se crée pas et on a un message d’erreur :
+Comme une fraction est un quotient, on ne peut pas diviser par 0.</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fractions</span> <span class="kn">import</span> <span class="n">Fraction</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Fraction</span><span class="p">(</span><span class="mi">24</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="go">12/5</span>
+</pre></div>
+</div>
+<p>Une fois la fraction calculée, on peut afficher son numérateur et son dénominateur avec <code class="docutils literal notranslate"><span class="pre">a.numerator</span></code> et <code class="docutils literal notranslate"><span class="pre">a.denominator</span></code>.
+Bien entendu, le numérateur de <code class="docutils literal notranslate"><span class="pre">24/10</span></code> n’est pas 24, ce dernier est réduit. On obtiendra donc 12.</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">Fraction</span><span class="p">(</span><span class="mi">24</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">numerator</span>
+<span class="go">12</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">denominator</span>
+<span class="go">5</span>
+</pre></div>
+</div>
+<p>Pour obtenir le résultat de la fraction en nombre réel, il faut transformer la fraction en nombre flottant, <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(disponible dans Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>.</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">float</span><span class="p">(</span><span class="n">Fraction</span><span class="p">(</span><span class="mi">24</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="go">2.4</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="operations">
+<h3>Opérations<a class="headerlink" href="#operations" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Les opérations sur les fractions se notent comme avec des nombres, mais le résultat sortant est en général une fraction.
+Les opérations unaires (de bases) se font comme si l’on manipulait des nombres. <em>Python</em> les reconnaîtra néanmoins comme
+des fractions.</p>
+<p>Le quotient de deux fractions est également une fraction, pour autant que la 2ème fractions ne soit pas nulle :
+Il est également possible d’afficher le reste euclidien avec le modulo. Ce reste est une fraction.</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">Fraction</span><span class="p">(</span><span class="mi">23</span><span class="p">,</span> <span class="mi">42</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">Fraction</span><span class="p">(</span><span class="mi">34</span><span class="p">,</span> <span class="mi">13</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">/</span> <span class="n">b</span>
+<span class="go">299/1428</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">%</span> <span class="n">b</span>
+<span class="go">23/42</span>
+</pre></div>
+</div>
+<p>L’exposant d’une fraction est une fraction, pour autant que l’exposant est un entier :</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Fraction</span><span class="p">(</span><span class="mi">23</span><span class="p">,</span> <span class="mi">42</span><span class="p">)</span> <span class="o">**</span> <span class="mi">3</span>
+<span class="go">12167/74088</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Fraction</span><span class="p">(</span><span class="mi">23</span><span class="p">,</span> <span class="mi">42</span><span class="p">)</span> <span class="o">**</span> <span class="o">-</span><span class="mi">3</span>
+<span class="go">74088/12167</span>
+</pre></div>
+</div>
+<p>Si l’exposant est un réel, le résultat sera un réel :</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Fraction</span><span class="p">(</span><span class="mi">23</span><span class="p">,</span> <span class="mi">42</span><span class="p">)</span> <span class="o">**</span> <span class="mf">0.6</span>
+<span class="go">0.6967662840791479</span>
+</pre></div>
+</div>
+<p>L’opposé d’une fraction s’obtient en la faisant précéder du signe - :</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="o">-</span><span class="n">Fraction</span><span class="p">(</span><span class="mi">23</span><span class="p">,</span> <span class="mi">42</span><span class="p">)</span>
+<span class="go">-23/42</span>
+</pre></div>
+</div>
+<p>L’inverse d’une fraction s’obtient en la divisant par 1 :</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="mi">1</span> <span class="o">/</span> <span class="n">Fraction</span><span class="p">(</span><span class="mi">23</span><span class="p">,</span> <span class="mi">42</span><span class="p">)</span>
+<span class="go">42/23</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="fractions-egyptiennes">
+<h3>Fractions égyptiennes<a class="headerlink" href="#fractions-egyptiennes" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Une <a class="reference external" href="http://fr.wikipedia.org/wiki/Fraction_%C3%A9gyptienne">fraction égyptienne</a> est une somme de fractions unitaires.
+C’est-à-dire de fractions qui ont des numérateurs égaux à un et des dénominateurs entiers positifs,
+avec ces dénominateurs tous différents.
+De ce fait, <strong>toute fraction peut s’écrire comme une somme de fractions égyptiennes</strong>.
+Dans l’exemple ci-dessous, l’algorithme fournit une liste de fractions, toutes de numérateur 1, dont la somme
+est une fraction donnée <em>f</em>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;Exemple de fraction égyptiennes.&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">fractions</span> <span class="kn">import</span> <span class="n">Fraction</span>
+<span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">ceil</span>
+
+
+<span class="k">def</span> <span class="nf">function</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Définition de la fonction fournissant une liste de fractions.&quot;&quot;&quot;</span>
+    <span class="n">e</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="n">f</span> <span class="o">-=</span> <span class="n">e</span>
+    <span class="n">liste</span> <span class="o">=</span> <span class="p">[</span><span class="n">e</span><span class="p">]</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">numerator</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">e</span> <span class="o">=</span> <span class="n">Fraction</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">ceil</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">f</span><span class="p">)))</span>
+        <span class="n">liste</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+        <span class="n">f</span> <span class="o">-=</span> <span class="n">e</span>
+    <span class="n">liste</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">liste</span>
+
+
+<span class="n">a</span> <span class="o">=</span> <span class="n">Fraction</span><span class="p">(</span><span class="mi">21</span><span class="p">,</span> <span class="mi">13</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">function</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Dans cet exemple, le dénominateur d’une fraction égyptienne est choisi (en entier) et est plus grand
+que l’inverse de la fraction <em>f</em> (pour que l’algorithme converge). Attention si l’inverse de <em>f</em> est entier,
+on ne doit pas ajouter 1 car la suite serait infinie. On utilise alors la fonctoin <code class="docutils literal notranslate"><span class="pre">ceil</span></code> (qui veut dire plafonner, voir plus haut dans le doucment).</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Il faut importer le module <em>math</em> qui contient la fonction ceil.</p></li>
+<li><p>L’objet <code class="docutils literal notranslate"><span class="pre">ceil(1/f)</span></code> n’est plus un entier mais un réel (par conséquent, il ne peut plus être le dénominateur d’une fraction, donc erreur de <em>Python</em>).</p></li>
+<li><p>On convertit alors ce réel en entier (avec le <em>int</em>).</p></li>
+</ul>
+</div></blockquote>
+<p>Comme <em>Python</em> ne possède pas de boucle <em>do..while</em>, il faut ajouter la dernière fraction égyptienne à la liste,
+pour que celle-ci soit complète.</p>
+<p>Le résultat, pour <span class="math notranslate nohighlight">\(\frac{21}{13}\)</span> est : <span class="math notranslate nohighlight">\(1 + \frac{1}{2} + \frac{1}{9} + \frac{1}{234}\)</span></p>
+<p>Cela signifie que la somme de ces fractions vaut <span class="math notranslate nohighlight">\(\frac{21}{13}\)</span></p>
+</div>
+</div>
+<div class="section" id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Le calcul mathématique est facile à réaliser en <em>Python</em>.
+Il est aisé de demander à <em>Python</em> de nous indiquer le type d’une variable.
+La librairie <a class="reference external" href="https://docs.python.org/3/library/math.html#module-math" title="(disponible dans Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">math</span></code></a> propose un vaste choix de fonctions. Celles montrées dans ce chapitres sont les plus courantes,
+il en existent encore bien d’autres.
+<em>Python</em> reconnaît et manipule également les nombres complexes. Il suffit de rentrer <code class="docutils literal notranslate"><span class="pre">complex()</span></code> afin
+d’utiliser ces derniers. Bien entendu, toutes les manipulations propres aux nombres complexes
+(réel, imaginaire, module, argument) sont possibles.
+En important le module <a class="reference external" href="https://docs.python.org/3/library/fractions.html#module-fractions" title="(disponible dans Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">fractions</span></code></a> , il est facile d’effectuer nos manipulations en utilisant des
+fractions. Les opérations sur les fractions se font comme pour les nombres, au moment de l’impression.</p>
+<dl class="footnote brackets">
+<dt class="label" id="gg"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>&lt;<a class="reference external" href="mailto:gabriel&#46;griesser&#37;&#52;&#48;he-arc&#46;ch">gabriel<span>&#46;</span>griesser<span>&#64;</span>he-arc<span>&#46;</span>ch</a>&gt;</p>
+</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Bibliothèques Python</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../builtins/index.html">Builtins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../collections/index.html"><code class="docutils literal notranslate"><span class="pre">collections</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../datetime/index.html"><code class="docutils literal notranslate"><span class="pre">datetime</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dunders/index.html">Dunders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../enum/index.html"><code class="docutils literal notranslate"><span class="pre">enum</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fstrings/index.html">f-strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../itertools/index.html"><code class="docutils literal notranslate"><span class="pre">itertools</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../io/index.html"><code class="docutils literal notranslate"><span class="pre">io</span></code></a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">math</span></code> / <code class="docutils literal notranslate"><span class="pre">fractions</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../random/index.html"><code class="docutils literal notranslate"><span class="pre">random</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../time/index.html"><code class="docutils literal notranslate"><span class="pre">time</span></code> / <code class="docutils literal notranslate"><span class="pre">datetime</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../statistics/index.html"><code class="docutils literal notranslate"><span class="pre">statistics</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../super/index.html"><code class="docutils literal notranslate"><span class="pre">super()</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../abc/index.html">Abstract Base Class (<code class="docutils literal notranslate"><span class="pre">abc</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../binary/index.html"><code class="docutils literal notranslate"><span class="pre">bytes</span></code> / <code class="docutils literal notranslate"><span class="pre">bytearray</span></code> / <code class="docutils literal notranslate"><span class="pre">memoryview</span></code>, <code class="docutils literal notranslate"><span class="pre">struct</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bisect/index.html"><code class="docutils literal notranslate"><span class="pre">bisect</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email/index.html">E-mail (<code class="docutils literal notranslate"><span class="pre">smtplib</span></code> / <code class="docutils literal notranslate"><span class="pre">imaplib</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hashlib/index.html"><code class="docutils literal notranslate"><span class="pre">hashlib</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../multiprocessing/index.html"><code class="docutils literal notranslate"><span class="pre">multiprocessing</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../re/index.html">Expressions régulières (<code class="docutils literal notranslate"><span class="pre">re</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../secrets/index.html"><code class="docutils literal notranslate"><span class="pre">secrets</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../weakref/index.html"><code class="docutils literal notranslate"><span class="pre">weakref</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../colorama/index.html"><code class="docutils literal notranslate"><span class="pre">colorama</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../invoke/index.html"><code class="docutils literal notranslate"><span class="pre">invoke</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../unittest/index.html"><code class="docutils literal notranslate"><span class="pre">unittest</span></code> / <code class="docutils literal notranslate"><span class="pre">doctest</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pytest/index.html"><code class="docutils literal notranslate"><span class="pre">pytest</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../csv/index.html"><code class="docutils literal notranslate"><span class="pre">csv</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../json/index.html"><code class="docutils literal notranslate"><span class="pre">json</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pillow/index.html">Python Imaging Library (<code class="docutils literal notranslate"><span class="pre">PIL</span></code>)</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../hug/index.html"><code class="docutils literal notranslate"><span class="pre">hug</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../matplotlib/index.html"><code class="docutils literal notranslate"><span class="pre">matplotlib</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../networkx/index.html"><code class="docutils literal notranslate"><span class="pre">networkx</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pycrypto/index.html"><code class="docutils literal notranslate"><span class="pre">pycrypto</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pygame/index.html"><code class="docutils literal notranslate"><span class="pre">pygame</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sphinx/index.html"><code class="docutils literal notranslate"><span class="pre">sphinx</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../watchdog/index.html"><code class="docutils literal notranslate"><span class="pre">watchdog</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../pbr/index.html"><cite>⚙️Automate your publishing to PyPI with PBR and Travis</cite></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../misc/about.html">À propos de ce livre</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../misc/contrib.html">Contribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../licence.html">Creative Commons Attribution-ShareAlike 4.0 International</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="../io/index.html" title="Chapitre précédent"><code class="docutils literal notranslate"><span class="pre">io</span></code></a></li>
+      <li>Next: <a href="../random/index.html" title="Chapitre suivant"><code class="docutils literal notranslate"><span class="pre">random</span></code></a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Recherche rapide</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016-2017, HE-Arc.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/math/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

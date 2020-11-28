@@ -1,0 +1,342 @@
+
+<!DOCTYPE html>
+
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>networkx &#8212; Documentation Bibliothèques Python 1.0.0</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/translations.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Recherche" href="../search.html" />
+    <link rel="next" title="pycrypto" href="../pycrypto/index.html" />
+    <link rel="prev" title="matplotlib" href="../matplotlib/index.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="networkx">
+<span id="networkx-tutorial"></span><h1><code class="docutils literal notranslate"><span class="pre">networkx</span></code><a class="headerlink" href="#networkx" title="Lien permanent vers ce titre">¶</a></h1>
+<p>Par Deni Gahlinger <a class="footnote-reference brackets" href="#dg" id="id1">1</a></p>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Lien permanent vers ce titre">¶</a></h2>
+<p><a class="reference external" href="https://networkx.github.io/documentation/networkx-1.11/tutorial/tutorial.html">NetworkX</a> est une bibiothèque Python qui permet d’instancier des graphes composés de nœuds
+et de ponts, ou liens. Grâce à cette bibliothèque, la manipulation de ces graphes est simplifiée</p>
+<p>Un graphe, c’est un ensemble d’objet ou nœud pouvant être reliés par des ponts. Il existe plusieurs
+opérations et calculs sur les graphes. les graphes que NetworkX permet d’instancier peuvent
+contenir comme nœud nimporte quel objet hashable.</p>
+<p>Nous allons donc voir premièrement un exemple d’instanciation de noeuds,
+ensuite découvrire les différentes sortes de graphes ainsi que les opérations sur elles,
+et finalement comprendre les différents types d’affichages de graphes.</p>
+</div>
+<div class="section" id="instanciation">
+<h2>Instanciation<a class="headerlink" href="#instanciation" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Voici un exemple d’instanciation d’un graphe simple avec NetworkX.
+Comme NetworkX prend nimporte quel objet hashable comme noeud, l’exemple prendra
+des int.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;Exemple d&#39;instanciation d&#39;un graphe avec NetworkX.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nwx</span>
+
+<span class="c1"># création du graphe vide avec un attribu (laisser les parenthèses vides</span>
+<span class="c1"># si on ne veut psa d&#39;attributs)</span>
+<span class="n">G</span> <span class="o">=</span> <span class="n">nwx</span><span class="o">.</span><span class="n">Graph</span><span class="p">(</span><span class="n">day</span><span class="o">=</span><span class="s2">&quot;Friday&quot;</span><span class="p">)</span>
+<span class="n">G</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="s1">&#39;day&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Monday&#39;</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="s1">&#39;5pm&#39;</span><span class="p">)</span>  <span class="c1"># ajout d&#39;un noeud avec un attribu de temps (5pm)</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_nodes_from</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>  <span class="c1"># ajout de plusieurs noeuds</span>
+
+<span class="n">Ns</span> <span class="o">=</span> <span class="n">nwx</span><span class="o">.</span><span class="n">path_graph</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>  <span class="c1"># création d&#39;un groupe de noeud</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_nodes_from</span><span class="p">(</span><span class="n">Ns</span><span class="p">)</span>  <span class="c1"># ajour de chaque noeud dans le graphe</span>
+
+<span class="n">Ng</span> <span class="o">=</span> <span class="n">nwx</span><span class="o">.</span><span class="n">path_graph</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="n">Ng</span><span class="p">)</span>  <span class="c1"># ajout de Ng comme un noeud de G.</span>
+
+<span class="n">G</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># création d&#39;un pont dans le graphe</span>
+<span class="n">e</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="o">*</span><span class="n">e</span><span class="p">)</span>  <span class="c1"># ajout d&#39;un pont déjà existant</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">([(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)])</span>  <span class="c1"># ajout de plusieurs edges</span>
+<span class="n">G</span><span class="o">.</span><span class="n">remove_edge</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="c1"># suppression du pont (1,2) on peut aussi supprimer des</span>
+<span class="c1"># groupes de ponts et des noeuds de la même façon avec</span>
+<span class="c1"># Graph.remove_node(), Graph.remove_nodes_from(),</span>
+<span class="c1"># Graph.remove_edges_from()</span>
+
+<span class="n">G</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>  <span class="c1"># supprime tout les noeuds et ponts du graphe</span>
+
+<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+
+<span class="n">G</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">([(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)])</span>
+
+<span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">()</span>  <span class="c1"># affiche les noeuds</span>
+
+<span class="n">G</span><span class="o">.</span><span class="n">edges</span><span class="p">()</span>  <span class="c1"># affiche les ponts</span>
+
+<span class="n">nwx</span><span class="o">.</span><span class="n">connected_components</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>  <span class="c1"># affiche les groupes de noeuds interconnectés</span>
+
+<span class="n">nwx</span><span class="o">.</span><span class="n">degree</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>  <span class="c1"># affiche les noeuds avec leurs nombre de connexions</span>
+
+<span class="n">nwx</span><span class="o">.</span><span class="n">degree</span><span class="p">(</span><span class="n">G</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>  <span class="c1"># affiche le nombre de connexion des noeuds</span>
+
+<span class="n">G</span><span class="o">.</span><span class="n">node</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># affiche le noeud 1</span>
+
+<span class="c1"># Directed graphs / graphes dirigés</span>
+<span class="c1"># ces graphes permettent différences opérations supplémentaires comme :</span>
+<span class="c1"># DiGraph.out_edges(), DiGraph.in_degree(), DiGraph.predecessors(),</span>
+<span class="c1"># DiGraph.successors().</span>
+
+<span class="n">DG</span> <span class="o">=</span> <span class="n">nwx</span><span class="o">.</span><span class="n">DiGraph</span><span class="p">()</span>
+
+<span class="c1"># ajout de ponts ayant différents poids</span>
+
+<span class="n">DG</span><span class="o">.</span><span class="n">add_weighted_edges_from</span><span class="p">([(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">)])</span>
+
+<span class="c1"># Multigraph</span>
+<span class="c1"># Les multigraph permettent d&#39;avoir plusieurs ponts entre deux mêmes points.</span>
+
+<span class="n">MG</span> <span class="o">=</span> <span class="n">nwx</span><span class="o">.</span><span class="n">DiGraph</span><span class="p">()</span>
+
+<span class="c1"># ajout de ponts ayant différents poids</span>
+
+<span class="n">MG</span><span class="o">.</span><span class="n">add_weighted_edges_from</span><span class="p">([(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">)])</span>
+
+<span class="c1"># code pris sur :</span>
+<span class="c1"># https://networkx.github.io/documentation/networkx-1.10/tutorial/tutorial.html</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="operation-sur-des-graphes">
+<h2>Opération sur des graphes<a class="headerlink" href="#operation-sur-des-graphes" title="Lien permanent vers ce titre">¶</a></h2>
+<p>NetworkX permet différentes opérations sur les graphes. En voici un exemple :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;Exemple d&#39;opérations sur les graphes avec NetworkX.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">NetworkX</span> <span class="k">as</span> <span class="nn">nwx</span>
+
+<span class="n">G1</span> <span class="o">=</span> <span class="n">nwx</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>
+<span class="n">G1</span><span class="o">.</span><span class="n">add_nodes_from</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="n">G2</span> <span class="o">=</span> <span class="n">nwx</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>
+<span class="n">G1</span><span class="o">.</span><span class="n">add_nodes_from</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>
+
+<span class="c1"># operations classiques sur les graphes :</span>
+
+<span class="c1"># FIXME: nb = nwx.subgraph(G1, nbunch)</span>
+<span class="c1"># induit un subgraphe de G en noeuds d&#39;un nBrunch</span>
+<span class="n">G3</span> <span class="o">=</span> <span class="n">nwx</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="n">G1</span><span class="p">,</span> <span class="n">G2</span><span class="p">)</span>  <span class="c1"># union de deux graphes</span>
+<span class="n">G3</span> <span class="o">=</span> <span class="n">nwx</span><span class="o">.</span><span class="n">disjoint_union</span><span class="p">(</span><span class="n">G1</span><span class="p">,</span> <span class="n">G2</span><span class="p">)</span>  <span class="c1"># union sans doublure</span>
+<span class="n">G3</span> <span class="o">=</span> <span class="n">nwx</span><span class="o">.</span><span class="n">cartesian_product</span><span class="p">(</span><span class="n">G1</span><span class="p">,</span> <span class="n">G2</span><span class="p">)</span>  <span class="c1"># produit cartésien</span>
+<span class="n">G3</span> <span class="o">=</span> <span class="n">nwx</span><span class="o">.</span><span class="n">compose</span><span class="p">(</span><span class="n">G1</span><span class="p">,</span> <span class="n">G2</span><span class="p">)</span>
+<span class="c1"># combine les graphes en détectant les mêmes noeuds</span>
+<span class="n">G3</span> <span class="o">=</span> <span class="n">nwx</span><span class="o">.</span><span class="n">complement</span><span class="p">(</span><span class="n">G1</span><span class="p">)</span>  <span class="c1"># complements de G1</span>
+<span class="n">G3</span> <span class="o">=</span> <span class="n">nwx</span><span class="o">.</span><span class="n">create_empty_copy</span><span class="p">(</span><span class="n">G1</span><span class="p">)</span>  <span class="c1"># crée une copie vide de G1</span>
+<span class="n">G3</span> <span class="o">=</span> <span class="n">nwx</span><span class="o">.</span><span class="n">convert_to_directed</span><span class="p">(</span><span class="n">G1</span><span class="p">)</span>  <span class="c1"># convertis un graphe dirigé</span>
+<span class="n">G1</span> <span class="o">=</span> <span class="n">nwx</span><span class="o">.</span><span class="n">convert_to_undirected</span><span class="p">(</span><span class="n">G3</span><span class="p">)</span>  <span class="c1"># convertis un graphe dirigé</span>
+
+<span class="c1"># création de graphe classique prédéfinis</span>
+
+<span class="n">K_5</span> <span class="o">=</span> <span class="n">nwx</span><span class="o">.</span><span class="n">complete_graph</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">K_3_5</span> <span class="o">=</span> <span class="n">nwx</span><span class="o">.</span><span class="n">complete_bipartite_graph</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">barbell</span> <span class="o">=</span> <span class="n">nwx</span><span class="o">.</span><span class="n">barbell_graph</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">lollipop</span> <span class="o">=</span> <span class="n">nwx</span><span class="o">.</span><span class="n">lollipop_graph</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+
+<span class="c1"># untilisation des générateurs de graphes stockastiques</span>
+
+<span class="n">er</span> <span class="o">=</span> <span class="n">nwx</span><span class="o">.</span><span class="n">erdos_renyi_graph</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">)</span>
+<span class="n">ws</span> <span class="o">=</span> <span class="n">nwx</span><span class="o">.</span><span class="n">watts_strogatz_graph</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+<span class="n">ba</span> <span class="o">=</span> <span class="n">nwx</span><span class="o">.</span><span class="n">barabasi_albert_graph</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">red</span> <span class="o">=</span> <span class="n">nwx</span><span class="o">.</span><span class="n">random_lobster</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">)</span>
+
+<span class="c1"># enregistrement d&#39;un graphe dans un fichier</span>
+
+<span class="n">nwx</span><span class="o">.</span><span class="n">write_gml</span><span class="p">(</span><span class="n">red</span><span class="p">,</span> <span class="s2">&quot;path.to.file&quot;</span><span class="p">)</span>
+<span class="n">mygraph</span> <span class="o">=</span> <span class="n">nwx</span><span class="o">.</span><span class="n">read_gml</span><span class="p">(</span><span class="s2">&quot;path.to.file&quot;</span><span class="p">)</span>
+
+<span class="c1"># code pris sur :</span>
+<span class="c1"># https://networkx.github.io/documentation/networkx-1.10/tutorial/tutorial.html</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="dessin-d-un-graphe">
+<h2>Dessin d’un graphe<a class="headerlink" href="#dessin-d-un-graphe" title="Lien permanent vers ce titre">¶</a></h2>
+<p>NetworkX n’est pas fait spécialement pour dessiner un graphe.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;Exemple de dessin d&#39;un graphe de networkX.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nwx</span>
+
+<span class="n">G1</span> <span class="o">=</span> <span class="n">nwx</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>
+<span class="n">G1</span><span class="o">.</span><span class="n">add_nodes_from</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+
+<span class="c1"># dessin avec Mathplotlib</span>
+
+<span class="n">nwx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G1</span><span class="p">)</span>  <span class="c1"># on peut aussi essayer avec :</span>
+<span class="c1"># nx.draw_random(G), nx.draw_circular(G), nx.draw_spectral(G)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>  <span class="c1"># pour afficher ensuite</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;path.png&quot;</span><span class="p">)</span>  <span class="c1"># pour enregistrer sur un fichier dans un format png</span>
+
+<span class="c1"># voir aussi : nx.draw_graphviz(G) et nx.write_dot(G,&#39;file.dot&#39;) avec</span>
+<span class="c1"># PyGraphviz ou pydot</span>
+
+<span class="c1"># code pris sur :</span>
+<span class="c1"># https://networkx.github.io/documentation/networkx-1.10/tutorial/tutorial.html</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Lien permanent vers ce titre">¶</a></h2>
+<p>On peut voir que NetwokX est une librairie assez simple à utiliser dans les bases, mais est assez complète
+Cette librairie est vraiment utile pour différentes problématique touchant les graphes et la théories des graphes
+comme le voyageur de commerce. Certains problèmes mathématiques dans ce domaine peuvent avoir une
+grande complexité (complexité non polynomiale).</p>
+<p>L’existance d’une librairie comme NetworkX permet de manipuler des graphes de façon simple et offre plusieurs
+options utile pour une utilisation assez large dans le domaine des graphes.</p>
+<dl class="footnote brackets">
+<dt class="label" id="dg"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>&lt;<a class="reference external" href="mailto:deni&#46;gahlinger&#37;&#52;&#48;he-arc&#46;ch">deni<span>&#46;</span>gahlinger<span>&#64;</span>he-arc<span>&#46;</span>ch</a>&gt;</p>
+</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Bibliothèques Python</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../builtins/index.html">Builtins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../collections/index.html"><code class="docutils literal notranslate"><span class="pre">collections</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../datetime/index.html"><code class="docutils literal notranslate"><span class="pre">datetime</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dunders/index.html">Dunders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../enum/index.html"><code class="docutils literal notranslate"><span class="pre">enum</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fstrings/index.html">f-strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../itertools/index.html"><code class="docutils literal notranslate"><span class="pre">itertools</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../io/index.html"><code class="docutils literal notranslate"><span class="pre">io</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../math/index.html"><code class="docutils literal notranslate"><span class="pre">math</span></code> / <code class="docutils literal notranslate"><span class="pre">fractions</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../random/index.html"><code class="docutils literal notranslate"><span class="pre">random</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../time/index.html"><code class="docutils literal notranslate"><span class="pre">time</span></code> / <code class="docutils literal notranslate"><span class="pre">datetime</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../statistics/index.html"><code class="docutils literal notranslate"><span class="pre">statistics</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../super/index.html"><code class="docutils literal notranslate"><span class="pre">super()</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../abc/index.html">Abstract Base Class (<code class="docutils literal notranslate"><span class="pre">abc</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../binary/index.html"><code class="docutils literal notranslate"><span class="pre">bytes</span></code> / <code class="docutils literal notranslate"><span class="pre">bytearray</span></code> / <code class="docutils literal notranslate"><span class="pre">memoryview</span></code>, <code class="docutils literal notranslate"><span class="pre">struct</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bisect/index.html"><code class="docutils literal notranslate"><span class="pre">bisect</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email/index.html">E-mail (<code class="docutils literal notranslate"><span class="pre">smtplib</span></code> / <code class="docutils literal notranslate"><span class="pre">imaplib</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hashlib/index.html"><code class="docutils literal notranslate"><span class="pre">hashlib</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../multiprocessing/index.html"><code class="docutils literal notranslate"><span class="pre">multiprocessing</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../re/index.html">Expressions régulières (<code class="docutils literal notranslate"><span class="pre">re</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../secrets/index.html"><code class="docutils literal notranslate"><span class="pre">secrets</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../weakref/index.html"><code class="docutils literal notranslate"><span class="pre">weakref</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../colorama/index.html"><code class="docutils literal notranslate"><span class="pre">colorama</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../invoke/index.html"><code class="docutils literal notranslate"><span class="pre">invoke</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../unittest/index.html"><code class="docutils literal notranslate"><span class="pre">unittest</span></code> / <code class="docutils literal notranslate"><span class="pre">doctest</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pytest/index.html"><code class="docutils literal notranslate"><span class="pre">pytest</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../csv/index.html"><code class="docutils literal notranslate"><span class="pre">csv</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../json/index.html"><code class="docutils literal notranslate"><span class="pre">json</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pillow/index.html">Python Imaging Library (<code class="docutils literal notranslate"><span class="pre">PIL</span></code>)</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../hug/index.html"><code class="docutils literal notranslate"><span class="pre">hug</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../matplotlib/index.html"><code class="docutils literal notranslate"><span class="pre">matplotlib</span></code></a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">networkx</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pycrypto/index.html"><code class="docutils literal notranslate"><span class="pre">pycrypto</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pygame/index.html"><code class="docutils literal notranslate"><span class="pre">pygame</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sphinx/index.html"><code class="docutils literal notranslate"><span class="pre">sphinx</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../watchdog/index.html"><code class="docutils literal notranslate"><span class="pre">watchdog</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../pbr/index.html"><cite>⚙️Automate your publishing to PyPI with PBR and Travis</cite></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../misc/about.html">À propos de ce livre</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../misc/contrib.html">Contribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../licence.html">Creative Commons Attribution-ShareAlike 4.0 International</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="../matplotlib/index.html" title="Chapitre précédent"><code class="docutils literal notranslate"><span class="pre">matplotlib</span></code></a></li>
+      <li>Next: <a href="../pycrypto/index.html" title="Chapitre suivant"><code class="docutils literal notranslate"><span class="pre">pycrypto</span></code></a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Recherche rapide</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016-2017, HE-Arc.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/networkx/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

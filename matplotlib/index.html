@@ -1,0 +1,470 @@
+
+<!DOCTYPE html>
+
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>matplotlib &#8212; Documentation Bibliothèques Python 1.0.0</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/translations.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Recherche" href="../search.html" />
+    <link rel="next" title="networkx" href="../networkx/index.html" />
+    <link rel="prev" title="hug" href="../hug/index.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="matplotlib">
+<span id="matplotlib-tutorial"></span><h1><code class="docutils literal notranslate"><span class="pre">matplotlib</span></code><a class="headerlink" href="#matplotlib" title="Lien permanent vers ce titre">¶</a></h1>
+<p>Par Florian Fasmeyer <a class="footnote-reference brackets" href="#ff" id="id1">1</a></p>
+<img alt="matPlotLib membranePlot" src="../_images/matplotlib.png" />
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Lien permanent vers ce titre">¶</a></h2>
+<p><a class="reference external" href="http://matplotlib.org/">matplotlib</a> est une bibliothèque Python capable de produire des graphes de qualité.
+<a class="reference external" href="http://matplotlib.org/">matplotlib</a> peut être utilisé dans des scripts Python, le shell Python et <a class="reference external" href="https://ipython.org/">IPython</a>,
+le notebook <a class="reference external" href="http://jupyter.org/">Jupyter</a>, des serveurs d’application web et dans quatre outils d’interface graphique.</p>
+<img alt="matPlotLib membranePlot" src="../_images/surface3d_frontpage.png" />
+<img alt="matPlotLib contourPlot" src="../_images/contour_frontpage.png" />
+<img alt="matPlotLib membranePlot" src="../_images/membrane_frontpage.png" />
+<img alt="matPlotLib histogramPlot" src="../_images/histogram_frontpage.png" />
+<p>Matplotlib essai de rendre les tâches simples “simples” et de rendre possible les choses compliqués.
+Vous pouvez générer des graphes, histogrames, des <a class="reference external" href="https://fr.wikipedia.org/wiki/Densit%C3%A9_spectrale_de_puissance">spectres</a> de puissance (lié à la transformée de Fourier),
+des graphiques à bares, des graphiques d’erreur, des nuages de <a class="reference external" href="http://spss.espaceweb.usherbrooke.ca/media/images/Site%20v17/nuage1.jpg">dispersion</a>, etc… en quelques lignes de code.</p>
+<p>Pour des graphiques simples, le module <a class="reference external" href="https://matplotlib.org/2.0.0/api/pyplot_api.html#module-matplotlib.pyplot" title="(disponible dans Matplotlib v2.0.0)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">matplotlib.pyplot</span></code></a> fournit une
+interface comme MATLAB spécialement adaptée avec <a class="reference external" href="https://ipython.org/">IPython</a>.</p>
+</div>
+<div class="section" id="exemple">
+<h2>Exemple<a class="headerlink" href="#exemple" title="Lien permanent vers ce titre">¶</a></h2>
+<p><a class="reference external" href="http://matplotlib.org/">Matplotlib</a> est généralement utilisé avec <a class="reference external" href="https://numpy.org/doc/stable/reference/index.html#module-numpy" title="(disponible dans NumPy v1.19)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">numpy</span></code></a>, permettant l’usage
+de fonctions utiles comme <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.arange.html#numpy.arange" title="(disponible dans NumPy v1.19)"><code class="xref py py-func docutils literal notranslate"><span class="pre">arange()</span></code></a> qui dans notre cas est
+utilisé pour la création de valeures à intervals réguliers de 0 à 5.</p>
+<p><a class="reference external" href="http://matplotlib.org/">Matplotlib</a> dispose de plus d’une centaine d’exemples (<a class="reference external" href="https://matplotlib.org/2.0.0/examples/index.html#examples-index" title="(disponible dans Matplotlib v2.0.0)"><span>Matplotlib Examples</span></a>)
+pour tous les cas possibles et imaginables.</p>
+<p>Il vous est conseilé de vous rendre sur le site officiel et de jeter un  œil à la <a class="reference external" href="http://matplotlib.org/gallery.html">galerie</a>.</p>
+<div class="section" id="cas-simple">
+<h3>Cas simple<a class="headerlink" href="#cas-simple" title="Lien permanent vers ce titre">¶</a></h3>
+<img alt="matPlotLib exemple2" src="../_images/exempleImportant.png" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;Dessine cos(x) entre 0 et 2 PI.&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># [0, 0.1, 0.2, ..., pi*2)</span>
+<span class="n">xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+<span class="c1"># calcule chaque y pour chaque x dans xs.</span>
+<span class="n">ys</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
+<span class="c1"># dessine</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">)</span>
+
+<span class="c1"># affiche le graphe</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="cas-pratique-de-statistique">
+<h3>Cas pratique de statistique<a class="headerlink" href="#cas-pratique-de-statistique" title="Lien permanent vers ce titre">¶</a></h3>
+<img alt="matPlotLib exemple1" src="../_images/example.png" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Fréquences cumulées et médiane.</span>
+
+<span class="sd"># Made by Florian Fasmeyer 27.02.2017</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+
+<span class="k">def</span> <span class="nf">cf</span><span class="p">(</span><span class="n">ni</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Cumule une liste de fréquences par addition.&quot;&quot;&quot;</span>
+    <span class="n">cumulFreq</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">ni</span><span class="p">:</span>
+        <span class="n">cumulFreq</span> <span class="o">+=</span> <span class="p">(</span><span class="n">i</span> <span class="o">/</span> <span class="n">n</span><span class="p">)</span>
+        <span class="k">yield</span> <span class="n">cumulFreq</span>
+
+
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">ni</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Prend une liste d&#39;occurence et calcule la fréquence.&quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">ni</span><span class="p">:</span>
+        <span class="k">yield</span> <span class="n">i</span> <span class="o">/</span> <span class="n">n</span>
+
+
+<span class="c1"># Variables</span>
+<span class="n">ni</span> <span class="o">=</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">104</span><span class="p">,</span> <span class="mi">163</span><span class="p">,</span> <span class="mi">121</span><span class="p">,</span> <span class="mi">57</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">i</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">ni</span><span class="p">)</span>
+<span class="n">n</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">ni</span><span class="p">)</span>
+<span class="n">cash</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">27</span><span class="p">,</span> <span class="mi">51</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">frequence</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">ni</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+<span class="n">frequence_cumule</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">cf</span><span class="p">(</span><span class="n">ni</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+
+<span class="n">major_ticksX</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">24</span><span class="p">,</span> <span class="mi">51</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">major_ticksY</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">163</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">major_ticksX2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">27</span><span class="p">,</span> <span class="mi">51</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">major_ticksY2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+
+<span class="c1"># Mod</span>
+<span class="n">mod</span> <span class="o">=</span> <span class="p">(</span><span class="n">cash</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="n">cash</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">-</span> <span class="n">cash</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="o">*</span> <span class="p">(</span><span class="n">ni</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">-</span> <span class="n">ni</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="o">/</span>
+       <span class="p">((</span><span class="n">ni</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">-</span> <span class="n">ni</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="o">+</span> <span class="p">(</span><span class="n">ni</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">-</span> <span class="n">ni</span><span class="p">[</span><span class="mi">4</span><span class="p">])))</span>
+
+<span class="c1"># Médiane</span>
+<span class="n">ccf</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">cf</span><span class="p">(</span><span class="n">ni</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+<span class="n">med</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.5</span> <span class="o">-</span> <span class="n">ccf</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="o">*</span> <span class="p">(</span><span class="n">cash</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">-</span> <span class="n">cash</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="o">/</span> <span class="p">(</span><span class="n">ccf</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">-</span> <span class="n">ccf</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="o">+</span> <span class="n">cash</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;médiane = </span><span class="si">{</span><span class="n">med</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;mod     = </span><span class="si">{</span><span class="n">mod</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Plot Graphes</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+
+<span class="c1"># fig1</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">major_ticksX</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">(</span><span class="n">major_ticksY</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">121</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+<span class="n">bins</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">24</span><span class="p">,</span> <span class="mi">51</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">24</span><span class="p">,</span> <span class="mi">48</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">bins</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">ni</span><span class="p">)</span>
+
+<span class="c1"># fig2</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">major_ticksX2</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">(</span><span class="n">major_ticksY2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">122</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">27</span><span class="p">,</span> <span class="mi">51</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">ccf</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">27</span><span class="p">,</span> <span class="mi">51</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">ccf</span><span class="p">,</span> <span class="s2">&quot;ro&quot;</span><span class="p">)</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+<span class="n">a</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">27</span><span class="p">,</span> <span class="mi">51</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">a</span><span class="p">)</span>
+<span class="n">a</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="mf">0.75</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">27</span><span class="p">,</span> <span class="mi">51</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">a</span><span class="p">)</span>
+<span class="n">a</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="mf">0.25</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">27</span><span class="p">,</span> <span class="mi">51</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">a</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="cas-particulier-avec-toolkits-pour-la-3d">
+<h3>Cas particulier avec toolkits pour la 3D<a class="headerlink" href="#cas-particulier-avec-toolkits-pour-la-3d" title="Lien permanent vers ce titre">¶</a></h3>
+<img alt="matPlotLib exemple3D" src="../_images/matplotlib-3d-graph-wire_frame-tutorial.png" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Plot 3D.</span>
+
+<span class="sd">source : PythonProgramming.net</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">style</span>
+<span class="kn">from</span> <span class="nn">mpl_toolkits.mplot3d</span> <span class="kn">import</span> <span class="n">axes3d</span>
+
+<span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;ggplot&#39;</span><span class="p">)</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
+
+<span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">axes3d</span><span class="o">.</span><span class="n">get_test_data</span><span class="p">()</span>
+
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot_wireframe</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">rstride</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">cstride</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x axis&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;y axis&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span><span class="s1">&#39;z axis&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="how-to">
+<h2>How to<a class="headerlink" href="#how-to" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Liste non exhaustive expliquant comment utiliser matplotlib.
+Le but est d’expliquer simplement des conceptes sur lesquels
+vous risquez autrement de perdre du temps.</p>
+<p>N’hésitez pas à visiter la page de <a class="reference external" href="https://matplotlib.org/2.0.0/users/pyplot_tutorial.html#pyplot-tutorial" title="(disponible dans Matplotlib v2.0.0)"><span>Pyplot tutorial</span></a> sur le site officiel
+si vous comprenez l’anglais ou le <a class="reference external" href="https://2.bp.blogspot.com/-2mxHUrtNNQI/VvCP1V94pNI/AAAAAAAAEqw/h9IWBjCeMowykzM8uXWWoOb3BymaZNTIQ/s1600/matrix-600x400.jpg">code</a>.</p>
+<p>Conseil, regardez les fonctions suivantes en détail</p>
+<ul class="simple">
+<li><p>plot(*args, **kwargs)</p></li>
+<li><p>triplot(*args, **kwargs)</p></li>
+<li><p>bar(left, height, width=0.8, bottom=None, hold=None, data=None, **kwargs)</p></li>
+<li><p>hist(x, bins=None, …, **kwargs)</p></li>
+<li><p>boxplot(x, notch=None, …)</p></li>
+</ul>
+<div class="section" id="graphique-simple">
+<h3>Graphique simple<a class="headerlink" href="#graphique-simple" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Le <a class="reference external" href="https://matplotlib.org/2.0.0/api/pyplot_api.html#matplotlib.pyplot.plot" title="(disponible dans Matplotlib v2.0.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">plot()</span></code></a> est la fonction la plus importante de
+<a class="reference external" href="http://matplotlib.org/">matplotlib</a> (on se demande pourquoi), pour cette raison il vous est
+recommandé de regarder la doc <a class="reference external" href="https://matplotlib.org/2.0.0/api/pyplot_api.html#module-matplotlib.pyplot" title="(disponible dans Matplotlib v2.0.0)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">matplotlib.pyplot</span></code></a> en détail.</p>
+<img alt="matPlotLib ro" src="../_images/simplesimple.png" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Florian Fasmeyer 23.03.2017</span>
+<span class="sd">&quot;&quot;&quot;De la statistique fait rapidement :-).&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">centreClasse</span> <span class="o">=</span> <span class="p">[</span><span class="mi">44</span><span class="p">,</span> <span class="mi">46</span><span class="p">,</span> <span class="mi">48</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">52</span><span class="p">,</span> <span class="mi">54</span><span class="p">,</span> <span class="mi">56</span><span class="p">]</span>
+<span class="n">effectifs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">centreClasse</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">effectifs</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">align</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.75</span><span class="p">)</span>  <span class="c1"># histograme</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s1">&#39;r--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="lignes-points-tirets">
+<h3>Lignes, points, tirets<a class="headerlink" href="#lignes-points-tirets" title="Lien permanent vers ce titre">¶</a></h3>
+<img alt="matPlotLib ro" src="../_images/ro.png" />
+<p>Pour changer l’affichage de ligne à points ou traitillé, il suffit d’ajouter
+un argument au moment de plot! Voir <a class="reference external" href="https://matplotlib.org/2.0.0/api/pyplot_api.html#matplotlib.pyplot.plot" title="(disponible dans Matplotlib v2.0.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">plot()</span></code></a>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;Affiche des points.&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+<span class="n">ys</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
+<span class="c1"># r -&gt; red</span>
+<span class="c1"># o -&gt; dot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">,</span> <span class="s2">&quot;ro&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="axes-et-axes-mineurs">
+<h3>Axes et axes mineurs<a class="headerlink" href="#axes-et-axes-mineurs" title="Lien permanent vers ce titre">¶</a></h3>
+<img alt="matPlotLib axes" src="../_images/axe.png" />
+<p>Pour modifier les axes l’on a besoin d’un objet que subplot retourne, d’où
+l’étrange <code class="docutils literal notranslate"><span class="pre">subplot(111)</span></code>.</p>
+<p>Vous remarquerez l’axe mineur, qui s’affiche tous les <span class="math notranslate nohighlight">\(0.1\)</span> ticks.</p>
+<p>Dans cet exemple l’on ne touche qu’à “x”. “y” est en mode par défaut, il se met
+directement à la bonne position. Notez bien qu rien ne vous empèche de faire
+des échelles étranges ou <a class="reference external" href="https://www.ilemaths.net/img/forum_img/0416/forum_416807_1.JPG">logarithmiques</a>. Voir <a class="reference external" href="https://numpy.org/doc/stable/reference/index.html#module-numpy" title="(disponible dans NumPy v1.19)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">numpy</span></code></a>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;plot un axe tout mignon.&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="c1"># de 5 à 10, par saut de 1 [5,6,7,8,9]</span>
+<span class="n">axe_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">axe_x_mineur</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">axe_x</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">axe_x_mineur</span><span class="p">,</span> <span class="n">minor</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># pour axe_x, donner var Y</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axe_x</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="s2">&quot;ro&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="afficher-plusieurs-graphes">
+<h3>Afficher plusieurs graphes<a class="headerlink" href="#afficher-plusieurs-graphes" title="Lien permanent vers ce titre">¶</a></h3>
+<img alt="matPlotLib subplot" src="../_images/AEGXG.png" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># source: stackoverflow</span>
+<span class="sd">&quot;&quot;&quot;exemple subplot.&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+
+<span class="c1"># subplot(taille_x, taille_y, position)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">221</span><span class="p">)</span>  <span class="c1"># haut gauche</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">222</span><span class="p">)</span>  <span class="c1"># haut droite</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">223</span><span class="p">)</span>  <span class="c1"># bas gauche</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">224</span><span class="p">)</span>  <span class="c1"># bas droit</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Vous pouvez aussi produire des assemblements asymétriques:</p>
+<img alt="matPlotLib subPlot2 printscreen Florian Fasmeyer 22.03.2017" src="../_images/subPlot.png" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Florian Fasmeyer 22.03.2017</span>
+<span class="sd">&quot;&quot;&quot;exemple subplot cas spécial.&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="c1"># subplot(taille_x, taille_y, position)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># taille(1,2) position(1)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">222</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">224</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Matplotlib est une bibliothèque extraordinaire permettant de gagner beaucoup de
+temps dans les applications nécessitant un affichage de données sous forme de
+graphiques.</p>
+</div>
+<div class="section" id="credits">
+<h2>Crédits<a class="headerlink" href="#credits" title="Lien permanent vers ce titre">¶</a></h2>
+<blockquote>
+<div><p><a class="reference external" href="http://matplotlib.org/">Matplotlib</a> est un projet par John Hunter (1968 - 2012) qui à l’aide de
+nombreux contributeurs, ont donné une quantité incommensurable de travail
+dans la production de ce software. Dans le cas ou Matplotlib contribue à un
+projet menant à des publications scientifiques, il vous est prié de faire
+reconnaitre ce travail en le citant dans votre projet. Vous pouvez utiliser
+cette <a class="reference external" href="http://matplotlib.org/2.0.0/citing.html">citation</a> prête à l’usage.</p>
+</div></blockquote>
+</div>
+<div class="section" id="sources">
+<h2>Sources<a class="headerlink" href="#sources" title="Lien permanent vers ce titre">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="http://matplotlib.org/">Matplotlib</a>.org</p></li>
+<li><p><a class="reference external" href="https://pythonprogramming.net/conclusion-matplotlib-tutorial/">PythonProgramming</a>.net</p></li>
+<li><p>StackOverflow.com <a class="reference external" href="http://stackoverflow.com/questions/3584805/in-matplotlib-what-does-the-argument-mean-in-fig-add-subplot111">subPlot</a></p></li>
+</ul>
+<dl class="footnote brackets">
+<dt class="label" id="ff"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>&lt;<a class="reference external" href="mailto:florian&#46;fasmeyer&#37;&#52;&#48;he-arc&#46;ch">florian<span>&#46;</span>fasmeyer<span>&#64;</span>he-arc<span>&#46;</span>ch</a>&gt;</p>
+</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Bibliothèques Python</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../builtins/index.html">Builtins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../collections/index.html"><code class="docutils literal notranslate"><span class="pre">collections</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../datetime/index.html"><code class="docutils literal notranslate"><span class="pre">datetime</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dunders/index.html">Dunders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../enum/index.html"><code class="docutils literal notranslate"><span class="pre">enum</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fstrings/index.html">f-strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../itertools/index.html"><code class="docutils literal notranslate"><span class="pre">itertools</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../io/index.html"><code class="docutils literal notranslate"><span class="pre">io</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../math/index.html"><code class="docutils literal notranslate"><span class="pre">math</span></code> / <code class="docutils literal notranslate"><span class="pre">fractions</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../random/index.html"><code class="docutils literal notranslate"><span class="pre">random</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../time/index.html"><code class="docutils literal notranslate"><span class="pre">time</span></code> / <code class="docutils literal notranslate"><span class="pre">datetime</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../statistics/index.html"><code class="docutils literal notranslate"><span class="pre">statistics</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../super/index.html"><code class="docutils literal notranslate"><span class="pre">super()</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../abc/index.html">Abstract Base Class (<code class="docutils literal notranslate"><span class="pre">abc</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../binary/index.html"><code class="docutils literal notranslate"><span class="pre">bytes</span></code> / <code class="docutils literal notranslate"><span class="pre">bytearray</span></code> / <code class="docutils literal notranslate"><span class="pre">memoryview</span></code>, <code class="docutils literal notranslate"><span class="pre">struct</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bisect/index.html"><code class="docutils literal notranslate"><span class="pre">bisect</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email/index.html">E-mail (<code class="docutils literal notranslate"><span class="pre">smtplib</span></code> / <code class="docutils literal notranslate"><span class="pre">imaplib</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hashlib/index.html"><code class="docutils literal notranslate"><span class="pre">hashlib</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../multiprocessing/index.html"><code class="docutils literal notranslate"><span class="pre">multiprocessing</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../re/index.html">Expressions régulières (<code class="docutils literal notranslate"><span class="pre">re</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../secrets/index.html"><code class="docutils literal notranslate"><span class="pre">secrets</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../weakref/index.html"><code class="docutils literal notranslate"><span class="pre">weakref</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../colorama/index.html"><code class="docutils literal notranslate"><span class="pre">colorama</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../invoke/index.html"><code class="docutils literal notranslate"><span class="pre">invoke</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../unittest/index.html"><code class="docutils literal notranslate"><span class="pre">unittest</span></code> / <code class="docutils literal notranslate"><span class="pre">doctest</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pytest/index.html"><code class="docutils literal notranslate"><span class="pre">pytest</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../csv/index.html"><code class="docutils literal notranslate"><span class="pre">csv</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../json/index.html"><code class="docutils literal notranslate"><span class="pre">json</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pillow/index.html">Python Imaging Library (<code class="docutils literal notranslate"><span class="pre">PIL</span></code>)</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../hug/index.html"><code class="docutils literal notranslate"><span class="pre">hug</span></code></a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">matplotlib</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../networkx/index.html"><code class="docutils literal notranslate"><span class="pre">networkx</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pycrypto/index.html"><code class="docutils literal notranslate"><span class="pre">pycrypto</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pygame/index.html"><code class="docutils literal notranslate"><span class="pre">pygame</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sphinx/index.html"><code class="docutils literal notranslate"><span class="pre">sphinx</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../watchdog/index.html"><code class="docutils literal notranslate"><span class="pre">watchdog</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../pbr/index.html"><cite>⚙️Automate your publishing to PyPI with PBR and Travis</cite></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../misc/about.html">À propos de ce livre</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../misc/contrib.html">Contribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../licence.html">Creative Commons Attribution-ShareAlike 4.0 International</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="../hug/index.html" title="Chapitre précédent"><code class="docutils literal notranslate"><span class="pre">hug</span></code></a></li>
+      <li>Next: <a href="../networkx/index.html" title="Chapitre suivant"><code class="docutils literal notranslate"><span class="pre">networkx</span></code></a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Recherche rapide</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016-2017, HE-Arc.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/matplotlib/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

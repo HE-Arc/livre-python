@@ -1,0 +1,509 @@
+
+<!DOCTYPE html>
+
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pycrypto &#8212; Documentation Bibliothèques Python 1.0.0</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/translations.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Recherche" href="../search.html" />
+    <link rel="next" title="pygame" href="../pygame/index.html" />
+    <link rel="prev" title="networkx" href="../networkx/index.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="pycrypto">
+<span id="pycrypto-tutorial"></span><h1><code class="docutils literal notranslate"><span class="pre">pycrypto</span></code><a class="headerlink" href="#pycrypto" title="Lien permanent vers ce titre">¶</a></h1>
+<p>Par Luca Srdjenovic <a class="footnote-reference brackets" href="#ls" id="id1">1</a></p>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Lien permanent vers ce titre">¶</a></h2>
+<p><a class="reference external" href="https://www.dlitz.net/software/pycrypto/">pycrypto</a> est une bibliothèque qui fournit  des outils de cryptographie
+primitive implémententés en langage Python.  Par exemple quand on fait du
+réseau, on a souvent besoin d’utiliser la cryptographie. En effet des méchants
+peuvent se situer entres deux machines qui commmuniquent pour les écouter. Et
+le méchant s’il le désire peut faire encore pire, c’est-à-dire remplacer un
+bout ou totalement une partie du message envoyé. À noter que pour des raisons
+de sécurité, il est recommandé d’utiliser une bibliothèque de haut niveau ce
+qui donnera moins de travail au programmeur pour éviter des longues analyses de
+sécurité. <a class="reference external" href="https://www.dlitz.net/software/pycrypto/">pycrypto</a> correspond bien à cette demande mais est une approche
+dangereuse qui demande de porter un grand détail à son fonctionnement.
+Cependant il permet de faire ce que l’on désire en cryptographie.</p>
+</div>
+<div class="section" id="mots-clefs">
+<h2>Mots clefs<a class="headerlink" href="#mots-clefs" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Quelques mots clefs pour aider la compréhension pour la suite :</p>
+<dl class="field-list simple">
+<dt class="field-odd"><cite>plaintext</cite></dt>
+<dd class="field-odd"><p>message original</p>
+</dd>
+<dt class="field-even"><cite>ciphertext</cite></dt>
+<dd class="field-even"><p>message après la transformation cryptograhpique appliqué au
+message original</p>
+</dd>
+<dt class="field-odd"><cite>encrypt</cite></dt>
+<dd class="field-odd"><p>produit le ciphertext en appliquant la transformation
+cryptographique au plaintext</p>
+</dd>
+<dt class="field-even"><cite>decrypt</cite></dt>
+<dd class="field-even"><p>produit le plaintext en appliquant la transformation
+cryptographique au ciphertext</p>
+</dd>
+<dt class="field-odd"><cite>cipher</cite></dt>
+<dd class="field-odd"><p>une composition particulière de la transformation cryptographique
+fournissant encryptage et décryptage</p>
+</dd>
+<dt class="field-even"><cite>hash</cite></dt>
+<dd class="field-even"><p>transformation cryptographique qui prend une grande entrée et la
+transforme en une unique sortie (de taille fixée).</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="type-de-cryptage">
+<h2>Type de cryptage<a class="headerlink" href="#type-de-cryptage" title="Lien permanent vers ce titre">¶</a></h2>
+<p>En cryptographie, il existe deux types de chiffrement.
+Le symétrique et l’asymétrique. Comme PyCrypto est vaste, nous allons juste
+nous intéresser au chiffrement symétrique.</p>
+<dl class="simple">
+<dt>Pour le symétrique, il y a deux types de clef :</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">stream</span> <span class="pre">ciphers</span></code>: opération sur des flux de données un byte à la fois</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">block</span> <span class="pre">ciphers</span></code>: opération de blocks sur des données, en 16 bytes
+à la fois.</p></li>
+</ul>
+</dd>
+</dl>
+<p>Nous allons utiliser le block cipher. Le plus commun et standard avancé est l”<a class="reference external" href="https://secure.wikimedia.org/wikipedia/en/wiki/Advanced_Encryption_Standard">AES</a> si
+on n’a pas trop d’idée de quel algorithme de cryptage à utiliser.
+Un peu moins commun est le DES.c’est le standard de la cryptographie car il
+était très utilisé dans le passé mais sa clef est trop petitE aujourd’hui à cause
+de ces 56-bit de taille.</p>
+<p>Voici une liste des différents algorithmes possibles :</p>
+<blockquote>
+<div><table class="docutils align-default">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Nom du module</p></th>
+<th class="head"><p>Type</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Crypto.Cipher.AES</p></td>
+<td><p>Block</p></td>
+</tr>
+<tr class="row-odd"><td><p>Crypto.Cipher.ARC2</p></td>
+<td><p>Block</p></td>
+</tr>
+<tr class="row-even"><td><p>Crypto.Cipher.ARC4</p></td>
+<td><p>Stream</p></td>
+</tr>
+<tr class="row-odd"><td><p>Crypto.Cipher.Blowfish</p></td>
+<td><p>Block</p></td>
+</tr>
+<tr class="row-even"><td><p>Crypto.Cipher.CAST</p></td>
+<td><p>Block</p></td>
+</tr>
+<tr class="row-odd"><td><p>Crypto.Cipher.DES</p></td>
+<td><p>Block</p></td>
+</tr>
+<tr class="row-even"><td><p>Crypto.Cipher.DES3</p></td>
+<td><p>Block</p></td>
+</tr>
+<tr class="row-odd"><td><p>Crypto.Cipher.XOR</p></td>
+<td><p>Stream</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</div>
+<div class="section" id="cryptographie-symetrique-aes">
+<h2>Cryptographie symétrique <code class="docutils literal notranslate"><span class="pre">AES</span></code><a class="headerlink" href="#cryptographie-symetrique-aes" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Les données d’entrées qui sont la plupart du temps des chaînes de caractères
+sont transformées en une sorte de variable appelé <code class="docutils literal notranslate"><span class="pre">clef</span></code> ce qui va
+produire le <code class="docutils literal notranslate"><span class="pre">ciphertext</span></code>. Ceci est engendré par des algorithmes
+d’encryptions.
+Les block ciphers qui prennent des entrées d’une taille fixe entre 8 et 16 octets
+les chiffrent. Les cipher blocks requierent des modes. <code class="docutils literal notranslate"><span class="pre">ECB</span></code> (Electronic Code Book)
+est le mode le plus simple. Ce n’est pas le meilleur parce qu’il
+a une faille quand des fichiers contiennent du code qui a une longueur plus grande
+que celle des blocks.
+Pour palier à ce problème, il y a <code class="docutils literal notranslate"><span class="pre">CBC</span></code> (Cipher Block Chaining) qui
+combine le texte avec le ciphertext avant chaque encryption et encrypte block
+par block. Ce mode est plus lent que le ECB.
+Il y a aussi le <code class="docutils literal notranslate"><span class="pre">CFB</span></code> (Cipher FeedBack) qui encrypte octet
+par octet. Ce mode est encore plus lent que CBC. En plus le CFB demande une
+chaine de caractère de base à 8 ou à 16 octets à l’initialisation. CBC et CFB
+sont les modes les plus communs.</p>
+<a class="reference internal image-reference" href="../_images/penguin.png"><img alt="Tux encrypté avec ECB et CBC." class="align-center" src="../_images/penguin.png" style="width: 299.5px; height: 150.0px;" /></a>
+</div>
+<div class="section" id="exemple">
+<h2>Exemple<a class="headerlink" href="#exemple" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Pour les exemples nous utiliserons le mode CBC.
+Avant de commencer, il nous faut créer un nombre aléatoire qui possède la même
+taille du bloc car la cryptographie dépend cruciellement d’un nombre aléatoire.
+Nous n’utiliserons pas le random() générateur de python mais celui de PyCrpyto
+car ce premier est inaproprié. Ces données aléatoires sont appellées comme un
+vecteur d’initialisation (Initialisation Vector).
+Donc nous allons écrire une fonction qui nous retourne un nombre aléatoire.</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">Crypto.Random.OSRNG.posix</span> <span class="k">as</span> <span class="nn">RNG</span>
+
+<span class="k">def</span> <span class="nf">randomCryptoNumber</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">RNG</span><span class="o">.</span><span class="n">new</span><span class="p">()</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">AES</span><span class="o">.</span><span class="n">block_size</span><span class="p">)</span> <span class="c1">#Retourne un nombre aléatoire</span>
+</pre></div>
+</div>
+<p>Avant de commencer à crypter notre message, nous devons d’abord s’assurer que la
+longueur du bloc de donnée est multiplié par la taille du block. Par exemple,
+si notre message est « Bonjoure Bonjoure », nous devons ajouter encore 8 byte. Un schéma
+d’ajout est de mettre « 0x80 » au premier byte et « 0x00 » aux byte qui suivent
+le reste de l’ajout. Ceci donnerai alors sur l’exemple:
+« Bonjoure Bonjoure0x800x000x000x000x000x000x000x000x00 ».</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">ajout_data</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="c1"># si la taille de donnée fait 16 byte, aucun ajout</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">%</span> <span class="mi">16</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">data</span>
+
+    <span class="c1"># On enlève un byte pour ajouter le 0x80</span>
+
+    <span class="n">dataAjouter</span> <span class="o">=</span> <span class="mi">15</span> <span class="o">-</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">%</span> <span class="mi">16</span><span class="p">)</span>
+
+    <span class="n">data</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="se">\x80</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">data</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\x00</span><span class="s1">&#39;</span> <span class="o">*</span> <span class="n">dataAjouter</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">data</span>
+</pre></div>
+</div>
+<p>La fonction pour enlever l’ajout</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">desajout_data</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+  <span class="k">if</span> <span class="ow">not</span> <span class="n">data</span><span class="p">:</span>
+      <span class="k">return</span> <span class="n">data</span>
+
+  <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\x00</span><span class="s1">&#39;</span><span class="p">)</span>
+  <span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;</span><span class="se">\x80</span><span class="s1">&#39;</span><span class="p">:</span>
+      <span class="k">return</span> <span class="n">data</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+  <span class="k">else</span><span class="p">:</span>
+      <span class="k">return</span> <span class="n">data</span>
+</pre></div>
+</div>
+<p>Maintenant il nous faut une clef pour le symétrique ciphers. Il y a trois
+tailles de clefs :</p>
+<ul class="simple">
+<li><p>16 bytes (128 bits),</p></li>
+<li><p>24 bytes (192 bits),</p></li>
+<li><p>et 32 bytes (256 bits).</p></li>
+</ul>
+<p>Nous allons simplement générer une clef aléatoire de 32 bytes avec une fonction.</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">taille_clef</span> <span class="o">=</span> <span class="mi">32</span>
+
+<span class="k">def</span> <span class="nf">generateCryptoKey</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">RNG</span><span class="o">.</span><span class="n">new</span><span class="p">()</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">taille_clef</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Maintenant, on peut utiliser cette clef pour crypter et decrypter des données.</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">Crypto.Cipher.AES</span> <span class="k">as</span> <span class="nn">AES</span>
+
+<span class="k">def</span> <span class="nf">encrypt</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">clef</span><span class="p">):</span>
+
+  <span class="c1">#Encrypte les donnée utilisant AES en mode CBC</span>
+
+  <span class="n">data</span> <span class="o">=</span> <span class="n">ajout_data</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+  <span class="n">number</span> <span class="o">=</span> <span class="n">randomCryptoNumber</span><span class="p">()</span>
+  <span class="n">aes</span> <span class="o">=</span> <span class="n">AES</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">clef</span><span class="p">,</span> <span class="n">AES</span><span class="o">.</span><span class="n">MODE_CBC</span><span class="p">,</span> <span class="n">number</span><span class="p">)</span>
+  <span class="n">msg_crypt</span> <span class="o">=</span> <span class="n">aes</span><span class="o">.</span><span class="n">encrypt</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+  <span class="k">return</span> <span class="n">numbet</span> <span class="o">+</span> <span class="n">msg_crypt</span>
+
+<span class="k">def</span> <span class="nf">decrypt</span><span class="p">(</span><span class="n">ciphertext</span><span class="p">,</span> <span class="n">clef</span><span class="p">):</span>
+
+  <span class="c1">#Decrypt un ciphertext encrypté avec l&#39;AES en mode CBC</span>
+
+  <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">ciphertext</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">AES</span><span class="o">.</span><span class="n">block_size</span><span class="p">:</span>
+      <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Invalid ciphertext.&quot;</span><span class="p">)</span>
+  <span class="n">number</span> <span class="o">=</span> <span class="n">ciphertext</span><span class="p">[:</span><span class="n">AES</span><span class="o">.</span><span class="n">block_size</span><span class="p">]</span>
+  <span class="n">ciphertext</span> <span class="o">=</span> <span class="n">ciphertext</span><span class="p">[</span><span class="n">AES</span><span class="o">.</span><span class="n">block_size</span><span class="p">:]</span>
+  <span class="n">aes</span> <span class="o">=</span> <span class="n">AES</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">clef</span><span class="p">,</span> <span class="n">AES</span><span class="o">.</span><span class="n">MODE_CBC</span><span class="p">,</span> <span class="n">number</span><span class="p">)</span>
+  <span class="n">data</span> <span class="o">=</span> <span class="n">aes</span><span class="o">.</span><span class="n">decrypt</span><span class="p">(</span><span class="n">ciphertext</span><span class="p">)</span>
+
+  <span class="k">return</span> <span class="n">desajout_data</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="c1">#Enleve le padding ajouter</span>
+</pre></div>
+</div>
+<p>Nous avons sécurisé notre message maintenant, mais ce n’est pas encore
+optimale. Il faut ajouter un algorithme de hashage à nos fonctions encrypt et
+decrypt. Nous allons utiliser un SHA-384 qui va augmenter de 48 bytes notre AES
+qui lui est à 32 bytes pour qu’on soit vraiment performant.</p>
+<p>Par exemple, crééons un hash:</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">hashlib</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sha</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha1</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;Hello Python&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sha</span>
+<span class="go">&#39;422fbfbc67fe17c86642c5eaaa48f8b670cbed1b&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="cryptographie-symetrique-des">
+<h2>Cryptographie symétrique <code class="docutils literal notranslate"><span class="pre">DES</span></code><a class="headerlink" href="#cryptographie-symetrique-des" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Voici un code pour crypter un string en DES</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">Crypto.Cipher</span> <span class="kn">import</span> <span class="n">DES</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">key</span> <span class="o">=</span> <span class="s1">&#39;abcdefgh&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">pad</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+<span class="go">        while len(text) % 8 != 0:</span>
+<span class="go">            text += &#39; &#39;</span>
+<span class="go">        return text</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">des</span> <span class="o">=</span> <span class="n">DES</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">DES</span><span class="o">.</span><span class="n">MODE_ECB</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">text</span> <span class="o">=</span> <span class="s1">&#39;test&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">padded_text</span> <span class="o">=</span> <span class="n">pad</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">encrypted_text</span> <span class="o">=</span> <span class="n">des</span><span class="o">.</span><span class="n">encrypt</span><span class="p">(</span><span class="n">padded_text</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">encrypted_text</span>
+<span class="go">b&#39;&gt;\xfc\x1f\x16x\x87\xb2\x93\x0e\xfcH\x02\xd59VQ&#39;</span>
+</pre></div>
+</div>
+<p>La taille de la clef en DES est de 8 bytes. Pour encrypter le string, il doit
+être multiplié par 8 dans sa longueur. La fonction qui fait ça s’appelle
+« pad ». Elle ajoute des espaces jusqu’a que ce soit un multiple de 8.
+Ensuite on crée une instance DES avec le text qu’on veut encrypter.</p>
+<p>Pour décrypter, il suffit simplement de faire la commande suivante :</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">des</span><span class="o">.</span><span class="n">decrypt</span><span class="p">(</span><span class="n">encrypted_text</span><span class="p">)</span>
+<span class="go">b&#39;test&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="chiffrement-avec-cles-publiques">
+<h2>Chiffrement avec clés publiques<a class="headerlink" href="#chiffrement-avec-cles-publiques" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Quand on fait du chiffrement avec clefs, on va crée des clés publiques. Si une
+personne voudra recevoir des fichiers auxquels il sera le seul à avoir
+l’authorisation de lire, il devra avoir une clef privée. Avec la clef pubique,
+tous pourront y avoir accès quand elle est diffusée. Mais seulement les
+personnes qui ont la clef privée pourront decrypter le message.</p>
+</div>
+<div class="section" id="exemple-code-avec-aes-et-des-en-mode-cfb">
+<h2>Exemple code avec AES et DES en mode CFB<a class="headerlink" href="#exemple-code-avec-aes-et-des-en-mode-cfb" title="Lien permanent vers ce titre">¶</a></h2>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;Example de Pycrypto.&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">Crypto</span> <span class="kn">import</span> <span class="n">Random</span>
+<span class="kn">from</span> <span class="nn">Crypto.Cipher</span> <span class="kn">import</span> <span class="n">AES</span><span class="p">,</span> <span class="n">DES</span>
+
+<span class="c1"># Vecteurs d&#39;initialisation</span>
+<span class="n">iv_AES</span> <span class="o">=</span> <span class="n">Random</span><span class="o">.</span><span class="n">new</span><span class="p">()</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">AES</span><span class="o">.</span><span class="n">block_size</span><span class="p">)</span>
+<span class="n">iv_DES</span> <span class="o">=</span> <span class="n">Random</span><span class="o">.</span><span class="n">get_random_bytes</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+
+<span class="n">key_AES</span> <span class="o">=</span> <span class="s1">&#39;abcdefghijklmnop&#39;</span>
+<span class="n">key_DES</span> <span class="o">=</span> <span class="s1">&#39;abcdefgh&#39;</span>
+
+<span class="n">aese</span> <span class="o">=</span> <span class="n">AES</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">key_AES</span><span class="p">,</span> <span class="n">AES</span><span class="o">.</span><span class="n">MODE_CFB</span><span class="p">,</span> <span class="n">iv_AES</span><span class="p">)</span>
+<span class="n">aesd</span> <span class="o">=</span> <span class="n">AES</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">key_AES</span><span class="p">,</span> <span class="n">AES</span><span class="o">.</span><span class="n">MODE_CFB</span><span class="p">,</span> <span class="n">iv_AES</span><span class="p">)</span>
+<span class="n">dese</span> <span class="o">=</span> <span class="n">DES</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">key_DES</span><span class="p">,</span> <span class="n">DES</span><span class="o">.</span><span class="n">MODE_CFB</span><span class="p">,</span> <span class="n">iv_DES</span><span class="p">)</span>
+<span class="n">desd</span> <span class="o">=</span> <span class="n">DES</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">key_DES</span><span class="p">,</span> <span class="n">DES</span><span class="o">.</span><span class="n">MODE_CFB</span><span class="p">,</span> <span class="n">iv_DES</span><span class="p">)</span>
+
+<span class="n">plaintext</span> <span class="o">=</span> <span class="s1">&#39;Hello! World&#39;</span>
+
+<span class="n">plaintext</span> <span class="o">=</span> <span class="n">aesd</span><span class="o">.</span><span class="n">decrypt</span><span class="p">(</span><span class="n">aese</span><span class="o">.</span><span class="n">encrypt</span><span class="p">(</span><span class="n">plaintext</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">plaintext</span><span class="p">)</span>
+
+<span class="n">plaintext</span> <span class="o">=</span> <span class="n">desd</span><span class="o">.</span><span class="n">decrypt</span><span class="p">(</span><span class="n">dese</span><span class="o">.</span><span class="n">encrypt</span><span class="p">(</span><span class="n">plaintext</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">plaintext</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<p>Resultat:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Output AES</span>
+<span class="sa">b</span><span class="s1">&#39;Hello! World&#39;</span>
+
+<span class="c1">#Output DES</span>
+<span class="sa">b</span><span class="s1">&#39;Hello! World&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Aujourd’hui, la cryptographie est une importante partie pour quiconque voudrait
+rendre sûr leur donnée. Il existe plus de dizaines de système de chiffrement
+rien qu’en Python. Si l’on désire faire des systèmes de communications
+sécurisés ou des votes électroniques, il est recommandé d’utiliser des
+protocoles de haut niveau. Python fournit un large panel d’outils pour y
+remédier, c’est pour ça qu’il est important d’avoir quelques notions pour
+éviter de se perdre.</p>
+</div>
+<div class="section" id="bibliographie">
+<h2>Bibliographie<a class="headerlink" href="#bibliographie" title="Lien permanent vers ce titre">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.blog.pythonlibrary.org/2016/05/18/python-3-an-intro-to-encryption">https://www.blog.pythonlibrary.org/2016/05/18/python-3-an-intro-to-encryption</a></p></li>
+<li><p><a class="reference external" href="https://erroneousthoughts.org/2014/04/27/introduction-to-pycrypto/">https://erroneousthoughts.org/2014/04/27/introduction-to-pycrypto/</a></p></li>
+<li><p><a class="reference external" href="https://leanpub.com/pycrypto/read">https://leanpub.com/pycrypto/read</a></p></li>
+</ul>
+<dl class="footnote brackets">
+<dt class="label" id="ls"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>&lt;<a class="reference external" href="mailto:luca&#46;srdjenovic&#37;&#52;&#48;he-arc&#46;ch">luca<span>&#46;</span>srdjenovic<span>&#64;</span>he-arc<span>&#46;</span>ch</a>&gt;</p>
+</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Bibliothèques Python</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../builtins/index.html">Builtins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../collections/index.html"><code class="docutils literal notranslate"><span class="pre">collections</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../datetime/index.html"><code class="docutils literal notranslate"><span class="pre">datetime</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dunders/index.html">Dunders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../enum/index.html"><code class="docutils literal notranslate"><span class="pre">enum</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fstrings/index.html">f-strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../itertools/index.html"><code class="docutils literal notranslate"><span class="pre">itertools</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../io/index.html"><code class="docutils literal notranslate"><span class="pre">io</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../math/index.html"><code class="docutils literal notranslate"><span class="pre">math</span></code> / <code class="docutils literal notranslate"><span class="pre">fractions</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../random/index.html"><code class="docutils literal notranslate"><span class="pre">random</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../time/index.html"><code class="docutils literal notranslate"><span class="pre">time</span></code> / <code class="docutils literal notranslate"><span class="pre">datetime</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../statistics/index.html"><code class="docutils literal notranslate"><span class="pre">statistics</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../super/index.html"><code class="docutils literal notranslate"><span class="pre">super()</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../abc/index.html">Abstract Base Class (<code class="docutils literal notranslate"><span class="pre">abc</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../binary/index.html"><code class="docutils literal notranslate"><span class="pre">bytes</span></code> / <code class="docutils literal notranslate"><span class="pre">bytearray</span></code> / <code class="docutils literal notranslate"><span class="pre">memoryview</span></code>, <code class="docutils literal notranslate"><span class="pre">struct</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bisect/index.html"><code class="docutils literal notranslate"><span class="pre">bisect</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email/index.html">E-mail (<code class="docutils literal notranslate"><span class="pre">smtplib</span></code> / <code class="docutils literal notranslate"><span class="pre">imaplib</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hashlib/index.html"><code class="docutils literal notranslate"><span class="pre">hashlib</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../multiprocessing/index.html"><code class="docutils literal notranslate"><span class="pre">multiprocessing</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../re/index.html">Expressions régulières (<code class="docutils literal notranslate"><span class="pre">re</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../secrets/index.html"><code class="docutils literal notranslate"><span class="pre">secrets</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../weakref/index.html"><code class="docutils literal notranslate"><span class="pre">weakref</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../colorama/index.html"><code class="docutils literal notranslate"><span class="pre">colorama</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../invoke/index.html"><code class="docutils literal notranslate"><span class="pre">invoke</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../unittest/index.html"><code class="docutils literal notranslate"><span class="pre">unittest</span></code> / <code class="docutils literal notranslate"><span class="pre">doctest</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pytest/index.html"><code class="docutils literal notranslate"><span class="pre">pytest</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../csv/index.html"><code class="docutils literal notranslate"><span class="pre">csv</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../json/index.html"><code class="docutils literal notranslate"><span class="pre">json</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pillow/index.html">Python Imaging Library (<code class="docutils literal notranslate"><span class="pre">PIL</span></code>)</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../hug/index.html"><code class="docutils literal notranslate"><span class="pre">hug</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../matplotlib/index.html"><code class="docutils literal notranslate"><span class="pre">matplotlib</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../networkx/index.html"><code class="docutils literal notranslate"><span class="pre">networkx</span></code></a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">pycrypto</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pygame/index.html"><code class="docutils literal notranslate"><span class="pre">pygame</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sphinx/index.html"><code class="docutils literal notranslate"><span class="pre">sphinx</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../watchdog/index.html"><code class="docutils literal notranslate"><span class="pre">watchdog</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../pbr/index.html"><cite>⚙️Automate your publishing to PyPI with PBR and Travis</cite></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../misc/about.html">À propos de ce livre</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../misc/contrib.html">Contribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../licence.html">Creative Commons Attribution-ShareAlike 4.0 International</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="../networkx/index.html" title="Chapitre précédent"><code class="docutils literal notranslate"><span class="pre">networkx</span></code></a></li>
+      <li>Next: <a href="../pygame/index.html" title="Chapitre suivant"><code class="docutils literal notranslate"><span class="pre">pygame</span></code></a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Recherche rapide</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016-2017, HE-Arc.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/pycrypto/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

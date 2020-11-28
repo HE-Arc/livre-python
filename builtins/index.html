@@ -1,0 +1,427 @@
+
+<!DOCTYPE html>
+
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Builtins &#8212; Documentation Bibliothèques Python 1.0.0</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/translations.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Recherche" href="../search.html" />
+    <link rel="next" title="collections" href="../collections/index.html" />
+    <link rel="prev" title="Bibliothèques Python" href="../index.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="builtins">
+<span id="builtins-tutorial"></span><h1>Builtins<a class="headerlink" href="#builtins" title="Lien permanent vers ce titre">¶</a></h1>
+<p>Par Adrien Ferreira Mendes <a class="footnote-reference brackets" href="#afm" id="id1">1</a></p>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Lien permanent vers ce titre">¶</a></h2>
+<p>L’interpréteur Python contient des fonctions et classes <em>« embarquées »</em> qui sont disponibles dans n’importe quel section d’un script. Cette section du livre va donc présenter ces différentes classes et fonctions avec une brève explication et des exemples pour rendre leur compréhension et utilisation plus claire.</p>
+<p>Dans une première partie se trouvera la présentation des différentes classes puis une deuxième partie traitera des fonctions qui font aussi parties des « builtins ». Il a été choisit de décrire le plus de fonctions possible par ordre alphabétique pour atteindre le maximum de sept pages. Cette section est beaucoup inspirée de la documentation officielle en anglais des « builtins » de python: <a class="reference external" href="https://docs.python.org/3/library/functions.html#built-in-funcs" title="(disponible dans Python v3.9)"><span>Built-in Functions</span></a>.</p>
+</div>
+<div class="section" id="les-classes">
+<h2>Les classes<a class="headerlink" href="#les-classes" title="Lien permanent vers ce titre">¶</a></h2>
+<div class="section" id="class-bool-x">
+<span id="bool"></span><h3><em>class</em> bool([x])<a class="headerlink" href="#class-bool-x" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Retourne une valeur booléenne entre <code class="docutils literal notranslate"><span class="pre">True</span></code> ou <code class="docutils literal notranslate"><span class="pre">False</span></code>. Si <code class="docutils literal notranslate"><span class="pre">x</span></code> est faux ou est omis, retourne False. Sinon la classe retourne vrai. Cette classe hérite de la classe <a class="reference internal" href="#int"><span class="std std-ref">int</span></a> , elle ne peut pas être héritée et ces seules instances sont <code class="docutils literal notranslate"><span class="pre">True</span></code> ou <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+</div>
+<div class="section" id="class-bytearray-source-encoding-errors">
+<span id="bytearray"></span><h3><em>class</em> bytearray(<em>[source[, encoding], errors]]]</em>)<a class="headerlink" href="#class-bytearray-source-encoding-errors" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Retourne un nouveau tableau de <a class="reference internal" href="#bytes"><span class="std std-ref">bytes</span></a>. Cette classe est une suite mutable d’entier, elle contient les méthodes de bases des séquences mutables mais aussi la plupart des méthodes de la classe <a class="reference internal" href="#bytes"><span class="std std-ref">bytes</span></a>.</p>
+<p>le paramètre source permet d’initialiser le tableau de manière différente:</p>
+<ul class="simple">
+<li><p>si c’est un <em>string</em>, il faut aussi donner les paramètres <em>encoding</em> et optionnellement  <em>errors</em>. bytearray() convertira le string en <a class="reference internal" href="#bytes"><span class="std std-ref">bytes</span></a> en utilisant str.encode().</p></li>
+<li><p>si c’est un entier, le tableau aura la taille de l’entier et sera initialisé avec des bytes null.</p></li>
+<li><p>Si c’est un objet qui implémente l’interface <em>buffer</em>, un buffer en lecture sera utilisé pour initialiser le tableau de <a class="reference internal" href="#bytes"><span class="std std-ref">bytes</span></a>.</p></li>
+<li><p>Si c’est un iterable, il faut absolument que cela soit un iterable d’entier  qui doivent tous être compris entre 0 &lt;= x &lt; 256. Les entiers seront utilisés comme contenu initial du tableau.</p></li>
+</ul>
+<p>Sans argument, un tableau de taille 0 sera créé.</p>
+</div>
+<div class="section" id="class-bytes-source-encoding-errors">
+<span id="bytes"></span><h3><em>class</em> bytes(<em>[source[, encoding[, errors]]]</em>)<a class="headerlink" href="#class-bytes-source-encoding-errors" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Retourne un nouveau objet Byte qui est une séquence immuable d’entier compris entre 0 &lt;= x &lt; 256. bytes est une version immuable de <a class="reference internal" href="#bytearray"><span class="std std-ref">bytearray</span></a>.</p>
+</div>
+<div class="section" id="class-method-fonction">
+<span id="method"></span><h3><em>class</em> method(<em>fonction</em>)<a class="headerlink" href="#class-method-fonction" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Retourne une méthode de classe pour la fonction passée en paramètre.</p>
+</div>
+<div class="section" id="class-complex-real-imag">
+<span id="complex"></span><h3><em>class</em> complex(<em>[real[, imag]]</em>)<a class="headerlink" href="#class-complex-real-imag" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Retourne un nombre complexe avec la valeur <em>Réelle + imaginairex1j</em> ou convertit une chaine de caractères en nombre complexe.</p>
+<p>Si le premier paramètre est un string, il sera interprété comme un nombre complexe et il ne faut pas ajouter de deuxième argument. Le deuxième paramètre ne devrait jamais être un string.</p>
+<p><strong>Note :</strong> Lors d’une conversion d’une chaine de caractère, elle ne doit pas contenir d’espace autour du + ou - central. Par exemple, le nombre complexe <em>“4+3j”</em> est correct, en revanche <em>“4 + 3j”</em> ne l’est pas.</p>
+</div>
+<div class="section" id="class-float-x">
+<span id="float"></span><h3><em>class</em> float([x])<a class="headerlink" href="#class-float-x" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Retourne un nombre flottant à partir de la chaine de caractères ou du nombre passé en argument.</p>
+<p>Si l’argument est un string il doit contenir un nombre décimal précédé d’un + ou d’un -.</p>
+<p>Si aucun argument n’est passé, le nombre 0.0 sera retourné.</p>
+</div>
+<div class="section" id="class-frozenset-iterable">
+<span id="frozenset"></span><h3><em>class</em> frozenset(<em>[iterable]</em>)<a class="headerlink" href="#class-frozenset-iterable" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Retourne un nouvel objet <em>frozenset</em>, avec en option des éléments de <em>iterable</em>.</p>
+</div>
+<div class="section" id="class-int-x-0">
+<span id="int"></span><h3><em>class</em> int(<em>x=0</em>)<a class="headerlink" href="#class-int-x-0" title="Lien permanent vers ce titre">¶</a></h3>
+<div class="section" id="class-int-x-base-10">
+<h4><em>class</em> int(<em>x,base=10</em>)<a class="headerlink" href="#class-int-x-base-10" title="Lien permanent vers ce titre">¶</a></h4>
+<p>Retourne un objet entier  construit grâce à un nombre ou à une chaine de caractères passés en paramètre. Retourne 0 si aucun argument n’est spécifié. Si x n’est pas un entier, il doit impérativement être soit une chaine de caractères, des bytes ou un tableau de bytes. La chaine de caractères peut optionnellement être précédée par un + ou un -.</p>
+</div>
+</div>
+<div class="section" id="class-object">
+<span id="object"></span><h3><em>class</em> object<a class="headerlink" href="#class-object" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Retourne un nouvel objet dépourvu de fonctionnalité. C’est une base à toute les classes. Cette classe contient toutes les méthodes communes à toute les classes Python. Le constructeur de la classe  n’accepte aucun argument.</p>
+</div>
+</div>
+<div class="section" id="les-fonctions">
+<h2>Les fonctions<a class="headerlink" href="#les-fonctions" title="Lien permanent vers ce titre">¶</a></h2>
+<div class="section" id="abs-nb">
+<span id="abs"></span><h3>abs(<em>nb</em>)<a class="headerlink" href="#abs-nb" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Retourne la valeur absolue d’un nombre. L’argument nb peut être un entier, un nombre flottant ou un nombre complexe. Dans le cas d’un nombre complexe, la fonction renvoie le module du nombre.</p>
+</div>
+<div class="section" id="all-iterable">
+<span id="all"></span><h3>all(<em>iterable</em>)<a class="headerlink" href="#all-iterable" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Retourne vrai si tout les éléments de l’iterable sont vrai ou si  il est vide.</p>
+<p>Voici l’algorithme de all:</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">all</span><span class="p">(</span><span class="n">iterable</span><span class="p">)</span>
+<span class="go">       for element in iterable</span>
+<span class="go">          if not element:</span>
+<span class="go">             return False</span>
+<span class="go">       return True</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="any-it">
+<span id="any"></span><h3>any(it)<a class="headerlink" href="#any-it" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Retourne vrai si un des éléments de la table
+est vrai. Retourne faux si l’itérable est vide.</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">all</span><span class="p">(</span><span class="n">iterable</span><span class="p">)</span>
+<span class="go">       for element in iterable</span>
+<span class="go">          if  element:</span>
+<span class="go">             return True</span>
+<span class="go">       return False</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="ascii-objet">
+<span id="ascii"></span><h3>ascii(<em>objet</em>)<a class="headerlink" href="#ascii-objet" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Retourne un string qui contient une représentation affichable d’un objet mais échappe tout les caractères non-ASCII. Cette fonction renvoie un string similaire à celui renvoyé par repr() en Python 2.</p>
+</div>
+<div class="section" id="bin-nb">
+<span id="bin"></span><h3>bin(<em>nb</em>)<a class="headerlink" href="#bin-nb" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Convertit un entier en binaire. Si nb n’est pas un objet <a class="reference internal" href="#int"><span class="std std-ref">int</span></a> Python, il doit définir une méthode <code class="docutils literal notranslate"><span class="pre">__index__()</span></code>  qui retourne un entier</p>
+</div>
+<div class="section" id="callable-objet">
+<span id="callable"></span><h3>callable(<em>objet</em>)<a class="headerlink" href="#callable-objet" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Retourne vrai si l’objet passé en argument est « callable », faux sinon. Si cette fonction retourne vrai, il est quand même possible qu’un call échoue. En revanche si elle retourne faux, il est certain qu’un call n’aboutira jamais.</p>
+</div>
+<div class="section" id="chr-i">
+<span id="chr"></span><h3>chr(<em>i</em>)<a class="headerlink" href="#chr-i" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Retourne la lettre correspondant dont l’unicode correspond à l’entier passé en paramètre. par exemple chr(98) retourna la lettre “b”. Cette fonction fait l’inverse de ord(),</p>
+</div>
+<div class="section" id="compile-source-filename-mode-flags-0-dont-inherit-false-optimize-1">
+<span id="compile"></span><h3>compile(<em>source, filename, mode, flags=0, dont_inherit=False,optimize=-1</em>)<a class="headerlink" href="#compile-source-filename-mode-flags-0-dont-inherit-false-optimize-1" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Compile la source en code ou en un objet AST. Un objet « code » peut être exécuté par exec() ou eval(). La source peut être une chaine de caractères, un byte string ou un objet AST.</p>
+<p>L’argument <em>filename</em> doit faire référence au fichier qui contient le code à compiler.</p>
+<p>Le mode spécifie avec quelle fonction il est possible d’exécuter le code. <em>Exec</em> si la source contient beaucoup de code, <em>eval</em> si la source ne contient qu’une seule expression et <em>single</em> si la source ne contient qu’une seule expression interactive.</p>
+</div>
+<div class="section" id="delattr-object-name">
+<span id="delattr"></span><h3>delattr(<em>object, name</em>)<a class="headerlink" href="#delattr-object-name" title="Lien permanent vers ce titre">¶</a></h3>
+<p>L’argument de cette fonction est un objet et le nom de l’un de ces attributs, la fonction va supprimer l’attribut spécifié si l’objet la lui permet.</p>
+</div>
+<div class="section" id="dir-object">
+<span id="dir"></span><h3>dir(<em>[object]</em>)<a class="headerlink" href="#dir-object" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Sans argument, la fonction retourne la liste des noms dans le contexte actuel. Avec un argument, elle essaie de retourner la liste valide des attributs de l’objet.</p>
+<p>Si l’objet possède une méthode _dir_(), cette méthode sera appelée et devra retourner la liste des attributs. Ceci permet aux objets qui implémente _getattr_() ou _getattribute_() de choisir la façon dont la fonction dir() agira sur leurs attributs</p>
+</div>
+<div class="section" id="divmod-a-b">
+<span id="divmod"></span><h3>divmod(<em>a,b</em>)<a class="headerlink" href="#divmod-a-b" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Prends les deux nombres non-complexes passés en paramètre et retourne leurs quotients et le reste.</p>
+</div>
+<div class="section" id="enumerate-iterable-start-0">
+<span id="enumerate"></span><h3>enumerate(<em>iterable,start=0</em>)<a class="headerlink" href="#enumerate-iterable-start-0" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Retourne un objet <em>enumerate</em>, le paramètre <em>iterable</em> doit être un iterateur ou un objet qui supporte l’itération. La méthode _next_() retournée par enumerate est composée de deux éléments, un index et la valeur de l’index.</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">saison</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Eté&#39;</span><span class="p">,</span> <span class="s1">&#39;Printemps&#39;</span><span class="p">,</span><span class="s1">&#39;Automne&#39;</span><span class="p">,</span><span class="s1">&#39;Hiver&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="nb">enumerate</span><span class="p">(</span><span class="n">saison</span><span class="p">))</span>
+<span class="go">[(0,&#39;Eté&#39;),(1,&#39;Printemps&#39;),(2,&#39;Automne&#39;),(3,&#39;Hiver&#39;)]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="eval-expression-globals-none-locals-none">
+<span id="eval"></span><h3>eval(<em>expression, globals=None, locals=None</em>)<a class="headerlink" href="#eval-expression-globals-none-locals-none" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Les arguments sont un string et des <em>globals</em> ou <em>locals</em> en option. Si spécifié, <em>globals</em> doit être un dictionnaire. Si spécifié, <em>locals</em> est un objet de mapping.</p>
+<p>L’expression passée en argument est convertit et évaluée comme une expression Python.</p>
+</div>
+<div class="section" id="exec-object-globals-locals">
+<span id="exec"></span><h3>exec(<em>object[, globals[, locals]]</em>)<a class="headerlink" href="#exec-object-globals-locals" title="Lien permanent vers ce titre">¶</a></h3>
+<p>l’attribut object doit être soit une chaine de caractères soit un objet. Si c’est une chaine de caractères, elle sera convertie en expressions Python. si c’est un objet, le code qu’il contient sera simplement exécuté.</p>
+</div>
+<div class="section" id="filter-fontion-iterable">
+<span id="filter"></span><h3>filter(<em>fontion, iterable</em>)<a class="headerlink" href="#filter-fontion-iterable" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Construit un itérateur grâce à <em>iterable</em> pour lequel chaque itération de fonction retourne vrai.</p>
+</div>
+<div class="section" id="format-value-format-spec">
+<span id="format"></span><h3>format(<em>value[, format_spec]</em>)<a class="headerlink" href="#format-value-format-spec" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Transforme <em>value</em> en une version <em>formatée</em>, contrôlée par <em>format_spec</em>.</p>
+</div>
+<div class="section" id="getattr-object-name-default">
+<span id="getattr"></span><h3>getattr(<em>object, name[, default</em>]<a class="headerlink" href="#getattr-object-name-default" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Retourne la valeur de l’attribut de l’objet passé en paramètre. Si <em>name</em> correspond au nom d’un des attributs de l’objet cela revient au même que d’appeler l’objet. Exemple : getattr(x, “foobar”) est égal à x.foobar.</p>
+</div>
+<div class="section" id="globals">
+<span id="id4"></span><h3>globals()<a class="headerlink" href="#globals" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Retourne un dictionnaire représentant la table symbolique actuelle.</p>
+</div>
+<div class="section" id="hasattr-object-name">
+<span id="hasattr"></span><h3>hasattr(<em>object, name</em>)<a class="headerlink" href="#hasattr-object-name" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Les arguments sont un objet et une chaine de caractères. Si la chaine de caractères correspond à un des attributs de l’objet, la fonction retourne vrai, faux sinon. Cette méthode est implémentée en utilisant la fonction getattr(object, name) et d’observer si elle soulève une exception AttributeError ou non.</p>
+</div>
+<div class="section" id="hash-object">
+<span id="hash"></span><h3>hash(<em>object</em>)<a class="headerlink" href="#hash-object" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Retourne la valeur hashée de l’objet. Ces valeurs hashés sont des entiers. Elles sont utilisées pour comparer des clés de dictionnaire efficacement.</p>
+</div>
+<div class="section" id="help-object">
+<span id="help"></span><h3>help(<em>[object]</em>)<a class="headerlink" href="#help-object" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Invoque l’aide de base de Python. Si aucun argument n’est passé, la page de base de l’aide
+sera affichée. Si l’argument est une chaine de caractères, alors la méthode va chercher si elle correspond au nom d’un module, si oui elle affiche la page d’aide en question.</p>
+</div>
+<div class="section" id="hex-x">
+<span id="hex"></span><h3>hex(<em>x</em>)<a class="headerlink" href="#hex-x" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Convertit un nombre entier en une chaine hexadécimale préfixée par « 0x » par exemple:</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">hex</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span>
+<span class="go">&#39;0xff&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">hex</span><span class="p">(</span><span class="o">-</span><span class="mi">42</span><span class="p">)</span>
+<span class="go">&#39;0x2a&#39;</span>
+</pre></div>
+</div>
+<p>Si l’entier n’est pas un entier Python, il doit définir une méthode <code class="docutils literal notranslate"><span class="pre">__index__()</span></code> qui retourne un entier.</p>
+</div>
+<div class="section" id="id">
+<span id="id-object"></span><h3>id(<em>object</em>)<a class="headerlink" href="#id" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Retourne « l’identité » d’un objet. Cette identité est un entier qui est garanti d’être unique et constant pendant toute la vie de l”<em>object</em>.</p>
+</div>
+<div class="section" id="input-prompt">
+<h3>input(<em>[prompt</em>)<a class="headerlink" href="#input-prompt" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Permet d’ajouter du texte supplémentaire à une chaine de caractères avant l’affichage.</p>
+<p>Exemple:</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">str</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;J&#39;</span><span class="n">aime</span><span class="s1">&#39;)</span>
+<span class="go">J&#39;aime le chocolat au lait!</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span>
+<span class="go">le chocolat au lait!</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="isinstance-object-classinfo">
+<span id="isinstance"></span><h3>isinstance(<em>object, classinfo</em>)<a class="headerlink" href="#isinstance-object-classinfo" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Retourne vrai si l’objet passé en paramètre est un objet appartenant à la classe spécifiée dans <em>classinfo</em>. Si <em>classinfo</em> est composé de plusieurs classes, object doit au moins appartenir à une des classes pour que la fonction retourne vrai, retourne faux sinon.</p>
+</div>
+<div class="section" id="iter-object-sentinel">
+<span id="iter"></span><h3>iter(<em>object[, sentinel]</em>)<a class="headerlink" href="#iter-object-sentinel" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Retourne un objet <em>iterator</em>. Le premier argument est interprété très différemment selon si le deuxième argument est présent ou non. Sans deuxième argument, <em>object</em> doit être une collection d’objet qui supporte le protocole d’itération. Si le deuxième argument est présent, alors <em>object</em> doit être un objet appelable.</p>
+</div>
+<div class="section" id="len-s">
+<span id="len"></span><h3>len(s)<a class="headerlink" href="#len-s" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Retourne la taille (le nombre d’attributs) d’un objet. L’argument s peut être une séquence comme un string, des bytes ou une liste. Il peut aussi être une collection comme un dictionnaire ou un set.</p>
+</div>
+<div class="section" id="locals">
+<span id="id6"></span><h3>locals()<a class="headerlink" href="#locals" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Mets à jour et retourne le dictionnaire qui représente la table de symbole courante</p>
+</div>
+<div class="section" id="map-function-iterable">
+<span id="map"></span><h3>map(<em>function, iterable, …</em>)<a class="headerlink" href="#map-function-iterable" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Retourne un itérateur qui applique <em>function</em> à tout les objets contenu dans <em>iterable</em>.</p>
+</div>
+<div class="section" id="max-arg1-arg2-args-key">
+<span id="max"></span><h3>max(<em>arg1, arg2, args[,key]</em>)<a class="headerlink" href="#max-arg1-arg2-args-key" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Retourne le plus grand objet d’un itérable composé de tout les objets de <em>arg1</em> et de <em>arg2</em></p>
+</div>
+<div class="section" id="memoryview-obj">
+<span id="memoryview"></span><h3>memoryview(<em>obj</em>)<a class="headerlink" href="#memoryview-obj" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Retourne une « memory view » d’un objet créé à partir de <em>obj</em> passé en argument.</p>
+</div>
+<div class="section" id="min-arg1-arg2-args-key">
+<span id="min"></span><h3>min(<em>arg1, arg2, args[,key]</em>)<a class="headerlink" href="#min-arg1-arg2-args-key" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Retourne le plus petit objet d’un itérable composé de tout les objets de <em>arg1</em> et de <em>arg2</em></p>
+</div>
+<div class="section" id="next-iterator-default">
+<span id="next"></span><h3>next(<em>iterator[, default]</em>)<a class="headerlink" href="#next-iterator-default" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Donne le prochain item d”<em>iterator</em> en appelant sa fonction <code class="docutils literal notranslate"><span class="pre">__next_()</span></code>.</p>
+</div>
+<div class="section" id="oct-x">
+<span id="oct"></span><h3>oct(<em>x</em>)<a class="headerlink" href="#oct-x" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Convertit un entier en octale. Si x n’est pas un entier Python il doit avoir définit une méthode <code class="docutils literal notranslate"><span class="pre">__index__()</span></code> qui retourne un entier.</p>
+</div>
+<div class="section" id="open-file-mode-r-buffering-1-encoding-none-errors-none-newline-none-closefd-true-opener-none">
+<span id="open"></span><h3>open(<em>file, mode=”r”, buffering=-1, encoding=None, errors=None, newline=None, closefd=True, opener=None</em>)<a class="headerlink" href="#open-file-mode-r-buffering-1-encoding-none-errors-none-newline-none-closefd-true-opener-none" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Ouvre un fichier et retourne le <em>file object</em> correspondant. Si le fichier ne peut pas être ouvert, une erreur OSError est levée.</p>
+<p><em>file</em> doit être le chemin du fichier en absolu ou en relatif.</p>
+<p>mode est un paramètre qui permet de déterminer le mode d’ouverture du fichier. Par défaut le mode “r” est choisi. Ce qui signifie que le fichier est ouvert en lecture. Un autre mode commun est “w” pour passer en mode écriture.</p>
+<ul class="simple">
+<li><p><strong>“r”</strong> - Ouvert en lecture</p></li>
+<li><p><strong>“w”</strong> - Ouvert en écriture</p></li>
+<li><p><strong>“x”</strong> - Ouvert en création, échoue si le fichier existe déjà</p></li>
+<li><p><strong>“b”</strong> - Mode binaire</p></li>
+<li><p><strong>“t”</strong> - Mode texte (par défaut)</p></li>
+<li><p><strong>“+”</strong> - Ouvre un fichier disque en écriture et lecture</p></li>
+</ul>
+<p>Voir: <a class="reference internal" href="../io/index.html#io-tutorial"><span class="std std-ref">io</span></a></p>
+</div>
+</div>
+<div class="section" id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Malheureusement, ce document ne contient pas une liste exhaustive de toutes les classes et fonctions inclue dans l’interpréteur Python. En effet, la limite de page pour chaque article ne permettait pas de toutes les décrire de façon complète.</p>
+<p>Pour conclure, les fonctions et classes présentées dans cette section font parties des plus basiques et les plus utilisées des commandes. La plupart du temps, nous les utilisons sans trop réfléchir à leur implémentation ou bien même sans savoir tout les possibilités quelles détiennent. En effet il est parfois intéressant de regarder la documentation pour pouvoir exploiter le plein potentiel de certaines classes ou fonctions.</p>
+<dl class="footnote brackets">
+<dt class="label" id="afm"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>&lt;<a class="reference external" href="mailto:adrien&#46;ferreiramendes&#37;&#52;&#48;he-arc&#46;ch">adrien<span>&#46;</span>ferreiramendes<span>&#64;</span>he-arc<span>&#46;</span>ch</a>&gt;</p>
+</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Bibliothèques Python</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Builtins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../collections/index.html"><code class="docutils literal notranslate"><span class="pre">collections</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../datetime/index.html"><code class="docutils literal notranslate"><span class="pre">datetime</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dunders/index.html">Dunders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../enum/index.html"><code class="docutils literal notranslate"><span class="pre">enum</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fstrings/index.html">f-strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../itertools/index.html"><code class="docutils literal notranslate"><span class="pre">itertools</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../io/index.html"><code class="docutils literal notranslate"><span class="pre">io</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../math/index.html"><code class="docutils literal notranslate"><span class="pre">math</span></code> / <code class="docutils literal notranslate"><span class="pre">fractions</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../random/index.html"><code class="docutils literal notranslate"><span class="pre">random</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../time/index.html"><code class="docutils literal notranslate"><span class="pre">time</span></code> / <code class="docutils literal notranslate"><span class="pre">datetime</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../statistics/index.html"><code class="docutils literal notranslate"><span class="pre">statistics</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../super/index.html"><code class="docutils literal notranslate"><span class="pre">super()</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../abc/index.html">Abstract Base Class (<code class="docutils literal notranslate"><span class="pre">abc</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../binary/index.html"><code class="docutils literal notranslate"><span class="pre">bytes</span></code> / <code class="docutils literal notranslate"><span class="pre">bytearray</span></code> / <code class="docutils literal notranslate"><span class="pre">memoryview</span></code>, <code class="docutils literal notranslate"><span class="pre">struct</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bisect/index.html"><code class="docutils literal notranslate"><span class="pre">bisect</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email/index.html">E-mail (<code class="docutils literal notranslate"><span class="pre">smtplib</span></code> / <code class="docutils literal notranslate"><span class="pre">imaplib</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hashlib/index.html"><code class="docutils literal notranslate"><span class="pre">hashlib</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../multiprocessing/index.html"><code class="docutils literal notranslate"><span class="pre">multiprocessing</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../re/index.html">Expressions régulières (<code class="docutils literal notranslate"><span class="pre">re</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../secrets/index.html"><code class="docutils literal notranslate"><span class="pre">secrets</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../weakref/index.html"><code class="docutils literal notranslate"><span class="pre">weakref</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../colorama/index.html"><code class="docutils literal notranslate"><span class="pre">colorama</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../invoke/index.html"><code class="docutils literal notranslate"><span class="pre">invoke</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../unittest/index.html"><code class="docutils literal notranslate"><span class="pre">unittest</span></code> / <code class="docutils literal notranslate"><span class="pre">doctest</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pytest/index.html"><code class="docutils literal notranslate"><span class="pre">pytest</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../csv/index.html"><code class="docutils literal notranslate"><span class="pre">csv</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../json/index.html"><code class="docutils literal notranslate"><span class="pre">json</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pillow/index.html">Python Imaging Library (<code class="docutils literal notranslate"><span class="pre">PIL</span></code>)</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../hug/index.html"><code class="docutils literal notranslate"><span class="pre">hug</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../matplotlib/index.html"><code class="docutils literal notranslate"><span class="pre">matplotlib</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../networkx/index.html"><code class="docutils literal notranslate"><span class="pre">networkx</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pycrypto/index.html"><code class="docutils literal notranslate"><span class="pre">pycrypto</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pygame/index.html"><code class="docutils literal notranslate"><span class="pre">pygame</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sphinx/index.html"><code class="docutils literal notranslate"><span class="pre">sphinx</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../watchdog/index.html"><code class="docutils literal notranslate"><span class="pre">watchdog</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../pbr/index.html"><cite>⚙️Automate your publishing to PyPI with PBR and Travis</cite></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../misc/about.html">À propos de ce livre</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../misc/contrib.html">Contribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../licence.html">Creative Commons Attribution-ShareAlike 4.0 International</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="../index.html" title="Chapitre précédent">Bibliothèques Python</a></li>
+      <li>Next: <a href="../collections/index.html" title="Chapitre suivant"><code class="docutils literal notranslate"><span class="pre">collections</span></code></a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Recherche rapide</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016-2017, HE-Arc.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/builtins/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

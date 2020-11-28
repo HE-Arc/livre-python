@@ -1,0 +1,327 @@
+
+<!DOCTYPE html>
+
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>time / datetime &#8212; Documentation Bibliothèques Python 1.0.0</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/translations.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Recherche" href="../search.html" />
+    <link rel="next" title="statistics" href="../statistics/index.html" />
+    <link rel="prev" title="random" href="../random/index.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="time-datetime">
+<span id="time-tutorial"></span><h1><code class="docutils literal notranslate"><span class="pre">time</span></code> / <code class="docutils literal notranslate"><span class="pre">datetime</span></code><a class="headerlink" href="#time-datetime" title="Lien permanent vers ce titre">¶</a></h1>
+<p>Par Nicolas Kaser <a class="footnote-reference brackets" href="#nk" id="id1">1</a></p>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Le module <a class="reference external" href="https://docs.python.org/3/library/time.html#module-time" title="(disponible dans Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">time</span></code></a> en python est une des façons les plus simple de manipuler le temps dans un programme. Un temps en python est, par défaut, un nombre représentant des secondes. Ca permet par exemple d’attendre un certain nombre de secondes, d’afficher une date avec un format spécifique ou encore de connaître le nombre de secondes écoulées depuis le 1er Janvier 1970 à 00:00 … Pas forcément utile mais possible.</p>
+<p>Le module <a class="reference external" href="https://docs.python.org/3/library/datetime.html#module-datetime" title="(disponible dans Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">datetime</span></code></a> affiche et formate des dates et heures avec une méthode un peu plus orientée objets (une date et une heure seront des objets).</p>
+</div>
+<div class="section" id="time">
+<h2><code class="docutils literal notranslate"><span class="pre">time</span></code><a class="headerlink" href="#time" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Maintenant le module Time est disponible pour l’utilisation.
+Il permet plusieurs choses. Notamment d’avoir des informations sur l’horloge du processeur. La ligne suivante retournera la valeur de l’horloge du CPU sous forme de nombre flottant.</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">time</span><span class="o">.</span><span class="n">clock</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>D’autres fonction comme clock_gettres(clk_id), clock_gettime(clk_id), clock_settime(clk_id, time) permettent d’obtenir la résolution d’une horloge spécifique, le temps ou de setter le temps de cette horloge avec “clk_id” l’id de l’horloge spécifique.</p>
+<p>La commande Time.time() affichera le nombre de seconde écoulées depuis la date appellée « L’Epoch Unix » qui est le 1er Janvier 1970 à 00:00.
+Pourquoi cette date ? L’année 1970 a été considérée comme un bon départ, compte tenu de l’essor qu’a pris l’informatique à partir de cette époque. D’autre part, un ordinateur est inévitablement limité quand il traite des entiers ; dans les langages de l’époque, il fallait tenir compte de ce fait tout simple : on ne pouvait pas compter un nombre de secondes trop important. La date de l’Epoch ne pouvait donc pas être trop reculée dans le temps. (Source : openclassroom).</p>
+<p>Donc:</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="go">1490354301.5397666</span>
+</pre></div>
+</div>
+<p>La fonction ctime([secs]), quand elle est appellée sans paramètre retourne la date d’aujourd’hui au format texte.</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">time</span><span class="o">.</span><span class="n">ctime</span><span class="p">()</span>
+<span class="go">&#39;Thu Mar 23 12:34:03 2017&#39;</span>
+</pre></div>
+</div>
+<p>En revanche avec un paramètre qui correspond à un nombre de secondes, ça affichera la date de l’Epoch après que ce nombre de secondes se soit écoulé.</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">time</span><span class="o">.</span><span class="n">ctime</span><span class="p">(</span><span class="mi">2000</span><span class="p">)</span>
+<span class="go">&#39;Thu Jan  1 01:33:20 1970&#39;</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">time</span><span class="o">.</span><span class="n">ctime</span><span class="p">(</span><span class="mi">400000000</span><span class="p">)</span>
+<span class="go">&#39;Sat Sep  4 17:06:40 1982&#39;</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">time</span><span class="o">.</span><span class="n">ctime</span><span class="p">(</span><span class="mi">22222222222</span><span class="p">)</span>
+<span class="go">&#39;Thu Mar 12 16:30:22 2674&#39;</span>
+</pre></div>
+</div>
+<p>D’autres commandes peuvent retourner une date au format struct_time qui est une structure possédant les informations sur une date et ayant la forme suivante:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Index</span><span class="o">-------</span><span class="n">Attribute</span><span class="o">----------------</span><span class="n">Values</span>
+
+<span class="mi">0</span> <span class="o">----------&gt;</span> <span class="n">tm_year</span> <span class="o">----------&gt;</span> <span class="p">(</span><span class="k">for</span> <span class="n">example</span><span class="p">,</span> <span class="mi">1993</span><span class="p">)</span>
+
+<span class="mi">1</span> <span class="o">----------&gt;</span> <span class="n">tm_mon</span> <span class="o">----------&gt;</span> <span class="nb">range</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">12</span><span class="p">]</span>
+
+<span class="mi">2</span> <span class="o">----------&gt;</span> <span class="n">tm_mday</span> <span class="o">----------&gt;</span> <span class="nb">range</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">31</span><span class="p">]</span>
+
+<span class="mi">3</span> <span class="o">----------&gt;</span> <span class="n">tm_hour</span> <span class="o">----------&gt;</span> <span class="nb">range</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">23</span><span class="p">]</span>
+
+<span class="mi">4</span> <span class="o">----------&gt;</span> <span class="n">tm_min</span> <span class="o">----------&gt;</span> <span class="nb">range</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">59</span><span class="p">]</span>
+
+<span class="mi">5</span> <span class="o">----------&gt;</span> <span class="n">tm_sec</span> <span class="o">----------&gt;</span> <span class="nb">range</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">61</span><span class="p">];</span>
+
+<span class="mi">6</span> <span class="o">----------&gt;</span> <span class="n">tm_wday</span> <span class="o">----------&gt;</span> <span class="nb">range</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="n">Monday</span> <span class="ow">is</span> <span class="mi">0</span>
+
+<span class="mi">7</span> <span class="o">----------&gt;</span> <span class="n">tm_yday</span> <span class="o">----------&gt;</span> <span class="nb">range</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">366</span><span class="p">]</span>
+
+<span class="mi">8</span> <span class="o">----------&gt;</span> <span class="n">tm_isdst</span> <span class="o">----------&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span> <span class="ow">or</span> <span class="o">-</span><span class="mi">1</span>
+
+<span class="n">N</span><span class="o">/</span><span class="n">A</span> <span class="o">----------&gt;</span> <span class="n">tm_zone</span> <span class="o">----------&gt;</span> <span class="n">abbreviation</span> <span class="n">of</span> <span class="n">timezone</span> <span class="n">name</span>
+
+<span class="n">N</span><span class="o">/</span><span class="n">A</span> <span class="o">----------&gt;</span> <span class="n">tm_gmtoff</span> <span class="o">----------&gt;</span> <span class="n">offset</span> <span class="n">east</span> <span class="n">of</span> <span class="n">UTC</span> <span class="ow">in</span> <span class="n">seconds</span>
+</pre></div>
+</div>
+<p>Contrairement au langage C, la valeur du mois se donne en valeur entre 1 et 12 alors qu’en C c’est entre 0 et 11.</p>
+<p>La fonction Time.localtime([secs]) retourne la même chose que Time.ctime([secs]) mais cette fois ci au format struct_time.</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">time</span><span class="o">.</span><span class="n">localtime</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Affichera : time.struct_time(tm_year=2017, tm_mon=3, tm_mday=24, tm_hour=13, tm_min=30, tm_sec=4, tm_wday=4, tm_yday=83, tm_isdst=0)</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">time</span><span class="o">.</span><span class="n">localtime</span><span class="p">(</span><span class="mi">400000000</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Affichera : time.struct_time(tm_year=1982, tm_mon=9, tm_mday=4, tm_hour=17, tm_min=6, tm_sec=40, tm_wday=5, tm_yday=247, tm_isdst=1)</p>
+<p>La fonction Time.mktime(t) fais l’inverse de localtime() en prenant une struct_time en argument et en retournant un nombre de secondes (par rapport à l’Epoch).</p>
+<p>Voici un exemple d’utilisation :</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2009</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">38</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">48</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">secs</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">mktime</span><span class="p">(</span> <span class="n">t</span> <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="s2">&quot;time.mktime(t) : </span><span class="si">%f</span><span class="s2">&quot;</span> <span class="o">%</span>  <span class="n">secs</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="s2">&quot;asctime(localtime(secs)): </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">time</span><span class="o">.</span><span class="n">asctime</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">localtime</span><span class="p">(</span><span class="n">secs</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Qui retournera le résultat suivant :</p>
+<p>time.mktime(t) : 1234915418.000000</p>
+<p>asctime(localtime(secs)): Tue Feb 17 17:03:38 2009</p>
+<p>Il existe également un moyen de faire attendre le programme avec le module Time.
+Il s’agit de Time.sleep(secs) avec secs = le nombre de secondes à attendre. Il bloquera ainsi le thread appellant pendant ce laps de temps. Attention. Contrairement à d’autres langages, l’argument est bien en secondes et pas en millisecondes.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>En c# par exemple cette ligne bloque le thread en question pendant une seconde. Ici en python il le bloque bien pendant 1000 secondes !!</p>
+</div>
+<div class="section" id="datetime">
+<h2><code class="docutils literal notranslate"><span class="pre">datetime</span></code><a class="headerlink" href="#datetime" title="Lien permanent vers ce titre">¶</a></h2>
+<p><a class="reference external" href="https://docs.python.org/3/library/datetime.html#module-datetime" title="(disponible dans Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">datetime</span></code></a> permet également de manipuler des dates et des temps.</p>
+<p>Ce module, plus orienté objet, possède plusieurs types :</p>
+<div class="section" id="date">
+<h3>date<a class="headerlink" href="#date" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Représente une date du calendrier Grégorien. Ses attributs sont: year, month et day</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="o">.</span><span class="n">today</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span><span class="o">.</span><span class="n">day</span>
+<span class="go">24</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span><span class="o">.</span><span class="n">month</span>
+<span class="go">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span><span class="o">.</span><span class="n">year</span>
+<span class="go">2017</span>
+</pre></div>
+</div>
+<p>Ainsi on voit qu’on peut afficher les attributs dans l’ordre qu’on veut et ou l’on veut</p>
+</div>
+<div class="section" id="id4">
+<h3>time<a class="headerlink" href="#id4" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Représente un temps. Ses attributs sont: hour, minute, second, microsecond et tzinfo.</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">time</span><span class="p">(</span><span class="n">hour</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">minute</span><span class="o">=</span><span class="mi">34</span><span class="p">,</span> <span class="n">second</span><span class="o">=</span><span class="mi">56</span><span class="p">,</span> <span class="n">microsecond</span><span class="o">=</span><span class="mi">123456</span><span class="p">)</span><span class="o">.</span><span class="n">isoformat</span><span class="p">(</span><span class="n">timespec</span><span class="o">=</span><span class="s1">&#39;minutes&#39;</span><span class="p">)</span>
+<span class="go">&#39;12:34&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span> <span class="o">=</span> <span class="n">time</span><span class="p">(</span><span class="n">hour</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">minute</span><span class="o">=</span><span class="mi">34</span><span class="p">,</span> <span class="n">second</span><span class="o">=</span><span class="mi">56</span><span class="p">,</span> <span class="n">microsecond</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span><span class="o">.</span><span class="n">isoformat</span><span class="p">(</span><span class="n">timespec</span><span class="o">=</span><span class="s1">&#39;microseconds&#39;</span><span class="p">)</span>
+<span class="go">&#39;12:34:56.000000&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span><span class="o">.</span><span class="n">isoformat</span><span class="p">(</span><span class="n">timespec</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">)</span>
+<span class="go">&#39;12:34:56&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id5">
+<h3>datetime<a class="headerlink" href="#id5" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Une combinaison d’une date et d’un temps. Ses attributs sont: year, month, day, hour, minute, second, microsecond et tzinfo.</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">isoformat</span><span class="p">(</span><span class="n">timespec</span><span class="o">=</span><span class="s1">&#39;minutes&#39;</span><span class="p">)</span>
+<span class="go">&#39;2002-12-25T00:00&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2015</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">59</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span><span class="o">.</span><span class="n">isoformat</span><span class="p">(</span><span class="n">timespec</span><span class="o">=</span><span class="s1">&#39;microseconds&#39;</span><span class="p">)</span>
+<span class="go">&#39;2015-01-01T12:30:59.000000&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="timedelta">
+<h3>timedelta<a class="headerlink" href="#timedelta" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Une durée exprimant la différence entre deux date, time ou datetime.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">timedelta</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">microseconds</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">days</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">seconds</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">microseconds</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Affichera :</p>
+<p>(-1, 86399, 999999)</p>
+</div>
+<div class="section" id="tzinfo">
+<h3>tzinfo<a class="headerlink" href="#tzinfo" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Classe abstraite utilisée par datetime et time pour fournir une notion personnalisable de réglage de l’heure (par exemple, pour l’heure d’été).</p>
+</div>
+<div class="section" id="timezone">
+<h3>timezone<a class="headerlink" href="#timezone" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Classe qui implémente tzinfo</p>
+<p>La méthode strftime(format) converti une date en string et permet le formatage de celle-ci. Strptime(format) permet,quand à elle, de convertir en datetime.</p>
+</div>
+</div>
+<div class="section" id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Pour conclure on peut dire que Time et DateTime sont des modules tout de même assez proches dans le cadre de leur utilisation. La principale différence est que DateTime est plus orienté objet et permet de faire des manipulations plus complexes et terme de traitement et d’affichage.</p>
+<p>Time en revanche à accès à l’horloge, aux données CPU et également à son thread parent (Time.sleep(x) et l’équivalent d’un thread.sleep(x) dans d’autre languages).</p>
+<dl class="footnote brackets">
+<dt class="label" id="nk"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>&lt;<a class="reference external" href="mailto:nicolas&#46;kaser&#37;&#52;&#48;he-arc&#46;ch">nicolas<span>&#46;</span>kaser<span>&#64;</span>he-arc<span>&#46;</span>ch</a>&gt;</p>
+</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Bibliothèques Python</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../builtins/index.html">Builtins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../collections/index.html"><code class="docutils literal notranslate"><span class="pre">collections</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../datetime/index.html"><code class="docutils literal notranslate"><span class="pre">datetime</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dunders/index.html">Dunders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../enum/index.html"><code class="docutils literal notranslate"><span class="pre">enum</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fstrings/index.html">f-strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../itertools/index.html"><code class="docutils literal notranslate"><span class="pre">itertools</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../io/index.html"><code class="docutils literal notranslate"><span class="pre">io</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../math/index.html"><code class="docutils literal notranslate"><span class="pre">math</span></code> / <code class="docutils literal notranslate"><span class="pre">fractions</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../random/index.html"><code class="docutils literal notranslate"><span class="pre">random</span></code></a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">time</span></code> / <code class="docutils literal notranslate"><span class="pre">datetime</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../statistics/index.html"><code class="docutils literal notranslate"><span class="pre">statistics</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../super/index.html"><code class="docutils literal notranslate"><span class="pre">super()</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../abc/index.html">Abstract Base Class (<code class="docutils literal notranslate"><span class="pre">abc</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../binary/index.html"><code class="docutils literal notranslate"><span class="pre">bytes</span></code> / <code class="docutils literal notranslate"><span class="pre">bytearray</span></code> / <code class="docutils literal notranslate"><span class="pre">memoryview</span></code>, <code class="docutils literal notranslate"><span class="pre">struct</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bisect/index.html"><code class="docutils literal notranslate"><span class="pre">bisect</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email/index.html">E-mail (<code class="docutils literal notranslate"><span class="pre">smtplib</span></code> / <code class="docutils literal notranslate"><span class="pre">imaplib</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hashlib/index.html"><code class="docutils literal notranslate"><span class="pre">hashlib</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../multiprocessing/index.html"><code class="docutils literal notranslate"><span class="pre">multiprocessing</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../re/index.html">Expressions régulières (<code class="docutils literal notranslate"><span class="pre">re</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../secrets/index.html"><code class="docutils literal notranslate"><span class="pre">secrets</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../weakref/index.html"><code class="docutils literal notranslate"><span class="pre">weakref</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../colorama/index.html"><code class="docutils literal notranslate"><span class="pre">colorama</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../invoke/index.html"><code class="docutils literal notranslate"><span class="pre">invoke</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../unittest/index.html"><code class="docutils literal notranslate"><span class="pre">unittest</span></code> / <code class="docutils literal notranslate"><span class="pre">doctest</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pytest/index.html"><code class="docutils literal notranslate"><span class="pre">pytest</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../csv/index.html"><code class="docutils literal notranslate"><span class="pre">csv</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../json/index.html"><code class="docutils literal notranslate"><span class="pre">json</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pillow/index.html">Python Imaging Library (<code class="docutils literal notranslate"><span class="pre">PIL</span></code>)</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../hug/index.html"><code class="docutils literal notranslate"><span class="pre">hug</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../matplotlib/index.html"><code class="docutils literal notranslate"><span class="pre">matplotlib</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../networkx/index.html"><code class="docutils literal notranslate"><span class="pre">networkx</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pycrypto/index.html"><code class="docutils literal notranslate"><span class="pre">pycrypto</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pygame/index.html"><code class="docutils literal notranslate"><span class="pre">pygame</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sphinx/index.html"><code class="docutils literal notranslate"><span class="pre">sphinx</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../watchdog/index.html"><code class="docutils literal notranslate"><span class="pre">watchdog</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../pbr/index.html"><cite>⚙️Automate your publishing to PyPI with PBR and Travis</cite></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../misc/about.html">À propos de ce livre</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../misc/contrib.html">Contribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../licence.html">Creative Commons Attribution-ShareAlike 4.0 International</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="../random/index.html" title="Chapitre précédent"><code class="docutils literal notranslate"><span class="pre">random</span></code></a></li>
+      <li>Next: <a href="../statistics/index.html" title="Chapitre suivant"><code class="docutils literal notranslate"><span class="pre">statistics</span></code></a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Recherche rapide</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016-2017, HE-Arc.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/time/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

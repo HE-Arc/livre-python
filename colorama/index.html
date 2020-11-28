@@ -1,0 +1,285 @@
+
+<!DOCTYPE html>
+
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>colorama &#8212; Documentation Bibliothèques Python 1.0.0</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/translations.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Recherche" href="../search.html" />
+    <link rel="next" title="invoke" href="../invoke/index.html" />
+    <link rel="prev" title="weakref" href="../weakref/index.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="colorama">
+<span id="colorama-tutorial"></span><h1><code class="docutils literal notranslate"><span class="pre">colorama</span></code><a class="headerlink" href="#colorama" title="Lien permanent vers ce titre">¶</a></h1>
+<p>Par Killian Castella <a class="footnote-reference brackets" href="#contact" id="id1">1</a></p>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Les caractères d’échappement <a class="reference external" href="https://en.wikipedia.org/wiki/ANSI_escape_code">ANSI</a> sont depuis longtemps utilisé pour produire des terminaux colorés et déplacer le curseur d’écriture dans les terminaux Unix.
+Seulement, ces caractères d’échappement ne sont pas compatibles avec le terminal natif de Windows.
+La bibliothèque externe de python colorama est la pour palier à ce problème en convertissant ces caractères en appels win32 appropriés.</p>
+<p>Grace à colorama, il est possible à de nombreuses bibliothèques se basant sur les caractères d’échappement ANSI d’être utilisées sur Windows.</p>
+<p>Pour résumer, <a class="reference internal" href="colorama.html#module-colorama" title="colorama"><code class="xref py py-mod docutils literal notranslate"><span class="pre">colorama</span></code></a> est une bibliothèque Python multiplateforme pour afficher des terminaux colorés.</p>
+</div>
+<div class="section" id="exemples">
+<h2>Exemples<a class="headerlink" href="#exemples" title="Lien permanent vers ce titre">¶</a></h2>
+<div class="section" id="fonctionalites-de-base">
+<h3>Fonctionalités de base<a class="headerlink" href="#fonctionalites-de-base" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Pour commencer avant d’utiliser colorama il faut importer les fonctionnalités désirées et initialiser colorama :</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">colorama</span> <span class="kn">import</span> <span class="n">Fore</span><span class="p">,</span> <span class="n">Back</span><span class="p">,</span> <span class="n">Style</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">init</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>On peut ensuite utiliser les diverses fonctionnalités :</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="colorama.html#colorama.ansi.AnsiFore" title="colorama.ansi.AnsiFore"><code class="xref py py-class docutils literal notranslate"><span class="pre">Fore</span></code></a> : permet de changer la couleur de l’arrière-plan,</p></li>
+<li><p><a class="reference internal" href="colorama.html#colorama.ansi.AnsiBack" title="colorama.ansi.AnsiBack"><code class="xref py py-class docutils literal notranslate"><span class="pre">Back</span></code></a> : permet de changer la couleur de l’écriture,</p></li>
+<li><p><a class="reference internal" href="colorama.html#colorama.ansi.AnsiStyle" title="colorama.ansi.AnsiStyle"><code class="xref py py-class docutils literal notranslate"><span class="pre">Style</span></code></a> : permet de changer la brillance de la police.</p></li>
+</ul>
+<p>Et la liste des attributs associés</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Fore</span><span class="p">:</span> <span class="n">BLACK</span><span class="p">,</span> <span class="n">RED</span><span class="p">,</span> <span class="n">GREEN</span><span class="p">,</span> <span class="n">YELLOW</span><span class="p">,</span> <span class="n">BLUE</span><span class="p">,</span> <span class="n">MAGENTA</span><span class="p">,</span> <span class="n">CYAN</span><span class="p">,</span> <span class="n">WHITE</span><span class="p">,</span> <span class="n">RESET</span><span class="o">.</span>
+<span class="n">Back</span><span class="p">:</span> <span class="n">BLACK</span><span class="p">,</span> <span class="n">RED</span><span class="p">,</span> <span class="n">GREEN</span><span class="p">,</span> <span class="n">YELLOW</span><span class="p">,</span> <span class="n">BLUE</span><span class="p">,</span> <span class="n">MAGENTA</span><span class="p">,</span> <span class="n">CYAN</span><span class="p">,</span> <span class="n">WHITE</span><span class="p">,</span> <span class="n">RESET</span><span class="o">.</span>
+<span class="n">Style</span><span class="p">:</span> <span class="n">DIM</span><span class="p">,</span> <span class="n">NORMAL</span><span class="p">,</span> <span class="n">BRIGHT</span><span class="p">,</span> <span class="n">RESET_ALL</span>
+</pre></div>
+</div>
+<p>Utilisation :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;Modification des styles.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">colorama</span> <span class="kn">import</span> <span class="n">Back</span><span class="p">,</span> <span class="n">Fore</span><span class="p">,</span> <span class="n">Style</span><span class="p">,</span> <span class="n">deinit</span><span class="p">,</span> <span class="n">init</span>
+
+<span class="n">init</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">Fore</span><span class="o">.</span><span class="n">RED</span> <span class="o">+</span> <span class="n">Style</span><span class="o">.</span><span class="n">NORMAL</span> <span class="o">+</span> <span class="s1">&#39;Un texte rouge&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Back</span><span class="o">.</span><span class="n">WHITE</span> <span class="o">+</span> <span class="s1">&#39;Avec un fond blanc&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Style</span><span class="o">.</span><span class="n">BRIGHT</span> <span class="o">+</span> <span class="s1">&#39;Plus lumineux !&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Style</span><span class="o">.</span><span class="n">RESET_ALL</span> <span class="o">+</span> <span class="s1">&#39;Retour à la normale&#39;</span><span class="p">)</span>
+
+<span class="n">deinit</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Résultat  :</p>
+<blockquote>
+<div><img alt="Texte mis en forme avec couleurs" src="../_images/CommandeBase.PNG" />
+</div></blockquote>
+<p>Pour arrêter colorama avant la fin du programme il suffit d’appeler deinit() :</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">deinit</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Avant l’arrêt, colorama va appeler <a class="reference internal" href="colorama.html#colorama.ansi.AnsiStyle.RESET_ALL" title="colorama.ansi.AnsiStyle.RESET_ALL"><code class="xref py py-attr docutils literal notranslate"><span class="pre">RESET_ALL</span></code></a> afin de rétablir le style initial.</p>
+</div>
+<div class="section" id="deplacement-du-curseur">
+<h3>Déplacement du curseur<a class="headerlink" href="#deplacement-du-curseur" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Il est également possible d’utiliser les sequences <a class="reference external" href="https://en.wikipedia.org/wiki/ANSI_escape_code">ANSI</a> directement dans notre code , c’est de cette manière que nous pouvons également déplacer le curseur.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;Déplacement du curseur.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">colorama</span> <span class="kn">import</span> <span class="n">deinit</span><span class="p">,</span> <span class="n">init</span>
+
+<span class="n">init</span><span class="p">()</span>
+
+<span class="c1"># ici on définit notre style</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\033</span><span class="s1">[33;42;1m&#39;</span><span class="p">)</span>
+
+<span class="c1"># deplacement du curseur à l&#39;aide de n lignes</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\033</span><span class="s1">[3B&#39;</span><span class="o">+</span><span class="s1">&#39;3 lignes plus bas&#39;</span><span class="p">)</span>
+
+<span class="c1"># deplacement du curseur à l&#39;aide de n lignes</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\033</span><span class="s1">[20C&#39;</span><span class="o">+</span><span class="s1">&#39;20 caractères plus loin&#39;</span><span class="p">)</span>
+
+<span class="c1"># deplacement du curseur à l&#39;aide de coordonnées</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\033</span><span class="s1">[15;10f&#39;</span><span class="o">+</span><span class="s1">&#39;Selon coordonées&#39;</span><span class="p">)</span>
+
+<span class="n">deinit</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">\\033</span></code> correspond au code octal en style C pour le caractère ESC. Les caractères qui se trouvent après le “[“ sont les séquences ANSI.</p>
+<dl>
+<dt>Résultat  :</dt><dd><img alt="Texte placé à divers endroit selon le code ci-dessus" src="../_images/CursorPositioning.png" />
+</dd>
+</dl>
+<p>colorama ne convertit qu’une partie des séquences <a class="reference external" href="https://en.wikipedia.org/wiki/ANSI_escape_code">ANSI</a> en appel Win32. la liste des séquences prises en charge se trouve <a class="reference external" href="https://github.com/tartley/colorama#recognised-ansi-sequences">ici</a>.</p>
+</div>
+<div class="section" id="utilisation-d-une-bibliotheque-utilisant-les-caracteres-d-echappement-ansi">
+<h3>Utilisation d’une bibliothèque utilisant les caractères d’échappement ANSI<a class="headerlink" href="#utilisation-d-une-bibliotheque-utilisant-les-caracteres-d-echappement-ansi" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Certaines bibliothèques se basent sur les séquences ANSI pour colorer les terminaux et ne sont donc pas fonctionelles avec windows, Ici un exemple d’utilisation de termcolor sous windows :</p>
+<blockquote>
+<div><img alt="affichage de termcolor non interpreté" src="../_images/termcolorWithoutColorama.png" />
+</div></blockquote>
+<p>On voit bien que tout n’est pas interpreté comme il se doit, C’est la qu’entre en jeu colorama qui permet d’interpreter correctement ces séquences :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;Utilisation de termcolor sous Windows.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">colorama</span> <span class="kn">import</span> <span class="n">init</span>
+<span class="kn">from</span> <span class="nn">termcolor</span> <span class="kn">import</span> <span class="n">colored</span>
+
+<span class="c1"># use Colorama to make Termcolor work on Windows too</span>
+<span class="n">init</span><span class="p">()</span>
+
+<span class="c1"># then use Termcolor for all colored text output</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">colored</span><span class="p">(</span><span class="s1">&#39;Text from termcolor on Windows&#39;</span><span class="p">,</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;on_yellow&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Ce qui nous donne :</p>
+<blockquote>
+<div><img alt="affichage de termcolor correctement interpreté" src="../_images/termcolor.png" />
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Lien permanent vers ce titre">¶</a></h2>
+<p>colorama est une bibliothèque très simple d’utilisation et très utile pour faire fonctionner diverses autres bibliothèques se basant sur les séquences ANSI sous Windows.
+Il est également possible de l’utiliser en <em>standalone</em> pour certaines applications simples.
+Malheureusement en l’état actuel, il y a encore un grand nombre de séquences non prises en charge, ceci est toutefois probablement amené à changer étant donné que <a class="reference internal" href="colorama.html#module-colorama" title="colorama"><code class="xref py py-mod docutils literal notranslate"><span class="pre">colorama</span></code></a> est mis à jour régulièrement.</p>
+<dl class="footnote brackets">
+<dt class="label" id="contact"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>&lt;<a class="reference external" href="mailto:killian&#46;castella&#37;&#52;&#48;he-arc&#46;ch">killian<span>&#46;</span>castella<span>&#64;</span>he-arc<span>&#46;</span>ch</a>&gt;</p>
+</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Bibliothèques Python</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../builtins/index.html">Builtins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../collections/index.html"><code class="docutils literal notranslate"><span class="pre">collections</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../datetime/index.html"><code class="docutils literal notranslate"><span class="pre">datetime</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dunders/index.html">Dunders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../enum/index.html"><code class="docutils literal notranslate"><span class="pre">enum</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fstrings/index.html">f-strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../itertools/index.html"><code class="docutils literal notranslate"><span class="pre">itertools</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../io/index.html"><code class="docutils literal notranslate"><span class="pre">io</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../math/index.html"><code class="docutils literal notranslate"><span class="pre">math</span></code> / <code class="docutils literal notranslate"><span class="pre">fractions</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../random/index.html"><code class="docutils literal notranslate"><span class="pre">random</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../time/index.html"><code class="docutils literal notranslate"><span class="pre">time</span></code> / <code class="docutils literal notranslate"><span class="pre">datetime</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../statistics/index.html"><code class="docutils literal notranslate"><span class="pre">statistics</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../super/index.html"><code class="docutils literal notranslate"><span class="pre">super()</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../abc/index.html">Abstract Base Class (<code class="docutils literal notranslate"><span class="pre">abc</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../binary/index.html"><code class="docutils literal notranslate"><span class="pre">bytes</span></code> / <code class="docutils literal notranslate"><span class="pre">bytearray</span></code> / <code class="docutils literal notranslate"><span class="pre">memoryview</span></code>, <code class="docutils literal notranslate"><span class="pre">struct</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bisect/index.html"><code class="docutils literal notranslate"><span class="pre">bisect</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email/index.html">E-mail (<code class="docutils literal notranslate"><span class="pre">smtplib</span></code> / <code class="docutils literal notranslate"><span class="pre">imaplib</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hashlib/index.html"><code class="docutils literal notranslate"><span class="pre">hashlib</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../multiprocessing/index.html"><code class="docutils literal notranslate"><span class="pre">multiprocessing</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../re/index.html">Expressions régulières (<code class="docutils literal notranslate"><span class="pre">re</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../secrets/index.html"><code class="docutils literal notranslate"><span class="pre">secrets</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../weakref/index.html"><code class="docutils literal notranslate"><span class="pre">weakref</span></code></a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">colorama</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../invoke/index.html"><code class="docutils literal notranslate"><span class="pre">invoke</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../unittest/index.html"><code class="docutils literal notranslate"><span class="pre">unittest</span></code> / <code class="docutils literal notranslate"><span class="pre">doctest</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pytest/index.html"><code class="docutils literal notranslate"><span class="pre">pytest</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../csv/index.html"><code class="docutils literal notranslate"><span class="pre">csv</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../json/index.html"><code class="docutils literal notranslate"><span class="pre">json</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pillow/index.html">Python Imaging Library (<code class="docutils literal notranslate"><span class="pre">PIL</span></code>)</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../hug/index.html"><code class="docutils literal notranslate"><span class="pre">hug</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../matplotlib/index.html"><code class="docutils literal notranslate"><span class="pre">matplotlib</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../networkx/index.html"><code class="docutils literal notranslate"><span class="pre">networkx</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pycrypto/index.html"><code class="docutils literal notranslate"><span class="pre">pycrypto</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pygame/index.html"><code class="docutils literal notranslate"><span class="pre">pygame</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sphinx/index.html"><code class="docutils literal notranslate"><span class="pre">sphinx</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../watchdog/index.html"><code class="docutils literal notranslate"><span class="pre">watchdog</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../pbr/index.html"><cite>⚙️Automate your publishing to PyPI with PBR and Travis</cite></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../misc/about.html">À propos de ce livre</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../misc/contrib.html">Contribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../licence.html">Creative Commons Attribution-ShareAlike 4.0 International</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="../weakref/index.html" title="Chapitre précédent"><code class="docutils literal notranslate"><span class="pre">weakref</span></code></a></li>
+      <li>Next: <a href="../invoke/index.html" title="Chapitre suivant"><code class="docutils literal notranslate"><span class="pre">invoke</span></code></a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Recherche rapide</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016-2017, HE-Arc.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/colorama/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

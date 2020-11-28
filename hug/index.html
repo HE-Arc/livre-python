@@ -1,0 +1,484 @@
+
+<!DOCTYPE html>
+
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>hug &#8212; Documentation Bibliothèques Python 1.0.0</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/translations.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Recherche" href="../search.html" />
+    <link rel="next" title="matplotlib" href="../matplotlib/index.html" />
+    <link rel="prev" title="Python Imaging Library (PIL)" href="../pillow/index.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="hug">
+<span id="hug-tutorial"></span><h1><code class="docutils literal notranslate"><span class="pre">hug</span></code><a class="headerlink" href="#hug" title="Lien permanent vers ce titre">¶</a></h1>
+<p>Par Charles Ombang Ndo <a class="footnote-reference brackets" href="#co" id="id1">1</a></p>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Une API (Application Programming Interface) est une façade regroupant des
+services qu’une application, offre à d’autres. Ces services sont définis sous
+forme de classes, de méthodes et généralement suivis d’une documentation
+décrivant le rôle de chaque composant de l’interface, exposant les utilisations
+possibles et les normes d’utilisation. La plupart des applications actuelles
+offrent ces <em>web services</em> plus connues sous RESTful web service.</p>
+<p>Dans l’univers Python, la bibliothèque <a class="reference external" href="http://www.hug.rest/">hug</a> est un outil assez puissant
+permettant d’implémenter une API. L’utilisation de la technologie <code class="docutils literal notranslate"><span class="pre">hug</span></code> pour
+créer des APIs en Python est motivée par de nombreux avantages qui seront
+détaillés dans un chapitre dédié.</p>
+<div class="section" id="restful-web-service-et-hug">
+<h3>RESTful web service et <code class="docutils literal notranslate"><span class="pre">hug</span></code><a class="headerlink" href="#restful-web-service-et-hug" title="Lien permanent vers ce titre">¶</a></h3>
+<p>A l’origine REST (Representational State Transfer) est l’idée de définir un
+ensemble de règles qui mises ensemble, permettent de construire une API et
+décrivent la manière, donc la communication se passe entre le client et le
+serveur. Les dévéloppeurs n’ont plus à écrire leur propre méthode HTTP (GET,
+POST..) pour récupérer des données, c’est REST qui va définir de manière unique
+les méthodes à utiliser. La conséquence directe est que quelque soit la
+technologie employée côté serveur, les règles ne changeront pas, elles seront
+tout le temps les mêmes.</p>
+<p>Le concept RESTful web service repose sur les ressources qui sont représentées
+par les <cite>URLs</cite>. Le client envoie des requêtes via ces URLs au moyen des
+méthodes du protocole HTTP, ce sont les verbes:
+- GET: récupération de données,
+- POST: ajout de données
+- PUT: modifications de données
+- DELETE: suppression de données.</p>
+<p>Les formats d’échanges sont nombreux. Dans ce chapitre, nous resterons sur du
+<a class="reference internal" href="../json/index.html#json-tutorial"><span class="std std-ref">JSON</span></a>.</p>
+</div>
+<div class="section" id="pourquoi-choisir-hug">
+<h3>Pourquoi choisir <code class="docutils literal notranslate"><span class="pre">hug</span></code><a class="headerlink" href="#pourquoi-choisir-hug" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Les très célèbres frameworks que sont <a class="reference external" href="http://flask.pocoo.org/">Flask</a> et <a class="reference external" href="https://www.djangoproject.com/">Django</a> sont bousculés par les
+performances qu’apportent hug. hug permet d’écrire une API de manière
+simplifiée. Les API implémentées dans d’autres frameworks peuvent l’être en
+quelques lignes avec hug. hug supporte le versioning, il permet la
+documentation par le code et hug intègre la validation des données.</p>
+</div>
+</div>
+<div class="section" id="fonctionnement">
+<h2>Fonctionnement<a class="headerlink" href="#fonctionnement" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Supposons une simple fonction permettant de faire la somme de deux nombres passés en paramètre.</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;Simple application effectuant une somme de deux nombres&quot;&quot;&quot;</span>
+
+<span class="k">def</span> <span class="nf">somme</span><span class="p">(</span><span class="n">val1</span><span class="p">,</span> <span class="n">val2</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Retourne la somme des deux nombres passés en paramètre&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">val1</span> <span class="o">+</span> <span class="n">val2</span>
+</pre></div>
+</div>
+<p>Pour transformer cette fonction en une simple API, il suffit d’importer la
+bibliothèque <a class="reference external" href="http://www.hug.rest/">hug</a> et le tour est joué. Le code du fichier <code class="docutils literal notranslate"><span class="pre">somme.py</span></code>.</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;Simple application effectuant une somme de deux nombres&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">hug</span>
+
+<span class="nd">@hug</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">somme</span><span class="p">(</span><span class="n">val1</span><span class="p">,</span> <span class="n">val2</span><span class="p">):</span>
+  <span class="sd">&quot;&quot;&quot;Retourne la somme des deux nombres passés en paramètre&quot;&quot;&quot;</span>
+  <span class="k">return</span> <span class="n">val1</span> <span class="o">+</span> <span class="n">val2</span>
+</pre></div>
+</div>
+<p>L’exécution du code ci-dessus via la commande.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> hug -f somme.py
+</pre></div>
+</div>
+<p><a class="reference external" href="http://www.hug.rest/">hug</a> lance le serveur sur le port 8000. En entrant l’adresse
+<code class="docutils literal notranslate"><span class="pre">http://localhost:8000</span></code> on a une réponse au format JSON. Dans notre exemple
+on obtient:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;404&quot;</span><span class="p">:</span> <span class="s2">&quot;The API call you tried to make was not defined. Here&#39;s a definition of the API to help you get going :)&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;documentation&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&quot;overview&quot;</span><span class="p">:</span> <span class="s2">&quot;Simple API permettant la somme de deux nombres&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;handlers&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;/somme&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="nt">&quot;GET&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="nt">&quot;usage&quot;</span><span class="p">:</span> <span class="s2">&quot;La fonction retourne le résultat obtenu de la somme des deux nombres en param\u00e8tres&quot;</span><span class="p">,</span>
+                    <span class="nt">&quot;outputs&quot;</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="nt">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;JSON (Javascript Serialized Object Notation)&quot;</span><span class="p">,</span>
+                        <span class="nt">&quot;content_type&quot;</span><span class="p">:</span> <span class="s2">&quot;application/json&quot;</span>
+                    <span class="p">},</span>
+                    <span class="nt">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="nt">&quot;val1&quot;</span><span class="p">:</span> <span class="p">{</span>
+                            <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;Basic text / string value&quot;</span>
+                        <span class="p">},</span>
+                        <span class="nt">&quot;val2&quot;</span><span class="p">:</span> <span class="p">{</span>
+                            <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;Basic text / string value&quot;</span>
+                        <span class="p">}</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>On peut remarquer que la documentation est très claire, la clé <cite>overview</cite> nous renseigne sur l’objectif de notre API, La clé usage renseigne sur le type de données renvoyées par l’API, dans notre cas, la ligne de code &#64;hug.get() indique qu’il s’agit d’une requête GET. La suite du bloc JSON ci-dessus nous renseigne sur les paramètres des l’API, leurs types et le format de retour.</p>
+<p>Maintenant pour voir le résultat de notre (petite) API, il suffit d’entrer dans le navigateur l’adresse suivante localhost:8000/somme?val1=..&amp;val2= .. il suffit de passer les valeurs aux paramètres.</p>
+</div>
+<div class="section" id="hug-et-le-versioning">
+<h2>hug et le versioning<a class="headerlink" href="#hug-et-le-versioning" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Comme souligné auparavant, hug supporte et gère très bien le versioning. On peut avoir plusieurs versions de l’API dans la même application.</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;Simple Exemple du versioning avec hug&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">hug</span>
+
+<span class="nd">@hug</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/echo&#39;</span><span class="p">,</span> <span class="n">versions</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">echo</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">text</span>
+
+
+<span class="nd">@hug</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/echo&#39;</span><span class="p">,</span> <span class="n">versions</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="k">def</span> <span class="nf">echo</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="k">return</span> <span class="s2">&quot;Echo: </span><span class="si">{text}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="nb">locals</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>Le code ci-dessus montre la façon dont hug gère le versioning. Il suffit pour cela d’ajouter dans la méthode GET les versions que l’on veut. C’est une fois de plus assez claire, simple et compréhensible.</p>
+<p>On peut déduire du code précédent que l’on a 4 versions. Pour le vérifier, il suffit de mettre dans le navigateur l’adresse <a class="reference external" href="http://localhost:8000">http://localhost:8000</a>, on a alors la documentation au format JSON suivante:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;404&quot;</span><span class="p">:</span> <span class="s2">&quot;The API call you tried to make was not defined. Here&#39;s a definition of the API to help you get going :)&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;documentation&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;overview&quot;</span><span class="p">:</span> <span class="s2">&quot;Simple Exemple du versioning avec hug&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;version&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+        <span class="nt">&quot;versions&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="mi">1</span><span class="p">,</span>
+            <span class="mi">2</span><span class="p">,</span>
+            <span class="mi">3</span><span class="p">,</span>
+            <span class="mi">4</span>
+        <span class="p">],</span>
+        <span class="nt">&quot;handlers&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;/echo&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="nt">&quot;GET&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="nt">&quot;outputs&quot;</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="nt">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;JSON (Javascript Serialized Object Notation)&quot;</span><span class="p">,</span>
+                        <span class="nt">&quot;content_type&quot;</span><span class="p">:</span> <span class="s2">&quot;application/json&quot;</span>
+                    <span class="p">},</span>
+                    <span class="nt">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="nt">&quot;text&quot;</span><span class="p">:</span> <span class="p">{</span>
+                            <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;Basic text / string value&quot;</span>
+                        <span class="p">}</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Si on compare ce rendu JSON au précédent, on remarque la présence du champ
+<code class="docutils literal notranslate"><span class="pre">version</span></code>. La clé <code class="docutils literal notranslate"><span class="pre">version</span></code> de valeur 4 indique la version actuelle de l’API et
+la clé <code class="docutils literal notranslate"><span class="pre">versions</span></code> prend en valeur un tableau listant les différentes versions
+de notre API. Pour tester le bon fonctionnement du versioning, on peut écrire
+&lt;<a class="reference external" href="http://localhost:8000/v1/echo?text=toto">http://localhost:8000/v1/echo?text=toto</a>&gt;. Dans cette URL, on spécifie la version
+que l’on souhaite utiliser, ici la version v1. En sortie on aura <code class="docutils literal notranslate"><span class="pre">toto</span></code>, ce qui
+correspond bien à la sortie attendue de la version 1. En changeant dans l’URL
+juste la version en la remplaçant par v2, v2 ou v4, la sortie est naturellement
+celle attendue suivant la version indiquée <code class="docutils literal notranslate"><span class="pre">Echo:toto</span></code>.</p>
+</div>
+<div class="section" id="type-annotation-et-validation">
+<h2><em>Type annotation</em> et validation<a class="headerlink" href="#type-annotation-et-validation" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Il est possible d’ajouter des fonctions aux paramètres de nos méthodes, pour
+expliciter comment ils sont validés et transcris en type python, on parle de
+type annotation. <code class="docutils literal notranslate"><span class="pre">argument:type</span></code>. L’avantage de l’utilisation d’une telle
+spécification est de clairement indiquer au niveau de la documentation le type
+de données attendues.</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;Test des types annotations&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">hug</span>
+
+<span class="nd">@hug</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">annota</span><span class="p">(</span><span class="n">text</span><span class="p">:</span><span class="nb">int</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">text</span>
+</pre></div>
+</div>
+<p>Le code ci-dessus montre l’utilisation des annotations. l’argument de la
+fonction <code class="docutils literal notranslate"><span class="pre">annota(...)</span></code> est suivi du type int soit text::int. On comprend
+aisément que l’argument text est de type int. Vérifions la sortie suivant
+l’adresse &lt;http://localhost:8000&gt;</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;404&quot;</span><span class="p">:</span> <span class="s2">&quot;The API call you tried to make was not defined. Here&#39;s a definition of the API to help you get going :)&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;documentation&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;overview&quot;</span><span class="p">:</span> <span class="s2">&quot;Test des types annotations&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;handlers&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;/annota&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="nt">&quot;GET&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="nt">&quot;outputs&quot;</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="nt">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;JSON (Javascript Serialized Object Notation)&quot;</span><span class="p">,</span>
+                        <span class="nt">&quot;content_type&quot;</span><span class="p">:</span> <span class="s2">&quot;application/json&quot;</span>
+                    <span class="p">},</span>
+                    <span class="nt">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="nt">&quot;text&quot;</span><span class="p">:</span> <span class="p">{</span>
+                            <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;int(x=0) -&gt; integer\nint(x, base=10) -&gt; integer\n\nConvert a number or string to an integer, or         return 0 if no arguments\nare given   If x is a number, return x __int__()   For floating point\nnumbers, this truncates towards zero \n\nIf x is not a number or if base is given, then x must be a string,\nbytes, or bytearray instance representing an integer literal in the\ngiven base   The literal can be preceded by &#39;+&#39; or &#39;-&#39; and be surrounded\nby whitespace   The base defaults to 10   Valid bases are 0 and 2-36 \nBase 0 means to interpret the base from the string as an integer literal \n&gt;&gt;&gt; int(&#39;0b100&#39;, base=0)\n4&quot;</span>
+                        <span class="p">}</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>On voit bien dans le bloc inputs la clé type, on peut clairement voir que
+l’entrée est de type int.</p>
+<p>Si on entre l’adresse &lt;<a class="reference external" href="http://localhost:8000/annota?text=salut">http://localhost:8000/annota?text=salut</a>&gt; on a en retour
+une belle erreur comme celle ci-dessous:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;errors&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;invalid literal for int() with base 10: &#39;salut&#39;&quot;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Il est important de noter que les annotations permettent implicitement de faire
+la validation automatique des données.</p>
+</div>
+<div class="section" id="les-directives">
+<h2>Les directives<a class="headerlink" href="#les-directives" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Les directives sont globalement des arguments enregistrés pour fournir
+automatiquement des valeurs. Un exemple serait meilleur pour expliquer le rôle
+des directives. hug possède des directives prédéfinies, mais il donne la
+possibilité de créer des directives personnalisées.</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">hug</span>
+
+<span class="nd">@hug</span><span class="o">.</span><span class="n">directive</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">salutation_general</span><span class="p">(</span><span class="n">greeting</span><span class="o">=</span><span class="s1">&#39;hi&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">greeting</span> <span class="o">+</span> <span class="s1">&#39; there!&#39;</span>
+<span class="nd">@hug</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">salut_anglais</span><span class="p">(</span><span class="n">greeting</span><span class="p">:</span> <span class="n">salutation_general</span><span class="o">=</span><span class="s1">&#39;hello&#39;</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">greeting</span>
+<span class="nd">@hug</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">salut_americain</span><span class="p">(</span><span class="n">greeting</span><span class="p">:</span> <span class="n">salutation_general</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">greeting</span>
+</pre></div>
+</div>
+<p>Ci-dessus, on a créé une directive basée sur la fonction
+<code class="docutils literal notranslate"><span class="pre">salutation_general(..)</span></code>. Cette fonction possède un paramètre avec une valeur
+par défaut. Si on va à l’adresse <a class="reference external" href="http://localhost:8000/salut_anglais">http://localhost:8000/salut_anglais</a> on aura en
+retour <code class="docutils literal notranslate"><span class="pre">hello</span> <span class="pre">there</span></code>, <a class="reference external" href="http://localhost:8000/salut_anglais">http://localhost:8000/salut_anglais</a> retournera <code class="docutils literal notranslate"><span class="pre">hi</span>
+<span class="pre">there</span></code>. En effet, dans la fonction <code class="docutils literal notranslate"><span class="pre">salut_anglais(..)</span></code>, on passe la
+directive avec une nouvelle valeur par défaut qui est <code class="docutils literal notranslate"><span class="pre">hello</span></code>. Cela a pour
+effet d’écraser la valeur par défaut <code class="docutils literal notranslate"><span class="pre">hi</span></code>. Par contre la fonction
+<code class="docutils literal notranslate"><span class="pre">salut_americain(..)</span></code> prend en argument la même directive, mais aucune valeur
+n’est redéfinie, cela va conserver la valeur par défaut <code class="docutils literal notranslate"><span class="pre">hi</span></code>.</p>
+</div>
+<div class="section" id="utilisation-des-directives">
+<h2>Utilisation des directives<a class="headerlink" href="#utilisation-des-directives" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Pour utiliser les directives dans nos fonctions, il existe deux méthodes. La
+première apparaît clairement, il s’agit de l’utilisation des types annotation
+<code class="docutils literal notranslate"><span class="pre">greeting::directive</span></code>. On peut aussi utiliser le préfixe <code class="docutils literal notranslate"><span class="pre">hug_</span></code> ce qui
+d’après notre exemple précédent deviendra avec la fonction
+<code class="docutils literal notranslate"><span class="pre">salut_americain(...)</span></code> :</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@hug</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">salut_americain</span><span class="p">(</span><span class="n">hug_salutation_general</span><span class="o">=</span><span class="s1">&#39;Yoo man&#39;</span><span class="p">):</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+<p>Il est aussi possible d’ajouter une valeur <code class="docutils literal notranslate"><span class="pre">hug_salutation_general='Yoo</span> <span class="pre">man'</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>il est important d’ajouter <code class="docutils literal notranslate"><span class="pre">**kwargs</span></code>.</p>
+</div>
+</div>
+<div class="section" id="format-de-sortie">
+<h2>Format de sortie<a class="headerlink" href="#format-de-sortie" title="Lien permanent vers ce titre">¶</a></h2>
+<p><a class="reference external" href="http://www.hug.rest/">hug</a> utilise le JSON comme format par défaut. Heureusement, il offre
+la possibilité de définir des formats autres que JSON. Il existe différentes
+façons de spécifier le format que l’on veut utiliser</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">hug</span><span class="o">.</span><span class="n">API</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span><span class="o">.</span><span class="n">output_format</span> <span class="o">=</span> <span class="n">hug</span><span class="o">.</span><span class="n">output_format</span><span class="o">.</span><span class="n">html</span>
+
+<span class="c1"># Ou</span>
+
+<span class="nd">@hug</span><span class="o">.</span><span class="n">default_output_format</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">my_output_formatter</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">response</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Format personnalisé.&quot;&quot;&quot;</span>
+
+<span class="c1"># Ou encore</span>
+
+<span class="nd">@hug</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="n">hug</span><span class="o">.</span><span class="n">output_format</span><span class="o">.</span><span class="n">html</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">my_endpoint</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Retourne du HTML.&quot;&quot;&quot;</span>
+</pre></div>
+</div>
+<p>Il est possible de créer des formats de sortie personnalisés. Cela se passe
+comme le montre le code ci-dessous</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@hug</span><span class="o">.</span><span class="n">format</span><span class="o">.</span><span class="n">content_type</span><span class="p">(</span><span class="s1">&#39;file/text&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">format_as_text</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">response</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">content</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Avertissement</p>
+<p>le <code class="docutils literal notranslate"><span class="pre">Content-Type</span></code> nommé <code class="docutils literal notranslate"><span class="pre">file/text</span></code> n’existe pas. Ce n’est pas donc pas
+un exemple utilisable en l’état.</p>
+</div>
+<div class="section" id="le-routing">
+<h3>Le Routing<a class="headerlink" href="#le-routing" title="Lien permanent vers ce titre">¶</a></h3>
+<p>C’est la notion qu’on retrouve dans la plupart des frameworks. Il s’agit de
+définir des chemins, urls d’accès aux données. <a class="reference external" href="http://www.hug.rest/website/learn/routing">La documentation officielle</a> détaille la notion de <em>Routing</em>
+de façon plus élaborée et plus large.</p>
+<p>Les APIs écrit avec <code class="docutils literal notranslate"><span class="pre">hug</span></code> peuvent être accédées depuis la ligne de commande, pour
+cela, il suffit de rajouter <code class="docutils literal notranslate"><span class="pre">&#64;hug.cli()</span></code> comme nous l’avons fait avec
+<code class="docutils literal notranslate"><span class="pre">&#64;hug.get()</span></code>.</p>
+</div>
+</div>
+<div class="section" id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Lien permanent vers ce titre">¶</a></h2>
+<p>La bibliothèque <a class="reference external" href="http://www.hug.rest/">hug</a> offre un moyen très simplifié d’écrire des API REST.
+La syntaxe est assez claire, la documentation bien élaborée depuis le code, le
+<em>versioning</em> est réalisé en une seule ligne de code.</p>
+<div class="section" id="bibliographie">
+<h3>Bibliographie<a class="headerlink" href="#bibliographie" title="Lien permanent vers ce titre">¶</a></h3>
+<ul class="simple">
+<li><p>Site de <code class="docutils literal notranslate"><span class="pre">hug</span></code>: <a class="reference external" href="http://www.hug.rest/">http://www.hug.rest/</a></p></li>
+<li><p><em>Réaliser une API avec Python 3</em>, par Rémi Alvergnat, <a class="reference external" href="http://toilal.github.io/talk-python3-hug/">http://toilal.github.io/talk-python3-hug/</a></p></li>
+</ul>
+<dl class="footnote brackets">
+<dt class="label" id="co"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>&lt;<a class="reference external" href="mailto:charles&#46;ombangndo&#37;&#52;&#48;he-arc&#46;ch">charles<span>&#46;</span>ombangndo<span>&#64;</span>he-arc<span>&#46;</span>ch</a>&gt;</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Bibliothèques Python</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../builtins/index.html">Builtins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../collections/index.html"><code class="docutils literal notranslate"><span class="pre">collections</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../datetime/index.html"><code class="docutils literal notranslate"><span class="pre">datetime</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dunders/index.html">Dunders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../enum/index.html"><code class="docutils literal notranslate"><span class="pre">enum</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fstrings/index.html">f-strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../itertools/index.html"><code class="docutils literal notranslate"><span class="pre">itertools</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../io/index.html"><code class="docutils literal notranslate"><span class="pre">io</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../math/index.html"><code class="docutils literal notranslate"><span class="pre">math</span></code> / <code class="docutils literal notranslate"><span class="pre">fractions</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../random/index.html"><code class="docutils literal notranslate"><span class="pre">random</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../time/index.html"><code class="docutils literal notranslate"><span class="pre">time</span></code> / <code class="docutils literal notranslate"><span class="pre">datetime</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../statistics/index.html"><code class="docutils literal notranslate"><span class="pre">statistics</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../super/index.html"><code class="docutils literal notranslate"><span class="pre">super()</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../abc/index.html">Abstract Base Class (<code class="docutils literal notranslate"><span class="pre">abc</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../binary/index.html"><code class="docutils literal notranslate"><span class="pre">bytes</span></code> / <code class="docutils literal notranslate"><span class="pre">bytearray</span></code> / <code class="docutils literal notranslate"><span class="pre">memoryview</span></code>, <code class="docutils literal notranslate"><span class="pre">struct</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bisect/index.html"><code class="docutils literal notranslate"><span class="pre">bisect</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email/index.html">E-mail (<code class="docutils literal notranslate"><span class="pre">smtplib</span></code> / <code class="docutils literal notranslate"><span class="pre">imaplib</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hashlib/index.html"><code class="docutils literal notranslate"><span class="pre">hashlib</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../multiprocessing/index.html"><code class="docutils literal notranslate"><span class="pre">multiprocessing</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../re/index.html">Expressions régulières (<code class="docutils literal notranslate"><span class="pre">re</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../secrets/index.html"><code class="docutils literal notranslate"><span class="pre">secrets</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../weakref/index.html"><code class="docutils literal notranslate"><span class="pre">weakref</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../colorama/index.html"><code class="docutils literal notranslate"><span class="pre">colorama</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../invoke/index.html"><code class="docutils literal notranslate"><span class="pre">invoke</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../unittest/index.html"><code class="docutils literal notranslate"><span class="pre">unittest</span></code> / <code class="docutils literal notranslate"><span class="pre">doctest</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pytest/index.html"><code class="docutils literal notranslate"><span class="pre">pytest</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../csv/index.html"><code class="docutils literal notranslate"><span class="pre">csv</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../json/index.html"><code class="docutils literal notranslate"><span class="pre">json</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pillow/index.html">Python Imaging Library (<code class="docutils literal notranslate"><span class="pre">PIL</span></code>)</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">hug</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../matplotlib/index.html"><code class="docutils literal notranslate"><span class="pre">matplotlib</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../networkx/index.html"><code class="docutils literal notranslate"><span class="pre">networkx</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pycrypto/index.html"><code class="docutils literal notranslate"><span class="pre">pycrypto</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pygame/index.html"><code class="docutils literal notranslate"><span class="pre">pygame</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sphinx/index.html"><code class="docutils literal notranslate"><span class="pre">sphinx</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../watchdog/index.html"><code class="docutils literal notranslate"><span class="pre">watchdog</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../pbr/index.html"><cite>⚙️Automate your publishing to PyPI with PBR and Travis</cite></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../misc/about.html">À propos de ce livre</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../misc/contrib.html">Contribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../licence.html">Creative Commons Attribution-ShareAlike 4.0 International</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="../pillow/index.html" title="Chapitre précédent">Python Imaging Library (<code class="docutils literal notranslate"><span class="pre">PIL</span></code>)</a></li>
+      <li>Next: <a href="../matplotlib/index.html" title="Chapitre suivant"><code class="docutils literal notranslate"><span class="pre">matplotlib</span></code></a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Recherche rapide</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016-2017, HE-Arc.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/hug/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

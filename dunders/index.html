@@ -1,0 +1,317 @@
+
+<!DOCTYPE html>
+
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dunders &#8212; Documentation Bibliothèques Python 1.0.0</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/translations.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Recherche" href="../search.html" />
+    <link rel="next" title="enum" href="../enum/index.html" />
+    <link rel="prev" title="datetime" href="../datetime/index.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="dunders">
+<span id="dunders-tutorial"></span><h1>Dunders<a class="headerlink" href="#dunders" title="Lien permanent vers ce titre">¶</a></h1>
+<p>Par Marc Friedli <a class="footnote-reference brackets" href="#mf" id="id1">1</a></p>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Le mot dunder est un raccourci de <em>Double UNDERscore</em> et représente toutes les méthodes Python qui commencent et finissent par un double underscore (par ex. <code class="docutils literal notranslate"><span class="pre">__init__()</span></code>).</p>
+<p>Les dunders sont des méthodes très puissantes et régulièrement utilisées en python. Ce sont des méthodes universelles que toute classe possède (un peu à l’image de la class Object dans Java).</p>
+<p>Cependant, dans python, les dunders sont rarement appelés directement.</p>
+<p>Par exemple :</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">toto</span> <span class="o">=</span> <span class="n">new</span> <span class="n">MyClass</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>fera appel aux méthodes <code class="docutils literal notranslate"><span class="pre">__new__()</span></code> et <code class="docutils literal notranslate"><span class="pre">__init__()</span></code> même si ces méthodes n’ont pas été surchargées.</p>
+<p>Les dunders ont des méthodes raccourci qui vont directement les appeler (autre raison pour laquelle on utilise régulièrement les dunders sans s’en rendre compte) :</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="mi">4</span> <span class="o">+</span> <span class="mi">5</span>
+<span class="go">9</span>
+</pre></div>
+</div>
+<p>fera appel au dunder <code class="docutils literal notranslate"><span class="pre">__add__()</span></code></p>
+<p>Ou bien :</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="nb">str</span><span class="p">(</span><span class="s2">&quot;I&#39;m a text&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>fera appel au dunder <code class="docutils literal notranslate"><span class="pre">__str__()</span></code> de <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(disponible dans Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>.</p>
+<p>La grande puissance des dunders est leur universalité. En effet, Python a été programmé de manière à ce qu’une opération soit toujours relié au même <em>dunder</em>.</p>
+<p>Par exemple, dans beaucoup de langages, si on veut connaitre la taille d’un truc, il faut d’abord savoir de quoi on parle (un tableau, une liste, un string etc.) avant de faire appel à la méthode appropriée. Dans python, on utilise toujours le dunder __len__() :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;Travis est très très compliqué.&quot;&quot;&quot;</span>
+
+
+<span class="k">class</span> <span class="nc">SomeClass</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Class d&#39;exemple.&quot;&quot;&quot;</span>
+
+    <span class="n">grammar</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="mi">1</span><span class="p">:</span> <span class="s2">&quot;Some string&quot;</span><span class="p">,</span>
+        <span class="mi">2</span><span class="p">:</span> <span class="s2">&quot;Another string&quot;</span><span class="p">,</span>
+        <span class="mi">3</span><span class="p">:</span> <span class="mi">42</span><span class="p">,</span>
+        <span class="mi">4</span><span class="p">:</span> <span class="kc">True</span>
+    <span class="p">}</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialisateur.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+
+
+<span class="n">sc</span> <span class="o">=</span> <span class="n">SomeClass</span><span class="p">(</span><span class="s2">&quot;Totoro&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sc</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>  <span class="c1"># affiche la taille du string (6)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sc</span><span class="o">.</span><span class="n">grammar</span><span class="p">))</span>  <span class="c1"># affiche le nombre d&#39;éléments (4)</span>
+</pre></div>
+</div>
+<p>Voir: <a class="reference external" href="http://lucumr.pocoo.org/2011/7/9/python-and-pola/">Python and the Principle of Least Astonishment</a></p>
+<p>Une autre grande utilisation des dunders consiste à les surcharger de manière à les personalisé.</p>
+<p>De plus, par convention, on déclare une méthode privée comme étant un dunder :</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">__myPrivateMethod__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">none</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="exemples">
+<h2>Exemples<a class="headerlink" href="#exemples" title="Lien permanent vers ce titre">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;Travis est trop compliqué.&quot;&quot;&quot;</span>
+
+
+<span class="k">class</span> <span class="nc">Main</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Class simulant une main aux cartes.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialisateur.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cartes</span> <span class="o">=</span> <span class="n">args</span>
+
+    <span class="k">def</span> <span class="nf">ajouter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">carte</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Méthode pour add une carte.&quot;&quot;&quot;</span>
+        <span class="n">obj2</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cartes</span><span class="p">)</span>  <span class="c1"># Converti en liste</span>
+        <span class="n">obj2</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">carte</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cartes</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">obj2</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Redéfinition de str.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="sa">u</span><span class="s1">&#39;; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cartes</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf8&#39;</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Redéfinition de len.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cartes</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Est appelé quand on fait objet[index] ou objet[key].&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">cartes</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Est appelé quand on fait un iter(objet).&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cartes</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__reversed__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Est appelé quand on fait reversed(objt).&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">reversed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cartes</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Est appelé quand &quot;in objet&quot;.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">cartes</span>
+
+
+<span class="n">main</span> <span class="o">=</span> <span class="n">Main</span><span class="p">(</span><span class="s1">&#39;1Coeur&#39;</span><span class="p">,</span> <span class="s1">&#39;7Pique&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">main</span><span class="p">))</span>
+
+<span class="n">main</span><span class="o">.</span><span class="n">ajouter</span><span class="p">(</span><span class="s1">&#39;AsCoeur&#39;</span><span class="p">)</span>
+
+<span class="c1"># parc qu&#39;on a défini __iter__!</span>
+<span class="k">for</span> <span class="n">carte</span> <span class="ow">in</span> <span class="n">main</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">carte</span><span class="p">)</span>
+
+<span class="c1"># 1Coeur</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">main</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="c1"># False</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;3Coeur&#39;</span> <span class="ow">in</span> <span class="n">main</span><span class="p">)</span>
+
+<span class="c1"># 3</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">main</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="section" id="difference-entre-str-et-repr">
+<h3>Différence entre <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(disponible dans Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> et <a class="reference external" href="https://docs.python.org/3/library/functions.html#repr" title="(disponible dans Python v3.9)"><code class="xref py py-func docutils literal notranslate"><span class="pre">repr()</span></code></a><a class="headerlink" href="#difference-entre-str-et-repr" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Les deux servent à afficher l’objets mais pas de la même manière :</p>
+<dl class="field-list simple">
+<dt class="field-odd">str</dt>
+<dd class="field-odd"><p>se veut d’être lisible, il donne les informations qu’un utilisateur veut savoir et non le programme. Elle est ambigu et permet donc facilement le cast.</p>
+</dd>
+<dt class="field-even">repr</dt>
+<dd class="field-even"><p>se veut au contraire non ambigu. Il doit représenter l’objet tel qu’il est réellement.</p>
+</dd>
+</dl>
+<p>De base, quand on chercher à afficher un objet, à moins que la méthode <code class="docutils literal notranslate"><span class="pre">__str__()</span></code> soit redéfinie, c’est la méthode repr qui sera appelée.</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">==</span><span class="nb">str</span><span class="p">(</span><span class="s2">&quot;3&quot;</span><span class="p">))</span> <span class="c1"># return True car str est ambigu</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">==</span><span class="nb">repr</span><span class="p">(</span><span class="s2">&quot;3&quot;</span><span class="p">))</span> <span class="c1"># return False car non-ambigu (Int != String)</span>
+</pre></div>
+</div>
+<p>Idéalement, il faudrait toujours redéfinir la méthode <code class="docutils literal notranslate"><span class="pre">__repr__()</span></code> et redéfinir <code class="docutils literal notranslate"><span class="pre">__str__()</span></code> uniquement si on a besoin de l’ambiguïté.</p>
+</div>
+</div>
+<div class="section" id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Il existe beaucoup de dunders. Il faut puiser dans la doc afin de connaitre ceux dont on a l’usage et savoir quand ils sont utilisés.
+Ce sont de puissants outils de Python qui permettent de facilement spécialiser le comportement d’un objet.</p>
+</div>
+<div class="section" id="bibliographie">
+<h2>Bibliographie<a class="headerlink" href="#bibliographie" title="Lien permanent vers ce titre">¶</a></h2>
+<ul class="simple">
+<li><p>The Python Data model, extrait de Fluent Python</p></li>
+<li><p><a class="reference external" href="http://sametmax.com/le-guide-ultime-et-definitif-sur-la-programmation-orientee-objet-en-python-a-lusage-des-debutants-qui-sont-rassures-par-les-textes-detailles-qui-prennent-le-temps-de-tout-expliquer-partie-6/">http://sametmax.com/le-guide-ultime-et-definitif-sur-la-programmation-orientee-objet-en-python-a-lusage-des-debutants-qui-sont-rassures-par-les-textes-detailles-qui-prennent-le-temps-de-tout-expliquer-partie-6/</a></p></li>
+<li><p><a class="reference external" href="http://www.diveintopython3.net/special-method-names.html">http://www.diveintopython3.net/special-method-names.html</a></p></li>
+</ul>
+<dl class="footnote brackets">
+<dt class="label" id="mf"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>&lt;<a class="reference external" href="mailto:marc&#46;friedli&#37;&#52;&#48;he-arc&#46;ch">marc<span>&#46;</span>friedli<span>&#64;</span>he-arc<span>&#46;</span>ch</a>&gt;</p>
+</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Bibliothèques Python</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../builtins/index.html">Builtins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../collections/index.html"><code class="docutils literal notranslate"><span class="pre">collections</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../datetime/index.html"><code class="docutils literal notranslate"><span class="pre">datetime</span></code></a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Dunders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../enum/index.html"><code class="docutils literal notranslate"><span class="pre">enum</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fstrings/index.html">f-strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../itertools/index.html"><code class="docutils literal notranslate"><span class="pre">itertools</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../io/index.html"><code class="docutils literal notranslate"><span class="pre">io</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../math/index.html"><code class="docutils literal notranslate"><span class="pre">math</span></code> / <code class="docutils literal notranslate"><span class="pre">fractions</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../random/index.html"><code class="docutils literal notranslate"><span class="pre">random</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../time/index.html"><code class="docutils literal notranslate"><span class="pre">time</span></code> / <code class="docutils literal notranslate"><span class="pre">datetime</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../statistics/index.html"><code class="docutils literal notranslate"><span class="pre">statistics</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../super/index.html"><code class="docutils literal notranslate"><span class="pre">super()</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../abc/index.html">Abstract Base Class (<code class="docutils literal notranslate"><span class="pre">abc</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../binary/index.html"><code class="docutils literal notranslate"><span class="pre">bytes</span></code> / <code class="docutils literal notranslate"><span class="pre">bytearray</span></code> / <code class="docutils literal notranslate"><span class="pre">memoryview</span></code>, <code class="docutils literal notranslate"><span class="pre">struct</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bisect/index.html"><code class="docutils literal notranslate"><span class="pre">bisect</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email/index.html">E-mail (<code class="docutils literal notranslate"><span class="pre">smtplib</span></code> / <code class="docutils literal notranslate"><span class="pre">imaplib</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hashlib/index.html"><code class="docutils literal notranslate"><span class="pre">hashlib</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../multiprocessing/index.html"><code class="docutils literal notranslate"><span class="pre">multiprocessing</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../re/index.html">Expressions régulières (<code class="docutils literal notranslate"><span class="pre">re</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../secrets/index.html"><code class="docutils literal notranslate"><span class="pre">secrets</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../weakref/index.html"><code class="docutils literal notranslate"><span class="pre">weakref</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../colorama/index.html"><code class="docutils literal notranslate"><span class="pre">colorama</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../invoke/index.html"><code class="docutils literal notranslate"><span class="pre">invoke</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../unittest/index.html"><code class="docutils literal notranslate"><span class="pre">unittest</span></code> / <code class="docutils literal notranslate"><span class="pre">doctest</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pytest/index.html"><code class="docutils literal notranslate"><span class="pre">pytest</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../csv/index.html"><code class="docutils literal notranslate"><span class="pre">csv</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../json/index.html"><code class="docutils literal notranslate"><span class="pre">json</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pillow/index.html">Python Imaging Library (<code class="docutils literal notranslate"><span class="pre">PIL</span></code>)</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../hug/index.html"><code class="docutils literal notranslate"><span class="pre">hug</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../matplotlib/index.html"><code class="docutils literal notranslate"><span class="pre">matplotlib</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../networkx/index.html"><code class="docutils literal notranslate"><span class="pre">networkx</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pycrypto/index.html"><code class="docutils literal notranslate"><span class="pre">pycrypto</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pygame/index.html"><code class="docutils literal notranslate"><span class="pre">pygame</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sphinx/index.html"><code class="docutils literal notranslate"><span class="pre">sphinx</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../watchdog/index.html"><code class="docutils literal notranslate"><span class="pre">watchdog</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../pbr/index.html"><cite>⚙️Automate your publishing to PyPI with PBR and Travis</cite></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../misc/about.html">À propos de ce livre</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../misc/contrib.html">Contribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../licence.html">Creative Commons Attribution-ShareAlike 4.0 International</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="../datetime/index.html" title="Chapitre précédent"><code class="docutils literal notranslate"><span class="pre">datetime</span></code></a></li>
+      <li>Next: <a href="../enum/index.html" title="Chapitre suivant"><code class="docutils literal notranslate"><span class="pre">enum</span></code></a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Recherche rapide</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016-2017, HE-Arc.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/dunders/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

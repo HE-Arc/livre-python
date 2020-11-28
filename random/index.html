@@ -1,0 +1,435 @@
+
+<!DOCTYPE html>
+
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>random &#8212; Documentation Bibliothèques Python 1.0.0</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/translations.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Recherche" href="../search.html" />
+    <link rel="next" title="time / datetime" href="../time/index.html" />
+    <link rel="prev" title="math / fractions" href="../math/index.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="random">
+<span id="random-tutorial"></span><h1><code class="docutils literal notranslate"><span class="pre">random</span></code><a class="headerlink" href="#random" title="Lien permanent vers ce titre">¶</a></h1>
+<a class="reference external image-reference" href="http://silabs.se/media/1060/dice-2x.png"><img alt="Dice logo" class="align-right" src="../_images/dice.png" style="width: 189.0px; height: 189.0px;" /></a>
+<p>Par Christophe Hirschi <a class="footnote-reference brackets" href="#email" id="id1">1</a></p>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Lien permanent vers ce titre">¶</a></h2>
+<p><a class="reference external" href="https://docs.python.org/3/library/random.html#module-random" title="(disponible dans Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">random</span></code></a> est un module Python regroupant plusieurs fonctions
+permettant de travailler avec des valeurs aléatoires.</p>
+<p>La distribution des nombres aléatoires est réalisée par le générateur de nombres
+pseudo-aléatoires <a class="reference external" href="https://fr.wikipedia.org/wiki/Mersenne_Twister">Mersenne Twister</a>, l’un des générateurs les plus testés et
+utilisés dans le monde informatique.</p>
+</div>
+<div class="section" id="module-random">
+<h2>Module <code class="docutils literal notranslate"><span class="pre">random</span></code><a class="headerlink" href="#module-random" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Le module comprend plusieurs fonctions travaillant chacune avec un type défini
+de variables. Ces fonctions peuvent être séparées en trois groupes :</p>
+<ul class="simple">
+<li><p>Celles qui travaillent avec des nombres entiers</p></li>
+<li><p>Celles qui travaillent avec des nombres réels</p></li>
+<li><p>Celles qui travaillent avec des séquences (par exemple des listes).</p></li>
+</ul>
+<p>Les fonctions de nombres entiers telles que <a class="reference external" href="https://docs.python.org/3/library/random.html#random.randint" title="(disponible dans Python v3.9)"><code class="xref py py-func docutils literal notranslate"><span class="pre">random.randint()</span></code></a> et
+<a class="reference external" href="https://docs.python.org/3/library/random.html#random.randrange" title="(disponible dans Python v3.9)"><code class="xref py py-func docutils literal notranslate"><span class="pre">random.randrange()</span></code></a> permettent de sélectionner arbitrairement une valeur
+entière dans un intervalle donné.</p>
+<p>Les fonctions de nombres réels, en plus de sélectionner des valeurs dans un
+intervalle (avec les fonctions <a class="reference external" href="https://docs.python.org/3/library/random.html#random.random" title="(disponible dans Python v3.9)"><code class="xref py py-func docutils literal notranslate"><span class="pre">random.random()</span></code></a> et
+<a class="reference external" href="https://docs.python.org/3/library/random.html#random.uniform" title="(disponible dans Python v3.9)"><code class="xref py py-func docutils literal notranslate"><span class="pre">random.uniform()</span></code></a> par exemple), permettent aussi de réaliser des
+distributions gaussienne, exponentielles et logarithmiques.</p>
+<p>Les fonctions de séquences permettent de manipuler des éléments dans une liste
+donnée. Elles peuvent sélectionner un élément de la liste aléatoirement
+(<a class="reference external" href="https://docs.python.org/3/library/random.html#random.choice" title="(disponible dans Python v3.9)"><code class="xref py py-func docutils literal notranslate"><span class="pre">random.choice()</span></code></a>), altérer l’ordre des éléments dans la liste elle-même
+(<a class="reference external" href="https://docs.python.org/3/library/random.html#random.shuffle" title="(disponible dans Python v3.9)"><code class="xref py py-func docutils literal notranslate"><span class="pre">random.shuffle()</span></code></a>) ou encore retourner un nombre d’éléments aléatoires
+d’une liste (<a class="reference external" href="https://docs.python.org/3/library/random.html#random.sample" title="(disponible dans Python v3.9)"><code class="xref py py-func docutils literal notranslate"><span class="pre">random.sample()</span></code></a>).</p>
+<div class="admonition warning">
+<p class="admonition-title">Avertissement</p>
+<p>Il est préférable d’éviter l’utilisation de <a class="reference external" href="https://docs.python.org/3/library/random.html#module-random" title="(disponible dans Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">random</span></code></a> pour des
+applications liées à la cryptographie ou la sécurité en général (génération
+de mots de passe, authentification de compte, etc.) et de préférer le
+module <a class="reference internal" href="../secrets/index.html#secrets-tutorial"><span class="std std-ref">secrets</span></a> à la place.</p>
+</div>
+</div>
+<div class="section" id="seeding">
+<h2><em>Seeding</em><a class="headerlink" href="#seeding" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Comme spécifiés dans l’introduction, les nombres générés par <a class="reference external" href="https://docs.python.org/3/library/random.html#module-random" title="(disponible dans Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">random</span></code></a>
+sont de nature pseudo-aléatoire, c’est-à-dire qu’une <em>graine</em>, <em>seed</em> en
+anglais, génère la suite de nombres. Dans le cas de <a class="reference external" href="https://docs.python.org/3/library/random.html#module-random" title="(disponible dans Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">random</span></code></a>, la période
+des <em>graines</em> est suffisamment élevée pour éviter de tomber sur les mêmes
+numéros lors d’un usage commun. Cependant, il peut être utile dans certains cas
+de répéter la même suite aléatoire de nombres. Pour cela, il est possible
+d’indiquer à <a class="reference external" href="https://docs.python.org/3/library/random.html#module-random" title="(disponible dans Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">random</span></code></a> la graine que l’on souhaite utiliser avec la
+fonction <a class="reference external" href="https://docs.python.org/3/library/random.html#random.seed" title="(disponible dans Python v3.9)"><code class="xref py py-func docutils literal notranslate"><span class="pre">random.seed()</span></code></a> qui reçoit un nombre en argument, la <em>graine</em>.</p>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;Exemple de seeding avec random.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">random</span>
+
+<span class="c1"># Attribution d&#39;une graine.</span>
+<span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Retour de valeurs.</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">())</span>  <span class="c1"># N°1</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">())</span>  <span class="c1"># N°2</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">())</span>  <span class="c1"># N°3</span>
+</pre></div>
+</td></tr></table></div>
+<p>Résultats :</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> python random_seeding.py
+<span class="go">0.13436424411240122</span>
+<span class="go">0.8474337369372327</span>
+<span class="go">0.763774618976614</span>
+
+<span class="gp">$</span> python random_seeding.py
+<span class="go">0.13436424411240122</span>
+<span class="go">0.8474337369372327</span>
+<span class="go">0.763774618976614</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="exemples">
+<h2>Exemples<a class="headerlink" href="#exemples" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Avant toutes choses, il convient d’importer le module au projet :</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">random</span>
+</pre></div>
+</div>
+<div class="section" id="nombres-reels">
+<h3>Nombres réels<a class="headerlink" href="#nombres-reels" title="Lien permanent vers ce titre">¶</a></h3>
+<p><a class="reference external" href="https://docs.python.org/3/library/random.html#random.random" title="(disponible dans Python v3.9)"><code class="xref py py-func docutils literal notranslate"><span class="pre">random.random()</span></code></a> est la fonction la plus basique du module. Elle
+retourne un nombre à virgule dans l’intervalle compris entre 0 et 1 non-compris
+<span class="math notranslate nohighlight">\([0; 1[\)</span> :</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span>
+<span class="go">0.6982933392406706</span>
+</pre></div>
+</div>
+<p><a class="reference external" href="https://docs.python.org/3/library/random.html#random.uniform" title="(disponible dans Python v3.9)"><code class="xref py py-func docutils literal notranslate"><span class="pre">random.uniform()</span></code></a> permet de spécifier un intervalle. La fonction accepte
+deux nombres comme arguments, <em>a</em> et <em>b</em>. Elle retourne un nombre à virgule
+dans l’intervalle compris entre <em>a</em> et <em>b</em> non-compris <span class="math notranslate nohighlight">\([a; b[\)</span> :</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mf">4.5</span><span class="p">,</span> <span class="mf">7.5</span><span class="p">)</span>
+<span class="go">5.292029100094782</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="nombres-entiers">
+<h3>Nombres entiers<a class="headerlink" href="#nombres-entiers" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Si l’on souhaite travailler avec des nombres entiers, il faut utiliser les
+fonctions suivantes :</p>
+<p><a class="reference external" href="https://docs.python.org/3/library/random.html#random.randint" title="(disponible dans Python v3.9)"><code class="xref py py-func docutils literal notranslate"><span class="pre">random.randint()</span></code></a> accepte deux nombre comme arguments, <em>a</em> et <em>b</em>, et
+retourne un nombre entier de l’intervalle compris entre <em>a</em> et <em>b</em>
+<span class="math notranslate nohighlight">\([a;b]\)</span> :</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span>
+<span class="go">8</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>C’est la seule fonction qui prend en compte la valeur limite supérieur de
+l’intervalle dans son exécution.</p>
+</div>
+<p><a class="reference external" href="https://docs.python.org/3/library/random.html#random.randrange" title="(disponible dans Python v3.9)"><code class="xref py py-func docutils literal notranslate"><span class="pre">random.randrange()</span></code></a> accepte un nombre comme argument, <em>a</em>. Cette
+fonction retourne un nombre entier compris entre 0 et <em>a</em> non-compris
+<span class="math notranslate nohighlight">\([0; a[\)</span> :</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span>
+<span class="go">8</span>
+</pre></div>
+</div>
+<p>Elle accepte aussi deux nombres comme arguments, <em>a</em> et <em>b</em>.
+Il est ainsi possible de spécifier le commencement de l’intervalle, ce qui
+correspond à l’intervalle <span class="math notranslate nohighlight">\([a; b[\)</span> :</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span>
+<span class="go">10</span>
+</pre></div>
+</div>
+<p>Il est possible d’ajouter un nombre en troisième argument pour indiquer
+un pas dans l’intervalle :</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="c1"># Retourne un nombre paire.</span>
+<span class="go">6</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="sequences">
+<h3>Séquences<a class="headerlink" href="#sequences" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Il est possible d’utiliser certaines fonctions du module sur des listes
+d’éléments :</p>
+<p><a class="reference external" href="https://docs.python.org/3/library/random.html#random.choice" title="(disponible dans Python v3.9)"><code class="xref py py-func docutils literal notranslate"><span class="pre">random.choice()</span></code></a> accepte une séquence comme argument, <em>seq</em>. Elle
+retourne un élément de la séquence <em>seq</em> à condition que celle-ci ne soit pas
+vide :</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="s1">&#39;dede&#39;</span><span class="p">,</span> <span class="s1">&#39;toto&#39;</span><span class="p">,</span> <span class="s1">&#39;lulu&#39;</span><span class="p">])</span>
+<span class="go">&#39;lulu&#39;</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">18</span><span class="p">])</span>
+<span class="go">18</span>
+</pre></div>
+</div>
+<p><a class="reference external" href="https://docs.python.org/3/library/random.html#random.shuffle" title="(disponible dans Python v3.9)"><code class="xref py py-func docutils literal notranslate"><span class="pre">random.shuffle()</span></code></a> accepte une séquence en argument, <em>seq</em>, et permet de
+mélanger les éléments de la séquence <em>seq</em> :</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;dede&#39;</span><span class="p">,</span> <span class="s1">&#39;toto&#39;</span><span class="p">,</span> <span class="s1">&#39;lulu&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">names</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">names</span>
+<span class="go">[&#39;lulu&#39;, &#39;toto&#39;, &#39;dede&#39;]</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">18</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">numbers</span>
+<span class="go">[4, 11, 18, 7]</span>
+</pre></div>
+</div>
+<p><a class="reference external" href="https://docs.python.org/3/library/random.html#random.sample" title="(disponible dans Python v3.9)"><code class="xref py py-func docutils literal notranslate"><span class="pre">random.sample()</span></code></a> prend en compte une séquence <em>seq</em> comme premier
+argument et un nombre <em>k</em> en second argument. Elle permet de retourner une liste
+de <em>k</em> éléments de la séquence <em>seq</em> aléatoirement :</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">random</span><span class="o">.</span><span class="n">sample</span><span class="p">([</span><span class="s1">&#39;dede&#39;</span><span class="p">,</span> <span class="s1">&#39;toto&#39;</span><span class="p">,</span> <span class="s1">&#39;lulu&#39;</span><span class="p">,</span> <span class="s1">&#39;momo&#39;</span><span class="p">,</span> <span class="s1">&#39;bibi&#39;</span><span class="p">],</span> <span class="mi">3</span><span class="p">)</span>
+<span class="go">[&#39;momo&#39;, &#39;dede&#39;, &#39;bibi&#39;]</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">random</span><span class="o">.</span><span class="n">sample</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">60</span><span class="p">],</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">[10, 30, 60, 50]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="exemple-concret">
+<h3>Exemple concret<a class="headerlink" href="#exemple-concret" title="Lien permanent vers ce titre">¶</a></h3>
+<p>L’exemple ci-dessous utilise la fonction <a class="reference external" href="https://docs.python.org/3/library/random.html#random.shuffle" title="(disponible dans Python v3.9)"><code class="xref py py-func docutils literal notranslate"><span class="pre">random.shuffle()</span></code></a> pour mélanger
+un jeu de 52 cartes.</p>
+<p>Dans un premier temps, les cartes sont créées et ajoutées une à une dans une
+liste de cartes appelée <em>jeu</em>. Cette liste est ensuite mélangée, puis les 5
+premières cartes du jeu mélangé sont attribuées au joueur.</p>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;Exemple d&#39;attribution de cartes.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">random</span>
+
+<span class="c1"># Préparation des cartes.</span>
+<span class="n">valeurs</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;Deux&quot;</span><span class="p">,</span> <span class="s2">&quot;Trois&quot;</span><span class="p">,</span> <span class="s2">&quot;Quatre&quot;</span><span class="p">,</span> <span class="s2">&quot;Cinq&quot;</span><span class="p">,</span> <span class="s2">&quot;Six&quot;</span><span class="p">,</span> <span class="s2">&quot;Sept&quot;</span><span class="p">,</span> <span class="s2">&quot;Huit&quot;</span><span class="p">,</span> <span class="s2">&quot;Neuf&quot;</span><span class="p">,</span> <span class="s2">&quot;Dix&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Valet&quot;</span><span class="p">,</span> <span class="s2">&quot;Dame&quot;</span><span class="p">,</span> <span class="s2">&quot;Roi&quot;</span><span class="p">,</span> <span class="s2">&quot;As&quot;</span>
+<span class="p">]</span>
+<span class="n">enseignes</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Cœur&quot;</span><span class="p">,</span> <span class="s2">&quot;Pique&quot;</span><span class="p">,</span> <span class="s2">&quot;Carreau&quot;</span><span class="p">,</span> <span class="s2">&quot;Trèfle&quot;</span><span class="p">]</span>
+
+<span class="c1"># Préparation du jeu de cartes (52 cartes).</span>
+<span class="n">jeu_de_cartes</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2"> de </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">valeurs</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">enseignes</span><span class="p">]</span>
+
+<span class="c1"># Mélange du jeu de cartes.</span>
+<span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">jeu_de_cartes</span><span class="p">)</span>
+
+<span class="c1"># Création de la main du joueur (5 cartes).</span>
+<span class="n">main</span> <span class="o">=</span> <span class="n">jeu_de_cartes</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>
+
+<span class="c1"># Affichage de la main du joueur.</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Main du joueur :&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">carte</span> <span class="ow">in</span> <span class="n">main</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;- &quot;</span> <span class="o">+</span> <span class="n">carte</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<p>Résultats :</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> python cards_shuffling.py
+<span class="go">Main du joueur :</span>
+<span class="go">- Valet de Pique</span>
+<span class="go">- Dix de Trèfle</span>
+<span class="go">- Dix de Carreau</span>
+<span class="go">- Roi de Carreau</span>
+<span class="go">- Trois de Coeur</span>
+
+<span class="gp">$</span> python cards_shuffling.py
+<span class="go">Main du joueur :</span>
+<span class="go">- Dame de Coeur</span>
+<span class="go">- Six de Coeur</span>
+<span class="go">- As de Carreau</span>
+<span class="go">- Deux de Trèfle</span>
+<span class="go">- Sept de Carreau</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Lien permanent vers ce titre">¶</a></h2>
+<p><a class="reference external" href="https://docs.python.org/3/library/random.html#module-random" title="(disponible dans Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">random</span></code></a> permet bien plus d’utilisations que la simple attribution d’une
+valeur dans un intervalle donné. Toutes ses fonctionnalités n’ont pu être
+traitées ici (car certaines sont exotiques et/ou très spécifiques) et si vous
+êtes désireux d’en connaitre encore un peu plus sur son sujet, visitez la
+documentation officielle Python3 de <a class="reference external" href="https://docs.python.org/3/library/random.html#module-random" title="(disponible dans Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">random</span></code></a>.</p>
+<dl class="footnote brackets">
+<dt class="label" id="email"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>&lt;<a class="reference external" href="mailto:christophe&#46;hirschi&#37;&#52;&#48;he-arc&#46;ch">christophe<span>&#46;</span>hirschi<span>&#64;</span>he-arc<span>&#46;</span>ch</a>&gt;</p>
+</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Bibliothèques Python</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../builtins/index.html">Builtins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../collections/index.html"><code class="docutils literal notranslate"><span class="pre">collections</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../datetime/index.html"><code class="docutils literal notranslate"><span class="pre">datetime</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dunders/index.html">Dunders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../enum/index.html"><code class="docutils literal notranslate"><span class="pre">enum</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fstrings/index.html">f-strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../itertools/index.html"><code class="docutils literal notranslate"><span class="pre">itertools</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../io/index.html"><code class="docutils literal notranslate"><span class="pre">io</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../math/index.html"><code class="docutils literal notranslate"><span class="pre">math</span></code> / <code class="docutils literal notranslate"><span class="pre">fractions</span></code></a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">random</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../time/index.html"><code class="docutils literal notranslate"><span class="pre">time</span></code> / <code class="docutils literal notranslate"><span class="pre">datetime</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../statistics/index.html"><code class="docutils literal notranslate"><span class="pre">statistics</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../super/index.html"><code class="docutils literal notranslate"><span class="pre">super()</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../abc/index.html">Abstract Base Class (<code class="docutils literal notranslate"><span class="pre">abc</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../binary/index.html"><code class="docutils literal notranslate"><span class="pre">bytes</span></code> / <code class="docutils literal notranslate"><span class="pre">bytearray</span></code> / <code class="docutils literal notranslate"><span class="pre">memoryview</span></code>, <code class="docutils literal notranslate"><span class="pre">struct</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bisect/index.html"><code class="docutils literal notranslate"><span class="pre">bisect</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email/index.html">E-mail (<code class="docutils literal notranslate"><span class="pre">smtplib</span></code> / <code class="docutils literal notranslate"><span class="pre">imaplib</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hashlib/index.html"><code class="docutils literal notranslate"><span class="pre">hashlib</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../multiprocessing/index.html"><code class="docutils literal notranslate"><span class="pre">multiprocessing</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../re/index.html">Expressions régulières (<code class="docutils literal notranslate"><span class="pre">re</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../secrets/index.html"><code class="docutils literal notranslate"><span class="pre">secrets</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../weakref/index.html"><code class="docutils literal notranslate"><span class="pre">weakref</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../colorama/index.html"><code class="docutils literal notranslate"><span class="pre">colorama</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../invoke/index.html"><code class="docutils literal notranslate"><span class="pre">invoke</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../unittest/index.html"><code class="docutils literal notranslate"><span class="pre">unittest</span></code> / <code class="docutils literal notranslate"><span class="pre">doctest</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pytest/index.html"><code class="docutils literal notranslate"><span class="pre">pytest</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../csv/index.html"><code class="docutils literal notranslate"><span class="pre">csv</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../json/index.html"><code class="docutils literal notranslate"><span class="pre">json</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pillow/index.html">Python Imaging Library (<code class="docutils literal notranslate"><span class="pre">PIL</span></code>)</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../hug/index.html"><code class="docutils literal notranslate"><span class="pre">hug</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../matplotlib/index.html"><code class="docutils literal notranslate"><span class="pre">matplotlib</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../networkx/index.html"><code class="docutils literal notranslate"><span class="pre">networkx</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pycrypto/index.html"><code class="docutils literal notranslate"><span class="pre">pycrypto</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pygame/index.html"><code class="docutils literal notranslate"><span class="pre">pygame</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sphinx/index.html"><code class="docutils literal notranslate"><span class="pre">sphinx</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../watchdog/index.html"><code class="docutils literal notranslate"><span class="pre">watchdog</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../pbr/index.html"><cite>⚙️Automate your publishing to PyPI with PBR and Travis</cite></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../misc/about.html">À propos de ce livre</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../misc/contrib.html">Contribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../licence.html">Creative Commons Attribution-ShareAlike 4.0 International</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="../math/index.html" title="Chapitre précédent"><code class="docutils literal notranslate"><span class="pre">math</span></code> / <code class="docutils literal notranslate"><span class="pre">fractions</span></code></a></li>
+      <li>Next: <a href="../time/index.html" title="Chapitre suivant"><code class="docutils literal notranslate"><span class="pre">time</span></code> / <code class="docutils literal notranslate"><span class="pre">datetime</span></code></a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Recherche rapide</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016-2017, HE-Arc.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/random/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,242 @@
+
+<!DOCTYPE html>
+
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>datetime &#8212; Documentation Bibliothèques Python 1.0.0</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/translations.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Recherche" href="../search.html" />
+    <link rel="next" title="Dunders" href="../dunders/index.html" />
+    <link rel="prev" title="collections" href="../collections/index.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="datetime">
+<span id="datetime-tutorial"></span><h1><code class="docutils literal notranslate"><span class="pre">datetime</span></code><a class="headerlink" href="#datetime" title="Lien permanent vers ce titre">¶</a></h1>
+<p>Par Mohamed Jmaa <a class="footnote-reference brackets" href="#mj" id="id1">1</a></p>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Le module <a class="reference external" href="https://docs.python.org/3/library/datetime.html#module-datetime" title="(disponible dans Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">datetime</span></code></a> propose plusieurs classes pour représenter des dates et heures. Vous n’allez rien découvrir d’absolument
+spectaculaire dans cette section mais nous nous avançons petit à petit vers une façon de gérer les dates et heures qui est
+davantage orientée objet.</p>
+<p>Encore et toujours, je ne prétends pas remplacer la documentation. Je me contente d’extraire de celle-ci les informations
+qui me semblent les plus importantes. Je vous encourage, là encore, à jeter un coup d’œil du côté de la documentation du module
+datetime.</p>
+</div>
+<div class="section" id="representer-une-date">
+<h2>Représenter une date<a class="headerlink" href="#representer-une-date" title="Lien permanent vers ce titre">¶</a></h2>
+<p>c’est bien d’avoir accès au temps actuel avec une précision d’une seconde sinon plus…
+mais parfois, cette précision est inutile. Dans certains cas, on a juste besoin d’une date, c’est-à-dire un jour, un mois et une année.
+Il est naturellement possible d’extraire cette information de notre timestamp. Le module <a class="reference external" href="https://docs.python.org/3/library/datetime.html#module-datetime" title="(disponible dans Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">datetime</span></code></a> propose une classe <a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.date" title="(disponible dans Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">date</span></code></a>,
+représentant une date, rien qu’une date.</p>
+<div class="section" id="l-objet-possede-trois-attributs">
+<h3>L’objet possède trois attributs :<a class="headerlink" href="#l-objet-possede-trois-attributs" title="Lien permanent vers ce titre">¶</a></h3>
+<ul class="simple">
+<li><p>year : l’année ;</p></li>
+<li><p>month : le mois ;</p></li>
+<li><p>day : le jour du mois.</p></li>
+</ul>
+<p>Il y a plusieurs façons de procéder. Le constructeur de cette classe prend trois arguments qui sont, dans l’ordre, l’année, le mois et le jour du mois.</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">datetime</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="p">(</span><span class="mi">2017</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">21</span><span class="p">)</span>
+<span class="go">2017-03-21</span>
+</pre></div>
+</div>
+<p>Il existe deux méthodes de classe qui peuvent etre intéresser :</p>
+<blockquote>
+<div><p><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.date.today" title="(disponible dans Python v3.9)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">datetime.date.today()</span></code></a> : renvoie la date d’aujourd’hui ;
+<a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.date.fromtimestamp" title="(disponible dans Python v3.9)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">datetime.date.fromtimestamp()</span></code></a> : renvoie la date correspondant au timestamp passé en argument.</p>
+</div></blockquote>
+<p>Exemple    :</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">time</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">datetime</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="o">.</span><span class="n">today</span><span class="p">()</span>
+<span class="go">datetime.date(2017, 3, 23)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="o">.</span><span class="n">fromtimestamp</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">())</span>
+<span class="go">datetime.date(2017, 3, 23)</span>
+</pre></div>
+</div>
+<p>Bien sûr, nous pouvons manipuler ces dates simplement et les comparer grâce aux opérateurs usuels.</p>
+</div>
+<div class="section" id="representer-une-heure">
+<h3>Représenter une heure<a class="headerlink" href="#representer-une-heure" title="Lien permanent vers ce titre">¶</a></h3>
+<p>C’est moins courant mais on peut également être amené à manipuler une heure, indépendemment de toute date. La classe <a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.time" title="(disponible dans Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.time</span></code></a> du module <a class="reference external" href="https://docs.python.org/3/library/datetime.html#module-datetime" title="(disponible dans Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">datetime</span></code></a> est là pour cela.</p>
+<p>On construit une heure avec non pas trois mais cinq paramètres, tous optionnels :</p>
+<p><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.time.hour" title="(disponible dans Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">datetime.time.hour</span></code></a> (0 par défaut) : les heures, valeur comprise entre 0 et 23 ;
+<a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.time.minute" title="(disponible dans Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">datetime.time.minute</span></code></a> (0 par défaut) : les minutes, valeur comprise entre 0 et 59 ;
+<a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.time.second" title="(disponible dans Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">datetime.time.second</span></code></a> (0 par défaut) : les secondes, valeur comprise entre 0 et 59 ;
+<a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.time.microsecond" title="(disponible dans Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">datetime.time.microsecond</span></code></a> (0 par défaut) : la précision de l’heure en micro-secondes, entre 0 et 1.000.000 ;
+<a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.time.tzinfo" title="(disponible dans Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">datetime.time.tzinfo</span></code></a> (None par défaut) : l’information de fuseau horaire (je ne détaillerai pas cette information ici).
+Cette classe est moins utilisée que <a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.date" title="(disponible dans Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">date</span></code></a> mais elle peut se révéler utile dans certains cas.</p>
+</div>
+<div class="section" id="representer-des-dates-et-heures">
+<h3>Représenter des dates et heures<a class="headerlink" href="#representer-des-dates-et-heures" title="Lien permanent vers ce titre">¶</a></h3>
+<p>On peut naturellement représenter une date et une heure dans le même objet, ce sera probablement la classe que nous utiliserons le plus souvent. Celle qui nous intéresse s’appelle <a class="reference external" href="https://docs.python.org/3/library/datetime.html#module-datetime" title="(disponible dans Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">datetime</span></code></a>, comme son module.</p>
+<p>Elle prend d’abord les paramètres de <a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.date" title="(disponible dans Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.date</span></code></a> (année, mois, jour) et ensuite les paramètres de <a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.time" title="(disponible dans Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.time</span></code></a> (heures, minutes, secondes, micro-secondes et fuseau horaire).</p>
+<p>les deux méthodes de classe que nous utiliserons le plus souvent :</p>
+<p><cite>datetime.date.now()</cite> : renvoie l’objet datetime avec la date et l’heure actuelles ;
+<cite>datetime.date.fromtimestamp()</cite> (timestamp) : renvoie la date et l’heure d’un timestamp précis.</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">datetime</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+<span class="go">datetime.datetime(2017, 3, 21, 5, 8, 22, 359000)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Il y a bien d’autres choses à voir dans ce module <a class="reference external" href="https://docs.python.org/3/library/datetime.html#module-datetime" title="(disponible dans Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">datetime</span></code></a> que je n’ai pas traitées dans ce document vous pouvez toujours vous y référer au documentation officielle du module.</p>
+<dl class="footnote brackets">
+<dt class="label" id="mj"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>&lt;<a class="reference external" href="mailto:mohamed&#46;jmaa&#37;&#52;&#48;he-arc&#46;ch">mohamed<span>&#46;</span>jmaa<span>&#64;</span>he-arc<span>&#46;</span>ch</a>&gt;</p>
+</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Bibliothèques Python</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../builtins/index.html">Builtins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../collections/index.html"><code class="docutils literal notranslate"><span class="pre">collections</span></code></a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">datetime</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dunders/index.html">Dunders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../enum/index.html"><code class="docutils literal notranslate"><span class="pre">enum</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fstrings/index.html">f-strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../itertools/index.html"><code class="docutils literal notranslate"><span class="pre">itertools</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../io/index.html"><code class="docutils literal notranslate"><span class="pre">io</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../math/index.html"><code class="docutils literal notranslate"><span class="pre">math</span></code> / <code class="docutils literal notranslate"><span class="pre">fractions</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../random/index.html"><code class="docutils literal notranslate"><span class="pre">random</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../time/index.html"><code class="docutils literal notranslate"><span class="pre">time</span></code> / <code class="docutils literal notranslate"><span class="pre">datetime</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../statistics/index.html"><code class="docutils literal notranslate"><span class="pre">statistics</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../super/index.html"><code class="docutils literal notranslate"><span class="pre">super()</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../abc/index.html">Abstract Base Class (<code class="docutils literal notranslate"><span class="pre">abc</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../binary/index.html"><code class="docutils literal notranslate"><span class="pre">bytes</span></code> / <code class="docutils literal notranslate"><span class="pre">bytearray</span></code> / <code class="docutils literal notranslate"><span class="pre">memoryview</span></code>, <code class="docutils literal notranslate"><span class="pre">struct</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bisect/index.html"><code class="docutils literal notranslate"><span class="pre">bisect</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email/index.html">E-mail (<code class="docutils literal notranslate"><span class="pre">smtplib</span></code> / <code class="docutils literal notranslate"><span class="pre">imaplib</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hashlib/index.html"><code class="docutils literal notranslate"><span class="pre">hashlib</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../multiprocessing/index.html"><code class="docutils literal notranslate"><span class="pre">multiprocessing</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../re/index.html">Expressions régulières (<code class="docutils literal notranslate"><span class="pre">re</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../secrets/index.html"><code class="docutils literal notranslate"><span class="pre">secrets</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../weakref/index.html"><code class="docutils literal notranslate"><span class="pre">weakref</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../colorama/index.html"><code class="docutils literal notranslate"><span class="pre">colorama</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../invoke/index.html"><code class="docutils literal notranslate"><span class="pre">invoke</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../unittest/index.html"><code class="docutils literal notranslate"><span class="pre">unittest</span></code> / <code class="docutils literal notranslate"><span class="pre">doctest</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pytest/index.html"><code class="docutils literal notranslate"><span class="pre">pytest</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../csv/index.html"><code class="docutils literal notranslate"><span class="pre">csv</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../json/index.html"><code class="docutils literal notranslate"><span class="pre">json</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pillow/index.html">Python Imaging Library (<code class="docutils literal notranslate"><span class="pre">PIL</span></code>)</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../hug/index.html"><code class="docutils literal notranslate"><span class="pre">hug</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../matplotlib/index.html"><code class="docutils literal notranslate"><span class="pre">matplotlib</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../networkx/index.html"><code class="docutils literal notranslate"><span class="pre">networkx</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pycrypto/index.html"><code class="docutils literal notranslate"><span class="pre">pycrypto</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pygame/index.html"><code class="docutils literal notranslate"><span class="pre">pygame</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sphinx/index.html"><code class="docutils literal notranslate"><span class="pre">sphinx</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../watchdog/index.html"><code class="docutils literal notranslate"><span class="pre">watchdog</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../pbr/index.html"><cite>⚙️Automate your publishing to PyPI with PBR and Travis</cite></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../misc/about.html">À propos de ce livre</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../misc/contrib.html">Contribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../licence.html">Creative Commons Attribution-ShareAlike 4.0 International</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="../collections/index.html" title="Chapitre précédent"><code class="docutils literal notranslate"><span class="pre">collections</span></code></a></li>
+      <li>Next: <a href="../dunders/index.html" title="Chapitre suivant">Dunders</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Recherche rapide</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016-2017, HE-Arc.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/datetime/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

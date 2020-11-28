@@ -1,0 +1,333 @@
+
+<!DOCTYPE html>
+
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Abstract Base Class (abc) &#8212; Documentation Bibliothèques Python 1.0.0</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/translations.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Recherche" href="../search.html" />
+    <link rel="next" title="bytes / bytearray / memoryview, struct" href="../binary/index.html" />
+    <link rel="prev" title="super()" href="../super/index.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="abstract-base-class-abc">
+<span id="abc-tutorial"></span><h1>Abstract Base Class (<code class="docutils literal notranslate"><span class="pre">abc</span></code>)<a class="headerlink" href="#abstract-base-class-abc" title="Lien permanent vers ce titre">¶</a></h1>
+<p>Par Sylvain Renaud <a class="footnote-reference brackets" href="#sr" id="id1">1</a></p>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Les classes abstraites sont comme des classes standard, avec la particulatrité qu’on ne pourra pas créer d’objets de ces classes.
+Les classes abstraites doivent être spécifiées. Les classes qui spécifient les classes abstraites pourront elles être instanciées.
+Lors de la spécialisation, la classe dérivée aura toutes les méthodes de la classe mère (la classe abstraite).
+Ce mécanisme est utile pour généraliser un objet.</p>
+<p>Exemple de classe abstraite : Shape (forme en français)</p>
+<img alt="Abstract class Shape" class="align-center" src="../_images/img_shape.jpg" />
+<p>La classe abstraite <code class="docutils literal notranslate"><span class="pre">Shape</span></code> possède la méthode <code class="docutils literal notranslate"><span class="pre">calculateArea()</span></code>.
+Nous savons qu’une forme géométrique possède une aire.
+Mais nous ne savons pas comment la calculer sans connaître la forme.
+C’est pourquoi il est nécessaire de créer des classes qui dérivent de Shape.
+Par exemple un rectange possède une aire calculable par <code class="docutils literal notranslate"><span class="pre">hauteur*largeur</span></code>.
+Idem pour d’autres formes géométriques qui ont leurs propre manière de calculer leurs aires.</p>
+<p>Nous pouvons par exemple créer des listes de <code class="docutils literal notranslate"><span class="pre">Shape</span></code>.
+Dans ces listes il y aura des Shape <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code>, <code class="docutils literal notranslate"><span class="pre">Triangle</span></code>, etc.
+Si nous demandons à chaque élément de la liste de calculer son aire, il l’a calculera grâce à sa propre formule.
+De plus, nous sommes certains que chaque élément de la liste possède la méthode <code class="docutils literal notranslate"><span class="pre">calculateArea()</span></code>
+puisqu’il implémente <code class="docutils literal notranslate"><span class="pre">Shape</span></code>.</p>
+</div>
+<div class="section" id="exemples">
+<h2>Exemples<a class="headerlink" href="#exemples" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Nous voulons donc pouvoir faire cela.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">shape</span> <span class="ow">in</span> <span class="n">shapes</span><span class="p">:</span>
+   <span class="nb">print</span><span class="p">(</span><span class="n">shape</span><span class="o">.</span><span class="n">calculateArea</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>Pour cela, il faut une classe abstraite Shape</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Shape</span><span class="p">(</span><span class="n">metaclass</span><span class="o">=</span><span class="n">abc</span><span class="o">.</span><span class="n">ABCMeta</span><span class="p">):</span>
+   <span class="sd">&quot;&quot;&quot;Shape est une classe abstraite.&quot;&quot;&quot;</span>
+
+   <span class="c1"># Méthode abstraite car les formes ont différentes manière de calculer leur aire.</span>
+   <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
+   <span class="k">def</span> <span class="nf">calculateArea</span><span class="p">():</span>
+      <span class="sd">&quot;&quot;&quot;Calcul l&#39;aire. Méthode abstraite.&quot;&quot;&quot;</span>
+</pre></div>
+</div>
+<p>Ensuite, on créé une classe <code class="docutils literal notranslate"><span class="pre">Rectange</span></code> qui implémente (hérite de) <code class="docutils literal notranslate"><span class="pre">Shape</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Rectangle</span><span class="p">(</span><span class="n">Shape</span><span class="p">):</span>
+   <span class="sd">&quot;&quot;&quot;Rectangle hérite de Shape.&quot;&quot;&quot;</span>
+
+   <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hauteur</span><span class="p">,</span> <span class="n">largeur</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialisation des attributs.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hauteur</span> <span class="o">=</span> <span class="n">hauteur</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">largeur</span> <span class="o">=</span> <span class="n">largeur</span>
+
+   <span class="k">def</span> <span class="nf">calculateArea</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Calcul l&#39;aire d&#39;un rectangle.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">hauteur</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">largeur</span>
+</pre></div>
+</div>
+<p>Ici on impémente la méthode <code class="docutils literal notranslate"><span class="pre">calculateArea()</span></code> avec la méthode de calcul <code class="docutils literal notranslate"><span class="pre">largeur</span> <span class="pre">*</span> <span class="pre">hauteur</span></code>.
+Si on oublie d’implémenter les méthodes abstraites dans une classe sensée implémenter une classe abstraite,
+une erreur se produit : <code class="docutils literal notranslate"><span class="pre">TypeError:</span> <span class="pre">Can't</span> <span class="pre">instantiate</span> <span class="pre">abstract</span> <span class="pre">class</span> <span class="pre">Rectangle</span> <span class="pre">with</span> <span class="pre">abstract</span> <span class="pre">methods</span> <span class="pre">calculateArea</span></code></p>
+<p>En revanche on peut tout à fait, dans la classe abstraite implémenter complètement une méthode.
+Les enfants hériteront alors de cette méthode sans devoir la redéfinir.
+Il suffit de ne pas la marquer comme <code class="docutils literal notranslate"><span class="pre">&#64;abstractmethod</span></code>.</p>
+<p>Ensuite faisons une autre classe, <code class="docutils literal notranslate"><span class="pre">Triangle</span></code>, qui implémente <code class="docutils literal notranslate"><span class="pre">Shape</span></code>. Elle aura le même prototype que
+<code class="docutils literal notranslate"><span class="pre">Rectangle</span></code> mais la méthode <code class="docutils literal notranslate"><span class="pre">calculateArea()</span></code> calculera l’aire différement.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Triangle</span><span class="p">(</span><span class="n">Shape</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Triangle hérite de Shape.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hauteur</span><span class="p">,</span> <span class="n">base</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialisation des attributs.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hauteur</span> <span class="o">=</span> <span class="n">hauteur</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">base</span> <span class="o">=</span> <span class="n">base</span>
+
+    <span class="k">def</span> <span class="nf">calculateArea</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Calcul l&#39;aire d&#39;un triangle.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">hauteur</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">base</span> <span class="o">/</span> <span class="mi">2</span>
+</pre></div>
+</div>
+<p>Nous pouvons ensuite créer une liste de Rectangle et de Triangle puis calculer l’aire de chacun d’entre
+eux en une instruction, comme présenté avant.</p>
+</div>
+<div class="section" id="creation-d-une-structure-de-donnees">
+<h2>Création d’une structure de données<a class="headerlink" href="#creation-d-une-structure-de-donnees" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Les classes abstraites peuvent également être utilisées pour créer sa propre structure de données.
+En implémentant par exemple <code class="docutils literal notranslate"><span class="pre">collections.abc.Sequence</span></code> (une classe abstraite built-in de Python),
+nous devrons redéfinir quelques méthodes qui permettront d’utiliser notre classe comme une liste.
+Nous pouvons par des assertions vérifier les éléments de cette liste pour qu’ils soient tous du même type.</p>
+<p>Prenons comme exemple une classe <code class="docutils literal notranslate"><span class="pre">Garage</span></code> qui contient une liste de <code class="docutils literal notranslate"><span class="pre">Voiture</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;Classe garage.&quot;&quot;&quot;</span>
+
+
+<span class="kn">from</span> <span class="nn">collections.abc</span> <span class="kn">import</span> <span class="n">Sequence</span>
+
+<span class="kn">from</span> <span class="nn">voiture</span> <span class="kn">import</span> <span class="n">Voiture</span>
+
+
+<span class="k">class</span> <span class="nc">Garage</span><span class="p">(</span><span class="n">Sequence</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Classe iterable.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">voitures</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Constructeur.&quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">voitures</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">Voiture</span><span class="p">):</span>
+                <span class="k">pass</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">v</span><span class="si">!r}</span><span class="s2"> n&#39;est pas une voiture.&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">voitures</span> <span class="o">=</span> <span class="n">voitures</span>
+
+    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Trouve la voiture à l&#39;index &#39;index&#39;.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">voitures</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Retourne le nombre de voitures.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">voitures</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">afficher</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Affiche toutes les voitures du garage.&quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">voitures</span><span class="p">:</span>
+            <span class="n">v</span><span class="o">.</span><span class="n">afficher</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Lors de la création d’un garage, on vérifie que les éléments de la liste soient de type <code class="docutils literal notranslate"><span class="pre">Voiture</span></code>.
+Si ce n’est pas le cas, on lève une erreur.
+Par exemple cette ligne là lève l’erreur:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Création des voitures.</span>
+<span class="n">v1</span> <span class="o">=</span> <span class="n">Voiture</span><span class="p">(</span><span class="s1">&#39;BMW&#39;</span><span class="p">,</span> <span class="s1">&#39;Noir&#39;</span><span class="p">)</span>
+<span class="n">v2</span> <span class="o">=</span> <span class="n">Voiture</span><span class="p">(</span><span class="s1">&#39;Subaru&#39;</span><span class="p">,</span> <span class="s1">&#39;Bleu&#39;</span><span class="p">)</span>
+<span class="n">v3</span> <span class="o">=</span> <span class="n">Voiture</span><span class="p">(</span><span class="s1">&#39;Dacia&#39;</span><span class="p">,</span> <span class="s1">&#39;Rouge&#39;</span><span class="p">)</span>
+
+<span class="c1"># On place les voitures dans un garage ainsi qu&#39;un nombre.</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">Garage</span><span class="p">(</span><span class="n">v1</span><span class="p">,</span> <span class="n">v2</span><span class="p">,</span> <span class="n">v3</span><span class="p">,</span> <span class="mi">42</span><span class="p">)</span>
+<span class="c1"># L&#39;erreur &#39;La liste ne contient pas que des Voiture.&#39; sera levée.</span>
+</pre></div>
+</div>
+<p>De même que l’exemple <code class="docutils literal notranslate"><span class="pre">Shape</span></code>, on aimerait afficher toutes les voitures d’un garage. Mais en appelant simplement
+une méthode du garage:</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Création des voitures.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v1</span> <span class="o">=</span> <span class="n">Voiture</span><span class="p">(</span><span class="s1">&#39;BMW&#39;</span><span class="p">,</span> <span class="s1">&#39;Noir&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v2</span> <span class="o">=</span> <span class="n">Voiture</span><span class="p">(</span><span class="s1">&#39;Subaru&#39;</span><span class="p">,</span> <span class="s1">&#39;Bleu&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v3</span> <span class="o">=</span> <span class="n">Voiture</span><span class="p">(</span><span class="s1">&#39;Dacia&#39;</span><span class="p">,</span> <span class="s1">&#39;Rouge&#39;</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># On place les voitures dans un garage.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">Garage</span><span class="p">(</span><span class="n">v1</span><span class="p">,</span> <span class="n">v2</span><span class="p">,</span> <span class="n">v3</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># On affiche le garage (toutes les voitures qu&#39;il contient)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">afficher</span><span class="p">()</span>
+<span class="go">BMW, Noir</span>
+<span class="go">Subaru, Bleu</span>
+<span class="go">Dacia, Rouge</span>
+</pre></div>
+</div>
+<p>La classe <code class="docutils literal notranslate"><span class="pre">Garage</span></code> implémente la classe abstraite <code class="docutils literal notranslate"><span class="pre">collections.abc.Sequence</span></code>. Tout comme les <code class="docutils literal notranslate"><span class="pre">list</span></code>.
+On peut donc accéder à une voiture du garage par son index, obtenir le nombre de voiture du garage et d’autres
+méthodes semblables à l’utilisation d’une <code class="docutils literal notranslate"><span class="pre">list</span></code>.</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">afficher</span><span class="p">()</span>
+<span class="go">BMW, Noir</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<span class="go">3</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Les classes abstraite en python permettent de créer nos propres structures de données se
+comportant comme les classes fournies (built-in).
+Grâce aux instructions <code class="docutils literal notranslate"><span class="pre">isinstance</span></code> et <code class="docutils literal notranslate"><span class="pre">issubclass</span></code> nous pouvons vérifier directement le type d’une variable.
+Cela permet, par exemple, de pouvoir utiliser la classe garage comme une liste.</p>
+<dl class="footnote brackets">
+<dt class="label" id="sr"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>&lt;<a class="reference external" href="mailto:sylvain&#46;renaud&#37;&#52;&#48;he-arc&#46;ch">sylvain<span>&#46;</span>renaud<span>&#64;</span>he-arc<span>&#46;</span>ch</a>&gt;</p>
+</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Bibliothèques Python</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../builtins/index.html">Builtins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../collections/index.html"><code class="docutils literal notranslate"><span class="pre">collections</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../datetime/index.html"><code class="docutils literal notranslate"><span class="pre">datetime</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dunders/index.html">Dunders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../enum/index.html"><code class="docutils literal notranslate"><span class="pre">enum</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fstrings/index.html">f-strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../itertools/index.html"><code class="docutils literal notranslate"><span class="pre">itertools</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../io/index.html"><code class="docutils literal notranslate"><span class="pre">io</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../math/index.html"><code class="docutils literal notranslate"><span class="pre">math</span></code> / <code class="docutils literal notranslate"><span class="pre">fractions</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../random/index.html"><code class="docutils literal notranslate"><span class="pre">random</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../time/index.html"><code class="docutils literal notranslate"><span class="pre">time</span></code> / <code class="docutils literal notranslate"><span class="pre">datetime</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../statistics/index.html"><code class="docutils literal notranslate"><span class="pre">statistics</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../super/index.html"><code class="docutils literal notranslate"><span class="pre">super()</span></code></a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Abstract Base Class (<code class="docutils literal notranslate"><span class="pre">abc</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../binary/index.html"><code class="docutils literal notranslate"><span class="pre">bytes</span></code> / <code class="docutils literal notranslate"><span class="pre">bytearray</span></code> / <code class="docutils literal notranslate"><span class="pre">memoryview</span></code>, <code class="docutils literal notranslate"><span class="pre">struct</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bisect/index.html"><code class="docutils literal notranslate"><span class="pre">bisect</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email/index.html">E-mail (<code class="docutils literal notranslate"><span class="pre">smtplib</span></code> / <code class="docutils literal notranslate"><span class="pre">imaplib</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hashlib/index.html"><code class="docutils literal notranslate"><span class="pre">hashlib</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../multiprocessing/index.html"><code class="docutils literal notranslate"><span class="pre">multiprocessing</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../re/index.html">Expressions régulières (<code class="docutils literal notranslate"><span class="pre">re</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../secrets/index.html"><code class="docutils literal notranslate"><span class="pre">secrets</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../weakref/index.html"><code class="docutils literal notranslate"><span class="pre">weakref</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../colorama/index.html"><code class="docutils literal notranslate"><span class="pre">colorama</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../invoke/index.html"><code class="docutils literal notranslate"><span class="pre">invoke</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../unittest/index.html"><code class="docutils literal notranslate"><span class="pre">unittest</span></code> / <code class="docutils literal notranslate"><span class="pre">doctest</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pytest/index.html"><code class="docutils literal notranslate"><span class="pre">pytest</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../csv/index.html"><code class="docutils literal notranslate"><span class="pre">csv</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../json/index.html"><code class="docutils literal notranslate"><span class="pre">json</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pillow/index.html">Python Imaging Library (<code class="docutils literal notranslate"><span class="pre">PIL</span></code>)</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../hug/index.html"><code class="docutils literal notranslate"><span class="pre">hug</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../matplotlib/index.html"><code class="docutils literal notranslate"><span class="pre">matplotlib</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../networkx/index.html"><code class="docutils literal notranslate"><span class="pre">networkx</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pycrypto/index.html"><code class="docutils literal notranslate"><span class="pre">pycrypto</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pygame/index.html"><code class="docutils literal notranslate"><span class="pre">pygame</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sphinx/index.html"><code class="docutils literal notranslate"><span class="pre">sphinx</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../watchdog/index.html"><code class="docutils literal notranslate"><span class="pre">watchdog</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../pbr/index.html"><cite>⚙️Automate your publishing to PyPI with PBR and Travis</cite></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../misc/about.html">À propos de ce livre</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../misc/contrib.html">Contribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../licence.html">Creative Commons Attribution-ShareAlike 4.0 International</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="../super/index.html" title="Chapitre précédent"><code class="docutils literal notranslate"><span class="pre">super()</span></code></a></li>
+      <li>Next: <a href="../binary/index.html" title="Chapitre suivant"><code class="docutils literal notranslate"><span class="pre">bytes</span></code> / <code class="docutils literal notranslate"><span class="pre">bytearray</span></code> / <code class="docutils literal notranslate"><span class="pre">memoryview</span></code>, <code class="docutils literal notranslate"><span class="pre">struct</span></code></a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Recherche rapide</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016-2017, HE-Arc.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/abc/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

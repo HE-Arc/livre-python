@@ -1,0 +1,363 @@
+
+<!DOCTYPE html>
+
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>itertools &#8212; Documentation Bibliothèques Python 1.0.0</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/translations.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Recherche" href="../search.html" />
+    <link rel="next" title="io" href="../io/index.html" />
+    <link rel="prev" title="f-strings" href="../fstrings/index.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="itertools">
+<span id="itertools-tutorial"></span><h1><code class="docutils literal notranslate"><span class="pre">itertools</span></code><a class="headerlink" href="#itertools" title="Lien permanent vers ce titre">¶</a></h1>
+<a class="reference external image-reference" href="https://www.iconfinder.com/icons/286688/tool_kit_toolbox_tools_icon#size=512"><img alt="lock logo" class="align-right" src="../_images/toolsbox.png" style="width: 204.8px; height: 204.8px;" /></a>
+<p>Par Johnny Da Costa <a class="footnote-reference brackets" href="#jd" id="id1">1</a></p>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Le module itertools de Python nous propose un bon nombre de générateurs prêts à l’emploi. Qu’est-ce qu’un générateur ou un itérateur ? Que permettent les itérateurs. Pour comprendre ça, nous allons utiliser un exemple très simple. Imaginez que vous avez une liste et que vous voulez l’afficher. La première chose qui nous vient à l’esprit est d’utiliser une boucle.</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">liste</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;I&quot;</span><span class="p">,</span> <span class="s2">&quot;do&quot;</span> <span class="s2">&quot;love&quot;</span><span class="p">,</span> <span class="s2">&quot;programming&quot;</span><span class="p">,</span> <span class="s2">&quot;in&quot;</span><span class="p">,</span> <span class="s2">&quot;python&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">liste</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="go">I</span>
+<span class="go">do</span>
+<span class="go">love</span>
+<span class="go">programming</span>
+<span class="go">in</span>
+<span class="go">python</span>
+</pre></div>
+</div>
+<p>Derrière cette boucle <strong>for</strong> se cache enfet un itérateur. C’est un objet qui va être chargé de parcourir un objet conteneur, dans  notre cas notre liste. Quand Python va tomber sur la ligne <strong>for i in liste:</strong>, il va appeler l’itérateur de notre liste pour pouvoir la parcourir. L’itérateur se crée dans la méthode <strong>__iter__</strong> de notre objet liste dans notre cas. Et va nous retourner notre itérateur pour pouvoir parcourir notre petite liste.</p>
+<p>A chaque itération python va appeler la méthode <strong>__next__</strong> de notre liste pour itérer à l’élément suivant ou s’arrêter avec l’exception <strong>StopIteration</strong> si le parcours est fini.</p>
+<p>Voici un autre exemple mais avec une chaine caractère.</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">chaine</span> <span class="o">=</span> <span class="s2">&quot;Python&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">iterateur</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="n">chaine</span><span class="p">)</span> <span class="c1"># va nous retourner un itérateur sur notre chaine</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">iterateur</span><span class="p">))</span> <span class="c1"># va nous afficher la première lettre de notre string</span>
+<span class="go">P</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">iterateur</span><span class="p">:</span> <span class="c1"># va parcourir tous les caractères un à un</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="go">y</span>
+<span class="go">t</span>
+<span class="go">h</span>
+<span class="go">o</span>
+<span class="go">n</span>
+</pre></div>
+</div>
+<p>On voit que le <strong>P</strong> à déjà été consommé lors de l’appel à la fonction <strong>next(iterateur)</strong></p>
+</div>
+<div class="section" id="iterateurs-offerts-par-python">
+<h2>Itérateurs offerts par Python<a class="headerlink" href="#iterateurs-offerts-par-python" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Python nous offres des <a class="reference external" href="https://docs.python.org/3/library/itertools.html#module-itertools" title="(disponible dans Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">itertools</span></code></a> qui sont des itérateurs qui nous permette d’itérer sur nous objets. Voici une petit liste non-exaustif de ce que nous propose se module :</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.python.org/3/library/itertools.html#itertools.count" title="(disponible dans Python v3.9)"><code class="xref py py-func docutils literal notranslate"><span class="pre">count()</span></code></a> : crée un itérateur qui va nous retourner des valeurs espacé de par 1 défault. Attention boucle inifni.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/itertools.html#itertools.repeat" title="(disponible dans Python v3.9)"><code class="xref py py-func docutils literal notranslate"><span class="pre">repeat()</span></code></a> : va nous répeter les éléments n fois.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/itertools.html#itertools.chain" title="(disponible dans Python v3.9)"><code class="xref py py-func docutils literal notranslate"><span class="pre">chain()</span></code></a> : permet de concaténer des listes, chaine de caractère, etc…</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/itertools.html#itertools.filterfalse" title="(disponible dans Python v3.9)"><code class="xref py py-func docutils literal notranslate"><span class="pre">filterfalse()</span></code></a> : créer un itérateur qui va filtrer les éléments qui sont itérable et nous retourner seulement ceux qui réponde faux à notre prédicat</p></li>
+</ul>
+<p>La liste est encore longue et le but ici n’est pas de voir chaque <a class="reference external" href="https://docs.python.org/3/library/itertools.html#module-itertools" title="(disponible dans Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">itertools</span></code></a> mais de comprendre le concept d’itérateur. Rien de mieux que pour comprendre ce que sont les itérateur que de créer le notre.</p>
+</div>
+<div class="section" id="nos-itertools-perso">
+<h2>Nos <a class="reference external" href="https://docs.python.org/3/library/itertools.html#module-itertools" title="(disponible dans Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">itertools</span></code></a> perso<a class="headerlink" href="#nos-itertools-perso" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Nous allons ici créer une classe qui va nous retourner un itérateur qui va parcouir un liste de la fin jusqu’au début.</p>
+<p>Exemple inspiré de la documentation Python : <a class="reference external" href="https://docs.python.org/3/tutorial/classes.html#tut-iterators" title="(disponible dans Python v3.9)"><span>Iterators</span></a>.</p>
+<ul class="simple">
+<li><p>Première étape nous allons créer notre class qui va nous retourner un itérateur</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+
+<span class="k">class</span> <span class="nc">itRevListe</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Nous retourne un itérateur.</span>
+
+<span class="sd">    Ce qui nous permettra de parcourir notre liste de la fin jusqu&#39;au début.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">liste</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;On va se mettre à la fin de notre liste.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">liste</span> <span class="o">=</span> <span class="n">liste</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">position</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">liste</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__next__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;On renvoie l&#39;élément suivant dans notre liste.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">position</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">StopIteration</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">position</span> <span class="o">-=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">liste</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">position</span><span class="p">]</span>
+
+
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Deuxième étape remplacer l’itérateur de l’objet liste par le notre.</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+
+<span class="k">class</span> <span class="nc">revList</span><span class="p">(</span><span class="nb">list</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    On va reprendre les méthodes et attributs de la class list.</span>
+
+<span class="sd">    Mais nous allons lui changer son itérateur par le notre.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Renvoie notre iterateur perso.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">itRevListe</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>troisième étape utiliser notre itertools perso!</p></li>
+</ul>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">liste</span> <span class="o">=</span> <span class="n">revList</span><span class="p">(</span><span class="n">islice</span><span class="p">(</span><span class="n">count</span><span class="p">(),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">liste</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="go">9</span>
+<span class="go">8</span>
+<span class="gp">...</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="les-generateurs">
+<h2>Les générateurs<a class="headerlink" href="#les-generateurs" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Les générateurs et les itérateurs sont intimement liés. Pour faire simple, un générateur est une fonction construite à l’aide
+du mot clef <strong>yield</strong>. Mais contrairement aux fonctions habituelles, elle n’a pas de <strong>return</strong>, mais un ou plusieurs <strong>yield</strong>. Mais à quoi servent-ils ? Ce sont en fait des objets <strong>itérable</strong>, c’est à dire qu’ils vont à chaque passage nous renvoyé différentes valeurs. Pour les récupérer soit une boucle classique <strong>for … in … :</strong> ou bien la méthode <strong>next</strong>.</p>
+<p>Un petit exemple simple :</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">say_hello</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">yield</span> <span class="s2">&quot;Bienvenue, &quot;</span>
+<span class="gp">... </span>    <span class="k">yield</span>                <span class="c1"># return none</span>
+<span class="gp">... </span>    <span class="k">yield</span> <span class="n">name</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="ow">in</span> <span class="n">say_hello</span><span class="p">(</span><span class="s2">&quot;Johnny&quot;</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="go">&quot;Bienvenue,&quot;</span>
+<span class="go">None</span>
+<span class="go">&quot;Johnny&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="exemple-de-generateur-fibonacci">
+<h2>Exemple de générateur <strong>fibonacci</strong><a class="headerlink" href="#exemple-de-generateur-fibonacci" title="Lien permanent vers ce titre">¶</a></h2>
+<p>D’après l’exemple de <a class="reference external" href="https://zestedesavoir.com/tutoriels/954/notions-de-python-avancees/5-generators/">zeste de savoir</a></p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">fibonacci</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="k">yield</span> <span class="n">a</span>
+<span class="gp">... </span>        <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">fibonacci</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+<span class="go">[0, 1, 1, 2, 3, 5, 8, 13, 21, 34]</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">fibonacci</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+<span class="go">[6, 7, 13, 20, 33]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="exemple-d-utilisations-d-itertools">
+<h2>Exemple d’utilisations d”<a class="reference external" href="https://docs.python.org/3/library/itertools.html#module-itertools" title="(disponible dans Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">itertools</span></code></a><a class="headerlink" href="#exemple-d-utilisations-d-itertools" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Essayons maintenant de résoudre un problème avec les itertools que Python nous offre. Imaginons que nous avons une liste de points qui formerait un chemin dont on aimerait connaitre la distance.</p>
+<p>Objectif :</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">chemin</span> <span class="o">=</span> <span class="p">[</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pairs</span> <span class="o">=</span> <span class="p">[(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">),</span> <span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">),</span> <span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">A</span><span class="p">)]</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">distances</span> <span class="o">=</span> <span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">B</span> <span class="o">-</span> <span class="n">A</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">C</span> <span class="o">-</span> <span class="n">B</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">A</span> <span class="o">-</span> <span class="n">C</span><span class="p">)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">distance</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">distances</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Voici nos fonctions :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">pairs</span><span class="p">(</span><span class="n">lst</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Pairs(&quot;abc&quot;) --&gt; [(a,b), (b,c), (c,a)].&quot;&quot;&quot;</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="n">cycle</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span>
+    <span class="nb">next</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">lst</span><span class="p">,</span> <span class="n">i</span><span class="p">))</span>
+
+
+<span class="k">def</span> <span class="nf">getDistance</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Retourne la distance entre chaque pairs.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">chain</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="p">))))</span>
+</pre></div>
+</div>
+<p>Sortie :</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">chemin</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">223</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">steps</span> <span class="o">=</span> <span class="n">pairs</span><span class="p">(</span><span class="n">chemin</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">steps</span><span class="p">)</span>
+<span class="go">[(5, 3), (3, 23), (23, 223), (223, 5)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">distances</span> <span class="o">=</span> <span class="n">getDistance</span><span class="p">(</span><span class="n">steps</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">distances</span>
+<span class="go">[-2, 20, 200, -218]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">sum</span><span class="p">(</span><span class="n">distances</span><span class="p">)</span>
+<span class="go">0</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="un-peu-de-design-pattern">
+<h2>Un peu de <em>design pattern</em><a class="headerlink" href="#un-peu-de-design-pattern" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Tout le monde utilise ce modèle de conception sans même le connaître vraiment. Imaginez le cas on nous voudrions itérer sur un répertoire pour obtenir son contenu ou appliquer un traitement sur chacun des fichiers. Sans  l’approche itérateur,  ils nous faudraient recupérer un flux sur le dossier courant est utiliser un <strong>while</strong> pour parcourir tout notre arborescence et vérifier le type (fichier ou dossier ?) et ensuite afficher. Mais imaginons que notre problème change et que nous ne devons plus itérer sur un répertoire mais sur un autre type de structure… Et on est repartie pour réecrire du code fastidueux et compliqué.</p>
+<p>Avec l’utilisation d’itérateur notre programme devient tout de suite plus robuste et plus élégant. Un gros avantage avec ce pattern est que si notre structure change, il nous suffit d’adapter son comportement sur cette objet (<a class="reference external" href="https://fr.wikipedia.org/wiki/D%C3%A9corateur_(patron_de_conception)">décorateur</a>) pour lui indiquer comment itérer sur cette objet. Grâce à ça, nous cachons la compléxité de parcours à notre client qui ne se rend même pas compte de ce qui se passent réelement.</p>
+<p>Mais en Python ce patron de conception est complétement intégré au language. Ce qui nous simplifie grandement la vie!</p>
+<p>Voici un <a class="reference external" href="http://sametmax.com/appliquer-un-traitement-a-tous-les-fichiers-dun-dossier-en-python/">exemple</a> de parcours du contenu d’un répertoire.</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="s1">&#39;./&#39;</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">element</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="n">element</span><span class="si">}</span><span class="s2">&#39; un dossier&quot;</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="k">else</span><span class="p">:</span>
+<span class="gp">... </span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="n">element</span><span class="si">}</span><span class="s2">&#39; est un fichier&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Lien permanent vers ce titre">¶</a></h2>
+<p><a class="reference external" href="https://docs.python.org/3/library/itertools.html#module-itertools" title="(disponible dans Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">itertools</span></code></a> est un module permettant de faire des choses simpas avec cet objet qu’est l’itérateur. Ils sont tellement utile et important que Python a dédié un module pour les opérations d’itération qui sont les itertools. L’itérateur apporte un niveau d’abstraction (couche de code en plus pour réaliser une action.) L’avantage est que l’itérateur est un objet qui coûte <a class="reference external" href="http://apprendre-python.com/page-iterateurs-iterator-generateur-generator-python">peu en utilisation mémoire</a>. La syntaxe est peu plus élégante car on va masquer au client la complexité de notre code. Les itérateurs nous permettent d’itérer sur toute sorte de structure de données, ce qui rend notre code plus robuste et reutilisable.</p>
+<dl class="footnote brackets">
+<dt class="label" id="jd"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>&lt;<a class="reference external" href="mailto:johnny&#46;dacosta&#37;&#52;&#48;he-arc&#46;ch">johnny<span>&#46;</span>dacosta<span>&#64;</span>he-arc<span>&#46;</span>ch</a>&gt;</p>
+</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Bibliothèques Python</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../builtins/index.html">Builtins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../collections/index.html"><code class="docutils literal notranslate"><span class="pre">collections</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../datetime/index.html"><code class="docutils literal notranslate"><span class="pre">datetime</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dunders/index.html">Dunders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../enum/index.html"><code class="docutils literal notranslate"><span class="pre">enum</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fstrings/index.html">f-strings</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">itertools</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../io/index.html"><code class="docutils literal notranslate"><span class="pre">io</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../math/index.html"><code class="docutils literal notranslate"><span class="pre">math</span></code> / <code class="docutils literal notranslate"><span class="pre">fractions</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../random/index.html"><code class="docutils literal notranslate"><span class="pre">random</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../time/index.html"><code class="docutils literal notranslate"><span class="pre">time</span></code> / <code class="docutils literal notranslate"><span class="pre">datetime</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../statistics/index.html"><code class="docutils literal notranslate"><span class="pre">statistics</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../super/index.html"><code class="docutils literal notranslate"><span class="pre">super()</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../abc/index.html">Abstract Base Class (<code class="docutils literal notranslate"><span class="pre">abc</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../binary/index.html"><code class="docutils literal notranslate"><span class="pre">bytes</span></code> / <code class="docutils literal notranslate"><span class="pre">bytearray</span></code> / <code class="docutils literal notranslate"><span class="pre">memoryview</span></code>, <code class="docutils literal notranslate"><span class="pre">struct</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bisect/index.html"><code class="docutils literal notranslate"><span class="pre">bisect</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email/index.html">E-mail (<code class="docutils literal notranslate"><span class="pre">smtplib</span></code> / <code class="docutils literal notranslate"><span class="pre">imaplib</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hashlib/index.html"><code class="docutils literal notranslate"><span class="pre">hashlib</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../multiprocessing/index.html"><code class="docutils literal notranslate"><span class="pre">multiprocessing</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../re/index.html">Expressions régulières (<code class="docutils literal notranslate"><span class="pre">re</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../secrets/index.html"><code class="docutils literal notranslate"><span class="pre">secrets</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../weakref/index.html"><code class="docutils literal notranslate"><span class="pre">weakref</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../colorama/index.html"><code class="docutils literal notranslate"><span class="pre">colorama</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../invoke/index.html"><code class="docutils literal notranslate"><span class="pre">invoke</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../unittest/index.html"><code class="docutils literal notranslate"><span class="pre">unittest</span></code> / <code class="docutils literal notranslate"><span class="pre">doctest</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pytest/index.html"><code class="docutils literal notranslate"><span class="pre">pytest</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../csv/index.html"><code class="docutils literal notranslate"><span class="pre">csv</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../json/index.html"><code class="docutils literal notranslate"><span class="pre">json</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pillow/index.html">Python Imaging Library (<code class="docutils literal notranslate"><span class="pre">PIL</span></code>)</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../hug/index.html"><code class="docutils literal notranslate"><span class="pre">hug</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../matplotlib/index.html"><code class="docutils literal notranslate"><span class="pre">matplotlib</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../networkx/index.html"><code class="docutils literal notranslate"><span class="pre">networkx</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pycrypto/index.html"><code class="docutils literal notranslate"><span class="pre">pycrypto</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pygame/index.html"><code class="docutils literal notranslate"><span class="pre">pygame</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sphinx/index.html"><code class="docutils literal notranslate"><span class="pre">sphinx</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../watchdog/index.html"><code class="docutils literal notranslate"><span class="pre">watchdog</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../pbr/index.html"><cite>⚙️Automate your publishing to PyPI with PBR and Travis</cite></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../misc/about.html">À propos de ce livre</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../misc/contrib.html">Contribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../licence.html">Creative Commons Attribution-ShareAlike 4.0 International</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="../fstrings/index.html" title="Chapitre précédent">f-strings</a></li>
+      <li>Next: <a href="../io/index.html" title="Chapitre suivant"><code class="docutils literal notranslate"><span class="pre">io</span></code></a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Recherche rapide</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016-2017, HE-Arc.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/itertools/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

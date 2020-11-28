@@ -1,0 +1,366 @@
+
+<!DOCTYPE html>
+
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>invoke &#8212; Documentation Bibliothèques Python 1.0.0</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/translations.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Recherche" href="../search.html" />
+    <link rel="next" title="unittest / doctest" href="../unittest/index.html" />
+    <link rel="prev" title="colorama" href="../colorama/index.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="invoke">
+<span id="invoke-tutorial"></span><h1><code class="docutils literal notranslate"><span class="pre">invoke</span></code><a class="headerlink" href="#invoke" title="Lien permanent vers ce titre">¶</a></h1>
+<p>Par Jonathan Guerne <a class="footnote-reference brackets" href="#email" id="id1">1</a></p>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Lien permanent vers ce titre">¶</a></h2>
+<p>L’utilité de <a class="reference external" href="http://www.pyinvoke.org/">pyinvoke</a> est de pouvoir très simplement lancer des tâches que vous
+aurez déjà préparé au pare avant et qui exécuteront par exemple des lignes de
+commande.</p>
+<p><a class="reference external" href="http://www.pyinvoke.org/">pyinvoke</a> se veut facile à prendre en main mais puissant à utiliser. Ce qui signifie
+que l’on peut l’utiliser dans le cas où l’on souhaite simplement lancer une commande simple :</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@task</span>
+<span class="k">def</span> <span class="nf">ouverture</span><span class="p">(</span><span class="n">ctx</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;bonjour&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Ou alors pour des groupes de tâches plus complexe pouvant également utiliser des
+arguments.</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@task</span>
+<span class="k">def</span> <span class="nf">clean</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">which</span> <span class="o">=</span> <span class="n">which</span> <span class="ow">or</span> <span class="s1">&#39;pyc&#39;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Cleaning </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">which</span><span class="p">))</span>
+
+<span class="nd">@task</span><span class="p">(</span><span class="n">pre</span><span class="o">=</span><span class="p">[</span><span class="n">call</span><span class="p">(</span><span class="n">clean</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">)])</span> <span class="c1"># or call(clean, &#39;all&#39;)</span>
+    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="n">ctx</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Building&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Code source tiré de la <a class="reference external" href="http://docs.pyinvoke.org/en/latest/getting-started.html#defining-and-running-task-functions" title="(dans Invoke)"><span class="xref std std-ref">documentation officielle</span></a> de invoke.</p>
+</div>
+<div class="section" id="exemple">
+<h2>Exemple<a class="headerlink" href="#exemple" title="Lien permanent vers ce titre">¶</a></h2>
+<div class="section" id="lancer-une-tache">
+<h3>lancer une tâche<a class="headerlink" href="#lancer-une-tache" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Dans un projets simple il est préférable de stocker les tâches dans un fichier nommé <code class="docutils literal notranslate"><span class="pre">tasks.py</span></code> (le nom du fichier est important).
+Il est cependant possible de stocker des tâches dans plusieurs fichiers en utilisant des namespaces</p>
+<p>Le fichier <code class="docutils literal notranslate"><span class="pre">tasks.py</span></code> doit commencer par importer les éléments invoke dont il va
+avoir besoin. Cela est fait avec la ligne suivante :</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">invoke</span> <span class="kn">import</span> <span class="n">task</span>
+</pre></div>
+</div>
+<p><a class="reference external" href="http://docs.pyinvoke.org/en/latest/api/tasks.html#invoke.tasks.task" title="(dans Invoke)"><code class="xref py py-func docutils literal notranslate"><span class="pre">task()</span></code></a> est l’élément essentiel à la création de tâche avec <a class="reference external" href="http://www.pyinvoke.org/">pyinvoke</a>, il faudra pratiquement toujours
+l’importer.</p>
+<p>On arrive à l’écriture de la tâche en elle-même. Sa sytaxe est très proche de
+celle d’une simple fonction :</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@task</span>
+<span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;do stuff&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>La seule nouveauté quand on a déjà codé des fonctions en python est la ligne <code class="docutils literal notranslate"><span class="pre">&#64;task</span></code> précédant
+la fonction elle-même. Comme on peut le voir sur l’exemple il est tout à fait possible d’utiliser
+des paramètres pour influencer le comportement de sa tâche.</p>
+<p>Une fois les tâches écrites on peut lancer un invite de commande afin de les tester.
+Pour pouvoir savoir quelle tâches sont disponibles pour notre projet on peut utiliser la commande suivante
+pour les lister :</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> invoke -l
+</pre></div>
+</div>
+<p>Maintenant, si on veut lancer la tâche <strong>build</strong> il faut le faire de cette façon :</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> invoke build
+</pre></div>
+</div>
+<p>Si on a envie d’obtenir de l’aide sur la commande <strong>build</strong> notamment ses paramètres on utilise
+cette commande :</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> invoke --help build
+</pre></div>
+</div>
+<p>Finalement pour lancer une commande en lui spécifiant ses arguments il faut écrire ceci :</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> invoke build -args lalala
+</pre></div>
+</div>
+<p>Ici on passe comme paramètre args la valeur <code class="docutils literal notranslate"><span class="pre">&quot;lalala&quot;</span></code>. Par défaut les
+paramètres sont interprétés comme des chaînes de caractères.</p>
+</div>
+<div class="section" id="lancer-une-commande">
+<h3>Lancer une commande<a class="headerlink" href="#lancer-une-commande" title="Lien permanent vers ce titre">¶</a></h3>
+<p>En guise d’exemple nous allons ici étudier comment utiliser Invoke pour pouvoir
+faciliter l’utilisation de la librairie sphinx en générant des pages HTML avec des
+fichiers écrits au format rst (comme celui-ci)</p>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;Module basic sphinx generation.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">invoke</span> <span class="kn">import</span> <span class="n">task</span>
+
+
+<span class="nd">@task</span>
+<span class="k">def</span> <span class="nf">html</span><span class="p">(</span><span class="n">ctx</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Génération de la documentation Sphinx en HTML.&quot;&quot;&quot;</span>
+    <span class="n">ctx</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;sphinx-build -b html source build/html&quot;</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<p>La première ligne sert évidemment à importer les éléments de la librairies Invoke
+avec lesquels on désir travailler. Ici en l’occurence comme dans tous les programme utilisant
+les <code class="docutils literal notranslate"><span class="pre">&#64;task</span></code> de Invok on importe <strong>task</strong>, on va également importer <strong>run</strong> qui va nous permettre
+de lancer nos commandes.</p>
+<p>Le code en lui-même est très simple est au final ne contient pas beaucoup plus de ligne
+que le premier exemple présenter en haut de ce document. La seule subtilité est que
+pour pouvoir lancer une commande on va devoir utiliser un contexte (ici appelé <strong>ctx</strong>)
+qui sera placé en argument de la tâche. Il suffit ensuite d’appelé la méthode run dans
+le contexte et de passer en argument une chaîne de caractère pour lancer la commande.</p>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>Sous windows on peut rencontrer des problèmes au lancement des commandes.
+En effet il est possible que Invoke ait besoin de connaître l’adresse de
+l’invite de commande à utiliser. Pour cela on va mettre en place un fichier de
+configuration contenant cette information (cf. <a class="reference external" href="https://github.com/pyinvoke/invoke/issues/345">WinError_3</a>)</p>
+</div>
+<p>On peut également mettre en place un système plus poussé qui va par exemple nettoyer
+le dossier de destination avant de générer le contenu HTML</p>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nd">@task</span>
+<span class="k">def</span> <span class="nf">clean</span><span class="p">(</span><span class="n">ctx</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Nettoyage du dossier de destination.&quot;&quot;&quot;</span>
+    <span class="n">run</span><span class="p">(</span><span class="s2">&quot;rm -rf build/html&quot;</span><span class="p">)</span>
+
+
+<span class="nd">@task</span><span class="p">(</span><span class="n">clean</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">html</span><span class="p">(</span><span class="n">ctx</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Generation de l&#39;html.&quot;&quot;&quot;</span>
+    <span class="n">run</span><span class="p">(</span><span class="s2">&quot;sphinx-build -b html source build/html&quot;</span><span class="p">)</span>
+
+
+</pre></div>
+</td></tr></table></div>
+<p>Pour qu’une tâche A appelle une tâche B avant son exécution il suffit d’utiliser la
+syntaxe suivante.</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@task</span>
+<span class="k">def</span> <span class="nf">B</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;task B&quot;</span><span class="p">)</span>
+
+<span class="nd">@task</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">A</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;task A&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Si un appel à la tâche A est fait, la sortie sera la suivante :</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> invoke A
+<span class="go">task B</span>
+<span class="go">task A</span>
+</pre></div>
+</div>
+<p>Finalement il peut être intéressant de savoir que l’on peut tester l’exécution
+d’une commande. Son comportement sera le suivant :
+Retourne <code class="docutils literal notranslate"><span class="pre">True</span></code> s’il n’y a pas eu d’erreur et <code class="docutils literal notranslate"><span class="pre">False</span></code> sinon.</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@task</span>
+<span class="k">def</span> <span class="nf">A</span><span class="p">(</span><span class="n">ctx</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">ctx</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;your command&quot;</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ok&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="autres-cas-concrets">
+<h3>Autres cas concrets<a class="headerlink" href="#autres-cas-concrets" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Dans le cadre de l’écriture de ce livre python il m’a été proposé pour expérimenter
+<strong>invoke</strong> d’automatiser la génération de la doc html (vu au chapitre précédent) et
+les vérifications de la conformité du code et de la doc.</p>
+<p>Les vérifications restent simple à mettre en place car il s’agit uniquement de commande à lancer
+on ne cherche pas ici à avoir un comportement différent selon leur résultat</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nd">@task</span>
+<span class="k">def</span> <span class="nf">checks</span><span class="p">(</span><span class="n">ctx</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Fait les différents checks du programme.&quot;&quot;&quot;</span>
+    <span class="n">run</span><span class="p">(</span><span class="s2">&quot;pydocstyle source&quot;</span><span class="p">)</span>
+    <span class="n">run</span><span class="p">(</span><span class="s2">&quot;pycodestyle source&quot;</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<p>Exécuter une commande va retourner un objet <a class="reference external" href="http://docs.pyinvoke.org/en/latest/api/runners.html#invoke.runners.Runner" title="(dans Invoke)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Runner</span></code></a>
+il possède différents attributs tel que par exemple le retour de la commande
+(ainsi que l’erreur) qui peut permettre de choisir une action à réaliser en
+fonction de son contenu.</p>
+</div>
+</div>
+<div class="section" id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Lien permanent vers ce titre">¶</a></h2>
+<p><a class="reference external" href="http://www.pyinvoke.org/">pyinvoke</a> est un outil très puissant, il est très utile par exemple pour automatiser
+des processus fastidieux dans la réalisation d’un projet. Au-delà de l’automatisation
+utilisé <strong>invoke</strong> permet de lancer n’importe quelle commande standard de l’invite de commande
+ce qui offre des possibilités immenses en termes par exemple de partage d’informations
+entre plusieurs applications.</p>
+<dl class="footnote brackets">
+<dt class="label" id="email"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>&lt;<a class="reference external" href="mailto:jonathan&#46;guerne&#37;&#52;&#48;he-arc&#46;ch">jonathan<span>&#46;</span>guerne<span>&#64;</span>he-arc<span>&#46;</span>ch</a>&gt;</p>
+</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Bibliothèques Python</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../builtins/index.html">Builtins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../collections/index.html"><code class="docutils literal notranslate"><span class="pre">collections</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../datetime/index.html"><code class="docutils literal notranslate"><span class="pre">datetime</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dunders/index.html">Dunders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../enum/index.html"><code class="docutils literal notranslate"><span class="pre">enum</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fstrings/index.html">f-strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../itertools/index.html"><code class="docutils literal notranslate"><span class="pre">itertools</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../io/index.html"><code class="docutils literal notranslate"><span class="pre">io</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../math/index.html"><code class="docutils literal notranslate"><span class="pre">math</span></code> / <code class="docutils literal notranslate"><span class="pre">fractions</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../random/index.html"><code class="docutils literal notranslate"><span class="pre">random</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../time/index.html"><code class="docutils literal notranslate"><span class="pre">time</span></code> / <code class="docutils literal notranslate"><span class="pre">datetime</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../statistics/index.html"><code class="docutils literal notranslate"><span class="pre">statistics</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../super/index.html"><code class="docutils literal notranslate"><span class="pre">super()</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../abc/index.html">Abstract Base Class (<code class="docutils literal notranslate"><span class="pre">abc</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../binary/index.html"><code class="docutils literal notranslate"><span class="pre">bytes</span></code> / <code class="docutils literal notranslate"><span class="pre">bytearray</span></code> / <code class="docutils literal notranslate"><span class="pre">memoryview</span></code>, <code class="docutils literal notranslate"><span class="pre">struct</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bisect/index.html"><code class="docutils literal notranslate"><span class="pre">bisect</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email/index.html">E-mail (<code class="docutils literal notranslate"><span class="pre">smtplib</span></code> / <code class="docutils literal notranslate"><span class="pre">imaplib</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hashlib/index.html"><code class="docutils literal notranslate"><span class="pre">hashlib</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../multiprocessing/index.html"><code class="docutils literal notranslate"><span class="pre">multiprocessing</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../re/index.html">Expressions régulières (<code class="docutils literal notranslate"><span class="pre">re</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../secrets/index.html"><code class="docutils literal notranslate"><span class="pre">secrets</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../weakref/index.html"><code class="docutils literal notranslate"><span class="pre">weakref</span></code></a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../colorama/index.html"><code class="docutils literal notranslate"><span class="pre">colorama</span></code></a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">invoke</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../unittest/index.html"><code class="docutils literal notranslate"><span class="pre">unittest</span></code> / <code class="docutils literal notranslate"><span class="pre">doctest</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pytest/index.html"><code class="docutils literal notranslate"><span class="pre">pytest</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../csv/index.html"><code class="docutils literal notranslate"><span class="pre">csv</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../json/index.html"><code class="docutils literal notranslate"><span class="pre">json</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pillow/index.html">Python Imaging Library (<code class="docutils literal notranslate"><span class="pre">PIL</span></code>)</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../hug/index.html"><code class="docutils literal notranslate"><span class="pre">hug</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../matplotlib/index.html"><code class="docutils literal notranslate"><span class="pre">matplotlib</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../networkx/index.html"><code class="docutils literal notranslate"><span class="pre">networkx</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pycrypto/index.html"><code class="docutils literal notranslate"><span class="pre">pycrypto</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pygame/index.html"><code class="docutils literal notranslate"><span class="pre">pygame</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sphinx/index.html"><code class="docutils literal notranslate"><span class="pre">sphinx</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../watchdog/index.html"><code class="docutils literal notranslate"><span class="pre">watchdog</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../pbr/index.html"><cite>⚙️Automate your publishing to PyPI with PBR and Travis</cite></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../misc/about.html">À propos de ce livre</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../misc/contrib.html">Contribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../licence.html">Creative Commons Attribution-ShareAlike 4.0 International</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="../colorama/index.html" title="Chapitre précédent"><code class="docutils literal notranslate"><span class="pre">colorama</span></code></a></li>
+      <li>Next: <a href="../unittest/index.html" title="Chapitre suivant"><code class="docutils literal notranslate"><span class="pre">unittest</span></code> / <code class="docutils literal notranslate"><span class="pre">doctest</span></code></a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Recherche rapide</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016-2017, HE-Arc.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/invoke/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

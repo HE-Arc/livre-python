@@ -1,0 +1,391 @@
+
+<!DOCTYPE html>
+
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>watchdog &#8212; Documentation Bibliothèques Python 1.0.0</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/translations.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Recherche" href="../search.html" />
+    <link rel="next" title="⚙️Automate your publishing to PyPI with PBR and Travis" href="../pbr/index.html" />
+    <link rel="prev" title="sphinx" href="../sphinx/index.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="watchdog">
+<span id="watchdog-tutorial"></span><h1><code class="docutils literal notranslate"><span class="pre">watchdog</span></code><a class="headerlink" href="#watchdog" title="Lien permanent vers ce titre">¶</a></h1>
+<p>Par Paul Jeanbourquin <a class="footnote-reference brackets" href="#pj" id="id1">1</a></p>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Watchdog est une librairie permettant l’utilisation d’événemement du système de fichier (création de fichier, modification, …).</p>
+<p>Cette librairie peut-être utilisée (par exemple) pour la mise en place d’un scanner de fichier dynamique
+(exemple Scanner multimédia)
+ou pour la mise en place d’un système d’audit des événements sur les fichiers.
+Dans le cadre de cet article, notre fils rouge sera la création d’un programme d’audit
+des événements émis par les fichiers de musiques (librement inspiré de l’article de Sam et Max <a class="bibtex reference internal" href="#sametmax2015" id="id2">[eM15]</a>).</p>
+</div>
+<div class="section" id="fonctionnement">
+<h2>Fonctionnement<a class="headerlink" href="#fonctionnement" title="Lien permanent vers ce titre">¶</a></h2>
+<div class="section" id="traitement-de-l-evenement">
+<h3>Traitement de l’événement<a class="headerlink" href="#traitement-de-l-evenement" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Pour intercepter les événements il faut créer une classe qui va contenir les fonctions par événements.</p>
+<p>Un exemple d’une classe pour un système d’audit :</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">watchdog.events</span> <span class="kn">import</span> <span class="n">FileSystemEventHandler</span>
+
+<span class="k">class</span> <span class="nc">AuditHandler</span><span class="p">(</span><span class="n">FileSystemEventHandler</span><span class="p">):</span>
+
+      <span class="k">def</span> <span class="nf">on_modified</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+          <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Le fichier </span><span class="si">%s</span><span class="s2"> a été modifié&quot;</span> <span class="o">%</span> <span class="n">event</span><span class="o">.</span><span class="n">src_path</span><span class="p">)</span>
+
+      <span class="k">def</span> <span class="nf">on_created</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">event</span><span class="p">):</span>
+          <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Le fichier </span><span class="si">%s</span><span class="s2"> a été créé&quot;</span> <span class="o">%</span> <span class="n">event</span><span class="o">.</span><span class="n">src_path</span><span class="p">)</span>
+
+      <span class="k">def</span> <span class="nf">on_deleted</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">event</span><span class="p">):</span>
+          <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Le fichier </span><span class="si">%s</span><span class="s2"> a été supprimé&quot;</span> <span class="o">%</span> <span class="n">event</span><span class="o">.</span><span class="n">src_path</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Liste d’événements interceptable :</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 26%" />
+<col style="width: 74%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Nom</p></th>
+<th class="head"><p>Déclanchement</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">on_modified</span></code></p></td>
+<td><p>Modification d’un fichier / dossier</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">on_created</span></code></p></td>
+<td><p>Création d’un fichier / dossier</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">on_deleted</span></code></p></td>
+<td><p>Suppression d’un fichier / dossier</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">on_moved</span></code></p></td>
+<td><p>Déplacement / renomage d’un fichier / dossier</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">on_any_event</span></code></p></td>
+<td><p>Dans tous les cas ci-dessus</p></td>
+</tr>
+</tbody>
+</table>
+<p>L’objet <code class="docutils literal notranslate"><span class="pre">event</span></code> est une instance de la classe <a class="reference external" href="https://pythonhosted.org/watchdog/api.html#watchdog.events.FileSystemEvent" title="(disponible dans watchdog v0.8.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">watchdog.events.FileSystemEvent</span></code></a>.
+Cette classe est dérivée pour chaque type d’événement. Elle contient les attributs suivant :</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 22%" />
+<col style="width: 78%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Attribut</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">event_type</span></code></p></td>
+<td><p>Le type d’événement en string</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">is_directory</span></code></p></td>
+<td><p>Boolean signalant si l’événement s’applique à un dossier</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">src_path</span></code></p></td>
+<td><p>Chemin du fichier ayant lancé l’événement</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">dest_path</span></code></p></td>
+<td><p>Fichier de destination (Uniquement lors d’un <code class="docutils literal notranslate"><span class="pre">on_moved</span></code>)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="interception-de-l-evenement">
+<h3>Interception de l’événement<a class="headerlink" href="#interception-de-l-evenement" title="Lien permanent vers ce titre">¶</a></h3>
+<p>La classe doit, ensuite, être liée à un observateur.
+C’est ici que nous spécifierons le dossier qui devra être observé.</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">eventhandler</span>
+<span class="kn">from</span> <span class="nn">watchdog.observers</span> <span class="kn">import</span> <span class="n">Observer</span>
+
+<span class="c1"># Création de l&#39;observeur</span>
+<span class="n">observer</span> <span class="o">=</span> <span class="n">Observer</span><span class="p">()</span>
+<span class="c1"># Création du lien</span>
+<span class="n">observer</span><span class="o">.</span><span class="n">schedule</span><span class="p">(</span><span class="n">eventhandler</span><span class="o">.</span><span class="n">AuditHandler</span><span class="p">(),</span> <span class="n">path</span><span class="o">=</span><span class="s1">&#39;U:&#39;</span><span class="p">,</span> <span class="n">recursive</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1"># Démarrage de l&#39;observateur</span>
+<span class="n">observer</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Dans ce cas, l’observateur surveille le dossier <code class="docutils literal notranslate"><span class="pre">&quot;U:&quot;</span></code> de manière récursive.</p>
+</div>
+<div class="section" id="bloquer-le-script">
+<h3>Bloquer le script<a class="headerlink" href="#bloquer-le-script" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Un observateur étant lancé dans un thread séparé, il faut bloquer l’éxecution du script.
+Mais, nous aimerions aussi pouvoir fermer le script par interruption du clavier.
+La fermeture de l’observateur doit aussi être douce. Pour ce faire nous utiliserons le code ci-dessous.</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span> <span class="c1"># Boucle infinie bloquant l&#39;execution du script</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># petite attente d&#39;une milliseconde</span>
+<span class="k">except</span> <span class="ne">KeyboardInterrupt</span><span class="p">:</span> <span class="c1"># Prise en charge de l&#39;interuption par le clavier</span>
+    <span class="n">observer</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span> <span class="c1"># Arret de l&#39;observateur</span>
+<span class="n">observer</span><span class="o">.</span><span class="n">join</span><span class="p">()</span> <span class="c1"># Attend que l&#39;observateur se soit bien fermé</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="filtrage">
+<h3>Filtrage<a class="headerlink" href="#filtrage" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Il est possible de filtrer les fichiers sur lesquelles les events sont interceptés,
+ce qui est utile si l’on souhaite (par exemple) traiter que certain type de fichiers (par ex. les .mp3).</p>
+<p>Pour ce faire, il faut utiliser une autre classe de base pour la classe de traitement.
+Deux classes dérivant de <a class="reference external" href="https://pythonhosted.org/watchdog/api.html#watchdog.events.FileSystemEventHandler" title="(disponible dans watchdog v0.8.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">watchdog.events.FileSystemEventHandler</span></code></a> sont fournies (liste dans le tableau ci-dessous).</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 42%" />
+<col style="width: 58%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Nom</p></th>
+<th class="head"><p>Utilisation</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">FileSystemEventHandler</span></code></p></td>
+<td><p>Handler de base (sans filtre)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">PatternMatchingEventHandler</span></code></p></td>
+<td><p>Handler utilisant un pattern pour filtrer</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">RegexMatchingEventHandler</span></code></p></td>
+<td><p>Handler utilisant un regex pour filtrer</p></td>
+</tr>
+</tbody>
+</table>
+<p>L’utilisation de la version avec les patterns étant la même que celle avec les regexes,
+nous utiliserons la version patterns dans la suite.
+Par exemple si l’on souhaite reprendre le code du programme d’audit fait plus haut mais,
+qui s’occupe que des fichiers de musique (.mp3, .flac, .wav).</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">watchdog.events</span> <span class="kn">import</span> <span class="n">PatternMatchingEventHandler</span>
+
+<span class="k">class</span> <span class="nc">AuditHandlerMusic</span><span class="p">(</span><span class="n">PatternMatchingEventHandler</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">on_modified</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Le fichier </span><span class="si">%s</span><span class="s2"> a été modifié&quot;</span> <span class="o">%</span> <span class="n">event</span><span class="o">.</span><span class="n">src_path</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">on_created</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">event</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Le fichier </span><span class="si">%s</span><span class="s2"> a été créé&quot;</span> <span class="o">%</span> <span class="n">event</span><span class="o">.</span><span class="n">src_path</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">on_deleted</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">event</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Le fichier </span><span class="si">%s</span><span class="s2"> a été supprimé&quot;</span> <span class="o">%</span> <span class="n">event</span><span class="o">.</span><span class="n">src_path</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>La classe de traitement ne change quasiment pas la seule différence est le changement de la classe de base.
+La principale différence ce trouvera au moment de l’instantation de l’objet.</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">eventhandler</span>
+<span class="kn">from</span> <span class="nn">watchdog.observers</span> <span class="kn">import</span> <span class="n">Observer</span>
+
+<span class="n">observer</span> <span class="o">=</span> <span class="n">Observer</span><span class="p">()</span>
+<span class="n">handler</span> <span class="o">=</span> <span class="n">eventhandler</span><span class="o">.</span><span class="n">AuditHandlerMusic</span><span class="p">(</span><span class="n">patterns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;*.mp3&quot;</span><span class="p">,</span> <span class="s2">&quot;*.wav&quot;</span><span class="p">,</span> <span class="s2">&quot;*.flac&quot;</span><span class="p">])</span>
+<span class="n">observer</span><span class="o">.</span><span class="n">schedule</span><span class="p">(</span><span class="n">handler</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s1">&#39;U:&#39;</span><span class="p">,</span> <span class="n">recursive</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">observer</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Ici nous avons instancié l’objet avant de le passer en arguments à la fonction.
+Nous spécifions aussi un premier arguement du constructeur
+qui se trouve dans ce cas être les patterns à traiter.</p>
+<p>Les autres arguments possible sont dans l’ordre :</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 29%" />
+<col style="width: 14%" />
+<col style="width: 57%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Noms</p></th>
+<th class="head"><p>Default</p></th>
+<th class="head"><p>Utilisation</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">patterns</span></code>/<code class="docutils literal notranslate"><span class="pre">regexes</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">None</span></code>/<code class="docutils literal notranslate"><span class="pre">[&quot;.*&quot;]</span></code></p></td>
+<td><p>Spécifie les patterns (respectivement regexes) à traiter</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ignore_patterns</span></code> / <code class="docutils literal notranslate"><span class="pre">ignore_regexes</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">None</span></code>/<code class="docutils literal notranslate"><span class="pre">[]</span></code></p></td>
+<td><p>Spécifie les patterns (respectivement regexes) à ignorer</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ignore_directories</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
+<td><p>Si mis à <code class="docutils literal notranslate"><span class="pre">True</span></code> ignore les dossiers</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">case_sensitive</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
+<td><p>Si mis à <code class="docutils literal notranslate"><span class="pre">True</span></code> rend le patterns (respectivement regex) sensible à la casse</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Lien permanent vers ce titre">¶</a></h2>
+<p>En conclusion, la bibliothèque <a class="reference external" href="https://pythonhosted.org/watchdog/quickstart.html#quickstart" title="(disponible dans watchdog v0.8.2)"><span class="xref std std-ref">watchdog</span></a> permet d’utiliser des événements, en provenance du système de fichiers, d’une manière facile et efficace.
+Watchdog permet aussi de filtrer les fichiers / dossiers émettant un événement.
+Cette bibliothèque permet aussi une grande réusabilité du code grâce, entre autre, à l’utilisation de classe pour le traitement des événements.</p>
+<dl class="footnote brackets">
+<dt class="label" id="pj"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>&lt;<a class="reference external" href="mailto:paul&#46;jeanbourquin&#37;&#52;&#48;he-arc&#46;ch">paul<span>&#46;</span>jeanbourquin<span>&#64;</span>he-arc<span>&#46;</span>ch</a>&gt;</p>
+</dd>
+</dl>
+<p id="bibtex-bibliography-watchdog/index-0"><dl class="citation">
+<dt class="bibtex label" id="sametmax2015"><span class="brackets"><a class="fn-backref" href="#id2">eM15</a></span></dt>
+<dd><p>Sam et Max. Réagir à un changement sur un fichier avec watchdog. 2015. URL: <a class="reference external" href="http://sametmax.com/reagir-a-un-changement-sur-un-fichier-avec-watchdog/">http://sametmax.com/reagir-a-un-changement-sur-un-fichier-avec-watchdog/</a>.</p>
+</dd>
+</dl>
+</p>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Bibliothèques Python</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../builtins/index.html">Builtins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../collections/index.html"><code class="docutils literal notranslate"><span class="pre">collections</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../datetime/index.html"><code class="docutils literal notranslate"><span class="pre">datetime</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dunders/index.html">Dunders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../enum/index.html"><code class="docutils literal notranslate"><span class="pre">enum</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fstrings/index.html">f-strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../itertools/index.html"><code class="docutils literal notranslate"><span class="pre">itertools</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../io/index.html"><code class="docutils literal notranslate"><span class="pre">io</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../math/index.html"><code class="docutils literal notranslate"><span class="pre">math</span></code> / <code class="docutils literal notranslate"><span class="pre">fractions</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../random/index.html"><code class="docutils literal notranslate"><span class="pre">random</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../time/index.html"><code class="docutils literal notranslate"><span class="pre">time</span></code> / <code class="docutils literal notranslate"><span class="pre">datetime</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../statistics/index.html"><code class="docutils literal notranslate"><span class="pre">statistics</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../super/index.html"><code class="docutils literal notranslate"><span class="pre">super()</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../abc/index.html">Abstract Base Class (<code class="docutils literal notranslate"><span class="pre">abc</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../binary/index.html"><code class="docutils literal notranslate"><span class="pre">bytes</span></code> / <code class="docutils literal notranslate"><span class="pre">bytearray</span></code> / <code class="docutils literal notranslate"><span class="pre">memoryview</span></code>, <code class="docutils literal notranslate"><span class="pre">struct</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bisect/index.html"><code class="docutils literal notranslate"><span class="pre">bisect</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email/index.html">E-mail (<code class="docutils literal notranslate"><span class="pre">smtplib</span></code> / <code class="docutils literal notranslate"><span class="pre">imaplib</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hashlib/index.html"><code class="docutils literal notranslate"><span class="pre">hashlib</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../multiprocessing/index.html"><code class="docutils literal notranslate"><span class="pre">multiprocessing</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../re/index.html">Expressions régulières (<code class="docutils literal notranslate"><span class="pre">re</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../secrets/index.html"><code class="docutils literal notranslate"><span class="pre">secrets</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../weakref/index.html"><code class="docutils literal notranslate"><span class="pre">weakref</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../colorama/index.html"><code class="docutils literal notranslate"><span class="pre">colorama</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../invoke/index.html"><code class="docutils literal notranslate"><span class="pre">invoke</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../unittest/index.html"><code class="docutils literal notranslate"><span class="pre">unittest</span></code> / <code class="docutils literal notranslate"><span class="pre">doctest</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pytest/index.html"><code class="docutils literal notranslate"><span class="pre">pytest</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../csv/index.html"><code class="docutils literal notranslate"><span class="pre">csv</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../json/index.html"><code class="docutils literal notranslate"><span class="pre">json</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pillow/index.html">Python Imaging Library (<code class="docutils literal notranslate"><span class="pre">PIL</span></code>)</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../hug/index.html"><code class="docutils literal notranslate"><span class="pre">hug</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../matplotlib/index.html"><code class="docutils literal notranslate"><span class="pre">matplotlib</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../networkx/index.html"><code class="docutils literal notranslate"><span class="pre">networkx</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pycrypto/index.html"><code class="docutils literal notranslate"><span class="pre">pycrypto</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pygame/index.html"><code class="docutils literal notranslate"><span class="pre">pygame</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sphinx/index.html"><code class="docutils literal notranslate"><span class="pre">sphinx</span></code></a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">watchdog</span></code></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../pbr/index.html"><cite>⚙️Automate your publishing to PyPI with PBR and Travis</cite></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../misc/about.html">À propos de ce livre</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../misc/contrib.html">Contribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../licence.html">Creative Commons Attribution-ShareAlike 4.0 International</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="../sphinx/index.html" title="Chapitre précédent"><code class="docutils literal notranslate"><span class="pre">sphinx</span></code></a></li>
+      <li>Next: <a href="../pbr/index.html" title="Chapitre suivant"><cite>⚙️Automate your publishing to PyPI with PBR and Travis</cite></a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Recherche rapide</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016-2017, HE-Arc.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/watchdog/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
